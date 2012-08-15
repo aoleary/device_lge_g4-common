@@ -182,8 +182,15 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.telephony.default_network=12 \
     ro.ril.svlte1x=false \
     ro.ril.svdo=false \
-    persist.radio.add_power_save=1 \
     persist.telephony.oosisdc=false
+
+# RIL Powersaving
+    persist.radio.add_power_save=1 \
+    pm.sleep_mode=1 \
+    ro.ril.disable.power.collapse=0 \
+    ro.ril.fast.dormancy.rule=1 \
+    ro.ril.fast.dormancy.timeout=3 \
+    ro.mot.eri.losalert.delay=1000
 
 # Security patch level
 PRODUCT_PROPERTY_OVERRIDES += \
