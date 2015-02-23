@@ -732,6 +732,12 @@ on property:bluetooth.startbtsnoop=true
 on property:bluetooth.startbtsnoop=false
     stop btsnoop
 
+service timekeep /vendor/bin/timekeep restore
+   class late_start
+   user root
+   group root
+   oneshot
+
 service ppd /vendor/bin/mm-pp-daemon
     class late_start
     user system
