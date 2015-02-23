@@ -417,6 +417,11 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/thermal-engine.conf:system/etc/thermal-engine-8992.conf
 
+# Timekeep
+PRODUCT_PACKAGES += \
+    timekeep \
+    TimeKeep
+
 # USB
 PRODUCT_PACKAGES += \
     android.hardware.usb@1.0-service.basic

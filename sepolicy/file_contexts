@@ -139,3 +139,7 @@
 
 # Health monitor
 /dev/system_health_monitor				u:object_r:health_monitor:s0
+
+# TimeKeep
+/sys/devices/qpnp-rtc-17/rtc/rtc0(/.*)?                 u:object_r:sysfs_rtc:s0
+/vendor/bin/timekeep                                    u:object_r:timekeep_exec:s0

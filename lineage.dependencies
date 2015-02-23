@@ -15,9 +15,10 @@
     "remote":      "lineage"
   },
   {
-    "repository":  "android_hardware_sony_timekeep",
-    "target_path": "hardware/sony/timekeep",
-    "remote":      "lineage"
+    "repository"  : "LineageOS/android_hardware_sony_timekeep",
+    "target_path" : "hardware/sony/timekeep",
+    "branch"      : "lineage-17.1",
+    "remote"      : "github"
   },
   {
     "repository":  "proprietary_vendor_lge",
