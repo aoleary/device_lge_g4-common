@@ -40,6 +40,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.opengles.version=196610 \
     ro.sf.lcd_density=560
 
+#Perfd
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.min_freq_0=384000 \
+    ro.min_freq_4=384000
+
 # GPS
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.gps.qc_nlp_in_use=1 \
