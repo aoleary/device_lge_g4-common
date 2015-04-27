@@ -88,7 +88,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     debug.sf.disable_backpressure=1 \
     debug.sf.latch_unsignaled=1 \
     persist.hwc.ptor.enable=true \
-    debug.sf.gpu_comp_tiling=1
+    debug.sf.gpu_comp_tiling=1 \
+    debug.cpurend.vsync=false
     
 # MSM8992 HAL settings
 # 196610 is decimal for 0x30002 to report major/minor versions as 3/2
