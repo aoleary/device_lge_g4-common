@@ -14,6 +14,9 @@ on boot
     chown system system /dev/cpuset/camera-daemon/tasks
     chmod 0664 /dev/cpuset/camera-daemon/tasks
 
+    # android background processes are set to nice 10. Never schedule these on the a57s.
+    write /proc/sys/kernel/sched_upmigrate_min_nice 9
+
 on enable-low-power
     # Set idle GPU to 300 Mhz
     write /sys/class/kgsl/kgsl-3d0/default_pwrlevel 6
