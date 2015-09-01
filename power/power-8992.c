@@ -172,14 +172,10 @@ static void process_video_encode_hint(void *metadata)
     if (video_encode_metadata.state == 1) {
         if (is_interactive_governor(governor)) {
             /* sched and cpufreq params
-             * hispeed freq - 768 MHz
-             * target load - 90
-             * above_hispeed_delay - 40ms
-             * sched_small_tsk - 50
-             */
-            int resource_values[] = {
-                0x2C07, 0x2F5A, 0x2704, 0x4032
-            };
+             * A57 - offlines
+             * A53 - 4 cores online at 1.2GHz
+            */
+            int resource_values[] = {0x150C, 0x160C, 0x170C, 0x180C, 0x3DFF};
             perform_hint_action(video_encode_metadata.hint_id,
                     resource_values, ARRAY_SIZE(resource_values));
         }
