@@ -58,7 +58,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.ts.postmakeup=false \
     persist.ts.rtmakeup=false \
     camera.no_navigation_bar=true \
-    ro.factorytest=0
+    ro.factorytest=0 \
+# Enable low power video mode for 4K encode
+    vidc.debug.perf.mode=2 \
+    vidc.enc.dcvs.extra-buff-count=2
 
 # DRM
 PRODUCT_PROPERTY_OVERRIDES += \
