@@ -41,7 +41,7 @@
 #include "power-common.h"
 #include "power-helper.h"
 
-#define LOG_TAG "QCOM PowerHAL"
+#define LOG_TAG "QCOMPowerHAL"
 #include <log/log.h>
 
 #define USINSEC 1000000L

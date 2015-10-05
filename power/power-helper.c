@@ -41,7 +41,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-#define LOG_TAG "QCOM PowerHAL"
+#define LOG_TAG "QCOMPowerHAL"
 #include <log/log.h>
 #include <hardware/power.h>
 

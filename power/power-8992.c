@@ -172,10 +172,10 @@ static void process_video_encode_hint(void *metadata)
     if (video_encode_metadata.state == 1) {
         if (is_interactive_governor(governor)) {
             /* sched and cpufreq params
-             * A57 - offlines
-             * A53 - 4 cores online at 1.2GHz
-            */
-            int resource_values[] = {0x150C, 0x160C, 0x170C, 0x180C, 0x3DFF};
+           A53: 4 cores online at 1.2GHz max, 960 min
+           A57: 4 cores online at 384 max, 384 min
+           */
+        int resource_values[] = {0x150C, 0x1F03, 0x2303};
             perform_hint_action(video_encode_metadata.hint_id,
                     resource_values, ARRAY_SIZE(resource_values));
         }
