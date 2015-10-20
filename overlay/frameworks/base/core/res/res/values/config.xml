@@ -369,6 +369,9 @@
     <bool name="config_device_vt_available">false</bool>
     <bool name="config_device_wfc_ims_available">false</bool>
 
+    <!-- Whether camera shutter sound is forced or not  (country specific). -->
+    <bool name="config_camera_sound_forced">false</bool>
+
     <!-- Boolean indicating if current platform supports BLE peripheral mode -->
     <bool name="config_bluetooth_le_peripheral_mode_supported">true</bool>
 
