@@ -737,7 +737,6 @@ bin/pm-service
 bin/mm-qcamera-app
 bin/hci_qcomm_init
 bin/msm_irqbalance
-bin/bdaddr_loader
 bin/imscmservice
 bin/irsc_util
 bin/thermal-engine

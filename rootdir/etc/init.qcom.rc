@@ -1203,11 +1203,18 @@ service zchgd_offmode /system/bin/zchgd -pseudooffmode -autostop -poffmodewarn
     group root graphics
     disabled
 
-service bdaddr_loader /system/bin/bdaddr_loader
+service conn_init /system/bin/hwaddrs
+    class core
     user root
-    group bluetooth net_bt_admin misc net_bt_stack
-    disabled
+    group system wifi
     oneshot
+
+# Running hwaddrs under init is enforcing 0600, we need more
+on property:init.svc.conn_init=stopped
+    chmod 644 /data/misc/wifi/config
+    chown system wifi /data/misc/wifi/config
+    chmod 644 /data/misc/bdaddr
+    chown bluetooth bluetooth /data/misc/bdaddr
 
 on property:persist.service.criticaltemp=1
    write /sys/kernel/debug/spmi/spmi-0/address 0x00867

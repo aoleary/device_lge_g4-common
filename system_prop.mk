@@ -26,17 +26,18 @@ PRODUCT_PROPERTY_OVERRIDES += \
     use.voice.path.for.pcm.voip=true \
     use.dedicated.device.for.voip=true \
     av.offload.enable=false
-    
+
 # Media
 PRODUCT_PROPERTY_OVERRIDES += \
     mm.enable.qcom_parser=3314291 \
     mm.enable.smoothstreaming=true \
     media.aac_51_output_enabled=true \
     qcom.hw.aac.encoder=true
-    
+
 # Bluetooth
 PRODUCT_PROPERTY_OVERRIDES += \
-    bluetooth.chip.vendor=brcm 
+    bluetooth.chip.vendor=brcm \
+    ro.bt.bdaddr_path="/data/misc/bdaddr"
 
 # Display
 #
