@@ -9,3 +9,4 @@
 /sns                                    u:object_r:sensors_data_file:s0
 /sns/cal(/.*)?                          u:object_r:sensors_data_file:s0
 
+/dev/ttyHSL1                            u:object_r:cir_device:s0

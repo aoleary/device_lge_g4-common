@@ -159,6 +159,8 @@ BOARD_SEPOLICY_DIRS += $(COMMON_PATH)/sepolicy
 
 BOARD_SEPOLICY_UNION += \
     device.te \
+    drmserver.te \
+    file.te \
     file_contexts \
     genfs_contexts \
     init-shell.te \
@@ -168,10 +170,11 @@ BOARD_SEPOLICY_UNION += \
     property.te \
     property_contexts \
     qmuxd.te \
+    qseecomd.te \
     rild.te \
     sensors.te \
     servicemanager.te \
-    tee.te \
+    system-server.te \
     time-daemon.te \
     thermal-engine.te \
     usb-uicc-daemon.te \

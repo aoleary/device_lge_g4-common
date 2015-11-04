@@ -70,8 +70,9 @@ on init
 
     # Set permissions for persist partition
     mkdir /persist 0771 system system
-    # Set permissions for persist partition
-    mkdir /persist 0771 system system
+
+    # Set permissions for drm partition
+    mkdir /persist-lg 0771 system system
 
     # See storage config details at http://source.android.com/devices/tech/storage/
     mkdir /mnt/shell/emulated 0700 shell shell
@@ -412,8 +413,10 @@ on post-fs
 
     chown system carrier /carrier
     chmod 0771 /carrier
-    #restorecon carrier partition.
+
+    # restorecon carrier partition
     restorecon_recursive /carrier
+    
     # We restorecon /preload in case preload folder has been reset.
     restorecon_recursive /preload
 

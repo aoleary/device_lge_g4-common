@@ -1,4 +1,8 @@
 allow mediaserver lge_diag_device:chr_file { read write open ioctl };
 allow mediaserver camera_prop:property_service { set };
 
+allow mediaserver persist_file:dir { search };
 allow mediaserver persist_data_file:dir { search };
+
+allow mediaserver firmware_data_file:dir search;
+allow mediaserver firmware_data_file:file { read getattr open };
