@@ -46,7 +46,7 @@ TARGET_NO_BOOTLOADER := true
 TARGET_USES_C2D_COMPOSITION := true
 
 # Kernel
-BOARD_CUSTOM_BOOTIMG_MK := $(COMMON_PATH)/mkbootimg.mk
+BOARD_DTBTOOL_ARGS := -2
 BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.console=ttyHSL0 androidboot.hardware=qcom user_debug=31 ehci-hcd.park=3 lpm_levels.sleep_disabled=1 boot_cpus=0-5
 BOARD_KERNEL_BASE := 0x00078000
 BOARD_KERNEL_PAGESIZE := 4096
