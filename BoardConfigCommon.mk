@@ -171,6 +171,7 @@ BOARD_SEPOLICY_UNION += \
     rild.te \
     sensors.te \
     servicemanager.te \
+    tee.te \
     time-daemon.te \
     thermal-engine.te \
     usb-uicc-daemon.te \
