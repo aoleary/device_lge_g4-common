@@ -1725,6 +1725,14 @@
         <ctl name="DEC4 Volume" value="84" />
     </path>
 
+    <path name="camcorder-stereo-dmic">
+        <path name="dual-mic-handset" />
+        <ctl name="ADC3 Volume" value="7" />
+        <ctl name="DEC4 Volume" value="84" />
+        <ctl name="ADC4 Volume" value="7" />
+        <ctl name="DEC3 Volume" value="84" />
+    </path>
+
     <path name="hdmi-tx">
         <path name="main-mic" />
     </path>
