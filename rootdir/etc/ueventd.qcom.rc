@@ -203,29 +203,24 @@
 # wlan
 /dev/wcnss_wlan           0660   system     system
 /dev/wcnss_ctrl           0660   system     system
+
 #nfc permissions
-#/dev/nfc-nci              0660    nfc         nfc
-#/dev/assd                 0660    nfc         nfc
 /dev/pn547                 0660    nfc         nfc
-# LGE_CHANGE_S, [NFC][sungwook.ahn@lge.com], 2013-03-9, NFC Bring up
-/dev/snfc_uart      0660    nfc nfcfelica
-/dev/snfc_intu_poll 0440    nfc nfcfelica
-/dev/snfc_rfs       0440    nfc nfcfelica
-/dev/snfc_uart_control  0660    nfc nfcfelica
-/dev/snfc_cen       0664    nfclock nfcfelica
-/dev/snfc_available_poll    0440    nfc nfcfelica
-# LGE_CHANGE_E, [NFC][sungwook.ahn@lge.com], 2013-03-9, NFC Bring up
-# LGE_CHANGE_S, 20130307, LGE-FeliCa@lge.com
-/dev/ttyHSL2              0660  mfc       nfcfelica
-/dev/i2c-5                0660  mfc       nfcfelica
-/dev/felica               0660  mfc       system
-/dev/felica_cen           0460  mfc       felicalock
-/dev/felica_pon           0660  mfc       system
-/dev/felica_rfs           0440  mfc       mfc
-/dev/felica_rws           0440  mfc       mfc
+/dev/snfc_uart      0660    nfc nfc
+/dev/snfc_intu_poll 0440    nfc nfc
+/dev/snfc_rfs       0440    nfc nfc
+/dev/snfc_uart_control  0660    nfc nfc
+/dev/snfc_cen       0664    nfc nfc
+/dev/snfc_available_poll    0440    nfc nfc
+/dev/ttyHSL2              0660  nfc       nfc
+/dev/i2c-5                0660  nfc       nfc
+/dev/felica               0660  nfc       system
+/dev/felica_cen           0460  nfc       nfc
+/dev/felica_pon           0660  nfc       system
+/dev/felica_rfs           0440  nfc       nfc
+/dev/felica_rws           0440  nfc       nfc
 /dev/felica_cal           0660  system    system
 /dev/felica_test          0660  system    system
-# LGE_CHANGE_S, 20130307, LGE-FeliCa@lge.com
 
 # UIO devices
 /dev/uio0                 0660   system     system
