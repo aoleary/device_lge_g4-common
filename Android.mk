@@ -161,4 +161,16 @@ $(WIDEVINE_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
 
 ALL_DEFAULT_INSTALLED_MODULES += $(WIDEVINE_SYMLINKS)
 
+HASHSTOR_IMAGES := \
+    hashstor.b00 hashstor.b01 hashstor.b02 hashstor.b03 hashstor.mdt
+
+HASHSTOR_SYMLINKS := $(addprefix $(TARGET_OUT_ETC)/firmware/,$(HASHSTOR_IMAGES))
+$(HASHSTOR_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
+	@echo "hashstor firmware link: $@"
+	@mkdir -p $(dir $@)
+	@rm -rf $@
+	$(hide) ln -sf /firmware/image/$(notdir $@) $@
+
+ALL_DEFAULT_INSTALLED_MODULES += $(HASHSTOR_SYMLINKS)
+
 endif
