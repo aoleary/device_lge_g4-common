@@ -83,6 +83,10 @@ PRODUCT_PACKAGES += \
     init.qcom.post_boot.sh \
     init.qcom.uicc.sh
 
+# RIL
+PRODUCT_PACKAGES += \
+	liblge
+
 # Audio
 PRODUCT_PACKAGES += \
     audiod \

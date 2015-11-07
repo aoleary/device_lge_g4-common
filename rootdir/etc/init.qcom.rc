@@ -40,6 +40,7 @@ on early-fs
     # load kernel modules
     insmod /system/lib/modules/mcDrvModule.ko
     insmod /system/lib/modules/mcKernelApi.ko
+
     # MobiCore Daemon Paths
     export MC_AUTH_TOKEN_PATH /data/app/mcRegistry
 
@@ -52,6 +53,7 @@ on early-fs
     chown system /sys/process/task_comm_list
 
 on init
+    export LD_PRELOAD /system/lib64/liblge.so
 
     mkdir /firmware 0771 system system
     mkdir /firmware/image 0771 system system
