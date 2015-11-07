@@ -65,6 +65,7 @@ on init
     mkdir /firmware/radio 0771 system system
     mkdir /firmware/adsp 0771 system system
     mkdir /firmware/cpe 0771 system system
+    mkdir /cust 0771 system system
     mkdir /carrier 0770 system carrier
     chown system carrier /carrier
     chmod 0770 /carrier
@@ -405,6 +406,17 @@ on post-fs
 on post-fs-data
     start hrdump
 
+    #Create NETMGR daemon socket area
+    mkdir /dev/socket/netmgr 0750 radio radio
+
+    # Mark the copy complete flag to not completed
+    write /data/misc/radio/copy_complete 0
+    chown radio radio /data/misc/radio/copy_complete
+    chmod 0660 /data/misc/radio/copy_complete
+
+    # Socket location for RIDL
+    mkdir /dev/socket/RIDL 2770 system system
+
     # Create directory for TZ Apps
     mkdir /data/misc/qsee 0770 system system
     
@@ -451,6 +463,7 @@ on post-fs-data
 
     # Create directory used by display clients
     mkdir /data/misc/display 0770 system graphics
+    mkdir /persist/display 0770 system graphics
 
     # Mounting of persist is moved to 'on emmc-fs' and 'on fs' sections
     # We chown/chmod /persist again so because mount is run as root + defaults
@@ -554,6 +567,13 @@ on post-fs-data
     chown system system /sys/devices/virtual/graphics/fb0/rgb
     chmod 0660 /sys/devices/virtual/graphics/fb0/rgb
 
+    # RIDL data
+    mkdir /data/misc/SelfHost/ 0710 system shell
+    mkdir /data/misc/SelfHost/QCLogs/ 2750 system shell
+    mkdir /data/misc/SelfHost/QCLogs/temp/ 0700 system shell
+    mkdir /data/misc/SelfHost/storage/ 0700 system shell
+    mkdir /data/misc/SelfHost/Running/ 2750 system shell
+
 service ssr_setup /system/bin/ssr_setup
     oneshot
     disabled
@@ -648,8 +668,8 @@ on property:wc_transport.start_hci=false
 
 service start_hci_filter /system/bin/wcnss_filter
     class late_start
-    user root
-    group bluetooth qcom_diag net_bt_stack
+    user bluetooth
+    group bluetooth diag net_bt_stack
     disabled
 
 on property:bluetooth.hciattach=true
@@ -689,7 +709,7 @@ service btsnoop /system/bin/btsnoop
 service ftmd /system/bin/logwrapper /system/bin/ftmdaemon
     class late_start
     user root
-    group bluetooth net_bt_admin misc net_bt_stack qcom_diag net_bt_stack
+    group bluetooth net_bt_admin misc net_bt_stack diag net_bt_stack
     disabled
     oneshot
 
@@ -703,7 +723,7 @@ service port-bridge /system/bin/port-bridge /dev/mhi_pipe_32 /dev/ttyGS0
 service qmuxd /system/bin/qmuxd
     class core
     user root
-    group radio audio bluetooth gps nfc qcom_diag
+    group radio audio bluetooth gps nfc diag
 
 service netmgrd /system/bin/netmgrd
     class main
@@ -874,7 +894,7 @@ service ril-daemon2 /system/bin/rild -c 2
     socket rild2 stream 660 root radio
     socket rild-debug2 stream 660 radio system
     user root
-    group radio cache inet misc audio sdcard_r sdcard_rw diag qcom_diag log
+    group radio cache inet misc audio sdcard_r sdcard_rw diag diag log
 
 service ril-daemon3 /system/bin/rild -c 3
     class main
@@ -882,7 +902,7 @@ service ril-daemon3 /system/bin/rild -c 3
     socket rild-debug3 stream 660 radio system
     user root
     disabled
-    group radio cache inet misc audio sdcard_r sdcard_rw diag qcom_diag log
+    group radio cache inet misc audio sdcard_r sdcard_rw diag diag log
 
 service usb_uicc_enable /system/bin/sh /system/etc/init.qcom.uicc.sh
     class late_start
@@ -949,14 +969,14 @@ on property:sys.qbcharger.enable=false
 service diag_mdlog_start /system/bin/diag_mdlog
     class late_start
     user sdcard_rw
-    group system qcom_diag sdcard_rw sdcard_r media_rw
+    group system diag sdcard_rw sdcard_r media_rw
     disabled
     oneshot
 
 service diag_mdlog_stop /system/bin/diag_mdlog -k
     class late_start
     user sdcard_rw
-    group system qcom_diag sdcard_rw sdcard_r media_rw
+    group system diag sdcard_rw sdcard_r media_rw
     disabled
     oneshot
 
@@ -1025,7 +1045,7 @@ service qseecomd /system/bin/qseecomd
     user root
     group root
 
-service perfd /system/bin/perfd
+service perfd /system/vendor/bin/perfd
     class main
     user root
     disabled
@@ -1047,7 +1067,7 @@ on property:init.svc.per_mgr=running
 on property:sys.shutdown.requested=*
     stop per_proxy
 
-service thermal-engine /system/bin/thermal-engine
+service thermal-engine /system/vendor/bin/thermal-engine
    class main
    user root
    socket thermal-send-client stream 0660 system system
@@ -1118,7 +1138,7 @@ on property:init.svc.bootanim=stopped
 service imscmservice /system/bin/imscmservice
    class main
    user system
-   group radio net_raw diag qcom_diag log
+   group radio net_raw diag diag log
    disabled
 
 on property:sys.ims.DATA_DAEMON_STATUS=1
@@ -1192,3 +1212,28 @@ on property:persist.service.criticaltemp=1
    write /sys/devices/virtual/thermal/thermal_zone12/ctrl_crit_temp 1
    write /sys/devices/virtual/thermal/thermal_zone13/ctrl_crit_temp 1
    write /sys/devices/virtual/thermal/thermal_zone14/ctrl_crit_temp 1
+
+# LGE IMS Features - To interwork with QMI WMS (64-bit exe/lib)
+service imswmsproxy /system/bin/imswmsproxy
+    class main
+    user system
+    group radio system net_admin net_raw
+
+# start sensor daemon as core class [START]
+service lge-sensor-sh /system/bin/sh /init.msm8992.sensor.sh
+    class core
+    user root
+    oneshot
+    seclabel u:r:sensors:s0
+# start sensor daemon as core class [END]
+
+service RIDL /system/vendor/bin/RIDLClient.exe
+    class late_start
+    oneshot
+    user system
+    group system inet log sdcard_r sdcard_rw
+
+service fidodaemon /system/vendor/bin/fidodaemon
+    class late_start
+    user system
+    group system

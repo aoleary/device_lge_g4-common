@@ -81,7 +81,8 @@ PRODUCT_PACKAGES += \
     init.qcom.fm.sh \
     init.class_main.sh \
     init.qcom.post_boot.sh \
-    init.qcom.uicc.sh
+    init.qcom.uicc.sh \
+    init.msm8992.sensor.sh
 
 # RIL
 PRODUCT_PACKAGES += \
