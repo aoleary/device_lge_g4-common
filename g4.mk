@@ -219,6 +219,7 @@ PRODUCT_PACKAGES += \
     libOmxVenc \
     libOmxVidcCommon \
     libstagefrighthw \
+    libstagefright_soft_flacdec \
     libqcmediaplayer \
     qcmediaplayer
 
