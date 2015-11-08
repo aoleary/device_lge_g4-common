@@ -2,10 +2,9 @@
 # System Properties for G4
 #
 
-# MTP and USB-OTG
+# MTP
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    persist.sys.usb.config=mtp \
-    persist.sys.isUsbOtgEnabled=true
+    persist.sys.usb.config=mtp
 
 # Camera
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
