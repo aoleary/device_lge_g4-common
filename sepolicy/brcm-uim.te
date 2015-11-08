@@ -1,0 +1,6 @@
+type brcm_uim_sysfs, domain;
+type brcm_uim_sysfs_exec, exec_type, file_type;
+
+init_daemon_domain(brcm_uim_sysfs)
+
+allow brcm_uim_sysfs bluetooth_prop:property_service { set };

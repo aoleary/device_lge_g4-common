@@ -14,3 +14,6 @@
 
 /system/bin/hwaddrs         u:object_r:hwaddrs_exec:s0
 /system/bin/imswmsproxy     u:object_r:imswmsproxy_exec:s0
+
+/system/bin/brcm-uim-sysfs  u:object_r:brcm_uim_sysfs_exec:s0
+/dev/brcm_bt_drv            u:object_r:hci_attach_dev:s0

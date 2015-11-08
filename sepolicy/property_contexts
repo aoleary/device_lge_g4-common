@@ -1,2 +1,3 @@
 persist.camera.ais.hal          u:object_r:camera_prop:s0
 persist.sys.thermald_miti_off   u:object_r:thermald_prop:s0
+service.brcm.bt.                u:object_r:bluetooth_prop:s0
