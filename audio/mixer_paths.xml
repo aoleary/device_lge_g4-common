@@ -376,23 +376,6 @@
     <!-- Opalum tuning path selection -->
     <ctl name="OPALUM_AFE" value="AUDIO_TUNING" />
 
-    <ctl name="Playback Channel Map" id="0" value="1" />
-    <ctl name="Playback Channel Map" id="1" value="2" />
-    <ctl name="Playback Channel Map" id="2" value="0" />
-    <ctl name="Playback Channel Map" id="3" value="0" />
-    <ctl name="Playback Channel Map" id="4" value="0" />
-    <ctl name="Playback Channel Map" id="5" value="0" />
-    <ctl name="Playback Channel Map" id="6" value="0" />
-    <ctl name="Playback Channel Map" id="7" value="0" />
-    <ctl name="Playback Channel Map15" id="0" value="1" />
-    <ctl name="Playback Channel Map15" id="1" value="2" />
-    <ctl name="Playback Channel Map15" id="2" value="0" />
-    <ctl name="Playback Channel Map15" id="3" value="0" />
-    <ctl name="Playback Channel Map15" id="4" value="0" />
-    <ctl name="Playback Channel Map15" id="5" value="0" />
-    <ctl name="Playback Channel Map15" id="6" value="0" />
-    <ctl name="Playback Channel Map15" id="7" value="0" />
-
     <!-- These are audio route (FE to BE) specific mixer settings -->
     <path name="deep-buffer-playback">
         <ctl name="SLIMBUS_0_RX Audio Mixer MultiMedia1" value="1" />
