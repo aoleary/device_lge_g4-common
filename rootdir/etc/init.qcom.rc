@@ -31,6 +31,10 @@ on early-init
     mount debugfs debugfs /sys/kernel/debug
     symlink /data/tombstones /tombstones
 
+    # Mount pstore file system on /mnt/pstore
+    mkdir /dev/pstore 660 system system
+    mount pstore /dev/pstore /dev/pstore
+
 on early-fs
     mount_all fstab.qcom
 
@@ -53,7 +57,7 @@ on early-fs
     chown system /sys/process/task_comm_list
 
 on init
-    export LD_PRELOAD /system/lib64/liblge.so
+    export LD_PRELOAD liblge.so
 
     mkdir /firmware 0771 system system
     mkdir /firmware/image 0771 system system
@@ -721,9 +725,10 @@ service port-bridge /system/bin/port-bridge /dev/mhi_pipe_32 /dev/ttyGS0
 
 # QMUX must be in multiple groups to support external process connections
 service qmuxd /system/bin/qmuxd
-    class core
+    class main
     user root
     group radio audio bluetooth gps nfc diag
+    disabled
 
 service netmgrd /system/bin/netmgrd
     class main

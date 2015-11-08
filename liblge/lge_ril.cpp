@@ -16,10 +16,11 @@
 
 #include <stdlib.h>
 
+#ifdef LIBLGE_64BIT
 extern "C" int _ZNK7android6Parcel10readUint64EPm(uint32_t *pArg);
 
 extern "C" int _ZNK7android6Parcel10readuInt64EPm(uint32_t *pArg) {
     return _ZNK7android6Parcel10readUint64EPm(pArg);
 }
-
+#endif
 
