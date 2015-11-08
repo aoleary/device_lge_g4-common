@@ -1,0 +1,4 @@
+type hwaddrs, domain;
+type hwaddrs_exec, exec_type, file_type;
+
+init_daemon_domain(hwaddrs)

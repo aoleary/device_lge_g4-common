@@ -11,3 +11,6 @@
 /sns/cal(/.*)?              u:object_r:sensors_data_file:s0
 
 /dev/ttyHSL1                u:object_r:cir_device:s0
+
+/system/bin/hwaddrs         u:object_r:hwaddrs_exec:s0
+/system/bin/imswmsproxy     u:object_r:imswmsproxy_exec:s0
