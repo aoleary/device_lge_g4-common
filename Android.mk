@@ -62,17 +62,17 @@ $(DXHDCP2_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
 
 ALL_DEFAULT_INSTALLED_MODULES += $(DXHDCP2_SYMLINKS)
 
-KEYMASTER_IMAGES := \
-    keymaste.b00 keymaste.b01 keymaste.b02 keymaste.b03 keymaste.mdt
-
-KEYMASTER_SYMLINKS :=$(addprefix $(TARGET_OUT_ETC)/firmware/,$(KEYMASTER_IMAGES))
-$(KEYMASTER_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
-	@echo "Keymaster firmware link: $@"
-	@mkdir -p $(dir $@)
-	@rm -rf $@
-	$(hide) ln -sf /firmware/image/$(notdir $@) $@
-
-ALL_DEFAULT_INSTALLED_MODULES += $(KEYMASTER_SYMLINKS)
+#KEYMASTER_IMAGES := \
+#    keymaste.b00 keymaste.b01 keymaste.b02 keymaste.b03 keymaste.mdt
+#
+#KEYMASTER_SYMLINKS :=$(addprefix $(TARGET_OUT_ETC)/firmware/,$(KEYMASTER_IMAGES))
+#$(KEYMASTER_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
+#	@echo "Keymaster firmware link: $@"
+#	@mkdir -p $(dir $@)
+#	@rm -rf $@
+#	$(hide) ln -sf /firmware/image/$(notdir $@) $@
+#
+#ALL_DEFAULT_INSTALLED_MODULES += $(KEYMASTER_SYMLINKS)
 
 MLSERVER_IMAGES := \
     mlserver.b00 mlserver.b01 mlserver.b02 mlserver.b03 mlserver.mdt
