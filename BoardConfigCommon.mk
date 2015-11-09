@@ -166,7 +166,8 @@ TARGET_KEYMASTER_WAIT_FOR_QSEE := true
 # Vendor init
 TARGET_INIT_VENDOR_LIB := libinit_msm
 
-#RIL
+# RIL
+BOARD_RIL_CLASS := ../../../device/lge/g4-common/ril/
 TARGET_RELEASE_CPPFLAGS += -DNEEDS_LGE_RIL_SYMBOLS
 
 # NFC
