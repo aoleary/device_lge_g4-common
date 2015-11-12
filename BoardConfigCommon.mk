@@ -165,9 +165,6 @@ BOARD_USES_QC_TIME_SERVICES := true
 # Disable HW based full disk encryption
 TARGET_HW_DISK_ENCRYPTION := false
 
-# Enable keymaster app checking
-TARGET_KEYMASTER_WAIT_FOR_QSEE := true
-
 # Vendor init
 TARGET_INIT_VENDOR_LIB := libinit_msm
 
