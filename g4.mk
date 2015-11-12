@@ -169,9 +169,10 @@ PRODUCT_PACKAGES += \
     memtrack.msm8992 \
     liboverlay
 
-# Keymaster
+# Keystore
 PRODUCT_PACKAGES += \
-    keystore.msm8992
+    keystore.msm8992 \
+    gatekeeper.msm8992
 
 # Filesystem management tools
 PRODUCT_PACKAGES += \
