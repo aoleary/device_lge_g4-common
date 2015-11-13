@@ -78,8 +78,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.timed.enable=true \
     ro.qualcomm.cabl=2 \
     ro.vendor.extension_library=libqti-perfd-client.so \
-    persist.dpm.feature=3 \
-    ro.frp.pst=/dev/block/platform/soc.0/f9824900.sdhci/by-name/persistent
+    persist.dpm.feature=3
 
 # Radio
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -92,9 +91,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.data.netmgrd.qos.enable=false \
     ro.use_data_netmgrd=true
 
-# Recovery
+# Factory Reset Protection
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.cwm.forbid_format=/boot,/firmware,/mpt,/persist,/persist-lg,/sns
+    ro.frp.pst=/dev/block/bootdevice/by-name/persistent
 
 # Sensor debugging
 # Valid settings (and presumably what they mean):

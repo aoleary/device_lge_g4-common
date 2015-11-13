@@ -1199,6 +1199,7 @@ on property:init.svc.hwaddrs=stopped
     chown system wifi /data/misc/wifi/config
     chmod 644 /data/misc/bdaddr
     chown bluetooth bluetooth /data/misc/bdaddr
+    restorecon /data/misc/bdaddr
 
 on property:persist.service.criticaltemp=1
    write /sys/kernel/debug/spmi/spmi-0/address 0x00867

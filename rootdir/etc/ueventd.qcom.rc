@@ -256,4 +256,5 @@
 /dev/mobicore             0600   system     system
 /dev/mobicore-user        0666   system     system
 
+# FRP
 /dev/block/bootdevice/by-name/persistent        0600    system  system
