@@ -1244,10 +1244,3 @@ service fidodaemon /system/vendor/bin/fidodaemon
     class late_start
     user system
     group system
-
-# shared transport user space mgr service for Bluetooth, FM and GPS
-service brcm_uim_sysfs /system/bin/brcm-uim-sysfs
-    class late_start
-    user root
-    group bluetooth net_bt_admin
-    oneshot
