@@ -290,41 +290,44 @@ on boot
     insmod /system/lib/modules/texfat.ko
 
 # START touch_driver
-	chown system system /sys/devices/virtual/input/lge_touch/incoming_call
-	chmod 664 /sys/devices/virtual/input/lge_touch/incoming_call
-	chown system system /sys/devices/virtual/input/lge_touch/ime_status
-	chown system lgkeyguard /sys/devices/virtual/input/lge_touch/keyguard
-	chmod 664 /sys/devices/virtual/input/lge_touch/keyguard
-	chown system system /sys/devices/virtual/input/lge_touch/ts_noise_log_enable
-	chmod 664 /sys/devices/virtual/input/lge_touch/ts_noise_log_enable
-	chown system system /sys/devices/virtual/input/lge_touch/ts_noise
-	chmod 664 /sys/devices/virtual/input/lge_touch/ts_noise
-	chown system system /sys/devices/virtual/input/lge_touch/sensing_test
-	chmod 664 /sys/devices/virtual/input/lge_touch/sensing_test
-	chown system system /sys/devices/virtual/input/lge_touch/hidden_normal_cal_state
-	chmod 664 /sys/devices/virtual/input/lge_touch/hidden_normal_cal_state
-	chown system system /sys/devices/virtual/input/lge_touch/hidden_lpwg_cal_state
-	chmod 664 /sys/devices/virtual/input/lge_touch/hidden_lpwg_cal_state
+    chown system system /sys/devices/virtual/input/lge_touch/incoming_call
+    chmod 664 /sys/devices/virtual/input/lge_touch/incoming_call
+    chown system system /sys/devices/virtual/input/lge_touch/ime_status
+    chown system lgkeyguard /sys/devices/virtual/input/lge_touch/keyguard
+    chmod 664 /sys/devices/virtual/input/lge_touch/keyguard
+    chown system system /sys/devices/virtual/input/lge_touch/ts_noise_log_enable
+    chmod 664 /sys/devices/virtual/input/lge_touch/ts_noise_log_enable
+    chown system system /sys/devices/virtual/input/lge_touch/ts_noise
+    chmod 664 /sys/devices/virtual/input/lge_touch/ts_noise
+    chown system system /sys/devices/virtual/input/lge_touch/sensing_test
+    chmod 664 /sys/devices/virtual/input/lge_touch/sensing_test
+    chown system system /sys/devices/virtual/input/lge_touch/hidden_normal_cal_state
+    chmod 664 /sys/devices/virtual/input/lge_touch/hidden_normal_cal_state
+    chown system system /sys/devices/virtual/input/lge_touch/hidden_lpwg_cal_state
+    chmod 664 /sys/devices/virtual/input/lge_touch/hidden_lpwg_cal_state
 # END touch_driver
 
 # START touch_knock_on
-	chown system system /sys/devices/virtual/input/lge_touch/lpwg_data
-	chmod 664 /sys/devices/virtual/input/lge_touch/lpwg_data
-	chown system radio /sys/devices/virtual/input/lge_touch/lpwg_notify
-	chmod 664 /sys/devices/virtual/input/lge_touch/lpwg_notify
-	write /sys/devices/virtual/input/lge_touch/lpwg_notify "1 1 0 0"
-	chown system system /sys/devices/virtual/input/lge_touch/lpwg_test_info
-	chmod 644 /sys/devices/virtual/input/lge_touch/lpwg_test_info
-	chown system system /sys/devices/virtual/input/lge_touch/lpwg_test_ctrl
-	chmod 644 /sys/devices/virtual/input/lge_touch/lpwg_test_ctrl
-	chown system system /sys/devices/virtual/input/lge_touch/touch_wake_up_test
-	chmod 664 /sys/devices/virtual/input/lge_touch/touch_wake_up_test
-	chown system system /sys/devices/virtual/input/lge_touch/quick_cover_status
-	chmod 664 /sys/devices/virtual/input/lge_touch/quick_cover_status
+    chown system system /sys/devices/virtual/input/lge_touch/lpwg_data
+    chmod 664 /sys/devices/virtual/input/lge_touch/lpwg_data
+    chown system radio /sys/devices/virtual/input/lge_touch/lpwg_notify
+    chmod 664 /sys/devices/virtual/input/lge_touch/lpwg_notify
+    chown system system /sys/devices/virtual/input/lge_touch/lpwg_test_info
+    chmod 644 /sys/devices/virtual/input/lge_touch/lpwg_test_info
+    chown system system /sys/devices/virtual/input/lge_touch/lpwg_test_ctrl
+    chmod 644 /sys/devices/virtual/input/lge_touch/lpwg_test_ctrl
+    chown system system /sys/devices/virtual/input/lge_touch/touch_wake_up_test
+    chmod 664 /sys/devices/virtual/input/lge_touch/touch_wake_up_test
+    chown system system /sys/devices/virtual/input/lge_touch/quick_cover_status
+    chmod 664 /sys/devices/virtual/input/lge_touch/quick_cover_status
 # END touch_knock_on
     lge_chcon_recursive /data/property u:object_r:property_data_file:s0
     lge_chcon_recursive /data/security u:object_r:security_file:s0
     start chcon_keystore
+
+# Double tap to wake gesture
+    chown system radio /sys/devices/virtual/input/lge_touch/tap2wake
+    chmod 664 /sys/devices/virtual/input/lge_touch/tap2wake
 
     chown media media /sys/devices/soc.0/qcom,msm-pcm-routing.39/cfg_string_rx
     chown media media /sys/devices/soc.0/qcom,msm-pcm-routing.39/cfg_string_tx

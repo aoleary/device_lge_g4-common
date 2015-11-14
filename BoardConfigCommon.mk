@@ -148,6 +148,7 @@ COMMON_GLOBAL_CFLAGS += \
 
 # Power
 TARGET_POWERHAL_VARIANT := qcom
+TARGET_TAP_TO_WAKE_NODE := "/sys/devices/virtual/input/lge_touch/tap2wake"
 
 # Qualcomm support
 BOARD_USES_QCOM_HARDWARE := true
