@@ -1,6 +1,0 @@
-allow thermal-engine lge_diag_device:chr_file { open read write ioctl };
-allow thermal-engine servicemanager:binder { call };
-allow thermal-engine system_server:binder { call };
-allow thermal-engine property_socket:sock_file { write };
-allow thermal-engine init:unix_stream_socket { connectto };
-allow thermal-engine thermald_prop:property_service { set };

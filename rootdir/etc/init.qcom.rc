@@ -1086,13 +1086,11 @@ on property:init.svc.per_mgr=running
 on property:sys.shutdown.requested=*
     stop per_proxy
 
-service thermal-engine /system/vendor/bin/thermal-engine
-   class main
-   user root
-   socket thermal-send-client stream 0660 system system
-   socket thermal-recv-client stream 0660 system system
-   socket thermal-recv-passive-client stream 0660 system system
-   group root
+# OSS thermal management
+service thermanager /system/bin/thermanager /system/etc/thermanager.xml
+    class late_start
+    user root
+    group root
 
 service time_daemon /system/bin/time_daemon
    class late_start

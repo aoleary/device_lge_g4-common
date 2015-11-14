@@ -116,9 +116,12 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     charger_res_images
 
-# Thermal configuration
+# Thermal
+PRODUCT_PACKAGES += \
+    thermanager
+
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/thermal-engine-8992.conf:system/etc/thermal-engine-8992.conf
+    $(LOCAL_PATH)/configs/thermanager.xml:system/etc/thermanager.xml
 
 # IZat configuration
 PRODUCT_COPY_FILES += \
