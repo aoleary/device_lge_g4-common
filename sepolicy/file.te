@@ -1,2 +1,5 @@
 type firmware_data_file, fs_type, contextmount_type;
-type persist_lg_data_file, fs_type, contextmount_type;
+type persist_lg_data_file, fs_type, mlstrustedobject;
+
+type cust_file, file_type, data_file_type;
+type multimedia_data_file, file_type, data_file_type;

@@ -3,6 +3,10 @@ allow mediaserver camera_prop:property_service { set };
 
 allow mediaserver persist_file:dir { search };
 allow mediaserver persist_data_file:dir { search };
+allow mediaserver persist_lg_data_file:dir { search };
+allow mediaserver cust_file:dir { search };
 
-allow mediaserver firmware_data_file:dir search;
+allow mediaserver firmware_data_file:dir { search };
 allow mediaserver firmware_data_file:file { read getattr open };
+
+allow mediaserver multimedia_data_file:dir { search };

@@ -1,2 +1,2 @@
-allow sensors lge_diag_device:chr_file { open read write ioctl };
-allow system_server cir_device:chr_file { open read write ioctl }; 
+allow system_server lge_diag_device:chr_file { open read write ioctl };
+allow system_server cir_device:chr_file { open read write ioctl };

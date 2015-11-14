@@ -38,7 +38,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Bluetooth
 PRODUCT_PROPERTY_OVERRIDES += \
     bluetooth.chip.vendor=brcm \
-    ro.bt.bdaddr_path="/data/misc/bdaddr" \
+    ro.bt.bdaddr_path="/data/misc/bluetooth/bdaddr" \
     persist.service.avrcp.browsing=1
 
 # Display

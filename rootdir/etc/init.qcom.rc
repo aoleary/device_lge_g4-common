@@ -423,7 +423,7 @@ on post-fs-data
 
     # Create directory for TZ Apps
     mkdir /data/misc/qsee 0770 system system
-    
+
     # NFC local data and nfcee xml storage
     mkdir /data/nfc 0770 nfc nfc
     mkdir /data/nfc/param 0770 nfc nfc
@@ -1197,9 +1197,8 @@ service hwaddrs /system/bin/hwaddrs
 on property:init.svc.hwaddrs=stopped
     chmod 644 /data/misc/wifi/config
     chown system wifi /data/misc/wifi/config
-    chmod 644 /data/misc/bdaddr
-    chown bluetooth bluetooth /data/misc/bdaddr
-    restorecon /data/misc/bdaddr
+    chmod 644 /data/misc/bluetooth/bdaddr
+    chown bluetooth bluetooth /data/misc/bluetooth/bdaddr
 
 on property:persist.service.criticaltemp=1
    write /sys/kernel/debug/spmi/spmi-0/address 0x00867
