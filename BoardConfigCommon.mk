@@ -161,9 +161,6 @@ TARGET_PLATFORM_DEVICE_BASE := /devices/soc.0/
 include device/qcom/sepolicy/sepolicy.mk
 BOARD_SEPOLICY_DIRS += $(COMMON_PATH)/sepolicy
 
-# Time services
-BOARD_USES_QC_TIME_SERVICES := true
-
 # Disable HW based full disk encryption
 TARGET_HW_DISK_ENCRYPTION := false
 

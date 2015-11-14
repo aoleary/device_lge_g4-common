@@ -375,7 +375,6 @@ vendor/lib/libmmcamera_trueportrait_lib.so
 vendor/lib/libqcci_legacy.so
 vendor/lib/libchromatix_imx234_hfr_120.so
 vendor/lib/libmmcamera_stillmore_lib.so
-vendor/lib/libTimeService.so
 vendor/lib/libmmcamera2_cpp_module.so
 vendor/lib/libFileMux.so
 vendor/lib/libchromatix_t4ka3_default_video.so
@@ -640,7 +639,6 @@ vendor/lib64/libvendorconn.so
 vendor/lib64/libconnctrl.so
 vendor/lib64/libbccQTI.so
 vendor/lib64/libqcci_legacy.so
-vendor/lib64/libTimeService.so
 vendor/lib64/libFileMux.so
 vendor/lib64/mediadrm/libdrmclearkeyplugin.so
 vendor/lib64/libadsprpc.so
@@ -678,7 +676,6 @@ vendor/lib64/libmmipstreamnetwork.so
 priv-app/com.qualcomm.location
 priv-app/com.qualcomm.location/com.qualcomm.location.apk
 priv-app/qcrilmsgtunnel/qcrilmsgtunnel.apk
-app/TimeService/TimeService.apk
 app/shutdownlistener/shutdownlistener.apk
 bin/adsprpcd
 bin/ATFWD-daemon
@@ -709,7 +706,6 @@ bin/rfs_access
 bin/rild
 bin/rmt_storage
 bin/sensors.qcom
-bin/time_daemon
 bin/xtwifi-client
 bin/xtwifi-inet-agent
 etc/data/qmi_config.xml

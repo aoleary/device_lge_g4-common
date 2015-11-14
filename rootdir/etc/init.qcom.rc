@@ -1092,10 +1092,11 @@ service thermanager /system/bin/thermanager /system/etc/thermanager.xml
     user root
     group root
 
-service time_daemon /system/bin/time_daemon
-   class late_start
-   user root
-   group root
+service timekeep /system/bin/timekeep restore
+    class late_start
+    user root
+    group root
+    oneshot
 
 service adsprpcd /system/bin/adsprpcd
    class main

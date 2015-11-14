@@ -1,1 +1,1 @@
-type thermald_prop, property_type;
+type timekeep_prop, property_type;
