@@ -1033,7 +1033,7 @@ service mocana-startup /system/bin/sh /system/etc/init.mocana.sh
 service p2p_supplicant /system/bin/wpa_supplicant \
     -iwlan0 -Dnl80211 -c/data/misc/wifi/wpa_supplicant.conf \
     -I/system/etc/wifi/p2p_supplicant_overlay.conf \
-    -puse_p2p_group_interface=1 \
+    -puse_p2p_group_interface=1p2p_device=1 \
     -m/data/misc/wifi/p2p_supplicant.conf \
     -e/data/misc/wifi/entropy.bin -g@android:wpa_wlan0
     class main
