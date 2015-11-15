@@ -16,7 +16,7 @@
 
 LOCAL_PATH := $(call my-dir)
 
-ifneq ($(filter g4 f500 h810 h811 h815 h818, $(TARGET_DEVICE)),)
+ifneq ($(filter g4 f500 h810 h811 h815 h818 vs986, $(TARGET_DEVICE)),)
 
 include $(call all-makefiles-under,$(LOCAL_PATH))
 
