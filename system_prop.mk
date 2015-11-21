@@ -14,7 +14,7 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     vidc.enc.dcvs.extra-buff-count=2
 
-#Audio   
+# Audio   
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.qc.sdk.audio.ssr=false \
     persist.audio.ssr.3mic=false \
@@ -86,6 +86,12 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.radio.apm_sim_not_pwdn=1 \
     persist.radio.add_power_save=1 \
     ro.telephony.ril_class=LgeLteRIL
+
+# LTE, CDMA, GSM/WCDMA
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.telephony.default_network=22 \
+    telephony.lteOnCdmaDevice=1 \
+    persist.radio.mode_pref_nv10=1
 
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.data.netmgrd.qos.enable=false \
