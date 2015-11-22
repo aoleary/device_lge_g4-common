@@ -36,14 +36,11 @@ import com.android.internal.telephony.uicc.IccCardStatus;
  * {@hide}
  */
 public class LgeLteRIL extends RIL implements CommandsInterface {
-
     static final String LOG_TAG = "LgeLteRIL";
-    private boolean isGSM = false;
 
     public LgeLteRIL(Context context, int preferredNetworkType,
             int cdmaSubscription, Integer instanceId) {
         this(context, preferredNetworkType, cdmaSubscription);
-        mQANElements = 5;
     }
 
     public LgeLteRIL(Context context, int networkMode, int cdmaSubscription) {
@@ -80,14 +77,17 @@ public class LgeLteRIL extends RIL implements CommandsInterface {
             appStatus.pin1_replaced  = p.readInt();
             appStatus.pin1           = appStatus.PinStateFromRILInt(p.readInt());
             appStatus.pin2           = appStatus.PinStateFromRILInt(p.readInt());
-            int remaining_count_pin1 = p.readInt();
-            int remaining_count_puk1 = p.readInt();
-            int remaining_count_pin2 = p.readInt();
-            int remaining_count_puk2 = p.readInt();
+            if (needsOldRilFeature("needPinPukReads")) {
+                int remaining_count_pin1 = p.readInt();
+                int remaining_count_puk1 = p.readInt();
+                int remaining_count_pin2 = p.readInt();
+                int remaining_count_puk2 = p.readInt();
+            }
             cardStatus.mApplications[i] = appStatus;
         }
-        // For Sprint GSM(LTE) only SIM
-        if (numApplications == 1 && !isGSM && appStatus != null && appStatus.app_type == appStatus.AppTypeFromRILInt(2)) {
+
+        if (needsOldRilFeature("sprintSimHack") && numApplications == 1 && appStatus != null
+                && appStatus.app_type == appStatus.AppTypeFromRILInt(2)) {
             cardStatus.mApplications = new IccCardApplicationStatus[numApplications + 2];
             cardStatus.mGsmUmtsSubscriptionAppIndex = 0;
             cardStatus.mApplications[cardStatus.mGsmUmtsSubscriptionAppIndex] = appStatus;
@@ -114,12 +114,7 @@ public class LgeLteRIL extends RIL implements CommandsInterface {
             appStatus3.pin2           = appStatus.pin2;
             cardStatus.mApplications[cardStatus.mImsSubscriptionAppIndex] = appStatus3;
         }
-        return cardStatus;
-    }
 
-    @Override
-    public void setPhoneType(int phoneType){
-        super.setPhoneType(phoneType);
-        isGSM = (phoneType != RILConstants.CDMA_PHONE);
+        return cardStatus;
     }
 }
