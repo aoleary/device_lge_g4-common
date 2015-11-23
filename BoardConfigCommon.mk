@@ -167,9 +167,6 @@ TARGET_HW_DISK_ENCRYPTION := false
 # Vendor init
 TARGET_INIT_VENDOR_LIB := libinit_msm
 
-# RIL
-BOARD_RIL_CLASS := ../../../device/lge/g4-common/ril/
-
 # NFC
 BOARD_NFC_CHIPSET := pn547
 BOARD_NFC_DEVICE := "/dev/pn547"
