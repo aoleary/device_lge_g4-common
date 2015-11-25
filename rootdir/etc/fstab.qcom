@@ -11,16 +11,16 @@
 /dev/block/bootdevice/by-name/userdata     /data           ext4    nosuid,nodev,barrier=1,noatime,noauto_da_alloc,errors=continue      wait,check,encryptable=/dev/block/bootdevice/by-name/encrypt
 /dev/block/bootdevice/by-name/cache        /cache          f2fs    rw,nosuid,nodev,noatime,nodiratime,inline_xattr                     wait,check
 /dev/block/bootdevice/by-name/cache        /cache          ext4    nosuid,nodev,barrier=1,noatime,noauto_da_alloc,errors=continue      wait,check
-/dev/block/bootdevice/by-name/persist      /persist        ext4    nosuid,nodev,barrier=1,data=ordered,nodelalloc,errors=panic         wait
+/dev/block/bootdevice/by-name/persist      /persist        ext4    nosuid,nodev,barrier=1,data=ordered,nodelalloc,errors=panic         wait,notrim
 /dev/block/bootdevice/by-name/persistent   /persistent     emmc    defaults                                                            defaults
 /dev/block/bootdevice/by-name/boot         /boot           emmc    defaults                                                            recoveryonly
 /dev/block/bootdevice/by-name/recovery     /recovery       emmc    defaults                                                            recoveryonly
 /dev/block/bootdevice/by-name/modem        /firmware       vfat    ro,shortname=lower,uid=1000,gid=1026,dmask=227,fmask=337,context=u:object_r:firmware_file:s0        wait
-/dev/block/bootdevice/by-name/cust         /cust           ext4    ro,nosuid,nodev,barrier=1,noauto_da_alloc                           defaults
+/dev/block/bootdevice/by-name/cust         /cust           ext4    ro,nosuid,nodev,barrier=1,noauto_da_alloc                           defaults,notrim
 
-/dev/block/bootdevice/by-name/sns          /sns            ext4    nosuid,nodev,barrier=1,noatime,noauto_da_alloc,errors=continue      wait
-/dev/block/bootdevice/by-name/drm          /persist-lg     ext4    nosuid,nodev,barrier=1,noatime,noauto_da_alloc,errors=continue      wait
-/dev/block/bootdevice/by-name/mpt          /mpt            ext4    nosuid,nodev,barrier=1,noatime,noauto_da_alloc,errors=continue      wait
+/dev/block/bootdevice/by-name/sns          /sns            ext4    nosuid,nodev,barrier=1,noatime,noauto_da_alloc,errors=continue      wait,notrim
+/dev/block/bootdevice/by-name/drm          /persist-lg     ext4    nosuid,nodev,barrier=1,noatime,noauto_da_alloc,errors=continue      wait,notrim
+/dev/block/bootdevice/by-name/mpt          /mpt            ext4    nosuid,nodev,barrier=1,noatime,noauto_da_alloc,errors=continue      wait,notrim
 
 /devices/soc.0/f98a4900.sdhci/mmc_host*        auto        auto    defaults        voldmanaged=sdcard1:auto,encryptable=userdata
 /devices/platform/xhci-hcd*                    auto        auto    defaults        voldmanaged=usb:auto
