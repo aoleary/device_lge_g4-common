@@ -57,7 +57,7 @@ on early-fs
     chown system /sys/process/task_comm_list
 
 on init
-    export LD_PRELOAD liblge.so
+    export LD_SHIM_LIBS /system/lib/libril.so|liblge.so:/system/lib64/libril.so|liblge.so
 
     mkdir /firmware 0771 system system
     mkdir /firmware/image 0771 system system
