@@ -182,12 +182,6 @@ PRODUCT_PACKAGES += \
     keystore.msm8992 \
     gatekeeper.msm8992
 
-# Filesystem management tools
-PRODUCT_PACKAGES += \
-    e2fsck \
-    make_ext4fs \
-    setup_fs
-
 # GPS
 PRODUCT_PACKAGES += \
     gps.msm8992
@@ -239,10 +233,6 @@ PRODUCT_BOOT_JARS += \
 # Power
 PRODUCT_PACKAGES += \
     power.msm8992
-
-# USB
-PRODUCT_PACKAGES += \
-    com.android.future.usb.accessory
 
 # Wifi
 PRODUCT_PACKAGES += \
