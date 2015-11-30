@@ -268,8 +268,11 @@
 		<threshold trigger="64500" clear="64000">
 			<mitigation name="gpu" level="3" />
 		</threshold>
-		<threshold trigger="66000" clear="64500">
-			<mitigation name="gpu" level="6" />
+		<threshold trigger="65000" clear="64500">
+			<mitigation name="gpu" level="4" />
+		</threshold>
+		<threshold trigger="66000" clear="65000">
+			<mitigation name="gpu" level="5" />
 		</threshold>
 	</configuration>
 
