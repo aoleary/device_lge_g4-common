@@ -181,6 +181,10 @@ PRODUCT_PACKAGES += \
     memtrack.msm8992 \
     liboverlay
 
+# QuickCircle Case App
+PRODUCT_PACKAGES += \
+    QuickCircle
+
 # Keystore
 PRODUCT_PACKAGES += \
     keystore.msm8992 \
