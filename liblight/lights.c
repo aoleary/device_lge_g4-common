@@ -156,7 +156,7 @@ set_speaker_light_locked(struct light_device_t* dev,
 
         colorRGB = state->color & 0x00ffffff;
 
-        if (onMS == 0 && offMS == 0) {
+        if (offMS <= 0) {
             sprintf(pattern,"0x%06x",colorRGB);
             ALOGD("Using onoff pattern: 0x%06x\n",colorRGB);
             write_str(EMOTIONAL_ONOFF_FILE, pattern);
