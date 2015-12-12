@@ -203,19 +203,19 @@
 		<threshold>
 			<mitigation name="usb" level="off" />
 		</threshold>
-		<threshold trigger="48000" clear="46000">
+		<threshold trigger="50000" clear="48000">
 			<mitigation name="usb" level="1" />
 		</threshold>
-		<threshold trigger="52000" clear="51000">
+		<threshold trigger="54000" clear="53000">
 			<mitigation name="usb" level="2" />
 		</threshold>
-        <threshold trigger="54000" clear="53000">
+		<threshold trigger="56000" clear="55000">
 			<mitigation name="usb" level="3" />
 		</threshold>
-		<threshold trigger="56000" clear="55000">
+		<threshold trigger="58000" clear="57000">
 			<mitigation name="usb" level="4" />
 		</threshold>
-		<threshold trigger="58000" clear="57000">
+		<threshold trigger="60000" clear="59000">
 			<mitigation name="usb" level="5" />
 		</threshold>
 	</configuration>
@@ -225,19 +225,19 @@
 		<threshold>
 			<mitigation name="charging" level="off" />
 		</threshold>
-        <threshold trigger="48000" clear="46000">
+		<threshold trigger="50000" clear="48000">
 			<mitigation name="charging" level="1" />
 		</threshold>
-		<threshold trigger="52000" clear="51000">
+		<threshold trigger="54000" clear="53000">
 			<mitigation name="charging" level="3" />
 		</threshold>
-		<threshold trigger="54000" clear="53000">
+		<threshold trigger="56000" clear="55000">
 			<mitigation name="charging" level="6" />
 		</threshold>
-		<threshold trigger="56000" clear="55000">
+		<threshold trigger="58000" clear="57000">
 			<mitigation name="charging" level="9" />
 		</threshold>
-		<threshold trigger="58000" clear="57000">
+		<threshold trigger="60000" clear="59000">
 			<mitigation name="charging" level="12" />
 		</threshold>
 	</configuration>
@@ -246,7 +246,7 @@
 		<threshold>
 			<mitigation name="battery_protect" level="off" />
 		</threshold>
-		<threshold trigger="58000" clear="57000">
+		<threshold trigger="62000" clear="60000">
 			<mitigation name="battery_protect" level="1" />
 		</threshold>
 		<threshold trigger="67000" clear="63000">
