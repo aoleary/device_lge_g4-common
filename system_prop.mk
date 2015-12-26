@@ -2,10 +2,6 @@
 # System Properties for G4
 #
 
-# MTP
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    persist.sys.usb.config=mtp
-
 # Camera add additional i/p buffer in case of encoder DCVS
 PRODUCT_PROPERTY_OVERRIDES += \
     vidc.enc.dcvs.extra-buff-count=2
