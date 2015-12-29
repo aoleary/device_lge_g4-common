@@ -1,0 +1,2 @@
+fs_use_xattr exfat u:object_r:labeledfs:s0;
+fs_use_xattr ntfs u:object_r:labeledfs:s0;
