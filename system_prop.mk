@@ -6,11 +6,11 @@
 PRODUCT_PROPERTY_OVERRIDES += \
     vidc.enc.dcvs.extra-buff-count=2 \
 
-# Camera: Force use 1920x1080 for preview
+# Camera: Force use QHD (2560x1440) for preview
 PRODUCT_PROPERTY_OVERRIDES += \
-    persist.camera.preview.size=4
+    persist.camera.preview.size=5
 
-#Audio   
+#Audio
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.qc.sdk.audio.ssr=false \
     persist.audio.ssr.3mic=false \
@@ -42,8 +42,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # OpenGLES:
 # 196608 is decimal for 0x30000 to report major/minor versions as 3/0
 # 196609 is decimal for 0x30001 to report major/minor versions as 3/1
-# Set to 3.0 (even though the blobs support 3.1) to maintain compatibility
-# with third party applications that do not support 3.1
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.hwc.mdpcomp.enable=true \
     ro.opengles.version=196609 \
