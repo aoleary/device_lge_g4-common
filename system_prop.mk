@@ -2,9 +2,13 @@
 # System Properties for G4
 #
 
-# Camera add additional i/p buffer in case of encoder DCVS
+# Camera: add additional i/p buffer in case of encoder DCVS
 PRODUCT_PROPERTY_OVERRIDES += \
-    vidc.enc.dcvs.extra-buff-count=2
+    vidc.enc.dcvs.extra-buff-count=2 \
+
+# Camera: Force use 1920x1080 for preview
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.camera.preview.size=4
 
 #Audio   
 PRODUCT_PROPERTY_OVERRIDES += \
