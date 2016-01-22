@@ -370,8 +370,8 @@
     <ctl name="PRI MI2S LOOPBACK Volume" value="1" />
     <!-- QUAT MI2S SPEAKER -->
 
-    <!-- initial gian of TI amp -->
-    <ctl name="Speaker Driver Playback Volume" value="9" />
+    <!-- Initial gain of TI TAS2552 amp -->
+    <ctl name="Speaker Driver Playback Volume" value="16" />
 
     <!-- Opalum tuning path selection -->
     <ctl name="OPALUM_AFE" value="AUDIO_TUNING" />
@@ -1365,7 +1365,7 @@
 
     <!-- CM: playback OUT handset speaker -->
     <path name="speaker">
-        <ctl name="Speaker Driver Playback Volume" value="9" />
+        <ctl name="Speaker Driver Playback Volume" value="16" />
     </path>
 
    <path name="sidetone-iir">
@@ -1555,7 +1555,7 @@
     <!-- CM: voice-call OUT handset speaker -->
     <path name="voice-speaker">
         <path name="speaker" />
-        <ctl name="Speaker Driver Playback Volume" value="9" />
+        <ctl name="Speaker Driver Playback Volume" value="12" />
     </path>
 
     <path name="voice-speaker-mic">
@@ -1581,7 +1581,7 @@
 
 	<path name="speaker-and-headphones">
         <path name="headphones" />
-        <ctl name="Speaker Driver Playback Volume" value="8" />
+        <ctl name="Speaker Driver Playback Volume" value="12" />
 	</path>
 
     <path name="usb-headphones">
@@ -2155,7 +2155,7 @@
     <!-- CM: voip OUT handset speaker -->
      <path name="voip-speaker">
         <path name="speaker" />
-        <ctl name="Speaker Driver Playback Volume" value="9" />
+        <ctl name="Speaker Driver Playback Volume" value="12" />
     </path>
 
     <!-- CM: voip OUT headphones -->
