@@ -5,6 +5,7 @@
 # Camera: add additional i/p buffer in case of encoder DCVS
 PRODUCT_PROPERTY_OVERRIDES += \
     vidc.enc.dcvs.extra-buff-count=2 \
+    persist.camera.cpp.duplication=false
 
 #Audio
 PRODUCT_PROPERTY_OVERRIDES += \
