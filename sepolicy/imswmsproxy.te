@@ -4,6 +4,6 @@ type imswmsproxy_exec, exec_type, file_type;
 init_daemon_domain(imswmsproxy)
 
 allow imswmsproxy lge_diag_device:chr_file { open read write ioctl };
-allow imswmsproxy qmuxd_socket:sock_file { create write setattr };
+allow imswmsproxy qmuxd_socket:sock_file { create write setattr unlink };
 allow imswmsproxy qmuxd_socket:dir { write add_name search remove_name };
 allow imswmsproxy qmuxd:unix_stream_socket { connectto };
