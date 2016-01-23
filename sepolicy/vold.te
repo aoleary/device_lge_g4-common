@@ -1,3 +1,6 @@
 allow vold persist_file:dir { read getattr open ioctl };
 allow vold persist_data_file:dir { read getattr };
 allow vold sensors_data_file:dir { read getattr open ioctl };
+
+allow vold firmware_file:dir { search };
+allow vold firmware_file:file { read open getattr };
