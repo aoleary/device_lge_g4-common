@@ -156,6 +156,9 @@ BOARD_USES_QCOM_HARDWARE := true
 # Init
 TARGET_PLATFORM_DEVICE_BASE := /devices/soc.0/
 
+# Keystore
+TARGET_PROVIDES_KEYMASTER := true
+
 # SELinux
 include device/qcom/sepolicy/sepolicy.mk
 BOARD_SEPOLICY_DIRS += $(COMMON_PATH)/sepolicy
