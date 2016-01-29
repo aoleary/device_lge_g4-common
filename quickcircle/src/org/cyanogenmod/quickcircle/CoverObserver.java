@@ -25,7 +25,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Handler;
 import android.os.PowerManager;
-import android.os.PowerManager.WakeLock;
 import android.os.SystemClock;
 import android.os.UEventObserver;
 import android.provider.Settings;
@@ -37,7 +36,6 @@ class CoverObserver extends UEventObserver {
     private static final String TAG = "QuickCircle";
 
     private final Context mContext;
-    private final WakeLock mWakeLock;
     private final IntentFilter mFilter = new IntentFilter();
     private PowerManager mPowerManager;
 
@@ -46,8 +44,6 @@ class CoverObserver extends UEventObserver {
     public CoverObserver(Context context) {
         mContext = context;
         PowerManager pm = (PowerManager)context.getSystemService(Context.POWER_SERVICE);
-        mWakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "CoverObserver");
-        mWakeLock.setReferenceCounted(false);
     }
 
     public synchronized final void init() {
@@ -71,7 +67,6 @@ class CoverObserver extends UEventObserver {
                     mPowerManager.wakeUp(SystemClock.uptimeMillis());
                 }
             }
-            mWakeLock.acquire();
         } catch (NumberFormatException e) {
             Log.e(TAG, "Error parsing SWITCH_STATE event", e);
         }
