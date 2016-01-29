@@ -645,6 +645,12 @@ service qcom-c_main-sh /system/bin/sh /init.class_main.sh
     user root
     oneshot
 
+service baseband-sh /system/bin/sh /init.baseband.sh
+    class late_start
+    user root
+    oneshot
+    disabled
+
 on property:vold.decrypt=trigger_restart_framework
     start qcom-c_main-sh
     start config_bluetooth
@@ -1247,3 +1253,6 @@ service fidodaemon /system/vendor/bin/fidodaemon
     class late_start
     user system
     group system
+
+on property:gsm.version.baseband=""
+    start baseband-sh

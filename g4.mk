@@ -83,7 +83,8 @@ PRODUCT_PACKAGES += \
     init.class_main.sh \
     init.qcom.post_boot.sh \
     init.qcom.uicc.sh \
-    init.msm8992.sensor.sh
+    init.msm8992.sensor.sh \
+    init.baseband.sh
 
 # RIL
 PRODUCT_PACKAGES += \
