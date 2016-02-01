@@ -26,6 +26,7 @@
 #
 
 import init.qcom.usb.rc
+import init.qcom.power.rc
 
 on early-init
     mount debugfs debugfs /sys/kernel/debug
@@ -959,9 +960,6 @@ service hcidump /system/bin/sh /system/etc/hcidump.sh
     disabled
     oneshot
 
-service charger /charger
-    class charger
-
 service ssr_diag /system/bin/ssr_diag
     class late_start
     user system
@@ -980,16 +978,6 @@ service charger_monitor /system/bin/charger_monitor
     user root
     group root
     disabled
-
-service qbcharger /charger -m 1
-    disabled
-    oneshot
-
-on property:sys.qbcharger.enable=true
-    start qbcharger
-
-on property:sys.qbcharger.enable=false
-    stop qbcharger
 
 service diag_mdlog_start /system/bin/diag_mdlog
     class late_start
