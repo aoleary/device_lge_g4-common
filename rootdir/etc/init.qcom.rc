@@ -135,11 +135,10 @@ on boot
 
     # For BCM FM Radio
     setprop ro.fm.module BCM
-    
+
     # WiFi
     chown wifi wifi /dev/rfkill
     chmod 0600 /dev/rfkill
-
 
     #Create QMUX deamon socket area
     mkdir /dev/socket/qmux_radio 0770 radio radio
@@ -286,9 +285,6 @@ on boot
 
     # HAL looks for pn54x but kernel driver uses pn547
     symlink /dev/pn547 /dev/pn54x
-
-    # exfat
-    insmod /system/lib/modules/texfat.ko
 
 # START touch_driver
     chown system system /sys/devices/virtual/input/lge_touch/incoming_call
