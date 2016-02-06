@@ -28,6 +28,7 @@ import android.os.Parcel;
  * {@hide}
  */
 public class LgeLteRIL extends RIL implements CommandsInterface {
+
     public LgeLteRIL(Context context, int preferredNetworkType, int cdmaSubscription) {
         super(context, preferredNetworkType, cdmaSubscription, null);
     }

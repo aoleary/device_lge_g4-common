@@ -1,0 +1,1 @@
+allow procrank self:capability { sys_admin };
