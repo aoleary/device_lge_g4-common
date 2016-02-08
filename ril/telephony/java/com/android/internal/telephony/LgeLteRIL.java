@@ -29,6 +29,10 @@ import android.os.Parcel;
  */
 public class LgeLteRIL extends RIL implements CommandsInterface {
 
+    public static final int RIL_UNSOL_AVAILABLE_RAT = 1054;
+    public static final int RIL_UNSOL_LOG_RF_BAND_INFO = 1165;
+    public static final int RIL_UNSOL_LTE_REJECT_CAUSE = 1187;
+
     public LgeLteRIL(Context context, int preferredNetworkType, int cdmaSubscription) {
         super(context, preferredNetworkType, cdmaSubscription, null);
     }
@@ -36,6 +40,53 @@ public class LgeLteRIL extends RIL implements CommandsInterface {
     public LgeLteRIL(Context context, int preferredNetworkType,
             int cdmaSubscription, Integer instanceId) {
         super(context, preferredNetworkType, cdmaSubscription, instanceId);
+    }
+
+    static String
+    lgeResponseToString(int request)
+    {
+        switch(request) {
+            case RIL_UNSOL_AVAILABLE_RAT: return "RIL_UNSOL_AVAILABLE_RAT";
+            case RIL_UNSOL_LOG_RF_BAND_INFO: return "RIL_UNSOL_LOG_RF_BAND_INFO";
+            case RIL_UNSOL_LTE_REJECT_CAUSE: return "RIL_UNSOL_LTE_REJECT_CAUSE";
+            default: return "<unknown response>";
+        }
+    }
+
+    protected void lgeUnsljLogRet(int response, Object ret) {
+        riljLog("[LGE-UNSL]< " + lgeResponseToString(response) + " " + retToString(response, ret));
+    }
+
+    @Override
+    protected void
+    processUnsolicited (Parcel p) {
+        Object ret;
+        int dataPosition = p.dataPosition(); // save off position within the Parcel
+        int response = p.readInt();
+
+        switch(response) {
+            case RIL_UNSOL_AVAILABLE_RAT: ret = responseInts(p); break;
+            case RIL_UNSOL_LOG_RF_BAND_INFO: ret = responseInts(p); break;
+            case RIL_UNSOL_LTE_REJECT_CAUSE: ret = responseInts(p); break;
+            default:
+                // Rewind the Parcel
+                p.setDataPosition(dataPosition);
+                // Forward responses that we are not overriding to the super class
+                super.processUnsolicited(p);
+                return;
+        }
+
+        switch(response) {
+            case RIL_UNSOL_AVAILABLE_RAT:
+                if (RILJ_LOGD) lgeUnsljLogRet(response, ret);
+                break;
+            case RIL_UNSOL_LOG_RF_BAND_INFO:
+                if (RILJ_LOGD) lgeUnsljLogRet(response, ret);
+                break;
+            case RIL_UNSOL_LTE_REJECT_CAUSE:
+                if (RILJ_LOGD) lgeUnsljLogRet(response, ret);
+                break;
+        }
     }
 
     @Override
