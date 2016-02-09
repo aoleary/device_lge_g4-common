@@ -1436,6 +1436,13 @@
         <ctl name="DEC3 Volume" value="84" />
     </path>
 
+    <!-- CM: audio-record IN speaker mic -->
+    <path name="speaker-mic">
+        <path name="2nd-mic" />
+        <ctl name="ADC4 Volume" value="11" />
+        <ctl name="DEC3 Volume" value="84" />
+    </path>
+
     <!-- CM: audio-record IN speaker dmic -->
     <path name="speaker-stereo-dmic-ef">
         <path name="dual-mic-speaker" />
