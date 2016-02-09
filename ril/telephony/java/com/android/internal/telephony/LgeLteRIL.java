@@ -101,7 +101,7 @@ public class LgeLteRIL extends RIL implements CommandsInterface {
 
         rr.mParcel.writeInt(2);
         rr.mParcel.writeString(operatorNumeric);
-        rr.mParcel.writeString("NOCHANGE");
+        rr.mParcel.writeString("2"); // NOCHANGE
 
         send(rr);
     }
