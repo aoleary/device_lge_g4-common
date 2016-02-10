@@ -162,7 +162,7 @@ on boot
 
     setprop ro.telephony.call_ring.multiple false
 
-    #Remove SUID bit for iproute2 ip tool
+    # Remove SUID bit for iproute2 ip tool
     chmod 0755 /system/bin/ip
 
     chmod 0444 /sys/devices/platform/msm_hsusb/gadget/usb_state
@@ -221,7 +221,6 @@ on boot
     # Allow access for CCID command/response timeout configuration
     chown system system /sys/module/ccid_bridge/parameters/bulk_msg_timeout
 
-
     # Flashlight
     chown system system /sys/class/leds/flashlight/brightness
     chown system system /sys/class/leds/flashlight_front/brightness
@@ -231,9 +230,8 @@ on boot
 
     chown system system /dev/iio:device0
 
-    #volume key wake up attribute file permission
+    # volume key wake up attribute file permission
     chown media media /sys/keyboard/vol_wakeup
-
 
     # Define TCP buffer sizes for various networks
     #   ReadMin, ReadInitial, ReadMax, WriteMin, WriteInitial, WriteMax,
@@ -255,13 +253,11 @@ on boot
 
     class_start core
 
-    # NFC ++
     # permissions for NFC
     chmod 0600 /dev/pn547
     chown nfc nfc /dev/pn547
     setprop debug.nfc.fw_download "true"
     setprop debug.nfc.fw_boot_download "false"
-    # NFC --
 
     # HAL looks for pn54x but kernel driver uses pn547
     symlink /dev/pn547 /dev/pn54x
@@ -298,8 +294,7 @@ on boot
     chown system system /sys/devices/virtual/input/lge_touch/quick_cover_status
     chmod 664 /sys/devices/virtual/input/lge_touch/quick_cover_status
 # END touch_knock_on
-    lge_chcon_recursive /data/property u:object_r:property_data_file:s0
-    lge_chcon_recursive /data/security u:object_r:security_file:s0
+
     start chcon_keystore
 
 # Double tap to wake gesture
@@ -323,12 +318,12 @@ on boot
 # Begin SRE Display New Feature
     chown system system /sys/class/sre/sre_func/sre_status
     chmod 644 /sys/class/sre/sre_func/sre_status
-
 # End SRE Display New Feature
 
 # Power_BSP, if need, control max_frequencies for peak current issue
 # Power_BSP, LGE raise log level until pr_info for debug
    write /proc/sys/kernel/printk "7 4 1 7"
+
 # emotional led
    chown system system /sys/devices/virtual/lg_rgb_led/use_patterns/blink_patterns
    chmod 0644 /sys/devices/virtual/lg_rgb_led/use_patterns/blink_patterns
@@ -339,7 +334,7 @@ on boot
    chown system system /sys/devices/virtual/lg_rgb_led/use_patterns/setting
    chmod 0644 /sys/devices/virtual/lg_rgb_led/use_patterns/setting
    write /sys/devices/virtual/lg_rgb_led/use_patterns/setting 0
-   
+
 # For QC2.0
    chown root system /sys/module/charger_controller/parameters/quick_charging_state
    chmod 0664 /sys/module/charger_controller/parameters/quick_charging_state
@@ -366,7 +361,6 @@ on boot
    write /sys/devices/virtual/thermal/thermal_zone14/ctrl_crit_temp 0
 
 on post-fs
-
     # for OOBE and PackageManager to access fotaBoot
     chmod 0666 /cache/recovery/last_fotaBoot
 
@@ -382,7 +376,7 @@ on post-fs
 
     # restorecon carrier partition
     restorecon_recursive /carrier
-    
+
     # We restorecon /preload in case preload folder has been reset.
     restorecon_recursive /preload
 
@@ -390,7 +384,7 @@ on post-fs
 on post-fs-data
     start hrdump
 
-    #Create NETMGR daemon socket area
+    # Create NETMGR daemon socket area
     mkdir /dev/socket/netmgr 0750 radio radio
 
     # Mark the copy complete flag to not completed
@@ -464,11 +458,11 @@ on post-fs-data
     chown system system /sys/devices/platform/msm_sdcc.3/polling
     chown system system /sys/devices/platform/msm_sdcc.4/polling
 
-    #Create the symlink to qcn wpa_supplicant folder for ar6000 wpa_supplicant
+    # Create the symlink to qcn wpa_supplicant folder for ar6000 wpa_supplicant
     mkdir /data/system 0775 system system
     #symlink /data/misc/wifi/wpa_supplicant /data/system/wpa_supplicant
 
-    #Create directories for Location services
+    # Create directories for Location services
     mkdir /data/misc/location 0770 gps gps
     mkdir /data/misc/location/mq 0770 gps gps
     mkdir /data/misc/location/xtwifi 0770 gps gps
@@ -476,18 +470,18 @@ on post-fs-data
     mkdir /data/misc/location/quipc 0770 gps system
     mkdir /data/misc/location/gsiff 0770 gps gps
 
-    #Create directory from IMS services
+    # Create directory from IMS services
     mkdir /data/shared 0755
     chown system system /data/shared
 
-    #Create directory for FOTA
+    # Create directory for FOTA
     mkdir /data/fota 0771
     chown system system /data/fota
 
     # Make sure the default firmware is loaded
     write /sys/module/bcmdhd/parameters/firmware_path "/system/etc/firmware/fw_bcmdhd.bin"
 
-    #Create directory for hostapd
+    # Create directory for hostapd
     mkdir /data/hostapd 0770 system wifi
 
     # Provide the access to hostapd.conf only to root and group
@@ -504,10 +498,10 @@ on post-fs-data
 
     setprop vold.post_fs_data_done 1
 
-    #Create a folder for SRS to be able to create a usercfg file
+    # Create a folder for SRS to be able to create a usercfg file
     mkdir /data/data/media 0770 media media
 
-    #Create PERFD deamon related dirs
+    # Create PERFD deamon related dirs
     mkdir /data/misc/perfd 0755 root system
     chmod 2755 /data/misc/perfd
     mkdir /data/system/perfd 0770 root system
@@ -534,13 +528,16 @@ on post-fs-data
     chmod 0771 /cota
     chown system system /preload
     chmod 0771 /preload
+
     # set device node permissions for TLC apps
     chmod 0600 /dev/mobicore
     chown system system /dev/mobicore
     chmod 0666 /dev/mobicore-user
     chown system system /dev/mobicore-user
-    #restorecon cota partition.
+
+    # restorecon cota partition.
     restorecon_recursive /cota
+
     mkdir /data/usf 0700 system system
 
     # Z2G4-BSP-TS@lge.com make directory for sns.reg used by sensordaemon
@@ -863,6 +860,7 @@ service qcom-post-boot /system/bin/sh /system/etc/init.qcom.post_boot.sh
 
 on property:sys.boot_completed=1
     start qcom-post-boot
+    setprop sys.io.scheduler "bfq"
 
 service hostapd /system/bin/hostapd -dd /data/hostapd/hostapd.conf
     class late_start
@@ -1116,7 +1114,6 @@ service usf-post-boot /system/bin/sh /system/etc/usf_post_boot.sh
 
 on property:init.svc.bootanim=stopped
     start usf-post-boot
-    setprop sys.io.scheduler bfq
 
 service energy-awareness /system/bin/energy-awareness
     class main
