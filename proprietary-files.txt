@@ -62,7 +62,6 @@ lib/libVDLowLightAPI.so
 lib/libloc_ds_api.so
 lib/libvss_nv_iface.so
 lib/libalhdri.so
-priv-app/com.qualcomm.location/com.qualcomm.location.apk
 priv-app/qcrilmsgtunnel/qcrilmsgtunnel.apk
 vendor/firmware/libpn547_fw_C9.so
 vendor/firmware/BCM4339_003.001.009.0117.0620_LGE_P1_EU.hcd:vendor/firmware/BCM4335_003.001.009.0117.0620_LGE_P1_EU.hcd
@@ -717,7 +716,6 @@ etc/data/netmgr_config.xml
 etc/data/dsi_config.xml
 etc/permissions/qcrilhook.xml
 etc/permissions/qcnvitems.xml
-etc/permissions/com.qualcomm.location.xml
 bin/imsdatadaemon
 bin/loc_launcher
 bin/imswmsproxy
