@@ -23,12 +23,6 @@
 
 		<resource name="emmc_therm" type="tz">/sys/class/thermal/thermal_zone17</resource>
 		<resource name="pa_therm0" type="tz">/sys/class/thermal/thermal_zone18</resource>
-		<resource name="THRM_57-0" type="tz">/sys/class/thermal/thermal_zone19</resource> <!-- THRM_57-0 -->
-		<resource name="THRM_57-1" type="tz">/sys/class/thermal/thermal_zone20</resource> <!-- THRM_57-1 -->
-		<resource name="THRM_53-0" type="tz">/sys/class/thermal/thermal_zone21</resource> <!-- THRM_53-0 -->
-		<resource name="THRM_53-1" type="tz">/sys/class/thermal/thermal_zone22</resource> <!-- THRM_53-1 -->
-		<resource name="THRM_53-2" type="tz">/sys/class/thermal/thermal_zone23</resource> <!-- THRM_53-2 -->
-		<resource name="THRM_53-3" type="tz">/sys/class/thermal/thermal_zone24</resource> <!-- THRM_53-3 -->
 
 		<resource name="temp-core" type="union">
 <!--			<resource name="msm_therm" /> -->
@@ -306,40 +300,32 @@
 		<threshold>
 			<mitigation name="cpu-a53" level="off" />
 		</threshold>
-		<threshold trigger="52600" clear="52000">
+		<threshold trigger="48000" clear="45000">
 			<mitigation name="cpu-a53" level="1" />
 		</threshold>
-		<threshold trigger="53600" clear="53200">
-			<mitigation name="cpu-a53" level="3" />
-		</threshold>
-		<threshold trigger="55500" clear="54000">
-			<mitigation name="cpu-a53" level="4" />
-		</threshold>
-		<threshold trigger="55500" clear="55000">
-			<mitigation name="cpu-a53" level="5" />
-		</threshold>
-		<threshold trigger="55900" clear="55500">
-			<mitigation name="cpu-a53" level="6" />
-		</threshold>
-		<threshold trigger="56300" clear="55900">
-			<mitigation name="cpu-a53" level="7" />
-		</threshold>
-		<threshold trigger="56800" clear="56300">
-			<mitigation name="cpu-a53" level="8" />
+		<threshold trigger="53000" clear="48000">
+			<mitigation name="cpu-a53" level="2" />
 		</threshold>
 	</configuration>
 
-	<!-- CPU A57 CLUSTER -->
+	<!-- CPU A53 CLUSTER -->
 	<configuration sensor="temp-cluster-a53">
 		<threshold>
 			<mitigation name="cpu-a53" level="off" />
 		</threshold>
 		<threshold trigger="78" clear="70">
-			<mitigation name="cpu-a53" level="2" />
-		</threshold>
-		<threshold trigger="84" clear="80">
 			<mitigation name="cpu-a53" level="4" />
 		</threshold>
+		<threshold trigger="84" clear="80">
+			<mitigation name="cpu-a53" level="5" />
+		</threshold>
+		<threshold trigger="104" clear="98">
+			<mitigation name="cpu-a53" level="7" />
+		</threshold>
+		<threshold trigger="110" clear="104">
+			<mitigation name="cpu-a53" level="8" />
+		</threshold>
+		<!-- shutdown -->
 		<threshold trigger="120" clear="100">
 			<mitigation name="cpu-a53" level="9" />
 		</threshold>
@@ -350,26 +336,11 @@
 		<threshold>
 			<mitigation name="cpu-a57" level="off" />
 		</threshold>
-		<threshold trigger="52900" clear="51700">
-			<mitigation name="cpu-a57" level="1" />
-		</threshold>
-		<threshold trigger="54200" clear="52900">
-			<mitigation name="cpu-a57" level="3" />
-		</threshold>
-		<threshold trigger="55400" clear="54200">
+		<threshold trigger="53000" clear="51000">
 			<mitigation name="cpu-a57" level="6" />
 		</threshold>
-		<threshold trigger="56000" clear="55400">
-			<mitigation name="cpu-a57" level="9" />
-		</threshold>
-		<threshold trigger="56600" clear="56000">
-			<mitigation name="cpu-a57" level="10" />
-		</threshold>
-		<threshold trigger="57600" clear="57200">
-			<mitigation name="cpu-a57" level="11" />
-		</threshold>
-		<threshold trigger="58500" clear="58000">
-			<mitigation name="cpu-a57" level="12" />
+		<threshold trigger="60000" clear="58000">
+			<mitigation name="cpu-a57" level="7" />
 		</threshold>
 	</configuration>
 
@@ -378,12 +349,19 @@
 		<threshold>
 			<mitigation name="cpu-a57" level="off" />
 		</threshold>
-		<threshold trigger="78" clear="70">
+		<threshold trigger="70" clear="55">
+			<mitigation name="cpu-a57" level="6" />
+		</threshold>
+		<threshold trigger="98" clear="92">
 			<mitigation name="cpu-a57" level="8" />
 		</threshold>
-		<threshold trigger="84" clear="80">
+		<threshold trigger="104" clear="98">
 			<mitigation name="cpu-a57" level="10" />
 		</threshold>
+		<threshold trigger="110" clear="104">
+			<mitigation name="cpu-a57" level="12" />
+		</threshold>
+		<!-- shutdown -->
 		<threshold trigger="120" clear="100">
 			<mitigation name="cpu-a57" level="13" />
 		</threshold>

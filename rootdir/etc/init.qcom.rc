@@ -323,43 +323,43 @@ on boot
 
 # Power_BSP, if need, control max_frequencies for peak current issue
 # Power_BSP, LGE raise log level until pr_info for debug
-   write /proc/sys/kernel/printk "7 4 1 7"
+    write /proc/sys/kernel/printk "7 4 1 7"
 
 # emotional led
-   chown system system /sys/devices/virtual/lg_rgb_led/use_patterns/blink_patterns
-   chmod 0644 /sys/devices/virtual/lg_rgb_led/use_patterns/blink_patterns
-   chown system system /sys/devices/virtual/lg_rgb_led/use_patterns/input_patterns
-   chmod 0644 /sys/devices/virtual/lg_rgb_led/use_patterns/input_patterns
-   chown system system /sys/devices/virtual/lg_rgb_led/use_patterns/onoff_patterns
-   chmod 0644 /sys/devices/virtual/lg_rgb_led/use_patterns/onoff_patterns
-   chown system system /sys/devices/virtual/lg_rgb_led/use_patterns/setting
-   chmod 0644 /sys/devices/virtual/lg_rgb_led/use_patterns/setting
-   write /sys/devices/virtual/lg_rgb_led/use_patterns/setting 0
+    chown system system /sys/devices/virtual/lg_rgb_led/use_patterns/blink_patterns
+    chmod 0644 /sys/devices/virtual/lg_rgb_led/use_patterns/blink_patterns
+    chown system system /sys/devices/virtual/lg_rgb_led/use_patterns/input_patterns
+    chmod 0644 /sys/devices/virtual/lg_rgb_led/use_patterns/input_patterns
+    chown system system /sys/devices/virtual/lg_rgb_led/use_patterns/onoff_patterns
+    chmod 0644 /sys/devices/virtual/lg_rgb_led/use_patterns/onoff_patterns
+    chown system system /sys/devices/virtual/lg_rgb_led/use_patterns/setting
+    chmod 0644 /sys/devices/virtual/lg_rgb_led/use_patterns/setting
+    write /sys/devices/virtual/lg_rgb_led/use_patterns/setting 0
 
 # For QC2.0
-   chown root system /sys/module/charger_controller/parameters/quick_charging_state
-   chmod 0664 /sys/module/charger_controller/parameters/quick_charging_state
+    chown root system /sys/module/charger_controller/parameters/quick_charging_state
+    chmod 0664 /sys/module/charger_controller/parameters/quick_charging_state
 
 # Power_BSP, add critical temp property for PM8992
-   on property:persist.service.criticaltemp=0
-   write /sys/kernel/debug/spmi/spmi-0/address 0x00867
-   write /sys/kernel/debug/spmi/spmi-0/data 0x80
-   write /sys/kernel/debug/spmi/spmi-0/address 0x20867
-   write /sys/kernel/debug/spmi/spmi-0/data 0x80
-   write /sys/module/msm_thermal/parameters/reset_temp 0
-   write /sys/devices/virtual/thermal/thermal_zone2/ctrl_crit_temp 0
-   write /sys/devices/virtual/thermal/thermal_zone3/ctrl_crit_temp 0
-   write /sys/devices/virtual/thermal/thermal_zone4/ctrl_crit_temp 0
-   write /sys/devices/virtual/thermal/thermal_zone5/ctrl_crit_temp 0
-   write /sys/devices/virtual/thermal/thermal_zone6/ctrl_crit_temp 0
-   write /sys/devices/virtual/thermal/thermal_zone7/ctrl_crit_temp 0
-   write /sys/devices/virtual/thermal/thermal_zone8/ctrl_crit_temp 0
-   write /sys/devices/virtual/thermal/thermal_zone9/ctrl_crit_temp 0
-   write /sys/devices/virtual/thermal/thermal_zone10/ctrl_crit_temp 0
-   write /sys/devices/virtual/thermal/thermal_zone11/ctrl_crit_temp 0
-   write /sys/devices/virtual/thermal/thermal_zone12/ctrl_crit_temp 0
-   write /sys/devices/virtual/thermal/thermal_zone13/ctrl_crit_temp 0
-   write /sys/devices/virtual/thermal/thermal_zone14/ctrl_crit_temp 0
+    on property:persist.service.criticaltemp=0
+    write /sys/kernel/debug/spmi/spmi-0/address 0x00867
+    write /sys/kernel/debug/spmi/spmi-0/data 0x80
+    write /sys/kernel/debug/spmi/spmi-0/address 0x20867
+    write /sys/kernel/debug/spmi/spmi-0/data 0x80
+    write /sys/module/msm_thermal/parameters/reset_temp 0
+    write /sys/devices/virtual/thermal/thermal_zone2/ctrl_crit_temp 0
+    write /sys/devices/virtual/thermal/thermal_zone3/ctrl_crit_temp 0
+    write /sys/devices/virtual/thermal/thermal_zone4/ctrl_crit_temp 0
+    write /sys/devices/virtual/thermal/thermal_zone5/ctrl_crit_temp 0
+    write /sys/devices/virtual/thermal/thermal_zone6/ctrl_crit_temp 0
+    write /sys/devices/virtual/thermal/thermal_zone7/ctrl_crit_temp 0
+    write /sys/devices/virtual/thermal/thermal_zone8/ctrl_crit_temp 0
+    write /sys/devices/virtual/thermal/thermal_zone9/ctrl_crit_temp 0
+    write /sys/devices/virtual/thermal/thermal_zone10/ctrl_crit_temp 0
+    write /sys/devices/virtual/thermal/thermal_zone11/ctrl_crit_temp 0
+    write /sys/devices/virtual/thermal/thermal_zone12/ctrl_crit_temp 0
+    write /sys/devices/virtual/thermal/thermal_zone13/ctrl_crit_temp 0
+    write /sys/devices/virtual/thermal/thermal_zone14/ctrl_crit_temp 0
 
 on post-fs
     # for OOBE and PackageManager to access fotaBoot
@@ -576,12 +576,6 @@ on property:persist.sys.ssr.enable_ramdumps=1
 on property:persist.sys.ssr.enable_ramdumps=0
     write /sys/module/subsystem_restart/parameters/enable_ramdumps 0
 
-on property:sys.boot_completed=1
-    write /dev/kmsg "Boot completed "
-
-on property:ro.board.platform=msm7630_fusion
-    start usbhub_init
-
 on property:init.svc.wpa_supplicant=stopped
     stop dhcpcd
 
@@ -660,19 +654,6 @@ service start_hci_filter /system/bin/wcnss_filter
     group bluetooth diag net_bt_stack
     disabled
 
-on property:bluetooth.hciattach=true
-    start hciattach
-
-on property:bluetooth.hciattach=false
-    setprop bluetooth.status off
-
-service hciattach_ath3k /system/bin/sh /system/etc/init.ath3k.bt.sh
-     class late_start
-     user bluetooth
-     group system bluetooth net_bt_admin misc
-     disabled
-     oneshot
-
 service bt-dun /system/bin/dun-server /dev/smd7 /dev/rfcomm0
     class late_start
     user bluetooth
@@ -688,11 +669,11 @@ service bt-sap /system/bin/sapd 15
     oneshot
 
 service btsnoop /system/bin/btsnoop
-   user bluetooth
-   group bluetooth net_bt_admin sdcard_rw sdcard_r
-   class late_start
-   disabled
-   oneshot
+    user bluetooth
+    group bluetooth net_bt_admin sdcard_rw sdcard_r
+    class late_start
+    disabled
+    oneshot
 
 service ftmd /system/bin/logwrapper /system/bin/ftmdaemon
     class late_start
@@ -859,10 +840,6 @@ service qcom-post-boot /system/bin/sh /system/etc/init.qcom.post_boot.sh
     disabled
     oneshot
 
-on property:sys.boot_completed=1
-    start qcom-post-boot
-    setprop sys.io.scheduler "bfq"
-
 service hostapd /system/bin/hostapd -dd /data/hostapd/hostapd.conf
     class late_start
     user root
@@ -910,12 +887,6 @@ service usb_uicc_daemon /system/bin/usb_uicc_client
     user system
     group system log net_raw
     oneshot
-
-on property:sys.usb_uicc.enabled=1
-    start usb_uicc_enable
-
-on property:sys.usb_uicc.enabled=0
-    start usb_uicc_enable
 
 service profiler_daemon /system/bin/profiler_daemon
     class late_start
@@ -966,8 +937,10 @@ service qlogd /system/xbin/qlogd
     socket qlogd stream 0662 system system
     class main
     disabled
+
 on property:persist.sys.qlogd=1
     start qlogd
+
 on property:persist.sys.qlogd=0
     stop qlogd
 
@@ -984,16 +957,6 @@ service msm_irqbalance /system/bin/msm_irqbalance -f /system/vendor/etc/msm_irqb
 service qcom-usb-sh /system/bin/sh /init.qcom.usb.sh
     class core
     user root
-    oneshot
-
-on property:sys.boot_completed=1
-    start mocana-startup
-    start wv-prov
-
-service mocana-startup /system/bin/sh /system/etc/init.mocana.sh
-    class late_start
-    user root
-    disabled
     oneshot
 
 service p2p_supplicant /system/bin/wpa_supplicant \
@@ -1048,6 +1011,25 @@ on property:init.svc.per_mgr=running
 
 on property:sys.shutdown.requested=*
     stop per_proxy
+
+on property:init.svc.bootanim=running
+    write /sys/module/lpm_levels/system/a53/cpu0/retention/idle_enabled 0
+    write /sys/module/lpm_levels/system/a53/cpu1/retention/idle_enabled 0
+    write /sys/module/lpm_levels/system/a53/cpu2/retention/idle_enabled 0
+    write /sys/module/lpm_levels/system/a53/cpu3/retention/idle_enabled 0
+    write /sys/module/lpm_levels/system/a57/cpu4/retention/idle_enabled 0
+    write /sys/module/lpm_levels/system/a57/cpu5/retention/idle_enabled 0
+    write /sys/module/lpm_levels/system/a57/a57-l2-retention/idle_enabled 0
+    write /sys/module/lpm_levels/system/a53/a53-l2-retention/idle_enabled 0
+    write /sys/module/lpm_levels/parameters/sleep_disabled 0
+
+on property:init.svc.bootanim=stopped
+    start usf-post-boot
+
+on property:sys.boot_completed=1
+    start qcom-post-boot
+    setprop sys.io.scheduler "bfq"
+    write /dev/kmsg "Boot completed"
 
 # OSS thermal management
 service thermanager /system/bin/thermanager /system/etc/thermanager.xml
@@ -1113,25 +1095,11 @@ service usf-post-boot /system/bin/sh /system/etc/usf_post_boot.sh
     disabled
     oneshot
 
-on property:init.svc.bootanim=stopped
-    start usf-post-boot
-
 service energy-awareness /system/bin/energy-awareness
     class main
     user root
     group system
     oneshot
-
-on property:init.svc.bootanim=running
-    write /sys/module/lpm_levels/system/a53/cpu0/retention/idle_enabled 0
-    write /sys/module/lpm_levels/system/a53/cpu1/retention/idle_enabled 0
-    write /sys/module/lpm_levels/system/a53/cpu2/retention/idle_enabled 0
-    write /sys/module/lpm_levels/system/a53/cpu3/retention/idle_enabled 0
-    write /sys/module/lpm_levels/system/a57/cpu4/retention/idle_enabled 0
-    write /sys/module/lpm_levels/system/a57/cpu5/retention/idle_enabled 0
-    write /sys/module/lpm_levels/system/a57/a57-l2-retention/idle_enabled 0
-    write /sys/module/lpm_levels/system/a53/a53-l2-retention/idle_enabled 0
-    write /sys/module/lpm_levels/parameters/sleep_disabled 0
 
 service qb_offmode_alarm /system/bin/qb_offmode_alarm
     class main
