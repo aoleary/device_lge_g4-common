@@ -38,6 +38,7 @@ on early-init
     mount pstore /dev/pstore /dev/pstore
 
 on early-fs
+    symlink /dev/block/platform/soc.0/${ro.boot.bootdevice} /dev/block/bootdevice
     mount_all fstab.qcom
 
     restorecon_recursive /persist
@@ -57,6 +58,11 @@ on early-fs
 
 # maintain the list of processes name for kernel monitoring usage
     chown system /sys/process/task_comm_list
+
+on fs
+    wait /dev/block/platform/soc.0/${ro.boot.bootdevice}
+    symlink /dev/block/platform/soc.0/${ro.boot.bootdevice} /dev/block/bootdevice
+    mount_all fstab.qcom
 
 on init
     # Shim libs
