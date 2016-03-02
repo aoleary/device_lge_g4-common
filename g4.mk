@@ -187,11 +187,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     QuickCircle
 
-# Keystore
-PRODUCT_PACKAGES += \
-    keystore.msm8992 \
-    gatekeeper.msm8992
-
 # GPS
 PRODUCT_PACKAGES += \
     gps.msm8992
