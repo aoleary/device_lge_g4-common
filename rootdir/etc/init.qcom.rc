@@ -83,8 +83,6 @@ on init
     # Set permissions for drm partition
     mkdir /persist-lg 0771 system system
 
-    # Support legacy paths
-    symlink /sdcard /mnt/sdcard
     symlink /sdcard /storage/sdcard0
 
 on early-boot
