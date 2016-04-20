@@ -6,7 +6,6 @@ lib64/libvss_dmi_qcci.so
 lib64/librilutils.so
 lib64/hw/consumerir.msm8992.so
 lib64/hw/wbc_hal.default.so
-lib64/librmnetctl.so
 lib64/libloc_api_v02.so
 lib64/libvss_resim_core.so
 lib64/libuicc.so
