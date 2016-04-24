@@ -151,6 +151,10 @@ PRODUCT_PACKAGES += \
     libqdutils \
     libqservice
 
+# Doze mode
+PRODUCT_PACKAGES += \
+    G4Doze
+
 # DRM
 PRODUCT_PACKAGES += \
     android.hardware.drm@1.0-impl
