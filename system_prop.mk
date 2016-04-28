@@ -49,6 +49,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.qc.sdk.gestures.camera=false \
     camera2.portability.force_api=1 \
     ro.factorytest=0 \
+    persist.camera.HAL3.enabled=0 \
     persist.camera.zsl.mode=1
 
 # DRM
