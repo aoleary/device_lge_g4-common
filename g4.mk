@@ -39,7 +39,7 @@ PRODUCT_PACKAGES += \
     audio.primary.msm8992 \
     audio.r_submix.default \
     audio.usb.default \
-    audio_amplifier.default
+    audio_amplifier.msm8992
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/etc/fstab.qcom:$(TARGET_COPY_OUT)/ramdisk/fstab.qcom \
