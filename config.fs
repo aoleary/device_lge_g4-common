@@ -40,12 +40,6 @@ user: AID_ROOT
 group: AID_SYSTEM
 caps: 0
 
-[cust/]
-mode: 0771
-user: AID_SYSTEM
-group: AID_SYSTEM
-caps: 0
-
 [carrier/]
 mode: 0770
 user: AID_SYSTEM

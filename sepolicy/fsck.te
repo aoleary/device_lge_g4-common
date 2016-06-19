@@ -15,5 +15,3 @@ allow fsck mpt_block_device:blk_file { read open write ioctl };
 allow fsck cache_block_device:blk_file { open read write };
 allow fsck mnt_vendor_file:dir getattr;
 allow fsck persist_data_file:dir getattr;
-
-allow fsck cust_block_device:blk_file { ioctl open read write };
