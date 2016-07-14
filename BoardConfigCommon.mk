@@ -172,9 +172,6 @@ BOARD_SEPOLICY_DIRS += $(COMMON_PATH)/sepolicy
 # Disable HW based full disk encryption
 TARGET_HW_DISK_ENCRYPTION := false
 
-# Vendor init
-TARGET_INIT_VENDOR_LIB := libinit_msm
-
 # NFC
 BOARD_NFC_CHIPSET := pn547
 BOARD_NFC_DEVICE := "/dev/pn547"
