@@ -103,6 +103,10 @@ PRODUCT_PACKAGES += \
     android.hardware.ir@1.0-impl \
     consumerir.msm8992
 
+# CPU Screen OFF
+PRODUCT_PACKAGES += \
+    cpucontrol
+
 # Display
 PRODUCT_PACKAGES += \
     android.hardware.graphics.allocator@2.0-impl \

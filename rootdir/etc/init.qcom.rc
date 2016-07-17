@@ -1123,6 +1123,10 @@ service pulseoff /sbin/pulse.sh stop
     seclabel u:r:pulse:s0
     oneshot
 
+service mpdecision /system/bin/cpucontrol
+   user root
+   disabled
+
 on property:sys.boot_completed=1
     stop pulseon
     start pulseoff
