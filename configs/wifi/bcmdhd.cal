@@ -171,3 +171,4 @@ ofdmfiltbe_2g=6
 
 # Set btc_params for BT coex issue 
 btc_params80=0 
+btc_params8=25000
