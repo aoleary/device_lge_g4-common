@@ -86,6 +86,10 @@ PRODUCT_PACKAGES += \
     init.msm8992.sensor.sh \
     init.baseband.sh
 
+# for android_filesystem_config.h
+PRODUCT_PACKAGES += \
+    fs_config_files
+
 # RIL
 PRODUCT_PACKAGES += \
 	liblge
