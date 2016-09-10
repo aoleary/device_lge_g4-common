@@ -1,21 +1,23 @@
-/dev/block/mmcblk0p35       u:object_r:frp_block_device:s0
-/dev/block/mmcblk0p40       u:object_r:system_block_device:s0
-/dev/block/mmcblk0p48       u:object_r:cust_block_device:s0
+/dev/block/mmcblk0p35               u:object_r:frp_block_device:s0
+/dev/block/mmcblk0p40               u:object_r:system_block_device:s0
+/dev/block/mmcblk0p48               u:object_r:cust_block_device:s0
 
-/dev/pn547                  u:object_r:nfc_device:s0
+/dev/pn547                          u:object_r:nfc_device:s0
 
-/dev/rfkill                 u:object_r:rfkill_device:s0
+/dev/rfkill                         u:object_r:rfkill_device:s0
 
-/dev/diag_lge               u:object_r:lge_diag_device:s0
+/dev/diag_lge                       u:object_r:lge_diag_device:s0
 
-/sns                        u:object_r:sensors_data_file:s0
-/sns/cal(/.*)?              u:object_r:sensors_data_file:s0
+/sns                                u:object_r:sensors_data_file:s0
+/sns/cal(/.*)?                      u:object_r:sensors_data_file:s0
 
-/dev/ttyHSL1                u:object_r:cir_device:s0
+/dev/ttyHSL1                        u:object_r:cir_device:s0
 
-/system/bin/hwaddrs         u:object_r:hwaddrs_exec:s0
-/system/bin/imswmsproxy     u:object_r:imswmsproxy_exec:s0
-/system/bin/thermanager     u:object_r:thermanager_exec:s0
-/system/bin/timekeep        u:object_r:timekeep_exec:s0
+/system/bin/hwaddrs                 u:object_r:hwaddrs_exec:s0
+/system/bin/imswmsproxy             u:object_r:imswmsproxy_exec:s0
+/system/bin/thermanager             u:object_r:thermanager_exec:s0
+/system/bin/timekeep                u:object_r:timekeep_exec:s0
 
-/data/misc/bdaddr           u:object_r:bluetooth_data_file:s0
+/data/misc/bdaddr                   u:object_r:bluetooth_data_file:s0
+
+/sys/kernel/debug/rmt_storage(/.*)? u:object_r:rmt_debugfs:s0

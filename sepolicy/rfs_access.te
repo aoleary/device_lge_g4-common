@@ -1,0 +1,1 @@
+allow rfs_access rmt_debugfs:file { open write };

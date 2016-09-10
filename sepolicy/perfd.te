@@ -1,0 +1,2 @@
+allow perfd system_data_file:dir { write add_name };
+allow perfd system_data_file:sock_file { create setattr };
