@@ -742,6 +742,7 @@ bin/qseecomd
 bin/netmgrd
 bin/mm-qcamera-app
 bin/radish
+bin/rild
 bin/rfs_access
 bin/qseecom_security_test
 bin/xtwifi-client

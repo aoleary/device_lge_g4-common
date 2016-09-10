@@ -116,6 +116,7 @@ BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/lge/g4-common/bluetooth
 
 # RIL
 BOARD_RIL_CLASS := ../../../device/lge/g4-common/ril/
+BOARD_PROVIDES_RILD := true
 
 # GPS
 USE_DEVICE_SPECIFIC_GPS := true
