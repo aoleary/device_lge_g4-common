@@ -677,7 +677,6 @@ vendor/lib/libchromatix_imx208_common.so
 vendor/lib/libmmcamera_isp_sce40.so
 vendor/lib/libchromatix_imx234_cpp_video.so
 vendor/lib/libqmi_encdec.so
-vendor/lib/libtar.so
 vendor/qcril.db
 vendor/etc/scve/textreco/worddecoder/textreco_url_10000_2.bin
 vendor/etc/scve/textreco/chardecoder/_numpunc_font40_conc2_DEFn__BGTouchy6x6n__1_1__morph.trn32025.trn
@@ -688,7 +687,6 @@ vendor/etc/scve/textreco/chardecoder/_eng_font40_4transmeshrnorm6x6_leaflda85_li
 vendor/etc/scve/textreco/chardecoder/_conf_eng_num_sym_font40_conc2_meshrn__de__1_1__zscore_morph.trn10158.trn
 vendor/etc/scve/textreco/chardecoder/_conf_eng_num_sym_font40_4transd_zscore_morph_.trn2876.trn
 vendor/bin/runtime_boot_res.sh
-vendor/bin/RIDLClient.exe
 vendor/bin/qti
 vendor/bin/apk_delete.sh
 vendor/bin/perfd

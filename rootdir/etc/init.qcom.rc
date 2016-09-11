@@ -391,9 +391,6 @@ on post-fs-data
     chown radio radio /data/misc/radio/copy_complete
     chmod 0660 /data/misc/radio/copy_complete
 
-    # Socket location for RIDL
-    mkdir /dev/socket/RIDL 2770 system system
-
     # Create directory for TZ Apps
     mkdir /data/misc/qsee 0770 system system
 
@@ -546,13 +543,6 @@ on post-fs-data
     # PCC Calibration
     chown system system /sys/devices/virtual/graphics/fb0/rgb
     chmod 0660 /sys/devices/virtual/graphics/fb0/rgb
-
-    # RIDL data
-    mkdir /data/misc/SelfHost/ 0710 system shell
-    mkdir /data/misc/SelfHost/QCLogs/ 2750 system shell
-    mkdir /data/misc/SelfHost/QCLogs/temp/ 0700 system shell
-    mkdir /data/misc/SelfHost/storage/ 0700 system shell
-    mkdir /data/misc/SelfHost/Running/ 2750 system shell
 
 service ssr_setup /system/bin/ssr_setup
     oneshot
@@ -1086,12 +1076,6 @@ service lge-sensor-sh /system/bin/sh /init.msm8992.sensor.sh
     oneshot
     seclabel u:r:sensors:s0
 # start sensor daemon as core class [END]
-
-service RIDL /system/vendor/bin/RIDLClient.exe
-    class late_start
-    oneshot
-    user system
-    group system inet log sdcard_r sdcard_rw
 
 on property:gsm.version.baseband=""
     start baseband-sh
