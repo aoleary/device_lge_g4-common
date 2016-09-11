@@ -3,7 +3,6 @@ lib64/libvss_nv_core.so
 lib64/libqdMetaData.so
 lib64/libvss_bsp_qcci.so
 lib64/libvss_dmi_qcci.so
-lib64/librilutils.so
 lib64/hw/consumerir.msm8992.so
 lib64/hw/wbc_hal.default.so
 lib64/libloc_api_v02.so
@@ -18,17 +17,18 @@ lib64/libvss_nv_idl.so
 lib64/libvss_resim_iface.so
 lib64/libvss_common_iface.so
 lib64/libvss_common_idl.so
-lib64/libril.so
 lib64/libcir_driver.so
 lib64/libloc_ds_api.so
 lib64/libvss_nv_iface.so
+lib64/libmdmcutback.so
+lib64/libmotext_inf.so
+lib64/libqmimotext.so
 lib/libvss_nv_core.so
 lib/drm/libdrmwvmplugin.so
 lib/libqdMetaData.so
 lib/libqomx_core.so
 lib/libvss_dmi_qcci.so
 lib/libVDHDRAPI.so
-lib/librilutils.so
 lib/hw/consumerir.msm8992.so
 lib/hw/wbc_hal.default.so
 lib/hw/camera.msm8992.so
@@ -51,7 +51,6 @@ lib/libvss_resim_iface.so
 lib/libvss_common_iface.so
 lib/libvss_common_idl.so
 lib/liblgmda.so
-lib/libril.so
 lib/libcir_driver.so
 lib/libVDBase.so
 lib/libalmalib.so
@@ -61,6 +60,9 @@ lib/libVDLowLightAPI.so
 lib/libloc_ds_api.so
 lib/libvss_nv_iface.so
 lib/libalhdri.so
+lib/libmdmcutback.so
+lib/libmotext_inf.so
+lib/libqmimotext.so
 priv-app/qcrilmsgtunnel/qcrilmsgtunnel.apk
 vendor/firmware/libpn547_fw_C9.so
 vendor/firmware/BCM4339_003.001.009.0117.0620_LGE_P1_EU.hcd:vendor/firmware/BCM4335_003.001.009.0117.0620_LGE_P1_EU.hcd
@@ -741,7 +743,6 @@ bin/qseecomd
 bin/netmgrd
 bin/mm-qcamera-app
 bin/radish
-bin/rild
 bin/rfs_access
 bin/qseecom_security_test
 bin/xtwifi-client

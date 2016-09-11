@@ -72,17 +72,19 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.extension_library=libqti-perfd-client.so \
     persist.dpm.feature=3
 
-# Radio
-PRODUCT_PROPERTY_OVERRIDES += \
-    rild.libpath=/vendor/lib64/libril-qc-qmi-1.so \
-    persist.radio.apm_sim_not_pwdn=1 \
-    persist.radio.add_power_save=1 \
-    ro.ril.telephony.mqanelements=5 \
-    ro.telephony.ril_class=LgeLteRIL
-
+# QMI
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.data.netmgrd.qos.enable=false \
+    persist.data.qmi.adb_logmask=0 \
+    persist.qcril.disable_retry=true \
+    rild.libpath=/vendor/lib64/libril-qc-qmi-1.so \
     ro.use_data_netmgrd=true
+
+# Radio
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.radio.apm_sim_not_pwdn=1 \
+    persist.radio.add_power_save=1 \
+    persist.telephony.oosisdc=false
 
 # Factory Reset Protection
 PRODUCT_PROPERTY_OVERRIDES += \

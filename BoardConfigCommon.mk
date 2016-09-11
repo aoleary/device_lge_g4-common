@@ -116,8 +116,7 @@ BOARD_CUSTOM_BT_CONFIG := device/lge/g4-common/bluetooth/libbt_vndcfg.txt
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/lge/g4-common/bluetooth
 
 # RIL
-BOARD_RIL_CLASS := ../../../device/lge/g4-common/ril/
-BOARD_PROVIDES_RILD := true
+TARGET_RIL_VARIANT := caf
 
 # GPS
 USE_DEVICE_SPECIFIC_GPS := true
