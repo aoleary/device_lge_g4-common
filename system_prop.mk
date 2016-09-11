@@ -34,14 +34,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.bt.bdaddr_path="/data/misc/bluetooth/bdaddr" \
     persist.service.avrcp.browsing=1
 
-# Display
-#
-# OpenGLES:
-# 196608 is decimal for 0x30000 to report major/minor versions as 3/0
-# 196609 is decimal for 0x30001 to report major/minor versions as 3/1
+# Display / OpenGLES
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.hwc.mdpcomp.enable=true \
-    ro.opengles.version=196609 \
+    ro.opengles.version=196610 \
     ro.sf.lcd_density=560
 
 # GPS
