@@ -26,21 +26,36 @@
                 <item>Built-In Mic</item>
                 <item>Built-In Back Mic</item>
                 <item>Telephony Rx</item>
+                <!-- <item>In Call-Voice</item> -->
             </attachedDevices>
             <defaultOutputDevice>Speaker</defaultOutputDevice>
             <mixPorts>
-                <mixPort name="primary output" role="source" flags="AUDIO_OUTPUT_FLAG_PRIMARY|AUDIO_OUTPUT_FLAG_FAST">
-                    <profile name="" format="AUDIO_FORMAT_PCM_16_BIT"
-                             samplingRates="44100,48000" channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
+                <mixPort name="primary output" role="source"
+                        flags="AUDIO_OUTPUT_FLAG_PRIMARY">
+                    <profile name=""
+                             format="AUDIO_FORMAT_PCM_16_BIT"
+                             samplingRates="44100,48000"
+                             channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
                 </mixPort>
-                <mixPort name="raw" role="source" flags="AUDIO_OUTPUT_FLAG_RAW|AUDIO_OUTPUT_FLAG_FAST">
-                    <profile name="" format="AUDIO_FORMAT_PCM_16_BIT"
-                             samplingRates="48000" channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
+                <mixPort name="raw" role="source"
+                             flags="AUDIO_OUTPUT_FLAG_RAW|AUDIO_OUTPUT_FLAG_FAST">
+                    <profile name=""
+                             format="AUDIO_FORMAT_PCM_16_BIT"
+                             samplingRates="48000"
+                             channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
                 </mixPort>
                 <mixPort name="deep_buffer" role="source"
                         flags="AUDIO_OUTPUT_FLAG_DEEP_BUFFER">
-                    <profile name="" format="AUDIO_FORMAT_PCM_16_BIT"
-                             samplingRates="8000,11025,12000,16000,22050,24000,32000,44100,48000"
+                    <profile name=""
+                             format="AUDIO_FORMAT_PCM_16_BIT"
+                             samplingRates="44100,48000"
+                             channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
+                </mixPort>
+                <mixPort name="low_latency" role="source"
+                        flags="AUDIO_OUTPUT_FLAG_FAST">
+                    <profile name=""
+                             format="AUDIO_FORMAT_PCM_16_BIT"
+                             samplingRates="44100,48000"
                              channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
                 </mixPort>
                 <mixPort name="compressed_offload" role="source"
@@ -58,22 +73,100 @@
                              samplingRates="8000,11025,12000,16000,22050,24000,32000,44100,48000"
                              channelMasks="AUDIO_CHANNEL_OUT_STEREO,AUDIO_CHANNEL_OUT_MONO"/>
                 </mixPort>
-                <mixPort name="voice_tx" role="source">
-                    <profile name="" format="AUDIO_FORMAT_PCM_16_BIT"
-                             samplingRates="8000,16000,48000" channelMasks="AUDIO_CHANNEL_OUT_STEREO,AUDIO_CHANNEL_OUT_MONO"/>
+                <mixPort name="incall_music" role="source"
+                        flags="AUDIO_OUTPUT_FLAG_DIRECT,AUDIO_OUTPUT_FLAG_INCALL_MUSIC">
+                    <profile name=""
+                             format="AUDIO_FORMAT_PCM_16_BIT"
+                             samplingRates="8000,16000,48000"
+                             channelMasks="AUDIO_CHANNEL_OUT_MONO,AUDIO_CHANNEL_OUT_STEREO"/>
                 </mixPort>
-                <mixPort name="tts" role="source" flags="AUDIO_OUTPUT_FLAG_TTS">
-                    <profile name="" format="AUDIO_FORMAT_PCM_16_BIT"
-                             samplingRates="48000" channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
+                <mixPort name="voice_tx" role="source">
+                    <profile name=""
+                             format="AUDIO_FORMAT_PCM_16_BIT"
+                             samplingRates="8000,16000,48000"
+                             channelMasks="AUDIO_CHANNEL_OUT_STEREO,AUDIO_CHANNEL_OUT_MONO"/>
+                </mixPort>
+                <mixPort name="voip_rx" role="source"
+                         flags="AUDIO_OUTPUT_FLAG_DIRECT,AUDIO_OUTPUT_FLAG_VOIP_RX">
+                    <profile name=""
+                             format="AUDIO_FORMAT_PCM_16_BIT"
+                             samplingRates="8000,16000"
+                             channelMasks="AUDIO_CHANNEL_IN_MONO"/>
+                    <profile name=""
+                             format="AUDIO_FORMAT_AMR_NB"
+                             samplingRates="8000"
+                             channelMasks="AUDIO_CHANNEL_IN_MONO"/>
+                    <profile name=""
+                             format="AUDIO_FORMAT_AMR_WB"
+                             samplingRates="16000"
+                             channelMasks="AUDIO_CHANNEL_IN_MONO"/>
+                    <profile name=""
+                             format="AUDIO_FORMAT_QCELP"
+                             samplingRates="8000"
+                             channelMasks="AUDIO_CHANNEL_IN_MONO"/>
+                    <profile name=""
+                             format="AUDIO_FORMAT_EVRC"
+                             samplingRates="8000"
+                             channelMasks="AUDIO_CHANNEL_IN_MONO"/>
+                    <profile name=""
+                             format="AUDIO_FORMAT_EVRCB"
+                             samplingRates="8000"
+                             channelMasks="AUDIO_CHANNEL_IN_MONO"/>
+                    <profile name=""
+                             format="AUDIO_FORMAT_EVRCWB"
+                             samplingRates="16000"
+                             channelMasks="AUDIO_CHANNEL_IN_MONO"/>
+                    <profile name=""
+                             format="AUDIO_FORMAT_EVRCNW"
+                             samplingRates="8000,16000"
+                             channelMasks="AUDIO_CHANNEL_IN_MONO"/>
+                </mixPort>
+                <mixPort name="tts" role="source"
+                             flags="AUDIO_OUTPUT_FLAG_TTS">
+                    <profile name=""
+                             format="AUDIO_FORMAT_PCM_16_BIT"
+                             samplingRates="48000"
+                             channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
                 </mixPort>
                 <mixPort name="primary input" role="sink">
-                    <profile name="" format="AUDIO_FORMAT_PCM_16_BIT"
+                    <profile name=""
+                             format="AUDIO_FORMAT_PCM_16_BIT"
                              samplingRates="8000,11025,12000,16000,22050,24000,32000,44100,48000"
-                             channelMasks="AUDIO_CHANNEL_IN_MONO,AUDIO_CHANNEL_IN_STEREO,AUDIO_CHANNEL_IN_FRONT_BACK,AUDIO_CHANNEL_INDEX_MASK_3"/>
+                             channelMasks="AUDIO_CHANNEL_IN_MONO,AUDIO_CHANNEL_IN_STEREO,AUDIO_CHANNEL_IN_FRONT_BACK"/>
+                    <profile name=""
+                             format="AUDIO_FORMAT_AMR_NB"
+                             samplingRates="8000"
+                             channelMasks="AUDIO_CHANNEL_IN_MONO,AUDIO_CHANNEL_IN_STEREO,AUDIO_CHANNEL_IN_FRONT_BACK"/>
+                    <profile name=""
+                             format="AUDIO_FORMAT_AMR_WB"
+                             samplingRates="16000"
+                             channelMasks="AUDIO_CHANNEL_IN_MONO,AUDIO_CHANNEL_IN_STEREO,AUDIO_CHANNEL_IN_FRONT_BACK"/>
+                    <profile name=""
+                             format="AUDIO_FORMAT_QCELP"
+                             samplingRates="8000"
+                             channelMasks="AUDIO_CHANNEL_IN_MONO,AUDIO_CHANNEL_IN_STEREO,AUDIO_CHANNEL_IN_FRONT_BACK"/>
+                    <profile name=""
+                             format="AUDIO_FORMAT_EVRC"
+                             samplingRates="8000"
+                             channelMasks="AUDIO_CHANNEL_IN_MONO,AUDIO_CHANNEL_IN_STEREO,AUDIO_CHANNEL_IN_FRONT_BACK"/>
+                    <profile name=""
+                             format="AUDIO_FORMAT_EVRCB"
+                             samplingRates="8000"
+                             channelMasks="AUDIO_CHANNEL_IN_MONO,AUDIO_CHANNEL_IN_STEREO,AUDIO_CHANNEL_IN_FRONT_BACK"/>
+                     <profile name=""
+                             format="AUDIO_FORMAT_EVRCWB"
+                             samplingRates="16000"
+                             channelMasks="AUDIO_CHANNEL_IN_MONO,AUDIO_CHANNEL_IN_STEREO,AUDIO_CHANNEL_IN_FRONT_BACK"/>
+                     <profile name=""
+                             format="AUDIO_FORMAT_EVRCNW"
+                             samplingRates="8000,16000"
+                             channelMasks="AUDIO_CHANNEL_IN_MONO,AUDIO_CHANNEL_IN_STEREO,AUDIO_CHANNEL_IN_FRONT_BACK"/>
                 </mixPort>
                 <mixPort name="voice_rx" role="sink">
-                    <profile name="" format="AUDIO_FORMAT_PCM_16_BIT"
-                             samplingRates="8000,16000,48000" channelMasks="AUDIO_CHANNEL_IN_STEREO,AUDIO_CHANNEL_IN_MONO"/>
+                    <profile name=""
+                             format="AUDIO_FORMAT_PCM_16_BIT"
+                             samplingRates="8000,16000,48000"
+                             channelMasks="AUDIO_CHANNEL_IN_MONO,AUDIO_CHANNEL_IN_STEREO"/>
                 </mixPort>
             </mixPorts>
             <devicePorts>
@@ -106,32 +199,33 @@
                 </devicePort>
                 <devicePort tagName="Telephony Rx" type="AUDIO_DEVICE_IN_TELEPHONY_RX" role="source">
                 </devicePort>
+                <!-- <devicePort tagName="In Call-Voice" type="AUDIO_DEVICE_IN_VOICE_CALL" role="source">
+                </devicePort> -->
             </devicePorts>
             <routes>
                 <route type="mix" sink="Earpiece"
-                       sources="primary output,raw,deep_buffer"/>
+                       sources="primary output,low_latency,deep_buffer"/>
                 <route type="mix" sink="Speaker"
-                       sources="primary output,raw,deep_buffer,compressed_offload,tts"/>
+                       sources="primary output,low_latency,deep_buffer"/>
                 <route type="mix" sink="Wired Headset"
-                       sources="primary output,raw,deep_buffer,compressed_offload"/>
+                       sources="primary output,low_latency,deep_buffer"/>
                 <route type="mix" sink="Wired Headphones"
-                       sources="primary output,raw,deep_buffer,compressed_offload"/>
+                       sources="primary output,low_latency,deep_buffer"/>
                 <route type="mix" sink="Line Out"
-                       sources="primary output,raw,deep_buffer,compressed_offload"/>
+                       sources="primary output,low_latency,deep_buffer"/>
                 <route type="mix" sink="BT SCO"
-                       sources="primary output,raw,deep_buffer"/>
+                       sources="primary output,low_latency,deep_buffer"/>
                 <route type="mix" sink="BT SCO Headset"
-                       sources="primary output,raw,deep_buffer"/>
+                       sources="primary output,low_latency,deep_buffer"/>
                 <route type="mix" sink="BT SCO Car Kit"
-                       sources="primary output,raw,deep_buffer"/>
+                       sources="primary output,low_latency,deep_buffer"/>
                 <route type="mix" sink="Telephony Tx"
                        sources="voice_tx"/>
                 <route type="mix" sink="primary input"
-                       sources="Built-In Mic,Built-In Back Mic,Wired Headset Mic,BT SCO Headset Mic"/>
+                       sources="Built-In Mic,Built-In Back Mic,Wired Headset Mic,BT SCO Headset Mic"/> <!-- ,In Call-Voice"/> -->
                 <route type="mix" sink="voice_rx"
                        sources="Telephony Rx"/>
             </routes>
-
         </module>
 
         <!-- A2dp Audio HAL -->
