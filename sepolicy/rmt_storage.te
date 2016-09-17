@@ -1,1 +1,2 @@
+allow rmt_storage rmt_debugfs:dir { search };
 allow rmt_storage rmt_debugfs:file { open write };

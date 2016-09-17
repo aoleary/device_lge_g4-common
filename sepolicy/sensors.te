@@ -7,3 +7,4 @@ allow sensors sensors_prop:property_service { set };
 allow sensors init:unix_stream_socket { connectto };
 
 allow sensors shell_exec:file { getattr };
+allow sensors toolbox_exec:file { getattr read open execute execute_no_trans };

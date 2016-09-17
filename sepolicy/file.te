@@ -7,3 +7,5 @@ type multimedia_data_file, file_type, data_file_type;
 type sns_file, file_type, data_file_type;
 
 type rmt_debugfs, fs_type;
+
+type rtc_sysfs, fs_type;
