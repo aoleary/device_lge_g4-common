@@ -323,14 +323,14 @@ void LocEngAdapter::reportPosition(UlpLocation &location,
     }
 }
 
-void LocInternalAdapter::reportSv(QtiGnssSvStatus &svStatus,
+void LocInternalAdapter::reportSv(GnssSvStatus &svStatus,
                                   GpsLocationExtended &locationExtended,
                                   void* svExt){
     sendMsg(new LocEngReportSv(mLocEngAdapter, svStatus,
                                locationExtended, svExt));
 }
 
-void LocEngAdapter::reportSv(QtiGnssSvStatus &svStatus,
+void LocEngAdapter::reportSv(GnssSvStatus &svStatus,
                              GpsLocationExtended &locationExtended,
                              void* svExt)
 {
