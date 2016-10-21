@@ -22,4 +22,4 @@
 
 /sys/kernel/debug/rmt_storage(/.*)? u:object_r:rmt_debugfs:s0
 
-/sys/devices/soc.0/qpnp-rtc-ffffffc0c499cc00/rtc/rtc0(/.*)? u:object_r:rtc_sysfs:s0
+/sys/devices/soc.0/qpnp-rtc-[^/]+/rtc/rtc0(/.*)?       u:object_r:rtc_sysfs:s0

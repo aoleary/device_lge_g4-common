@@ -1,1 +1,2 @@
 allow mediacodec system_data_file:sock_file { write };
+allow mediacodec persist_lg_data_file:dir { search };
