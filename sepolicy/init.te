@@ -2,3 +2,8 @@ allow qti_init_shell radio_prop:property_service { set };
 
 allow init rmt_debugfs:dir { relabelto };
 allow init rmt_debugfs:file { relabelto };
+
+allow init rtc_sysfs:dir { relabelto };
+allow init rtc_sysfs:filesystem { associate };
+allow init rtc_sysfs:file { relabelto };
+allow init rtc_sysfs:lnk_file { relabelto };

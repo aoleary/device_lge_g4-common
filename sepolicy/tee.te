@@ -1,0 +1,2 @@
+allow tee persist_lg_data_file:dir { write add_name };
+allow tee persist_lg_data_file:file { create };

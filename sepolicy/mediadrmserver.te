@@ -1,0 +1,5 @@
+allow mediadrmserver persist_lg_data_file:dir { search };
+allow mediadrmserver firmware_data_file:dir { search };
+
+allow mediadrmserver firmware_data_file:dir { search };
+allow mediadrmserver firmware_data_file:file { read open getattr };
