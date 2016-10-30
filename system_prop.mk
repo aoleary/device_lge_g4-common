@@ -26,8 +26,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     mm.enable.qcom_parser=3314291 \
     mm.enable.smoothstreaming=true \
     media.aac_51_output_enabled=true \
-    qcom.hw.aac.encoder=true \
-    ro.sys.sdcardfs=true
+    qcom.hw.aac.encoder=true
 
 # Bluetooth
 PRODUCT_PROPERTY_OVERRIDES += \
