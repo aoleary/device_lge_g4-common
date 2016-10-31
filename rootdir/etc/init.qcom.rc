@@ -866,9 +866,10 @@ service vm_bms /system/bin/vm_bms
     group root
 
 service msm_irqbalance /system/bin/msm_irqbalance -f /system/vendor/etc/msm_irqbalance.conf
-   class core
+    class core
     user root
     group root
+    writepid /dev/cpuset/system-background/tasks
 
 # init.qcom.usb.sh configure RNDIS to go through HW IPA
 service qcom-usb-sh /system/bin/sh /init.qcom.usb.sh
@@ -901,6 +902,7 @@ service qcamerasvr /system/bin/mm-qcamera-daemon
     class late_start
     user camera
     group camera system inet input graphics
+    writepid /dev/cpuset/system-background/tasks
 
 service qseecomd /system/bin/qseecomd
     class core
@@ -943,6 +945,7 @@ on property:init.svc.bootanim=running
 
 on property:init.svc.bootanim=stopped
     start usf-post-boot
+    restart cameraserver
 
 on property:sys.boot_completed=1
     start qcom-post-boot
