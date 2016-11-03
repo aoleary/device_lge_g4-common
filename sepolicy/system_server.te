@@ -7,3 +7,5 @@ allow system_server rtc_sysfs:dir { search };
 allow system_server rtc_sysfs:file { read open getattr };
 
 allow system_server themeservice_app_data_file:dir { relabelto };
+
+allow system_server mpctl_socket:dir { search };

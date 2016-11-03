@@ -1,1 +1,1 @@
-allow audioserver system_data_file:sock_file { write };
+allow audioserver cust_file:dir { search };

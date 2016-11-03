@@ -19,6 +19,7 @@
 /system/bin/timekeep                u:object_r:timekeep_exec:s0
 
 /data/misc/bdaddr                   u:object_r:bluetooth_data_file:s0
+/data/misc/perfd(/.*)?              u:object_r:mpctl_socket:s0
 
 /sys/kernel/debug/rmt_storage(/.*)? u:object_r:rmt_debugfs:s0
 
