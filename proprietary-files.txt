@@ -1,4 +1,3 @@
-app/shutdownlistener/shutdownlistener.apk
 lib64/libvss_nv_core.so
 lib64/libqdMetaData.so
 lib64/libvss_bsp_qcci.so
@@ -679,6 +678,8 @@ vendor/lib/libchromatix_imx208_common.so
 vendor/lib/libmmcamera_isp_sce40.so
 vendor/lib/libchromatix_imx234_cpp_video.so
 vendor/lib/libqmi_encdec.so
+vendor/lib/libmmcamera_llvd.so
+vendor/lib/libllvd_smore.so
 vendor/qcril.db
 vendor/etc/scve/textreco/worddecoder/textreco_url_10000_2.bin
 vendor/etc/scve/textreco/chardecoder/_numpunc_font40_conc2_DEFn__BGTouchy6x6n__1_1__morph.trn32025.trn
