@@ -160,7 +160,6 @@ vendor/lib64/libdisp-aba.so
 vendor/lib64/libSHIMDivxDrm.so
 vendor/lib64/libwfdnative.so
 vendor/lib64/libRSDriver_adreno.so
-vendor/lib64/libflp.so
 vendor/lib64/lib-rtpcore.so
 vendor/lib64/lib-imsrcscmservice.so
 vendor/lib64/libvendorconn.so
@@ -374,7 +373,6 @@ vendor/lib/libQSEEComAPI.so
 vendor/lib/libchromatix_imx234_hfr_60_open.so
 vendor/lib/hw/activity_recognition.msm8992.so
 vendor/lib/hw/keystore.msm8992.so
-vendor/lib/hw/flp.default.so
 vendor/lib/hw/gatekeeper.msm8992.so
 vendor/lib/hw/sensors.msm8992.so
 vendor/lib/libmmcamera_isp_bg_stats44.so
@@ -453,7 +451,6 @@ vendor/lib/libchromatix_t4ka3_postproc.so
 vendor/lib/libactuator_dw9716.so
 vendor/lib/libwfdnative.so
 vendor/lib/libRSDriver_adreno.so
-vendor/lib/libflp.so
 vendor/lib/lib-rtpcore.so
 vendor/lib/lib-imsrcscmservice.so
 vendor/lib/libchromatix_t4ka3_cpp_video.so
