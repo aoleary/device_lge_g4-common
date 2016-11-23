@@ -171,8 +171,8 @@ TARGET_PROVIDES_KEYMASTER := true
 include device/qcom/sepolicy/sepolicy.mk
 BOARD_SEPOLICY_DIRS += $(COMMON_PATH)/sepolicy
 
-# Disable HW based full disk encryption
-TARGET_HW_DISK_ENCRYPTION := false
+# Enable HW based full disk encryption
+TARGET_HW_DISK_ENCRYPTION := true
 
 # NFC
 BOARD_NFC_CHIPSET := pn547
