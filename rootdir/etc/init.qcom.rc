@@ -59,6 +59,9 @@ on early-fs
     chown system /sys/process/task_comm_list
 
 on init
+    # Shim libs
+    export LD_SHIM_LIBS /system/vendor/lib/libwvm.so|libshims_wvm.so
+
     mkdir /firmware 0771 system system
     mkdir /firmware/image 0771 system system
     mkdir /persist/data 0700 system system

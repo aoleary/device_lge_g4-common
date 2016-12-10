@@ -1,4 +1,4 @@
-# Copyright 2015 The CyanogenMod Project
+# Copyright 2016 The CyanogenMod Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,10 +15,11 @@
 LOCAL_PATH := $(call my-dir)
 include $(CLEAR_VARS)
 
-LOCAL_SRC_FILES := lights.c
-LOCAL_MODULE_RELATIVE_PATH := hw
-LOCAL_SHARED_LIBRARIES := liblog libcutils
-LOCAL_MODULE := lights.$(TARGET_BOARD_PLATFORM)
+LOCAL_SRC_FILES := wvm.c
+LOCAL_SHARED_LIBRARIES := libstagefright_foundation
+LOCAL_MODULE := libshims_wvm
 LOCAL_MODULE_TAGS := optional
+
+LOCAL_CFLAGS_arm64 += -DLIBSHIMS_64BIT
 
 include $(BUILD_SHARED_LIBRARY)
