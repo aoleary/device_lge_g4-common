@@ -12,3 +12,5 @@ allow system_app timekeep_prop:file { read open getattr };
 
 allow timekeep rtc_sysfs:dir { search };
 allow timekeep rtc_sysfs:file { read open };
+
+allow timekeep rootfs:lnk_file { getattr };
