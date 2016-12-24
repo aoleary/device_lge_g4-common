@@ -2,12 +2,10 @@
 # System Properties for G4
 #
 
-# Camera
+# Camera: add additional i/p buffer in case of encoder DCVS
 PRODUCT_PROPERTY_OVERRIDES += \
-    persist.camera.HAL3.enabled=1 \
     vidc.enc.dcvs.extra-buff-count=2 \
-    persist.camera.cpp.duplication=false \
-    media.camera.ts.monotonic=0
+    persist.camera.cpp.duplication=false
 
 # Audio
 PRODUCT_PROPERTY_OVERRIDES += \
