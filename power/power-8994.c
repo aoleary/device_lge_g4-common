@@ -308,8 +308,7 @@ int set_interactive_override(int on)
     if (!on) {
         /* Display off */
         if (is_interactive_governor(governor)) {
-            // Offline all big cores
-            int resource_values[] = {0x777};
+            int resource_values[] = {0x41004000, 0x0}; /* 4+0 core config in display off */
             perform_hint_action(DISPLAY_STATE_HINT_ID,
                     resource_values, ARRAY_SIZE(resource_values));
         }
