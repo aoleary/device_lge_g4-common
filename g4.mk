@@ -161,6 +161,10 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/quipc.conf:system/etc/quipc.conf \
     $(LOCAL_PATH)/configs/sap.conf:system/etc/sap.conf
 
+# IR
+PRODUCT_PACKAGES += \
+    consumerir.msm8992 \
+
 # IRSC
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/sec_config:system/etc/sec_config

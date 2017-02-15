@@ -2,7 +2,6 @@ lib64/libvss_nv_core.so
 lib64/libqdMetaData.so
 lib64/libvss_bsp_qcci.so
 lib64/libvss_dmi_qcci.so
-lib64/hw/consumerir.msm8992.so
 lib64/hw/wbc_hal.default.so
 lib64/libloc_api_v02.so
 lib64/libvss_resim_core.so
@@ -28,7 +27,6 @@ lib/libqdMetaData.so
 lib/libqomx_core.so
 lib/libvss_dmi_qcci.so
 lib/libVDHDRAPI.so
-lib/hw/consumerir.msm8992.so
 lib/hw/wbc_hal.default.so
 lib/hw/camera.msm8992.so
 lib/libloc_api_v02.so
