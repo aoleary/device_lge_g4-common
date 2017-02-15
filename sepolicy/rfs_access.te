@@ -2,3 +2,4 @@ allow rfs_access rmt_debugfs:dir { search };
 allow rfs_access rmt_debugfs:file { open write };
 
 allow rmt_debugfs debugfs:filesystem { associate };
+allow rfs_access self:capability net_raw;

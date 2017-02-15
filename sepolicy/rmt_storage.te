@@ -1,2 +1,3 @@
 allow rmt_storage rmt_debugfs:dir { search };
 allow rmt_storage rmt_debugfs:file { open write };
+allow rmt_storage self:capability dac_override;
