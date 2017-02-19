@@ -150,7 +150,11 @@ EXTENDED_FONT_FOOTPRINT := true
 TARGET_PROVIDES_LIBLIGHT := true
 
 # Offmode Charging
+WITH_CM_CHARGER := true
 BOARD_CHARGER_DISABLE_INIT_BLANK := true
+BOARD_CHARGER_ENABLE_SUSPEND := false
+BACKLIGHT_PATH := "/sys/class/leds/lcd-backlight/brightness"
+
 BOARD_CHARGING_CMDLINE_NAME := "androidboot.mode"
 BOARD_CHARGING_CMDLINE_VALUE := "chargerlogo"
 
@@ -177,10 +181,6 @@ TARGET_HW_DISK_ENCRYPTION := false
 # NFC
 BOARD_NFC_CHIPSET := pn547
 BOARD_NFC_DEVICE := "/dev/pn547"
-
-# HAL static libs
-BOARD_HAL_STATIC_LIBRARIES := \
-    libhealthd.msm8992
 
 # CMHW
 BOARD_USES_CYANOGEN_HARDWARE := true
