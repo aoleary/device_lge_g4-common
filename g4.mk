@@ -73,6 +73,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     io.github.berkantkz.kztorch
 
+# rootless torch tile workaround
+PRODUCT_PACKAGES += \
+    Flashlight
+
 # Charger
 PRODUCT_PACKAGES += \
     charger_res_images

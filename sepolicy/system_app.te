@@ -8,10 +8,11 @@ binder_call(system_app, wificond)
 
 allow system_app time_daemon:unix_stream_socket connectto;
 allow system_app proc_pagetypeinfo:file { getattr open read };
+allow system_app sysfs_led:dir r_dir_perms;
+allow system_app sysfs_led:file rw_file_perms;
 allow system_app sysfs_zram:dir search;
 allow system_app sysfs_zram:file { getattr open read };
 allow system_app vold:binder call;
 
 dontaudit system_app installd:binder call;
 dontaudit system_app netd:binder call;
-
