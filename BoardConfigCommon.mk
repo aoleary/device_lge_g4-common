@@ -183,10 +183,8 @@ BOARD_NFC_CHIPSET := pn547
 BOARD_NFC_DEVICE := "/dev/pn547"
 
 # CMHW
+BOARD_HARDWARE_CLASS += $(COMMON_PATH)/cmhw
 BOARD_USES_CYANOGEN_HARDWARE := true
-BOARD_HARDWARE_CLASS := \
-    $(COMMON_PATH)/cmhw \
-    hardware/cyanogen/cmhw
 
 # inherit from the proprietary version
 -include vendor/lge/g4-common/BoardConfigVendor.mk
