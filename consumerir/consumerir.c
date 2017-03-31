@@ -43,20 +43,9 @@ static const consumerir_freq_range_t consumerir_freqs[] = {
 static int consumerir_transmit(struct consumerir_device *dev __unused,
    int carrier_freq, const int pattern[], int pattern_len)
 {
-    int total_time = 0, ret = 0;
-    long i;
-
-    for (i = 0; i < pattern_len; i++)
-        total_time += pattern[i];
-
     // call into libcir_driver
-    ret = transmitIr(IR_DEVICE, LG_IR_BAUD_RATE, carrier_freq, pattern, pattern_len);
-
-    /* simulate the time spent transmitting by sleeping */
-    ALOGD("transmit for %d uS at %d Hz", total_time, carrier_freq);
-    usleep(total_time);
-
-    return ret;
+    ALOGD("transmitting pattern at %d Hz", carrier_freq);
+    return transmitIr(IR_DEVICE, LG_IR_BAUD_RATE, carrier_freq, pattern, pattern_len);
 }
 
 static int consumerir_get_num_carrier_freqs(struct consumerir_device *dev __unused)
