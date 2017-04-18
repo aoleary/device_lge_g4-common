@@ -258,4 +258,4 @@ WIFI_DRIVER_FW_PATH_STA := "/vendor/firmware/fw_bcmdhd.bin"
 WPA_SUPPLICANT_VERSION := VER_0_8_X
 
 # inherit from the proprietary version
--include vendor/lge/g4-common/BoardConfigVendor.mk
+include vendor/lge/g4-common/BoardConfigVendor.mk
