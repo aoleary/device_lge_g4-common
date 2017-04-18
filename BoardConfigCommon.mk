@@ -260,4 +260,4 @@ WPA_SUPPLICANT_VERSION := VER_0_8_X
 VENDOR_SECURITY_PATCH := 2017-07-01
 
 # inherit from the proprietary version
--include vendor/lge/g4-common/BoardConfigVendor.mk
+include vendor/lge/g4-common/BoardConfigVendor.mk
