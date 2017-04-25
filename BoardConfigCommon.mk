@@ -39,7 +39,8 @@ TARGET_LD_SHIM_LIBS := \
     /system/vendor/lib/libwvm.so|libshims_wvm.so \
     /system/vendor/lib64/libcneapiclient.so|system/vendor/lib64/libcne_shim.so \
     /system/vendor/lib64/libril-qc-qmi-1.so|/vendor/lib64/rild_socket.so \
-    /system/lib64/libmdmcutback.so|libqsap_shim.so
+    /system/lib64/libmdmcutback.so|libqsap_shim.so \
+    /system/lib/libshim_camera.so:/system/lib/libcamera_client.so|libshim_cameraclient.so
 
 # inherit from the proprietary version
 -include vendor/lge/g4-common/BoardConfigVendor.mk
