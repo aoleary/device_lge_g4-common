@@ -60,7 +60,7 @@ on early-fs
 
 on init
     # Shim libs
-    export LD_SHIM_LIBS /system/vendor/lib/libwvm.so|libshims_wvm.so
+    export LD_SHIM_LIBS "/system/vendor/lib/libwvm.so|libshims_wvm.so:/system/bin/mm-qcamera-daemon|libshims_camera.so"
 
     mkdir /firmware 0771 system system
     mkdir /firmware/image 0771 system system
