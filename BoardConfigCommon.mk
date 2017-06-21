@@ -97,6 +97,10 @@ TARGET_CAMERASERVICE_CLOSES_NATIVE_HANDLES := true
 TARGET_PROCESS_SDK_VERSION_OVERRIDE := \
     /system/vendor/bin/mm-qcamera-daemon=24
 
+# Dex - Pre-opt SystemUI
+PRODUCT_DEXPREOPT_SPEED_APPS += \
+    SystemUI
+
 # Display
 TARGET_USES_ION := true
 TARGET_USES_NEW_ION_API := true
