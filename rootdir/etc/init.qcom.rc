@@ -718,6 +718,8 @@ service qcom-c_core-sh /system/bin/sh /init.qcom.class_core.sh
     class core
     user root
     oneshot
+    group root system wakelock
+    writepid /dev/cpuset/system-background/tasks
 
 service qcom-c_main-sh /system/bin/sh /init.class_main.sh
     class main
@@ -747,6 +749,7 @@ service rmt_storage /system/vendor/bin/rmt_storage
     user root
     disabled
     group root wakelock
+    shutdown critical
     writepid /dev/cpuset/system-background/tasks
 
 service rfs_access /system/vendor/bin/rfs_access
