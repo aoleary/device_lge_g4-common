@@ -1,5 +1,5 @@
--app/ims/lib/arm64/libimscamera_jni.so
--app/ims/lib/arm64/libimsmedia_jni.so
+app/ims/lib/arm64/libimscamera_jni.so
+app/ims/lib/arm64/libimsmedia_jni.so
 -app/ims/ims.apk
 bin/ims_rtp_daemon
 bin/loc_launcher
