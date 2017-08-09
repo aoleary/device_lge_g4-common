@@ -51,7 +51,7 @@ lib/libqdMetaData.so
 -lib/libloc_api_v02.so
 lib/libmmjpeg_interface.so
 lib/libimscamera_jni.so
-lib/libcir_driver.so
+-lib/libcir_driver.so
 lib/libmorpho_image_stab31.so
 lib/libalmalib.so
 lib/drm/libfwdlockengine.so
@@ -71,7 +71,7 @@ lib64/libqmimotext.so
 lib64/libqdMetaData.so
 -lib64/libloc_api_v02.so
 lib64/libimscamera_jni.so
-lib64/libcir_driver.so
+-lib64/libcir_driver.so
 lib64/hw/wbc_hal.default.so
 lib64/libmdmdetect.so
 lib64/libimsmedia_jni.so
