@@ -792,13 +792,12 @@ service battery_monitor /system/bin/battery_monitor
     disabled
 
 # Add rild socket permission for dual SIM sanghwan.jung@lge.com
-service ril-daemon2 /system/bin/rild -c 2
+service ril-daemon2 /vendor/bin/hw/rild -c 2
     class main
-    socket rild2 stream 660 root radio
-    socket rild-debug2 stream 660 radio system
-    user root
+    user radio
     disabled
-    group radio cache inet misc audio sdcard_r sdcard_rw diag qcom_diag log net_raw
+    group radio cache inet misc audio log readproc wakelock
+    capabilities BLOCK_SUSPEND NET_ADMIN NET_RAW
 
 # Add rild socket permission for dual SIM sanghwan.jung@lge.com
 service ril-daemon3 /system/bin/rild -c 3
