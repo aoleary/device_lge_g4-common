@@ -22,5 +22,8 @@ TARGET_SPECIFIC_HEADER_PATH := $(COMMON_PATH)/include
 include $(COMMON_PATH)/PlatformConfig.mk
 include $(COMMON_PATH)/board/*.mk
 
+# HIDL
+DEVICE_MANIFEST_FILE := $(COMMON_PATH)/configs/manifest.xml
+
 # inherit from the proprietary version
 -include vendor/lge/g4-common/BoardConfigVendor.mk
