@@ -10,20 +10,23 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Audio
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.qc.sdk.audio.ssr=false \
-    persist.audio.ssr.3mic=false \
+    persist.audio.ssr.3mic=true \
     persist.audio.fluence.voicecall=true \
     persist.audio.fluence.voicerec=false \
     persist.audio.fluence.speaker=true \
     ro.qc.sdk.audio.fluencetype=fluence \
     ro.qc.sdk.audio.ssr=false \
     tunnel.audio.encode=false \
+    audio.deep_buffer.media=true \
+    audio.offload.pcm.enable=true \
+    audio.offload.buffer.size.kb=32 \
     use.voice.path.for.pcm.voip=true \
     use.dedicated.device.for.voip=true \
     av.offload.enable=false
 
 # Media
 PRODUCT_PROPERTY_OVERRIDES += \
-    mm.enable.qcom_parser=3314291 \
+    mm.enable.qcom_parser=3379827 \
     mm.enable.smoothstreaming=true \
     media.aac_51_output_enabled=true \
     qcom.hw.aac.encoder=true \
@@ -51,9 +54,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.gps.qc_nlp_in_use=1 \
     persist.loc.nlp_name=com.qualcomm.services.location \
-    ro.gps.agps_provider=1 \
-    ro.qc.sdk.izat.premium_enabled=0 \
-    ro.qc.sdk.izat.service_mask=0x0
+    ro.gps.agps_provider=1 
 
 # NITZ
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -72,7 +73,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.timed.enable=true \
     ro.qualcomm.cabl=2 \
     ro.vendor.extension_library=libqti-perfd-client.so \
-    persist.dpm.feature=3
+    persist.dpm.feature=1
 
 # QMI
 PRODUCT_PROPERTY_OVERRIDES += \

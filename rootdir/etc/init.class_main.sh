@@ -38,6 +38,7 @@ start_copying_prebuilt_qcril_db
 #
 # Make modem config folder and copy firmware config to that folder
 #
+#
 rm -rf /data/misc/radio/modem_config
 mkdir /data/misc/radio/modem_config
 chmod 660 /data/misc/radio/modem_config

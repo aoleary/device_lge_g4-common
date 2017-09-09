@@ -1,0 +1,2 @@
+BOARD_NFC_CHIPSET := pn547
+BOARD_NFC_DEVICE := "/dev/pn547"

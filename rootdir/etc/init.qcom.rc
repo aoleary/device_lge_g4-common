@@ -60,7 +60,7 @@ on early-fs
 
 on init
     # Shim libs
-    export LD_SHIM_LIBS "/system/vendor/lib/libwvm.so|libshims_wvm.so:/system/bin/mm-qcamera-daemon|libshims_camera.so"
+    export LD_SHIM_LIBS /system/vendor/lib/libwvm.so|libshims_wvm.so    
 
     mkdir /firmware 0771 system system
     mkdir /firmware/image 0771 system system
@@ -261,6 +261,11 @@ on boot
 
     # HAL looks for pn54x but kernel driver uses pn547
     symlink /dev/pn547 /dev/pn54x
+
+    # Begin hdmi res_info
+    chown system system /sys/devices/virtual/graphics/fb1/res_info
+    chmod 644 /sys/devices/virtual/graphics/fb1/res_info
+    # End hdmi res_info
 
 # START touch_driver
     chown system system /sys/devices/virtual/input/lge_touch/incoming_call
@@ -868,7 +873,7 @@ service vm_bms /system/bin/vm_bms
     user root
     group root
 
-service msm_irqbalance /system/bin/msm_irqbalance -f /system/vendor/etc/msm_irqbalance.conf
+service msm_irqbalance /system/bin/msm_irqbalance -f /system/etc/msm_irqbalance.conf
     class core
     user root
     group root
@@ -955,17 +960,10 @@ on property:sys.boot_completed=1
     setprop sys.io.scheduler "bfq"
     write /dev/kmsg "Boot completed"
 
-# OSS thermal management
-service thermanager /system/bin/thermanager /system/etc/thermanager.xml
+service time_daemon /system/bin/time_daemon
     class late_start
     user root
     group root
-
-service timekeep /system/bin/timekeep restore
-    class late_start
-    user root
-    group root
-    oneshot
 
 service adsprpcd /system/bin/adsprpcd
    class main
