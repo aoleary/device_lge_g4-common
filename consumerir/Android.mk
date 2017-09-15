@@ -20,6 +20,7 @@ include $(CLEAR_VARS)
 
 LOCAL_MODULE := consumerir.$(TARGET_BOARD_PLATFORM)
 LOCAL_MODULE_RELATIVE_PATH := hw
+LOCAL_PROPRIETARY_MODULE := true
 LOCAL_SRC_FILES := consumerir.c
 LOCAL_SHARED_LIBRARIES := liblog libcutils libcir_driver
 LOCAL_MODULE_TAGS := optional
