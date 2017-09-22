@@ -20,7 +20,3 @@ PRODUCT_PROPERTY_OVERRIDES += \
     vidc.debug.perf.mode=2 \
     vidc.enc.dcvs.extra-buff-count=2 \
     persist.camera.cpp.duplication=false
-
-# Seccomp policy
-PRODUCT_COPY_FILES += \
-	$(LOCAL_PATH)/configs/mediacodec.policy:system/vendor/etc/seccomp_policy/mediacodec.policy
