@@ -15,6 +15,7 @@ allow init property_socket:sock_file { create setattr write};
 allow init socket_device:sock_file create;
 allow init socket_device:sock_file setattr;
 
+allow init { domain -lmkd -crash_dump }:process noatsecure;
 allow init firmware_file:dir mounton;
 allow init fsg_file:dir mounton;
 allow init pstorefs:dir mounton;
