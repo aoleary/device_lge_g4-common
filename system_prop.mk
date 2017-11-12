@@ -55,6 +55,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
     camera2.portability.force_api=1 \
     persist.camera.video.ubwc=0 \
     persist.camera.HAL3.enabled=1 \
+    persist.ts.postmakeup=false \
+    persist.ts.rtmakeup=false \
+    camera.no_navigation_bar=true \
     ro.factorytest=0
 
 # DRM
