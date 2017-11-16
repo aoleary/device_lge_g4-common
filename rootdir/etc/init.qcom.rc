@@ -37,6 +37,9 @@ on early-init
     mkdir /dev/pstore 660 system system
     mount pstore /dev/pstore /dev/pstore
 
+    # Setup zram options
+    write /sys/block/zram0/max_comp_streams 4
+
 on early-fs
     symlink /dev/block/platform/soc.0/${ro.boot.bootdevice} /dev/block/bootdevice
     mount_all fstab.qcom
