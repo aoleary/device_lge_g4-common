@@ -1,5 +1,5 @@
 #!/system/bin/sh
-# Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
+# Copyright (c) 2012-2017, The Linux Foundation. All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
@@ -775,53 +775,22 @@ case "$target" in
 
         # ensure at most one A57 is online when thermal hotplug is disabled
         echo 0 > /sys/devices/system/cpu/cpu5/online
-        # in case CPU4 is online, limit its frequency
-        echo 960000 > /sys/devices/system/cpu/cpu4/cpufreq/scaling_max_freq
-        # Limit A57 max freq from msm_perf module in case CPU 4 is offline
-        echo "4:960000 5:960000" > /sys/module/msm_performance/parameters/cpu_max_freq
-        # configure governor settings for little cluster
-        echo "interactive" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
-        echo 1 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/use_sched_load
-        echo 1 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/use_migration_notif
-        echo 19000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/above_hispeed_delay
-        echo 90 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/go_hispeed_load
-        echo 20000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_rate
-        echo 960000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/hispeed_freq
-        echo 1 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/io_is_busy
-        echo 80 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads
-        echo 40000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/min_sample_time
-        echo 80000 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/max_freq_hysteresis
-        echo 384000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
         # online CPU4
         echo 1 > /sys/devices/system/cpu/cpu4/online
-        # Best effort limiting for first time boot if msm_performance module is absent
-        echo 960000 > /sys/devices/system/cpu/cpu4/cpufreq/scaling_max_freq
-        # configure governor settings for big cluster
-        echo "interactive" > /sys/devices/system/cpu/cpu4/cpufreq/scaling_governor
-        echo 1 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/use_sched_load
-        echo 1 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/use_migration_notif
-        echo "39000 950000:19000" > /sys/devices/system/cpu/cpu4/cpufreq/interactive/above_hispeed_delay
-        echo 90 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/go_hispeed_load
-        echo 20000 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/timer_rate
-        echo 768000 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/hispeed_freq
-        echo 1 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/io_is_busy
-        echo "85 750000:90" > /sys/devices/system/cpu/cpu4/cpufreq/interactive/target_loads
-        echo 40000 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/min_sample_time
-        echo 0 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/max_freq_hysteresis
-        echo 384000 > /sys/devices/system/cpu/cpu4/cpufreq/scaling_min_freq
+        echo conservative > /sys/devices/system/cpu/cpu4/cpufreq/scaling_governor
+        # configure CPU0
+        echo blu_active > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+        echo 960000 > /sys/devices/system/cpu/cpu0/cpufreq/blu_active/hispeed_freq
         # restore A57's max
         cat /sys/devices/system/cpu/cpu4/cpufreq/cpuinfo_max_freq > /sys/devices/system/cpu/cpu4/cpufreq/scaling_max_freq
-
         # plugin remaining A57s
         echo 1 > /sys/devices/system/cpu/cpu5/online
         # Restore CPU 4 max freq from msm_performance
-        echo "4:4294967295 5:4294967295" > /sys/module/msm_performance/parameters/cpu_max_freq
-        # input boost configuration
-        echo 0:1248000 > /sys/module/cpu_boost/parameters/input_boost_freq
-        echo 40 > /sys/module/cpu_boost/parameters/input_boost_ms
-
+        echo "4:1632000 5:1632000" > /sys/module/msm_performance/parameters/cpu_max_freq
+	# input boost,cpu boost
+	echo 0:672000 1:0 2:0 3:0 4:480000 5:0 > /sys/module/cpu_boost/parameters/input_boost_freq
         # multi boost configuration
-        echo 0:1248000 > /sys/module/cpu_boost/parameters/multi_boost_freq
+        echo 0:672000 > /sys/module/cpu_boost/parameters/multi_boost_freq
 
         # Setting b.L scheduler parameters
         echo 1 > /proc/sys/kernel/sched_migration_fixup
@@ -832,40 +801,52 @@ case "$target" in
         echo 85 > /proc/sys/kernel/sched_downmigrate
         echo 400000 > /proc/sys/kernel/sched_freq_inc_notify
         echo 400000 > /proc/sys/kernel/sched_freq_dec_notify
+        echo 70 > /proc/sys/vm/dirty_background_ratio
+        echo 1000 > /proc/sys/vm/dirty_expire_centisecs
+        echo 100 > /proc/sys/vm/swappiness
         #enable rps static configuration
         echo 8 >  /sys/class/net/rmnet_ipa0/queues/rx-0/rps_cpus
         for devfreq_gov in /sys/class/devfreq/qcom,cpubw*/governor
         do
             echo "bw_hwmon" > $devfreq_gov
         done
-        # Disable sched_boost
-        echo 0 > /proc/sys/kernel/sched_boost
+		for devfreq_gov in /sys/class/devfreq/qcom,mincpubw*/governor
+        do
+            echo "cpufreq" > $devfreq_gov
+        done
 
-        # Disable retention and standalone power collapse
-        echo "N" > /sys/module/lpm_levels/system/a53/cpu0/retention/idle_enabled
-        echo "N" > /sys/module/lpm_levels/system/a53/cpu1/retention/idle_enabled
-        echo "N" > /sys/module/lpm_levels/system/a53/cpu2/retention/idle_enabled
-        echo "N" > /sys/module/lpm_levels/system/a53/cpu3/retention/idle_enabled
-        echo "N" > /sys/module/lpm_levels/system/a57/cpu4/retention/idle_enabled
-        echo "N" > /sys/module/lpm_levels/system/a57/cpu5/retention/idle_enabled
-        echo "N" > /sys/module/lpm_levels/system/a53/cpu0/retention/suspend_enabled
-        echo "N" > /sys/module/lpm_levels/system/a53/cpu1/retention/suspend_enabled
-        echo "N" > /sys/module/lpm_levels/system/a53/cpu2/retention/suspend_enabled
-        echo "N" > /sys/module/lpm_levels/system/a53/cpu3/retention/suspend_enabled
-        echo "N" > /sys/module/lpm_levels/system/a57/cpu4/retention/suspend_enabled
-        echo "N" > /sys/module/lpm_levels/system/a57/cpu5/retention/suspend_enabled
-        echo "N" > /sys/module/lpm_levels/system/a53/cpu0/standalone_pc/idle_enabled
-        echo "N" > /sys/module/lpm_levels/system/a53/cpu1/standalone_pc/idle_enabled
-        echo "N" > /sys/module/lpm_levels/system/a53/cpu2/standalone_pc/idle_enabled
-        echo "N" > /sys/module/lpm_levels/system/a53/cpu3/standalone_pc/idle_enabled
-        echo "N" > /sys/module/lpm_levels/system/a57/cpu4/standalone_pc/idle_enabled
-        echo "N" > /sys/module/lpm_levels/system/a57/cpu5/standalone_pc/idle_enabled
-        echo "N" > /sys/module/lpm_levels/system/a53/cpu0/standalone_pc/suspend_enabled
-        echo "N" > /sys/module/lpm_levels/system/a53/cpu1/standalone_pc/suspend_enabled
-        echo "N" > /sys/module/lpm_levels/system/a53/cpu2/standalone_pc/suspend_enabled
-        echo "N" > /sys/module/lpm_levels/system/a53/cpu3/standalone_pc/suspend_enabled
-        echo "N" > /sys/module/lpm_levels/system/a57/cpu4/standalone_pc/suspend_enabled
-        echo "N" > /sys/module/lpm_levels/system/a57/cpu5/standalone_pc/suspend_enabled
+        # Disable sched_boost
+        # echo 0 > /proc/sys/kernel/sched_boost
+
+		# Set Memory parameters
+        configure_memory_parameters
+        restorecon -R /sys/devices/system/cpu
+
+	    # Disable CPU retention
+	    echo 0 > /sys/module/lpm_levels/system/a53/cpu0/retention/idle_enabled
+	    echo 0 > /sys/module/lpm_levels/system/a53/cpu1/retention/idle_enabled
+	    echo 0 > /sys/module/lpm_levels/system/a53/cpu2/retention/idle_enabled
+	    echo 0 > /sys/module/lpm_levels/system/a53/cpu3/retention/idle_enabled
+	    echo 0 > /sys/module/lpm_levels/system/a57/cpu4/retention/idle_enabled
+	    echo 0 > /sys/module/lpm_levels/system/a57/cpu5/retention/idle_enabled
+
+	    # Disable L2 retention
+	    echo 0 > /sys/module/lpm_levels/system/a53/a53-l2-retention/idle_enabled
+	    echo 0 > /sys/module/lpm_levels/system/a57/a57-l2-retention/idle_enabled
+
+	    # Disable CPU Standalone Power Collapse
+	    echo "N" > /sys/module/lpm_levels/system/a53/cpu0/standalone_pc/idle_enabled
+	    echo "N" > /sys/module/lpm_levels/system/a53/cpu1/standalone_pc/idle_enabled
+	    echo "N" > /sys/module/lpm_levels/system/a53/cpu2/standalone_pc/idle_enabled
+	    echo "N" > /sys/module/lpm_levels/system/a53/cpu3/standalone_pc/idle_enabled
+	    echo "N" > /sys/module/lpm_levels/system/a57/cpu4/standalone_pc/idle_enabled
+	    echo "N" > /sys/module/lpm_levels/system/a57/cpu5/standalone_pc/idle_enabled
+	    echo "N" > /sys/module/lpm_levels/system/a53/cpu0/standalone_pc/suspend_enabled
+	    echo "N" > /sys/module/lpm_levels/system/a53/cpu1/standalone_pc/suspend_enabled
+	    echo "N" > /sys/module/lpm_levels/system/a53/cpu2/standalone_pc/suspend_enabled
+	    echo "N" > /sys/module/lpm_levels/system/a53/cpu3/standalone_pc/suspend_enabled
+	    echo "N" > /sys/module/lpm_levels/system/a57/cpu4/standalone_pc/suspend_enabled
+	    echo "N" > /sys/module/lpm_levels/system/a57/cpu5/standalone_pc/suspend_enabled
 
         # re-enable thermal and BCL hotplug
         echo 1 > /sys/module/msm_thermal/core_control/enabled
