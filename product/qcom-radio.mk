@@ -13,7 +13,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.radio.app_hw_mbn_path=/firmware/image/modem_pr/mcfg/configs/mcfg_hw/generic/common/MSM8994/LA \
     ro.data.large_tcp_window_size=true \
     ro.use_data_netmgrd=true \
-    ro.telephony.default_network=9 \
+    ro.telephony.default_network=12 \
     persist.radio.add_power_save=1 \
     persist.telephony.oosisdc=false
 
