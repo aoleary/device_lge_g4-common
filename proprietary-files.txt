@@ -211,7 +211,6 @@ vendor/lib64/libasn1cper.so
 vendor/lib64/librpmb.so
 vendor/lib64/libmmQSM.so
 vendor/lib64/libqmiservices.so
-vendor/lib64/mediadrm/libdrmclearkeyplugin.so
 vendor/lib64/libqmi.so
 vendor/lib64/libmm-color-convertor.so
 vendor/lib64/libqti-perfd-client.so
@@ -270,7 +269,7 @@ vendor/lib64/libaudcal.so
 vendor/firmware/libpn547_fw_C9.so
 vendor/firmware/libpn547_fw_22.so
 vendor/firmware/libpn547_fw.so
-vendor/firmware/BCM4339_003.001.009.0117.0620_LGE_P1_EU.hcd
+vendor/firmware/BCM4339_003.001.009.0117.0620_LGE_P1_EU.hcd:vendor/firmware/BCM4335_003.001.009.0117.0620_LGE_P1_EU.hcd
 vendor/qcril.db
 vendor/lib/libaptX-1.0.0-rel-Android21-ARMv7A.so
 vendor/lib/libaptXHD-1.0.0-rel-Android21-ARMv7A.so
@@ -619,7 +618,6 @@ vendor/lib/libmmcamera_isp_demosaic44.so
 vendor/lib/libmmcamera_imx234_eeprom.so
 vendor/lib/libqmiservices.so
 vendor/lib/mediadrm/libwvdrmengine.so
-vendor/lib/mediadrm/libdrmclearkeyplugin.so
 vendor/lib/libqmi.so
 vendor/lib/libchromatix_t4ka3_cpp_liveshot_open.so
 vendor/lib/libmmcamera2_c2d_module.so
