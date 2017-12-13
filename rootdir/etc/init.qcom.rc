@@ -723,7 +723,8 @@ service qmuxd /system/bin/qmuxd
 
 service netmgrd /system/bin/netmgrd
     class main
-    group radio
+    user root
+    group radio root wifi wakelock inet
 
 service qti /system/vendor/bin/qti
     class main
