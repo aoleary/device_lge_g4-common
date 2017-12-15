@@ -574,6 +574,27 @@ service ss_ramdump /system/bin/subsystem_ramdump
     group system
     disabled
 
+service cnd /system/bin/cnd
+    class late_start
+    socket cnd stream 660 root inet
+    group root wakelock
+
+service imsqmidaemon /system/bin/imsqmidaemon
+    class main
+    user system
+    socket ims_qmid stream 0660 system radio
+    group radio net_raw log diag
+
+service imsdatadaemon /system/bin/imsdatadaemon
+    class main
+    user system
+    socket ims_datad stream 0660 system radio
+    group system wifi radio inet net_raw log diag net_admin
+    disabled
+
+on property:sys.ims.QMI_DAEMON_STATUS=1
+    start imsdatadaemon
+
 on property:persist.sys.ssr.restart_level=*
     start ssr_setup
 
