@@ -69,7 +69,7 @@ on fs
 
 on init
     # Shim libs
-    export LD_SHIM_LIBS /system/vendor/lib/libwvm.so|libshims_wvm.so    
+    export LD_SHIM_LIBS /system/vendor/lib64/libwvm.so|libshims_wvm.so    
 
     mkdir /firmware 0771 system system
     mkdir /firmware/image 0771 system system

@@ -266,6 +266,7 @@ vendor/lib64/libnetmgr.so
 vendor/lib64/libmdsprpc.so
 vendor/lib64/libmmipstreamutils.so
 vendor/lib64/libaudcal.so
+vendor/lib64/libwvm.so
 vendor/firmware/libpn547_fw_C9.so
 vendor/firmware/libpn547_fw_22.so
 vendor/firmware/libpn547_fw.so
@@ -500,7 +501,6 @@ vendor/lib/libwfdmmutils.so
 vendor/lib/libAlAisTune.so
 vendor/lib/libmm-hdcpmgr.so
 vendor/lib/libmmcamera2_wnr_module.so
-vendor/lib/libwvm.so
 vendor/lib/libavenhancements.so
 vendor/lib/libmmcamera_isp_clamp_encoder40.so
 vendor/lib/libmmcamera2_vpe_module.so
