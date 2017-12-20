@@ -423,6 +423,10 @@ on post-fs-data
     # Create folder for camera sockets
     mkdir /data/misc/camera 0770 camera camera
 
+    # Create file for ipconfig
+    touch /data/misc/ethernet/ipconfig.txt
+    chmod 755 /data/misc/ethernet/ipconfig.txt
+
     mkdir /data/misc/ipa 0700 net_admin net_admin
 
     mkdir /data/misc/bluetooth 0770 bluetooth bluetooth
