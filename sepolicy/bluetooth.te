@@ -1,0 +1,1 @@
+allow bluetooth proc:file { write };

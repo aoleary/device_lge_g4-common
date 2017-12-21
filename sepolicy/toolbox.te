@@ -1,0 +1,16 @@
+allow toolbox file_contexts_file:file { getattr read open };
+allow toolbox init:fifo_file { write getattr };
+allow toolbox init:file { read };
+allow toolbox init:unix_stream_socket { connectto };
+allow toolbox kernel:file { read };
+allow toolbox proc:file { getattr };
+allow toolbox proc_interrupts:file { getattr };
+allow toolbox proc_iomem:file { getattr };
+allow toolbox proc_meminfo:file { getattr };
+allow toolbox proc_modules:file { getattr };
+allow toolbox proc_stat:file { getattr };
+allow toolbox proc_sysrq:file { getattr };
+allow toolbox proc_timer:file { getattr };
+allow toolbox proc_zoneinfo:file { getattr };
+allow toolbox property_socket:sock_file { write };
+allow toolbox toolbox:capability { sys_ptrace };
