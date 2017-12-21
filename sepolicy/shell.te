@@ -1,1 +1,2 @@
-allow shell device:chr_file { read write ioctl };
+# never allow rule
+#allow shell device:chr_file { read write ioctl };

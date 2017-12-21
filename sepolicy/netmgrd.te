@@ -1,2 +1,4 @@
+type netmgrd, domain;
+
 allow netmgrd socket_device:dir { write add_name };
 allow netmgrd socket_device:sock_file { create };

@@ -1,16 +1,26 @@
+type drm_block_device, dev_type;
+type proc_kernel_sched, fs_type;
+type qmux, domain;
+type qmuxd_socket, file_type;
+type ssd_block_device, dev_type;
+type thermal_device, dev_type;
+
 allow init debugfs:file { write };
-allow init device:chr_file { read write open ioctl };
+# never allow rule { chr_file ( read write open ioctl )}!!!
+#allow init device:chr_file { read write open ioctl };
 allow init drm_block_device:blk_file { write };
 allow init init:netlink_kobject_uevent_socket { read };
-allow init init:socket { read create ioctl write };
+# never allow rule
+#allow init init:socket { read create ioctl write };
 allow init kernel:system { module_request };
 allow init proc_kernel_sched:file { write };
 allow init qmux:unix_stream_socket { connectto };
 allow init qmuxd_socket:sock_file { write };
-allow init shell_exec:file { execute_no_trans };
+# never allow rules { execute no trans }!!!
+#allow init shell_exec:file { execute_no_trans };
 allow init ssd_block_device:blk_file { write };
-allow init system_file:file { execute_no_trans };
+#allow init system_file:file { execute_no_trans };
 allow init tee_device:chr_file { write read open ioctl };
 allow init thermal_device:chr_file { ioctl };
 allow init uio_device:chr_file { write };
-allow init vendor_file:file { execute_no_trans };
+#allow init vendor_file:file { execute_no_trans };

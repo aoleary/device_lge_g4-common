@@ -1,1 +1,2 @@
+type qseecomtee_prop, property_type;
 allow gatekeeperd qseecomtee_prop:file { read open getattr };

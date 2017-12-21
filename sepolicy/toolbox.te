@@ -13,4 +13,5 @@ allow toolbox proc_sysrq:file { getattr };
 allow toolbox proc_timer:file { getattr };
 allow toolbox proc_zoneinfo:file { getattr };
 allow toolbox property_socket:sock_file { write };
-allow toolbox toolbox:capability { sys_ptrace };
+# never allow rule
+#allow toolbox toolbox:capability { sys_ptrace };

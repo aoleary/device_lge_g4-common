@@ -1,1 +1,2 @@
-allow bluetooth proc:file { write };
+# never allow rule
+#allow bluetooth proc:file { write };

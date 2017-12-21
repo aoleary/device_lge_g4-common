@@ -1,1 +1,3 @@
+type debugfs_ipc, fs_type, debugfs_type;
+
 allow kernel debugfs_ipc:dir { search };
