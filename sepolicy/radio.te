@@ -1,0 +1,6 @@
+type persist_file, file_type;
+
+allow radio qmuxd_socket:dir { search };
+allow radio system_app_data_file:dir getattr;
+allow radio persist_file:dir rw_dir_perms;
+allow radio persist_file:file { getattr open };
