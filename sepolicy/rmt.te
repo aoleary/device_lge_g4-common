@@ -1,0 +1,1 @@
+allow rmt debugfs:file { open write };

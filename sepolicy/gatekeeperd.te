@@ -1,2 +1,4 @@
 type qseecomtee_prop, property_type;
-allow gatekeeperd qseecomtee_prop:file { read open getattr };
+
+allow gatekeeperd device:chr_file { ioctl open read write };
+allow gatekeeperd qseecomtee_prop:file { getattr open read };
