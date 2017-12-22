@@ -10,8 +10,7 @@ allow init debugfs:file { write };
 #allow init device:chr_file { read write open ioctl };
 allow init drm_block_device:blk_file { write };
 allow init init:netlink_kobject_uevent_socket { read };
-# never allow rule
-#allow init init:socket { read create ioctl write };
+allow init init:socket { read create write };
 allow init kernel:system { module_request };
 allow init proc_kernel_sched:file { write };
 allow init qmux:unix_stream_socket { connectto };
@@ -24,3 +23,9 @@ allow init tee_device:chr_file { write read open ioctl };
 allow init thermal_device:chr_file { ioctl };
 allow init uio_device:chr_file { write };
 #allow init vendor_file:file { execute_no_trans };
+allow init tmpfs:lnk_file { create };
+allow init init:socket { bind read };
+# never allow policy
+#allow init default_android_service:service_manager { add find };
+allow init alarm_device:chr_file { write };
+allow init init:capability2 { block_suspend };

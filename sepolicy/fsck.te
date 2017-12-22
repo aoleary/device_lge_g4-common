@@ -1,0 +1,2 @@
+# never allow policy
+#allow fsck block_device:blk_file { read open };
