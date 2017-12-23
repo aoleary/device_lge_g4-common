@@ -25,5 +25,8 @@ include $(COMMON_PATH)/board/*.mk
 # HIDL
 DEVICE_MANIFEST_FILE := $(COMMON_PATH)/configs/manifest.xml
 
+# Keymaster
+TARGET_KEYMASTER_WAIT_FOR_QSEE := true
+
 # inherit from the proprietary version
 -include vendor/lge/g4-common/BoardConfigVendor.mk
