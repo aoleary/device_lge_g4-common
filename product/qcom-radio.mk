@@ -2,16 +2,20 @@ PRODUCT_PROPERTY_OVERRIDES += \
     rild.libpath=/vendor/lib64/libril-qc-qmi-1.so \
     ril.subscription.types=NV,RUIM
 
-11PRODUCT_PROPERTY_OVERRIDES += \
+PRODUCT_PROPERTY_OVERRIDES += \
     persist.data.mode=concurrent \
     persist.data.netmgrd.qos.enable=true \
+    persist.data.qmi.adb_logmask=0 \
+    persist.qcril.disable_retry=true \
     persist.radio.apm_sim_not_pwdn=1 \
     persist.radio.custom_ecc=1 \
     persist.radio.sib16_support=1 \
     persist.radio.app_hw_mbn_path=/firmware/image/modem_pr/mcfg/configs/mcfg_hw/generic/common/MSM8994/LA \
     ro.data.large_tcp_window_size=true \
     ro.use_data_netmgrd=true \
-    ro.telephony.default_network=9
+    ro.telephony.default_network=9 \
+    persist.radio.add_power_save=1 \
+    persist.telephony.oosisdc=false
 
 # NITZ
 PRODUCT_PROPERTY_OVERRIDES += \

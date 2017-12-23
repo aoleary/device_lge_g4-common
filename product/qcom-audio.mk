@@ -19,7 +19,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.qc.sdk.audio.ssr=false \
     persist.audio.ssr.3mic=true
 
-
 # offload settings
 PRODUCT_PROPERTY_OVERRIDES += \
     av.offload.enable=false \
@@ -29,7 +28,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
     audio.offload.passthrough=false \
     audio.offload.pcm.24bit.enable=true \
     audio.offload.multiple.enabled=false \
-    audio.deep_buffer.media=true
+    audio.deep_buffer.media=true \
+    tunnel.audio.encode=false \
+    use.dedicated.device.for.voip=true
 
 # voip
 PRODUCT_PROPERTY_OVERRIDES += \

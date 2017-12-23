@@ -10,3 +10,9 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.sensor.proximity.xml:system/etc/permissions/android.hardware.sensor.proximity.xml \
     frameworks/native/data/etc/android.hardware.sensor.stepcounter.xml:system/etc/permissions/android.hardware.sensor.stepcounter.xml \
     frameworks/native/data/etc/android.hardware.sensor.stepdetector.xml:system/etc/permissions/android.hardware.sensor.stepdetector.xml
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.debug.sensors.hal=e \
+    debug.qualcomm.sns.daemon=e \
+    debug.qualcomm.sns.hal=e \
+    debug.qualcomm.sns.libsensor1=e
