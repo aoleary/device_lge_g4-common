@@ -9,3 +9,7 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_BOOT_JARS += \
     telephony-ext
+
+# Netutils
+PRODUCT_PACKAGES += \
+    android.system.net.netd@1.0

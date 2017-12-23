@@ -1,4 +1,8 @@
 PRODUCT_PACKAGES += \
+    android.hardware.graphics.mapper@2.0-impl \
+    android.hardware.graphics.allocator@2.0-impl \
+    android.hardware.graphics.composer@2.1-impl \
+    android.hardware.memtrack@1.0-impl \
     copybit.msm8992 \
     gralloc.msm8992 \
     hwcomposer.msm8992 \
@@ -29,4 +33,3 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # OpenGLES Android Extension
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.opengles.aep.xml:system/etc/permissions/android.hardware.opengles.aep.xml
-
