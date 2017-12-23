@@ -1,1 +1,1 @@
-allow fsck block_device:blk_file { open read };
+#allow fsck block_device:blk_file { open read };

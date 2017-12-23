@@ -1,1 +1,1 @@
-allow untrusted_app_25 device:chr_file { ioctl open read write };
+allow untrusted_app_25 device:chr_file { ioctl };

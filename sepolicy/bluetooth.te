@@ -1,3 +1,3 @@
-allow bluetooth device:chr_file { ioctl open read write };
-allow bluetooth proc:file { write };
+allow bluetooth device:chr_file { ioctl };
+#allow bluetooth proc:file { write };
 allow bluetooth sysfs:file { write };

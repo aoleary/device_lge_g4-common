@@ -1,1 +1,1 @@
-allow system_app device:chr_file { ioctl read write };
+allow system_app device:chr_file { ioctl };

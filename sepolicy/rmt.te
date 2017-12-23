@@ -1,1 +1,3 @@
-allow rmt debugfs:file { open write };
+type rmt, domain;
+
+#allow rmt debugfs:file { open write };
