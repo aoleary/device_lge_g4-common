@@ -5,9 +5,8 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     libcurl
 
-# For android_filesystem_config.h
-PRODUCT_PACKAGES += \
-   fs_config_files
+# Filesystem
+TARGET_FS_CONFIG_GEN := $(LOCAL_PATH)/config.fs
 
 # Charger
 PRODUCT_PACKAGES += \
