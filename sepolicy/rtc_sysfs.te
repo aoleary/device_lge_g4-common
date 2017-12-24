@@ -1,1 +1,0 @@
-allow rtc_sysfs sysfs:filesystem { associate };

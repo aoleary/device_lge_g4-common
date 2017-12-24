@@ -1,4 +1,0 @@
-type cir_device, dev_type;
-type rfkill_device, dev_type;
-type lge_diag_device, dev_type;
-type cust_block_device, dev_type;

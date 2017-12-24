@@ -1,2 +1,0 @@
-allow netmgrd lge_diag_device:chr_file { open read write ioctl };
-allow netmgrd self:capability { dac_override };

@@ -1,3 +1,0 @@
-allow audioserver cust_file:dir { search };
-
-allow audioserver rootfs:lnk_file { getattr };

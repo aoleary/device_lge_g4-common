@@ -1,3 +1,0 @@
-allow ueventd rtc_sysfs:dir { read open search };
-allow ueventd rtc_sysfs:file { rw_file_perms };
-allow ueventd rtc_sysfs:lnk_file { getattr };

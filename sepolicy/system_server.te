@@ -1,9 +1,0 @@
-allow system_server lge_diag_device:chr_file { open read write ioctl };
-allow system_server cir_device:chr_file { open read write ioctl };
-
-allow system_server shell_data_file:file { ioctl };
-
-allow system_server rtc_sysfs:dir { search };
-allow system_server rtc_sysfs:file { read open getattr };
-
-allow system_server mpctl_socket:dir { search };

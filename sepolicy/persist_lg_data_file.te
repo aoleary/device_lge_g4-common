@@ -1,1 +1,0 @@
-allow persist_lg_data_file labeledfs:filesystem { associate };

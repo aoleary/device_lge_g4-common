@@ -1,2 +1,0 @@
-type fs-cpuset, domain;
-allow fs-cpuset kernel:system module_request;
