@@ -194,11 +194,11 @@
     </hal>
     <hal format="hidl">
         <name>android.hardware.thermal</name>
-        <transport>passthrough</transport>
+        <transport>hwbinder</transport>
         <version>1.1</version>
         <interface>
             <name>IThermal</name>
-            <instance>default</instance>
+            <instance>msm8992</instance>
         </interface>
     </hal>
     <hal format="hidl">
