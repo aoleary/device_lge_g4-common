@@ -1,5 +1,7 @@
 type persist_file, file_type;
 
+qmux_socket(radio)
+
 allow system_server socket_device:dir { write };
 allow radio system_app_data_file:dir getattr;
 allow radio persist_file:dir rw_dir_perms;
