@@ -1,5 +1,9 @@
 # RIL
 PRODUCT_PACKAGES += \
+    android.hardware.radio@1.0-impl \
+    android.hardware.radio@1.0-service \
+    android.hardware.radio.deprecated@1.0-impl \
+    android.hardware.radio.deprecated@1.0-service \
     librmnetctl \
     libxml2 \
     libprotobuf-cpp-full \
