@@ -1,3 +1,4 @@
+type qmuxd, domain;
 type persist_file, file_type;
 
 qmux_socket(radio)
