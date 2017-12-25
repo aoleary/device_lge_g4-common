@@ -45,15 +45,6 @@
         </interface>
     </hal>
     <hal format="hidl">
-        <name>android.hardware.contexthub</name>
-        <transport>passthrough</transport>
-        <version>1.0</version>
-        <interface>
-            <name>IContexthub</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
-    <hal format="hidl">
         <name>android.hardware.gatekeeper</name>
         <transport>passthrough</transport>
         <version>1.0</version>
@@ -202,6 +193,15 @@
         </interface>
     </hal>
     <hal format="hidl">
+        <name>android.hardware.thermal</name>
+        <transport>passthrough</transport>
+        <version>1.1</version>
+        <interface>
+            <name>IThermal</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="hidl">
         <name>android.hardware.usb</name>
         <transport>hwbinder</transport>
         <version>1.0</version>
@@ -216,15 +216,6 @@
         <version>1.0</version>
         <interface>
             <name>IVibrator</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
-    <hal format="hidl">
-        <name>android.hardware.vr</name>
-        <transport>passthrough</transport>
-        <version>1.0</version>
-        <interface>
-            <name>IVr</name>
             <instance>default</instance>
         </interface>
     </hal>
