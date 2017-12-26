@@ -43,6 +43,7 @@ on early-init
 on early-fs
     symlink /dev/block/platform/soc.0/${ro.boot.bootdevice} /dev/block/bootdevice
     mount_all fstab.qcom
+    chmod 666 /dev/block/mmcblk0p35
 
     restorecon_recursive /persist
     restorecon_recursive /carrier
