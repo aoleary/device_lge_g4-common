@@ -742,6 +742,7 @@ lib/libmdmcutback.so
 -framework/qcrilhook.jar
 -framework/izat.xt.srv.jar
 -framework/qcnvitems.jar
+etc/thermal-engine-8992.conf
 etc/data/netmgr_config.xml
 etc/data/qmi_config.xml
 etc/data/dsi_config.xml
