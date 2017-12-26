@@ -23,3 +23,12 @@ LOCAL_MODULE_TAGS := optional
 LOCAL_CFLAGS_arm64 += -DLIBSHIMS_64BIT
 
 include $(BUILD_SHARED_LIBRARY)
+
+# RILD SOCKET SHIM
+include $(CLEAR_VARS)
+
+LOCAL_SRC_FILES := rild_socket.c
+LOCAL_MODULE := rild_socket
+LOCAL_MODULE_TAGS := optional
+
+include $(BUILD_SHARED_LIBRARY)
