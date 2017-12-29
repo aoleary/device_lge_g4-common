@@ -42,3 +42,8 @@ allow init thermal_device:chr_file { ioctl };
 allow init tmpfs:lnk_file { create };
 allow init uio_device:chr_file { write };
 #allow init vendor_file:file { execute_no_trans };
+allow init init:netlink_kobject_uevent_socket { create };
+allow init init:netlink_kobject_uevent_socket { setopt };
+allow init init:netlink_kobject_uevent_socket { bind };
+allow init video_device:chr_file { write };
+#allow init default_android_service:service_manager { add find };

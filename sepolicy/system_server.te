@@ -4,3 +4,5 @@ allow system_server device:chr_file { getattr ioctl };
 allow system_server socket_device:sock_file { write };
 allow system_server socket_device:dir { write };
 allow system_server socket_device:dir { add_name };
+allow system_server default_android_service:service_manager { find };
+#allow system_server default_android_service:service_manager { add };

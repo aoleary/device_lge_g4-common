@@ -1,0 +1,8 @@
+#allow priv_app device:chr_file { read write open };
+allow priv_app proc_modules:file { read };
+allow priv_app proc_modules:file { open };
+allow priv_app proc_modules:file { getattr };
+allow priv_app device:dir { read };
+allow priv_app device:dir { open };
+allow priv_app proc_interrupts:file { read };
+allow priv_app proc_interrupts:file { open };
