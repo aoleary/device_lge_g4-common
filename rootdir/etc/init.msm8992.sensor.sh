@@ -44,3 +44,12 @@ start_sensors()
 }
 
 start_sensors
+
+# Calibrate sensors on boot
+
+if [[ ! -f /sns/cal/cal_data.txt && -f /system/etc/sensors/sensor_def_variable.conf ]]; then
+    rm /sns/cal/sns.reg
+    touch /sns/cal/cal_data.txt
+fi
+
+exit 0
