@@ -22,6 +22,10 @@ TARGET_SPECIFIC_HEADER_PATH := $(COMMON_PATH)/include
 include $(COMMON_PATH)/PlatformConfig.mk
 include $(COMMON_PATH)/board/*.mk
 
+# Dexpreopt
+WITH_DEXPREOPT := true
+WITH_DEXPREOPT_BOOT_IMG_AND_SYSTEM_SERVER_ONLY := true
+
 # HIDL
 DEVICE_MANIFEST_FILE := $(COMMON_PATH)/configs/manifest.xml
 
