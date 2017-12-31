@@ -5,3 +5,4 @@ allow servicemanager init:process { getattr };
 allow servicemanager rild:dir { search };
 allow servicemanager rild:file { read };
 allow servicemanager rild:file { open };
+allow servicemanager rild:process { getattr };
