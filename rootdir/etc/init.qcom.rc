@@ -822,14 +822,6 @@ service battery_monitor /system/bin/battery_monitor
     group system
     disabled
 
-# Add rild socket permission for dual SIM sanghwan.jung@lge.com
-service ril-daemon2 /vendor/bin/hw/rild -c 2
-    class main
-    user radio
-    disabled
-    group radio cache inet misc audio log readproc wakelock
-    capabilities BLOCK_SUSPEND NET_ADMIN NET_RAW
-
 service usb_uicc_daemon /system/bin/usb_uicc_client
     class main
     user system
