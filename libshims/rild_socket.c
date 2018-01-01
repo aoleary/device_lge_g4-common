@@ -14,6 +14,6 @@
  * limitations under the License.
  */
 
-#define MAX_SOCKET_NAME_LENGTH 6
+#define MAX_SOCKET_NAME_LENGTH 20
 
 char rild[MAX_SOCKET_NAME_LENGTH] = "rild";
