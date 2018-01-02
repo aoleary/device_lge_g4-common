@@ -4,7 +4,6 @@ bin/rfs_access
 bin/mm-pp-daemon
 bin/rmt_storage
 bin/radish
-bin/mm-qcamera-daemon
 bin/tftp_server
 bin/xtwifi-inet-agent
 bin/imsqmidaemon
@@ -15,7 +14,6 @@ bin/hci_qcomm_init
 bin/btnvtool
 bin/bdaddr_loader
 bin/ATFWD-daemon
-bin/irsc_util
 bin/pm-proxy
 bin/imscmservice
 bin/lowi-server
@@ -48,6 +46,8 @@ lib64/libmdmcutback.so
 -app/TimeService/TimeService.apk
 -priv-app/qcrilmsgtunnel/qcrilmsgtunnel.apk
 -priv-app/com.qualcomm.location/com.qualcomm.location.apk
+vendor/bin/mm-qcamera-daemon
+vendor/bin/irsc_util
 vendor/bin/LKCore
 vendor/bin/perfd
 vendor/bin/audioflacapp
