@@ -6,6 +6,7 @@ PRODUCT_PACKAGES += \
     libqsap_sdk \
     libQWiFiSoftApCfg \
     libwpa_client \
+    readmac \
     wificond \
     wifilogd \
     hostapd \
