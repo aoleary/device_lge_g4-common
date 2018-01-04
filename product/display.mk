@@ -1,5 +1,6 @@
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.sf.lcd_density=560
+    ro.sf.lcd_density=560 \
+    qemu.hw.mainkeys=0
 
 # RenderScript
 PRODUCT_PACKAGES += \
