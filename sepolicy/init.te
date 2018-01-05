@@ -48,3 +48,5 @@ allow init init:netlink_kobject_uevent_socket { bind };
 allow init video_device:chr_file { write };
 #allow init default_android_service:service_manager { add find };
 allow init device:chr_file { getattr };
+allow init input_device:chr_file { ioctl };
+#allow init device:chr_file { read write };
