@@ -72,3 +72,5 @@ allow toolbox wificond:file { read };
 allow toolbox wifi_prop:file { getattr };
 allow toolbox system_data_file:dir { open };
 allow toolbox system_data_file:dir { remove_name };
+allow toolbox sysfs_thermal:dir { search };
+allow toolbox sysfs_thermal:file { read open };
