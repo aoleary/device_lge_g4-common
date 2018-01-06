@@ -1,28 +1,28 @@
-[system/bin/qmuxd]
+[system/vendor/bin/qmuxd]
 mode: 0700
 user: AID_RADIO
 group: AID_SHELL
 caps: BLOCK_SUSPEND
 
-[system/bin/mm-qcamera-daemon]
+[system/vendor/bin/mm-qcamera-daemon]
 mode: 0700
 user: AID_CAMERA
 group: AID_SHELL
 caps: SYS_NICE
 
-[system/bin/pm-service]
+[system/vendor/bin/pm-service]
 mode: 0755
 user: AID_SYSTEM
 group: AID_SYSTEM
 caps: NET_BIND_SERVICE
 
-[system/bin/imsdatadaemon]
+[system/vendor/bin/imsdatadaemon]
 mode: 0755
 user: AID_SYSTEM
 group: AID_SYSTEM
 caps: NET_BIND_SERVICE
 
-[system/bin/ims_rtp_daemon]
+[system/vendor/bin/ims_rtp_daemon]
 mode: 0755
 user: AID_SYSTEM
 group: AID_RADIO

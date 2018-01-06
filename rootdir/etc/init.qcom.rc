@@ -597,13 +597,13 @@ on post-fs-data
     chown system system /sys/devices/virtual/graphics/fb0/rgb
     chmod 0660 /sys/devices/virtual/graphics/fb0/rgb
 
-service imsqmidaemon /system/bin/imsqmidaemon
+service imsqmidaemon /system/vendor/bin/imsqmidaemon
     class main
     user system
     socket ims_qmid stream 0660 system radio
     group radio net_raw log diag
 
-service imsdatadaemon /system/bin/imsdatadaemon
+service imsdatadaemon /system/vendor/bin/imsdatadaemon
     class main
     user system
     socket ims_datad stream 0660 system radio
@@ -628,6 +628,21 @@ service cnd /system/bin/cnd
 start imsqmidaemon
 on property:sys.ims.QMI_DAEMON_STATUS=1
     start imsdatadaemon
+
+service ims_rtp_daemon /system/vendor/bin/ims_rtp_daemon
+   class main
+   user system
+   socket ims_rtpd stream 0660 system radio
+   group radio diag inet log
+   disabled
+
+on property:sys.ims.DATA_DAEMON_STATUS=1
+    start ims_rtp_daemon
+
+service imscmservice /system/vendor/bin/imscmservice
+   class main
+   user system
+   group radio diag log
 
 on property:persist.sys.ssr.restart_level=*
     start ssr_setup
@@ -664,6 +679,30 @@ on property:bluetooth.startbtsnoop=true
 on property:bluetooth.startbtsnoop=false
     stop btsnoop
 
+service ppd /system/vendor/bin/mm-pp-daemon
+    class late_start
+    disabled
+    user system
+    socket pps stream 0660 system system
+    group system graphics
+
+on property:init.svc.surfaceflinger=stopped
+    stop ppd
+
+on property:init.svc.surfaceflinger=running
+    start ppd
+
+on property:vold.decrypt=trigger_restart_framework
+    start config_bluetooth
+
+on property:persist.env.fastdorm.enabled=true
+    setprop persist.radio.data_no_toggle 1
+
+service irsc_util /system/vendor/bin/irsc_util "/etc/sec_config"
+    class main
+    user root
+    oneshot
+
 service qcom-c_core-sh /system/bin/sh /init.qcom.class_core.sh
     class core
     user root
@@ -692,12 +731,12 @@ service irsc_util /system/vendor/bin/irsc_util "/vendor/etc/sec_config"
     user root
     oneshot
 
-service rmt_storage /system/bin/rmt_storage
+service rmt_storage /system/vendor/bin/rmt_storage
     class core
     user root
     disabled
 
-service rfs_access /system/bin/rfs_access
+service rfs_access /system/vendor/bin/rfs_access
    class core
    user root
    group system net_raw
@@ -708,7 +747,7 @@ on property:wc_transport.start_hci=true
 on property:wc_transport.start_hci=false
     stop start_hci_filter
 
-service start_hci_filter /system/bin/wcnss_filter
+service start_hci_filter /system/vendor/bin/wcnss_filter
     class late_start
     user bluetooth
     group bluetooth diag bluetooth
@@ -749,22 +788,34 @@ service port-bridge /system/bin/port-bridge /dev/mhi_pipe_32 /dev/ttyGS0
     disabled
 
 # QMUX must be in multiple groups to support external process connections
-service qmuxd /system/bin/qmuxd
+service qmuxd /system/vendor/bin/qmuxd
     class main
     user root
     group radio audio bluetooth gps nfc diag
     disabled
 
-service netmgrd /system/bin/netmgrd
+service netmgrd /system/vendor/bin/netmgrd
     class main
     user root
     group radio root wifi wakelock inet
+
+service ipacm-diag /system/vendor/bin/ipacm-diag
+    class main
+    user system
+    socket ipacm_log_file dgram 660 system net_admin
+    group net_admin oem_2950
+
+service ipacm /system/bin/ipacm
+    class main
+    user net_admin
+    group net_admin inet
+    writepid /dev/cpuset/system-background/tasks
 
 service qti /system/vendor/bin/qti
     class main
     disabled
 
-service sensors /system/bin/sensors.qcom
+service sensors /system/vendor/bin/sensors.qcom
     class late_start
     user root
     group root
@@ -916,10 +967,12 @@ service vm_bms /system/bin/vm_bms
     user root
     group root
 
-service msm_irqbalance /system/bin/msm_irqbalance -f /vendor/etc/msm_irqbalance.conf
+service msm_irqbalance /system/vendor/bin/msm_irqbalance -f /system/vendor/etc/msm_irqbalance.conf
+    socket msm_irqbalance seqpacket 660 root system
     class core
     user root
     group root
+    disabled
     writepid /dev/cpuset/system-background/tasks
 
 # init.qcom.usb.sh configure RNDIS to go through HW IPA
@@ -944,7 +997,7 @@ service qcamerasvr /system/vendor/bin/mm-qcamera-daemon
     group camera system inet input graphics
     writepid /dev/cpuset/system-background/tasks
 
-service qseecomd /system/bin/qseecomd
+service qseecomd /system/vendor/bin/qseecomd
     class core
     user root
     group root
@@ -963,12 +1016,12 @@ service thermal-engine /system/vendor/bin/thermal-engine
    socket thermal-recv-passive-client stream 0666 system system
    group root
 
-service per_mgr /system/bin/pm-service
+service per_mgr /system/vendor/bin/pm-service
     class core
     user system
     group system net_raw
 
-service per_proxy /system/bin/pm-proxy
+service per_proxy /system/vendor/bin/pm-proxy
     class core
     user system
     group system net_raw
@@ -1000,12 +1053,12 @@ on property:sys.boot_completed=1
     setprop sys.io.scheduler "bfq"
     write /dev/kmsg "Boot completed"
 
-service time_daemon /system/bin/time_daemon
+service time_daemon /system/vendor/bin/time_daemon
     class late_start
     user root
     group root
 
-service adsprpcd /system/bin/adsprpcd
+service adsprpcd /system/vendor/bin/adsprpcd
    class main
    user media
    group media
@@ -1057,7 +1110,7 @@ service usf-post-boot /system/bin/sh /system/etc/usf_post_boot.sh
     disabled
     oneshot
 
-service energy-awareness /system/bin/energy-awareness
+service energy-awareness /system/vendor/bin/energy-awareness
     class main
     user root
     group system
