@@ -57,12 +57,9 @@ on early-fs
     export MC_AUTH_TOKEN_PATH /data/app/mcRegistry
 
 #SSD_DISP start
-    chown system graphics /sys/class/leds/lcd-backlight/cabc_level_ctl
-    chown system system /sys/class/leds/lcd-backlight-nits/brightness
+    chown system system /sys/devices/soc.0/qpnp-wled-23/leds/wled/brightness
+    chown system system /sys/devices/soc.0/fd900000.qcom,mdss_mdp/qcom,mdss_fb_primary.188/leds/lcd-backlight/brightness
 #SSD_DISP end
-
-# maintain the list of processes name for kernel monitoring usage
-    chown system /sys/process/task_comm_list
 
 on fs
     wait /dev/block/platform/soc.0/${ro.boot.bootdevice}
@@ -107,8 +104,6 @@ on boot
     start rmt_storage
     start rfs_access
 
-    write /sys/bus/i2c/devices/2-0020/input/input0/update_fw 1
-
     # bring cores online
     write /sys/module/msm_thermal/core_control/enabled 0
     write /sys/devices/system/cpu/cpu0/online 1
@@ -134,14 +129,13 @@ on boot
     chmod 0660 /proc/bluetooth/sleep/preproto
     chmod 0660 /proc/bluetooth/sleep/lpm
     chmod 0660 /proc/bluetooth/sleep/btwrite
-    chown bluetooth bluetooth /dev/ttyHS99
+    chown bluetooth bluetooth /dev/ttyHSL0
+    chown bluetooth bluetooth /dev/ttyHSL1
     chown bluetooth bluetooth /dev/ttyHS0
-    chmod 0660 /sys/module/hci_uart/parameters/ath_lpm
-    chmod 0660 /sys/module/hci_uart/parameters/ath_btwrite
     chmod 0660 /dev/ttyHS99
     chmod 0660 /dev/ttyHS0
-    chown bluetooth bluetooth /sys/devices/platform/msm_serial_hs.0/clock
-    chmod 0660 /sys/devices/platform/msm_serial_hs.0/clock
+    chown bluetooth bluetooth /sys/devices/soc.0/f995e000.uart/clock
+    chmod 0660 /sys/devices/soc.0/f995e000.uart/clock
 
     # Feature chip vendor : brcm
     setprop bluetooth.chip.vendor brcm
@@ -176,8 +170,6 @@ on boot
     # Remove SUID bit for iproute2 ip tool
     chmod 0755 /system/bin/ip
 
-    chmod 0444 /sys/devices/platform/msm_hsusb/gadget/usb_state
-
 #   Define TCP buffer sizes for various networks
 #   ReadMin, ReadInitial, ReadMax, WriteMin, WriteInitial, WriteMax,
     setprop net.tcp.buffersize.default 4096,87380,524288,4096,16384,110208
@@ -206,7 +198,7 @@ on boot
 
     # Wifi firmware reload path
     chown wifi wifi /sys/module/bcmdhd/parameters/firmware_path
-    chown wifi wifi /sys/module/wlan/parameters/fwpath
+    chown wifi wifi /sys/devices/soc.0/f9824900.sdhci/mmc_host/mmc0/mmc0:0001/fwrev
 
     # create symlink for fb1 as HDMI
     symlink /dev/graphics/fb1 /dev/graphics/hdmi
@@ -264,16 +256,18 @@ on boot
     chown system system /sys/module/ccid_bridge/parameters/bulk_msg_timeout
 
     # Flashlight
-    chown system system /sys/class/leds/flashlight/brightness
-    chown system system /sys/class/leds/flashlight_front/brightness
+    chown system system /sys/devices/soc.0/qpnp-flash-led-26/leds/led:flash_0/brightness
+    chown system system /sys/devices/soc.0/qpnp-flash-led-26/leds/led:flash_1/brightness
     chown system system /sys/class/leds/flashlight_front/dual_brightness
-    chown system system /sys/class/leds/torch_0_front/brightness
-    chown system system /sys/class/leds/torch_1_front/brightness
+    chown system system /sys/devices/soc.0/qpnp-flash-led-26/leds/led:torch_0/brightness
+    chown system system /sys/devices/soc.0/qpnp-flash-led-26/leds/led:torch_1/brightness
+    chown system system /sys/devices/soc.0/leds-qpnp-25/leds/red/brightness
+    chown system system /sys/devices/soc.0/leds-qpnp-25/leds/blue/brightness
+    chown system system /sys/devices/soc.0/leds-qpnp-25/leds/green/brightness
+    chown system system /sys/devices/soc.0/qpnp-wled-23/leds/wled/brightness
+    chown system system /sys/devices/soc.0/qcom,camera-flash.85/leds/torch-light0/brightness
+    chown system system /sys/devices/soc.0/qcom,camera-flash.85/leds/torch-light1/brightness
 
-    chown system system /dev/iio:device0
-
-    # volume key wake up attribute file permission
-    chown media media /sys/keyboard/vol_wakeup
 
     # Define TCP buffer sizes for various networks
     #   ReadMin, ReadInitial, ReadMax, WriteMin, WriteInitial, WriteMax,
@@ -408,9 +402,6 @@ on boot
     write /sys/devices/virtual/thermal/thermal_zone14/ctrl_crit_temp 0
 
 on post-fs
-    # for OOBE and PackageManager to access fotaBoot
-    chmod 0666 /cache/recovery/last_fotaBoot
-
     #change permissions on vmallocinfo so we can grab it from bugreports
     chown root log /proc/vmallocinfo
     chmod 0440 /proc/vmallocinfo
@@ -448,6 +439,8 @@ on post-fs-data
 
     # Create folder for mm-qcamera-daemon
     mkdir /data/camera 0770 media camera
+    mkdir /dev/cpuset/camera-daemon
+    touch /dev/cpuset/camera-daemon/tasks
 
     # Create folder for camera sockets
     mkdir /data/misc/camera 0770 camera camera
@@ -501,10 +494,7 @@ on post-fs-data
     chmod 0664 /sys/devices/platform/msm_sdcc.4/polling
 
     # Chown polling nodes as needed from UI running on system server
-    chown system system /sys/devices/platform/msm_sdcc.1/polling
-    chown system system /sys/devices/platform/msm_sdcc.2/polling
-    chown system system /sys/devices/platform/msm_sdcc.3/polling
-    chown system system /sys/devices/platform/msm_sdcc.4/polling
+    chown system system /sys/devices/soc.0/f9824900.sdhci/polling
 
     # Create the symlink to qcn wpa_supplicant folder for ar6000 wpa_supplicant
     mkdir /data/system 0775 system system
@@ -522,18 +512,11 @@ on post-fs-data
     mkdir /data/shared 0755
     chown system system /data/shared
 
-    # Create directory for FOTA
-    mkdir /data/fota 0771
-    chown system system /data/fota
-
     # Make sure the default firmware is loaded
     write /sys/module/bcmdhd/parameters/firmware_path "/system/etc/firmware/fw_bcmdhd.bin"
 
     # Create directory for hostapd
     mkdir /data/hostapd 0770 system wifi
-
-    # Provide the access to hostapd.conf only to root and group
-    chmod 0660 /data/hostapd/hostapd.conf
 
     # Create /data/time folder for time-services
     mkdir /data/time/ 0700 system system
@@ -572,7 +555,6 @@ on post-fs-data
     mkdir /persist/data/tz 0700 system system
     mkdir /persist/tee 0700 system system
     mkdir /data/app/mcRegistry 0775 system system
-    symlink /persist/tee/00000000.authtokcont.backup /data/app/mcRegistry/00000000.authtokcont.backup
     chown root cw_access /cota
     chmod 0771 /cota
     chown system system /preload
@@ -593,23 +575,6 @@ on post-fs-data
     mkdir /sns/cal/ 0644 system system
     restorecon_recursive /sns
 
-    # PCC Calibration
-    chown system system /sys/devices/virtual/graphics/fb0/rgb
-    chmod 0660 /sys/devices/virtual/graphics/fb0/rgb
-
-service imsqmidaemon /system/vendor/bin/imsqmidaemon
-    class main
-    user system
-    socket ims_qmid stream 0660 system radio
-    group radio net_raw log diag
-
-service imsdatadaemon /system/vendor/bin/imsdatadaemon
-    class main
-    user system
-    socket ims_datad stream 0660 system radio
-    group system wifi radio inet net_raw log diag net_admin
-    disabled
-
 service ssr_setup /system/bin/ssr_setup
     oneshot
     disabled
@@ -624,6 +589,19 @@ service cnd /system/bin/cnd
     class late_start
     socket cnd stream 660 root inet
     group root wakelock
+
+service imsqmidaemon /system/vendor/bin/imsqmidaemon
+    class main
+    user system
+    socket ims_qmid stream 0660 system radio
+    group radio net_raw log diag
+
+service imsdatadaemon /system/vendor/bin/imsdatadaemon
+    class main
+    user system
+    socket ims_datad stream 0660 system radio
+    group system wifi radio inet net_raw log diag net_admin
+    disabled
 
 start imsqmidaemon
 on property:sys.ims.QMI_DAEMON_STATUS=1
@@ -747,12 +725,6 @@ on property:wc_transport.start_hci=true
 on property:wc_transport.start_hci=false
     stop start_hci_filter
 
-service start_hci_filter /system/vendor/bin/wcnss_filter
-    class late_start
-    user bluetooth
-    group bluetooth diag bluetooth
-    disabled
-
 service bt-dun /system/bin/dun-server /dev/smd7 /dev/rfcomm0
     class late_start
     user bluetooth
@@ -804,12 +776,6 @@ service ipacm-diag /system/vendor/bin/ipacm-diag
     user system
     socket ipacm_log_file dgram 660 system net_admin
     group net_admin oem_2950
-
-service ipacm /system/bin/ipacm
-    class main
-    user net_admin
-    group net_admin inet
-    writepid /dev/cpuset/system-background/tasks
 
 service qti /system/vendor/bin/qti
     class main
@@ -896,17 +862,6 @@ on property:ro.data.large_tcp_window_size=true
     # Adjust socket buffer to enlarge TCP receive window for high bandwidth (e.g. DO-RevB)
     write /proc/sys/net/ipv4/tcp_adv_win_scale  2
 
-service battery_monitor /system/bin/battery_monitor
-    user system
-    group system
-    disabled
-
-service usb_uicc_daemon /system/bin/usb_uicc_client
-    class main
-    user system
-    group system log net_raw
-    oneshot
-
 service profiler_daemon /system/bin/profiler_daemon
     class late_start
     user root
@@ -932,25 +887,6 @@ service hvdcp /system/bin/hvdcp
 
 on property:persist.usb.hvdcp.detect=true
     start hvdcp
-
-service charger_monitor /system/bin/charger_monitor
-    user root
-    group root
-    disabled
-
-service diag_mdlog_start /system/bin/diag_mdlog
-    class late_start
-    user sdcard_rw
-    group system diag sdcard_rw sdcard_r media_rw
-    disabled
-    oneshot
-
-service diag_mdlog_stop /system/bin/diag_mdlog -k
-    class late_start
-    user sdcard_rw
-    group system diag sdcard_rw sdcard_r media_rw
-    disabled
-    oneshot
 
 service qlogd /system/xbin/qlogd
     socket qlogd stream 0662 system system
@@ -1046,7 +982,8 @@ on property:init.svc.bootanim=running
 
 on property:init.svc.bootanim=stopped
     start usf-post-boot
-    restart cameraserver
+    stop cameraserver
+    start cameraserver
 
 on property:sys.boot_completed=1
     start qcom-post-boot
