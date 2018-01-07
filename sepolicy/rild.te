@@ -8,3 +8,4 @@ allow rild socket_device:sock_file { write };
 allow rild default_android_service:service_manager { find };
 allow rild socket_device:dir { remove_name add_name };
 allow rild socket_device:sock_file { unlink };
+allow rild socket_device:sock_file { setattr };
