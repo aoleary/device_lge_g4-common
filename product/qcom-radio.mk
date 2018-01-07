@@ -5,6 +5,7 @@ PRODUCT_PACKAGES += \
     android.hardware.radio.deprecated@1.0-impl \
     android.hardware.radio.deprecated@1.0-service \
     libsecril-client-sap \
+    libcnefeatureconfig \
     librmnetctl \
     libxml2 \
     libprotobuf-cpp-full \
