@@ -441,6 +441,13 @@ on post-fs-data
     mkdir /data/camera 0770 media camera
     mkdir /dev/cpuset/camera-daemon
     touch /dev/cpuset/camera-daemon/tasks
+    touch /dev/cpuset/tasks
+    touch /dev/stune/tasks
+    mount -oremount,rw /
+    mkdir /odm
+    mkdir /odm/lib
+    mkdir /odm/lib/hw
+    mount -oremount,ro /
 
     # Create folder for camera sockets
     mkdir /data/misc/camera 0770 camera camera
