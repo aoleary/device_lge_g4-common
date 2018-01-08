@@ -360,7 +360,7 @@ vendor/lib/libwfdnative.so
 vendor/lib/libchromatix_t4ka3_cpp_vt.so
 vendor/lib/libmmcamera_tintless_bg_pca_algo.so
 vendor/lib/libchromatix_imx234_cpp_snapshot_hdr.so
-vendor/lib/hw/power.qcom.so
+vendor/lib/hw/camera.msm8992.so
 vendor/lib/hw/keystore.msm8992.so
 vendor/lib/hw/gatekeeper.msm8992.so
 vendor/lib/hw/flp.default.so
@@ -715,7 +715,6 @@ vendor/lib/libaudcal.so
 lib/libqomx_core.so
 lib/libmmcamera_interface.so
 lib/liblgmda.so
-lib/hw/camera.msm8992.so
 lib/hw/wbc_hal.default.so
 lib/hw/sensors.msm8992.so
 lib/hw/lgkm.default.so
