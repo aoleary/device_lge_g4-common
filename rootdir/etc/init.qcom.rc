@@ -30,6 +30,9 @@ import init.qcom.power.rc
 import init.device.rc
 
 on early-init
+    # Symlink diag to diag_lge to unbreak LG proprietary tools
+    symlink /dev/diag /dev/diag_lge
+
     mount debugfs debugfs /sys/kernel/debug
     symlink /data/tombstones /tombstones
 
@@ -149,7 +152,15 @@ on boot
 
     #Create QMUX deamon socket area
     mkdir /dev/socket/qmux_radio 0770 radio radio
+    mkdir /data/misc/radio/modem_config/mcfg_sw 0770 radio radio
+    mkdir /system/etc/motorola 0770 radio radio
+    mkdir /system/etc/motorola/mdmctbk 0770 radio radio
+    touch /system/etc/motorola/mdmctbk/ctbk_val.cfg 0770 radio radio
     chmod 2770 /dev/socket/qmux_radio
+    chmod 2770 /data/misc/radio/modem_config/mcfg_sw
+    chmod 2770 /system/etc/motorola
+    chmod 2770 /system/etc/motorola/mdmctbk
+    chmod 2770 /system/etc/motorola/mdmctbk/ctbk_val.cfg
     mkdir /dev/socket/qmux_audio 0770 media audio
     chmod 2770 /dev/socket/qmux_audio
     mkdir /dev/socket/qmux_bluetooth 0770 bluetooth bluetooth
@@ -863,8 +874,10 @@ service ril-daemon /vendor/bin/hw/rild
     class main
     socket rild stream 660 root radio
     socket rild-debug stream 660 radio system
+    socket qmux_radio/rild_oem0 stream 660 radio system
+    socket qmux_radio/qmux_client_socket stream 660 radio system
     user root
-    group radio cache inet misc audio log oem_2950 net_raw wifi diag qcom_diag
+    group radio cache inet misc audio log oem_2950 net_raw wifi diag qcom_diag diag_lge
 
 service ril-daemon1 /vendor/bin/hw/rild -c 2
     class main
