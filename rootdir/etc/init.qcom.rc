@@ -454,14 +454,12 @@ on post-fs-data
     touch /dev/cpuset/camera-daemon/tasks
     touch /dev/cpuset/tasks
     touch /dev/stune/tasks
-    mount -oremount,rw /
-    mkdir /odm
-    mkdir /odm/lib
-    mkdir /odm/lib/hw
-    mount -oremount,ro /
 
     # Create folder for camera sockets
     mkdir /data/misc/camera 0770 camera camera
+    symlink /dev/media1 /dev/media3
+    symlink /dev/media2 /dev/media4
+    touch /dev/pmsg0 0666 camera camera
 
     # Create file for ipconfig
     touch /data/misc/ethernet/ipconfig.txt
