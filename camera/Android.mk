@@ -33,25 +33,3 @@ LOCAL_MODULE_TAGS := optional
 
 LOCAL_32_BIT_ONLY := true
 include $(BUILD_SHARED_LIBRARY)
-
-include $(CLEAR_VARS)
-
-LOCAL_MODULE := sensors.hal.tof
-
-LOCAL_C_INCLUDES := kernel/include/linux/input
-
-LOCAL_MODULE_RELATIVE_PATH := hw
-
-LOCAL_MODULE_TAGS := optional
-
-LOCAL_CFLAGS := -DLOG_TAG=\"Sensors\"
-LOCAL_SRC_FILES := \
-    sensors.cpp \
-    SensorBase.cpp \
-    ProximitySensor.cpp \
-    InputEventReader.cpp
-
-LOCAL_SHARED_LIBRARIES := liblog libcutils
-LOCAL_PRELINK_MODULE := false
-
-include $(BUILD_SHARED_LIBRARY)
