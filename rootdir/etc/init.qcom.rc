@@ -43,6 +43,13 @@ on early-init
     # Setup zram options
     write /sys/block/zram0/max_comp_streams 4
 
+    # Ril sockets
+    mkdir /dev/socket/netmgr 0750 radio radio
+    mkdir /dev/socket/rild 660 root radio
+    mkdir /dev/socket/rild-debug 660 radio system
+    mkdir /dev/socket/qmux_radio/rild_oem0 660 radio system
+    mkdir /dev/socket/qmux_radio/qmux_client_socket 660 radio system
+
 on early-fs
     symlink /dev/block/platform/soc.0/${ro.boot.bootdevice} /dev/block/bootdevice
     mount_all fstab.qcom
@@ -432,9 +439,6 @@ on post-fs
 # msm specific files that need to be created on /data
 on post-fs-data
     start hrdump
-
-    # Create NETMGR daemon socket area
-    mkdir /dev/socket/netmgr 0750 radio radio
 
     # Mark the copy complete flag to not completed
     write /data/misc/radio/copy_complete 0
@@ -870,10 +874,6 @@ service qcom-post-boot /system/bin/sh /system/etc/init.qcom.post_boot.sh
 #Group permissions for rild
 service ril-daemon /vendor/bin/hw/rild
     class main
-    socket rild stream 660 root radio
-    socket rild-debug stream 660 radio system
-    socket qmux_radio/rild_oem0 stream 660 radio system
-    socket qmux_radio/qmux_client_socket stream 660 radio system
     user root
     group radio cache inet misc audio log oem_2950 net_raw wifi diag qcom_diag diag_lge
 
