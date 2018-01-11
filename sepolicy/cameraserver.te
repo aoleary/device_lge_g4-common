@@ -1,5 +1,5 @@
 allow cameraserver device:chr_file { ioctl };
-allow cameraserver init:unix_stream_socket { connectto };
+allow cameraserver init:unix_stream_socket { connectto sendto };
 allow cameraserver property_socket:sock_file { write };
 #allow cameraserver device:chr_file { read write };
 #allow cameraserver device:chr_file { open };
