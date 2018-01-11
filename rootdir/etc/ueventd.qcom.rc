@@ -24,6 +24,18 @@
 # OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
+# Devices
+/dev/null                 0666   root       root
+/dev/zero                 0666   root       root
+/dev/full                 0666   root       root
+/dev/ptmx                 0666   root       root
+/dev/tty                  0666   root       root
+/dev/random               0666   root       root
+/dev/urandom              0666   root       root
+/dev/ashmem               0666   root       root
+/dev/binder               0666   root       root
+/dev/smem_log             0606   root       root
+/dev/pmsg0                0666   camera     camera
 
 # the DIAG device node is not world writable/readable.
 /dev/diag                 0660   system     qcom_diag
@@ -83,6 +95,7 @@
 /dev/sdioctl6             0640   radio      radio
 /dev/sdioctl7             0640   radio      radio
 /dev/sdioctl8             0640   radio      radio
+/dev/system_health_monitor 0640  radio      radio
 /dev/rmnet_mux_ctrl       0640   radio      radio
 /dev/hsicctl0             0640   radio      radio
 /dev/hsicctl1             0640   radio      radio
