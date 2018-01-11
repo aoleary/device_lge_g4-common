@@ -9,12 +9,10 @@ bin/ATFWD-daemon
 bin/lowi-server
 bin/xtwifi-client
 bin/loc_launcher
-lib/libn2pm.so
 lib64/hw/wbc_hal.default.so
 lib64/hw/sensors.msm8992.so
 lib64/hw/lgkm.default.so
 lib64/hw/lgkm.msm8992.so
-lib64/libn2pm.so
 -lib64/libloc_api_v02.so
 lib64/libqmimotext.so
 lib64/liblgkm.so
