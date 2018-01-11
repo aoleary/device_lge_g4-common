@@ -21,6 +21,10 @@
 /system/bin/thermanager             u:object_r:thermanager_exec:s0
 /system/bin/timekeep                u:object_r:timekeep_exec:s0
 
+/dev/smem_log                       u:object_r:shared_log_device:s0
+/dev/socket/netmgr(/.*)?            u:object_r:netmgrd_socket:s0
+/dev/socket/msm_irqbalance          u:object_r:irqbalance_socket:s0
+
 /data/misc/bdaddr                   u:object_r:bluetooth_data_file:s0
 
 /data/thermal(/.*)?                 u:object_r:thermal_data_file:s0
