@@ -37,8 +37,8 @@ on early-init
     symlink /data/tombstones /tombstones
 
     # Mount pstore file system on /mnt/pstore
-    mkdir /dev/pstore 660 system system
-    mount pstore /dev/pstore /dev/pstore
+    mkdir /mnt/pstore 660 system system
+    mount pstore /mnt/pstore /mnt/pstore
 
     # Setup zram options
     write /sys/block/zram0/max_comp_streams 4
