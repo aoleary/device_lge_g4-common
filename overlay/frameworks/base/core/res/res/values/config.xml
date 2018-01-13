@@ -287,6 +287,9 @@
     <!-- Boolean indicating if current platform supports BLE peripheral mode -->
     <bool name="config_bluetooth_le_peripheral_mode_supported">true</bool>
 
+    <!-- Set to true to enable battery led multiple color support -->
+    <bool name="config_multiColorBatteryLed">true</bool>
+
     <!-- Set to true to enable support for multicolor notification led -->
     <bool name="config_multiColorNotificationLed">true</bool>
 
