@@ -163,12 +163,10 @@ on boot
     mkdir /data/misc/radio/modem_config/mcfg_sw 0770 radio radio
     mkdir /system/etc/motorola 0770 radio radio
     mkdir /system/etc/motorola/mdmctbk 0770 radio radio
-    touch /system/etc/motorola/mdmctbk/ctbk_val.cfg 0770 radio radio
     chmod 2770 /dev/socket/qmux_radio
     chmod 2770 /data/misc/radio/modem_config/mcfg_sw
     chmod 2770 /system/etc/motorola
     chmod 2770 /system/etc/motorola/mdmctbk
-    chmod 2770 /system/etc/motorola/mdmctbk/ctbk_val.cfg
     mkdir /dev/socket/qmux_audio 0770 media audio
     chmod 2770 /dev/socket/qmux_audio
     mkdir /dev/socket/qmux_bluetooth 0770 bluetooth bluetooth
@@ -549,6 +547,11 @@ on post-fs-data
 
     # Create a folder for SRS to be able to create a usercfg file
     mkdir /data/data/media 0770 media media
+
+    # Create rild related dirs
+    touch /data/misc/radio/ril_log 0755 radio radio
+    mkdir /system/etc/motorola/mdmctbk 0755 radio radio
+    touch /system/etc/motorola/qcril.db-wal 0755 radio radio
 
     # Create PERFD deamon related dirs
     mkdir /data/misc/perfd 0755 root system
@@ -1144,3 +1147,6 @@ service lge-sensor-sh /system/bin/sh /init.msm8992.sensor.sh
 
 on property:gsm.version.baseband=""
     start baseband-sh
+
+on property:wlan.write.con_mode=*
+    write /sys/module/wlan/parameters/con_mode ${wlan.write.con_mode}
