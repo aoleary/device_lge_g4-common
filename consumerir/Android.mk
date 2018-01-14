@@ -1,4 +1,5 @@
 # Copyright (C) 2013 The Android Open Source Project
+# Copyright (C) 2018 The LineageOS Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,19 +13,31 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-ifneq ($(TARGET_PROVIDES_CONSUMERIR),true)
-
 LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
 
-LOCAL_MODULE := consumerir.$(TARGET_BOARD_PLATFORM)
+LOCAL_MODULE := android.hardware.ir@1.0-service.lge
+LOCAL_INIT_RC := android.hardware.ir@1.0-service.lge.rc
 LOCAL_MODULE_RELATIVE_PATH := hw
-LOCAL_PROPRIETARY_MODULE := true
-LOCAL_SRC_FILES := consumerir.c
-LOCAL_SHARED_LIBRARIES := liblog libcutils libcir_driver
+LOCAL_SHARED_LIBRARIES := \
+    liblog \
+    libcutils \
+    libdl \
+    libxml2 \
+    libhidlbase \
+    libhidltransport \
+    libhardware \
+    libutils \
+    android.hardware.ir@1.0 \
+    libcir_driver
+
+LOCAL_SRC_FILES := \
+    service.cpp \
+    ConsumerIr.cpp
+
 LOCAL_MODULE_TAGS := optional
+LOCAL_VENDOR_MODULE := true
 
-include $(BUILD_SHARED_LIBRARY)
+include $(BUILD_EXECUTABLE)
 
-endif
