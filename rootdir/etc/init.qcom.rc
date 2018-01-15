@@ -457,6 +457,7 @@ on post-fs-data
     touch /dev/cpuset/camera-daemon/tasks
     touch /dev/cpuset/tasks
     touch /dev/stune/tasks
+    chmod 0666 /dev/media0
 
     # Create folder for camera sockets
     mkdir /data/misc/camera 0771 camera camera

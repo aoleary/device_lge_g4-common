@@ -51,4 +51,4 @@ allow init video_device:chr_file { ioctl write };
 allow init input_device:chr_file { ioctl };
 allow init cameraserver:fd { use };
 allow init hal_graphics_allocator_default:fd { use };
-allow init gpu_device:chr_file { write };
+allow init gpu_device:chr_file { write ioctl };

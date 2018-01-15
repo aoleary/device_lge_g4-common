@@ -6,3 +6,4 @@ allow priv_app device:dir { read };
 allow priv_app device:dir { open };
 allow priv_app proc_interrupts:file { read };
 allow priv_app proc_interrupts:file { open };
+allow priv_app net_dns_prop:file { getattr };
