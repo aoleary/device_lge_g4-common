@@ -46,7 +46,7 @@ allow init uio_device:chr_file { write };
 allow init init:netlink_kobject_uevent_socket { create };
 allow init init:netlink_kobject_uevent_socket { setopt };
 allow init init:netlink_kobject_uevent_socket { bind };
-allow init video_device:chr_file { write };
+allow init video_device:chr_file { ioctl write };
 #allow init default_android_service:service_manager { add find };
 allow init input_device:chr_file { ioctl };
 allow init cameraserver:fd { use };
