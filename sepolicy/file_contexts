@@ -14,12 +14,14 @@
 /sns                                u:object_r:sensors_data_file:s0
 /sns/cal(/.*)?                      u:object_r:sensors_data_file:s0
 
+/dev/ttyHS0                         u:object_r:cir_device:s0
+/dev/ttyHSL0                        u:object_r:cir_device:s0
 /dev/ttyHSL1                        u:object_r:cir_device:s0
 
-/system/bin/hwaddrs                 u:object_r:hwaddrs_exec:s0
-/system/bin/imswmsproxy             u:object_r:imswmsproxy_exec:s0
-/system/bin/thermanager             u:object_r:thermanager_exec:s0
-/system/bin/timekeep                u:object_r:timekeep_exec:s0
+/system/vendor/bin/hwaddrs          u:object_r:hwaddrs_exec:s0
+/system/vendor/bin/imswmsproxy      u:object_r:imswmsproxy_exec:s0
+/system/vendor/bin/btnvtool         u:object_r:btnvtool_exec:s0
+
 
 /dev/smem_log                       u:object_r:shared_log_device:s0
 /dev/socket/netmgr(/.*)?            u:object_r:netmgrd_socket:s0
