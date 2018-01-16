@@ -1,11 +1,9 @@
+bin/ATFWD-daemon
 bin/qseecom_sample_client
 bin/radish
 bin/tftp_server
 bin/xtwifi-inet-agent
 bin/hci_qcomm_init
-bin/btnvtool
-bin/bdaddr_loader
-bin/ATFWD-daemon
 bin/lowi-server
 bin/xtwifi-client
 bin/loc_launcher
@@ -26,6 +24,8 @@ lib64/libmdmcutback.so
 -app/TimeService/TimeService.apk
 -priv-app/qcrilmsgtunnel/qcrilmsgtunnel.apk
 -priv-app/com.qualcomm.location/com.qualcomm.location.apk
+vendor/bin/bdaddr_loader
+vendor/bin/btnvtool
 vendor/bin/energy-awareness
 vendor/bin/rfs_access
 vendor/bin/mm-pp-daemon
@@ -55,6 +55,10 @@ vendor/bin/slim_daemon
 vendor/bin/qti
 vendor/bin/thermal-engine
 vendor/bin/RIDLClient.exe
+vendor/lib/libatd_corelib.so
+vendor/lib/liblgftmitem.so
+vendor/lib64/liblgftmitem.so
+vendor/lib64/libatd_corelib.so
 vendor/lib64/libwfdavenhancements.so
 vendor/lib64/libwfdmmsink.so
 vendor/lib64/liblistensoundmodel2.so

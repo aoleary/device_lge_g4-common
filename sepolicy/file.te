@@ -20,3 +20,5 @@ type shared_log_device, dev_type;
 type netmgrd_socket, file_type;
 type irqbalance_socket, file_type;
 type sysfs_esoc, sysfs_type, fs_type;
+type btnvtool_exec, exec_type, file_type;
+

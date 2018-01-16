@@ -686,6 +686,17 @@ service ppd /system/vendor/bin/mm-pp-daemon
     socket pps stream 0660 system system
     group system graphics
 
+service bdaddr_loader /system/vendor/bin/bdaddr_loader
+    class late_start
+    user root
+    group bluetooth net_bt_admin
+    oneshot
+
+service config_bluetooth /system/bin/sh /system/etc/init.qcom.bt.sh "onboot"
+    class core
+    user root
+    oneshot
+
 on property:init.svc.surfaceflinger=stopped
     stop ppd
 
@@ -773,6 +784,12 @@ service ftmd /system/bin/logwrapper /system/bin/ftmdaemon
     user root
     group bluetooth net_bt_admin misc bluetooth diag bluetooth
     disabled
+    oneshot
+
+service config_bt_addr /system/vendor/bin/btnvtool -O
+    class core
+    user bluetooth
+    group bluetooth radio
     oneshot
 
 service port-bridge /system/bin/port-bridge /dev/mhi_pipe_32 /dev/ttyGS0
