@@ -7,6 +7,10 @@ PRODUCT_PACKAGES += \
     libqcompostprocbundle \
     libqcomvisualizer \
     libqcomvoiceprocessing \
+    libqcomvoiceprocessingdescriptors \
+    libtinyalsa \
+    libtinycompress \
+    libtinyxml \
     tinymix
 
 # speaker protection
