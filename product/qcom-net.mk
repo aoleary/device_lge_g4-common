@@ -1,11 +1,12 @@
 PRODUCT_PACKAGES += \
     ebtables \
     ethertypes \
+    libnl_2 \
+    libbson \
     libcnefeatureconfig \
     libqsap_sdk \
     librmnetctl \
-    libxml2 \
-    telephony-ext
+    libxml2
 
 # Netutils
 PRODUCT_PACKAGES += \
