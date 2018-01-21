@@ -24,6 +24,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.data.large_tcp_window_size=true \
     ro.use_data_netmgrd=true \
     ro.telephony.default_network=12 \
+    ro.ril.svlte1x=false \
+    ro.ril.svdo=false \
     persist.radio.add_power_save=1 \
     persist.telephony.oosisdc=false
 
