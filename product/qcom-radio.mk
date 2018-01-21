@@ -6,7 +6,8 @@ PRODUCT_PACKAGES += \
     android.hardware.radio.deprecated@1.0-service \
     libsecril-client-sap \
     libprotobuf-cpp-full \
-    rild_socket
+    rild_socket \
+    libxml2
 
 PRODUCT_PROPERTY_OVERRIDES += \
     rild.libpath=/vendor/lib64/libril-qc-qmi-1.so \
