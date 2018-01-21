@@ -8,6 +8,12 @@ allow rild socket_device:sock_file { write };
 allow rild default_android_service:service_manager { find };
 allow rild socket_device:dir { remove_name add_name };
 allow rild socket_device:sock_file { unlink setattr };
-allow rild rild:capability { sys_module dac_override };
+allow rild rild:capability { sys_module dac_override chown };
 #allow rild device:chr_file { read open };
+#allow rild device:chr_file { write ioctl };
 #allow rild system_data_file:file { write };
+allow rild shared_log_device:chr_file { read write open };
+allow rild radio_data_file:file { getattr read write open ioctl lock };
+allow rild system_file:dir { add_name remove_name };
+#allow rild system_file:file { write create setattr unlink };
+
