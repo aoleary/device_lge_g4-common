@@ -16,4 +16,6 @@ allow rild shared_log_device:chr_file { read write open };
 allow rild radio_data_file:file { getattr read write open ioctl lock };
 allow rild system_file:dir { add_name remove_name };
 #allow rild system_file:file { write create setattr unlink };
-
+allow rild audioserver_service:service_manager { find };
+allow rild vendor_file:file { execute_no_trans lock };
+allow rild radio_data_file:dir rw_dir_perms;
