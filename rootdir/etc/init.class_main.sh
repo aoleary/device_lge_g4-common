@@ -34,18 +34,6 @@ start_copying_prebuilt_qcril_db()
     fi
 }
 start_copying_prebuilt_qcril_db
-
-#
-# Make modem config folder and copy firmware config to that folder
-#
-#
-rm -rf /data/misc/radio/modem_config
-mkdir /data/misc/radio/modem_config
-chmod 660 /data/misc/radio/modem_config
-cp -r /firmware/image/modem_pr/mbn_ota/* /data/misc/radio/modem_config
-chown -hR radio.radio /data/misc/radio/modem_config
-echo 1 > /data/misc/radio/copy_complete
-
 #
 # start ril-daemon only for targets on which radio is present
 #
@@ -85,6 +73,8 @@ case "$baseband" in
     elif [ "$multisim" = "tsts" ]; then
         start ril-daemon2
         start ril-daemon3
+    else start ril-daemon
+         start ril-daemon1
     fi
 
     case "$datamode" in
