@@ -993,7 +993,7 @@ service qseecomd /system/vendor/bin/qseecomd
     user root
     group root
 
-service perfd /system/vendor/bin/perfd
+service perfd /system/bin/perfd
     class main
     user root
     group system
