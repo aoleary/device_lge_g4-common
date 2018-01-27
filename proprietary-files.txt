@@ -49,7 +49,6 @@ vendor/bin/imsdatadaemon
 vendor/bin/mm-qcamera-daemon
 vendor/bin/irsc_util
 vendor/bin/LKCore
-vendor/bin/perfd
 vendor/bin/audioflacapp
 vendor/bin/slim_daemon
 vendor/bin/qti
