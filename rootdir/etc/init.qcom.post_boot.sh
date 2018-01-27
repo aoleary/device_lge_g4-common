@@ -166,63 +166,6 @@ case "$target" in
     ;;
 esac
 
-# Post-setup services
-case "$target" in
-    "msm8660" | "msm8960" | "msm8226" | "msm8610" | "mpq8092" )
-        start mpdecision
-    ;;
-    "msm8916")
-        if [ -f /sys/devices/soc0/soc_id ]; then
-           soc_id=`cat /sys/devices/soc0/soc_id`
-        else
-           soc_id=`cat /sys/devices/system/soc/soc0/id`
-        fi
-        if [ $soc_id = 239 ]; then
-            setprop ro.min_freq_0 800000
-            setprop ro.min_freq_4 499200
-        else
-            setprop ro.min_freq_0 800000
-        fi
-        #start perfd after setprop
-        start perfd # start perfd on 8916 and 8939
-    ;;
-    "msm8974")
-        start mpdecision
-        echo 512 > /sys/block/mmcblk0/bdi/read_ahead_kb
-    ;;
-    "msm8994" | "msm8992")
-        rm /data/system/perfd/default_values
-        setprop ro.min_freq_0 384000
-        setprop ro.min_freq_4 384000
-        start perfd
-    ;;
-    "apq8084")
-        rm /data/system/perfd/default_values
-        start mpdecision
-        echo 512 > /sys/block/mmcblk0/bdi/read_ahead_kb
-        echo 512 > /sys/block/sda/bdi/read_ahead_kb
-        echo 512 > /sys/block/sdb/bdi/read_ahead_kb
-        echo 512 > /sys/block/sdc/bdi/read_ahead_kb
-        echo 512 > /sys/block/sdd/bdi/read_ahead_kb
-        echo 512 > /sys/block/sde/bdi/read_ahead_kb
-        echo 512 > /sys/block/sdf/bdi/read_ahead_kb
-        echo 512 > /sys/block/sdg/bdi/read_ahead_kb
-        echo 512 > /sys/block/sdh/bdi/read_ahead_kb
-    ;;
-    "msm7627a")
-        if [ -f /sys/devices/soc0/soc_id ]; then
-            soc_id=`cat /sys/devices/soc0/soc_id`
-        else
-            soc_id=`cat /sys/devices/system/soc/soc0/id`
-        fi
-        case "$soc_id" in
-            "127" | "128" | "129")
-                start mpdecision
-        ;;
-        esac
-    ;;
-esac
-
 case "$target" in
     "msm8226" | "msm8974" | "msm8610" | "apq8084" | "mpq8092" | "msm8610" | "msm8916" | "msm8994" | "msm8992")
         # Let kernel know our image version/variant/crm_version
