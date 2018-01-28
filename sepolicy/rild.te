@@ -12,6 +12,7 @@ allow rild rild:capability { sys_module dac_override chown };
 #allow rild device:chr_file { read open };
 #allow rild device:chr_file { write ioctl };
 #allow rild system_data_file:file { write };
+allow rild system_data_file:dir { write read open };
 allow rild shared_log_device:chr_file { read write open };
 allow rild radio_data_file:file { getattr read write open ioctl lock };
 allow rild system_file:dir { add_name remove_name };
@@ -19,3 +20,5 @@ allow rild system_file:dir { add_name remove_name };
 allow rild audioserver_service:service_manager { find };
 allow rild vendor_file:file { execute_no_trans lock };
 allow rild radio_data_file:dir rw_dir_perms;
+allow rild netmgrd_socket:sock_file { write };
+

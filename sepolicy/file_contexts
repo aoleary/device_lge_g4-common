@@ -10,6 +10,7 @@
 /dev/rfkill                         u:object_r:rfkill_device:s0
 
 /dev/diag_lge                       u:object_r:lge_diag_device:s0
+/dev/diag                           u:object_r:device:s0
 
 /sns                                u:object_r:sensors_data_file:s0
 /sns/cal(/.*)?                      u:object_r:sensors_data_file:s0
@@ -18,10 +19,10 @@
 /dev/ttyHSL0                        u:object_r:cir_device:s0
 /dev/ttyHSL1                        u:object_r:cir_device:s0
 
+/system/bin/ip                      u:object_r:system_file:s0
 /system/vendor/bin/hwaddrs          u:object_r:hwaddrs_exec:s0
 /system/vendor/bin/imswmsproxy      u:object_r:imswmsproxy_exec:s0
 /system/vendor/bin/btnvtool         u:object_r:btnvtool_exec:s0
-
 
 /dev/smem_log                       u:object_r:shared_log_device:s0
 /dev/socket/netmgr(/.*)?            u:object_r:netmgrd_socket:s0
@@ -48,3 +49,7 @@
 
 /sys/bus/msm_subsys(/.*)?           u:object_r:sysfs_msm_subsys:s0
 /sys/bus/esoc(/.*)?                 u:object_r:sysfs_esoc:s0
+
+/system/etc/motorola(/*)            u:object_r:system_file:s0
+
+/data/misc/radio/modem_config/mcfg_sw u:object_r:system_data_file:s0
