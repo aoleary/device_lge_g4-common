@@ -62,17 +62,17 @@ $(DXHDCP2_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
 
 ALL_DEFAULT_INSTALLED_MODULES += $(DXHDCP2_SYMLINKS)
 
-#KEYMASTER_IMAGES := \
-#    keymaste.b00 keymaste.b01 keymaste.b02 keymaste.b03 keymaste.mdt
-#
-#KEYMASTER_SYMLINKS :=$(addprefix $(TARGET_OUT_ETC)/firmware/,$(KEYMASTER_IMAGES))
-#$(KEYMASTER_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
-#	@echo "Keymaster firmware link: $@"
-#	@mkdir -p $(dir $@)
-#	@rm -rf $@
-#	$(hide) ln -sf /firmware/image/$(notdir $@) $@
-#
-#ALL_DEFAULT_INSTALLED_MODULES += $(KEYMASTER_SYMLINKS)
+KEYMASTER_IMAGES := \
+    keymaste.b00 keymaste.b01 keymaste.b02 keymaste.b03 keymaste.mdt
+
+KEYMASTER_SYMLINKS :=$(addprefix $(TARGET_OUT_ETC)/firmware/,$(KEYMASTER_IMAGES))
+$(KEYMASTER_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
+	@echo "Keymaster firmware link: $@"
+	@mkdir -p $(dir $@)
+	@rm -rf $@
+	$(hide) ln -sf /firmware/image/$(notdir $@) $@
+
+ALL_DEFAULT_INSTALLED_MODULES += $(KEYMASTER_SYMLINKS)
 
 MLSERVER_IMAGES := \
     mlserver.b00 mlserver.b01 mlserver.b02 mlserver.b03 mlserver.mdt
@@ -196,5 +196,51 @@ $(RFS_MSM_MPSS_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
 	$(hide) ln -sf /firmware $@/readonly/firmware
 
 ALL_DEFAULT_INSTALLED_MODULES += $(RFS_MSM_ADSP_SYMLINKS) $(RFS_MSM_MPSS_SYMLINKS)
+
+WCNSS_FW := WCNSS_qcom_wlan_nv.bin WCNSS_cfg.dat
+WCNSS_FW_SYMLINKS := $(addprefix $(TARGET_OUT_ETC)/firmware/wlan/qca_cld/,$(notdir $(WCNSS_FW)))
+$(WCNSS_FW_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
+	@echo "WCNSS firmware links: $@"
+	@mkdir -p $(dir $@)
+	@rm -rf $@
+	$(hide) ln -sf /system/etc/wifi/$(notdir $@) $@
+
+WCNSS_CFG := WCNSS_qcom_cfg.ini
+WCNSS_CFG_SYMLINKS := $(addprefix $(TARGET_OUT_VENDOR)/firmware/wlan/qca_cld/,$(notdir $(WCNSS_CFG)))
+$(WCNSS_CFG_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
+	@echo "WCNSS configs and firmware links: $@"
+	@mkdir -p $(dir $@)
+	@rm -rf $@
+	$(hide) ln -sf /system/etc/wifi/$(notdir $@) $@
+
+WCNSS_MAC_SYMLINK := $(TARGET_OUT_ETC)/firmware/wlan/qca_cld/wlan_mac.bin
+$(WCNSS_MAC_SYMLINK): $(LOCAL_INSTALLED_MODULE)
+	@echo "WCNSS MAC bin link: $@"
+	@mkdir -p $(dir $@)
+	@rm -rf $@
+	$(hide) ln -sf /persist/$(notdir $@) $@
+
+ALL_DEFAULT_INSTALLED_MODULES += $(WCNSS_CFG_SYMLINKS) $(WCNSS_MAC_SYMLINK) $(WCNSS_FW_SYMLINKS)
+
+IMS_LIBS := libimscamera_jni.so libimsmedia_jni.so
+
+IMS_SYMLINKS := $(addprefix $(TARGET_OUT)/app/ims/lib/arm64/,$(notdir $(IMS_LIBS)))
+$(IMS_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
+	@echo "IMS lib link: $@"
+	@mkdir -p $(dir $@)
+	@rm -rf $@
+	$(hide) ln -sf /system/vendor/lib64/$(notdir $@) $@
+
+ALL_DEFAULT_INSTALLED_MODULES += $(IMS_SYMLINKS)
+
+BT_FIRMWARE := btfw32.tlv btnv32.bin btnv32.b15
+BT_FIRMWARE_SYMLINKS := $(addprefix $(TARGET_OUT_VENDOR)/firmware/,$(notdir $(BT_FIRMWARE)))
+$(BT_FIRMWARE_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
+	@echo "Creating BT firmware symlink: $@"
+	@mkdir -p $(dir $@)
+	@rm -rf $@
+	$(hide) ln -sf /bt_firmware/image/$(notdir $@) $@
+
+ALL_DEFAULT_INSTALLED_MODULES += $(BT_FIRMWARE_SYMLINKS)
 
 endif
