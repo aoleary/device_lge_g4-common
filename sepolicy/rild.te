@@ -21,4 +21,4 @@ allow rild audioserver_service:service_manager { find };
 allow rild vendor_file:file { execute_no_trans lock };
 allow rild radio_data_file:dir rw_dir_perms;
 allow rild netmgrd_socket:sock_file { write };
-
+qmux_socket(rild)
