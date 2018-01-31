@@ -16,7 +16,7 @@ allow init drm_block_device:blk_file { write };
 #allow init init:binder { call transfer };
 allow init init:capability2 { block_suspend };
 allow init init:netlink_kobject_uevent_socket { read };
-allow init init:netlink_route_socket { getattr nlmsg_read nlmsg_write read setopt write };
+allow init init:netlink_route_socket { getattr nlmsg_read nlmsg_write read setopt write bind };
 allow init init:netlink_socket { bind create read write };
 allow init init:netlink_xfrm_socket { bind create };
 allow init init:rawip_socket { create setopt };
