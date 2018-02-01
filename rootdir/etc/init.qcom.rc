@@ -48,7 +48,6 @@ on early-init
     mkdir /dev/socket/netmgr 0750 radio radio
     mkdir /dev/socket/rild 0660 root radio
     mkdir /dev/socket/rild-debug 0660 radio system
-    touch /dev/socket/qmux_radio/rild_oem0 0666 radio system
     touch /dev/socket/qmux_radio/qmux_client_socket 0666 radio system
 
 on early-fs
@@ -903,6 +902,7 @@ service qcom-post-boot /system/bin/sh /system/etc/init.qcom.post_boot.sh
 #Group permissions for rild
 service ril-daemon /vendor/bin/hw/rild
     class main
+    socket qmux_radio/rild_oem0 stream 0666 radio system
     user root
     group radio cache inet misc audio log oem_2950 net_raw wifi diag qcom_diag diag_lge
 

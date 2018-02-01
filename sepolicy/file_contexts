@@ -27,6 +27,8 @@
 /dev/smem_log                       u:object_r:shared_log_device:s0
 /dev/socket/netmgr(/.*)?            u:object_r:netmgrd_socket:s0
 /dev/socket/msm_irqbalance          u:object_r:irqbalance_socket:s0
+/dev/socket/qmux_radio(/*)?         u:object_r:rild_socket:s0
+/dev/socket/qmux_radio/rild_oem0    u:object_r:rild_socket:s0
 
 /data/misc/bdaddr                   u:object_r:bluetooth_data_file:s0
 
@@ -53,3 +55,7 @@
 /system/etc/motorola(/*)            u:object_r:system_file:s0
 
 /data/misc/radio/modem_config/mcfg_sw u:object_r:system_data_file:s0
+/data/misc/radio/iccid_1            u:object_r:ril_data:s0
+/data/misc/radio/iccid_0            u:object_r:ril_data:s0
+
+/dev/system_health_monitor          u:object_r:health:s0

@@ -13,3 +13,5 @@ add_service(radio, radio_service)
 add_service(radio, imscm_service)
 allow radio qmuxd_socket:dir search;
 allow radio qmuxd_socket:sock_file write;
+#allow radio system_data_file:file { write };
+allow radio rild_socket:lnk_file { read write open };

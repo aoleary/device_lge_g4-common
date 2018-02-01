@@ -53,4 +53,4 @@ allow init cameraserver:fd { use };
 allow init hal_graphics_allocator_default:fd { use };
 allow init gpu_device:chr_file { write ioctl };
 allow init rtc_device:chr_file { ioctl };
-
+allow init rild_socket:sock_file { write };
