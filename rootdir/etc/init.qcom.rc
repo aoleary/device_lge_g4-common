@@ -97,6 +97,10 @@ on init
     chmod 0770 /carrier
     chmod 0644 /proc/cmdline
 
+    # Watchdog
+    touch /system/etc/watchdog 0775 system system
+    symlink /system/etc/watchdog /dev/watchdog
+
     # Set permissions for persist partition
     mkdir /persist 0771 system system
 
