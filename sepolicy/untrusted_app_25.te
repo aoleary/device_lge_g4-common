@@ -1,1 +1,9 @@
 allow untrusted_app_25 device:chr_file { ioctl };
+allow untrusted_app_25 unlabeled:dir { search read open getattr };
+allow untrusted_app_25 unlabeled:filesystem { getattr };
+allow untrusted_app_25 unlabeled:file { getattr read open write };
+allow untrusted_app_25 storage_file:file { getattr };
+allow untrusted_app_25 rootfs:dir { read open };
+allow untrusted_app_25 proc:file { getattr };
+#allow untrusted_app_25 proc:file { read open };
+#allow untrusted_app_25 hal_memtrack_hwservice:hwservice_manager { find };

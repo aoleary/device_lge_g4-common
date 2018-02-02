@@ -1,3 +1,4 @@
+#type priv_app, domain;
 #allow priv_app device:chr_file { read write open };
 allow priv_app proc_modules:file { read };
 allow priv_app proc_modules:file { open };
@@ -7,3 +8,5 @@ allow priv_app device:dir { open };
 allow priv_app proc_interrupts:file { read };
 allow priv_app proc_interrupts:file { open };
 allow priv_app net_dns_prop:file { getattr };
+allow priv_app unlabeled:filesystem { getattr };
+allow priv_app unlabeled:file { read open getattr };

@@ -59,3 +59,5 @@
 /data/misc/radio/iccid_0            u:object_r:ril_data:s0
 
 /dev/system_health_monitor          u:object_r:health:s0
+
+/mnt/media_rw/*/*/*/*               u:object_r:unlabeled:s0
