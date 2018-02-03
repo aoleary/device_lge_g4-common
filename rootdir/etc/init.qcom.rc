@@ -80,6 +80,15 @@ on init
     # Shim libs
     export LD_SHIM_LIBS /system/vendor/lib64/libwvm.so|libshims_wvm.so:/system/vendor/lib64/libril-qc-qmi-1.so|rild_socket.so
 
+    mkdir /mnt/shell/emulated 0700 shell shell
+    mkdir /storage/emulated 0555 root root
+    mkdir /mnt/media_rw/sdcard1 0775 media_rw media_rw
+    mkdir /mnt/media_rw/usbdisk 0775 media_rw media_rw
+    mkdir /storage/sdcard1 0775 system system
+    mkdir /storage/usbdisk 0775 system system
+    chmod 775 /mnt/media_rw
+    chmod 775 /mnt/media_rw/*
+
     mkdir /firmware 0771 system system
     mkdir /firmware/image 0771 system system
     mkdir /persist/data 0700 system system
