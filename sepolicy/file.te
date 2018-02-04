@@ -24,3 +24,4 @@ type sysfs_esoc, sysfs_type, fs_type;
 type btnvtool_exec, exec_type, file_type;
 type imscm_service, service_manager_type;
 type health, file_type;
+type cam_device, dev_type, fs_type;

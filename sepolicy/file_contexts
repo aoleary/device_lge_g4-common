@@ -5,6 +5,8 @@
 
 /dev/kgsl-3d0                       u:object_r:gpu_device:s0
 
+/dev/v4l-subdev15                   u:object_r:cam_device:s0
+
 /dev/pn547                          u:object_r:nfc_device:s0
 
 /dev/rfkill                         u:object_r:rfkill_device:s0
