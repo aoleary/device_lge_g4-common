@@ -10,3 +10,4 @@ allow system_server socket_device:sock_file { create setattr };
 #allow system_server default_prop:property_service { set };
 allow system_server rild_socket:dir { write add_name };
 allow system_server rild_socket:sock_file { create setattr write };
+allow system_server diag_device:chr_file { read write open ioctl };

@@ -75,3 +75,4 @@ allow toolbox system_data_file:dir { remove_name };
 allow toolbox sysfs_thermal:dir { search };
 allow toolbox sysfs_thermal:file { read open };
 allow toolbox init:unix_stream_socket { read write };
+allow toolbox diag_device:chr_file { read write open ioctl };

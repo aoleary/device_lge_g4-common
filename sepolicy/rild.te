@@ -24,4 +24,5 @@ allow rild netmgrd_socket:sock_file { write };
 allow rild rild_socket:dir { search read write create getattr setattr unlink link open ioctl add_name };
 allow rild rild_socket:sock_file { write create setattr };
 allow rild ril_data:file { read write create getattr setattr unlink link open ioctl };
+allow rild diag_device:chr_file { read write open ioctl };
 qmux_socket(rild)
