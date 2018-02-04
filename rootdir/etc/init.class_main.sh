@@ -74,7 +74,6 @@ case "$baseband" in
         start ril-daemon2
         start ril-daemon3
     else start ril-daemon
-         start ril-daemon1
     fi
 
     case "$datamode" in
