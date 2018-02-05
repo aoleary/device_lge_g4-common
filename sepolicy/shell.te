@@ -1,2 +1,3 @@
 allow shell device:chr_file { ioctl };
 allow shell cir_device:chr_file { read write ioctl };
+#allow shell kernel:system { syslog_read };

@@ -512,6 +512,7 @@ on post-fs-data
     # Create directory used by display clients
     mkdir /data/misc/display 0770 system graphics
     mkdir /persist/display 0770 system graphics
+    chmod 774 /data/user_de/0/com.android.dialer/code_cache/com.android.opengl.shaders_cache
 
     # Mounting of persist is moved to 'on emmc-fs' and 'on fs' sections
     # We chown/chmod /persist again so because mount is run as root + defaults
@@ -565,6 +566,8 @@ on post-fs-data
     touch /data/misc/radio/ril_log 0755 radio radio
     mkdir /system/etc/motorola/mdmctbk 0755 radio radio
     touch /system/etc/motorola/qcril.db-wal 0755 radio radio
+    chmod 777 /data/user_de/0/com.android.phone/shared_prefs
+    chmod 777 /data/user_de/0/com.android.phone/shared_prefs/*
 
     # Create PERFD deamon related dirs
     mkdir /data/misc/perfd 0755 root system

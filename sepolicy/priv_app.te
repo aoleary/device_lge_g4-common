@@ -12,3 +12,4 @@ allow priv_app unlabeled:filesystem { getattr };
 allow priv_app unlabeled:file { read open getattr };
 allow priv_app emulated_block_device:dir { getattr };
 allow priv_app sockets:dir { read open };
+allow priv_app hal_memtrack_hwservice:hwservice_manager { find };

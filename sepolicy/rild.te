@@ -22,9 +22,10 @@ allow rild vendor_fs:file { execute_no_trans lock };
 allow rild radio_data_file:dir rw_dir_perms;
 allow rild netmgrd_socket:sock_file { write };
 allow rild rild_socket:dir { search read write create getattr setattr unlink link open ioctl add_name remove_name };
-allow rild rild_socket:sock_file { write create setattr };
-allow rild ril_data:file { read write create getattr setattr unlink link open ioctl };
+allow rild rild_socket:sock_file { write create setattr getattr unlink link };
 allow rild diag_device:chr_file { read write open ioctl };
 allow rild binder_per_mgr_service:service_manager { add find };
 allow rild binder_conn_service:service_manager { add find };
+allow rild audioserver:binder { call transfer };
+allow rild ril_data_file:file { read write open ioctl create getattr setattr unlink link };
 qmux_socket(rild)

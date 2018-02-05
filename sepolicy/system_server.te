@@ -15,3 +15,5 @@ allow system_server sensors_device:chr_file { getattr setattr };
 allow system_server binder_per_mgr_service:service_manager { add find };
 allow system_server binder_conn_service:service_manager { add find };
 allow system_server netmgrd_socket:sock_file { write };
+allow system_server emulated_block_device:dir { search };
+allow system_server sockets:sock_file { write };

@@ -5,3 +5,4 @@ allow cameraserver cam_device:chr_file { read write open ioctl };
 allow cameraserver camera_data_file:sock_file { write };
 allow cameraserver thermal_socket_device:sock_file { write };
 allow cameraserver cam_file:unix_dgram_socket { sendto };
+allow cameraserver sockets:sock_file { write };
