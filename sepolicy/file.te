@@ -15,6 +15,7 @@ type sockets, dev_type;
 type temp_device, dev_type;
 type energy_device, dev_type;
 type modem_device, dev_type;
+type firmware_block_device, dev_type;
 
 type thermal_socket_device, file_type;
 type cam_file, file_type;
@@ -46,3 +47,5 @@ type health, file_type;
 type binder_per_mgr_service, service_manager_type;
 type binder_loc_izat_service, service_manager_type;
 type binder_conn_service, service_manager_type;
+
+type fw_file, fs_type;

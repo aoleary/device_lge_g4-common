@@ -1,3 +1,5 @@
-allow vold emulated_block_device:dir { getattr search };
+allow vold emulated_block_device:dir { getattr search write add_name remove_name create setattr getattr };
 allow vold system_crypt_file:file { read write open ioctl getattr setattr unlink link };
-allow vold data_block_device:blk_file { open read };
+allow vold data_block_device:blk_file { open read ioctl write };
+allow vold qseecom_device:chr_file { read write open ioctl };
+allow vold firmware_file:file { read getattr };

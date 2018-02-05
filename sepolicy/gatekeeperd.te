@@ -3,3 +3,6 @@ type qseecomtee_prop, property_type;
 allow gatekeeperd device:chr_file { ioctl };
 allow gatekeeperd qseecomtee_prop:file { getattr open read };
 allow gatekeeperd qseecom_device:chr_file { read write open ioctl };
+allow gatekeeperd fw_file:file { read write open getattr ioctl };
+allow gatekeeperd firmware_block_device:file { read write open getattr ioctl };
+allow gatekeeperd firmware_file:file { read open getattr };
