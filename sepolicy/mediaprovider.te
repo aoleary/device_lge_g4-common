@@ -1,2 +1,3 @@
 allow mediaprovider unlabeled:dir { getattr search read open };
 allow mediaprovider unlabeled:file { getattr };
+allow mediaprovider emulated_block_device:dir { getattr search read open };

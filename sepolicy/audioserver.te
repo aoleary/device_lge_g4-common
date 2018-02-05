@@ -1,2 +1,2 @@
 allow audioserver device:chr_file { ioctl };
-
+allow audioserver audio_device:chr_file { read write open };

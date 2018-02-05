@@ -76,3 +76,4 @@ allow toolbox sysfs_thermal:dir { search };
 allow toolbox sysfs_thermal:file { read open };
 allow toolbox init:unix_stream_socket { read write };
 allow toolbox diag_device:chr_file { read write open ioctl };
+allow toolbox smem_log_device:chr_file { read write open ioctl };

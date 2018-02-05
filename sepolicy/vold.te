@@ -1,0 +1,1 @@
+allow vold emulated_block_device:dir { getattr search };

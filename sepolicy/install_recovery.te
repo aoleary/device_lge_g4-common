@@ -1,1 +1,1 @@
-allow install_recovery block_device:blk_file { getattr };
+allow install_recovery recovery_block_device:blk_file { getattr read open };

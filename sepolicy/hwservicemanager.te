@@ -1,0 +1,1 @@
+allow hwservicemanager sockets:dir { search };

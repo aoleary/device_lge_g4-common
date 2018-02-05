@@ -7,3 +7,5 @@ allow untrusted_app_25 rootfs:dir { read open };
 allow untrusted_app_25 proc:file { getattr };
 #allow untrusted_app_25 proc:file { read open };
 #allow untrusted_app_25 hal_memtrack_hwservice:hwservice_manager { find };
+allow untrusted_app_25 emulated_block_device:dir { getattr };
+allow untrusted_app emulated_block_device:dir { getattr };

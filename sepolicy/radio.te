@@ -15,3 +15,4 @@ allow radio qmuxd_socket:dir search;
 allow radio qmuxd_socket:sock_file write;
 #allow radio system_data_file:file { write };
 allow radio rild_socket:lnk_file { read write open };
+allow radio rild_socket:dir { search };

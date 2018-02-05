@@ -2,4 +2,4 @@ type netmgrd, domain;
 
 allow netmgrd socket_device:dir { add_name write };
 allow netmgrd socket_device:sock_file { create };
-allow netmgrd system_file:file lock;
+allow netmgrd fs:file { lock };

@@ -1,2 +1,2 @@
 allow shell device:chr_file { ioctl };
-#allow shell device:chr_file { read write };
+allow shell cir_device:chr_file { read write ioctl };

@@ -1,2 +1,5 @@
 allow ueventd firmware_file:dir { search };
 allow ueventd firmware_file:file { getattr open read };
+allow ueventd health:chr_file { create setattr };
+allow ueventd qseecom_device:dir { relabelto };
+allow ueventd qseecom_device:filesystem { associate };
