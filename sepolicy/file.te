@@ -29,6 +29,7 @@ type shell_ex, exec_type, file_type;
 type ril_data_file, file_type, data_file_type;
 type system_crypt_file, file_type, data_file_type;
 
+type system_rild_file, file_type;
 type vendor_fs, fs_type, sysfs_type;
 type fs, fs_type, sysfs_type;
 type rmt_debugfs, fs_type;
