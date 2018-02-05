@@ -1,1 +1,3 @@
 allow vold emulated_block_device:dir { getattr search };
+allow vold system_crypt_file:file { read write open ioctl getattr setattr unlink link };
+allow vold data_block_device:blk_file { open read };

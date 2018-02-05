@@ -27,6 +27,7 @@ type rtc_sysfs, sysfs_type, file_type;
 type camera_socket, file_type;
 type shell_ex, exec_type, file_type;
 type ril_data_file, file_type, data_file_type;
+type system_crypt_file, file_type, data_file_type;
 
 type vendor_fs, fs_type, sysfs_type;
 type fs, fs_type, sysfs_type;
