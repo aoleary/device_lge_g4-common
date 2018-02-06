@@ -51,7 +51,6 @@ tmpfs                               u:object_r:temp_device:s0
 /system/bin/iptables                u:object_r:fs:s0
 /system/bin/sh                      u:object_r:shell_ex:s0
 /system/bin/perfd                   u:object_r:fs:s0
-/system/bin/sysinit                 u:object_r:fs:s0
 /system/bin/tc                      u:object_r:fs:s0
 /system/vendor/bin/hwaddrs          u:object_r:hwaddrs_exec:s0
 /system/vendor/bin/imswmsproxy      u:object_r:imswmsproxy_exec:s0
@@ -60,7 +59,6 @@ tmpfs                               u:object_r:temp_device:s0
 /system/vendor/bin/rfs_access       u:object_r:vendor_fs:s0
 
 /dev/smem_log                       u:object_r:smem_log_device:s0
-/dev/socket                         u:object_r:sockets:s0
 /dev/socket/netmgr(/.*)?            u:object_r:netmgrd_socket:s0
 /dev/socket/msm_irqbalance          u:object_r:irqbalance_socket:s0
 /dev/socket/qmux_radio(/*)?         u:object_r:rild_socket:s0

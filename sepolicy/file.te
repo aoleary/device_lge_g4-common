@@ -11,7 +11,6 @@ type qseecom_device, dev_type;
 type smd_device, dev_type;
 type emulated_block_device, dev_type;
 type qti_device, dev_type;
-type sockets, dev_type;
 type temp_device, dev_type;
 type energy_device, dev_type;
 type modem_device, dev_type;
