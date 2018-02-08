@@ -1,20 +1,46 @@
-allow system_server device:chr_file { getattr ioctl };
-#allow system_server init:binder { call transfer };
-allow system_server socket_device:sock_file { write };
-allow system_server socket_device:dir { write };
-allow system_server socket_device:dir { add_name };
-allow system_server binder_loc_izat_service:service_manager { find add };
-allow system_server socket_device:sock_file { create setattr };
-#allow system_server default_prop:property_service { set };
-allow system_server rild_socket:dir { write add_name search };
-allow system_server rild_socket:sock_file { create setattr write };
-allow system_server diag_device:chr_file { read write open ioctl };
-allow system_server smem_log_device:chr_file { read write open ioctl };
-#allow system_server dalvikcache_file:file { execute };
-allow system_server sensors_device:chr_file { getattr setattr };
-allow system_server binder_per_mgr_service:service_manager { add find };
-allow system_server binder_conn_service:service_manager { add find };
-allow system_server netmgrd_socket:sock_file { write };
-allow system_server emulated_block_device:dir { search };
-allow system_server sockets:sock_file { write };
-allow system_server system_crypt_file:file { open read getattr };
+# Grant access to Qualcomm MSM Interface (QMI) radio sockets to system services
+# (e.g., LocationManager)
+qmux_socket(system_server)
+
+allow system_server self:netlink_socket create_socket_perms_no_ioctl;
+
+allow system_server per_mgr_service:service_manager find;
+
+# Fingerprint access
+allow system_server fingerprint_device:chr_file rw_file_perms;
+
+#Needed by libmdmdetect to get subsystem info and to check their states
+allow system_server sysfs_ssr:dir r_dir_perms;
+allow system_server sysfs_ssr:lnk_file r_file_perms;
+
+# Needed by hubconnection for sensor hub
+allow system_server sensors_device:chr_file rw_file_perms;
+allow system_server uhid_device:chr_file rw_file_perms;
+allow system_server persist_file:dir search;
+allow system_server persist_sensortool_file:file r_file_perms;
+
+# talk to perfd
+allow system_server perfd_data_file:dir search;
+allow system_server perfd_data_file:sock_file write;
+allow system_server perfd:unix_stream_socket connectto;
+
+# hubconnection to get and set sensors.contexthub.* properties
+set_prop(system_server, contexthub_prop);
+
+# To improve app launch times - we would like to force all tasks to
+# run on big cores for app launch (sched_boost) - instead of just
+# boosting them to make it "more likely" to run on big cores.
+allow system_server zygote:process setsched;
+
+allowxperm system_server self:udp_socket ioctl { SIOCSIFFLAGS SIOCDEVPRIVATE_D };
+
+# use MSM ipc router ioctls
+allow system_server self:socket ioctl;
+allowxperm system_server self:socket ioctl msm_sock_ipc_ioctls;
+
+# system_server calls the power HAL, which reads debugfs_rpm
+allow system_server debugfs_rpm:file { read open getattr };
+
+#allow system_server default_prop:property_service set;
+allow system_server location_data_file:dir create;
+allow system_server socket_device:sock_file write;

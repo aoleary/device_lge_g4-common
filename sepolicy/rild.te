@@ -1,34 +1,56 @@
-allow rild servicemanager:binder { call };
-#allow rild init:binder { transfer call };
-#allow rild rild:socket { ioctl };
-allow rild system_data_file:file { read open getattr };
-allow rild socket_device:dir { write };
-allow rild socket_device:sock_file { create };
-allow rild socket_device:sock_file { write };
-allow rild default_android_service:service_manager { find };
-allow rild socket_device:dir { remove_name add_name };
-allow rild socket_device:sock_file { unlink setattr };
-allow rild rild:capability { sys_module dac_override chown };
-allow rild health:chr_file { read write open ioctl };
-allow rild device:chr_file { ioctl };
-#allow rild system_data_file:file { write };
-allow rild system_data_file:dir { write read open };
-allow rild smem_log_device:chr_file { read write open ioctl };
-allow rild radio_data_file:file { getattr read write open ioctl lock };
-allow rild system_file:dir { add_name remove_name };
-allow rild system_rild_file:file { create setattr getattr ioctl unlink link write read open };
-allow rild system_rild_file:dir { add_name remove_name };
-allow rild fs:file { write create setattr unlink };
-allow rild audioserver_service:service_manager { find };
-allow rild vendor_fs:file { execute_no_trans lock };
-allow rild radio_data_file:dir rw_dir_perms;
-allow rild netmgrd_socket:sock_file { write };
-allow rild netmgrd_socket:dir { search };
-allow rild rild_socket:dir { search read write create getattr setattr unlink link open ioctl add_name remove_name };
-allow rild rild_socket:sock_file { write create setattr getattr unlink link };
-allow rild diag_device:chr_file { read write open ioctl };
-allow rild binder_per_mgr_service:service_manager { add find };
-allow rild binder_conn_service:service_manager { add find };
-allow rild audioserver:binder { call transfer };
-allow rild ril_data_file:file { read write open ioctl create getattr setattr unlink link };
+binder_call(rild, audioserver)
+binder_call(rild, mediaserver)
+binder_use(rild)
+binder_service(rild)
+
+# Grant access to Qualcomm MSM Interface (QMI) radio sockets to RILD
 qmux_socket(rild)
+
+# whitelist qualcomm specific ioctls
+allow rild self:socket ioctl;
+allowxperm rild self:socket ioctl msm_sock_ipc_ioctls;
+allowxperm rild self:udp_socket ioctl priv_sock_ioctls;
+
+allow rild persist_file:dir search;
+
+# rild needs to parse through /proc to obtain pid of netmgrd
+r_dir_file(rild, netmgrd)
+# b/18352920 suppress denials until the procfs lookup is removed
+dontaudit rild domain:dir r_dir_perms;
+
+allow rild audioserver_service:service_manager find;
+allow rild mediaserver_service:service_manager find;
+allow rild per_mgr_service:service_manager find;
+
+allow rild time_daemon:unix_stream_socket connectto;
+
+# rild reads qcril.db linked to /system/etc/qcril.db
+allow rild radio_data_file:lnk_file read;
+
+# allow rild to access radio data file
+allow rild radio_data_file:dir rw_dir_perms;
+allow rild radio_data_file:file create_file_perms;
+
+userdebug_or_eng(`
+  allow rild ssr_device:chr_file { open read };
+
+  allow rild sysfs_ssr:dir { open search read };
+  allow rild sysfs_ssr:lnk_file { read open };
+  allow rild sysfs_ssr:dir r_dir_perms;
+  allow rild sysfs_ssr:lnk_file read;
+')
+
+# allow rild to use qualcomm's socket ipc ioctls
+allow rild self:socket ioctl;
+allowxperm rild self:socket ioctl msm_sock_ipc_ioctls;
+
+allow rild device:chr_file { ioctl };
+#allow rild device:chr_file { open };
+#allow rild init:binder { transfer call };
+allow rild self:capability { sys_module dac_override };
+allow rild smem_log_device:chr_file { read write ioctl open };
+allow rild socket_device:sock_file write;
+allow rild unlabeled:dir { write read open add_name remove_name };
+allow rild unlabeled:file { setattr read lock getattr write ioctl unlink open };
+#allow rild unlabeled:file { create };
+

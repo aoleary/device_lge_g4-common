@@ -1,1 +1,2 @@
-allow install_recovery recovery_block_device:blk_file { getattr read open };
+allow install_recovery tty_device:chr_file { read write open };
+

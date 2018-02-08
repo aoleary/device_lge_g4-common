@@ -1,3 +1,0 @@
-type storaged, domain, coredomain, mlstrustedsubject;
-
-allow storaged sockets:dir { search };
