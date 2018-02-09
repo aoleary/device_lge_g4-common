@@ -1,22 +1,11 @@
-# Network utilities (radio process)
-type netmgrd, domain, device_domain_deprecated;
-type netmgrd_exec, exec_type, file_type;
-
-# Uses network sockets.
-net_domain(netmgrd)
-allowxperm netmgrd self:udp_socket ioctl priv_sock_ioctls;
-
-# Talk to qmuxd (qmux_radio)
-qmux_socket(netmgrd)
+allow netmgrd lge_diag_device:chr_file { open read write ioctl };
+allow netmgrd self:capability { dac_override };
 
 # Runs commands via sh.
 allow netmgrd shell_exec:file rx_file_perms;
 
 # Starts as (root,radio) changes to (radio,radio)
 allow netmgrd self:capability { setuid setgid net_admin net_raw setpcap };
-
-# Started by init
-init_daemon_domain(netmgrd)
 
 allow netmgrd smem_log_device:chr_file rw_file_perms;
 
@@ -26,17 +15,13 @@ allow netmgrd proc_net:dir r_dir_perms;
 
 # Runs /system/bin/toolbox
 allow netmgrd system_file:file rx_file_perms;
-allow netmgrd vendor_file_type:file rx_file_perms;
 
-allow netmgrd self:netlink_socket create_socket_perms_no_ioctl;
 allow netmgrd self:netlink_route_socket nlmsg_write;
-allow netmgrd self:netlink_xfrm_socket { create_socket_perms_no_ioctl nlmsg_write nlmsg_read };
 
 # b/17065650
 allow netmgrd self:socket { create ioctl read write };
-allowxperm netmgrd self:socket ioctl msm_sock_ipc_ioctls;
 
-# CONFIG_MODULES not set in shamu_defconfig
+# CONFIG_MODULES not set in titan_defconfig
 dontaudit netmgrd self:capability sys_module;
 
 # Set net_radio properties
@@ -48,8 +33,6 @@ allow netmgrd netd_socket:sock_file write;
 #Allow access to files associated with netd
 allow netmgrd net_data_file:file r_file_perms;
 allow netmgrd net_data_file:dir r_dir_perms;
-
-allow netmgrd shell_exec:file { execute r_file_perms execute_no_trans };
 
 r_dir_file(netmgrd, sysfs_ssr);
 
@@ -63,6 +46,8 @@ unix_socket_connect(netmgrd, cnd, cnd)
 
 # execute toybox/toolbox
 allow netmgrd toolbox_exec:file rx_file_perms;
+allow netmgrd qmuxd:unix_stream_socket connectto;
+allow netmgrd qmuxd_qmuxd_socket:sock_file write;
 
 #Allow netmgrd to use wakelock
 wakelock_use(netmgrd)

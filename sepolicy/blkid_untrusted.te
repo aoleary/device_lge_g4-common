@@ -1,0 +1,1 @@
+allow blkid_untrusted system_file:file execute_no_trans;

@@ -1,14 +1,22 @@
-unix_socket_connect(mediaserver, thermal, thermal-engine)
-allow mediaserver thermal_socket:sock_file w_file_perms;
+allow mediaserver lge_diag_device:chr_file { read write open ioctl };
+allow mediaserver camera_prop:property_service { set };
+allow mediaserver persist_file:dir { search };
+allow mediaserver persist_data_file:dir { search };
+allow mediaserver persist_lg_data_file:dir { search };
+allow mediaserver cust_file:dir { search };
+allow mediaserver firmware_data_file:dir { search };
+allow mediaserver firmware_data_file:file { read getattr open };
+allow mediaserver multimedia_data_file:dir { search };
+# communicate with perfd
+#allow mediaserver perfd:unix_stream_socket connectto;
+allow mediaserver mpctl_data_file:dir search;
+allow mediaserver mpctl_data_file:sock_file write;
+allow mediaserver mpctl_socket:dir search;
+allow mediaserver mpctl_socket:sock_file write;
+unix_socket_send(mediaserver, mpctl, mpdecision)
+unix_socket_connect(mediaserver, mpctl, mpdecision)
+allow mediaserver system_data_file:sock_file write;
+allow mediaserver system_server:unix_stream_socket { read write };
+allow mediaserver sensorservice_service:service_manager find;
+allow mediaserver camera_prop:property_service set;
 
-allow mediaserver camera:unix_dgram_socket sendto;
-allow mediaserver camera_data_file:sock_file write;
-
-# allow communication w/perfd
-allow mediaserver perfd_data_file:dir search;
-allow mediaserver perfd_data_file:sock_file write;
-allow mediaserver perfd:unix_dgram_socket sendto;
-allow mediaserver perfd:unix_stream_socket connectto;
-
-# needed for widevine classic
-allow mediaserver tee_device:chr_file { ioctl open read write };

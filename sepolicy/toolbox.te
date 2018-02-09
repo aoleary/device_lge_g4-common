@@ -1,8 +1,4 @@
-allow toolbox ctl_default_prop:property_service set;
-allow toolbox ctl_rildaemon_prop:property_service set;
-allow toolbox file_contexts_file:file { read getattr open };
-allow toolbox init:fifo_file { read write getattr };
-allow toolbox self:capability net_admin;
-allow toolbox self:udp_socket { create ioctl };
-allow toolbox smem_log_device:chr_file { read write };
-allow toolbox sysfs_devices_system_cpu:file write;
+allow toolbox init:unix_stream_socket connectto;
+allow toolbox system_file:file execute;
+allow toolbox vendor_file:file execute;
+allow toolbox qti_init_shell_exec:file { read execute };

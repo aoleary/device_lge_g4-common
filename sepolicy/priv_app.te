@@ -1,4 +1,6 @@
+allow priv_app device:dir { open read };
+allow priv_app proc_interrupts:file { open read };
+allow priv_app proc_modules:file { getattr open read };
+
 allowxperm priv_app self:udp_socket ioctl { SIOCGIWESSID };
-allow priv_app device:dir { read open };
-allow priv_app proc_interrupts:file { read open };
-allow priv_app proc_modules:file { read getattr open };
+

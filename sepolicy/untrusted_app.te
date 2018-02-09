@@ -1,1 +1,8 @@
-allow untrusted_app proc_stat:file { read getattr open };
+# allow apps to read battery status
+allow untrusted_app sysfs_battery_supply:lnk_file r_file_perms;
+
+# allow apps to read charging status
+#allow untrusted_app sysfs_dc_supply:lnk_file r_file_perms;
+allow untrusted_app sysfs_usb_supply:lnk_file r_file_perms;
+
+allow untrusted_app sysfs:file r_file_perms;

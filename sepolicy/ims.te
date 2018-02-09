@@ -1,39 +1,66 @@
-# For IP Multimedia Subsystem(IMS) functionality
-type ims, domain, device_domain_deprecated;
-type ims_exec, exec_type, file_type;
-
 # Started by init
-init_daemon_domain(ims)
+#init_daemon_domain(ims)
+net_domain(ims)
 
-allow ims self:capability { net_raw net_admin };
+allow ims self:capability net_bind_service;
 
-# Allow ims to create and use socket to communicate between ims processes.
-allow ims self:socket create_socket_perms;
-allowxperm ims self:socket ioctl msm_sock_ipc_ioctls;
+# Use generic netlink socket
+allow ims self:{
+    netlink_socket
+    socket
+    netlink_generic_socket
+} create_socket_perms_no_ioctl;
 
-# Allow ims to tell init to start the ims data service via property=sys.ims.QMI_DAEMON_STATUS
-set_prop(ims, qcom_ims_prop);
+# To run NDC command
+allow ims {
+    vendor_shell_exec
+    system_file
+    # IMS route installation
+    wcnss_service_exec
+    # for WPA supplicant comment to remove compilation issue
+    #wpa_exec
+}:file rx_file_perms;
 
-# Allow ims to write to ims_socket
-allow ims ims_socket:sock_file write;
-
-# talk to connectivity engine observer interface daemon (cnd)
-unix_socket_connect(ims, cnd, cnd)
-# talk to netd
+# Talk to netd via netd_socket
 unix_socket_connect(ims, netd, netd)
-# talk to qmux
-qmux_socket(ims)
-# communicate with the network driver
-allow ims self:udp_socket { create ioctl };
-allowxperm ims self:udp_socket ioctl SIOCDEVPRIVATE_D;
 
-# Runs /system/bin/sh for executing ndc commands via popen
-allow ims shell_exec:file rx_file_perms;
+# Talk to qumuxd via ims_socket
+unix_socket_connect(ims, ims, qmuxd)
 
-# Runs /system/bin/ndc
-allow ims system_file:file rx_file_perms;
-allow ims vendor_file_type:file rx_file_perms;
+set_prop(ims, qcom_ims_prop)
 
-# address qualcomm proprietary binary denials
-allow ims self:netlink_socket create_socket_perms_no_ioctl;
-allow ims self:netlink_route_socket { create_socket_perms_no_ioctl nlmsg_write nlmsg_read };
+# permissions needed for IMS to connect and interact with WPA supplicant
+# comment to remove compilation
+#unix_socket_send(ims, wpa, wpa)
+allow ims wpa_socket:dir w_dir_perms;
+allow ims wpa_socket:sock_file { create unlink setattr };
+allow ims wifi_data_file:dir r_dir_perms;
+
+# permissions for communication with CNE in LBO use case
+unix_socket_connect(ims, cnd, cnd)
+
+#Allow access to netmgrd socket
+netmgr_socket(ims);
+
+# Inherit and use open files from radio.
+allow ims radio:fd use;
+
+#diag
+userdebug_or_eng(`
+    diag_use(ims)
+')
+allow ims self:{ socket udp_socket } ioctl;
+# ioctlcmd=c302
+allowxperm ims self:socket ioctl msm_sock_ipc_ioctls;
+# ioctlcmd=89fd
+allowxperm ims self:udp_socket ioctl priv_sock_ioctls;
+allow ims sysfs:file r_file_perms;
+allow ims sysfs_data:file r_file_perms;
+hwbinder_use(ims)
+get_prop(ims, hwservicemanager_prop)
+get_prop(ims, qcom_ims_prop)
+allow ims hal_cne_hwservice:hwservice_manager find;
+binder_call(ims, cnd)
+
+allow ims imsrcs_service:service_manager add;
+allow ims smem_log_device:chr_file { ioctl open read write };

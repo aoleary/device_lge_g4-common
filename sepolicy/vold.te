@@ -1,6 +1,10 @@
-# vold goes through /proc and opens each dir as O_RDONLY
-# to gather information about all PIDS.
-# It does not need access to /proc/irq which is labeled as
+allow vold persist_file:dir { read getattr open ioctl };
+allow vold persist_data_file:dir { read getattr };
+allow vold sensors_data_file:dir { read getattr open ioctl };
+
+allow vold firmware_file:dir { search };
+allow vold firmware_file:file { read open getattr };
+
 # See system/vold commit 66270a21df1058434e4d63691221f11ff5387a0f
 dontaudit vold proc_irq:dir { read open };
 
@@ -12,6 +16,3 @@ allow vold swap_block_device:blk_file getattr;
 # read sys.listeners. sys.keymaster. properties
 get_prop(vold, qseecomtee_prop)
 
-allow vold block_device:blk_file { getattr };
-#allow vold block_device:blk_file { read write open };
-allow vold kernel:system module_request;

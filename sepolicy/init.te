@@ -1,50 +1,28 @@
-allow init tmpfs:lnk_file create_file_perms;
-# allow: write /sys/bus/msm_subsys/devices/subsys0/restart_level "related"
-allow init sysfs_ssr:lnk_file read;
+allow qti_init_shell radio_prop:property_service { set };
+
+allow init debugfs:file { write };
+
+allow init rmt_debugfs:dir { relabelto };
+allow init rmt_debugfs:file { relabelto };
+
+allow init rtc_sysfs:dir { relabelto };
+allow init rtc_sysfs:filesystem { associate };
+allow init rtc_sysfs:file { relabelto };
+allow init rtc_sysfs:lnk_file { relabelto };
+
+allow init proc_touchpanel:file getattr;
+allow init property_socket:sock_file { create setattr write};
+allow init socket_device:sock_file create;
+allow init socket_device:sock_file setattr;
+
+allow init firmware_file:dir mounton;
+allow init fsg_file:dir mounton;
+allow init pstorefs:dir mounton;
+
+allowxperm init self:socket ioctl msm_sock_ipc_ioctls;
+allowxperm init self:udp_socket ioctl { SIOCGIWESSID };
+allowxperm init self:udp_socket ioctl priv_sock_ioctls;
 
 allow init app_data_file:dir search;
-allow init app_data_file:file setattr;
-allow init camera_device:chr_file {  ioctl };
-#allow init camera_device:chr_file { write };
-allow init cameraserver:fd use;
-allow init device:chr_file { ioctl };
-#allow init device:chr_file { read open };
-allow init gpu_device:chr_file { ioctl };
-#allow init gpu_device:chr_file { write };
-allow init hal_graphics_allocator_default:fd use;
-allow init input_device:chr_file ioctl;
-allow init ion_device:chr_file { ioctl };
-#allow init ion_device:chr_file { write };
-allow init proc_kernel_sched:file write;
-allow init property_socket:sock_file write;
-allow init qmuxd_socket:sock_file write;
-allow init rmnet_device:chr_file { ioctl };
-#allow init rmnet_device:chr_file { write };
-allow init rtc_device:chr_file ioctl;
-#allow init self:binder { transfer call };
-allow init self:capability2 block_suspend;
-allow init self:netlink_kobject_uevent_socket read;
-allow init self:netlink_route_socket { write getattr setopt nlmsg_write read bind create };
-allow init self:netlink_socket { write read create };
-allow init self:rawip_socket { getopt create setopt };
-allow init self:socket { read write create };
-#allow init self:socket { ioctl };
-allow init self:udp_socket ioctl;
-allow init sensors_device:chr_file ioctl;
-allow init servicemanager:binder { transfer call };
-#allow init shell_exec:file execute_no_trans;
-allow init smd_device:chr_file ioctl;
-allow init smem_log_device:chr_file { ioctl };
-#allow init smem_log_device:chr_file { write };
-allow init socket_device:sock_file { write create unlink setattr };
-#allow init system_file:file execute_no_trans;
-allow init tee_device:chr_file ioctl;
-allow init thermal_device:chr_file { ioctl };
-allow init ttyHSL0_device:chr_file { ioctl };
-#allow init thermal_device:chr_file { write };
-#allow init ttyHSL0_device:chr_file { write };
-#allow init unlabeled:file { execute };
-#allow init unlabeled:file { execute_no_trans };
-#allow init vendor_file:file execute_no_trans;
-allow init video_device:chr_file { ioctl };
-#allow init video_device:chr_file { write };
+#allow init firmware_file:dir create;
+allow init smem_log_device:chr_file { ioctl write };

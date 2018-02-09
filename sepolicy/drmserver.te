@@ -1,0 +1,2 @@
+allow drmserver firmware_data_file:file { read getattr open };
+allow drmserver firmware_data_file:dir r_dir_perms;

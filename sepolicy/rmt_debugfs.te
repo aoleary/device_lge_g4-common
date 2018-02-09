@@ -1,0 +1,1 @@
+allow rmt_debugfs debugfs:filesystem associate;
