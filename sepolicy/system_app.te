@@ -9,3 +9,22 @@ unix_socket_connect(system_app, mpctl, mpdecision)
 
 allow system_app proc_touchpanel:dir search;
 allow system_app proc_touchpanel:file rw_file_perms;
+
+unix_socket_connect(system_app, cnd, cnd)
+allow system_app time:unix_stream_socket connectto;
+get_prop(system_app, hw_sku_prop);
+
+allow system_app {
+    ctl_default_prop
+    fm_prop
+    usf_prop
+}:property_service set;
+
+allow system_app {
+    atfwd_service
+    dun_service
+    # access to color service SDK
+    qfp_proxy_service
+}:service_manager add;
+
+allowxperm system_app self:socket ioctl msm_sock_ipc_ioctls;
