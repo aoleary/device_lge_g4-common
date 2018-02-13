@@ -10,6 +10,7 @@ type sysfs_camera, sysfs_type, file_type;
 type rmt_debugfs, fs_type;
 type debugfs_rpm, debugfs_type, fs_type;
 
+type healthd_sysfs, fs_type;
 type rtc_sysfs, fs_type;
 type proc_irq, fs_type;
 type nv_data_file, file_type;

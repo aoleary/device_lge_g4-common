@@ -10,3 +10,8 @@ allow ueventd persist_wifi_file:file r_file_perms;
 allow ueventd sysfs_nanoapp_cmd:file w_file_perms;
 allow ueventd rtc_sysfs:file relabelto;
 allow ueventd rtc_sysfs:lnk_file relabelto;
+allow ueventd sysfs:dir { search read open };
+allow ueventd healthd_sysfs:lnk_file { getattr };
+allow ueventd healthd_sysfs:dir { search open read };
+allow ueventd healthd_sysfs:file { open read getattr };
+allow ueventd sysfs:file { open read getattr };

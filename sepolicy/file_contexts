@@ -52,6 +52,8 @@
 
 /sys/devices/soc.0/qpnp-rtc-[^/]+/rtc/rtc0(/.*)?       u:object_r:rtc_sysfs:s0
 
+/sys/devices/soc.0/qpnp-smbcharger-17/power_supply/battery(/.*)?    u:object_r:healthd_sysfs:s0
+
 /sys/devices/system/cpu/cpu[0-3]/cpufreq/schedutil(/.*)?            u:object_r:sysfs_devices_system_cpu:s0
 /data/cam_socket1                                       u:object_r:camera_socket:s0
 /data/cam_socket2                                       u:object_r:camera_socket:s0
