@@ -3,3 +3,7 @@ allow servicemanager thermal-engine:file { read open };
 allow servicemanager thermal-engine:dir { search };
 allow servicemanager ims:dir search;
 allow servicemanager ims:file { open read };
+allow servicemanager per_mgr:dir { search };
+allow servicemanager ims:process { getattr };
+allow servicemanager per_mgr:process { getattr };
+allow servicemanager per_mgr:file { read open };

@@ -1,3 +1,5 @@
 allow audioserver cust_file:dir { search };
 
 allow audioserver rootfs:lnk_file { getattr };
+
+allow audioserver binder_per_mgr_service:service_manager find;

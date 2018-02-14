@@ -20,10 +20,21 @@ allow init firmware_file:dir mounton;
 allow init fsg_file:dir mounton;
 allow init pstorefs:dir mounton;
 
-allowxperm init self:socket ioctl msm_sock_ipc_ioctls;
-allowxperm init self:udp_socket ioctl { SIOCGIWESSID };
-allowxperm init self:udp_socket ioctl priv_sock_ioctls;
-
 allow init app_data_file:dir search;
 #allow init firmware_file:dir create;
 allow init smem_log_device:chr_file { ioctl write };
+
+allow init app_data_file:file { setattr };
+allow init system_data_file:file append;
+
+allow init sensors_data_file:dir mounton;
+allow init persist_lg_data_file:dir mounton;
+allow init mpt_file:dir mounton;
+allow init functionfs:dir mounton;
+
+allow init system_block_device:{ blk_file lnk_file } relabelto;
+allow init persistent_block_device:blk_file setattr;
+
+allowxperm init self:socket ioctl msm_sock_ipc_ioctls;
+allowxperm init self:udp_socket ioctl priv_sock_ioctls;
+allowxperm init self:udp_socket ioctl SIOCSIFFLAGS;

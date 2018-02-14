@@ -48,5 +48,10 @@ allow rild smem_log_device:chr_file { ioctl open read write };
 allow rild vendor_file:file lock;
 
 allow rild { mediaserver_service audioserver_service }:service_manager find;
+allow rild healthd_sysfs:file { open read };
+allow rild healthd_sysfs:dir { search };
+allow rild self:capability { sys_module dac_override };
+
+allow rild binder_per_mgr_service:service_manager find;
 
 allowxperm rild self:socket ioctl msm_sock_ipc_ioctls;

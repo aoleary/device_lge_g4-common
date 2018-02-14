@@ -1,0 +1,10 @@
+allow fsck cache_file:dir getattr;
+allow fsck system_block_device:blk_file { getattr };
+allow fsck persist_block_device:blk_file { read open getattr };
+allow fsck persist_file:dir getattr;
+allow fsck sensors_data_file:dir getattr;
+allow fsck sns_block_device:blk_file { read open getattr };
+allow fsck drm_block_device:blk_file { read open getattr };
+allow fsck mpt_block_device:blk_file { read open getattr };
+allow fsck mpt_file:dir getattr;
+allow fsck functionfs:dir getattr;

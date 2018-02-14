@@ -2,3 +2,5 @@ allow toolbox init:unix_stream_socket connectto;
 allow toolbox system_file:file execute;
 allow toolbox vendor_file:file execute;
 allow toolbox qti_init_shell_exec:file { read execute };
+allow toolbox init:fifo_file { getattr write };
+allow toolbox property_socket:sock_file write;

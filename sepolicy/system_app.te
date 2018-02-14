@@ -12,6 +12,7 @@ allow system_app proc_touchpanel:file rw_file_perms;
 
 unix_socket_connect(system_app, cnd, cnd)
 allow system_app time:unix_stream_socket connectto;
+allow system_app time_daemon:unix_stream_socket connectto;
 get_prop(system_app, hw_sku_prop);
 
 allow system_app {
@@ -23,7 +24,6 @@ allow system_app {
 allow system_app {
     atfwd_service
     dun_service
-    # access to color service SDK
     qfp_proxy_service
 }:service_manager add;
 

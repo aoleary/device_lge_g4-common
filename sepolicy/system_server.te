@@ -51,3 +51,14 @@ allow system_server qmuxd_qmuxd_socket:sock_file write;
 allow system_server sensors:unix_stream_socket connectto;
 allow system_server sensors_socket:sock_file write;
 allow system_server smem_log_device:chr_file { ioctl open read write };
+
+# Allow system_server to communicate with perfd
+allow system_server perfd_data_file:dir search;
+allow system_server perfd_data_file:sock_file write;
+allow system_server perfd:unix_stream_socket connectto;
+allow system_server mpctl_data_file:dir search;
+allow system_server mpctl_data_file:sock_file write;
+allow system_server mpctl_socket:dir search;
+allow system_server mpctl_socket:sock_file write;
+
+allow system_server binder_per_mgr_service:service_manager find;
