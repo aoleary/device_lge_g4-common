@@ -4,3 +4,4 @@ allow toolbox vendor_file:file execute;
 allow toolbox qti_init_shell_exec:file { read execute };
 allow toolbox init:fifo_file { getattr write };
 allow toolbox property_socket:sock_file write;
+allow toolbox bluetooth_prop:property_service set;
