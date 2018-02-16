@@ -711,7 +711,7 @@ service bdaddr_loader /system/vendor/bin/bdaddr_loader
     group bluetooth net_bt_admin
     oneshot
 
-service config_bluetooth /system/etc/init.qcom.bt.sh "onboot"
+service config_bluetooth /system/bin/init.qcom.bt.sh "onboot"
     class core
     user root
     oneshot
