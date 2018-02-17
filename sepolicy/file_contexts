@@ -45,6 +45,7 @@
 /(vendor|system/vendor)/vendor/bin/rfs_access       u:object_r:rfs_access_exec:s0
 /(vendor|system/vendor)/vendor/bin/qseecomd         u:object_r:tee_exec:s0
 /(vendor|system/vendor)/vendor/bin/btnvtool         u:object_r:btnvtool_exec:s0
+/system/vendor/firmware/BCM4335_003.001.009.0117.0620_LGE_P1_EU.hcd u:object_r:bt_firmware_file:s0
 
 /data/misc/bdaddr                   u:object_r:bluetooth_data_file:s0
 
