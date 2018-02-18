@@ -104,10 +104,6 @@ on init
     chmod 0770 /carrier
     chmod 0644 /proc/cmdline
 
-    # Watchdog
-    touch /system/etc/watchdog 0775 system system
-    symlink /system/etc/watchdog /dev/watchdog
-
     # Set permissions for persist partition
     mkdir /persist 0771 system system
 
@@ -465,17 +461,10 @@ on post-fs-data
     # Create folder for mm-qcamera-daemon
     mkdir /data/camera 0770 media camera
     mkdir /dev/cpuset/camera-daemon
-    touch /dev/cpuset/camera-daemon/tasks
-    touch /dev/cpuset/tasks
-    touch /dev/stune/tasks
     chmod 0666 /dev/media0
 
     # Create folder for camera sockets
     mkdir /data/misc/camera 0771 camera camera
-
-    # Create file for ipconfig
-    touch /data/misc/ethernet/ipconfig.txt
-    chmod 755 /data/misc/ethernet/ipconfig.txt
 
     mkdir /data/misc/ipa 0700 net_admin net_admin
 
@@ -562,8 +551,6 @@ on post-fs-data
     mkdir /data/data/media 0770 media media
 
     # Create rild related dirs
-    touch /data/misc/radio/ril_log 0755 radio radio
-    touch /system/etc/motorola/qcril.db-wal 2777 radio radio
     chown 13:13 /system/etc/motorola 
     chown 13:13 /system/etc/motorola/*       
     chown 13:13 /system/etc/motorola/*/*
