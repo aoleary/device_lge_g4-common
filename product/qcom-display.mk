@@ -4,11 +4,17 @@ PRODUCT_PACKAGES += \
     android.hardware.graphics.composer@2.1-impl \
     android.hardware.graphics.mapper@2.0-impl \
     android.hardware.memtrack@1.0-impl \
+    android.hardware.light@2.0-impl \
+    android.hardware.light@2.0-service \
     copybit.msm8992 \
     gralloc.msm8992 \
     hwcomposer.msm8992 \
     memtrack.msm8992 \
-    liboverlay
+    lights.msm8992 \
+    liboverlay \
+    libhdmi \
+    libqdutils \
+    libqservice
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.qualcomm.cabl=2
