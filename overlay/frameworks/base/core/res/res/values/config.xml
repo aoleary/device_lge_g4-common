@@ -311,6 +311,6 @@
            audio output to the WiFi display encoder in the media server.
          * The remote submix module "audio.r_submix.default" must be installed on the device.
          * The device must be provisioned with HDCP keys (for protected content). -->
-    <bool name="config_enableWifiDisplay">false</bool>
+<!--    <bool name="config_enableWifiDisplay">false</bool>-->
 
 </resources>
