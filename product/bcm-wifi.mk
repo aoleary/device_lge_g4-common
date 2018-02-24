@@ -1,5 +1,6 @@
 PRODUCT_PACKAGES += \
     android.hardware.wifi@1.0-service \
+    android.hardware.wifi.offload@1.0-service \
     ipacm \
     ipacm-diag \
     IPACM_cfg.xml \
