@@ -45,6 +45,9 @@ esac
 target=`getprop ro.board.platform`
 case "$target" in
     "msm8992")
+        touch /dev/soundtrigger_dma_drv
+        chmod 0660 /dev/soundtrigger_dma_drv
+        chown media:media /dev/soundtrigger_dma_drv
         # disable thermal bcl hotplug to switch governor
         echo 0 > /sys/module/msm_thermal/core_control/enabled
         for mode in /sys/devices/soc.0/qcom,bcl.*/mode

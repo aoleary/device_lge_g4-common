@@ -36,6 +36,8 @@
 
 /dev/ttyHSL1                        u:object_r:cir_device:s0
 
+/dev/soundtrigger_dma_drv           u:object_r:audio_device:s0
+
 /(vendor|system/vendor)/bin/imscmservice            u:object_r:ims_exec:s0
 /(vendor|system/vendor)/bin/hwaddrs                 u:object_r:hwaddrs_exec:s0
 /(vendor|system/vendor)/bin/imswmsproxy             u:object_r:imswmsproxy_exec:s0

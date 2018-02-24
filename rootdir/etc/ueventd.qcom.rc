@@ -38,8 +38,8 @@
 /dev/watchdog             0755   system     system
 
 # the DIAG device node is not world writable/readable.
-/dev/diag                 0660   system     qcom_diag
-/dev/diag_lge             0660   system     qcom_diag
+/dev/diag                 0660   radio      radio
+/dev/diag_lge             0660   radio      radio
 
 /dev/genlock              0666   system     system
 /dev/kgsl                 0666   system     system
@@ -165,6 +165,7 @@
 /dev/msm_preproc_ctl      0660   system     audio
 /dev/msm_rtac             0660   system     audio
 /dev/msm_voicememo        0660   system     audio
+/dev/soundtrigger_dma_drv 0660   media      media
 /dev/radio0               0640   fm_radio   fm_radio
 /dev/smd3                 0660   bluetooth  bluetooth
 /dev/smd2                 0660   bluetooth  bluetooth

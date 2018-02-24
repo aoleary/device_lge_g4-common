@@ -104,6 +104,9 @@ on init
     chmod 0770 /carrier
     chmod 0644 /proc/cmdline
 
+    chmod 0660 /dev/soundtrigger_dma_drv
+    chown media media /dev/soundtrigger_dma_drv
+
     # Set permissions for persist partition
     mkdir /persist 0771 system system
 
