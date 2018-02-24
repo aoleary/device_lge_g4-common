@@ -1012,6 +1012,7 @@ service thermal-engine /system/vendor/bin/thermal-engine
    socket thermal-recv-client stream 0660 system system
    socket thermal-recv-passive-client stream 0666 system system
    group root
+   disabled
 
 service per_mgr /system/vendor/bin/pm-service
     class core
