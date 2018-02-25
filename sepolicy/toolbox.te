@@ -5,3 +5,6 @@ allow toolbox qti_init_shell_exec:file { read execute };
 allow toolbox init:fifo_file { getattr write };
 allow toolbox property_socket:sock_file write;
 allow toolbox bluetooth_prop:property_service set;
+allow toolbox device:dir { write add_name };
+allow toolbox device:file { create read write open getattr setattr };
+allow toolbox toolbox:capability { chown };
