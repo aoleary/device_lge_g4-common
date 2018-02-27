@@ -12,3 +12,10 @@ allow mm-qcamerad { untrusted_app untrusted_app_25 }:fd use;
 allow mm-qcamerad camera_data_file:sock_file { create unlink };
 set_prop(mm-qcamerad, debug_prop)
 
+allow mm-qcamerad self:tcp_socket create;
+allow mm-qcamerad self:tcp_socket setopt;
+allow mm-qcamerad self:tcp_socket { bind listen };
+allow mm-qcamerad self:tcp_socket listen;
+allow mm-qcamerad port:tcp_socket name_bind;
+allow mm-qcamerad self:tcp_socket create_stream_socket_perms;
+allow mm-qcamerad node:tcp_socket node_bind;
