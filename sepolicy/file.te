@@ -12,7 +12,7 @@ type sysfs_msm_subsys_restart, sysfs_type, fs_type;
 type sysfs_tap2wake, fs_type, sysfs_type;
 
 type rmt_debugfs, fs_type;
-type debugfs_rpm, debugfs_type, fs_type;
+#type debugfs_rpm, debugfs_type, fs_type;
 
 type healthd_sysfs, fs_type;
 type rtc_sysfs, fs_type;
