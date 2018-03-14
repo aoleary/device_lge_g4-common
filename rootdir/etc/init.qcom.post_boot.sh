@@ -48,9 +48,8 @@ case "$target" in
         touch /dev/soundtrigger_dma_drv
         chmod 0660 /dev/soundtrigger_dma_drv
         chown media:media /dev/soundtrigger_dma_drv
-        touch /dev/socket/seempdw
-        chmod 0660 /dev/socket/seempdw
-        chown system:system /dev/socket/seempdw
+        touch /dev/socket/perfd
+        chmod 0777 /dev/socket/perfd
         # disable thermal bcl hotplug to switch governor
         echo 0 > /sys/module/msm_thermal/core_control/enabled
         for mode in /sys/devices/soc.0/qcom,bcl.*/mode

@@ -1008,8 +1008,9 @@ service qseecomd /system/vendor/bin/qseecomd
 service perfd /system/bin/perfd
     class main
     user root
-    group system
+    group root readproc
     disabled
+    socket perfd seqpacket 0666 root system
     writepid /dev/cpuset/system-background/tasks
 
 service thermal-engine /system/vendor/bin/thermal-engine
@@ -1026,6 +1027,7 @@ service per_mgr /system/vendor/bin/pm-service
     class core
     user system
     group system net_raw
+    socket seempdw dgram 0666 system system
 
 service per_proxy /system/vendor/bin/pm-proxy
     class core
