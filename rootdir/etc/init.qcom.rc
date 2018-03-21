@@ -891,7 +891,7 @@ service qti /vendor/bin/qti
     writepid /dev/cpuset/system-background/tasks
     disabled
 
-service sensors /vendor/bin/sensors.qcom
+service vendor.sensors /vendor/bin/sensors.qcom
     class core
     user root
     group root system wakelock
