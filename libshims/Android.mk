@@ -13,30 +13,22 @@
 # limitations under the License.
 
 LOCAL_PATH := $(call my-dir)
-
 include $(CLEAR_VARS)
+
 LOCAL_SRC_FILES := wvm.c
 LOCAL_SHARED_LIBRARIES := libstagefright_foundation
 LOCAL_MODULE := libshims_wvm
 LOCAL_MODULE_TAGS := optional
-LOCAL_PROPRIETARY_MODULE := true
+
 LOCAL_CFLAGS_arm64 += -DLIBSHIMS_64BIT
+
 include $(BUILD_SHARED_LIBRARY)
 
 # RILD SOCKET SHIM
 include $(CLEAR_VARS)
+
 LOCAL_SRC_FILES := rild_socket.c
 LOCAL_MODULE := rild_socket
 LOCAL_MODULE_TAGS := optional
-LOCAL_PROPRIETARY_MODULE := true
-include $(BUILD_SHARED_LIBRARY)
 
-# QSAP
-include $(CLEAR_VARS)
-LOCAL_SRC_FILES := libqsap_shim.c
-LOCAL_SHARED_LIBRARIES := libqsap_sdk liblog
-LOCAL_C_INCLUDES := $(TOP)/system/qcom/softap/sdk
-LOCAL_MODULE := libqsap_shim
-LOCAL_MODULE_TAGS := optional
-LOCAL_PROPRIETARY_MODULE := true
 include $(BUILD_SHARED_LIBRARY)
