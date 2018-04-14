@@ -1,7 +1,0 @@
-allow healthd sysfs_thermal:dir search;
-allow healthd sysfs_thermal:file { read open };
-allow healthd healthd_sysfs:file { open getattr read };
-allow healthd sysfs:file { open getattr read };
-allow healthd healthd_sysfs:dir { search };
-allow healthd sysfs:dir { search };
-allowxperm healthd self:netlink_kobject_uevent_socket ioctl msm_sock_ipc_ioctls;

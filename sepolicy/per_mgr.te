@@ -1,6 +1,0 @@
-allow per_mgr self:capability { net_raw };
-allow per_mgr default_android_service:service_manager { find };
-allow per_mgr smem_log_device:chr_file { ioctl open read write };
-allow per_mgr binder_per_mgr_service:service_manager { add find };
-
-binder_call(per_mgr, servicemanager);

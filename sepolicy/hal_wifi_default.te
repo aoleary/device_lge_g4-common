@@ -1,3 +1,0 @@
-allow hal_wifi_default firmware_file:file { open read };
-allow hal_wifi_default sysfs:file write;
-allow hal_wifi_default wifi_data_file:file { read open getattr };

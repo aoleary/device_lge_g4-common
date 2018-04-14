@@ -1,2 +1,0 @@
-allow gatekeeperd firmware_file:file { read open getattr };
-allow gatekeeperd firmware_file:dir { search };

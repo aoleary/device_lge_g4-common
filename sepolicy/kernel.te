@@ -1,2 +1,0 @@
-allow kernel msm_irqbalanced:process setsched;
-

@@ -1,1 +1,0 @@
-allow dumpstate gatekeeper_service:service_manager { find };
