@@ -22,6 +22,6 @@
   {
     "repository":  "proprietary_vendor_lge",
     "target_path": "vendor/lge",
-    "remote":      "thepiguy0"
+    "remote":      "cypheros"
   }
 ]
