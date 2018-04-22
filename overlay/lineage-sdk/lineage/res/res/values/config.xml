@@ -28,7 +28,7 @@
          LIGHTS_BATTERY_LED = 64
          For example, a device supporting pulsating, RGB notification and
          battery LEDs would set this config to 11. -->
-    <integer name="config_deviceLightCapabilities">11</integer>
+    <integer name="config_deviceLightCapabilities">75</integer>
 
     <!-- Is the battery LED intrusive? Used to decide if there should be a battery led switch -->
     <bool name="config_intrusiveBatteryLed">true</bool>
