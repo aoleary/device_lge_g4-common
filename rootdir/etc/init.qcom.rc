@@ -909,8 +909,8 @@ service qcom-post-boot /system/bin/init.qcom.post_boot.sh
 #Group permissions for rild
 service ril-daemon /vendor/bin/hw/rild
     class main
-    socket qmux_radio/rild_oem0 stream 0666 radio system
-    socket qmux_radio/qmux_client_socket stream 0666 radio system
+    socket qmux_radio/rild_oem0 stream 0777 radio system
+    socket qmux_radio/qmux_client_socket stream 0777 radio system
     user root
     disabled
     group radio cache inet misc audio log oem_2950 net_raw wifi diag qcom_diag diag_lge
