@@ -205,7 +205,7 @@ fi
 # sfX: workaround for randomly no SIM on boot
 REQRESTART=$(getprop gsm.sim.operator.iso-country)
 if [ -z "$REQRESTART" ];then
-    stop ril-daemon; stop ril-daemon
+    stop ril-daemon
     start ril-daemon && echo "$0: restarted RIL daemon as gsm.sim.operator.iso-country was empty" >> /dev/kmsg
 else
     echo "$0: haven't touched RIL daemon as gsm.sim.operator.iso-country is >$REQRESTART<" >> /dev/kmsg
