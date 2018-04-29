@@ -203,14 +203,21 @@ if [ -c /dev/coresight-stm ]; then
 fi
 
 # sfX && kessaras: workaround for randomly no SIM on boot
-REQRESTART=$(getprop gsm.sim.operator.iso-country)
+sleep 5
+x=1
+REQRESTART=$(getprop gsm.sim.state)
 while [ -z "$REQRESTART" ]
 do
     stop ril-daemon
     start ril-daemon
-    echo "$0: restarted RIL daemon as gsm.sim.operator.iso-country was empty" >> /dev/kmsg
-    sleep 20
-    REQRESTART=$(getprop gsm.sim.operator.iso-country)
+    echo "$0: restarted RIL daemon as gsm.sim.state was empty" >> /dev/kmsg
+    sleep 10
+    REQRESTART=$(getprop gsm.sim.state)
+    x=$((x + 1))
+    if [[ $x -eq 10 ]]
+    then
+        break #For those that do not use the phone with a sim, after 10 tries to fix ril exit the loop.
+    fi
 done
 echo "$0: ended" >> /dev/kmsg
 # < END workaround
