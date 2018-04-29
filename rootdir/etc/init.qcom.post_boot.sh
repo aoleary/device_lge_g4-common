@@ -209,7 +209,7 @@ do
     stop ril-daemon
     start ril-daemon
     echo "$0: restarted RIL daemon as gsm.sim.operator.iso-country was empty" >> /dev/kmsg
-    sleep 10
+    sleep 20
     REQRESTART=$(getprop gsm.sim.operator.iso-country)
 done
 echo "$0: ended" >> /dev/kmsg
