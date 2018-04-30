@@ -69,16 +69,6 @@
         <fqname>@1.0::IOemLock/default</fqname>
     </hal>
     <hal format="hidl">
-        <name>android.hardware.weaver</name>
-        <transport arch="32+64">passthrough</transport>
-        <version>1.0</version>
-        <interface>
-            <name>IWeaver</name>
-            <instance>default</instance>
-        </interface>
-        <fqname>@1.0::IWeaver/default</fqname>
-    </hal>
-    <hal format="hidl">
         <name>vendor.lineage.touch</name>
         <transport arch="32+64">passthrough</transport>
         <version>1.0</version>
