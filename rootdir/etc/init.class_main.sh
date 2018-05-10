@@ -28,9 +28,13 @@
 
 start_copying_prebuilt_qcril_db()
 {
-    if [ -f /system/vendor/qcril.db -a ! -f /data/misc/radio/qcril.db ]; then
-        cp /system/vendor/qcril.db /data/misc/radio/qcril.db
-        chown -h radio.radio /data/misc/radio/qcril.db
+    if [ -f /system/vendor/qcril.db -a ! -f /system/etc/motorola/qcril.db ]; then
+        mkdir /system/etc/motorola
+        chown -h radio:radio /system/etc/motorola
+        chmod 770 /system/etc/motorola
+        cp /system/vendor/qcril.db /system/etc/motorola/qcril.db
+        chown -h radio.radio /system/etc/motorola/qcril.db
+        chmod 770 /system/etc/motorola/qcril.db
     fi
 }
 start_copying_prebuilt_qcril_db

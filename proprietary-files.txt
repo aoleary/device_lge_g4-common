@@ -274,7 +274,6 @@ vendor/firmware/libpn547_fw_C9.so
 vendor/firmware/libpn547_fw_22.so
 vendor/firmware/libpn547_fw.so
 vendor/firmware/BCM4339_003.001.009.0117.0620_LGE_P1_EU.hcd:vendor/firmware/BCM4335_003.001.009.0117.0620_LGE_P1_EU.hcd
-vendor/qcril.db
 vendor/lib/libaptX-1.0.0-rel-Android21-ARMv7A.so
 vendor/lib/libaptXHD-1.0.0-rel-Android21-ARMv7A.so
 vendor/lib/libaptXScheduler.so
@@ -745,6 +744,7 @@ lib/libmdmcutback.so
 -framework/qcrilhook.jar
 -framework/izat.xt.srv.jar
 -framework/qcnvitems.jar
+etc/motorola/qcril.db
 etc/thermal-engine-8992.conf
 etc/data/netmgr_config.xml
 etc/data/qmi_config.xml
