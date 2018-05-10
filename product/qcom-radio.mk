@@ -7,6 +7,7 @@ PRODUCT_PACKAGES += \
     librmnetctl \
     libsecril-client-sap \
     libprotobuf-cpp-full \
+    libmdmdetect \
     rild_socket \
     libxml2
 
