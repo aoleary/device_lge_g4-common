@@ -3,7 +3,8 @@ PRODUCT_PACKAGES += \
     audio.primary.msm8992 \
     audio.r_submix.default \
     audio.usb.default \
-    audio_policy.msm8992
+    audio_policy.msm8992 \
+    audio_amplifier.default
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio/audio_effects.xml:system/vendor/etc/audio_effects.xml \
