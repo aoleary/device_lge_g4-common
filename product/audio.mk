@@ -11,9 +11,6 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio/audio_output_policy.conf:system/vendor/etc/audio_output_policy.conf \
     $(LOCAL_PATH)/audio/audio_platform_info.xml:system/vendor/etc/audio_platform_info.xml \
     $(LOCAL_PATH)/audio/mixer_paths.xml:system/vendor/etc/mixer_paths.xml \
-    $(LOCAL_PATH)/audio/mixer_paths_qvr.xml:system/vendor/etc/mixer_paths_qvr.xml \
-    $(LOCAL_PATH)/audio/mixer_paths_skuk.xml:system/vendor/etc/mixer_paths_skuk.xml \
-    $(LOCAL_PATH)/audio/mixer_paths_tavil.xml:system/vendor/etc/mixer_paths_tavil.xml \
     $(LOCAL_PATH)/audio/aanc_tuning_mixer.txt:system/vendor/etc/aanc_tuning_mixer.txt \
     $(LOCAL_PATH)/audio/audio_policy_configuration.xml:system/vendor/etc/audio_policy_configuration.xml \
     $(LOCAL_PATH)/audio/audio_policy_volumes_drc.xml:system/vendor/etc/audio_policy_volumes_drc.xml \
