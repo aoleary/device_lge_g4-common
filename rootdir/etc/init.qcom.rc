@@ -66,8 +66,8 @@ on early-fs
     export MC_AUTH_TOKEN_PATH /data/app/mcRegistry
 
 #SSD_DISP start
-    chown system system /sys/devices/soc.0/qpnp-wled-23/leds/wled/brightness
-    chown system system /sys/devices/soc.0/fd900000.qcom,mdss_mdp/qcom,mdss_fb_primary.188/leds/lcd-backlight/brightness
+    chown system system /sys/class/leds/wled/brightness
+    chown system system /sys/bus/platform/drivers/mdss_fb/qcom,mdss_fb_primary.188/leds/lcd-backlight/brightness
 #SSD_DISP end
 
 on fs
@@ -280,17 +280,28 @@ on boot
     chown system system /sys/module/ccid_bridge/parameters/bulk_msg_timeout
 
     # Flashlight
-    chown system system /sys/devices/soc.0/qpnp-flash-led-26/leds/led:flash_0/brightness
-    chown system system /sys/devices/soc.0/qpnp-flash-led-26/leds/led:flash_1/brightness
+    chown system system /sys/class/leds/led:flash_0/brightness
+    chown system system /sys/class/leds/led:flash_1/brightness
     chown system system /sys/class/leds/flashlight_front/dual_brightness
-    chown system system /sys/devices/soc.0/qpnp-flash-led-26/leds/led:torch_0/brightness
-    chown system system /sys/devices/soc.0/qpnp-flash-led-26/leds/led:torch_1/brightness
-    chown system system /sys/devices/soc.0/leds-qpnp-25/leds/red/brightness
-    chown system system /sys/devices/soc.0/leds-qpnp-25/leds/blue/brightness
-    chown system system /sys/devices/soc.0/leds-qpnp-25/leds/green/brightness
-    chown system system /sys/devices/soc.0/qpnp-wled-23/leds/wled/brightness
-    chown system system /sys/devices/soc.0/qcom,camera-flash.85/leds/torch-light0/brightness
-    chown system system /sys/devices/soc.0/qcom,camera-flash.85/leds/torch-light1/brightness
+    chown system system /sys/class/leds/led:torch_0/brightness
+    chown system system /sys/class/leds/led:torch_1/brightness
+    chown system system /sys/class/leds/red/brightness
+    chown system system /sys/class/leds/blue/brightness
+    chown system system /sys/class/leds/green/brightness
+    chown system system /sys/class/leds/wled/brightness
+    chown system system /sys/bus/platform/drivers/qcom,camera-flash/qcom,camera-flash.85/leds/torch-light0/brightness
+    chown system system /sys/bus/platform/drivers/qcom,camera-flash/qcom,camera-flash.85/leds/torch-light1/brightness
+    chmod 0666 /sys/class/leds/led:flash_0/brightness
+    chmod 0666 /sys/class/leds/led:flash_1/brightness
+    chmod 0666 /sys/class/leds/flashlight_front/dual_brightness
+    chmod 0666 /sys/class/leds/led:torch_0/brightness
+    chmod 0666 /sys/class/leds/led:torch_1/brightness
+    chmod 0666 /sys/class/leds/red/brightness
+    chmod 0666 /sys/class/leds/blue/brightness
+    chmod 0666 /sys/class/leds/green/brightness
+    chmod 0666 /sys/class/leds/wled/brightness
+    chmod 0666 /sys/bus/platform/drivers/qcom,camera-flash/qcom,camera-flash.85/leds/torch-light0/brightness
+    chmod 0666 /sys/bus/platform/drivers/qcom,camera-flash/qcom,camera-flash.85/leds/torch-light1/brightness
 
 
     # Define TCP buffer sizes for various networks
