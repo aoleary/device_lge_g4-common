@@ -79,6 +79,7 @@ on init
     # ZRAM setup
     write /sys/block/zram0/comp_algorithm lzo
     write /proc/sys/vm/page-cluster 0
+    write /sys/class/leds/blue/brightness 255
 
     mkdir /mnt/shell/emulated 0700 shell shell
     mkdir /storage/emulated 0555 root root
@@ -302,7 +303,6 @@ on boot
     chmod 0777 /sys/class/leds/wled/brightness
     chmod 0777 /sys/bus/platform/drivers/qcom,camera-flash/qcom,camera-flash.85/leds/torch-light0/brightness
     chmod 0777 /sys/bus/platform/drivers/qcom,camera-flash/qcom,camera-flash.85/leds/torch-light1/brightness
-
 
     # Define TCP buffer sizes for various networks
     #   ReadMin, ReadInitial, ReadMax, WriteMin, WriteInitial, WriteMax,
