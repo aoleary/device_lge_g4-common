@@ -1436,6 +1436,13 @@
         <ctl name="DEC3 Volume" value="84" />
     </path>
 
+    <!-- CM: audio-record IN handset mic -->
+    <path name="voice-memo">
+        <path name="handset-mic" />
+        <ctl name="ADC3 Volume" value="10" />
+        <ctl name="DEC4 Volume" value="84" />
+    </path>
+
     <!-- CM: audio-record IN speaker mic -->
     <path name="speaker-mic">
         <path name="2nd-mic" />
