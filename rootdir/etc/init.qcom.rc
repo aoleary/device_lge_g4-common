@@ -123,6 +123,15 @@ on early-boot
 
     write /sys/kernel/boot_adsp/boot 1
 
+    chcon -R /data/property u:object_r:system_data_file:s0
+    chcon -R /data/security u:object_r:system_data_file:s0
+    start chcon_keystore
+
+service chcon_keystore /system/bin/init.recovery.m1_chcon_keystore.sh
+    disabled
+    oneshot
+    seclabel u:r:keystore:s0
+
 on boot
     start rmt_storage
     start rfs_access
