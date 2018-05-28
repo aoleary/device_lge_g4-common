@@ -36,9 +36,33 @@ PRODUCT_PROPERTY_OVERRIDES += \
     tunnel.audio.encode=false \
     use.dedicated.device.for.voip=true
 
+# Audio
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.qc.sdk.audio.fluencetype=fluencepro \
+    persist.audio.fluence.voicecall=true \
+    persist.audio.fluence.voicecomm=true \
+    persist.audio.fluence.voicerec=false \
+    persist.audio.fluence.speaker=true \
+    persist.speaker.prot.enable=true \
+    ro.config.vc_call_vol_steps=7
+
+# Reduce client buffer size for fast audio output tracks
+PRODUCT_PROPERTY_OVERRIDES += \
+    af.fast_track_multiplier=1
+
+# Low latency audio buffer size in frames
+PRODUCT_PROPERTY_OVERRIDES += \
+    audio_hal.period_size=192
+
+# low audio flinger standby delay to reduce power consumption
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.audio.flinger_standbytime_ms=300
+
 # voip
 PRODUCT_PROPERTY_OVERRIDES += \
     use.voice.path.for.pcm.voip=false
 
 PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/android.hardware.audio.low_latency.xml:system/etc/permissions/android.hardware.audio.low_latency.xml
+    frameworks/native/data/etc/android.hardware.audio.low_latency.xml:system/etc/permissions/android.hardware.audio.low_latency.xml \
+    frameworks/native/data/etc/android.hardware.audio.pro.xml:system/etc/permissions/android.hardware.audio.pro.xml
+
