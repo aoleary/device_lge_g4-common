@@ -1443,6 +1443,13 @@
         <ctl name="DEC4 Volume" value="84" />
     </path>
 
+    <!-- audio record with headset -->
+    <path name="headset-voice-memo">
+        <path name="adc2" />
+        <ctl name="ADC2 Volume" value="7" />
+        <ctl name="DEC5 Volume" value="84" />
+    </path>
+
     <!-- CM: audio-record IN speaker mic -->
     <path name="speaker-mic">
         <path name="2nd-mic" />
