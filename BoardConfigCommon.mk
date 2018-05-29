@@ -22,6 +22,12 @@ TARGET_SPECIFIC_HEADER_PATH := $(COMMON_PATH)/include
 include $(COMMON_PATH)/PlatformConfig.mk
 include $(COMMON_PATH)/board/*.mk
 
+# Filesystem
+TARGET_USERIMAGES_USE_F2FS := true
+TARGET_USERIMAGES_USE_EXT4 := true
+TARGET_EXFAT_DRIVER := sdfat
+TARGET_VFAT_DRIVER := sdfat
+
 # HIDL
 DEVICE_MANIFEST_FILE := $(COMMON_PATH)/configs/manifest.xml
 
