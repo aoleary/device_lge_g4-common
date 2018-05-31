@@ -22,7 +22,7 @@ PRODUCT_COPY_FILES += \
 
 # fluence multi-mic solution
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.qc.sdk.audio.fluencetype=fluence \
+    ro.qc.sdk.audio.fluencetype=fluencepro \
     persist.audio.fluence.audiorec=false \
     persist.audio.fluence.speaker=true \
     persist.audio.fluence.voicecall=true \
