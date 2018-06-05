@@ -477,6 +477,10 @@
        <path name="low-latency-playback" />
     </path>
 
+    <path name="low-latency-playback speaker-and-headphones">
+       <path name="low-latency-playback" />
+    </path>
+
     <path name="low-latency-playback speaker-protected">
         <path name="low-latency-playback" />
     </path>
