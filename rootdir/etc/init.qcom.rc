@@ -852,7 +852,8 @@ service qti /system/vendor/bin/qti
 service sensors /system/vendor/bin/sensors.qcom
     class core
     user root
-    group root
+    group root system
+    writepid /dev/cpuset/system-background/tasks
     disabled
 
 on property:ro.use_data_netmgrd=false
