@@ -144,6 +144,11 @@
 
     </acdb_ids>
 
+    <config_params>
+        <param key="snd_card_name" value="msm8994-tomtom-snd-card"/>
+        <param key="input_mic_max_count" value="2"/>
+    </config_params>
+
     <backend_names>
         <!-- Output devices -->
         <device name="SND_DEVICE_OUT_SPEAKER" backend="speaker" />
