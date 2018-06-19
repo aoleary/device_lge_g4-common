@@ -474,7 +474,7 @@
 
     <!-- CM: voice-call OUT handset speaker -->
     <path name="low-latency-playback voice-speaker">
-        <!-- empty -->
+        <path name="low-latency-playback" />
     </path>
 
     <path name="low-latency-playback handset">
