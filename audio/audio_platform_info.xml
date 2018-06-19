@@ -160,9 +160,6 @@
 
     <device_names>
         <!-- Output devices -->
-        <device name="SND_DEVICE_OUT_VOIP_HANDSET" alias="voip-earpiece" />
-        <device name="SND_DEVICE_OUT_VOIP_SPEAKER" alias="voip-speaker" />
-        <device name="SND_DEVICE_OUT_VOIP_HEADPHONES" alias="voip-headphones" />
 
         <!-- Input devices -->
         <device name="SND_DEVICE_IN_VOICE_DMIC" alias="voice-dmic-ef" /> <!-- handset mic for voice-call earpiece -->
@@ -180,9 +177,6 @@
         <device name="SND_DEVICE_IN_HANDSET_MIC" alias="voice-memo" /> <!-- handset mic for audio-record -->
         <device name="SND_DEVICE_IN_HEADSET_MIC" alias="headset-voice-memo" />
         <device name="SND_DEVICE_IN_HEADSET_MIC_FLUENCE" alias="headset-voice-memo" />
-        <device name="SND_DEVICE_IN_VOIP_HANDSET_MIC" alias="voip-handset-mic" />
-        <device name="SND_DEVICE_IN_VOIP_SPEAKER_MIC" alias="voip-speaker-mic" />
-        <device name="SND_DEVICE_IN_VOIP_HEADSET_MIC" alias="voip-headset-mic" />
     </device_names>
 
 </audio_platform_info>
