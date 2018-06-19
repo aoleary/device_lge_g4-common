@@ -173,6 +173,7 @@
         <device name="SND_DEVICE_IN_HANDSET_DMIC_NS" alias="voice-dmic-ef" /> <!-- handset mic for voice-call earpiece -->
         <device name="SND_DEVICE_IN_HANDSET_DMIC_AEC_NS" alias="voice-dmic-ef" /> <!-- handset mic for voice-call earpiece -->
 
+        <device name="SND_DEVICE_IN_VOICE_SPEAKER_QMIC" alias="voice-speaker-dmic-ef"/>
         <device name="SND_DEVICE_IN_VOICE_SPEAKER_DMIC" alias="voice-speaker-dmic-ef" /> <!-- handset mic for voice-call speaker -->
         <device name="SND_DEVICE_IN_SPEAKER_DMIC" alias="voice-speaker-dmic-ef" /> <!-- handset mic for voice-call speaker -->
         <device name="SND_DEVICE_IN_SPEAKER_DMIC_AEC" alias="voice-speaker-dmic-ef" /> <!-- handset mic for voice-call speaker -->
