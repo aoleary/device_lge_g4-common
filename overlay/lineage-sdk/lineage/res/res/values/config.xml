@@ -50,5 +50,14 @@
     <!-- Does the device supports fast charging -->
     <bool name="config_FastChargingLedSupported">true</bool>
 
+    <!-- Proximity check on screen on to prevent accidental wakeups -->
+    <bool name="config_proximityCheckOnWake">true</bool>
+
+    <!-- Proximity check on screen on default -->
+    <bool name="config_proximityCheckOnWakeEnabledByDefault">false</bool>
+
+    <!-- Proximity check timeout -->
+    <integer name="nameconfig_proximityCheckTimeout">250</integer>
+
 </resources>
 
