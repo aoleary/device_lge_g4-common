@@ -96,8 +96,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Camera
 PRODUCT_PACKAGES += \
-    camera.device@1.0-impl \
-    camera.device@3.2-impl \
     camera.device@3.4-external-impl \
     camera.device@3.5-external-impl \
     android.hardware.camera.provider@2.4-impl \
