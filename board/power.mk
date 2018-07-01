@@ -1,4 +1,4 @@
-WITH_CM_CHARGER := true
+WITH_LINEAGE_CHARGER := false
 BOARD_CHARGER_DISABLE_INIT_BLANK := true
 BOARD_CHARGER_ENABLE_SUSPEND := false
 BACKLIGHT_PATH := "/sys/class/leds/lcd-backlight/brightness"
