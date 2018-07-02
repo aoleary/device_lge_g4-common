@@ -16,6 +16,9 @@
 
 $(call inherit-product-if-exists, vendor/lge/g4-common/g4-common-vendor.mk)
 
+# Build with specific settings for g4-common
+$(call inherit-product, $(LOCAL_PATH)/configs/go_for_g4.mk)
+
 # Audio
 PRODUCT_PACKAGES += \
     android.hardware.audio@2.0-impl \
