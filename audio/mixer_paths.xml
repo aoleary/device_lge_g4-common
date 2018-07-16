@@ -2149,33 +2149,33 @@
     <!-- QUAT MI2S SPEAKER ends -->
 
     <path name="bt-sco-and-speaker">
-        <ctl name="SLIM_0_RX SampleRate" value="KHZ_48" />
+        <ctl name="SLIM_0_RX SampleRate" value="KHZ_8" />
         <path name="speaker" />
     </path>
 
     <path name="bt-sco-wb-and-speaker">
-        <ctl name="SLIM_0_RX SampleRate" value="KHZ_96" />
+        <ctl name="SLIM_0_RX SampleRate" value="KHZ_16" />
         <path name="speaker" />
     </path>
 
     <path name="bt-sco-and-headphones">
-        <ctl name="SLIM_0_RX SampleRate" value="KHZ_48" />
+        <ctl name="SLIM_0_RX SampleRate" value="KHZ_8" />
         <path name="headphones" />
     </path>
 
     <path name="bt-sco-wb-and-headphones">
-        <ctl name="SLIM_0_RX SampleRate" value="KHZ_96" />
+        <ctl name="SLIM_0_RX SampleRate" value="KHZ_16" />
         <path name="headphones" />
     </path>
 
     <path name="bt-sco-and-headphones-and-speaker">
-        <ctl name="SLIM_0_RX SampleRate" value="KHZ_48" />
+        <ctl name="SLIM_0_RX SampleRate" value="KHZ_8" />
         <path name="headphones" />
         <path name="speaker" />
     </path>
 
     <path name="bt-sco-wb-and-headphones-and-speaker">
-        <ctl name="SLIM_0_RX SampleRate" value="KHZ_96" />
+        <ctl name="SLIM_0_RX SampleRate" value="KHZ_16" />
         <path name="speaker-and-headphones" />
     </path>
 
