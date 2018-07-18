@@ -221,7 +221,7 @@ while [ "$REQRESTART" != "READY" ];do
         sleep 2
         start ril-daemon
         echo "$0: restarted RIL daemon as gsm.sim.state was >$REQRESTART<" >> /dev/kmsg
-        sleep 30
+        sleep 20
         PRTRIGGER=0
     fi
     REQRESTART=$(getprop gsm.sim.state)
