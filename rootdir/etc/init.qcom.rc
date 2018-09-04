@@ -703,6 +703,7 @@ service ppd /system/vendor/bin/mm-pp-daemon
     class late_start
     disabled
     user system
+    seclabel u:r:camera:s0
     socket pps stream 0660 system system
     group system graphics
 
