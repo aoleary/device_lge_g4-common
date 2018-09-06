@@ -41,7 +41,8 @@ TARGET_LD_SHIM_LIBS := \
     /system/vendor/lib64/libril-qc-qmi-1.so|/system/vendor/lib64/rild_socket.so \
     /system/lib64/libmdmcutback.so|libqsap_shim.so \
     /system/lib/libshim_camera.so:/system/lib/libcamera_client.so|libshim_cameraclient.so \
-    /system/vendor/lib/libmmcamera_stillmore_lib.so|/system/lib/libshim_cameraclient.so
+    /system/vendor/lib/libmmcamera_stillmore_lib.so|/system/lib/libshim_cameraclient.so \
+	/system/vendor/lib/hw/camera.8992.so|/system/vendor/lib/hw/libcamera_shim.so
 
 # inherit from the proprietary version
 -include vendor/lge/g4-common/BoardConfigVendor.mk
