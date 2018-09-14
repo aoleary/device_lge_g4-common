@@ -1,0 +1,5 @@
+allow mm-qcamerad camera_data_file:sock_file { create unlink };
+allow mm-qcamerad sysfs:file { read open };
+allow mm-qcamerad camera_socket:sock_file unlink;
+
+allow mm-qcamerad self:tcp_socket { create setopt bind };

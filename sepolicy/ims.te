@@ -1,0 +1,14 @@
+allow ims smem_log_device:chr_file { read write open };
+allow ims self:capability net_raw;
+#allow ims smem_log_device:chr_file ioctl;
+
+allow ims self:socket create_socket_perms;
+allowxperm ims self:socket ioctl msm_sock_ipc_ioctls;
+
+allow ims ims_socket:sock_file write;
+
+allow ims self:udp_socket { create ioctl };
+allowxperm ims self:udp_socket ioctl SIOCDEVPRIVATE_D;
+
+allow ims self:netlink_socket create_socket_perms_no_ioctl;
+allow ims self:netlink_route_socket { create_socket_perms_no_ioctl nlmsg_write nlmsg_read };

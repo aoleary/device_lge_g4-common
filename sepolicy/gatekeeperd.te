@@ -1,0 +1,5 @@
+allow gatekeeperd vfat:file { read getattr open };
+
+allow gatekeeperd sd_device:file { read getattr open };
+
+allow gatekeeperd vfat:dir search;

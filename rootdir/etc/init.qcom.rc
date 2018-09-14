@@ -90,16 +90,13 @@ on init
     chmod 775 /mnt/media_rw
     chmod 775 /mnt/media_rw/*
 
-    mkdir /firmware 0771 system system
-    mkdir /firmware/image 0771 system system
+    chmod 0771 /firmware
+    chmod 0771 /firmware/image 0771
     mkdir /persist/data 0700 system system
     mkdir /devlog 0700 root root
     mkdir /fataldevlog 0700 root root
     mkdir /cota 0771 root cw_access
     mkdir /preload 0771 system system
-    mkdir /firmware/radio 0771 system system
-    mkdir /firmware/adsp 0771 system system
-    mkdir /firmware/cpe 0771 system system
     mkdir /cust 0771 system system
     mkdir /carrier 0770 system carrier
     chown system carrier /carrier
@@ -127,7 +124,7 @@ on early-boot
     chcon -R /data/security u:object_r:system_data_file:s0
     start chcon_keystore
 
-service chcon_keystore /system/bin/init.recovery.m1_chcon_keystore.sh
+service chcon_keystore /system/vendor/bin/init.recovery.m1_chcon_keystore.sh
     disabled
     oneshot
     seclabel u:r:keystore:s0
@@ -468,7 +465,7 @@ on post-fs-data
 
     start qseecomd
     # busy loop to wait for qseecomd started
-    exec - root root system -- /system/bin/init.qcom.qseecomd.sh
+    exec - root root system -- /system/vendor/bin/init.qcom.qseecomd.sh
 
     # Mark the copy complete flag to not completed
     write /data/misc/radio/copy_complete 0
@@ -636,11 +633,6 @@ service ss_ramdump /system/bin/subsystem_ramdump
     group system
     disabled
 
-service cnd /system/bin/cnd
-    class late_start
-    socket cnd stream 660 root inet
-    group root wakelock
-
 service imsqmidaemon /system/vendor/bin/imsqmidaemon
     class main
     user system
@@ -720,7 +712,7 @@ service bdaddr_loader /system/vendor/bin/bdaddr_loader
     group bluetooth net_bt_admin
     oneshot
 
-service config_bluetooth /system/bin/init.qcom.bt.sh "onboot"
+service config_bluetooth /system/vendor/bin/init.qcom.bt.sh "onboot"
     class core
     user root
     oneshot
@@ -742,12 +734,12 @@ service irsc_util /system/vendor/bin/irsc_util "/etc/sec_config"
     user root
     oneshot
 
-service qcom-c_main-sh /system/bin/init.class_main.sh
+service qcom-c_main-sh /system/vendor/bin/init.class_main.sh
     class main
     user root
     oneshot
 
-service baseband-sh /system/bin/init.baseband.sh
+service baseband-sh /system/vendor/bin/init.baseband.sh
     class late_start
     user root
     oneshot
@@ -864,7 +856,7 @@ on property:ro.use_data_netmgrd=false
 on property:ro.data.large_tcp_window_size=true
     write /proc/sys/net/ipv4/tcp_adv_win_scale  2
 
-service btwlancoex /system/etc/init.qcom.coex.sh
+service btwlancoex /system/vendor/bin/init.qcom.coex.sh
     class late_start
     user bluetooth
     group bluetooth net_bt_admin inet net_admin net_raw
@@ -890,7 +882,7 @@ service amp_unload /system/bin/amploader -u
     oneshot
 
 
-service fm_dl /system/etc/init.qcom.fm.sh
+service fm_dl /system/vendor/bin/init.qcom.fm.sh
     class late_start
     user root
     group system
@@ -914,7 +906,7 @@ on property:drmdiag.load=1
 on property:drmdiag.load=0
     stop drmdiag
 
-service qcom-post-boot /system/bin/init.qcom.post_boot.sh
+service qcom-post-boot /system/vendor/bin/init.qcom.post_boot.sh
     class late_start
     user root
     disabled
@@ -922,13 +914,16 @@ service qcom-post-boot /system/bin/init.qcom.post_boot.sh
 
 #Group permissions for rild
 service ril-daemon /vendor/bin/hw/rild
-    class main
+    class late_start
     socket qmux_radio/rild_oem0 stream 0777 radio system
     socket qmux_radio/qmux_client_socket stream 0777 radio system
-    user radio
+    user root
     disabled
     group radio cache inet misc audio log readproc wakelock oem_2901 oem_2950 net_raw wifi diag
     capabilities BLOCK_SUSPEND NET_ADMIN NET_RAW
+
+on property:init.svc.ril-daemon=stopped
+    start ril-daemon
 
 service hostapd /system/vendor/bin/hostapd -dd /data/misc/wifi/hostapd.conf
     class late_start
@@ -946,12 +941,6 @@ service profiler_daemon /system/bin/profiler_daemon
     user root
     group root
     disabled
-
-service hcidump /system/etc/hcidump.sh
-    user bluetooth
-    group bluetooth system net_bt_admin net_admin
-    disabled
-    oneshot
 
 service ssr_diag /system/bin/ssr_diag
     class late_start
@@ -991,7 +980,7 @@ service msm_irqbalance /system/vendor/bin/msm_irqbalance -f /system/vendor/etc/m
     writepid /dev/cpuset/system-background/tasks
 
 # init.qcom.usb.sh configure RNDIS to go through HW IPA
-service qcom-usb-sh /system/bin/init.qcom.usb.sh
+service qcom-usb-sh /system/vendor/bin/init.qcom.usb.sh
     class core
     user root
     oneshot
@@ -1130,12 +1119,6 @@ service usf_proximity /system/bin/usf_proximity
     group system inet
     disabled
 
-service usf-post-boot /system/etc/usf_post_boot.sh
-    class late_start
-    user root
-    disabled
-    oneshot
-
 service energy-awareness /system/vendor/bin/energy-awareness
     class main
     user root
@@ -1187,13 +1170,13 @@ on property:persist.service.criticaltemp=1
    write /sys/devices/virtual/thermal/thermal_zone14/ctrl_crit_temp 1
 
 # LGE IMS Features - To interwork with QMI WMS (64-bit exe/lib)
-service imswmsproxy /system/bin/imswmsproxy
+service imswmsproxy /system/vendor/bin/imswmsproxy
     class main
     user system
     group radio system net_admin net_raw
 
 # start sensor daemon as core class [START]
-service lge-sensor-sh /system/bin/init.msm8992.sensor.sh
+service lge-sensor-sh /system/vendor/bin/init.msm8992.sensor.sh
     class core
     user root
     oneshot

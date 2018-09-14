@@ -1,0 +1,17 @@
+allow init app_data_file:dir search;
+allow init app_data_file:file setattr;
+allow init sensors_data_file:dir mounton;
+allow init smem_log_device:chr_file { write ioctl };
+allow init vfat:dir mounton;
+#allow init btnvtool_exec:file execute_no_trans;
+allow init frp_block_device:blk_file setattr;
+allow init persist-lg_block_device:dir mounton;
+allow init unlabeled:dir mounton;
+allow init functionfs:dir mounton;
+
+allow init socket_device:sock_file unlink;
+allow init thermal_socket:sock_file unlink;
+
+allow init sd_device:dir mounton;
+
+allow init system_device:file { read getattr open execute execute_no_trans };

@@ -1,0 +1,2 @@
+type touch_socket, file_type, mlstrustedobject;
+type ril_database, file_type, data_file_type;

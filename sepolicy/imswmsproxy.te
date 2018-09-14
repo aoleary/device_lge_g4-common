@@ -1,0 +1,11 @@
+type imswmsproxy, domain;
+type imswmsproxy_exec, exec_type, vendor_file_type, file_type;
+net_domain(imswmsproxy)
+init_daemon_domain(imswmsproxy)
+
+allow imswmsproxy qmuxd:unix_stream_socket connectto;
+allow imswmsproxy qmuxd_socket:sock_file write;
+allow imswmsproxy diag_device:chr_file { read write ioctl open };
+allow imswmsproxy qmuxd_socket:dir { search write add_name remove_name };
+allow imswmsproxy qmuxd_socket:sock_file { create setattr unlink };
+

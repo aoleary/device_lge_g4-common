@@ -1,0 +1,10 @@
+allow sensors sensors_data_file:dir { read getattr open };
+allow sensors sensors_data_file:file { read write getattr open };
+allow sensors sensors_prop:property_service set;
+allow sensors shell_exec:file { read getattr };
+allow sensors toolbox_exec:file { getattr execute read open execute_no_trans };
+allow sensors init:unix_stream_socket connectto;
+allow sensors property_socket:sock_file write;
+allow sensors qti_init_shell_exec:file entrypoint;
+
+allow sensors sensors_data_file:dir search;

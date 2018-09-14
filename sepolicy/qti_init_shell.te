@@ -1,0 +1,14 @@
+allow qti_init_shell device:dir { write add_name };
+allow qti_init_shell device:file { read create open getattr setattr write };
+allow qti_init_shell file_contexts_file:file { read getattr open };
+allow qti_init_shell kmsg_device:chr_file { open append };
+allow qti_init_shell shell_exec:file { read getattr };
+allow qti_init_shell socket_device:dir { write add_name };
+allow qti_init_shell socket_device:file { read create open getattr setattr write };
+allow qti_init_shell sysfs:file write;
+allow qti_init_shell sysfs_cpu_boost:file write;
+allow qti_init_shell sysfs_msm_perf:file write;
+allow qti_init_shell toolbox_exec:file { read getattr open execute execute_no_trans };
+allow qti_init_shell btnvtool_exec:file execute_no_trans;
+allow qti_init_shell smem_log_device:chr_file { read write ioctl open };
+allow qti_init_shell system_device:file  { read getattr open execute execute_no_trans };

@@ -1,0 +1,4 @@
+allow netmgrd net_data_file:dir read;
+allow netmgrd netd_socket:sock_file write;
+allow netmgrd shell_exec:file { read execute open getattr execute_no_trans };
+allow netmgrd toolbox_exec:file { read getattr open execute execute_no_trans };

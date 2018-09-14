@@ -1,0 +1,5 @@
+allow energyawareness sysfs:file { read getattr open };
+allow energyawareness sysfs_uio:dir { read search open };
+allow energyawareness sysfs_uio:lnk_file read;
+allow energyawareness sysfs_uio_file:dir search;
+allow energyawareness sysfs_uio_file:file { read getattr open };

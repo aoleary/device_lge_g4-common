@@ -1,0 +1,4 @@
+allow bluetooth firmware_file:dir { search open read };
+allow bluetooth firmware_file:file { read open };
+allow bluetooth proc:file { open };
+allow bluetooth sysfs:file write;

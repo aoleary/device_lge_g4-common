@@ -1,0 +1,5 @@
+allow ueventd vfat:dir search;
+allow ueventd vfat:file { read getattr open };
+
+allow ueventd sd_device:dir search;
+allow ueventd sd_device:file { read getattr open };

@@ -1,0 +1,4 @@
+type system_device, dev_type;
+type rfkill_device, dev_type;
+type persist-lg_block_device, dev_type;
+type mpt_block_device, dev_type;

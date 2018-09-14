@@ -1,0 +1,9 @@
+allow rild audioserver_service:service_manager find;
+allow rild default_android_service:service_manager find;
+allow rild radio_data_file:dir { search write add_name remove_name };
+allow rild radio_data_file:file { create write ioctl read lock open getattr unlink };
+allow rild servicemanager:binder call;
+allow rild smem_log_device:chr_file { read write ioctl open };
+
+allow rild system_device:file write;
+allow rild ril_database:file write;

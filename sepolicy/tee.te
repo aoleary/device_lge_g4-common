@@ -1,0 +1,11 @@
+allow tee smem_log_device:chr_file { read write ioctl open };
+allow tee unlabeled:dir { read getattr open };
+allow tee unlabeled:file { read getattr open };
+allow tee vfat:file { read getattr open };
+allow tee vfat:dir search;
+
+allow tee unlabeled:file write;
+
+allow tee sd_device:file { read getattr open };
+
+allow tee unlabeled:dir search;

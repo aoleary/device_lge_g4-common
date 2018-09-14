@@ -2,6 +2,7 @@ bin/ATFWD-daemon
 bin/qmi-framework-tests/check_system_health
 bin/qmi-framework-tests/qmi_test_mt_client_init_instance
 bin/hci_qcomm_init
+bin/hwaddrs
 bin/loc_launcher
 bin/lowi-server
 bin/qseecom_sample_client
