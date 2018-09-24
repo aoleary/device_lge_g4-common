@@ -1,1 +1,3 @@
 allow qmuxd diag_device:chr_file { read write ioctl open };
+allow qmuxd qmuxd_socket:dir { write add_name remove_name search };
+allow qmuxd qmuxd_socket:sock_file { create setattr getattr write unlink };
