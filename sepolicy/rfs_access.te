@@ -1,4 +1,3 @@
-allow rfs_access debugfs:file { read write open };
 allow rfs_access sysfs:file { read getattr open };
 allow rfs_access sysfs_uio:dir { read search open };
 allow rfs_access sysfs_uio:lnk_file read;
