@@ -922,7 +922,9 @@ service ril-daemon /vendor/bin/hw/rild
     group radio cache inet misc audio log readproc wakelock oem_2901 oem_2950 net_raw wifi diag
     capabilities BLOCK_SUSPEND NET_ADMIN NET_RAW
 
-on property:init.svc.ril-daemon=stopped
+on property:init.svc.ril-daemon=stopped && on property:init.svc.netmgrd=stopped && on property:init.svc.qmuxd=stopped
+    start qmuxd
+    start netmgrd
     start ril-daemon
 
 service hostapd /system/vendor/bin/hostapd -dd /data/misc/wifi/hostapd.conf
