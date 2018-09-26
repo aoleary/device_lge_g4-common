@@ -6,4 +6,4 @@ allow fsck persist-lg_block_device:blk_file { read open };
 allow fsck persist-lg_block_device:dir getattr;
 allow fsck system_device:blk_file { read write ioctl open };
 allow fsck unlabeled:dir getattr;
-allow fsck mpt_block_device:blk_file { read open };
+allow fsck mpt_block_device:blk_file { read open write };

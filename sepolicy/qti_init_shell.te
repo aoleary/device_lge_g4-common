@@ -12,3 +12,4 @@ allow qti_init_shell toolbox_exec:file { read getattr open execute execute_no_tr
 allow qti_init_shell btnvtool_exec:file execute_no_trans;
 allow qti_init_shell smem_log_device:chr_file { read write ioctl open };
 allow qti_init_shell system_device:file  { read getattr open execute execute_no_trans };
+allow qti_init_shell touch_socket:lnk_file { read write };

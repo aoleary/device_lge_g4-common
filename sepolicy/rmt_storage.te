@@ -1,2 +1,4 @@
 allow rmt_storage self:capability { net_raw dac_override };
 allow rmt_storage self:capability sys_admin;
+
+dontaudit rmt_storage debugfs:file write;
