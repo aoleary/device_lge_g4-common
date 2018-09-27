@@ -3,3 +3,7 @@ allow ueventd vfat:file { read getattr open };
 
 allow ueventd sd_device:dir search;
 allow ueventd sd_device:file { read getattr open };
+
+allow ueventd console_device:dir relabelto;
+allow ueventd console_device:file relabelto;
+allow ueventd console_device:lnk_file relabelto;

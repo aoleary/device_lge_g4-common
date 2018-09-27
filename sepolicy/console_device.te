@@ -1,0 +1,1 @@
+allow console_device sysfs:filesystem associate;

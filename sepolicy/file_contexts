@@ -10,6 +10,8 @@
 /dev/block/mmcblk0p47                                               u:object_r:system_device:s0
 /dev/block/mmcblk0p50                                               u:object_r:userdata_block_device:s0
 
+/dev/ttyHSL[0-9]*                                                   u:object_r:console_device:s0
+
 ###################################
 # socket devices
 /dev/rfkill                                                         u:object_r:rfkill_device:s0
@@ -28,3 +30,5 @@
 /(vendor|system/vendor)/bin/bdaddr_loader                u:object_r:bdaddr_loader_exec:s0
 /(vendor|system/vendor)/bin/init\.msm8992\.sensor\.sh    u:object_r:qti_init_shell_exec:s0
 /system/etc/motorola(/.*)?                               u:object_r:ril_database:s0
+/(system|system/vendor)/bin/vmstat                       u:object_r:vmstat_exec:s0
+/proc/vmstat                                             u:object_r:vmstat_exec:s0

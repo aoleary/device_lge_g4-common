@@ -1,2 +1,3 @@
 type touch_socket, file_type, mlstrustedobject;
 type ril_database, file_type, data_file_type;
+type vmstat_exec, exec_type, file_type, vendor_file_type;

@@ -1,0 +1,6 @@
+allow untrusted_app_25 app_data_file:file open;
+allow untrusted_app_25 bluetooth_data_file:dir getattr;
+allow untrusted_app_25 nfc_data_file:dir getattr;
+allow untrusted_app_25 proc:file { getattr };
+allow untrusted_app_25 radio_data_file:dir getattr;
+allow untrusted_app_25 system_app_data_file:dir getattr;
