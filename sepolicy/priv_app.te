@@ -28,3 +28,4 @@ allow priv_app mnt_media_rw_file:dir search;
 allow priv_app touch_socket:lnk_file getattr;
 allow priv_app proc:file read;
 allow priv_app vmstat_exec:file read;
+allow priv_app qemu_hw_mainkeys_prop:file read;
