@@ -6,5 +6,5 @@ allow rild servicemanager:binder call;
 allow rild smem_log_device:chr_file { read write ioctl open };
 
 allow rild system_device:file write;
-allow rild ril_database:dir search;
+allow rild ril_database:dir { search write add_name remove_name };
 allow rild ril_database:file { read write open create getattr setattr unlink lock ioctl };
