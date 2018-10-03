@@ -4,3 +4,6 @@ binder_call(system_app, imscm)
 binder_call(system_app, wificond)
 
 allow system_app time_daemon:unix_stream_socket connectto;
+
+dontaudit system_app installd:binder call;
+dontaudit system_app netd:binder call;
