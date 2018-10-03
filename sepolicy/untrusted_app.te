@@ -1,10 +1,8 @@
 allow untrusted_app proc:file { getattr };
 allow untrusted_app sysfs_zram:dir search;
 allow untrusted_app sysfs_zram:file { read open getattr };
-allow untrusted_app vmstat_exec:file { getattr read };
 allow untrusted_app sysfs:file read;
 
-dontaudit untrusted_app kgsl_debugfs:file { read getattr open };
-allow untrusted_app proc_stat:file open;
-
-dontaudit untrusted_app proc:file { read open };
+allow untrusted_app proc_vmstat:file { getattr open read };
+allow untrusted_app net_dns_prop:file { getattr open };
+allow untrusted_app proc_zoneinfo:file { read getattr open };
