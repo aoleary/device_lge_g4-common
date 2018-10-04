@@ -6,3 +6,8 @@ allow untrusted_app_25 radio_data_file:dir getattr;
 allow untrusted_app_25 system_app_data_file:dir getattr;
 
 allow untrusted_app_25 proc_vmstat:file { getattr open read };
+allow untrusted_app_25 proc_stat:file open;
+allow untrusted_app_25 unlabeled:dir getattr;
+allow untrusted_app_25 app_data_file:file open;
+
+dontaudit untrusted_app_25 proc:file { read open };
