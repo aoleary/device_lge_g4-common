@@ -42,6 +42,10 @@ allow untrusted_app tombstone_data_file:dir getattr;
 allow untrusted_app unlabeled:dir read;
 allow untrusted_app vndservice_contexts_file:file read;
 
+allow untrusted_app boot_mode_prop:file { getattr open };
+allow untrusted_app sdm_idle_time_prop:file open;
+allow untrusted_app wcnss_prop:file { getattr open };
+
 dontaudit untrusted_app proc:file { read open };
 dontaudit untrusted_app hal_memtrack_hwservice:hwservice_manager find;
 dontaudit untrusted_app kgsl_debugfs:file { read getattr open };
