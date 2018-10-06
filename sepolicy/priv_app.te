@@ -32,3 +32,14 @@ allow priv_app qemu_hw_mainkeys_prop:file { read open };
 # vmstat
 allow priv_app proc_stat:file { getattr read open };
 allow priv_app proc_vmstat:file { getattr open read };
+
+
+allow priv_app firmware_file:dir { read open };
+allow priv_app firmware_file:file getattr;
+allow priv_app firmware_file:lnk_file getattr;
+allow priv_app mac_perms_file:file getattr;
+allow priv_app rfs_system_file:dir { read open };
+allow priv_app rfs_system_file:lnk_file getattr;
+allow priv_app ril_database:dir { read getattr open };
+allow priv_app ril_database:file getattr;
+allow priv_app rootfs:blk_file getattr;
