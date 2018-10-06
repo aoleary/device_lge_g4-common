@@ -16,4 +16,5 @@ PRODUCT_PACKAGES += \
     init.msm8992.sensor.sh \
     init.baseband.sh \
     init.qcom.bt.sh \
-    init.qcom.usb.sh
+    init.qcom.usb.sh \
+    init.qcom.qseecomd.sh
