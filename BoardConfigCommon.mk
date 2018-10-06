@@ -28,6 +28,10 @@ TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_EXFAT_DRIVER := sdfat
 TARGET_VFAT_DRIVER := sdfat
 
+# RILD
+TARGET_PROCESS_SDK_VERSION_OVERRIDE := \
+        /vendor/bin/hw/rild=27
+
 # Graphics
 HAVE_ADRENO_SOURCE:= false
 OVERRIDE_RS_DRIVER:= libRSDriver_adreno.so
