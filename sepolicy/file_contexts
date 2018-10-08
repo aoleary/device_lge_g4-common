@@ -32,3 +32,8 @@
 /(vendor|system/vendor)/bin/init\.msm8992\.sensor\.sh    u:object_r:qti_init_shell_exec:s0
 /(vendor|system/vendor)/bin/init\.qcom\.qseecomd\.sh     u:object_r:qti_init_shell_exec:s0
 /system/etc/motorola(/.*)?                               u:object_r:ril_database:s0
+
+###################################
+# Data System files
+#
+/data/system_de/[0-9]/spblob(/.*)?                       u:object_r:vold_data:s0

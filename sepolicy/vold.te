@@ -1,0 +1,3 @@
+allow vold system_data_file:file open;
+allow vold vold_data:dir rw_dir_perms;
+allow vold vold_data:file { rw_file_perms create_file_perms };

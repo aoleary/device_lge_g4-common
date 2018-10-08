@@ -1,5 +1,6 @@
 type touch_socket, file_type, mlstrustedobject;
 type ril_database, file_type, data_file_type;
+type vold_data, file_type, data_file_type;
 
 # debugfs
 type debugfs_energy, debugfs_type, fs_type;
