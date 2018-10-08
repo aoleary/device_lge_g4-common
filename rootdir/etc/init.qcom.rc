@@ -801,7 +801,7 @@ service ftmd /system/bin/logwrapper /system/bin/ftmdaemon
     disabled
     oneshot
 
-service config_bt_addr /system/vendor/bin/btnvtool -O
+service config_bt_addr /system/vendor/bin/sh -c "/system/vendor/bin/btnvtool -O"
     class core
     user bluetooth
     group bluetooth radio
