@@ -36,4 +36,11 @@
 ###################################
 # Data System files
 #
+/data/system_de/[0-9]/spblob                             u:object_r:vold_data:s0
 /data/system_de/[0-9]/spblob(/.*)?                       u:object_r:vold_data:s0
+/sdcard/Android/data                                     u:object_r:data_file:s0
+
+###################################
+# Other partition files
+#
+/sns/cal(/.*)?                                           u:object_r:sensors_data:s0

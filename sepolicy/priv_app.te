@@ -28,6 +28,8 @@ allow priv_app mnt_media_rw_file:dir search;
 allow priv_app touch_socket:lnk_file getattr;
 allow priv_app proc:file read;
 allow priv_app qemu_hw_mainkeys_prop:file { read open };
+allow priv_app mnt_media_rw_stub_file:dir getattr;
+allow priv_app wifi_prop:file read;
 
 # vmstat
 allow priv_app proc_stat:file { getattr read open };
@@ -43,3 +45,5 @@ allow priv_app rfs_system_file:lnk_file getattr;
 allow priv_app ril_database:dir { read getattr open };
 allow priv_app ril_database:file getattr;
 allow priv_app rootfs:blk_file getattr;
+
+allow priv_app proc_modules:file read;

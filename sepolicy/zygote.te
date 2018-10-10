@@ -1,1 +1,2 @@
 allow zygote system_device:file write;
+allow zygote untrusted_app:process ptrace;
