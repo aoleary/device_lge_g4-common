@@ -1063,6 +1063,12 @@ service adsprpcd /vendor/bin/adsprpcd
     group media
     writepid /dev/cpuset/system-background/tasks
 
+service charger /vendor/bin/charger
+    class charger
+    group log system graphics
+    capabilities SYS_BOOT
+    seclabel u:r:charger:s0
+
 service energy-awareness /vendor/bin/energy-awareness
     class main
     user root
