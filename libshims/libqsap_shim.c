@@ -5,6 +5,8 @@
 
 #include "cutils/log.h"
 
+#include <string.h>
+
 // Keep in sync with system/qcom/softap/sdk/qsap_api.c
 struct Command qsap_str[eSTR_LAST] = {
     { "wpa",                     NULL           },
