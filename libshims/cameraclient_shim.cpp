@@ -21,3 +21,5 @@ const char CameraParameters::FOCUS_MODE_MANUAL_POSITION[] = "manual";
 const char CameraParameters::WHITE_BALANCE_MANUAL_CCT[] = "manual-cct";
 
 }; // namespace android
+
+const char *__ZN4qrcp22StillMoreTunableParamsC1Ev;
