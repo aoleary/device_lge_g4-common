@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 #include "cameraclient_shim.h"
+#include <stdint.h>
 
 namespace android {
 
@@ -21,3 +22,9 @@ const char CameraParameters::FOCUS_MODE_MANUAL_POSITION[] = "manual";
 const char CameraParameters::WHITE_BALANCE_MANUAL_CCT[] = "manual-cct";
 
 }; // namespace android
+
+namespace android {
+extern "C" void _ZN4qrcp22StillMoreTunableParamsC1Ev() {}
+extern "C" void _Z20stillMore_jmf9K6K5NQfff() {}
+extern "C" void _Z20stillMore_yPGmb6U2btPKPKhS2_jjjjjPKPKijjjPhS7_jjRiS8_S8_S8_() {}
+}
