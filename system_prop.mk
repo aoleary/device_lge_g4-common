@@ -108,7 +108,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.ui.hw=1 \
     persist.sys.wfd.virtual=0 \
     ro.opengles.version=196610 \
-    ro.sf.compbypass.enable=0
+    ro.sf.compbypass.enable=0 \
+    debug.hwui.use_buffer_age=false
 
 # FIFO: enable scheduling for UI and Render threads by default
 PRODUCT_PROPERTY_OVERRIDES += \
