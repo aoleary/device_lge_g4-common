@@ -126,6 +126,14 @@ PRODUCT_PROPERTY_OVERRIDES += \
     vidc.enc.dcvs.extra-buff-count=2 \
     persist.camera.cpp.duplication=false
 
+# Memory Optimizations
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.vendor.qti.sys.fw.bg_apps_limit=10 \
+    ro.vendor.qti.am.reschedule_service=true \
+    ro.vendor.qti.sys.fw.bservice_enable=true \
+    ro.vendor.qti.sys.fw.bservice_age=5000 \
+    ro.vendor.qti.sys.fw.bservice_limit=5
+
 # Perf
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.timed.enable=true \
