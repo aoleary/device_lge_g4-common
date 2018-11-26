@@ -45,4 +45,9 @@
         wifi,bt,nfc,rotation,location,cell,dnd,airplane,custom(com.abhi.flashlight/.TorchTile)
     </string>
 
+<!-- Begin: Doze mode -->
+    <!-- Doze: does this device support STATE_DOZE and STATE_DOZE_SUSPEND?  -->
+    <bool name="doze_display_state_supported">false</bool>
+<!-- End: Doze mode -->
+
 </resources>
