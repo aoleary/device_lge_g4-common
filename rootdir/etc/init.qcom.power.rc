@@ -1,3 +1,11 @@
+on init
+    # Add a cpuset for the camera daemon
+    mkdir /dev/cpuset/camera-daemon 0750 cameraserver cameraserver
+    write /dev/cpuset/camera-daemon/cpus 0-5
+    write /dev/cpuset/camera-daemon/mems 0
+    chown cameraserver cameraserver /dev/cpuset/camera-daemon/tasks
+    chmod 0660 /dev/cpuset/camera-daemon/tasks
+
 on boot
     # Update foreground and background cpusets
     write /dev/cpuset/foreground/cpus 0-2,4,5
