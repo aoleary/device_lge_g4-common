@@ -7,3 +7,4 @@ allow servicemanager rild:process getattr;
 allow servicemanager imscm:dir search;
 allow servicemanager imscm:file { read open };
 allow servicemanager imscm:process getattr;
+allow servicemanager mm-qcamerad:dir search;
