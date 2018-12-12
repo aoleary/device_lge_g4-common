@@ -14,6 +14,9 @@ allow init thermal_socket:sock_file unlink;
 
 allow init sd_device:dir mounton;
 
+allow init block_device:blk_file setattr;
+allow init tmpfs:file getattr;
+
 allow init system_device:file { read getattr open execute execute_no_trans };
 
 dontaudit init btnvtool_exec:file execute_no_trans;
