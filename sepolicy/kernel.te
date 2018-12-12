@@ -1,0 +1,2 @@
+allow kernel rootfs:chr_file { read write };
+allow kernel tmpfs:blk_file read;
