@@ -1,3 +1,5 @@
 binder_call(mm-pp-daemon, servicemanager)
 
 allow mm-pp-daemon system_prop:property_service set;
+allow mm-pp-daemon surfaceflinger:binder call;
+allow mm-pp-daemon surfaceflinger_service:service_manager find;
