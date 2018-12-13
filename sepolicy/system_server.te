@@ -16,5 +16,5 @@ dontaudit system_server dalvikcache_data_file:file { write execute };
 
 allow system_server binder_per_mgr_service:service_manager find;
 
-#infrared
-allow system_server device:chr_file { read write };
+# infrared
+# neverallow (public/domain.te): allow system_server device:chr_file { read write };
