@@ -8,3 +8,6 @@ allow servicemanager imscm:dir search;
 allow servicemanager imscm:file { read open };
 allow servicemanager imscm:process getattr;
 allow servicemanager mm-qcamerad:dir search;
+allow servicemanager mm-pp-daemon:dir search;
+allow servicemanager mm-pp-daemon:file { open read };
+allow servicemanager mm-pp-daemon:process getattr;
