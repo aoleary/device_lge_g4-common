@@ -21,6 +21,10 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/product_launched_with_l_mr1.mk
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/ld.config.txt:$(TARGET_COPY_OUT_SYSTEM)/etc/swcodec/ld.config.txt
 
+# AMBIENT DISPLAY: Gestures
+PRODUCT_PACKAGES +=\
+    LGDoze
+
 # Audio
 PRODUCT_PACKAGES += \
     android.hardware.audio.service \
