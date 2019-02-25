@@ -14,6 +14,9 @@ LOCAL_SRC_FILES := ipa_nat_drv.c \
                    ipa_nat_drvi.c
 
 LOCAL_CFLAGS := -DDEBUG
+LOCAL_CFLAGS += \
+    -Wno-unused-parameter
+
 LOCAL_MODULE := libipanat
 LOCAL_MODULE_TAGS := optional
 LOCAL_PRELINK_MODULE := false
