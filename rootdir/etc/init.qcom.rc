@@ -87,6 +87,10 @@ on fs
     start boot_lc_kernel
     start boot_lc_crash
 
+    # do not block adb which is default since Android 10 and can cause adb issues / crashes
+    setprop persist.adb.nonblocking_ffs 0
+    setprop ro.adb.nonblocking_ffs 0
+
 on init
     # ZRAM setup
     write /sys/block/zram0/comp_algorithm lzo
