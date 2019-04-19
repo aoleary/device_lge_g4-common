@@ -202,35 +202,4 @@ if [ -c /dev/coresight-stm ]; then
     fi
 fi
 
-# workaround for randomly no SIM on boot (https://github.com/Suicide-Squirrel/issues_oreo/issues/6)
-x=1
-PRTRIGGER=0
-REQRESTART=$(getprop gsm.sim.state)
-while [ "$REQRESTART" != "READY" ];do
 
-    # PIN_REQUIRED means usually the user get prompted - unfortunately 
-    # sometimes there is no prompt.
-    # this will restart RIL not on the first but every second run only (which should be safe) and
-    # let the user enough time to enter the PIN if the prompt appears
-    if [ "$REQRESTART" == "PIN_REQUIRED" ]&&[ $PRTRIGGER -eq 0 ];then
-        echo "$0: PIN_REQUIRED detected. waiting 30s for user input.." >> /dev/kmsg && sleep 30
-        PRTRIGGER=1
-    else
-        echo "$0: RIL restart - try $x of 20" >> /dev/kmsg
-        stop ril-daemon
-        sleep 2
-        start ril-daemon
-        echo "$0: restarted RIL daemon as gsm.sim.state was >$REQRESTART<" >> /dev/kmsg
-        sleep 20
-        PRTRIGGER=0
-    fi
-    REQRESTART=$(getprop gsm.sim.state)
-    x=$((x + 1))
-    if [[ $x -eq 20 ]];then
-	echo "$0: auto restart RIL daemon aborted.. too many tries!" >> /dev/kmsg
-        break
-    fi
-done
-echo "$0: gsm.sim.state >$REQRESTART<" >> /dev/kmsg
-echo "$0: ended" >> /dev/kmsg
-# < END workaround

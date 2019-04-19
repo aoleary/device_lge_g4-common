@@ -921,9 +921,8 @@ service qcom-post-boot /system/vendor/bin/init.qcom.post_boot.sh
     disabled
     oneshot
 
-#Group permissions for rild
-service ril-daemon /vendor/bin/hw/rild
-    class late_start
+# real rild started by wrild.sh
+service real-ril-daemon /vendor/bin/hw/rild
     socket qmux_radio/rild_oem0 stream 0777 radio system
     socket qmux_radio/qmux_client_socket stream 0777 radio system
     user root
@@ -931,10 +930,15 @@ service ril-daemon /vendor/bin/hw/rild
     group radio cache inet misc audio log readproc wakelock oem_2901 oem_2950 net_raw wifi diag
     capabilities BLOCK_SUSPEND NET_ADMIN NET_RAW
 
-on property:init.svc.ril-daemon=stopped && on property:init.svc.netmgrd=stopped && on property:init.svc.qmuxd=stopped
+# the rild wrapper which ensures proper rild handling
+service ril-daemon /system/bin/wrild.sh
+    user root
+    disabled
+
+on property:init.svc.ril-daemon=stopped
     start qmuxd
     start netmgrd
-    start ril-daemon
+	start ril-daemon
 
 service hostapd /system/vendor/bin/hostapd -dd /data/misc/wifi/hostapd.conf
     class late_start

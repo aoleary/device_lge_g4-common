@@ -17,4 +17,5 @@ PRODUCT_PACKAGES += \
     init.baseband.sh \
     init.qcom.bt.sh \
     init.qcom.usb.sh \
-    init.qcom.qseecomd.sh
+    init.qcom.qseecomd.sh \
+    wrild.sh

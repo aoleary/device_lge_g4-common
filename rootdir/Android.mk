@@ -46,6 +46,14 @@ include $(BUILD_PREBUILT)
 # Configuration scripts
 
 include $(CLEAR_VARS)
+LOCAL_MODULE	    := wrild.sh
+LOCAL_MODULE_TAGS   := optional eng
+LOCAL_MODULE_CLASS  := BIN
+LOCAL_SRC_FILES	    := bin/wrild.sh
+LOCAL_MODULE_PATH   := $(TARGET_OUT_EXECUTABLES)
+include $(BUILD_PREBUILT)
+
+include $(CLEAR_VARS)
 LOCAL_MODULE        := init.qcom.coex.sh
 LOCAL_MODULE_TAGS   := optional eng
 LOCAL_MODULE_CLASS  := ETC
