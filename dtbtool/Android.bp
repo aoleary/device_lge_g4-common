@@ -1,0 +1,10 @@
+cc_binary_host {
+    name: "dtbTool_lgg4",
+
+    srcs: ["dtbtool.c"],
+
+    cflags: ["-Wall"],
+
+    //# Hybrid v1/v2 dtbTool. Use a different name to avoid conflicts with copies in device repos
+
+}
