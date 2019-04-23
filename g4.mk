@@ -36,3 +36,6 @@ $(call inherit-product, device/lge/g4-common/frameworks/native/build/phone-xxxhd
 
 $(call inherit-product-if-exists, frameworks/native/build/phone-xxxhdpi-3072-hwui-memory.mk)
 
+# Inherits fdroid
+$(call inherit-product-if-exists, vendor/fdroid/fdroid-vendor.mk)
+
