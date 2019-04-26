@@ -1142,7 +1142,6 @@ service lge-sensor-sh /vendor/bin/init.msm8992.sensor.sh
     user root
     group root wakelock
     oneshot
-    seclabel u:r:sensors:s0
     writepid /dev/cpuset/system-background/tasks
 # start sensor daemon as core class [END]
 
