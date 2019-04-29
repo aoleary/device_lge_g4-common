@@ -1,4 +1,4 @@
+#neverallow: allow audioserver device:chr_file { ioctl open read write };
 allow audioserver socket_device:file write;
 allow audioserver device:file { read write open };
 allow audioserver audio_device:file { read write open };
-#neverallow: allow audioserver device:chr_file { ioctl open read write };
