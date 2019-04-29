@@ -1,0 +1,1 @@
+allow logpersist cache_file:dir { open read write };

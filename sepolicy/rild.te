@@ -1,5 +1,12 @@
+allow rild self:socket ioctl;
+allow rild servicemanager:binder call;
+allow rild smem_log_device:chr_file { ioctl open read write };
+allow rild socket_device:dir { add_name remove_name write };
+allow rild socket_device:sock_file { create unlink write };
+#neverallow: allow rild system_data_file:file { getattr open read write };
+
 allow rild audioserver_service:service_manager find;
-allow rild default_android_service:service_manager find;
+#neverallow: allow rild default_android_service:service_manager find;
 allow rild radio_data_file:dir { search write add_name remove_name };
 allow rild radio_data_file:file { create write ioctl read lock open getattr unlink };
 allow rild servicemanager:binder call;

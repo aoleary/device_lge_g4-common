@@ -1,6 +1,7 @@
 allow ims smem_log_device:chr_file { read write open };
 allow ims self:capability net_raw;
-#allow ims smem_log_device:chr_file ioctl;
+allow ims smem_log_device:chr_file { ioctl open read write };
+allow ims system_prop:property_service set;
 
 allow ims self:socket create_socket_perms;
 allowxperm ims self:socket ioctl msm_sock_ipc_ioctls;
