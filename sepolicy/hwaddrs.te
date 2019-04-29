@@ -3,8 +3,6 @@ type hwaddrs_exec, exec_type, file_type;
 net_domain(hwaddrs)
 init_daemon_domain(hwaddrs)
 
-allow hwaddrs misc_block_device:blk_file { read open getattr };
-allow hwaddrs self:capability dac_override;
 allow hwaddrs wifi_data_file:dir { write add_name };
 allow hwaddrs wifi_data_file:file { write open create };
 allow hwaddrs bluetooth_data_file:dir { write add_name };

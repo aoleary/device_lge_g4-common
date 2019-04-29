@@ -12,7 +12,6 @@ allow priv_app hwservice_contexts_file:file getattr;
 allow priv_app mnt_media_rw_file:dir { read getattr open };
 allow priv_app nfc_data_file:dir getattr;
 allow priv_app nonplat_service_contexts_file:file getattr;
-allow priv_app persist_file:dir getattr;
 allow priv_app radio_data_file:dir getattr;
 allow priv_app seapp_contexts_file:file getattr;
 allow priv_app sensors_data_file:dir { search read getattr open };
@@ -27,7 +26,6 @@ allow priv_app rfs_system_file:dir getattr;
 allow priv_app mnt_media_rw_file:dir search;
 allow priv_app touch_socket:lnk_file getattr;
 allow priv_app proc:file read;
-allow priv_app qemu_hw_mainkeys_prop:file { read open };
 allow priv_app mnt_media_rw_stub_file:dir getattr;
 allow priv_app wifi_prop:file read;
 

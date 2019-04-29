@@ -1,5 +1,4 @@
 allow fsck cache_file:dir getattr;
-allow fsck persist_file:dir getattr;
 allow fsck sensors_data_file:dir getattr;
 allow fsck modem_efs_partition_device:blk_file { read write ioctl open };
 allow fsck persist-lg_block_device:blk_file { read open write ioctl };

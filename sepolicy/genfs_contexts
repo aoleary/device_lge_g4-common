@@ -5,4 +5,3 @@ genfscon debugfs /energyawareness                     u:object_r:debugfs_energy:
 genfscon debugfs /rmt_storage                         u:object_r:debugfs_rmt:s0
 genfscon debugfs /sys/kernel/debug/rmt_storage        u:object_r:debugfs_rmt:s0
 genfscon debugfs /rfs_access                          u:object_r:debugfs_rfs:s0
-genfscon proc /vmstat                                 u:object_r:proc_vmstat:s0

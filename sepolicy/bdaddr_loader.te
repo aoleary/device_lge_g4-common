@@ -5,7 +5,6 @@ init_daemon_domain(bdaddr_loader)
 
 allow bdaddr_loader bluetooth_prop:property_service set;
 allow bdaddr_loader init:unix_stream_socket connectto;
-allow bdaddr_loader misc_block_device:blk_file { read getattr open };
 allow bdaddr_loader property_socket:sock_file write;
 
 allow bdaddr_loader block_device:dir search;
