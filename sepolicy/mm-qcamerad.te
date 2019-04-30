@@ -2,3 +2,5 @@ binder_call(mm-qcamerad, servicemanager)
 allow mm-qcamerad camera_data_file:sock_file { create unlink };
 allow mm-qcamerad sysfs:file { read open };
 allow mm-qcamerad self:tcp_socket { create setopt bind };
+allow mm-qcamerad camera_data_file:dir write;
+allow mm-qcamerad camera_data_file:dir { add_name remove_name };

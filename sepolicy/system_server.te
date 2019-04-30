@@ -16,5 +16,9 @@ dontaudit system_server dalvikcache_data_file:file { write execute };
 
 allow system_server binder_per_mgr_service:service_manager find;
 
+allow system_server qmuxd:unix_stream_socket connectto;
+allow system_server qmuxd_socket:dir { add_name write };
+allow system_server qmuxd_socket:sock_file { create setattr write };
+
 # infrared
 # neverallow (public/domain.te): allow system_server device:chr_file { read write };

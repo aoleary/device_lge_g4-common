@@ -1,3 +1,5 @@
+# neverallow: allow thermal-engine self:capability dac_override;
+
 allow thermal-engine socket_device:sock_file { create setattr };
 allow thermal-engine sysfs_spmi_dev:dir { read search open };
 allow thermal-engine sysfs_spmi_dev:lnk_file read;

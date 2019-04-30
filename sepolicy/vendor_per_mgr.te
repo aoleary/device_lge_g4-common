@@ -1,0 +1,2 @@
+allow vendor_per_mgr binder_per_mgr_service:service_manager { add find };
+allow vendor_per_mgr smem_log_device:chr_file { read write };

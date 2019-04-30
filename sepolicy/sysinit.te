@@ -1,0 +1,3 @@
+# sysinit.te: ERROR 'unknown type sysinit' at token ';'
+# allow sysinit shell_exec:file { getattr read };
+# allow sysinit system_file:dir { open read };

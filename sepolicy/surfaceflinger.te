@@ -1,1 +1,4 @@
+#neverallow: allow surfaceflinger persist_display_file:dir search;
+#neverallow: allow surfaceflinger default_android_service:service_manager { add find };
+
 allow surfaceflinger socket_device:file write;
