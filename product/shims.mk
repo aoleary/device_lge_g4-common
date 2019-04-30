@@ -4,4 +4,4 @@ PRODUCT_PACKAGES += \
     libcne_shim \
     libshim_cameraclient \
     libqsap_shim \
-    libcamera_shim
+    libfence_shim

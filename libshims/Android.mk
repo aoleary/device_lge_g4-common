@@ -49,10 +49,11 @@ LOCAL_MODULE := libshim_cameraclient
 LOCAL_MODULE_TAGS := optional
 include $(BUILD_SHARED_LIBRARY)
 
-# LIBCAMERA SHIM
+# Fence
 include $(CLEAR_VARS)
-LOCAL_SRC_FILES := camera.cpp
-LOCAL_MODULE := libcamera_shim
+LOCAL_SRC_FILES := fence.cpp
+LOCAL_MODULE := libfence_shim
 LOCAL_MODULE_TAGS := optional
 LOCAL_PROPRIETARY_MODULE := true
+LOCAL_VENDOR_MODULE := true
 include $(BUILD_SHARED_LIBRARY)
