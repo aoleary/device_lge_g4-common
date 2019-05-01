@@ -1,1 +1,0 @@
-TARGET_RIL_VARIANT := caf

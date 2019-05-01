@@ -1,2 +1,0 @@
-TARGET_POWERHAL_VARIANT := qcom
-
