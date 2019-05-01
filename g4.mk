@@ -32,7 +32,7 @@ TARGET_BOOTANIMATION_HALF_RES := true
 
 include $(LOCAL_PATH)/product/*.mk
 
-$(call inherit-product, device/lge/g4-common/frameworks/native/build/phone-xxxhdpi-3072-dalvik-heap.mk)
+$(call inherit-product, frameworks/native/build/phone-xxxhdpi-3072-dalvik-heap.mk)
 
 # fdroid
 WITH_FDROID := true
