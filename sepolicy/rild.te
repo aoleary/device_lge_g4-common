@@ -1,4 +1,4 @@
-#neverallow: allow rild system_data_file:file { getattr open read write };
+#neverallow: allow rild system_data_file:file { write };
 #neverallow: allow rild default_android_service:service_manager find;
 
 allow rild self:socket ioctl;
@@ -20,3 +20,5 @@ allow rild ril_database:file { read write open create getattr setattr unlink loc
 allow rild binder_per_mgr_service:service_manager find;
 
 allow rild ril_database:file { getattr ioctl lock open read };
+allow rild system_data_file:dir { add_name write };
+allow rild system_data_file:file { getattr open read };

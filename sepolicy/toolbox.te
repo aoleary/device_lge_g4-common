@@ -1,4 +1,6 @@
 #neverallow: allow toolbox self:capability sys_ptrace;
+#ERROR 'unknown type hal_allocator_default' at token ' allow toolbox hal_allocator_default:file read;
+#allow toolbox hal_allocator_default:file read;
 
 allow toolbox init:fifo_file { getattr write };
 allow toolbox init:unix_stream_socket connectto;
@@ -9,4 +11,19 @@ allow toolbox init:file { open read };
 allow toolbox kernel:dir { getattr search };
 allow toolbox kernel:file { open read };
 allow toolbox ueventd:file read;
-allow toolbox vendor_init:file read;
+allow toolbox vendor_init:dir { getattr search };
+allow toolbox vendor_init:file { read open };
+allow toolbox hwservicemanager:file read;
+allow toolbox logd:dir getattr;
+allow toolbox logd:file read;
+allow toolbox servicemanager:file read;
+allow toolbox vndservicemanager:file read;
+
+allow toolbox netd:file read;
+allow toolbox tee:file read;
+allow toolbox vold:file read;
+allow toolbox zygote:file read;
+
+allow toolbox healthd:file read;
+allow toolbox ueventd:dir { getattr search };
+allow toolbox ueventd:file open;

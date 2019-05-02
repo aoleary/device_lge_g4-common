@@ -1,5 +1,7 @@
 #neverallow: allow fsck mnt_vendor_file:dir getattr;
-#neverallow: allow fsck block_device:blk_file { ioctl open read write };
+#neverallow: allow fsck block_device:blk_file { open read write };
+
+allow fsck block_device:blk_file ioctl;
 
 allow fsck cache_file:dir getattr;
 allow fsck sensors_data_file:dir getattr;

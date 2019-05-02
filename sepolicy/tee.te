@@ -1,5 +1,6 @@
-#neverallow: allow tee block_device:blk_file { getattr open read write };
+#neverallow: allow tee block_device:blk_file { open read write };
 
+allow tee block_device:blk_file getattr;
 allow tee smem_log_device:chr_file { read write ioctl open };
 allow tee unlabeled:dir { read getattr open };
 allow tee unlabeled:file { read getattr open };

@@ -1,14 +1,16 @@
 #neverallow: allow init default_android_service:service_manager { add find };
-#neverallow: allow init device:chr_file { getattr ioctl open read write };
+#neverallow: allow init device:chr_file { open read write };
 #neverallow: allow init firmware_file:dir create;
 #neverallow: allow init imsrcs_service:service_manager add;
 #neverallow: allow init permission_service:service_manager find;
-#neverallow: allow init sysfs:file { open read setattr write };
+#neverallow: allow init sysfs:file { open read write };
 #neverallow: allow init shell_exec:file execute_no_trans;
 #neverallow: allow init sensorservice_service:service_manager find;
 #neverallow: allow init system_file:file execute_no_trans;
 #neverallow: allow init vendor_file:file execute_no_trans;
 
+allow init device:chr_file { getattr ioctl };
+allow init sysfs:file setattr;
 
 allow init app_data_file:dir search;
 allow init app_data_file:file setattr;
@@ -39,7 +41,7 @@ allow init ion_device:chr_file write;
 allow init kernel:system module_request;
 allow init netd:unix_stream_socket connectto;
 allow init netd_socket:sock_file write;
-allow init proc:file write;
+allow init proc:file { open read write };
 allow init proc_filesystems:file getattr;
 allow init ram_device:blk_file write;
 allow init self:capability2 block_suspend;
