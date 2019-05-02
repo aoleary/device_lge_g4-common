@@ -1,3 +1,12 @@
+#neverallow: allow toolbox self:capability sys_ptrace;
+
 allow toolbox init:fifo_file { getattr write };
 allow toolbox init:unix_stream_socket connectto;
 allow toolbox property_socket:sock_file write;
+allow toolbox init:dir { getattr search };
+allow toolbox init:fifo_file ioctl;
+allow toolbox init:file { open read };
+allow toolbox kernel:dir { getattr search };
+allow toolbox kernel:file { open read };
+allow toolbox ueventd:file read;
+allow toolbox vendor_init:file read;

@@ -1,4 +1,7 @@
+#neverallow: allow cameraserver default_prop:property_service set;
+
 allow cameraserver socket_device:sock_file write;
 set_prop(cameraserver, camera_prop)
 allow cameraserver init:unix_stream_socket connectto;
 allow cameraserver property_socket:sock_file write;
+allow cameraserver mm-qcamerad:unix_dgram_socket sendto;

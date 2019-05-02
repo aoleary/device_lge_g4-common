@@ -9,6 +9,7 @@
 #neverallow: allow init system_file:file execute_no_trans;
 #neverallow: allow init vendor_file:file execute_no_trans;
 
+
 allow init app_data_file:dir search;
 allow init app_data_file:file setattr;
 allow init sensors_data_file:dir mounton;
@@ -54,6 +55,7 @@ allow init tmpfs:lnk_file create;
 allow init video_device:chr_file { ioctl write };
 allow init sysfs_boot_adsp:file open;
 allow init sysfs_msm_power:file { open write };
+allow init sysfs_thermal:file write;
 
 dontaudit init bluetooth:process transition;
 dontaudit init btnvtool_exec:file execute_no_trans;
