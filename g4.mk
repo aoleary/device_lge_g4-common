@@ -20,8 +20,9 @@ $(call inherit-product-if-exists, vendor/lge/g4-common/g4-common-vendor.mk)
 PRODUCT_PACKAGES += \
     android.hardware.audio@2.0-impl \
     android.hardware.audio.effect@2.0-impl \
+    android.hardware.audio.effect@2.0-service \
     android.hardware.soundtrigger@2.0-impl \
-    audiod \
+    android.hardware.soundtrigger@2.0-service \
     libaudio-resampler \
     libqcompostprocbundle \
     libqcomvisualizer \
@@ -35,7 +36,6 @@ PRODUCT_PACKAGES += \
     audio.primary.msm8992 \
     audio.r_submix.default \
     audio.usb.default \
-    audio_policy.msm8992 \
     audio_amplifier.default
 
 PRODUCT_COPY_FILES += \
@@ -51,6 +51,11 @@ PRODUCT_COPY_FILES += \
     frameworks/av/services/audiopolicy/config/r_submix_audio_policy_configuration.xml:system/vendor/etc/r_submix_audio_policy_configuration.xml \
     frameworks/av/services/audiopolicy/config/usb_audio_policy_configuration.xml:system/vendor/etc/usb_audio_policy_configuration.xml \
     frameworks/av/services/audiopolicy/config/default_volume_tables.xml:system/vendor/etc/default_volume_tables.xml
+
+# Sound Trigger
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/audio/sound_trigger_mixer_paths.xml:system/vendor/etc/sound_trigger_mixer_paths.xml \
+    $(LOCAL_PATH)/audio/sound_trigger_platform_info.xml:system/vendor/etc/sound_trigger_platform_info.xml
 
 # Bluetooth
 PRODUCT_PACKAGES += \

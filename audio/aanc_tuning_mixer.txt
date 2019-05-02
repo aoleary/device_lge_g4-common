@@ -4,8 +4,8 @@ acdb_dev_id:85
 Txdevice:0
 
 enable
-TX7 HPF Switch:0
-TX8 HPF Switch:0
+TX7 HPF Switch:1
+TX8 HPF Switch:1
 AIF1_CAP Mixer SLIM TX7:1
 AIF1_CAP Mixer SLIM TX8:1
 SLIM TX7 MUX:DEC9
@@ -21,8 +21,8 @@ AIF1_CAP Mixer SLIM TX7:0
 AIF1_CAP Mixer SLIM TX8:0
 SLIM TX7 MUX:ZERO
 SLIM TX8 MUX:ZERO
-DEC10 MUX:ZERO
 DEC9 MUX:ZERO
+DEC10 MUX:ZERO
 TX7 HPF Switch:0
 TX8 HPF Switch:0
 
@@ -32,8 +32,8 @@ acdb_dev_id:88
 Txdevice:0
 
 enable
-TX7 HPF Switch:0
-TX8 HPF Switch:0
+TX7 HPF Switch:1
+TX8 HPF Switch:1
 AIF1_CAP Mixer SLIM TX7:1
 AIF1_CAP Mixer SLIM TX8:1
 SLIM TX7 MUX:DEC8
@@ -66,8 +66,8 @@ acdb_dev_id:91
 Txdevice:0
 
 enable
-TX7 HPF Switch:0
-TX8 HPF Switch:0
+TX7 HPF Switch:1
+TX8 HPF Switch:1
 AIF1_CAP Mixer SLIM TX7:1
 AIF1_CAP Mixer SLIM TX8:1
 SLIM TX7 MUX:DEC8
@@ -142,4 +142,3 @@ RX1 MIX1 INP1:ZERO
 RX1 Digital Volume:0
 DAC1 Switch:0
 ANC Function:OFF
-
