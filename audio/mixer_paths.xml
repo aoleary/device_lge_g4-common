@@ -57,6 +57,7 @@
     <ctl name="HDMI_RX Port Mixer MI2S_TX" value="0" />
     <ctl name="SLIMBUS_0_RX Port Mixer SLIM_0_TX" value="0" />
     <ctl name="SEC_AUX_PCM_RX Audio Mixer MultiMedia1" value="0" />
+    <ctl name="SEC_AUX_PCM_RX Audio Mixer MultiMedia3" value="0" />
     <ctl name="SEC_AUX_PCM_RX Audio Mixer MultiMedia4" value="0" />
     <ctl name="SEC_AUX_PCM_RX Audio Mixer MultiMedia5" value="0" />
     <ctl name="SEC_AUX_PCM_RX Audio Mixer MultiMedia6" value="0" />
@@ -905,6 +906,7 @@
     </path>
 
     <path name="low-latency-record bt-sco">
+      <ctl name="MultiMedia5 Mixer SLIM_0_TX" value="1" />
     </path>
 
     <path name="low-latency-record bt-sco-wb">
@@ -1406,6 +1408,19 @@
     <!-- CM: playback OUT handset speaker -->
     <path name="speaker">
         <ctl name="Speaker Driver Playback Volume" value="9" />
+    </path>
+
+    <!-- raw pb -->
+    <path name="audio-ull-playback">
+        <ctl name="SLIMBUS_0_RX Audio Mixer MultiMedia3" value="1" />
+    </path>
+
+    <path name="audio-ull-playback speaker">
+        <path name="speaker" />
+    </path>
+
+    <path name="audio-ull-playback bt-sco">
+        <ctl name="SEC_AUX_PCM_RX Audio Mixer MultiMedia3" value="1" />
     </path>
 
    <path name="sidetone-iir">
