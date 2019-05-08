@@ -111,7 +111,6 @@ vendor/lib/egl/libGLESv2_adreno.so
 vendor/lib/egl/libQTapGLES.so
 vendor/lib/egl/libq3dtools_adreno.so
 vendor/lib/egl/libq3dtools_esx.so
-vendor/lib/hw/sound_trigger.primary.msm8992.so
 vendor/lib/hw/camera.msm8992.so
 vendor/lib/hw/activity_recognition.msm8992.so
 vendor/lib/hw/flp.default.so
