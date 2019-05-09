@@ -459,6 +459,9 @@ on post-fs
     # We restorecon /preload in case preload folder has been reset.
     restorecon_recursive /preload
 
+    # required for Google wizard / first logon
+    chmod 0222 /sys/kernel/debug/tracing/trace_marker
+
 # msm specific files that need to be created on /data
 on post-fs-data
     start hrdump
