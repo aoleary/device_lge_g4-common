@@ -1,9 +1,17 @@
+#neverallow: allow system_app perfprofd:binder call;
+#unknown type storaged : allow system_app storaged:binder call;
+
 binder_use(system_app)
 binder_call(system_app, wificond)
 binder_call(system_app, imscm)
 binder_call(system_app, wificond)
 
 allow system_app time_daemon:unix_stream_socket connectto;
+allow system_app proc_pagetypeinfo:file { getattr open read };
+allow system_app sysfs_zram:dir search;
+allow system_app sysfs_zram:file { getattr open read };
+allow system_app vold:binder call;
 
 dontaudit system_app installd:binder call;
 dontaudit system_app netd:binder call;
+

@@ -1,3 +1,6 @@
+#neverallow: allow system_server vfat:dir { read open };
+#neverallow (req for infrared, public/domain.te): allow system_server device:chr_file { read write };
+
 allow system_server frp_block_device:blk_file { read write open setattr getattr ioctl };
 allow system_server default_android_service:service_manager find;
 allow system_server sensors:unix_stream_socket connectto;
@@ -19,6 +22,3 @@ allow system_server binder_per_mgr_service:service_manager find;
 allow system_server qmuxd:unix_stream_socket connectto;
 allow system_server qmuxd_socket:dir { add_name write };
 allow system_server qmuxd_socket:sock_file { create setattr write };
-
-# infrared
-# neverallow (public/domain.te): allow system_server device:chr_file { read write };

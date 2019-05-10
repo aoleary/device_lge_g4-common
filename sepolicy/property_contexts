@@ -1,0 +1,2 @@
+persist.camera.				u:object_r:camera_prop:s0
+ro.qualcomm.bluetooth.			u:object_r:qti_init_prop:s0
