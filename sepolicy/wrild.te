@@ -1,0 +1,32 @@
+#neverallow: allow wrild self:capability sys_ptrace;
+#neverallow: allow wrild system_file:file entrypoint;
+#unknown type hal_allocator_default: allow wrild hwservicemanager:file read;
+
+type wrild, domain;
+type wrild_exec, exec_type, file_type;
+init_daemon_domain(wrild)
+
+allow wrild healthd:file read;
+allow wrild hwservicemanager:file read;
+allow wrild init:dir { getattr search };
+allow wrild init:file { open read };
+allow wrild init:unix_stream_socket connectto;
+allow wrild kernel:dir { getattr search };
+allow wrild kernel:file { open read };
+allow wrild logd:dir { getattr search };
+allow wrild logd:file { read open };
+allow wrild property_socket:sock_file write;
+allow wrild shell_exec:file { getattr read };
+allow wrild system_file:file execute_no_trans;
+allow wrild servicemanager:dir getattr;
+allow wrild servicemanager:file read;
+allow wrild tee:file read;
+allow wrild toolbox_exec:file { execute execute_no_trans getattr open read };
+allow wrild netd:file read;
+allow wrild ueventd:dir { getattr search };
+allow wrild ueventd:file read;
+allow wrild vendor_init:dir { getattr search };
+allow wrild vendor_init:file { read open };
+allow wrild vndservicemanager:file read;
+allow wrild vold:file read;
+allow wrild zygote:file read;

@@ -931,6 +931,7 @@ service real-ril-daemon /vendor/bin/hw/rild
 # the rild wrapper which ensures proper rild handling
 service ril-daemon /system/bin/wrild.sh
     user root
+    seclabel u:r:wrild:s0
     disabled
 
 on property:init.svc.ril-daemon=stopped
