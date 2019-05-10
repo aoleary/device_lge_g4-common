@@ -39,4 +39,10 @@
          does not work well, particularly with noisy touchscreens. Note that disabling it may
          increase the rate of unintentional unlocks. -->
     <bool name="config_lockscreenAntiFalsingClassifierEnabled">false</bool>
+
+    <!-- The default tiles to display in QuickSettings -->
+    <string name="quick_settings_tiles_default" translatable="false">
+        wifi,bt,dnd,rotation,battery,cell,airplane,custom(io.github.berkantkz.kztorch/.kzService)
+    </string>
+
 </resources>

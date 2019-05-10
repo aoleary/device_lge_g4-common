@@ -69,6 +69,10 @@ PRODUCT_PACKAGES += \
     libqomx_core \
     libmm-qcamera
 
+# Torch tile workaround
+PRODUCT_PACKAGES += \
+    io.github.berkantkz.kztorch
+
 # Charger
 PRODUCT_PACKAGES += \
     charger_res_images
