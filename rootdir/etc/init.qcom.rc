@@ -937,7 +937,7 @@ service ril-daemon /system/bin/wrild.sh
 on property:init.svc.ril-daemon=stopped
     start qmuxd
     start netmgrd
-	start ril-daemon
+    start ril-daemon
 
 on property:ro.data.large_tcp_window_size=true
     # Adjust socket buffer to enlarge TCP receive window for high bandwidth (e.g. DO-RevB)
