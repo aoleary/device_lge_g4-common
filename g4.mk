@@ -69,10 +69,6 @@ PRODUCT_PACKAGES += \
     libqomx_core \
     libmm-qcamera
 
-# Torch tile workaround
-PRODUCT_PACKAGES += \
-    io.github.berkantkz.kztorch
-
 # rootless torch tile workaround
 PRODUCT_PACKAGES += \
     Flashlight

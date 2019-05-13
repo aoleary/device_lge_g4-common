@@ -42,7 +42,7 @@
 
     <!-- The default tiles to display in QuickSettings -->
     <string name="quick_settings_tiles_default" translatable="false">
-        wifi,bt,dnd,rotation,battery,cell,airplane,custom(com.abhi.flashlight/.TorchTile),custom(io.github.berkantkz.kztorch/.kzService)
+        wifi,bt,dnd,rotation,battery,cell,airplane,custom(com.abhi.flashlight/.TorchTile)
     </string>
 
 </resources>
