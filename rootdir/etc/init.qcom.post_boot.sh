@@ -90,18 +90,6 @@ case "$target" in
         # multi boost configuration
         echo 0:672000 > /sys/module/cpu_boost/parameters/multi_boost_freq
 
-        # Setting b.L scheduler parameters
-        echo 1 > /proc/sys/kernel/sched_migration_fixup
-        echo 30 > /proc/sys/kernel/sched_small_task
-        echo 20 > /proc/sys/kernel/sched_mostly_idle_load
-        echo 3 > /proc/sys/kernel/sched_mostly_idle_nr_run
-        echo 99 > /proc/sys/kernel/sched_upmigrate
-        echo 85 > /proc/sys/kernel/sched_downmigrate
-        echo 400000 > /proc/sys/kernel/sched_freq_inc_notify
-        echo 400000 > /proc/sys/kernel/sched_freq_dec_notify
-        echo 70 > /proc/sys/vm/dirty_background_ratio
-        echo 1000 > /proc/sys/vm/dirty_expire_centisecs
-        echo 100 > /proc/sys/vm/swappiness
         #enable rps static configuration
         echo 8 >  /sys/class/net/rmnet_ipa0/queues/rx-0/rps_cpus
         for devfreq_gov in /sys/class/devfreq/qcom,cpubw*/governor
