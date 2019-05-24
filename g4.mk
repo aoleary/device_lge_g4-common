@@ -158,7 +158,8 @@ PRODUCT_PACKAGES += \
     init.qcom.bt.sh \
     init.qcom.usb.sh \
     init.qcom.qseecomd.sh \
-    wrild.sh
+    wrild.sh \
+    sysctl.rc 
 
 # IPA
 PRODUCT_PACKAGES += \

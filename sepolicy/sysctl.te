@@ -1,0 +1,7 @@
+type init-sysctl, domain;
+type init-sysctl_exec, exec_type, file_type;
+init_daemon_domain(init-sysctl)
+
+allow init-sysctl proc:file { getattr open read write };
+allow init-sysctl proc_dirty:file { getattr open read write };
+allow init-sysctl toolbox_exec:file { entrypoint getattr read };
