@@ -30,7 +30,7 @@ PRODUCT_PACKAGES += \
     android.hardware.audio.effect@2.0-impl \
     android.hardware.audio.effect@6.0 \
     android.hardware.audio.effect@6.0-impl \
-    android.hardware.soundtrigger@2.0-impl \
+    android.hardware.soundtrigger@2.2-impl \
     libaudio-resampler \
     libqcompostprocbundle \
     libqcomvisualizer \
