@@ -50,4 +50,8 @@
     <bool name="doze_display_state_supported">false</bool>
 <!-- End: Doze mode -->
 
+    <!-- Max visible notification icons -->
+    <integer name="config_maxVisibleNotificationIcons">7</integer>
+    <integer name="config_maxVisibleNotificationIconsWhenDark">8</integer>
+
 </resources>
