@@ -31,7 +31,13 @@
 
 #define BTA_DISABLE_DELAY 1000 /* in milliseconds */
 
-#define BTIF_HF_WBS_PREFERRED TRUE /* Use WBS */
+/*
+ * Do not use WBS when BTHW_FW_EXTENDED_CONFIGURATION = TRUE (vnd conf)
+ * When set to true and your headset supports WBS it will
+ * just be silence on both sites - at least when WBS does actually turn on 
+ * which is not the case for all WBS enabled headsets.
+*/
+#define BTIF_HF_WBS_PREFERRED FALSE /* Do not use WBS */
 
 #define BT_CLEAN_TURN_ON_DISABLED 1
 #endif
