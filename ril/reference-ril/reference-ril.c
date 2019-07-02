@@ -3297,7 +3297,7 @@ mainLoop(void *param __unused)
         fd = -1;
         while  (fd < 0) {
             if (s_port > 0) {
-                fd = socket_loopback_client(s_port, SOCK_STREAM);
+		fd = socket_network_client("localhost", s_port, SOCK_STREAM);
             } else if (s_device_socket) {
                 if (!strcmp(s_device_path, "/dev/socket/qemud")) {
                     /* Before trying to connect to /dev/socket/qemud (which is
