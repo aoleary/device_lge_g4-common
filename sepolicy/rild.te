@@ -22,3 +22,7 @@ allow rild binder_per_mgr_service:service_manager find;
 allow rild ril_database:file { getattr ioctl lock open read };
 allow rild system_data_file:dir { add_name write };
 allow rild system_data_file:file { getattr open read };
+
+# neverallow protected:
+allow rild system_data_file:file { write create };
+
