@@ -1560,9 +1560,9 @@
     <path name="voice-speaker-dmic-ef">
         <path name="dual-mic-speaker" />
         <ctl name="ADC3 Volume" value="11" />
-        <ctl name="DEC4 Volume" value="84" />
+        <ctl name="DEC4 Volume" value="92" />
         <ctl name="ADC4 Volume" value="11" />
-        <ctl name="DEC3 Volume" value="84" />
+        <ctl name="DEC3 Volume" value="92" />
     </path>
 
     <!-- CM: voip IN handset mic -->
