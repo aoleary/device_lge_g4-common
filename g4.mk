@@ -14,11 +14,7 @@
 # limitations under the License.
 #
 
-# Proprietary stuff
 $(call inherit-product-if-exists, vendor/lge/g4-common/g4-common-vendor.mk)
-
-# Build ril-caf
-$(call project-set-path,qcom-ril,$(COMMON_PATH)/ril)
 
 # Audio
 PRODUCT_PACKAGES += \
