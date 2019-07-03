@@ -7,7 +7,7 @@
 x=1
 PRTRIGGER=0
 REQRESTART=99
-MAXRET=50
+MAXRET=10
 
 # logging func
 F_LOG(){
