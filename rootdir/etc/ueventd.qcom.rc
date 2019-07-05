@@ -238,7 +238,7 @@
 /dev/felica_test          0660  system    system
 
 # UIO devices
-/dev/uio0                 0660   system     system
+/dev/uio0                 0660   root     system
 /dev/uio1                 0660   system     system
 /dev/uio2                 0660   system     system
 

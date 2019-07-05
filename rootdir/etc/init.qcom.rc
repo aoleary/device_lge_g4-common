@@ -130,7 +130,11 @@ service chcon_keystore /system/vendor/bin/init.recovery.m1_chcon_keystore.sh
     seclabel u:r:keystore:s0
 
 on boot
+    # rmt_storage
     start rmt_storage
+    # rfs_access
+    chmod 0664 /sys/power/wake_lock
+    chmod 0666 /persist/rfs/msm/adsp
     start rfs_access
 
     # bring cores online
@@ -772,6 +776,7 @@ service rfs_access /system/vendor/bin/rfs_access
    class core
    user root
    group system net_raw
+   capabilities NET_RAW
    writepid /dev/cpuset/system-background/tasks
 
 on property:wc_transport.start_hci=true
