@@ -3,3 +3,7 @@ allow mm-qcamerad camera_data_file:sock_file { create unlink };
 allow mm-qcamerad sysfs:file { read open };
 allow mm-qcamerad self:tcp_socket { create setopt bind };
 allow mm-qcamerad camera_data_file:dir { add_name remove_name write search };
+allow mm-qcamerad sensorservice_service:service_manager find;
+allow mm-qcamerad permission_service:service_manager find;
+allow mm-qcamerad system_server:unix_stream_socket { read write };
+allow mm-qcamerad sensors_socket:sock_file read;

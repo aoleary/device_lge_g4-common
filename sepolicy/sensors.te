@@ -14,6 +14,7 @@ allow sensors sensors_data_file:dir search;
 allow sensors unlabeled:dir { search getattr };
 allow sensors unlabeled:file write;
 
-allow sensors sensors_data:dir { search getattr read open };
-allow sensors sensors_data:file { write getattr read open };
+allow sensors sensors_data:dir { search getattr read open add_name remove_name write };
+allow sensors sensors_data:file { write setattr getattr read open };
 allow sensors ctl_start_prop:property_service set;
+allow sensors touch_socket:lnk_file read;
