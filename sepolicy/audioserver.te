@@ -1,5 +1,5 @@
 #neverallow: allow audioserver device:chr_file { open read write };
-
+allow audioserver qti_init_prop:file { getattr open read };
 allow audioserver device:chr_file ioctl;
 allow audioserver socket_device:file write;
 allow audioserver device:file { read write open };

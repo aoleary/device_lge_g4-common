@@ -1,1 +1,2 @@
 allow flashlight_app_data_file sysfs:filesystem associate;
+allow flashlight_app_data_file labeledfs:filesystem associate;

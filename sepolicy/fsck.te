@@ -1,8 +1,3 @@
-#neverallow: allow fsck mnt_vendor_file:dir getattr;
-#neverallow: allow fsck block_device:blk_file { open read write };
-
-allow fsck block_device:blk_file ioctl;
-
 allow fsck cache_file:dir getattr;
 allow fsck sensors_data_file:dir getattr;
 allow fsck modem_efs_partition_device:blk_file { read write ioctl open };
@@ -11,3 +6,7 @@ allow fsck persist-lg_block_device:dir getattr;
 allow fsck system_device:blk_file { read write ioctl open };
 allow fsck unlabeled:dir getattr;
 allow fsck mpt_block_device:blk_file { read open write ioctl };
+
+# neverallow protected
+allow fsck block_device:blk_file { ioctl open read write };
+allow fsck mnt_vendor_file:dir getattr;

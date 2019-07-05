@@ -16,3 +16,4 @@ allow sensors unlabeled:file write;
 
 allow sensors sensors_data:dir { search getattr read open };
 allow sensors sensors_data:file { write getattr read open };
+allow sensors ctl_start_prop:property_service set;

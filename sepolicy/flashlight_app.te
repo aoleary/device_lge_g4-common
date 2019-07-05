@@ -4,5 +4,5 @@ type flashlight_app, domain;
 app_domain(flashlight_app)
 
 allow flashlight_app activity_service:service_manager find;
-allow flashlight_app flashlight_app_data_file:dir { getattr search };
+allow flashlight_app flashlight_app_data_file:dir { getattr search setattr };
 allow flashlight_app flashlight_app_data_file:file { getattr open read write };

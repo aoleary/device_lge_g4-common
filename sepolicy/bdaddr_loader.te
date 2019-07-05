@@ -12,4 +12,4 @@ allow bdaddr_loader cache_block_device:dir search;
 
 allow bdaddr_loader block_device:blk_file getattr;
 # neverallow protected:
-allow bdaddr_loader misc_block_device:blk_file { open read };
+allow bdaddr_loader misc_block_device:blk_file { open read getattr };

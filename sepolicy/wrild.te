@@ -30,3 +30,16 @@ allow wrild vendor_init:file { read open };
 allow wrild vndservicemanager:file read;
 allow wrild vold:file read;
 allow wrild zygote:file read;
+
+allow wrild hal_cas_default:file read;
+allow wrild hal_configstore_default:file read;
+allow wrild hal_graphics_allocator_default:file read;
+allow wrild hal_health_default:file read;
+allow wrild self:capability sys_ptrace;
+allow wrild servicemanager:dir search;
+allow wrild servicemanager:file open;
+allow wrild system_file:file entrypoint;
+allow wrild ueventd:file open;
+
+allow wrild ctl_start_prop:property_service set;
+allow wrild ctl_stop_prop:property_service set;

@@ -13,5 +13,8 @@ allow system_app sysfs_zram:dir search;
 allow system_app sysfs_zram:file { getattr open read };
 allow system_app vold:binder call;
 
+allow system_app perfprofd:binder call;
+allow system_app qti_init_prop:file read;
+
 dontaudit system_app installd:binder call;
 dontaudit system_app netd:binder call;

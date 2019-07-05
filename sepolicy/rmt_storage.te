@@ -1,7 +1,7 @@
-#neverallow: allow rmt_storage block_device:blk_file { open read write };
+allow rmt_storage self:capability { net_raw sys_admin };
 
-allow rmt_storage self:capability sys_admin;
-allow rmt_storage self:capability { net_raw };
+# neverallow protected:
+allow rmt_storage block_device:blk_file { read write open };
 
 # debugfs access
 userdebug_or_eng(`
