@@ -137,6 +137,10 @@ on boot
     chmod 0666 /persist/rfs/msm/adsp
     start rfs_access
 
+    # sensors
+    chown root system /sns/cal
+    chmod 0755 /sns/cal
+
     # bring cores online
     write /sys/module/msm_thermal/core_control/enabled 0
     write /sys/devices/system/cpu/cpu0/online 1
@@ -181,9 +185,8 @@ on boot
     chmod 0600 /dev/rfkill
 
     #Create QMUX deamon socket area
-    mkdir /dev/socket/qmux_radio 0770 radio radio
+    mkdir /dev/socket/qmux_radio 0775 radio radio
     mkdir /data/misc/radio/modem_config/mcfg_sw 0770 radio radio
-    chmod 2770 /dev/socket/qmux_radio
     chmod 2770 /data/misc/radio/modem_config/mcfg_sw
     mkdir /dev/socket/qmux_audio 0770 media audio
     chmod 2770 /dev/socket/qmux_audio
@@ -630,7 +633,7 @@ on post-fs-data
     mkdir /data/usf 0700 system system
 
     # Z2G4-BSP-TS@lge.com make directory for sns.reg used by sensordaemon
-    mkdir /sns/cal/ 0644 system system
+    mkdir /sns/cal/ 0774 system system
     restorecon_recursive /sns
 
 service ssr_setup /system/bin/ssr_setup
@@ -854,7 +857,7 @@ service qti /system/vendor/bin/qti
 service sensors /system/vendor/bin/sensors.qcom
     class core
     user root
-    group root system
+    group root system wakelock
     writepid /dev/cpuset/system-background/tasks
     disabled
 
@@ -1032,9 +1035,9 @@ service perfd /system/bin/perfd
 service thermal-engine /system/vendor/bin/thermal-engine
     class main
     user root
-    socket thermal-send-client stream 0666 system system
-    socket thermal-recv-client stream 0660 system system
-    socket thermal-recv-passive-client stream 0666 system system
+    socket thermal-send-client stream 0666 root system
+    socket thermal-recv-client stream 0660 root system
+    socket thermal-recv-passive-client stream 0666 root system
     group root
     writepid /dev/cpuset/system-background/tasks
 
@@ -1188,6 +1191,7 @@ service imswmsproxy /system/vendor/bin/imswmsproxy
 service lge-sensor-sh /system/vendor/bin/init.msm8992.sensor.sh
     class core
     user root
+    group root wakelock
     oneshot
     seclabel u:r:sensors:s0
 # start sensor daemon as core class [END]
