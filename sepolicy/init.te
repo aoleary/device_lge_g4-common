@@ -62,5 +62,7 @@ allow init sysfs_msm_power:file { open write };
 allow init sysfs_thermal:file write;
 allow init flashlight_app_data_file:file setattr;
 
+allow init rootfs:file { create write };
+
 dontaudit init bluetooth:process transition;
 dontaudit init btnvtool_exec:file execute_no_trans;
