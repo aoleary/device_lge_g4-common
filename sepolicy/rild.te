@@ -23,6 +23,11 @@ allow rild ril_database:file { getattr ioctl lock open read };
 allow rild system_data_file:dir { add_name write };
 allow rild system_data_file:file { getattr open read };
 
+# qcril db
+allow rild ril_database:lnk_file { getattr read };
+allow rild system_data_file:dir { open read remove_name };
+allow rild system_data_file:file { ioctl lock setattr unlink };
+
 # neverallow protected:
 allow rild system_data_file:file { write create };
 

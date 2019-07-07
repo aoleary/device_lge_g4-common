@@ -252,4 +252,14 @@ $(KEYMASTER_IMPL_SYMLINK): $(LOCAL_INSTALLED_MODULE)
 
 ALL_DEFAULT_INSTALLED_MODULES += $(KEYMASTER_IMPL_SYMLINK)
 
+QCRIL_DB := /data/system/qcril/qcril.db
+QCRIL_DB_BASE := $(addprefix $(TARGET_OUT)/etc/motorola/,$(notdir qcril.db))
+$(QCRIL_DB_BASE): $(LOCAL_INSTALLED_MODULE)
+	@echo "Creating QCRIL db symlink: $@"
+	@mkdir -p $(dir $@)
+	@rm -rf $@
+	$(hide) ln -sf $(QCRIL_DB) $(QCRIL_DB_BASE)
+
+ALL_DEFAULT_INSTALLED_MODULES += $(QCRIL_DB_BASE)
+
 endif
