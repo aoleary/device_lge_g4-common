@@ -302,6 +302,9 @@
     <!-- Flag indicating which package name can access the persistent data partition -->
     <string name="config_persistentDataPackageName" translatable="false">com.google.android.gms</string>
 
+    <!-- Full screen aspect ratio -->
+    <item name="config_screenAspectRatio" format="float" type="dimen">1.778</item>
+
     <!-- Does the battery LED support multiple colors?
          Used to decide if the user can change the colors -->
     <bool name="config_multiColorBatteryLed">true</bool>
