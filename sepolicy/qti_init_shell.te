@@ -28,8 +28,8 @@ allow qti_init_shell sysfs_net:file write;
 allow qti_init_shell system_prop:property_service set;
 allow qti_init_shell ctl_start_prop:property_service set;
 
-
 # qcril db
-allow qti_init_shell ril_database:dir search;
-allow qti_init_shell ril_database:file getattr;
-allow qti_init_shell system_data_file:file getattr;
+allow qti_init_shell ril_database:dir { search open };
+allow qti_init_shell ril_database:file { getattr read open };
+allow qti_init_shell system_data_file:file { getattr write create open read setattr };
+allow qti_init_shell system_data_file:dir { setattr write add_name create };
