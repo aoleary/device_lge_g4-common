@@ -9,3 +9,5 @@ allow vold modem_efs_partition_device:blk_file getattr;
 allow vold mpt_block_device:blk_file getattr;
 allow vold persist-lg_block_device:blk_file getattr;
 allow vold system_device:blk_file getattr;
+
+allow vold rootfs:blk_file getattr;
