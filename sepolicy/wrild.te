@@ -21,6 +21,7 @@ allow wrild system_file:file execute_no_trans;
 allow wrild servicemanager:dir getattr;
 allow wrild servicemanager:file read;
 allow wrild tee:file read;
+allow wrild tee:dir getattr;
 allow wrild toolbox_exec:file { execute execute_no_trans getattr open read };
 allow wrild netd:file read;
 allow wrild ueventd:dir { getattr search };
@@ -28,7 +29,8 @@ allow wrild ueventd:file read;
 allow wrild vendor_init:dir { getattr search };
 allow wrild vendor_init:file { read open };
 allow wrild vndservicemanager:file read;
-allow wrild vold:file read;
+allow wrild vold:file { read open };
+allow wrild vold:dir { getattr search };
 allow wrild zygote:file read;
 
 allow wrild hal_cas_default:file read;
