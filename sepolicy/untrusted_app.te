@@ -1,1 +1,2 @@
 allow untrusted_app proc_vmstat:file { getattr open };
+allow untrusted_app proc_version:file read;
