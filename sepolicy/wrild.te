@@ -46,7 +46,7 @@ allow wrild ueventd:file open;
 allow wrild ctl_start_prop:property_service set;
 allow wrild ctl_stop_prop:property_service set;
 
-allow wrild magisk:file read;
+#allow wrild magisk:file read;
 
 dontaudit wrild hwservicemanager:dir { getattr search };
 dontaudit wrild hwservicemanager:file open;
