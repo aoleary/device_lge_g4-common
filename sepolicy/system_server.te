@@ -24,3 +24,5 @@ allow system_server binder_per_mgr_service:service_manager find;
 allow system_server qmuxd:unix_stream_socket connectto;
 allow system_server qmuxd_socket:dir { add_name write search };
 allow system_server qmuxd_socket:sock_file { create setattr write };
+
+allow system_server vfat:dir { open read write };
