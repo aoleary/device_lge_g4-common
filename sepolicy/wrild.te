@@ -14,6 +14,7 @@ allow wrild toolbox_exec:file { execute execute_no_trans getattr open read };
 
 # wrild.sh uses ps and so will spam the log for unneeded stuff
 # everything with "comm=ps" in an avc denied log should be added here:
+dontaudit wrild audioserver:file read;
 dontaudit wrild cameraserver:file { read };
 dontaudit wrild drmserver:file { read };
 dontaudit wrild energyawareness:file { read };
@@ -45,6 +46,7 @@ dontaudit wrild su:file { read };
 dontaudit wrild tee:file { read };
 dontaudit wrild ueventd:file { read };
 dontaudit wrild vendor_init:file { read };
+dontaudit wrild vendor_per_mgr:file read;
 dontaudit wrild vndservicemanager:file { read };
 dontaudit wrild vold:file { read };
 dontaudit wrild zygote:file { read };
