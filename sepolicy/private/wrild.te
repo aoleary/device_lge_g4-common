@@ -1,0 +1,9 @@
+type wrild, domain;
+type wrild_exec, exec_type, file_type;
+init_daemon_domain(wrild)
+
+allow wrild hal_allocator_default:file { read open };
+allow wrild hal_allocator_default:dir { search getattr };
+
+allow wrild statsd:file read;
+allow wrild storaged:file read;
