@@ -196,8 +196,6 @@ TARGET_NO_BOOTLOADER := true
 TARGET_USES_QCOM_BSP := true
 
 # Power
-BOARD_CHARGER_DISABLE_INIT_BLANK := true
-BOARD_CHARGER_ENABLE_SUSPEND := false
 BACKLIGHT_PATH := "/sys/class/leds/lcd-backlight/brightness"
 TARGET_TAP_TO_WAKE_NODE := "/sys/devices/virtual/input/lge_touch/tap2wake"
 TARGET_HAS_NO_WLAN_STATS := true

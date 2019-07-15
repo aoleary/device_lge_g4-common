@@ -68,6 +68,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     vidc.debug.perf.mode=2 \
     vidc.enc.dcvs.extra-buff-count=2
 
+# Charger
+PRODUCT_PRODUCT_PROPERTIES += \
+    ro.charger.enable_suspend=true
+
 # Configstore
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.surface_flinger.force_hwc_copy_for_virtual_displays=true \
