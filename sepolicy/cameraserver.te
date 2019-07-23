@@ -6,3 +6,5 @@ allow cameraserver init:unix_stream_socket connectto;
 allow cameraserver property_socket:sock_file write;
 allow cameraserver mm-qcamerad:unix_dgram_socket sendto;
 allow cameraserver camera_data_file:dir search;
+
+allow cameraserver default_android_hwservice:hwservice_manager find;
