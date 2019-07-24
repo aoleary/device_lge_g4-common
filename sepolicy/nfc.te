@@ -1,0 +1,1 @@
+allow nfc vendor_data_file:file { getattr open read write };
