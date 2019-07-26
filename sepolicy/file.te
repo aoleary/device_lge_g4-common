@@ -12,4 +12,5 @@ type debugfs_rfs, debugfs_type, fs_type;
 # torch
 type flashlight_app_data_file, sysfs_type, fs_type;
 
-#type storaged, sysfs_type, fs_type;
+# readmac
+type persist_wifi_file, file_type;
