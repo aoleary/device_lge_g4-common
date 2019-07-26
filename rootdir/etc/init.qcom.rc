@@ -1151,7 +1151,7 @@ service zchgd_offmode /system/bin/zchgd -pseudooffmode -autostop -poffmodewarn
     group root graphics
     disabled
 
-service hwaddrs /system/bin/hwaddrs
+service hwaddrs /system/vendor/bin/hwaddrs
     class core
     user root
     group system wifi
