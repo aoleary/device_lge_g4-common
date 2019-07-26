@@ -31,10 +31,10 @@ int main() {
     int i;
 
     fd1 = open("/dev/block/bootdevice/by-name/misc", O_RDONLY);
-    fd2 = open("/data/misc/wifi/config", O_WRONLY|O_CREAT|O_TRUNC, S_IRUSR|S_IWUSR|S_IRGRP|S_IROTH);
 
     if (!blank(fd1, 0x3000))
     {
+        fd2 = open("/data/misc/wifi/config", O_CREAT|O_WRONLY|O_TRUNC, S_IRUSR|S_IWUSR|S_IRGRP|S_IROTH);
         write(fd2, "cur_etheraddr=", 14);
 
         for(i = 0; i < 6; i++) {
@@ -53,7 +53,7 @@ int main() {
 
     if (!blank(fd1, 0x4000))
     {
-        fd2 = open("/data/misc/bluetooth/bdaddr", O_WRONLY|O_CREAT|O_TRUNC, S_IRUSR|S_IWUSR|S_IRGRP|S_IROTH);
+        fd2 = open("/data/misc/bluetooth/bdaddr", O_CREAT|O_WRONLY|O_TRUNC, S_IRUSR|S_IWUSR|S_IRGRP|S_IROTH);
         for(i = 0; i < 6; i++) {
             lseek(fd1, 0x4000 + i, SEEK_SET);
             lseek(fd2, 0, SEEK_END);
