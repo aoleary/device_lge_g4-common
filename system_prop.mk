@@ -68,8 +68,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Dexopt (try not to use big cores during dexopt)
 PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.boot-dex2oat-threads=4 \
-    dalvik.vm.dex2oat-threads=2 \
-    dalvik.vm.image-dex2oat-threads=4
+    dalvik.vm.dex2oat-threads=4 \
+    dalvik.vm.image-dex2oat-threads=4 \
+    dalvik.vm.image-dex2oat-filter=speed \
+    ro.vendor.qti.am.reschedule_service=true
 
 # Display
 PRODUCT_PROPERTY_OVERRIDES += \
