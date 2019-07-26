@@ -516,9 +516,6 @@ on post-fs-data
     mkdir /data/misc/dhcp 0770 dhcp dhcp
     chown dhcp dhcp /data/misc/dhcp
 
-    # WiFi: ensure we never have an empty MAC
-    start readmac
-
     # Create the directories used by CnE subsystem
     mkdir /data/connectivity 0771 system system
     chown system system /data/connectivity
@@ -1201,13 +1198,6 @@ service lge-sensor-sh /system/vendor/bin/init.msm8992.sensor.sh
     oneshot
     seclabel u:r:sensors:s0
 # start sensor daemon as core class [END]
-
-# WiFi: ensure we never have an empty MAC
-service readmac /system/bin/readmac
-    user root
-    group system
-    oneshot
-    seclabel u:r:readmac:s0
 
 on property:gsm.version.baseband=""
     start baseband-sh

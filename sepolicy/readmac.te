@@ -1,9 +1,0 @@
-type readmac, domain, service_manager_type;
-type readmac_exec, exec_type, file_type;
-init_daemon_domain(readmac)
-
-type_transition readmac mnt_vendor_file:file persist_wifi_file;
-
-allow readmac mnt_vendor_file:dir { search add_name write };
-allow readmac persist_wifi_file:file { create getattr open read write };
-allow readmac system_file:file entrypoint;

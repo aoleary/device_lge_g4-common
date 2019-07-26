@@ -48,6 +48,3 @@
 
 # torch/flashlight
 /sys/devices/soc.0/qpnp-flash-led-26/leds/led:torch_1/brightness	u:object_r:flashlight_app_data_file:s0
-
-# readmac file
-/persist/wlan_mac\.bin					 u:object_r:persist_wifi_file:s0
