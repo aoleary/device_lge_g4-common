@@ -1,2 +1,3 @@
 allow nfc vendor_data_file:file { getattr open read write };
-allow nfc nfc_vendor_data_file:dir search;
+allow nfc nfc_vendor_data_file:dir { search write add_name };
+allow nfc nfc_vendor_data_file:file { getattr create open read write };
