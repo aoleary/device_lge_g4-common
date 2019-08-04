@@ -1523,7 +1523,7 @@ int IPACM_Wan::handle_header_add_evt(uint8_t *mac_addr)
 	strlcpy(pHeaderDescriptor->hdr[0].name, index, sizeof(pHeaderDescriptor->hdr[0].name));
 	if ( strlcat(pHeaderDescriptor->hdr[0].name, IPA_WAN_PARTIAL_HDR_NAME_v4, sizeof(pHeaderDescriptor->hdr[0].name)) > IPA_RESOURCE_NAME_MAX)
 	{
-		IPACMERR(" header name construction failed exceed length (%d)\n", strlen(pHeaderDescriptor->hdr[0].name));
+		IPACMERR(" header name construction failed exceed length (%lu)\n", strlen(pHeaderDescriptor->hdr[0].name));
 		res = IPACM_FAILURE;
 		goto fail;
 	}
@@ -1615,7 +1615,7 @@ int IPACM_Wan::handle_header_add_evt(uint8_t *mac_addr)
 					 strlcpy(pHeaderDescriptor->hdr[0].name, index, sizeof(pHeaderDescriptor->hdr[0].name));
 					 if (strlcat(pHeaderDescriptor->hdr[0].name, IPA_WAN_PARTIAL_HDR_NAME_v6, sizeof(pHeaderDescriptor->hdr[0].name)) > IPA_RESOURCE_NAME_MAX)
 					 {
-					 	IPACMERR(" header name construction failed exceed length (%d)\n", strlen(pHeaderDescriptor->hdr[0].name));
+					 	IPACMERR(" header name construction failed exceed length (%lu)\n", strlen(pHeaderDescriptor->hdr[0].name));
 					 	res = IPACM_FAILURE;
 					 	goto fail;
 					 }
@@ -4851,7 +4851,7 @@ int IPACM_Wan::handle_wan_hdr_init(uint8_t *mac_addr)
 
 								if (strlcat(pHeaderDescriptor->hdr[0].name, IPA_WAN_PARTIAL_HDR_NAME_v4, sizeof(pHeaderDescriptor->hdr[0].name)) > IPA_RESOURCE_NAME_MAX)
 								{
-									IPACMERR(" header name construction failed exceed length (%d)\n", strlen(pHeaderDescriptor->hdr[0].name));
+									IPACMERR(" header name construction failed exceed length (%lu)\n", strlen(pHeaderDescriptor->hdr[0].name));
 									res = IPACM_FAILURE;
 									goto fail;
 								}
@@ -4859,7 +4859,7 @@ int IPACM_Wan::handle_wan_hdr_init(uint8_t *mac_addr)
 								snprintf(index,sizeof(index), "%d", header_name_count);
 								if (strlcat(pHeaderDescriptor->hdr[0].name, index, sizeof(pHeaderDescriptor->hdr[0].name)) > IPA_RESOURCE_NAME_MAX)
 								{
-									IPACMERR(" header name construction failed exceed length (%d)\n", strlen(pHeaderDescriptor->hdr[0].name));
+									IPACMERR(" header name construction failed exceed length (%lu)\n", strlen(pHeaderDescriptor->hdr[0].name));
 									res = IPACM_FAILURE;
 									goto fail;
 								}
@@ -4938,14 +4938,14 @@ int IPACM_Wan::handle_wan_hdr_init(uint8_t *mac_addr)
 
 				if (strlcat(pHeaderDescriptor->hdr[0].name, IPA_WAN_PARTIAL_HDR_NAME_v6, sizeof(pHeaderDescriptor->hdr[0].name)) > IPA_RESOURCE_NAME_MAX)
 				{
-					IPACMERR(" header name construction failed exceed length (%d)\n", strlen(pHeaderDescriptor->hdr[0].name));
+					IPACMERR(" header name construction failed exceed length (%lu)\n", strlen(pHeaderDescriptor->hdr[0].name));
 					res = IPACM_FAILURE;
 					goto fail;
 				}
 				snprintf(index,sizeof(index), "%d", header_name_count);
 				if (strlcat(pHeaderDescriptor->hdr[0].name, index, sizeof(pHeaderDescriptor->hdr[0].name)) > IPA_RESOURCE_NAME_MAX)
 				{
-					IPACMERR(" header name construction failed exceed length (%d)\n", strlen(pHeaderDescriptor->hdr[0].name));
+					IPACMERR(" header name construction failed exceed length (%lu)\n", strlen(pHeaderDescriptor->hdr[0].name));
 					res = IPACM_FAILURE;
 					goto fail;
 				}
