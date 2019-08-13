@@ -117,7 +117,9 @@ PRODUCT_PACKAGES += \
 
 # F-droid
 WITH_FDROID := true
-$(call inherit-product-if-exists, vendor/fdroid/fdroid-vendor.mk)
+PRODUCT_PACKAGES += \
+    F-Droid \
+    FDroidPrivilegedExtension
 
 # Filesystem
 TARGET_FS_CONFIG_GEN := $(LOCAL_PATH)/config.fs
