@@ -26,3 +26,7 @@ allow system_server qmuxd_socket:dir { add_name write search };
 allow system_server qmuxd_socket:sock_file { create setattr write };
 
 allow system_server vfat:dir { open read write };
+
+# watchdog
+allow system_server wrild:fifo_file write;
+allow system_server wrild:fd use;

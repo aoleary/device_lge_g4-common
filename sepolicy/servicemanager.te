@@ -16,3 +16,8 @@ allow servicemanager mm-pp-daemon:process getattr;
 allow servicemanager vendor_per_mgr:dir search;
 allow servicemanager vendor_per_mgr:file { open read };
 allow servicemanager vendor_per_mgr:process getattr;
+
+# watchdog
+allow servicemanager wrild:dir search;
+allow servicemanager wrild:file { read open };
+allow servicemanager wrild:process getattr;

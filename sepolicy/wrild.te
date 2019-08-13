@@ -2,6 +2,10 @@ type wrild, domain;
 type wrild_exec, exec_type, file_type;
 init_daemon_domain(wrild)
 
+# allow wrild to read any /proc/pid
+r_dir_file(wrild, domain)
+
+# rild
 allow wrild ctl_start_prop:property_service set;
 allow wrild ctl_stop_prop:property_service set;
 allow wrild init:unix_stream_socket connectto;
@@ -12,63 +16,111 @@ allow wrild system_file:file entrypoint;
 allow wrild system_file:file execute_no_trans;
 allow wrild toolbox_exec:file { execute execute_no_trans getattr open read };
 
+# watchdog
+allow wrild cache_file:dir { add_name write };
+allow wrild cache_file:file { ioctl append create open };
+allow wrild init:dir { getattr search };
+allow wrild init:file { open read };
+allow wrild kernel:dir { getattr search };
+allow wrild kernel:file { open read };
+allow wrild kernel:system { syslog_read syslog_mod};
+allow wrild kmsg_device:chr_file { open read };
+allow wrild logcat_exec:file { getattr open read execute execute_no_trans };
+allow wrild logd:dir { getattr search };
+allow wrild logd:file { open read };
+allow wrild logd:unix_stream_socket connectto;
+allow wrild logd_socket:sock_file write;
+allow wrild logdr_socket:sock_file write;
+allow wrild media_rw_data_file:dir { open read search write add_name create getattr remove_name rmdir };
+allow wrild media_rw_data_file:file { read open create write append getattr unlink };
+allow wrild mnt_user_file:dir search;
+allow wrild mnt_user_file:lnk_file read;
+allow wrild registry_service:service_manager find;
+allow wrild rild:file read;
+allow wrild radio_prop:property_service set;
+allow wrild sdcardfs:dir { search write add_name create read getattr open read remove_name rmdir };
+allow wrild sdcardfs:file { create append open getattr unlink };
+allow wrild self:capability2 syslog;
+allow wrild servicemanager:binder call;
+allow wrild storage_file:dir search;
+allow wrild storage_file:lnk_file read;
+allow wrild system_server:binder call;
+allow wrild window_service:service_manager find;
+allow wrild wrild_prop:property_service set;
+allow wrild wrild_prop:file { getattr open read };
+
 # wrild.sh uses ps and so will spam the log for unneeded stuff
+# wildcard not possible and as we override neverallows thats the only known way.
 # everything with "comm=ps" in an avc denied log should be added here:
-dontaudit wrild adsprpcd:file read;
-dontaudit wrild audioserver:file read;
-dontaudit wrild cameraserver:file { read };
-dontaudit wrild drmserver:file { read };
-dontaudit wrild energyawareness:file { read };
-dontaudit wrild gatekeeperd:file read;
-dontaudit wrild hal_cas_default:file { read };
-dontaudit wrild hal_configstore_default:file { read };
-dontaudit wrild hal_graphics_allocator_default:file { read };
-dontaudit wrild hal_health_default:file { read };
-dontaudit wrild hal_light_default:file { read };
-dontaudit wrild hal_lineage_trust_default:file read;
-dontaudit wrild hal_power_default:file { read };
-dontaudit wrild hal_thermal_default:file { read };
-dontaudit wrild hal_usb_default:file { read };
-dontaudit wrild hal_wifi_default:file { read };
-dontaudit wrild hal_wifi_offload_default:file read;
-dontaudit wrild healthd:file { read };
-dontaudit wrild hwservicemanager:file { read };
-dontaudit wrild imscm:file read;
-dontaudit wrild ims:file read;
-dontaudit wrild imswmsproxy:file read;
-dontaudit wrild incidentd:file { read };
-dontaudit wrild init:file { read };
-dontaudit wrild installd:file { read };
-dontaudit wrild kernel:file { read };
-dontaudit wrild keystore:file { read };
-dontaudit wrild lmkd:file read;
-dontaudit wrild logd:file { read };
-dontaudit wrild mediacodec:file read;
-dontaudit wrild mediadrmserver:file { read };
-dontaudit wrild mediaextractor:file { read };
-dontaudit wrild mediametrics:file read;
-dontaudit wrild mediaserver:file read;
-dontaudit wrild mm-pp-daemon:file read;
-dontaudit wrild mm-qcamerad:file read;
-dontaudit wrild netd:file { read };
-dontaudit wrild perfprofd:file read;
-dontaudit wrild qmuxd:file read;
-dontaudit wrild rfs_access:file { read };
-dontaudit wrild rmt_storage:file read;
-dontaudit wrild sensors:file read;
-dontaudit wrild servicemanager:file { read };
-dontaudit wrild shell:file read;
-dontaudit wrild su:file { read };
-dontaudit wrild surfaceflinger:file read;
-dontaudit wrild tee:file { read };
-dontaudit wrild thermal-engine:file read;
-dontaudit wrild thermalserviced:file read;
-dontaudit wrild time_daemon:file read;
-dontaudit wrild tombstoned:file read;
-dontaudit wrild ueventd:file { read };
-dontaudit wrild vendor_init:file { read };
-dontaudit wrild vendor_per_mgr:file read;
-dontaudit wrild vndservicemanager:file { read };
-dontaudit wrild vold:file { read };
-dontaudit wrild wificond:file read;
-dontaudit wrild zygote:file { read };
+define(`wrild_dont_audit', `{
+    adsprpcd
+    audioserver
+    cameraserver
+    drmserver
+    energyawareness
+    gatekeeperd
+    hal_cas_default
+    hal_configstore_default
+    hal_graphics_allocator_default
+    hal_health_default
+    hal_light_default
+    hal_lineage_trust_default
+    hal_power_default
+    hal_thermal_default
+    hal_usb_default
+    hal_wifi_default
+    hal_wifi_offload_default
+    healthd
+    hwservicemanager
+    imscm
+    ims
+    imswmsproxy
+    incidentd
+    init
+    installd
+    isolated_app
+    kernel
+    keystore
+    lmkd
+    logd
+    mediacodec
+    mediadrmserver
+    mediaextractor
+    mediaprovider
+    mediametrics
+    mediaserver
+    mm-pp-daemon
+    mm-qcamerad
+    netd
+    perfprofd
+    platform_app
+    priv_app
+    qmuxd
+    rfs_access
+    rmt_storage
+    secure_element
+    sensors
+    servicemanager
+    shell
+    su
+    surfaceflinger
+    tee
+    thermal-engine
+    thermalserviced
+    time_daemon
+    tombstoned
+    traceur_app
+    ueventd
+    untrusted_app
+    untrusted_app_25
+    untrusted_app_27
+    vendor_init
+    vendor_per_mgr
+    vndservicemanager
+    vold
+    wificond
+    zygote
+}')
+
+dontaudit wrild wrild_dont_audit:{ file dir } { read getattr };
+dontaudit wrild wrild_dont_audit:{ dir } { search };
