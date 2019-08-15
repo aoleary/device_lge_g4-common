@@ -228,6 +228,18 @@
         <fqname>@1.0::ISap/slot1</fqname>
     </hal>
     <hal format="hidl">
+        <name>android.hardware.secure_element</name>
+	<transport arch="32+64">passthrough</transport>
+        <version>1.0</version>
+        <interface>
+            <name>ISecureElement</name>
+            <instance>eSE1</instance>
+            <instance>SIM1</instance>
+        </interface>
+        <fqname>@1.0::ISecureElement/eSE1</fqname>
+        <fqname>@1.0::ISecureElement/SIM1</fqname>
+    </hal>
+    <hal format="hidl">
         <name>android.hardware.radio.deprecated</name>
         <transport>hwbinder</transport>
         <version>1.0</version>
