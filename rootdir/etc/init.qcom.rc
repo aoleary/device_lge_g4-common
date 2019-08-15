@@ -197,6 +197,11 @@ on boot
     mkdir /dev/socket/qmux_nfc 0770 nfc nfc
     chmod 2770 /dev/socket/qmux_nfc
 
+    # initial start-up of RIL
+    start qmuxd
+    start netmgrd
+    start real-ril-daemon
+
     setprop wifi.interface wlan0
 
 #   Define TCP buffer sizes for various networks
@@ -934,17 +939,19 @@ service real-ril-daemon /vendor/bin/hw/rild
     socket qmux_radio/rild_oem0 stream 0777 radio system
     socket qmux_radio/qmux_client_socket stream 0777 radio system
     user root
-    disabled
     group radio cache inet misc audio log readproc wakelock oem_2901 oem_2950 net_raw wifi diag
     capabilities BLOCK_SUSPEND NET_ADMIN NET_RAW
+    disabled
 
 # the rild wrapper which ensures proper rild handling
 service ril-daemon /system/bin/wrild.sh
+    class main
     user root
     seclabel u:r:wrild:s0
-    disabled
 
 on property:init.svc.ril-daemon=stopped
+    stop netmgrd
+    stop qmuxd
     start qmuxd
     start netmgrd
     start ril-daemon
