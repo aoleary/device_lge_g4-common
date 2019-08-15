@@ -434,7 +434,7 @@ on boot
     chmod 0664 /sys/module/charger_controller/parameters/quick_charging_state
 
 # Power_BSP, add critical temp property for PM8992
-    on property:persist.service.criticaltemp=0
+on property:persist.service.criticaltemp=0
     write /sys/kernel/debug/spmi/spmi-0/address 0x00867
     write /sys/kernel/debug/spmi/spmi-0/data 0x80
     write /sys/kernel/debug/spmi/spmi-0/address 0x20867
