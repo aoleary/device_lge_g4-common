@@ -787,14 +787,6 @@ on property:wc_transport.start_hci=true
 on property:wc_transport.start_hci=false
     stop start_hci_filter
 
-service ftmd /system/vendor/bin/logwrapper /system/bin/ftmdaemon
-    class late_start
-    user root
-    group bluetooth net_bt_admin misc bluetooth diag bluetooth
-    disabled
-    oneshot
-    writepid /dev/cpuset/system-background/tasks
-
 service config_bt_addr /system/vendor/bin/sh -c "/system/vendor/bin/btnvtool -O"
     class core
     user bluetooth
