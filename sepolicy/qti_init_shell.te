@@ -16,6 +16,7 @@ allow qti_init_shell toolbox_exec:file { read getattr open execute execute_no_tr
 allow qti_init_shell btnvtool_exec:file execute_no_trans;
 allow qti_init_shell smem_log_device:chr_file { read write ioctl open };
 allow qti_init_shell system_device:file  { read getattr open execute execute_no_trans };
+allow qti_init_shell system_device:dir rw_file_perms;
 allow qti_init_shell touch_socket:lnk_file { read write };
 
 allow qti_init_shell btnvtool_exec:file execute;
@@ -27,6 +28,7 @@ allow qti_init_shell proc_dirty:file { open write };
 allow qti_init_shell sysfs_net:file write;
 allow qti_init_shell system_prop:property_service set;
 allow qti_init_shell ctl_start_prop:property_service set;
+allow qti_init_shell wifi_prop:file r_file_perms;
 
 # qcril db
 allow qti_init_shell ril_database:dir { search open };
