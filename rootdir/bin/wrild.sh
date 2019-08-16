@@ -25,7 +25,7 @@ WDFREQ=20	                # check frequency of the watchdog in secs
 # a "|" delimited list of apps/package names (case insensive) which are able to accept/do calls
 # if one of these apps are in the foreground(!) the watchdog will skip any actions
 # a package name is something like com.microsoft.office.lync15 but office.lync or lync is fully enough as well
-CALLAPPS="dialer|call|whatsapp|thoughtcrime.securesms|telegram|challegram|viber|threema|slack|facebook.orca|facebook.mlite|skype|office.lync|microsoft.teams|imoim"
+CALLAPPS="dialer|call|whatsapp|thoughtcrime.securesms|telegram|challegram|viber|threema|slack|facebook.orca|facebook.mlite|skype|office.lync|microsoft.teams|imoim|tachyon"
 
 
 # internal watchdog debug mode. never touch this!
