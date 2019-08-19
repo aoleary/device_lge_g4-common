@@ -342,7 +342,8 @@ PRODUCT_PACKAGES += \
     libcne_shim \
     libshim_cameraclient \
     libqsap_shim \
-    libfence_shim
+    libfence_shim \
+    ims_rtp_shim
 
 # System properties
 -include $(LOCAL_PATH)/system_prop.mk

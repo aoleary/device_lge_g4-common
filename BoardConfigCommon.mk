@@ -201,7 +201,7 @@ TARGET_PROCESS_SDK_VERSION_OVERRIDE += \
 # Screen density
 PRODUCT_AAPT_CONFIG := normal hdpi xhdpi xxhdpi 560dpi xxxhdpi
 PRODUCT_AAPT_PREF_CONFIG := 560dpi
-    
+
 # Sepolicy
 include device/qcom/sepolicy/sepolicy.mk
 BOARD_SEPOLICY_DIRS += $(COMMON_PATH)/sepolicy
@@ -217,7 +217,8 @@ TARGET_LD_SHIM_LIBS := \
     /system/lib64/libmdmcutback.so|libqsap_shim.so \
     /system/lib/libshim_camera.so:/system/lib/libcamera_client.so|libshim_cameraclient.so \
     /system/vendor/lib/libmmcamera_stillmore_lib.so|/system/lib/libshim_cameraclient.so \
-    /system/vendor/lib/hw/camera.msm8992.so|/system/vendor/lib/libfence_shim.so
+    /system/vendor/lib/hw/camera.msm8992.so|/system/vendor/lib/libfence_shim.so \
+    /system/vendor/lib64/lib-rtpcore.so|/system/vendor/lib64/ims_rtp_shim.so
 
 # Thermal
 USE_DEVICE_SPECIFIC_THERMAL := true
