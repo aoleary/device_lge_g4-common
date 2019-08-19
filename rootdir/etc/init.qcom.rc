@@ -931,6 +931,14 @@ service qcamerasvr /system/vendor/bin/mm-qcamera-daemon
     group camera system inet input graphics
     writepid /dev/cpuset/system-background/tasks
 
+service laserinit /system/vendor/bin/laser_init
+    class late_start
+    user root
+    group root
+    seclabel u:r:laser_sensor:s0
+    oneshot
+    writepid /dev/cpuset/system-background/tasks
+
 service qseecomd /system/vendor/bin/qseecomd
     class core
     user root

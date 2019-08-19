@@ -27,6 +27,7 @@
 #
 /(system|system/vendor)/bin/hwaddrs                      u:object_r:hwaddrs_exec:s0
 /(system|system/vendor)/bin/logwrapper                   u:object_r:system_file:s0
+/(system|system/vendor)/bin/laser_init                   u:object_r:laser_sensor_exec:s0
 /(system|system/vendor)/bin/surfaceflinger               u:object_r:surfaceflinger_exec:s0
 /(vendor|system/vendor)/bin/imscmservice                 u:object_r:imscm_exec:s0
 /(vendor|system/vendor)/bin/imswmsproxy                  u:object_r:imswmsproxy_exec:s0

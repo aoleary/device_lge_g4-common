@@ -1,0 +1,6 @@
+type laser_sensor, domain;
+type laser_sensor_exec, exec_type, file_type;
+init_daemon_domain(laser_sensor)
+
+allow laser_sensor proc:file { read open getattr };
+allow laser_sensor self:capability sys_resource;

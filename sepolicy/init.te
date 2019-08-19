@@ -34,16 +34,13 @@ allow init tmpfs:file getattr;
 
 allow init bluetooth:process { siginh rlimitinh noatsecure };
 
-# wrild
-#allow init system_file:file execute_no_trans;
-
 allow init bluetooth:process rlimitinh;
 allow init input_device:chr_file ioctl;
 allow init ion_device:chr_file write;
 allow init kernel:system module_request;
 allow init netd:unix_stream_socket connectto;
 allow init netd_socket:sock_file write;
-allow init proc:file { open read write };
+allow init proc:file { open read write getattr };
 allow init proc_filesystems:file getattr;
 allow init ram_device:blk_file write;
 allow init self:capability2 block_suspend;
