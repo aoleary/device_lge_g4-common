@@ -46,7 +46,7 @@ F_RILCHK(){
     DBOOTED=$(getprop sys.boot_completed)
     CURANIM=$(getprop init.svc.bootanim)
     ENC=$(getprop ro.crypto.state)
-    ENCSTATE=$(getprop init.svc.uncrypt)
+    ENCSTATE=$(getprop vold.decrypt)
     PROPSIM=$(getprop wrild.sim.count)
     if [ -z "$PROPSIM" ];then
         SIMCOUNT=$(logcat -b all -d |egrep "insertedSimCount.*[01]" | egrep -o "[01]" | tail -n1)
@@ -69,7 +69,7 @@ F_RILCHK(){
 	echo 7
     elif [ "$CURANIM" != "stopped" ];then
         echo 7
-    elif [ "$ENC" == "encrypted" ] && [ "$ENCSTATE" != "stopped" ];then
+    elif [ "$ENC" == "encrypted" ] && [ "$ENCSTATE" != "trigger_restart_framework" ];then
         echo 7
     elif [ "$CURSTATE" == "PIN_REQUIRED" ]; then
         echo 9
@@ -105,7 +105,7 @@ F_RILRESTART(){
             x=1
         elif [ "$REQRESTART" -eq 1 ];then
             [ $WDDEBUG == 1 ] && F_LOG e "!!!! DEBUG MODE DEBUG MODE - NO ACTION TAKEN !!!!"
-            if [ -d /sdcard/Download/ ];then
+            if [ -d /storage/emulated/0 ];then
                 F_LOG w "RIL restart - try $x of $MAXRET"
                 [ $WDDEBUG == 0 ] && stop real-ril-daemon
                 sleep 1
