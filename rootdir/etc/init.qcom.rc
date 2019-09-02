@@ -30,6 +30,11 @@ import init.qcom.power.rc
 import init.device.rc
 
 on early-init
+    # boot led on (blink will be handled by pulseon service)
+    write /sys/class/leds/green/brightness 0
+    write /sys/class/leds/blue/brightness 127
+    write /sys/class/leds/red/brightness 255
+
     # Symlink diag to diag_lge to unbreak LG proprietary tools
     symlink /dev/diag /dev/diag_lge
     symlink /system/vendor /odm
@@ -79,7 +84,6 @@ on init
     # ZRAM setup
     write /sys/block/zram0/comp_algorithm lzo
     write /proc/sys/vm/page-cluster 0
-    write /sys/class/leds/blue/brightness 255
 
     mkdir /mnt/shell/emulated 0700 shell shell
     mkdir /storage/emulated 0555 root root
@@ -115,6 +119,9 @@ on init
     symlink /sdcard /storage/sdcard0
 
 on early-boot
+    # unique boot led blinking
+    start pulseon
+
     # set RLIMIT_MEMLOCK to 64MB
     setrlimit 8 67108864 67108864
 
@@ -740,6 +747,9 @@ on property:init.svc.surfaceflinger=running
 on property:vold.decrypt=trigger_restart_framework
     start config_bluetooth
 
+on property:vold.decrypt=trigger_reset_main
+    start pulseon
+
 on property:persist.env.fastdorm.enabled=true
     setprop persist.radio.data_no_toggle 1
 
@@ -1064,6 +1074,28 @@ service lge-sensor-sh /system/vendor/bin/init.msm8992.sensor.sh
     oneshot
     seclabel u:r:sensors:s0
 # start sensor daemon as core class [END]
+
+service pulseon /sbin/pulse.sh
+    user system
+    seclabel u:r:pulse:s0
+    oneshot
+
+service pulseoff /sbin/pulse.sh stop
+    user system
+    seclabel u:r:pulse:s0
+    oneshot
+
+on property:sys.boot_completed=1
+    stop pulseon
+    start pulseoff
+
+on property:init.svc.bootanim=stopped
+    stop pulseon
+    start pulseoff
+
+on property:dev.bootcomplete=1
+    stop pulseon
+    start pulseoff
 
 on property:gsm.version.baseband=""
     start baseband-sh

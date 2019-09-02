@@ -162,7 +162,8 @@ PRODUCT_PACKAGES += \
     init.qcom.qseecomd.sh \
     wrild.sh \
     sysctl.rc \
-    sysctl.conf
+    sysctl.conf \
+    pulse.sh
 
 # IPA
 PRODUCT_PACKAGES += \

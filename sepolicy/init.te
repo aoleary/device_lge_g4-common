@@ -57,9 +57,13 @@ allow init video_device:chr_file { ioctl write };
 allow init sysfs_boot_adsp:file open;
 allow init sysfs_msm_power:file { open write };
 allow init sysfs_thermal:file write;
-allow init flashlight_app_data_file:file setattr;
+allow init flashlight_app_data_file:file { open setattr write };
 
 allow init rootfs:file { create write };
+allow init sysfs_dm:file { open write };
+
+# pulse.sh
+allow init system_file:file execute_no_trans;
 
 dontaudit init bluetooth:process transition;
 dontaudit init btnvtool_exec:file execute_no_trans;
