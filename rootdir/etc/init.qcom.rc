@@ -317,17 +317,17 @@ on boot
     chown system system /sys/class/leds/wled/brightness
     chown system system /sys/bus/platform/drivers/qcom,camera-flash/qcom,camera-flash.85/leds/torch-light0/brightness
     chown system system /sys/bus/platform/drivers/qcom,camera-flash/qcom,camera-flash.85/leds/torch-light1/brightness
-    chmod 0777 /sys/class/leds/led:flash_0/brightness
-    chmod 0777 /sys/class/leds/led:flash_1/brightness
-    chmod 0777 /sys/class/leds/flashlight_front/dual_brightness
-    chmod 0777 /sys/class/leds/led:torch_0/brightness
-    chmod 0777 /sys/class/leds/led:torch_1/brightness
-    chmod 0777 /sys/class/leds/red/brightness
-    chmod 0777 /sys/class/leds/blue/brightness
-    chmod 0777 /sys/class/leds/green/brightness
-    chmod 0777 /sys/class/leds/wled/brightness
-    chmod 0777 /sys/bus/platform/drivers/qcom,camera-flash/qcom,camera-flash.85/leds/torch-light0/brightness
-    chmod 0777 /sys/bus/platform/drivers/qcom,camera-flash/qcom,camera-flash.85/leds/torch-light1/brightness
+    chmod 0666 /sys/class/leds/led:flash_0/brightness
+    chmod 0666 /sys/class/leds/led:flash_1/brightness
+    chmod 0666 /sys/class/leds/flashlight_front/dual_brightness
+    chmod 0666 /sys/class/leds/led:torch_0/brightness
+    chmod 0666 /sys/class/leds/led:torch_1/brightness
+    chmod 0666 /sys/class/leds/red/brightness
+    chmod 0666 /sys/class/leds/blue/brightness
+    chmod 0666 /sys/class/leds/green/brightness
+    chmod 0666 /sys/class/leds/wled/brightness
+    chmod 0666 /sys/bus/platform/drivers/qcom,camera-flash/qcom,camera-flash.85/leds/torch-light0/brightness
+    chmod 0666 /sys/bus/platform/drivers/qcom,camera-flash/qcom,camera-flash.85/leds/torch-light1/brightness
 
     # Define TCP buffer sizes for various networks
     #   ReadMin, ReadInitial, ReadMax, WriteMin, WriteInitial, WriteMax,
