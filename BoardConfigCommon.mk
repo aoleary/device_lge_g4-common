@@ -98,10 +98,6 @@ TARGET_USES_MEDIA_EXTENSIONS := true
 TARGET_PROCESS_SDK_VERSION_OVERRIDE := \
     /system/vendor/bin/mm-qcamera-daemon=24
 
-# Dex - Pre-opt SystemUI
-PRODUCT_DEXPREOPT_SPEED_APPS += \
-    SystemUI
-
 # Display
 HAVE_ADRENO_SOURCE:= false
 MAX_EGL_CACHE_KEY_SIZE := 12*1024

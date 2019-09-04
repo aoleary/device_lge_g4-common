@@ -103,6 +103,10 @@ PRODUCT_PACKAGES += \
     android.hardware.ir@1.0-impl \
     consumerir.msm8992
 
+# Dex - Pre-opt SystemUI
+PRODUCT_DEXPREOPT_SPEED_APPS += \
+    SystemUI
+
 # Display
 PRODUCT_PACKAGES += \
     android.hardware.graphics.allocator@2.0-impl \
