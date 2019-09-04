@@ -5,7 +5,7 @@
 #
 ##############################################
 
-INTERVALL=1s
+INTERVALL=1.5s
 
 F_ON(){
     echo 0 > /sys/class/leds/green/brightness
