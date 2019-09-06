@@ -29,7 +29,4 @@
     <!-- Set to true to turn on Wifi by default -->
     <bool name="def_wifi_on">true</bool>
 
-    <!-- Default for Settings.Secure.NFC_PAYMENT_COMPONENT -->
-    <string name="def_nfc_payment_component">false</string>
-
 </resources>
