@@ -458,4 +458,8 @@
          153600 = 150 MB
      -->
     <integer name="config_lowMemoryKillerMinFreeKbytesAbsolute">153600</integer>
+
+    <!-- Minimum color temperature, in Kelvin, supported by Night display. -->
+    <integer name="config_nightDisplayColorTemperatureMin">1200</integer>
+
 </resources>
