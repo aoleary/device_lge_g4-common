@@ -72,18 +72,26 @@ PRODUCT_PROPERTY_OVERRIDES += \
     qemu.hw.mainkeys=0 \
     ro.qualcomm.cabl=2
 
+# Properties to improve rendering
+    debug.enable.sglscale=1 \
+    debug.egl.hw=1 \
+    debug.sf.hw=1 \
+    debug.sf.disable_hwc=0 \
+    debug.sf.recomputecrop=0 \
+    debug.sf.disable_backpressure=1 \
+    debug.sf.latch_unsignaled=1 \
+    persist.hwc.ptor.enable=true \
+    debug.sf.gpu_comp_tiling=1
+    
 # MSM8992 HAL settings
 # 196610 is decimal for 0x30002 to report major/minor versions as 3/2
 PRODUCT_PROPERTY_OVERRIDES += \
     debug.composition.type=c2d \
-    debug.egl.hw=1 \
     debug.mdpcomp.logs=0 \
-    debug.sf.hw=1 \
     persist.debug.wfd.enable=1 \
     persist.demo.hdmirotationlock=false \
     persist.hwc.enable_vds=1 \
     persist.hwc.mdpcomp.enable=true \
-    persist.hwc.ptor.enable=true \
     persist.mdpcomp.4k2kSplit=1 \
     persist.mdpcomp_perfhint=50 \
     persist.metadata_dynfps.disable=true \
