@@ -1096,6 +1096,9 @@ on property:init.svc.bootanim=stopped
     stop pulseon
     start pulseoff
 
+on property:apexd.status=ready
+    mount none /system/etc/swcodec/ld.config.txt /apex/com.android.media.swcodec/etc/ld.config.txt bind
+
 on property:dev.bootcomplete=1
     stop pulseon
     start pulseoff
