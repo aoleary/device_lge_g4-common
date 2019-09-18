@@ -121,13 +121,11 @@ PRODUCT_PACKAGES += \
     android.hardware.graphics.composer@2.1-service \
     android.hardware.graphics.mapper@2.0-impl-2.1 \
     android.hardware.memtrack@1.0-impl \
-    android.hardware.light@2.0-impl \
-    android.hardware.light@2.0-service \
     copybit.msm8992 \
     gralloc.msm8992 \
     hwcomposer.msm8992 \
     memtrack.msm8992 \
-    lights.msm8992 \
+    android.hardware.light@2.0-service.g4 \
     liboverlay \
     libhdmi \
     libqdutils \
