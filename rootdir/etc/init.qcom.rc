@@ -98,7 +98,7 @@ on init
     chmod 775 /mnt/media_rw/*
 
     chmod 0771 /firmware
-    chmod 0771 /firmware/image 0771
+    chmod 0771 /firmware/image
     mkdir /persist/data 0700 system system
     mkdir /devlog 0700 root root
     mkdir /fataldevlog 0700 root root
@@ -124,8 +124,6 @@ on early-boot
 
     write /sys/kernel/boot_adsp/boot 1
 
-    chcon -R /data/property u:object_r:system_data_file:s0
-    chcon -R /data/security u:object_r:system_data_file:s0
     start chcon_keystore
 
 service chcon_keystore /system/vendor/bin/init.recovery.m1_chcon_keystore.sh
