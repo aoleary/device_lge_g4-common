@@ -210,6 +210,9 @@ BOARD_PLAT_PRIVATE_SEPOLICY_DIR += $(COMMON_PATH)/sepolicy/private
 BOARD_SEPOLICY_VERS := $(PLATFORM_SDK_VERSION).0
 SELINUX_IGNORE_NEVERALLOWS := true
 
+# Sepolicy-tmp
+BOARD_SEPOLICY_DIRS += device/lge/g4-common/sepolicy-tmp
+
 # Shims
 TARGET_LD_SHIM_LIBS := \
     /system/vendor/lib/libwvm.so|libshims_wvm.so \
