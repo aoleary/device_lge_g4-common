@@ -110,12 +110,6 @@ on init
     chmod 0660 /dev/soundtrigger_dma_drv
     chown media media /dev/soundtrigger_dma_drv
 
-    # Set permissions for persist partition
-    mkdir /persist 0771 system system
-
-    # Set permissions for drm partition
-    mkdir /persist-lg 0771 system system
-
     symlink /sdcard /storage/sdcard0
 
 on early-boot

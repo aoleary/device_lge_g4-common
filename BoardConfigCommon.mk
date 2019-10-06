@@ -127,6 +127,7 @@ TARGET_USERIMAGES_USE_F2FS := true
 TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_EXFAT_DRIVER := sdfat
 TARGET_VFAT_DRIVER := sdfat
+BOARD_ROOT_EXTRA_FOLDERS := firmware mpt persist persist-lg sns
 # Install kernel modules on system
 NEED_KERNEL_MODULE_SYSTEM := true
 
