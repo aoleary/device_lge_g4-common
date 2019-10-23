@@ -865,6 +865,7 @@
     </path>
 
     <path name="audio-record">
+        <ctl name="AUX PCM SampleRate" value="48000" />
         <ctl name="MultiMedia1 Mixer SLIM_0_TX" value="1" />
     </path>
 
