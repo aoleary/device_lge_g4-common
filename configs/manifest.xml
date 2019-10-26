@@ -51,13 +51,12 @@
     </hal>
     <hal format="hidl">
         <name>android.hardware.authsecret</name>
-        <transport arch="32+64">passthrough</transport>
+        <transport>hwbinder</transport>
         <version>1.0</version>
         <interface>
             <name>IAuthSecret</name>
             <instance>default</instance>
         </interface>
-        <fqname>@1.0::IAuthSecret/default</fqname>
     </hal>
     <hal format="hidl">
         <name>android.hardware.oemlock</name>
