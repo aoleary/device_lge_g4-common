@@ -127,6 +127,7 @@ TARGET_FS_CONFIG_GEN := $(LOCAL_PATH)/config.fs
 # GPS
 PRODUCT_PACKAGES += \
     android.hardware.gnss@1.0-impl \
+    android.hardware.gnss@1.0-service \
     gps.msm8992 \
     quipc.conf
 

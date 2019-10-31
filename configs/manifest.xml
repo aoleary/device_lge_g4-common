@@ -79,12 +79,13 @@
     </hal>
     <hal format="hidl">
         <name>android.hardware.gnss</name>
-        <transport arch="32+64">passthrough</transport>
-        <version>1.1</version>
+        <transport arch="64">passthrough</transport>
+        <version>1.0</version>
         <interface>
             <name>IGnss</name>
             <instance>default</instance>
         </interface>
+        <fqname>@1.0::IGnss/default</fqname>
         <fqname>@1.1::IGnss/default</fqname>
     </hal>
     <hal format="hidl">
