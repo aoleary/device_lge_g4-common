@@ -368,4 +368,23 @@
          manager will disable alpha trasformation in animations where not
          strictly needed. -->
     <bool name="config_sf_limitedAlpha">true</bool>
+
+    <!-- Values for global GPS configuration -->
+    <string-array translatable="false" name="config_gpsParameters">
+        <item>SUPL_HOST=supl.nokia.com</item>
+        <item>SUPL_PORT=7275</item>
+        <item>SUPL_VER=0x20000</item>
+        <item>SUPL_MODE=1</item>
+        <item>SUPL_ES=1</item>
+        <item>LPP_PROFILE=3</item>
+        <item>USE_EMERGENCY_PDN_FOR_EMERGENCY_SUPL=1</item>
+        <item>A_GLONASS_POS_PROTOCOL_SELECT=0x4</item>
+        <item>GPS_LOCK=0x2</item>
+        <item>XTRA_SERVER_QUERY=0</item>
+        <!-- XTRA servers are still ignored due to libizat_core.so which is needed and have izatcloud.net hardcoded inside -->
+        <item>XTRA_SERVER_1=https://xtra.gpsonextra.net/xtra3grc.bin</item>
+        <item>XTRA_SERVER_2=https://xtra1.gpsonextra.net/xtra3grc.bin</item>
+        <item>XTRA_SERVER_3=https://xtra2.gpsonextra.net/xtra3grc.bin</item>
+        <item>XTRA_SERVER_4=https://xtra3.gpsonextra.net/xtra3grc.bin</item>
+    </string-array>
 </resources>

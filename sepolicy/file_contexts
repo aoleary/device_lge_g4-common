@@ -124,3 +124,4 @@
 
 # Health monitor
 /dev/system_health_monitor				u:object_r:health_monitor:s0
+/sbin/pulse.sh						u:object_r:pulse_exec:s0
