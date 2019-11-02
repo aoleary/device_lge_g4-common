@@ -19,7 +19,7 @@ COMMON_PATH := device/lge/g4-common
 
 TARGET_SPECIFIC_HEADER_PATH := $(COMMON_PATH)/include
 
-LLVM_ENABLE_THREADS := true
+BUILD_BROKEN_DUP_RULES := true
 
 # Arch
 TARGET_ARCH := arm64
