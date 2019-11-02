@@ -197,10 +197,6 @@ BOARD_USES_QC_TIME_SERVICES := true
 TARGET_PROCESS_SDK_VERSION_OVERRIDE += \
     /vendor/bin/hw/rild=27
 
-# Screen density
-PRODUCT_AAPT_CONFIG := normal hdpi xhdpi xxhdpi 560dpi xxxhdpi
-PRODUCT_AAPT_PREF_CONFIG := 560dpi
-
 # Sepolicy
 include device/qcom/sepolicy/sepolicy.mk
 BOARD_SEPOLICY_DIRS += $(COMMON_PATH)/sepolicy
