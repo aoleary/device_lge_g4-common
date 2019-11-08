@@ -9,8 +9,6 @@ allowxperm rfs_access self:socket ioctl msm_sock_ipc_ioctls;
 
 # debugfs access
 userdebug_or_eng(`
-  allow energyawareness debugfs_energy:dir search;
-  allow energyawareness debugfs_energy:file rw_file_perms;
   allow rfs_access debugfs_rfs:dir search;
   allow rfs_access debugfs_rfs:file rw_file_perms;
   allow rfs_access debugfs_rmt:dir search;

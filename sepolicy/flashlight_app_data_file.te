@@ -1,5 +1,4 @@
 allow flashlight_app_data_file self:file write;
 allow flashlight_app_data_file sysfs:file write;
 allow flashlight_app_data_file sysfs:filesystem associate;
-allow flashlight_app_data_file tmpfs:filesystem associate;
 allow flashlight_app_data_file labeledfs:filesystem associate;

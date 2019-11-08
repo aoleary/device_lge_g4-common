@@ -1,1 +1,2 @@
+# storaged.te:3:ERROR 'unknown type storaged' at token ';'
 allow storaged sysfs:file { getattr open read };

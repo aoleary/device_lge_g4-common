@@ -1,7 +1,6 @@
-#neverallow: allow qti_init_shell default_prop:property_service set;
-
 set_prop(qti_init_shell, qti_init_prop)
 
+allow qti_init_shell ctl_start_prop:property_service set;
 allow qti_init_shell device:dir { write add_name };
 allow qti_init_shell device:file { read create open getattr setattr write };
 allow qti_init_shell file_contexts_file:file { read getattr open };
@@ -13,25 +12,20 @@ allow qti_init_shell sysfs:file write;
 allow qti_init_shell sysfs_cpu_boost:file write;
 allow qti_init_shell sysfs_msm_perf:file write;
 allow qti_init_shell toolbox_exec:file { read getattr open execute execute_no_trans };
-allow qti_init_shell btnvtool_exec:file execute_no_trans;
+#allow qti_init_shell btnvtool_exec:file execute_no_trans;
 allow qti_init_shell smem_log_device:chr_file { read write ioctl open };
-allow qti_init_shell system_device:file  { read getattr open execute execute_no_trans };
+allow qti_init_shell system_device:file rwx_file_perms;
 allow qti_init_shell system_device:dir rw_file_perms;
 allow qti_init_shell touch_socket:lnk_file { read write };
 
-allow qti_init_shell btnvtool_exec:file execute;
-allow qti_init_shell btnvtool_exec:file { read open };
-allow qti_init_shell btnvtool_exec:file execute_no_trans;
+#allow qti_init_shell btnvtool_exec:file execute;
+#allow qti_init_shell btnvtool_exec:file { read open };
+#allow qti_init_shell btnvtool_exec:file execute_no_trans;
 
 allow qti_init_shell bluetooth_prop:file { getattr open read };
 allow qti_init_shell proc_dirty:file { open write };
 allow qti_init_shell sysfs_net:file write;
 allow qti_init_shell system_prop:property_service set;
+allow qti_init_shell self:capability dac_override;
 allow qti_init_shell ctl_start_prop:property_service set;
 allow qti_init_shell wifi_prop:file r_file_perms;
-
-# qcril db
-allow qti_init_shell ril_database:dir { search open };
-allow qti_init_shell ril_database:file { getattr read open };
-allow qti_init_shell system_data_file:file { getattr write create open read setattr };
-allow qti_init_shell system_data_file:dir { setattr write add_name create };

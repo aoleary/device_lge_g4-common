@@ -2,12 +2,3 @@ allow vold system_data_file:file open;
 allow vold vold_data:dir rw_dir_perms;
 allow vold vold_data:file { rw_file_perms create_file_perms };
 allow vold pstorefs:filesystem unmount;
-
-allow vold block_device:blk_file getattr;
-allow vold cache_block_device:blk_file getattr;
-allow vold modem_efs_partition_device:blk_file getattr;
-allow vold mpt_block_device:blk_file getattr;
-allow vold persist-lg_block_device:blk_file getattr;
-allow vold system_device:blk_file getattr;
-
-allow vold rootfs:blk_file getattr;

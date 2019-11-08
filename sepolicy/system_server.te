@@ -1,30 +1,29 @@
-#neverallow: allow system_server vfat:dir { read open };
-#neverallow (req for infrared, public/domain.te): allow system_server device:chr_file { read write };
-
+allow system_server crash_dump:process getpgid;
 allow system_server frp_block_device:blk_file { read write open setattr getattr ioctl };
 allow system_server default_android_service:service_manager find;
 allow system_server sensors:unix_stream_socket connectto;
 allow system_server sensors_device:chr_file getattr;
-allow system_server sensors_socket:sock_file { write read };
 allow system_server smem_log_device:chr_file { read write ioctl open };
 allow system_server socket_device:file write;
 allow system_server dalvikcache_data_file:dir r_dir_perms;
-allow system_server sd_device:dir { read open };
 allow system_server console_device:chr_file { read write };
 allow system_server vold_data:dir rw_dir_perms;
 allow system_server vold_data:file { rw_file_perms create_file_perms };
 allow system_server data_file:dir r_dir_perms;
 
-dontaudit system_server dalvikcache_data_file:file { write execute };
+allow system_server dalvikcache_data_file:file { write execute };
 
 allow system_server binder_per_mgr_service:service_manager find;
 
-#allow system_server magisk_file:unix_stream_socket { read write };
-
 allow system_server qmuxd:unix_stream_socket connectto;
-allow system_server qmuxd_socket:dir { add_name write search };
-allow system_server qmuxd_socket:sock_file { create setattr write };
+allow system_server qmuxd_socket:dir { add_name write search remove_name };
+allow system_server qmuxd_socket:sock_file { create setattr write unlink };
 
+allow system_server vfat:dir { open read };
+
+# External SD card access
+allow system_server sdcardfs:dir r_dir_perms;
+allow system_server sdcardfs:file r_file_perms;
 allow system_server vfat:dir { open read write };
 
 # watchdog

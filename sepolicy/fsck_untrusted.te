@@ -1,3 +1,0 @@
-allow fsck_untrusted media_rw_data_file:dir getattr;
-allow fsck_untrusted sysfs_dm:dir search;
-allow fsck_untrusted sysfs_dm:file { read open getattr };
