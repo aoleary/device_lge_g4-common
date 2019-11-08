@@ -1,5 +1,4 @@
 allow platform_app proc_vmstat:file { getattr open read };
-allow platform_app radio_data_file:dir getattr;
 
 allow platform_app { hal_camera_default mediacodec }:fd use;
 allow platform_app ion_device:chr_file r_file_perms;

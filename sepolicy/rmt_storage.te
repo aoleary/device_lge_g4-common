@@ -1,12 +1,12 @@
-allow rmt_storage self:capability { net_raw sys_admin };
-
-# neverallow protected:
-allow rmt_storage block_device:blk_file { read write open };
+allow rmt_storage modemst1_block_device:blk_file { open read write };
+allow rmt_storage modemst2_block_device:blk_file { open read write };
+allow rmt_storage fsc_block_device:blk_file { open read write };
+allow rmt_storage fsg_block_device:blk_file { open read write };
+allow rmt_storage self:capability sys_admin;
+allow rmt_storage self:capability net_raw;
 
 # debugfs access
 userdebug_or_eng(`
-  allow energyawareness debugfs_energy:dir search;
-  allow energyawareness debugfs_energy:file rw_file_perms;
   allow rfs_access debugfs_rfs:dir search;
   allow rfs_access debugfs_rfs:file rw_file_perms;
   allow rmt_storage debugfs_rmt:dir search;

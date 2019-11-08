@@ -1,5 +1,6 @@
 #neverallow: allow tee block_device:blk_file { open read write };
 
+allow tee block_device:blk_file getattr;
 allow tee smem_log_device:chr_file { read write ioctl open };
 allow tee unlabeled:dir { read getattr open };
 allow tee unlabeled:file { read getattr open };
@@ -8,10 +9,9 @@ allow tee vfat:dir search;
 
 allow tee unlabeled:file write;
 
-allow tee sd_device:file { read getattr open };
-
 allow tee unlabeled:dir search;
 
 allow tee system_prop:property_service set;
 
-allow tee block_device:blk_file { getattr ioctl open read write };
+allow tee disk_block_device:blk_file { getattr ioctl open read write };
+allow tee ssd_block_device:blk_file { open read write };

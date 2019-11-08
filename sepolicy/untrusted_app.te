@@ -1,2 +1,9 @@
-allow untrusted_app proc_vmstat:file { getattr open };
-allow untrusted_app proc_version:file read;
+allow untrusted_app sysfs_switch:dir search;
+allow untrusted_app sysfs_graphics:dir search;
+allow untrusted_app unlabeled:dir search;
+allow untrusted_app proc_qtaguid_stat:file { getattr open read };
+allow untrusted_app proc_zoneinfo:file { getattr open read };
+allow untrusted_app proc_vmstat:file { open getattr read };
+allow untrusted_app sysfs_graphics:file { getattr open read };
+allow untrusted_app touch_socket:lnk_file { read open getattr };
+allow untrusted_app usermodehelper:file { read open getattr };

@@ -1,2 +1,3 @@
 allow crash_dump gatekeeper_data_file:dir search;
 allow crash_dump tmpfs:dir search;
+allow crash_dump resourcecache_data_file:file { open read };

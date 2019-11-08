@@ -1,3 +1,5 @@
+#neverallow: allow bdaddr_loader block_device:blk_file { open read };
+
 type bdaddr_loader, domain;
 type bdaddr_loader_exec, exec_type, vendor_file_type, file_type;
 net_domain(bdaddr_loader)
@@ -10,6 +12,4 @@ allow bdaddr_loader property_socket:sock_file write;
 allow bdaddr_loader block_device:dir search;
 allow bdaddr_loader cache_block_device:dir search;
 
-allow bdaddr_loader block_device:blk_file getattr;
-# neverallow protected:
-allow bdaddr_loader misc_block_device:blk_file { open read getattr };
+allow bdaddr_loader misc_block_device:blk_file { getattr open read };

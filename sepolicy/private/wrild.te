@@ -1,0 +1,3 @@
+# allow wrild hal_allocator_default:file read;
+# allow wrild statsd:file read;
+# allow wrild storaged:file read;

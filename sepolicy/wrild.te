@@ -57,7 +57,6 @@ define(`wrild_dont_audit', `{
     audioserver
     cameraserver
     drmserver
-    energyawareness
     gatekeeperd
     hal_cas_default
     hal_configstore_default
@@ -88,8 +87,6 @@ define(`wrild_dont_audit', `{
     mediaprovider
     mediametrics
     mediaserver
-    mm-pp-daemon
-    mm-qcamerad
     netd
     perfprofd
     platform_app
@@ -105,7 +102,6 @@ define(`wrild_dont_audit', `{
     surfaceflinger
     tee
     thermal-engine
-    thermalserviced
     time_daemon
     tombstoned
     traceur_app

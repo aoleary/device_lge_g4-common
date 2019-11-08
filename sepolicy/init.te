@@ -1,16 +1,3 @@
-#neverallow: allow init default_android_service:service_manager { add find };
-#neverallow: allow init device:chr_file { open read write };
-#neverallow: allow init firmware_file:dir create;
-#neverallow: allow init imsrcs_service:service_manager add;
-#neverallow: allow init permission_service:service_manager find;
-#neverallow: allow init sysfs:file { open read write };
-#neverallow: allow init shell_exec:file execute_no_trans;
-#neverallow: allow init sensorservice_service:service_manager find;
-#neverallow: allow init system_file:file execute_no_trans;
-#neverallow: allow init vendor_file:file execute_no_trans;
-
-allow init sysfs:file { open read write };
-
 allow init device:chr_file { getattr ioctl };
 allow init sysfs:file setattr;
 
@@ -27,7 +14,7 @@ allow init functionfs:dir mounton;
 allow init socket_device:sock_file unlink;
 allow init thermal_socket:sock_file unlink;
 
-allow init sd_device:dir mounton;
+#allow init sd_device:dir mounton;
 
 allow init block_device:blk_file setattr;
 allow init tmpfs:file getattr;
@@ -39,7 +26,7 @@ allow init input_device:chr_file ioctl;
 allow init ion_device:chr_file write;
 allow init kernel:system module_request;
 allow init netd:unix_stream_socket connectto;
-allow init netd_socket:sock_file write;
+#allow init netd_socket:sock_file write;
 allow init proc:file { open read write getattr };
 allow init proc_filesystems:file getattr;
 allow init ram_device:blk_file write;
@@ -57,15 +44,15 @@ allow init video_device:chr_file { ioctl write };
 allow init sysfs_boot_adsp:file open;
 allow init sysfs_msm_power:file { open write };
 allow init sysfs_thermal:file write;
-allow init flashlight_app_data_file:file { open setattr write };
 
-allow init rootfs:file { create write };
 allow init sensors_data:dir mounton;
-allow init sysfs_dm:file { open write };
 
 allow init persist_data_file:dir mounton;
 
 allow init block_device:blk_file write;
 
-dontaudit init bluetooth:process transition;
-dontaudit init btnvtool_exec:file execute_no_trans;
+allow init flashlight_app_data_file:file { open setattr write };
+allow init sysfs:file { open write };
+
+allow init bluetooth:process transition;
+#allow init btnvtool_exec:file execute_no_trans;

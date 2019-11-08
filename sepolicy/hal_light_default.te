@@ -2,3 +2,4 @@ allow hal_light_default sysfs:file { read write open };
 allow hal_light_default { hal_camera_default mediacodec }:fd use;
 allow hal_light_default ion_device:chr_file r_file_perms;
 allow hal_light_default hwbinder_device:chr_file rw_file_perms;
+allow hal_light_default flashlight_app_data_file:file { r_file_perms rw_file_perms };
