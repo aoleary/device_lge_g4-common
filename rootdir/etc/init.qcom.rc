@@ -32,8 +32,8 @@ import init.device.rc
 on early-init
     # boot led on (blink will be handled by pulseon service)
     write /sys/class/leds/green/brightness 0
-    write /sys/class/leds/blue/brightness 127
-    write /sys/class/leds/red/brightness 255
+    write /sys/class/leds/blue/brightness 254
+    write /sys/class/leds/red/brightness 0
 
     # Symlink diag to diag_lge to unbreak LG proprietary tools
     symlink /dev/diag /dev/diag_lge
