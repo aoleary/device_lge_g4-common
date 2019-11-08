@@ -221,7 +221,7 @@ on boot
     setprop ro.telephony.call_ring.multiple false
 
     # Remove SUID bit for iproute2 ip tool
-    chmod 0755 /system/bin/ip
+    #chmod 0755 /system/bin/ip
 
 #   Define TCP buffer sizes for various networks
 #   ReadMin, ReadInitial, ReadMax, WriteMin, WriteInitial, WriteMax,
@@ -599,12 +599,12 @@ on post-fs-data
     mkdir /data/data/media 0770 media media
 
     # Create rild related dirs
-    chown 13:13 /system/etc/motorola 
-    chown 13:13 /system/etc/motorola/*       
-    chown 13:13 /system/etc/motorola/*/*
-    chmod 2777 /system/etc/motorola
-    chmod 2777 /system/etc/motorola/*      
-    chmod 2777 /system/etc/motorola/*/*
+    #chown 13:13 /system/etc/motorola
+    #chown 13:13 /system/etc/motorola/*
+    #chown 13:13 /system/etc/motorola/*/*
+    #chmod 2777 /system/etc/motorola
+    #chmod 2777 /system/etc/motorola/*
+    #chmod 2777 /system/etc/motorola/*/*
     chmod 777 /data/user_de/0/com.android.phone/shared_prefs
     chmod 777 /data/user_de/0/com.android.phone/shared_prefs/*
 
@@ -632,9 +632,9 @@ on post-fs-data
     mkdir /persist/tee 0700 system system
     mkdir /data/app/mcRegistry 0775 system system
     chown root cw_access /cota
-    chmod 0771 /cota
-    chown system system /preload
-    chmod 0771 /preload
+    #chmod 0771 /cota
+    #chown system system /preload
+    #chmod 0771 /preload
 
     # set device node permissions for TLC apps
     chmod 0600 /dev/mobicore
