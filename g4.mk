@@ -165,6 +165,27 @@ PRODUCT_PACKAGES += \
     sysctl.conf \
     pulse.sh
 
+PRODUCT_PACKAGES_ENG += \
+    fstab.qcom \
+    init.qcom.rc \
+    init.qcom.power.rc \
+    init.qcom.usb.rc \
+    ueventd.qcom.rc \
+    init.qcom.coex.sh \
+    init.qcom.fm.sh \
+    init.class_main.sh \
+    init.qcom.post_boot.sh \
+    init.qcom.uicc.sh \
+    init.msm8992.sensor.sh \
+    init.baseband.sh \
+    init.qcom.bt.sh \
+    init.qcom.usb.sh \
+    init.qcom.qseecomd.sh \
+    wrild.sh \
+    sysctl.rc \
+    sysctl.conf \
+    pulse.sh
+
 # IPA
 PRODUCT_PACKAGES += \
     ipacm \
