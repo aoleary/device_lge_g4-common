@@ -391,7 +391,7 @@
         </interface>
         <fqname>@1.0::IHostapd/default</fqname>
     </hal>
-    <hal format="hidl">
+    <!--hal format="hidl">
         <name>android.hardware.wifi.offload</name>
         <transport>hwbinder</transport>
         <version>1.0</version>
@@ -400,7 +400,7 @@
             <instance>default</instance>
         </interface>
         <fqname>@1.0::IOffload/default</fqname>
-    </hal>
+    </hal>-->
     <hal format="hidl">
         <name>android.hardware.wifi.supplicant</name>
         <transport>hwbinder</transport>
