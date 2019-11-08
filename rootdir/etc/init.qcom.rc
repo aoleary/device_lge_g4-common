@@ -25,9 +25,9 @@
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 
-import init.qcom.usb.rc
-import init.qcom.power.rc
-import init.device.rc
+import /vendor/etc/init/hw/init.qcom.usb.rc
+import /vendor/etc/init/hw/init.qcom.power.rc
+import /init.device.rc
 
 on early-init
     # boot led on (blink will be handled by pulseon service)
