@@ -82,6 +82,14 @@ on fs
     symlink /dev/block/platform/soc.0/${ro.boot.bootdevice} /dev/block/bootdevice
     mount_all /vendor/etc/fstab.qcom
 
+    # debug boot process
+    rm /cache/boot_lc_full.txt
+    rm /cache/boot_lc_crash.txt
+    rm /cache/boot_lc_kernel.txt
+    start boot_lc
+    start boot_lc_kernel
+    start boot_lc_crash
+
 on init
     # ZRAM setup
     write /sys/block/zram0/comp_algorithm lzo
@@ -1084,6 +1092,27 @@ service lge-sensor-sh /vendor/bin/init.msm8992.sensor.sh
     seclabel u:r:sensors:s0
 # start sensor daemon as core class [END]
 
+service boot_lc /system/bin/logcat -b all -D -f /cache/boot_lc_full.txt
+    class main
+    user root
+    group root system
+    disabled
+    oneshot
+
+service boot_lc_crash /system/bin/logcat -b crash -D -f /cache/boot_lc_crash.txt
+    class main
+    user root
+    group root system
+    disabled
+    oneshot
+
+service boot_lc_kernel /system/bin/logcat -b kernel -D -f /cache/boot_lc_kernel.txt
+    class main
+    user root
+    group root system
+    disabled
+    oneshot
+
 service pulseon /vendor/bin/pulse.sh
     user system
     seclabel u:r:pulse:s0
@@ -1097,6 +1126,9 @@ service pulseoff /vendor/bin/pulse.sh stop
 on property:sys.boot_completed=1
     stop pulseon
     start pulseoff
+    stop boot_lc
+    stop boot_lc_crash
+    stop boot_lc_kernel
 
     # Restrict permissions to socket file to hide Magisk & co.
 on property:sys.boot_completed=1
@@ -1112,6 +1144,9 @@ on property:apexd.status=ready
 on property:dev.bootcomplete=1
     stop pulseon
     start pulseoff
+    stop boot_lc
+    stop boot_lc_crash
+    stop boot_lc_kernel
 
 on property:gsm.version.baseband=""
     start baseband-sh
