@@ -95,7 +95,7 @@ USE_DEVICE_SPECIFIC_CAMERA := true
 TARGET_USES_MEDIA_EXTENSIONS := true
 TARGET_CAMERASERVICE_CLOSES_NATIVE_HANDLES := true
 TARGET_PROCESS_SDK_VERSION_OVERRIDE := \
-    /system/vendor/bin/mm-qcamera-daemon=24
+    /vendor/bin/mm-qcamera-daemon=24
 
 # Display
 TARGET_USES_ION := true
