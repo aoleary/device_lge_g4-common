@@ -193,6 +193,9 @@ PRODUCT_PACKAGES += \
     ipacm-diag \
     IPACM_cfg.xml
 
+PRODUCT_PACKAGES_DEBUG += \
+    ipa_nat_test \
+
 # Kernel modules
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/modules/mcDrvModule.ko:/system/lib/modules/mcDrvModule.ko \
