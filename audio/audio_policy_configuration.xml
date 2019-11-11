@@ -282,18 +282,18 @@
         </module>
 
         <!-- A2dp Audio HAL -->
-        <xi:include href="/vendor/etc/audio/a2dp_audio_policy_configuration.xml"/>
+        <xi:include href="/vendor/etc/a2dp_audio_policy_configuration.xml"/>
 
         <!-- Usb Audio HAL -->
-        <xi:include href="/vendor/etc/audio/usb_audio_policy_configuration.xml"/>
+        <xi:include href="/vendor/etc/usb_audio_policy_configuration.xml"/>
 
         <!-- Remote Submix Audio HAL -->
-        <xi:include href="/vendor/etc/audio/r_submix_audio_policy_configuration.xml"/>
+        <xi:include href="/vendor/etc/r_submix_audio_policy_configuration.xml"/>
 
     </modules>
 
     <!-- Volume section -->
-    <xi:include href="/vendor/etc/audio/audio_policy_volumes_drc.xml"/>
-    <xi:include href="/vendor/etc/audio/default_volume_tables.xml"/>
+    <xi:include href="/vendor/etc/audio_policy_volumes_drc.xml"/>
+    <xi:include href="/vendor/etc/default_volume_tables.xml"/>
 
 </audioPolicyConfiguration>
