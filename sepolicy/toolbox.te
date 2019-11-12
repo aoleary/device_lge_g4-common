@@ -27,3 +27,5 @@ allow toolbox zygote:file read;
 allow toolbox healthd:file read;
 allow toolbox ueventd:dir { getattr search };
 allow toolbox ueventd:file open;
+
+allow toolbox qti_init_prop:property_service set;

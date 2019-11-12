@@ -1,6 +1,10 @@
-allow cameraserver socket_device:sock_file write;
 #set_prop(cameraserver, camera_prop)
+allow cameraserver mmqcamd:unix_dgram_socket sendto;
+allow cameraserver camera_data_file:sock_file write;
+allow cameraserver camera_data_file:dir search;
+allow cameraserver default_prop:property_service set;
+allow cameraserver device:chr_file { ioctl open read write };
+allow cameraserver init:unix_dgram_socket sendto;
 allow cameraserver init:unix_stream_socket connectto;
 allow cameraserver property_socket:sock_file write;
-#allow cameraserver mm-qcamerad:unix_dgram_socket sendto;
-allow cameraserver camera_data_file:dir search;
+allow cameraserver socket_device:sock_file write;

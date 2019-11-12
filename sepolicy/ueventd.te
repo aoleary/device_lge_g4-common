@@ -1,6 +1,6 @@
-allow ueventd vfat:dir search;
-allow ueventd vfat:file { read getattr open };
-
 allow ueventd console_device:dir relabelto;
 allow ueventd console_device:file relabelto;
 allow ueventd console_device:lnk_file relabelto;
+
+allow ueventd vfat:dir search;
+allow ueventd vfat:file { getattr open read };
