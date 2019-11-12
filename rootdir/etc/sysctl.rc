@@ -10,4 +10,4 @@ on fs
 service sysctld /system/bin/sysctl -p
     user root
     oneshot
-    #seclabel u:r:init-sysctl:s0
+    seclabel u:r:init-sysctl:s0
