@@ -1,0 +1,18 @@
+type mmqcamd, domain;
+type mmqcamd_exec, exec_type, file_type;
+
+init_daemon_domain(mmqcamd)
+
+allow mmqcamd camera_data_file:dir { add_name remove_name write };
+allow mmqcamd camera_data_file:sock_file { create unlink };
+allow mmqcamd cameraserver:fd use;
+allow mmqcamd gpu_device:chr_file { ioctl open read write };
+allow mmqcamd init:unix_stream_socket connectto;
+allow mmqcamd input_device:chr_file { ioctl open read };
+allow mmqcamd input_device:dir { open read };
+allow mmqcamd ion_device:chr_file { open read write };
+allow mmqcamd sensors_device:chr_file getattr;
+allow mmqcamd socket_device:sock_file write;
+allow mmqcamd sysfs:file { open read };
+allow mmqcamd vendor_file:dir read;
+allow mmqcamd video_device:chr_file { ioctl open read write };

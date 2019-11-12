@@ -8,6 +8,9 @@ allow sensors init:unix_stream_socket connectto;
 allow sensors property_socket:sock_file write;
 allow sensors qti_init_shell_exec:file entrypoint;
 
+allow sensors persist_file:dir getattr;
+allow sensors persist_file:file { getattr setattr };
+allow sensors self:capability chown;
 allow sensors sensors_data_file:dir search;
 
 allow sensors modem_efs_partition_device:dir { r_dir_perms create_dir_perms };

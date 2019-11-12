@@ -3,6 +3,7 @@ type imscm_exec, exec_type, vendor_file_type, file_type;
 net_domain(imscm)
 init_daemon_domain(imscm)
 
+allow imscm default_android_service:service_manager add;
 allow imscm imsrcs_service:service_manager add;
 allow imscm smem_log_device:chr_file { read write open ioctl };
 allow imscm servicemanager:binder { transfer call };

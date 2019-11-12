@@ -34,6 +34,24 @@ user: AID_SYSTEM
 group: AID_SYSTEM
 caps: 0
 
+[cota/]
+mode: 0777
+user: AID_ROOT
+group: AID_SYSTEM
+caps: 0
+
+[cust/]
+mode: 0771
+user: AID_SYSTEM
+group: AID_SYSTEM
+caps: 0
+
+[carrier/]
+mode: 0770
+user: AID_SYSTEM
+group: AID_SYSTEM
+caps: 0
+
 [mpt/]
 mode: 0755
 user: AID_SYSTEM
@@ -46,8 +64,20 @@ user: AID_SYSTEM
 group: AID_SYSTEM
 caps: 0
 
+[persist/data]
+mode: 0700
+user: AID_SYSTEM
+group: AID_SYSTEM
+caps: 0
+
 [persist-lg/]
 mode: 0755
+user: AID_SYSTEM
+group: AID_SYSTEM
+caps: 0
+
+[preload/]
+mode: 0771
 user: AID_SYSTEM
 group: AID_SYSTEM
 caps: 0

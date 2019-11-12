@@ -1,5 +1,11 @@
 set_prop(qti_init_shell, qti_init_prop)
 
+allow qti_init_shell persist_file:file { getattr open read };
+allow qti_init_shell sysfs_android_usb:file write;
+allow qti_init_shell system_data_file:dir { add_name create setattr write };
+allow qti_init_shell system_data_file:file { create getattr open read setattr write };
+allow qti_init_shell vendor_file:file execute_no_trans;
+
 allow qti_init_shell ctl_start_prop:property_service set;
 allow qti_init_shell device:dir { write add_name };
 allow qti_init_shell device:file { read create open getattr setattr write };

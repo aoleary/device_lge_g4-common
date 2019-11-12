@@ -19,6 +19,7 @@ type ril_database, file_type, data_file_type;
 type vold_data, file_type, data_file_type, core_data_file_type;
 type sensors_data, file_type, data_file_type;
 type cam_socket_file, file_type, data_file_type;
+type time_data_file, fs_type;
 
 # debugfs
 type debugfs_energy, debugfs_type, fs_type;
@@ -31,5 +32,20 @@ type flashlight_app_data_file, sysfs_type, fs_type;
 # bluetooth
 type bt_data_file, sysfs_type, fs_type;
 
+# persist & persist-lg
+type persist_wifi_file, fs_type;
+type persist_sensortool_file, fs_type;
+type persist_camera_file, fs_type;
+type persist_lg_data_file, fs_type;
+type firmware_data_file, fs_type;
+type kmstore_data_file, fs_type;
+type mms_data_file, fs_type;
+type multimedia_data_file, fs_type;
+type secclk_data_file, fs_type;
+type widevine_data_file, fs_type;
+
+# /mpt
+type mpt_file, fs_type;
+
 # wrild
-#type ril_daemon, sysfs_type, fs_type;
+type ril_daemon, sysfs_type, fs_type;

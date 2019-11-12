@@ -1,0 +1,19 @@
+type energyawareness, domain; 
+type energyawareness_exec, exec_type, file_type;
+init_daemon_domain(energyawareness)
+
+allow energyawareness sysfs:file { read getattr open }; 
+allow energyawareness sysfs_uio:dir { read search open };       
+allow energyawareness sysfs_uio:lnk_file read;  
+allow energyawareness sysfs_uio_file:dir search;        
+allow energyawareness sysfs_uio_file:file { read getattr open };        
+
+# debugfs access        
+userdebug_or_eng(`      
+  allow energyawareness debugfs_energy:dir search;      
+  allow energyawareness debugfs_energy:file rw_file_perms;      
+  allow rfs_access debugfs_rfs:dir search;      
+  allow rfs_access debugfs_rfs:file rw_file_perms;      
+  allow rmt_storage debugfs_rmt:dir search;     
+  allow rmt_storage debugfs_rmt:file rw_file_perms;     
+')

@@ -1,4 +1,6 @@
 allow zygote system_device:file write;
+allow zygote system_file:dir write;
+allow zygote system_file:file write;
 allow zygote untrusted_app:process ptrace;
 allow zygote proc_cmdline:file { getattr open read };
 allow zygote self:capability sys_resource;

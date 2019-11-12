@@ -1,0 +1,34 @@
+# Those listed can read any file on the system and can write	
+# any file on the system from a standard permissions point of	
+# view.  With SELinux it means that they can read all file	
+# types that SELinux allows them to read, even if they are	
+# running with a process UID that is not allowed to read the	
+# file.	
+# Similar they are allowed to write all SELinux writable types	
+# even if they aren't allowed to write based on UID.	
+#	
+# ************************************************************	
+#	
+# ... and yes this is a solid security hole.	
+#	
+# ************************************************************	
+
+#============= sensors ==============	
+allow sensors self:capability { dac_override dac_read_search };	
+
+#============= thermal-engine ==============	
+allow thermal-engine self:capability { dac_override dac_read_search };	
+
+#============= hwaddrs ==============	
+allow hwaddrs self:capability dac_override;	
+
+#============= qti_init_shell ==============	
+allow qti_init_shell self:capability dac_override;	
+
+#============= rfs_access ==============	
+# FIXED !!!!	
+#allow rfs_access self:capability { dac_override dac_read_search };	
+
+#============= rmt_storage ==============	
+# FIXED !!!!	
+#allow rmt_storage self:capability dac_override;
