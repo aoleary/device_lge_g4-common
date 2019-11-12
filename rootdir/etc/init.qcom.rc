@@ -40,7 +40,7 @@ on early-init
     symlink /system/vendor /odm
 
     mount debugfs debugfs /sys/kernel/debug
-    symlink /data/tombstones /tombstones
+    #R/O fs: symlink /data/tombstones /tombstones
 
     # Mount pstore file system on /mnt/pstore
     mkdir /mnt/pstore 660 system system
@@ -58,13 +58,6 @@ on early-fs
     symlink /dev/block/platform/soc.0/${ro.boot.bootdevice} /dev/block/bootdevice
     chown root:root /dev/block/mmcblk0p35
     chmod 666 /dev/block/mmcblk0p35
-
-    restorecon_recursive /persist
-    restorecon_recursive /carrier
-
-    # load kernel modules
-    insmod /system/lib/modules/mcDrvModule.ko
-    insmod /system/lib/modules/mcKernelApi.ko
 
     # MobiCore Daemon Paths
     export MC_AUTH_TOKEN_PATH /data/app/mcRegistry
@@ -87,6 +80,13 @@ on fs
     start boot_lc_kernel
     start boot_lc_crash
 
+    restorecon_recursive /carrier
+    restorecon_recursive /firmware
+    restorecon_recursive /mpt
+    restorecon_recursive /persist
+    restorecon_recursive /persist-lg
+    restorecon_recursive /sns
+
     # do not block adb which is default since Android 10 and can cause adb issues / crashes
     setprop persist.adb.nonblocking_ffs 0
     setprop ro.adb.nonblocking_ffs 0
@@ -97,23 +97,23 @@ on init
     write /proc/sys/vm/page-cluster 0
 
     mkdir /mnt/shell/emulated 0700 shell shell
-    mkdir /storage/emulated 0555 root root
+    #R/O fs: mkdir /storage/emulated 0555 root root
     mkdir /mnt/media_rw/sdcard1 0775 media_rw media_rw
     mkdir /mnt/media_rw/usbdisk 0775 media_rw media_rw
-    mkdir /storage/sdcard1 0775 system system
-    mkdir /storage/usbdisk 0775 system system
+    #R/O fs: mkdir /storage/sdcard1 0775 system system
+    #R/O fs: mkdir /storage/usbdisk 0775 system system
     chmod 775 /mnt/media_rw
     chmod 775 /mnt/media_rw/*
 
-    chmod 0771 /firmware
-    chmod 0771 /firmware/image
-    mkdir /persist/data 0700 system system
-    mkdir /devlog 0700 root root
-    mkdir /fataldevlog 0700 root root
-    mkdir /cota 0771 root cw_access
-    mkdir /preload 0771 system system
-    mkdir /cust 0771 system system
-    mkdir /carrier 0770 system carrier
+    #R/O fs: chmod 0771 /firmware
+    #R/O fs: chmod 0771 /firmware/image
+    #R/O fs: mkdir /persist/data 0700 system system
+    #R/O fs: mkdir /devlog 0700 root root
+    #R/O fs: mkdir /fataldevlog 0700 root root
+    #R/O fs: mkdir /cota 0771 root cw_access
+    #R/O fs: mkdir /preload 0771 system system
+    #R/O fs: mkdir /cust 0771 system system
+    #R/O fs: mkdir /carrier 0770 system carrier
     chown system carrier /carrier
     chmod 0770 /carrier
     chmod 0644 /proc/cmdline
@@ -121,7 +121,7 @@ on init
     chmod 0660 /dev/soundtrigger_dma_drv
     chown media media /dev/soundtrigger_dma_drv
 
-    symlink /sdcard /storage/sdcard0
+    #R/O fs: symlink /sdcard /storage/sdcard0
 
 on early-boot
     # unique boot led blinking
