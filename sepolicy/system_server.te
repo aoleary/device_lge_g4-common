@@ -27,6 +27,7 @@ allow system_server sdcardfs:file r_file_perms;
 allow system_server vfat:dir { open read write };
 
 allow system_server init:binder call;
+allow system_server hal_hardware_power:binder call;
 
 # watchdog
 allow system_server wrild:fifo_file write;

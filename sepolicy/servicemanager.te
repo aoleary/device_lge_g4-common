@@ -16,9 +16,15 @@ allow servicemanager vendor_per_mgr:dir search;
 allow servicemanager vendor_per_mgr:file { open read };
 allow servicemanager vendor_per_mgr:process getattr;
 
+allow servicemanager netmgrd:dir search;
+allow servicemanager netmgrd:file { open read };
+allow servicemanager netmgrd:process getattr;
 allow servicemanager pm_proxy:dir search;
 allow servicemanager pm_proxy:file { open read };
 allow servicemanager pm_proxy:process getattr;
+allow servicemanager pmservice:dir search;
+allow servicemanager pmservice:file { open read };
+allow servicemanager pmservice:process getattr;
 
 # watchdog
 allow servicemanager wrild:dir search;

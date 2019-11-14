@@ -126,5 +126,7 @@
 ###################################
 # Service HALs
 #
-/(vendor|system/vendor)/bin/hw/android\.hardware\.authsecret@[1-9]\.[0-9]-service u:object_r:hal_authsecret_default_exec:s0
-/system/bin/hw/lineage\.trust@1\.0-service                    u:object_r:hal_trust_default_exec:s0
+/(vendor|system/vendor)/bin/hw/android\.hardware\.authsecret@[1-9]\.[0-9]-service	u:object_r:hal_authsecret_default_exec:s0
+/(vendor|system/vendor)/bin/hw/lineage\.trust@[1-9]\.[0-9]-service                   	u:object_r:hal_trust_default_exec:s0
+/(vendor|system/vendor)/bin/hw/android.hardware.power@[1-9]\.[0-9]-service-qti		u:object_r:hal_hardware_power_exec:s0
+/(vendor|system/vendor)/bin/hw/android.hardware.usb@[1-9]\.[0-9]-service.basic		u:object_r:hal_hardware_usb_exec:s0

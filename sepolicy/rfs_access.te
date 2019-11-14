@@ -9,6 +9,11 @@ allow rfs_access self:capability net_raw;
 allow rfs_access self:socket create_socket_perms;
 allowxperm rfs_access self:socket ioctl msm_sock_ipc_ioctls;
 
+allow rfs_access debugfs_rmt_storage:dir search;
+allow rfs_access debugfs_rmt_storage:file { open write };
+allow rfs_access persist_file:dir { setattr search };
+allow rfs_access uio_device:chr_file { open read write };
+
 # debugfs access
 userdebug_or_eng(`
   allow rfs_access debugfs_rfs:dir search;

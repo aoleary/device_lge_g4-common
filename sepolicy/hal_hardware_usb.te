@@ -1,0 +1,8 @@
+type hal_hardware_usb, coredomain, domain;
+type hal_hardware_usb_exec, system_file_type, exec_type, file_type;
+init_daemon_domain(hal_hardware_usb)
+
+allow hal_hardware_usb hal_usb_hwservice:hwservice_manager add;
+allow hal_hardware_usb hidl_base_hwservice:hwservice_manager add;
+allow hal_hardware_usb hwservicemanager:binder transfer;
+allow hal_hardware_usb hwservicemanager_prop:file { getattr open read };

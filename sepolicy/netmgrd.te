@@ -8,3 +8,10 @@ allow netmgrd property_socket:sock_file write;
 
 allow netmgrd default_prop:property_service set;
 allow netmgrd sysfs:file { read open };
+
+allow netmgrd dnsresolver_service:service_manager find;
+allow netmgrd netd_service:service_manager find;
+allow netmgrd qmuxd_socket:dir { add_name remove_name write };
+allow netmgrd qmuxd_socket:sock_file { create setattr unlink };
+allow netmgrd servicemanager:binder call;
+allow netmgrd system_file:file { execute_no_trans lock };

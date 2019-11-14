@@ -1,0 +1,9 @@
+type hal_hardware_power, coredomain, domain;
+type hal_hardware_power_exec, system_file_type, exec_type, file_type;
+init_daemon_domain(hal_hardware_power)
+
+allow hal_hardware_power default_android_hwservice:hwservice_manager add;
+allow hal_hardware_power hal_power_hwservice:hwservice_manager add;
+allow hal_hardware_power hidl_base_hwservice:hwservice_manager add;
+allow hal_hardware_power hwservicemanager:binder transfer;
+allow hal_hardware_power hwservicemanager_prop:file { getattr open read };

@@ -12,6 +12,7 @@ allow mmqcamd input_device:chr_file { ioctl open read };
 allow mmqcamd input_device:dir { open read };
 allow mmqcamd ion_device:chr_file { open read write };
 allow mmqcamd sensors_device:chr_file getattr;
+allow mmqcamd sensors:unix_stream_socket connectto;
 allow mmqcamd socket_device:sock_file write;
 allow mmqcamd sysfs:file { open read };
 allow mmqcamd vendor_file:dir read;
