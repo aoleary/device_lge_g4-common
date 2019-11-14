@@ -1,0 +1,9 @@
+allow hwservicemanager hal_hardware_power:dir search;
+allow hwservicemanager hal_hardware_power:file { open read };
+allow hwservicemanager hal_hardware_power:process getattr;
+allow hwservicemanager hal_hardware_usb:dir search;
+allow hwservicemanager hal_hardware_usb:file { open read };
+allow hwservicemanager hal_hardware_usb:process getattr;
+allow hwservicemanager init:dir search;
+allow hwservicemanager init:file { open read };
+allow hwservicemanager init:process getattr;

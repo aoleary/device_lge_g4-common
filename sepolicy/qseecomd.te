@@ -2,3 +2,15 @@ type qseecomd, domain;
 type qseecomd_exec, exec_type, file_type;
 init_daemon_domain(qseecomd)
 
+allow qseecomd block_device:dir getattr;
+allow qseecomd disk_block_device:blk_file { getattr ioctl open read write };
+allow qseecomd init:unix_stream_socket connectto;
+allow qseecomd ion_device:chr_file { ioctl open read };
+allow qseecomd property_socket:sock_file write;
+allow qseecomd self:capability { setgid setuid sys_rawio };
+allow qseecomd smem_log_device:chr_file { ioctl open read write };
+allow qseecomd ssd_block_device:blk_file { open read write };
+allow qseecomd sysfs:file { getattr open read };
+allow qseecomd system_prop:property_service set;
+allow qseecomd tee_device:chr_file { ioctl open read write };
+allow qseecomd vfat:file { getattr open read };

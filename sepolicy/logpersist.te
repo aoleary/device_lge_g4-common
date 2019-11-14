@@ -1,1 +1,2 @@
-allow logpersist cache_file:dir { open read write };
+allow logpersist cache_file:dir { open read write add_name };
+allow logpersist cache_file:file { append create getattr open };

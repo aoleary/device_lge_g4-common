@@ -1,3 +1,11 @@
 type mmppdaemon, domain;
 type mmppdaemon_exec, exec_type, file_type;
 init_daemon_domain(mmppdaemon)
+
+allow mmppdaemon graphics_device:chr_file { ioctl open read write };
+allow mmppdaemon init:unix_stream_socket connectto;
+allow mmppdaemon property_socket:sock_file write;
+allow mmppdaemon sysfs_graphics:dir search;
+allow mmppdaemon sysfs_graphics:file { getattr open read write };
+allow mmppdaemon sysfs_leds:dir search;
+allow mmppdaemon system_prop:property_service set;

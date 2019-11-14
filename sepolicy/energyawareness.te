@@ -2,11 +2,14 @@ type energyawareness, domain;
 type energyawareness_exec, exec_type, file_type;
 init_daemon_domain(energyawareness)
 
+allow energyawareness device:chr_file { ioctl open read write };
+allow energyawareness self:netlink_kobject_uevent_socket { bind create getopt read setopt };
 allow energyawareness sysfs:file { read getattr open }; 
 allow energyawareness sysfs_uio:dir { read search open };       
 allow energyawareness sysfs_uio:lnk_file read;  
 allow energyawareness sysfs_uio_file:dir search;        
 allow energyawareness sysfs_uio_file:file { read getattr open };        
+allow energyawareness uio_device:chr_file { open read write };
 
 # debugfs access        
 userdebug_or_eng(`      

@@ -8,3 +8,7 @@ allow qmuxd sysfs:file { open write };
 allow qmuxd diag_device:chr_file { read write ioctl open };
 allow qmuxd qmuxd_socket:dir { write add_name remove_name search };
 allow qmuxd qmuxd_socket:sock_file { create setattr getattr write unlink };
+
+allow qmuxd self:capability { setpcap setuid };
+allow qmuxd smem_log_device:chr_file { ioctl open read write };
+allow qmuxd sysfs_wake_lock:file { append open };

@@ -1,3 +1,8 @@
 type imsqmidaemon, domain;
 type imsqmidaemon_exec, exec_type, file_type;
 init_daemon_domain(imsqmidaemon)
+
+allow imsqmidaemon init:unix_stream_socket connectto;
+allow imsqmidaemon property_socket:sock_file write;
+allow imsqmidaemon smem_log_device:chr_file { ioctl open read write };
+allow imsqmidaemon system_prop:property_service set;

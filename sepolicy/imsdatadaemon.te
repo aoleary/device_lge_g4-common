@@ -3,4 +3,6 @@ type imsdatadaemon_exec, exec_type, file_type;
 
 init_daemon_domain(imsdatadaemon)
 
-allow imsdatadaemon self:socket read;
+allow imsdatadaemon self:capability net_raw;
+allow imsdatadaemon self:socket { bind create ioctl read };
+allow imsdatadaemon smem_log_device:chr_file { ioctl open read write };
