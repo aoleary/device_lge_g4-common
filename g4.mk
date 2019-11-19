@@ -436,6 +436,7 @@ PRODUCT_PACKAGES += \
     wpa_supplicant.conf
 
 PRODUCT_COPY_FILES += \
+    device/lge/g4-common/wifi/wpa_supplicant_overlay.conf:$(TARGET_COPY_OUT_SYSTEM)/etc/wifi/wpa_supplicant_overlay.conf \
     $(LOCAL_PATH)/wifi/bcmdhd.cal:system/vendor/etc/wifi/bcmdhd.cal
 
 $(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/firmware/bcm4339/device-bcm.mk)
