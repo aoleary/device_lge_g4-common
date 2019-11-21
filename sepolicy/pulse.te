@@ -3,7 +3,7 @@ type pulse_exec, exec_type, file_type;
 
 init_daemon_domain(pulse)
 
-allow pulse flashlight_app_data_file:file { open write };
+allow pulse flashlight_app_data_file:file { open write getattr read };
 allow pulse rootfs:file { entrypoint read };
 allow pulse toolbox_exec:file { execute_no_trans open };
 allow pulse rootfs:file open;

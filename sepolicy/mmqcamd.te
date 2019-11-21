@@ -7,6 +7,7 @@ allow mmqcamd camera_data_file:dir { add_name remove_name write };
 allow mmqcamd camera_data_file:sock_file { create unlink };
 allow mmqcamd cameraserver:fd use;
 allow mmqcamd gpu_device:chr_file { ioctl open read write };
+allow mmqcamd hal_camera_default:fd use;
 allow mmqcamd init:unix_stream_socket connectto;
 allow mmqcamd input_device:chr_file { ioctl open read };
 allow mmqcamd input_device:dir { open read };

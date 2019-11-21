@@ -26,4 +26,4 @@ allow rild system_data_file:file { getattr open read };
 
 allow rild device:file { open write };
 allow rild system_data_file:dir { open read remove_name };
-allow rild system_data_file:file { lock setattr unlink };
+allow rild system_data_file:file { ioctl lock setattr unlink };
