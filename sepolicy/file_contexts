@@ -39,6 +39,7 @@
 /persist/wlan_mac\.bin             u:object_r:persist_wifi_file:s0
 /persist/sensorcal\.json           u:object_r:persist_sensortool_file:s0
 /persist/calibration(/.*)?         u:object_r:persist_camera_file:s0
+/persist/sensors(/.*)?         	   u:object_r:persist_sensors_file:s0
 
 # DRM
 /persist-lg(/.*)?			u:object_r:persist_lg_data_file:s0
@@ -127,7 +128,7 @@
 # Service HALs
 #
 /(vendor|system/vendor)/bin/hw/android\.hardware\.authsecret@[1-9]\.[0-9]-service	u:object_r:hal_authsecret_default_exec:s0
-/(vendor|system/vendor)/bin/hw/lineage\.trust@[1-9]\.[0-9]-service                   	u:object_r:hal_trust_default_exec:s0
+/(vendor|system/vendor)/bin/hw/vendor.lineage\.trust@[1-9]\.[0-9]-service                   	u:object_r:hal_trust_default_exec:s0
 /(vendor|system/vendor)/bin/hw/android.hardware.power@[1-9]\.[0-9]-service-qti		u:object_r:hal_hardware_power_exec:s0
 /(vendor|system/vendor)/bin/hw/android.hardware.usb@[1-9]\.[0-9]-service.basic		u:object_r:hal_hardware_usb_exec:s0
 /(vendor|system/vendor)/bin/hw/android\.hardware\.light@[1-9]\.[0-9]-service.g4      	u:object_r:hal_light_default_exec:s0

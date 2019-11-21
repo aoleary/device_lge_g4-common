@@ -85,7 +85,7 @@ allow init block_device:blk_file write;
 
 allow init sysfs_wake_lock:file { append open };
 allow init system_device:blk_file relabelto;
-allow init system_file:file execute_no_trans;
+allow init system_file:file { execute_no_trans mounton };
 allow init tee_device:chr_file { ioctl open read write };
 allow init thermal_socket:sock_file unlink;
 allow init tmpfs:file getattr;

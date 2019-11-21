@@ -1,0 +1,3 @@
+allow hal_camera_default camera_data_file:sock_file write;
+allow hal_camera_default default_prop:property_service set;
+allow hal_camera_default mmqcamd:unix_dgram_socket sendto;
