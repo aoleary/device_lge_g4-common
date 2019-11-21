@@ -30,3 +30,7 @@ allow rild { hal_camera_default mediacodec }:fd use;
 allow rild ion_device:chr_file r_file_perms;
 allow rild hwbinder_device:chr_file rw_file_perms;
 typeattribute rild binder_in_vendor_violators;
+
+allow rild device:file { open write };
+allow rild system_data_file:dir { open read remove_name };
+allow rild system_data_file:file { lock setattr unlink };
