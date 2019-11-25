@@ -1,6 +1,7 @@
 allow system_server crash_dump:process getpgid;
 allow system_server frp_block_device:blk_file { read write open setattr getattr ioctl };
-allow system_server default_android_service:service_manager find;
+allow system_server default_android_hwservice:hwservice_manager find;
+allow system_server default_android_service:service_manager { find add };
 allow system_server sensors:unix_stream_socket connectto;
 allow system_server sensors_device:chr_file getattr;
 allow system_server smem_log_device:chr_file { read write ioctl open };
@@ -28,6 +29,7 @@ allow system_server vfat:dir { open read write };
 
 allow system_server hal_hardware_power:binder call;
 allow system_server hal_hardware_usb:binder { call transfer };
+allow system_server hal_trust_default:binder call;
 allow system_server init:binder call;
 allow system_server ssr_device:chr_file { open read };
 
