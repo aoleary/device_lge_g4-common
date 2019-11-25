@@ -1,8 +1,4 @@
-#type qmuxd, domain;
-#type qmuxd_exec, exec_type, file_type;
-#init_daemon_domain(qmuxd)
-
-allow qmuxd smd_device:chr_file { open read write };
+allow qmuxd smd_device:chr_file { open read write ioctl };
 allow qmuxd sysfs:file { open write };
 
 allow qmuxd diag_device:chr_file { read write ioctl open };
@@ -10,5 +6,9 @@ allow qmuxd qmuxd_socket:dir { write add_name remove_name search };
 allow qmuxd qmuxd_socket:sock_file { create setattr getattr write unlink };
 
 allow qmuxd self:capability { setpcap setuid };
+allow qmuxd self:capability2 block_suspend;
 allow qmuxd smem_log_device:chr_file { ioctl open read write };
 allow qmuxd sysfs_wake_lock:file { append open };
+
+allow qmuxd socket_device:dir { add_name write };
+allow qmuxd socket_device:sock_file { create setattr };

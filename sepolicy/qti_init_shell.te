@@ -35,3 +35,5 @@ allow qti_init_shell system_prop:property_service set;
 allow qti_init_shell self:capability dac_override;
 allow qti_init_shell ctl_start_prop:property_service set;
 allow qti_init_shell wifi_prop:file r_file_perms;
+
+allow qti_init_shell sysfs_thermal:file write;
