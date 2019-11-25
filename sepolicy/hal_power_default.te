@@ -1,1 +1,2 @@
 allow hal_power_default socket_device:file write;
+allow hal_power_default sysfs:file { open write };

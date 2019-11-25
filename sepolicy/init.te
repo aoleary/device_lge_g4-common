@@ -60,6 +60,7 @@ allow init sysfs_thermal:file write;
 allow init flashlight_app_data_file:file { open setattr write };
 
 allow init rootfs:file { create write };
+allow init sensors_data:dir mounton;
 allow init sysfs_dm:file { open write };
 
 dontaudit init bluetooth:process transition;
