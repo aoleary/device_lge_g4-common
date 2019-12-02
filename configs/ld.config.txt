@@ -19,7 +19,7 @@ additional.namespaces = platform,sphal
 namespace.default.isolated = true
 namespace.default.visible = true
 
-namespace.default.search.paths      = /apex/com.android.media.swcodec/${LIB}
+namespace.default.search.paths      = /apex/com.android.media.swcodec/${LIB}:/system/lib64
 namespace.default.asan.search.paths = /apex/com.android.media.swcodec/${LIB}
 
 namespace.default.links = platform
