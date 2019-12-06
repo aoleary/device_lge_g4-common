@@ -177,8 +177,3 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Storage
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.sys.sdcardfs=true
-
-# Fix graphical glitches on skiagl
-PRODUCT_PROPERTY_OVERRIDES += \
-    debug.hwui.renderer=opengl
-
