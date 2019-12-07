@@ -47,5 +47,8 @@ type widevine_data_file, fs_type;
 # /mpt
 type mpt_file, fs_type;
 
+# /cust
+type cust_file, fs_type;
+
 # wrild
 type ril_daemon, sysfs_type, fs_type;
