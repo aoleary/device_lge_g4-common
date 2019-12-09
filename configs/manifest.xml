@@ -1,29 +1,21 @@
 <manifest version="1.0" type="device" target-level="legacy">
     <hal format="hidl">
         <name>android.hardware.audio</name>
-        <transport arch="32+64">passthrough</transport>
+        <transport>hwbinder</transport>
         <version>2.0</version>
-        <version>4.0</version>
         <interface>
             <name>IDevicesFactory</name>
             <instance>default</instance>
-            <instance>msd</instance>
         </interface>
-        <fqname>@2.0::IDevicesFactory/default</fqname>
-        <fqname>@4.0::IDevicesFactory/default</fqname>
-        <fqname>@2.0::IDevicesFactory/msd</fqname>
     </hal>
     <hal format="hidl">
         <name>android.hardware.audio.effect</name>
-        <transport arch="32+64">passthrough</transport>
+        <transport>hwbinder</transport>
         <version>2.0</version>
-        <version>4.0</version>
         <interface>
             <name>IEffectsFactory</name>
             <instance>default</instance>
         </interface>
-        <fqname>@2.0::IEffectsFactory/default</fqname>
-        <fqname>@4.0::IEffectsFactory/default</fqname>
     </hal>
     <hal format="hidl">
         <name>android.hardware.soundtrigger</name>
