@@ -1,0 +1,6 @@
+# Temp Fix
+/firmware(/.*)?        u:object_r:firmware_file:s0
+/mpt(/.*)?             u:object_r:mpt_file:s0
+/persist(/.*)?         u:object_r:persist_file:s0
+/persist-lg(/.*)?      u:object_r:persist-lg_file:s0
+/sns(/.*)?             u:object_r:sns_file:s0
