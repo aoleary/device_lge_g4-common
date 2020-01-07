@@ -17,7 +17,7 @@ BOARD_VENDOR := lge
 
 COMMON_PATH := device/lge/g4-common
 
-TARGET_SPECIFIC_HEADER_PATH := $(COMMON_PATH)/include
+TARGET_SPECIFIC_HEADER_PATH := $(COMMON_PATH)/include $(COMMON_PATH)/softap/sdk
 
 LLVM_ENABLE_THREADS := true
 
