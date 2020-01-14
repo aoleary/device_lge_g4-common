@@ -133,7 +133,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     vidc.debug.level=1 \
     vidc.debug.perf.mode=2 \
     vidc.enc.dcvs.extra-buff-count=2 \
-    persist.camera.cpp.duplication=false
+    persist.camera.cpp.duplication=false \
+    ro.config.avoid_gfx_accel=true
 
 # Perf
 PRODUCT_PROPERTY_OVERRIDES += \
