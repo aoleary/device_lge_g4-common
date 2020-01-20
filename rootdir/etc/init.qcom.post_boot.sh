@@ -77,8 +77,7 @@ case "$target" in
         echo 1 > /sys/devices/system/cpu/cpu4/online
         echo conservative > /sys/devices/system/cpu/cpu4/cpufreq/scaling_governor
         # configure CPU0
-        echo blu_active > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
-        echo 960000 > /sys/devices/system/cpu/cpu0/cpufreq/blu_active/hispeed_freq
+        echo interactive > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
         # restore A57's max
         cat /sys/devices/system/cpu/cpu4/cpufreq/cpuinfo_max_freq > /sys/devices/system/cpu/cpu4/cpufreq/scaling_max_freq
         # plugin remaining A57s
