@@ -75,7 +75,7 @@ case "$target" in
         echo 0 > /sys/devices/system/cpu/cpu5/online
         # online CPU4
         echo 1 > /sys/devices/system/cpu/cpu4/online
-        echo conservative > /sys/devices/system/cpu/cpu4/cpufreq/scaling_governor
+        echo ondemand > /sys/devices/system/cpu/cpu4/cpufreq/scaling_governor
         # configure CPU0
         echo interactive > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
         # restore A57's max
