@@ -32,6 +32,8 @@ CALLAPPS="dialer|call|whatsapp|thoughtcrime.securesms|telegram|challegram|viber|
 WDDEBUG=0
 #####################################################################################
 
+# initial value for wrild property
+setprop wrild.ril-handling starting
 
 # logging func
 F_LOG(){
@@ -75,6 +77,7 @@ F_RILCHK(){
         echo 9
     elif [ "$CURSTATE" == "LOADED" ] && [ -z "$CUROPER" ];then
         F_LOG i "LOADED but no operator yet .. sleeping 25s"
+	setprop wrild.ril-handling waiting-for-operatorid
         sleep 25
         echo 1
     elif [ "$CURSTATE" == "LOADED" ] && [ ! -z "$CUROPER" ];then
@@ -83,6 +86,7 @@ F_RILCHK(){
         echo 42
     else
         F_LOG i "No condition met (yet) .. sleeping 10s"
+	setprop wrild.ril-handling no-condition-met
         sleep 10
         echo 1
     fi
@@ -98,37 +102,48 @@ F_RILRESTART(){
         # this will restart RIL not on the first but every second run only (which should be safe) and
         # let the user enough time to enter the PIN if the prompt appears
         if [ "$REQRESTART" -eq 9 ]&&[ $PRTRIGGER -eq 0 ];then
+	    setprop wrild.ril-handling waiting-for-pin
             F_LOG i "PIN_REQUIRED detected. waiting 40s for user input.." && sleep 40
             PRTRIGGER=1
         elif [ "$REQRESTART" -eq 7 ];then
             F_LOG i "Boot (still) in progress ... hanging around for 10s ..." && sleep 10
+	    setprop wrild.ril-handling systemboot-in-progress
             x=1
         elif [ "$REQRESTART" -eq 1 ];then
             [ $WDDEBUG == 1 ] && F_LOG e "!!!! DEBUG MODE DEBUG MODE - NO ACTION TAKEN !!!!"
             if [ -d /storage/emulated/0 ];then
                 F_LOG w "RIL restart - try $x of $MAXRET"
+		setprop wrild.ril-handling restarting-rild
                 [ $WDDEBUG == 0 ] && stop real-ril-daemon
                 sleep 1
                 [ $WDDEBUG == 0 ] && start real-ril-daemon
                 F_LOG w "restarted RIL daemon as REQRESTART was set to >$REQRESTART<"
+		setprop wrild.ril-handling restarting-rild-done
                 [ $WDDEBUG == 0 ] && sleep 40
                 PRTRIGGER=0
                 x=$((x + 1))
             else
                 F_LOG w "Skipping restart as /data isn't mounted yet ..." && sleep 5
+		setprop wrild.ril-handling data-not-mounted-yet
             fi
         elif [ "$REQRESTART" -eq 9 ] ;then
             F_LOG i "PIN_REQUIRED detected. waiting another minute for user input.." && sleep 60
             x=1
+	    setprop wrild.ril-handling waiting-for-pin
         elif [ "$REQRESTART" -eq 0 ] ;then
-            F_LOG i "no restart required. RILD seems to work properly already." && break
+            F_LOG i "no restart required. RILD seems to work properly already."
+	    setprop wrild.ril-handling rild-up
+	    break
         elif [ "$REQRESTART" -eq 42 ];then
             F_LOG e "No SIM detected!" && return $REQRESTART
+	    setprop wrild.ril-handling no-sim
         else
             F_LOG e "unusual state detected . waiting 20s before another try .." && sleep 20
+	    setprop wrild.ril-handling weird-state
         fi
         if [[ $x -eq $MAXRET ]];then
             F_LOG e "auto restart RIL daemon aborted.. too many tries!"
+	    setprop wrild.ril-handling too-many-retries
             return 99
         fi
     done
