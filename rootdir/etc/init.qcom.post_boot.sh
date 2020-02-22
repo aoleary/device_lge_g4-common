@@ -71,6 +71,10 @@ case "$target" in
             echo -n enable > $mode
         done
 
+# Available Freqs in kernel
+# Little: 384000 460800 600000 672000 787200 864000 960000 1248000 1440000
+# Big: 384000 480000 633600 768000 864000 960000 1248000 1344000 1440000 1536000 1632000 1689600 1824000
+
         # ensure at most one A57 is online when thermal hotplug is disabled
         echo 0 > /sys/devices/system/cpu/cpu5/online
         # online CPU4
