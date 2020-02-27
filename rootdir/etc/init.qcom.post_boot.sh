@@ -79,9 +79,9 @@ case "$target" in
         echo 0 > /sys/devices/system/cpu/cpu5/online
         # online CPU4
         echo 1 > /sys/devices/system/cpu/cpu4/online
-        echo ondemand > /sys/devices/system/cpu/cpu4/cpufreq/scaling_governor
+        echo tripndroid > /sys/devices/system/cpu/cpu4/cpufreq/scaling_governor
         # configure CPU0
-        echo interactive > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+        echo tripndroid > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
         # restore A57's max
         cat /sys/devices/system/cpu/cpu4/cpufreq/cpuinfo_max_freq > /sys/devices/system/cpu/cpu4/cpufreq/scaling_max_freq
         # plugin remaining A57s
