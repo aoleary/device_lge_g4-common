@@ -488,7 +488,6 @@ on post-fs-data
     exec - root root system -- /system/vendor/bin/init.qcom.qseecomd.sh
 
     # Post-boot tuning: set readahead to 2048KB during boot only
-    setprop sys.io.scheduler "fiops"
     write /sys/block/mmcblk0/queue/read_ahead_kb 2048
     write /sys/block/mmcblk1/queue/read_ahead_kb 2048
 
