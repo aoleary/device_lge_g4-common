@@ -160,14 +160,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     net.dns1=1.1.1.1\
     net.dns2=9.9.9.9
 
-# LMKD
-PRODUCT_PROPERTY_OVERRIDES +=
-        pm.dexopt.downgrade_after_inactive_days=7 \
-	ro.lmk.critical_upgrade=true \
-	ro.lmk.upgrade_pressure=40 \
-	ro.lmk.downgrade_pressure=60 \
-	ro.lmk.use_psi=false
-
 # Media
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.media.treble_omx=false \
