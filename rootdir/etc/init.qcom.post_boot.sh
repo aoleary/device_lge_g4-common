@@ -164,6 +164,55 @@ case "$target" in
     ;;
 esac
 
+# LowMemKiller (LMK)
+# set lowmemory killer (LMK) profile. Set in PAGES (i.e. 4KB)
+# to set e.g. 50 MB: (50*1024)/4 = 12800 <-- so 12800 is the value to set
+#
+# Foreground Applications (FA):
+#	The application currently shown on the screen and running.
+# Visible Applications (VA):
+#	Applications that might not be shown on the screen currently, but are still running.
+#	They might be hidden behind an overlay or have a transparent window.
+# Secondary Server (SSRV):
+#	Services running in the background and needed for Apps to function properly.
+#	This category includes Google Play Services for example.
+# Hidden Applications (HA):
+#	Applications that are hidden from the user, but are running in the background.
+# Content Providers (CP):
+#	These are the services providing content to the system like contacts provider, location provider etc.
+# Empty Applications (EA):
+#	This category contains Applications that the user exited, but Android still keeps in RAM.
+#	They do not steal any CPU time or cause any power drain.
+#
+# (source: https://www.droidviews.com/tweak-android-low-memory-killer-needs/)
+#
+# Example values:
+# 	115200 = 450 MB
+#	76800  = 300 MB
+#	51200  = 200 MB
+#	35840  = 140 MB
+#	30720  = 120 MB
+#	25600  = 100 MB
+#	17920  =  70 MB
+#	12800  =  50 MB
+#	10240  =  40 MB
+#	7680   =  30 MB
+#	5120   =  20 MB
+#
+# Example for LOS default (LG G4):
+#      8777,10971,13165,15360,26331,38400
+
+# MEMTOTAL_MB calculates the detected RAM and set different profiles based on the findings.
+MEMTOTAL_MB="$(($(grep -i memtotal /proc/meminfo  | egrep -o '[0-9]+') / 1024))"
+if [ "$MEMTOTAL_MB" -ge "2800" ];then
+    #      FA  , VA  , SSRV,  HA ,  CP  , EA
+    echo '7680,10240,30720,51200,30720,76800' > /sys/module/lowmemorykiller/parameters/minfree
+elif [ "$MEMTOTAL_MB" -ge "2000" ];then
+    #      FA  , VA  , SSRV,  HA ,  CP  , EA
+    echo '7680,10240,25600,30720,25600,51200' > /sys/module/lowmemorykiller/parameters/minfree
+fi
+# skip setting a LMK profile when we have *NO* finding (i.e. using the default)
+
 case "$target" in
     "msm8226" | "msm8974" | "msm8610" | "apq8084" | "mpq8092" | "msm8610" | "msm8916" | "msm8994" | "msm8992")
         # Let kernel know our image version/variant/crm_version
