@@ -83,12 +83,20 @@ on fs
     start boot_lc_kernel
     start boot_lc_crash
 
-    restorecon_recursive /carrier
-    restorecon_recursive /firmware
-    restorecon_recursive /mpt
-    restorecon_recursive /persist
-    restorecon_recursive /persist-lg
-    restorecon_recursive /sns
+    # These directories have different labeling in stock rom.
+    # Jumping between stock and AOSP needs restorecon -F to apply our labeling.
+    exec u:r:vendor_init:s0 root root -- /vendor/bin/toybox_vendor \
+      restorecon -RF  /carrier
+    exec u:r:vendor_init:s0 root root -- /vendor/bin/toybox_vendor \
+      restorecon -RF /firmware	
+    exec u:r:vendor_init:s0 root root -- /vendor/bin/toybox_vendor \
+      restorecon -RF  /mpt
+    exec u:r:vendor_init:s0 root root -- /vendor/bin/toybox_vendor \
+      restorecon -RF /persist
+    exec u:r:vendor_init:s0 root root -- /vendor/bin/toybox_vendor \
+      restorecon -RF  /persist-lg
+    exec u:r:vendor_init:s0 root root -- /vendor/bin/toybox_vendor \
+      restorecon -RF  /sns
 
     # do not block adb which is default since Android 10 and can cause adb issues / crashes
     setprop persist.adb.nonblocking_ffs 0
