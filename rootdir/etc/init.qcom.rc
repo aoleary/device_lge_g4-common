@@ -107,13 +107,6 @@ on fs
     mount none /system/etc/gps.conf /system/etc/gps_debug.conf bind
 
 on late-fs
-    # Start services for bootanim
-    start servicemanager
-    start vendor.configstore-hal
-    start surfaceflinger
-    start bootanim
-    start vendor.hwcomposer-2-1
-    start vendor.gralloc-2-0
 
     # Mount RW partitions which need run fsck
     mount_all /vendor/etc/fstab.qcom --late
@@ -158,6 +151,15 @@ on init
     chown media media /dev/soundtrigger_dma_drv
 
     #R/O fs: symlink /sdcard /storage/sdcard0
+
+on late-init
+    # Start services for bootanim
+    start servicemanager
+    start vendor.configstore-hal
+    start surfaceflinger
+    start bootanim
+    start vendor.hwcomposer-2-1
+    start vendor.gralloc-2-0
 
 on early-boot
     # unique boot led blinking
