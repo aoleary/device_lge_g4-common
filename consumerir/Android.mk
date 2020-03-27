@@ -42,3 +42,13 @@ LOCAL_PRIVATE_PLATFORM_APIS := true
 
 include $(BUILD_EXECUTABLE)
 
+# Dummy libcir_driver
+ifneq ($(TARGET_SUPPORTS_CONSUMERIR),true)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE := libcir_driver
+LOCAL_VENDOR_MODULE := true
+LOCAL_SRC_FILES := ConsumerIr.cpp
+include $(BUILD_SHARED_LIBRARY)
+
+endif
