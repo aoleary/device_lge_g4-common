@@ -23,3 +23,14 @@ LOCAL_SHARED_LIBRARIES := liblog libcutils libcir_driver
 LOCAL_MODULE_TAGS := optional
 
 include $(BUILD_SHARED_LIBRARY)
+
+# Dummy libcir_driver
+ifneq ($(TARGET_SUPPORTS_CONSUMERIR),true)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE := libcir_driver
+LOCAL_VENDOR_MODULE := true
+LOCAL_SRC_FILES := consumerir.c
+include $(BUILD_SHARED_LIBRARY)
+
+endif
