@@ -88,13 +88,9 @@ case "$target" in
         echo 1 > /sys/devices/system/cpu/cpu5/online
         # Restore CPU 4 max freq from msm_performance
         echo "4:1632000 5:1632000" > /sys/module/msm_performance/parameters/cpu_max_freq
-	# input boost,cpu boost
-	echo 0:787200 1:0 2:0 3:0 4:480000 5:0 > /sys/module/cpu_boost/parameters/input_boost_freq
-        echo 20 > /sys/module/cpu_boost/parameters/boost_ms
-        echo 40 > /sys/module/cpu_boost/parameters/input_boost_ms
 
-        # multi boost configuration
-        echo 0:787200 > /sys/module/cpu_boost/parameters/multi_boost_freq
+        # Dynamic Stune Boost
+        echo 20 > /sys/module/cpu_boost/parameters/dynamic_stune_boost
 
         #enable rps static configuration
         echo 8 >  /sys/class/net/rmnet_ipa0/queues/rx-0/rps_cpus
