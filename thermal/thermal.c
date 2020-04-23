@@ -37,7 +37,7 @@
 #define BATTERY_SENSOR_NUM              1
 #define GPU_SENSOR_NUM                  12
 
-const int CPU_SENSORS[] = {8, 8, 9, 10, 13, 14};
+const int CPU_SENSORS[] = {7, 7, 9, 10, 13, 14};
 
 #define CPU_NUM                         (sizeof(CPU_SENSORS) / sizeof(int))
 #define TEMPERATURE_NUM                 9
@@ -45,7 +45,7 @@ const int CPU_SENSORS[] = {8, 8, 9, 10, 13, 14};
 // qcom, therm-reset-temp
 #define CPU_SHUTDOWN_THRESHOLD          115
 //qcom, limit-temp
-#define CPU_THROTTLING_THRESHOLD        60
+#define CPU_THROTTLING_THRESHOLD        112
 
 #define BATTERY_SHUTDOWN_THRESHOLD      60
 // vendor/lge/g4-common/proprietary/thermal-engine/thermal-engine-8992.conf

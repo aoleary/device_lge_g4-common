@@ -966,7 +966,7 @@ service thermal-engine /system/vendor/bin/thermal-engine
     socket thermal-recv-client stream 0660 root system
     socket thermal-recv-passive-client stream 0666 root system
     group root
-    disabled
+    writepid /dev/cpuset/system-background/tasks
 
 service per_mgr /system/vendor/bin/pm-service
     class core
