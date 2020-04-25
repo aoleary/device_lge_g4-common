@@ -249,4 +249,9 @@
         <permission name="android.permission.READ_PRECISE_PHONE_STATE"/>
     </privapp-permissions>
 
+    <privapp-permissions package="com.android.camera2">
+        <permission name="android.permission.BIND_WALLPAPER"/>
+        <permission name="android.permission.PREVENT_POWER_KEY"/>
+        <permission name="android.permission.WRITE_MEDIA_STORAGE"/>
+    </privapp-permissions>
 </permissions>
