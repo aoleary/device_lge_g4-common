@@ -977,7 +977,7 @@ service laserinit /vendor/bin/laser_init
     oneshot
     writepid /dev/cpuset/system-background/tasks
 
-service qseecomd /vendor/bin/qseecomd
+service vendor.qseecomd /vendor/bin/qseecomd
     class core
     user root
     group root
