@@ -145,6 +145,8 @@ on early-boot
 
     start chcon_keystore
 
+    start vendor.qseecomd
+
 service chcon_keystore /vendor/bin/init.recovery.m1_chcon_keystore.sh
     disabled
     oneshot
