@@ -126,6 +126,10 @@
 # pulse.sh
 /(vendor|system|system/vendor)/bin/pulse.sh		u:object_r:pulse_exec:s0
 
+# TimeKeep
+/sys/devices/soc\.0/qpnp-rtc-8/rtc/rtc0(/.*)?                           u:object_r:sysfs_rtc:s0
+/(system/vendor|vendor)/bin/timekeep                                    u:object_r:timekeep_exec:s0
+
 ###################################
 # Service HALs
 #

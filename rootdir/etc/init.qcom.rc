@@ -842,12 +842,6 @@ on property:bluetooth.startbtsnoop=true
 on property:bluetooth.startbtsnoop=false
     stop btsnoop
 
-service timekeep /vendor/bin/timekeep restore
-   class late_start
-   user root
-   group root
-   oneshot
-
 service bdaddr_loader /vendor/bin/bdaddr_loader
     class late_start
     user root
