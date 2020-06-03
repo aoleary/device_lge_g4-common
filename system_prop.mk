@@ -275,3 +275,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # WiFi Scan Interval (default = 15s)
 PRODUCT_PROPERTY_OVERRIDES += \
     wifi.supplicant_scan_interval=600
+
+# Zygote preforking
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.device_config.runtime_native.usap_pool_enabled=true
