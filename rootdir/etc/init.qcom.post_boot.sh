@@ -194,6 +194,7 @@ esac
 #	10240  =  40 MB
 #	7680   =  30 MB
 #	5120   =  20 MB
+#	2560   =  10 MB
 #
 # Example for LOS default (LG G4):
 #      8777,10971,13165,15360,26331,38400
@@ -202,10 +203,10 @@ esac
 MEMTOTAL_MB="$(($(grep -i memtotal /proc/meminfo  | egrep -o '[0-9]+') / 1024))"
 if [ "$MEMTOTAL_MB" -ge "2800" ];then
     #      FA  , VA  , SSRV,  HA ,  CP  , EA
-    echo '7680,10240,30720,51200,30720,76800' > /sys/module/lowmemorykiller/parameters/minfree
+    echo '2560,5120,36096,79360,108288,115200' > /sys/module/lowmemorykiller/parameters/minfree
 elif [ "$MEMTOTAL_MB" -ge "2000" ];then
     #      FA  , VA  , SSRV,  HA ,  CP  , EA
-    echo '7680,10240,25600,30720,25600,51200' > /sys/module/lowmemorykiller/parameters/minfree
+    echo '2560,5120,36096,76800,79360,115200' > /sys/module/lowmemorykiller/parameters/minfree
 fi
 # skip setting a LMK profile when we have *NO* finding (i.e. using the default)
 
