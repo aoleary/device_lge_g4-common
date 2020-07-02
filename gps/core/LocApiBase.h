@@ -33,7 +33,7 @@
 #include <ctype.h>
 #include <gps_extended.h>
 #include <MsgTask.h>
-#include <log_util.h>
+#include <platform_lib_log_util.h>
 
 namespace loc_core {
 class ContextBase;
@@ -118,6 +118,8 @@ public:
     void reportSv(GnssSvStatus &svStatus,
                   GpsLocationExtended &locationExtended,
                   void* svExt);
+    void reportSvMeasurement(GnssSvMeasurementSet &svMeasurementSet);
+    void reportSvPolynomial(GnssSvPolynomial &svPolynomial);
     void reportStatus(GpsStatusValue status);
     void reportNmea(const char* nmea, int length);
     void reportXtraServer(const char* url1, const char* url2,
@@ -252,11 +254,6 @@ public:
 
     virtual enum loc_api_adapter_err setXtraVersionCheck(enum xtra_version_check check);
 
-    /*
-      Update gps reporting events
-     */
-    virtual int updateRegistrationMask(LOC_API_ADAPTER_EVENT_MASK_T event,
-                                       loc_registration_mask_status isEnabled);
     /*
       Check if the modem support the service
      */
