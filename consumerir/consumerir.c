@@ -29,7 +29,7 @@
 #define IR_DEVICE "/dev/ttyHSL1"
 #define LG_IR_BAUD_RATE 115200
 
-extern int transmitIr(const char *dev, int baudRate, int frequency, int pattern[], int pattern_len);
+extern int transmitIr(const char *dev, int baudRate, int frequency, const int pattern[], int pattern_len);
 
 static const consumerir_freq_range_t consumerir_freqs[] = {
     {.min = 30000, .max = 30000},
