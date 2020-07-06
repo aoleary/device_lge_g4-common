@@ -191,7 +191,7 @@ PRODUCT_PACKAGES += \
 
 # LiveDisplay
 PRODUCT_PACKAGES += \
-    vendor.lineage.livedisplay@2.0-service-sysfs
+    vendor.lineage.livedisplay@1.0-service-legacymm
 
 # MP-CTL
 PRODUCT_PACKAGES += \
