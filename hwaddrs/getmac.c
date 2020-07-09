@@ -47,9 +47,9 @@ int main() {
         }
 
         write(fd2, "\n", 1);
+        close(fd2);
     }
 
-    close(fd2);
 
     if (!blank(fd1, 0x4000))
     {
@@ -62,9 +62,9 @@ int main() {
             write(fd2, &macbuf, 2);
             if(i != 5) write(fd2, ":", 1);
         }
+        close(fd2);
     }
 
-    close(fd2);
     close(fd1);
 
     return 0;
