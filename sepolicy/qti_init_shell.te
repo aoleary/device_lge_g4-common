@@ -24,6 +24,8 @@ allow qti_init_shell btnvtool_exec:file { read open };
 allow qti_init_shell btnvtool_exec:file execute_no_trans;
 
 allow qti_init_shell bluetooth_prop:file { getattr open read };
+allow qti_init_shell persist_file:dir r_dir_perms;
+allow qti_init_shell persist_file:file r_file_perms;
 allow qti_init_shell proc_dirty:file { open write };
 allow qti_init_shell sysfs_net:file write;
 allow qti_init_shell system_prop:property_service set;

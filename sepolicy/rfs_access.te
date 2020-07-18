@@ -1,3 +1,5 @@
+allow rfs_access persist_file:dir create_dir_perms;
+allow rfs_access persist_file:file create_file_perms;
 allow rfs_access sysfs:file { read getattr open };
 allow rfs_access sysfs_uio:dir { read search open };
 allow rfs_access sysfs_uio:lnk_file read;

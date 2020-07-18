@@ -14,8 +14,8 @@ allow sensors sensors_data_file:dir search;
 allow sensors modem_efs_partition_device:dir { r_dir_perms create_dir_perms };
 allow sensors modem_efs_partition_device:file rw_file_perms;
 allow sensors persist_file:dir { r_dir_perms create_dir_perms };
-allow sensors unlabeled:dir { search getattr setattr };
-allow sensors unlabeled:file rw_file_perms;
+allow sensors unlabeled:dir { search getattr setattr read open };
+allow sensors unlabeled:file create_file_perms;
 
 allow sensors sensors_data:dir { search getattr read open add_name remove_name write };
 allow sensors sensors_data:file { write setattr getattr read open create unlink };
