@@ -5,3 +5,4 @@ init_daemon_domain(init-sysctl)
 allow init-sysctl proc:file { getattr open read write };
 allow init-sysctl proc_dirty:file { getattr open read write };
 allow init-sysctl toolbox_exec:file { entrypoint getattr read };
+allow init-sysctl proc_extra_free_kbytes:file write;
