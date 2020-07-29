@@ -14,3 +14,4 @@ allow netmgrd qmuxd:unix_stream_socket connectto;
 allow netmgrd servicemanager:binder call;
 allow netmgrd system_file:file { execute_no_trans lock };
 
+allow netmgrd self:capability sys_module;

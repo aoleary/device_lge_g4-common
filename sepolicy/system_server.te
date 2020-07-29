@@ -36,3 +36,7 @@ allow system_server ssr_device:chr_file { open read };
 # watchdog
 allow system_server wrild:fifo_file write;
 allow system_server wrild:fd use;
+
+allow system_server debugfs_kgsl:file r_file_perms;
+allow system_server self:process execmem;
+allow system_server socket_device:sock_file write;

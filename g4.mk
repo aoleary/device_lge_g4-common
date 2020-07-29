@@ -101,7 +101,7 @@ PRODUCT_PACKAGES += \
 TARGET_PROVIDES_CONSUMERIR_HAL := true
 PRODUCT_PACKAGES += \
     android.hardware.ir@1.0-impl \
-    consumerir.msm8992 
+    consumerir.msm8992
 
 # Display
 PRODUCT_PACKAGES += \
@@ -223,7 +223,8 @@ PRODUCT_PACKAGES += \
 
 # LiveDisplay
 PRODUCT_PACKAGES += \
-    vendor.lineage.livedisplay@1.0-service-legacymm
+    vendor.lineage.livedisplay@1.0-service-legacymm \
+    vendor.lineage.livedisplay@2.0-service-legacymm
 
 # MP-CTL
 PRODUCT_PACKAGES += \

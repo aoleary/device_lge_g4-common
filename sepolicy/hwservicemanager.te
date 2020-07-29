@@ -7,3 +7,7 @@ allow hwservicemanager hal_hardware_usb:process getattr;
 allow hwservicemanager init:dir search;
 allow hwservicemanager init:file { open read };
 allow hwservicemanager init:process getattr;
+
+allow hwservicemanager hal_trust_default:dir search;
+allow hwservicemanager hal_trust_default:file { open read };
+allow hwservicemanager hal_trust_default:process getattr;

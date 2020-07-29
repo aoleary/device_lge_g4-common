@@ -7,3 +7,7 @@ init_daemon_domain(hal_trust_default)
 allow hal_trust_default default_android_hwservice:hwservice_manager add;
 allow hal_trust_default hidl_base_hwservice:hwservice_manager add;
 allow hal_trust_default hwservicemanager_prop:file { open read };
+
+allow hal_trust_default hal_lineage_trust_hwservice:hwservice_manager add;
+allow hal_trust_default hwservicemanager:binder transfer;
+allow hal_trust_default hwservicemanager_prop:file getattr;

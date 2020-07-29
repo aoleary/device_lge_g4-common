@@ -14,3 +14,4 @@ allow qseecomd sysfs:file { getattr open read };
 allow qseecomd system_prop:property_service set;
 allow qseecomd tee_device:chr_file { ioctl open read write };
 allow qseecomd vfat:file { getattr open read };
+allow qseecomd disk_block_device:blk_file ioctl;

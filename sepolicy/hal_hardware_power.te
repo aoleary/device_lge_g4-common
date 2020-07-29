@@ -7,3 +7,6 @@ allow hal_hardware_power hal_power_hwservice:hwservice_manager add;
 allow hal_hardware_power hidl_base_hwservice:hwservice_manager add;
 allow hal_hardware_power hwservicemanager:binder transfer;
 allow hal_hardware_power hwservicemanager_prop:file { getattr open read };
+
+allow hal_hardware_power socket_device:file write;
+allow hal_hardware_power sysfs:file { open write };
