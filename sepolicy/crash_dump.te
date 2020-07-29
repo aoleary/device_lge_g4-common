@@ -6,3 +6,5 @@ allow crash_dump init:process ptrace;
 allow crash_dump resourcecache_data_file:file { open read };
 allow crash_dump runtime_event_log_tags_file:file getattr;
 allow crash_dump tmpfs:dir search;
+
+allow crash_dump gpu_device:chr_file { getattr open };

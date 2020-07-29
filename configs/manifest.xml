@@ -25,6 +25,7 @@
             <name>ISoundTriggerHw</name>
             <instance>default</instance>
         </interface>
+        <fqname>@2.0::ISoundTriggerHw/default</fqname>
     </hal>
     <hal format="hidl">
         <name>android.hardware.bluetooth</name>
@@ -47,16 +48,6 @@
         </interface>
         <fqname>@2.4::ICameraProvider/external/0</fqname>
         <fqname>@2.4::ICameraProvider/legacy/0</fqname>
-    </hal>
-    <hal format="hidl">
-        <name>android.hardware.soundtrigger</name>
-        <transport arch="32+64">passthrough</transport>
-        <version>2.0</version>
-        <interface>
-            <name>ISoundTriggerHw</name>
-            <instance>default</instance>
-        </interface>
-        <fqname>@2.0::ISoundTriggerHw/default</fqname>
     </hal>
     <hal format="hidl">
         <name>android.hardware.authsecret</name>
@@ -193,11 +184,13 @@
         <name>android.hardware.graphics.mapper</name>
         <transport arch="32+64">passthrough</transport>
         <version>2.1</version>
+        <version>3.0</version>
         <interface>
             <name>IMapper</name>
             <instance>default</instance>
         </interface>
-        <fqname>@2.0::IMapper/default</fqname>
+        <fqname>@2.1::IMapper/default</fqname>
+        <fqname>@3.0::IMapper/default</fqname>
     </hal>
     <hal format="hidl">
         <name>android.hardware.health</name>
@@ -469,19 +462,14 @@
             <name>ISunlightEnhancement</name>
             <instance>default</instance>
         </interface>
+        <name>vendor.lineage.camera.motor</name>
+        <transport arch="32+64">passthrough</transport>
+        <version>1.0</version>
         <interface>
-            <name>IPictureAdjustment</name>
+            <name>ICameraMotor</name>
             <instance>default</instance>
         </interface>
-        <fqname>@2.0::IAdaptiveBacklight/default</fqname>
-        <fqname>@2.0::IAutoContrast/default</fqname>
-        <fqname>@2.0::IColorBalance/default</fqname>
-        <fqname>@2.0::IColorEnhancement/default</fqname>
-        <fqname>@2.0::IDisplayColorCalibration/default</fqname>
-        <fqname>@2.0::IDisplayModes/default</fqname>
-        <fqname>@2.0::IReadingEnhancement/default</fqname>
-        <fqname>@2.0::ISunlightEnhancement/default</fqname>
-        <fqname>@2.0::IPictureAdjustment/default</fqname>
+        <fqname>@1.0::ICameraMotor/default</fqname>
     </hal>
     <hal format="hidl">
         <name>vendor.lineage.trust</name>

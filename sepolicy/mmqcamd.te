@@ -11,10 +11,13 @@ allow mmqcamd hal_camera_default:fd use;
 allow mmqcamd init:unix_stream_socket connectto;
 allow mmqcamd input_device:chr_file { ioctl open read };
 allow mmqcamd input_device:dir { open read };
-allow mmqcamd ion_device:chr_file { open read write };
+allow mmqcamd ion_device:chr_file { open read write ioctl };
 allow mmqcamd sensors_device:chr_file getattr;
 allow mmqcamd sensors:unix_stream_socket connectto;
 allow mmqcamd socket_device:sock_file write;
 allow mmqcamd sysfs:file { open read };
 allow mmqcamd vendor_file:dir read;
 allow mmqcamd video_device:chr_file { ioctl open read write };
+allow mmqcamd self:tcp_socket { bind create listen setopt };
+
+allow mmqcamd node:tcp_socket node_bind;
