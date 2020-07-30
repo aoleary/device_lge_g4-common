@@ -939,7 +939,7 @@ service wpa_supplicant /vendor/bin/hw/wpa_supplicant \
 
 #start camera server as daemon
 service qcamerasvr /system/vendor/bin/mm-qcamera-daemon
-    class late_start
+    class main
     user camera
     group camera system inet input graphics
     writepid /dev/cpuset/system-background/tasks
