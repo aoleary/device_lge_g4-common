@@ -30,3 +30,5 @@ allow system_server vfat:dir { open read write };
 # watchdog
 allow system_server wrild:fifo_file write;
 allow system_server wrild:fd use;
+
+allow system_server { hal_camera_default mediacodec }:fd use;

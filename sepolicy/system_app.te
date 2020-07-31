@@ -16,5 +16,7 @@ allow system_app vold:binder call;
 allow system_app perfprofd:binder call;
 allow system_app qti_init_prop:file { read getattr open };
 
+allow system_app { hal_camera_default mediacodec }:fd use;
+
 dontaudit system_app installd:binder call;
 dontaudit system_app netd:binder call;

@@ -31,3 +31,4 @@ allow rild system_data_file:file { ioctl lock setattr unlink };
 # neverallow protected:
 allow rild system_data_file:file { write create };
 
+allow rild { hal_camera_default mediacodec }:fd use;

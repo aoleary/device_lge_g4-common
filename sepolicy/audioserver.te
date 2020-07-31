@@ -5,3 +5,5 @@ allow audioserver socket_device:file write;
 allow audioserver device:file { read write open };
 allow audioserver audio_device:file { read write open };
 allow audioserver unlabeled:dir search;
+
+allow audioserver { hal_camera_default mediacodec }:fd use;

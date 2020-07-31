@@ -4,3 +4,4 @@ allow hal_wifi_default wifi_data_file:file { read getattr open };
 allow hal_wifi_default wifi_data_file:dir search;
 
 allow hal_wifi_default firmware_file:dir search;
+allow hal_wifi_default { hal_camera_default mediacodec }:fd use;

@@ -7,3 +7,5 @@ allow mm-qcamerad sensorservice_service:service_manager find;
 allow mm-qcamerad permission_service:service_manager find;
 allow mm-qcamerad system_server:unix_stream_socket { read write };
 allow mm-qcamerad sensors_socket:sock_file read;
+
+allow mm-qcamerad { hal_camera_default mediacodec }:fd use;

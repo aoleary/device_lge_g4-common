@@ -8,3 +8,5 @@ allow cameraserver mm-qcamerad:unix_dgram_socket sendto;
 allow cameraserver camera_data_file:dir search;
 
 allow cameraserver default_android_hwservice:hwservice_manager find;
+
+allow cameraserver { hal_camera_default mediacodec }:fd use;

@@ -1,3 +1,5 @@
 allow radio qmuxd_socket:sock_file { unlink write };
 allow radio qmuxd_socket:dir search;
 allow radio system_app_data_file:dir getattr;
+
+allow radio { hal_camera_default mediacodec }:fd use;
