@@ -14,4 +14,6 @@ allowxperm ims self:udp_socket ioctl SIOCDEVPRIVATE_D;
 allow ims self:netlink_socket create_socket_perms_no_ioctl;
 allow ims self:netlink_route_socket { create_socket_perms_no_ioctl nlmsg_write nlmsg_read };
 
+typeattribute ims binder_in_vendor_violators;
+
 dontaudit ims smem_log_device:chr_file ioctl;
