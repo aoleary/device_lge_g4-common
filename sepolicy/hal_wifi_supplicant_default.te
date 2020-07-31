@@ -2,3 +2,5 @@ allow hal_wifi_supplicant_default rfkill_device:chr_file { read open };
 allow hal_wifi_supplicant_default wifi_data_file:file { getattr read open };
 allow hal_wifi_supplicant_default wifi_vendor_data_file:sock_file { create setattr unlink write };
 allow hal_wifi_supplicant_default { hal_camera_default mediacodec }:fd use;
+allow hal_wifi_supplicant_default ion_device:chr_file r_file_perms;
+allow hal_wifi_supplicant_default hwbinder_device:chr_file rw_file_perms;

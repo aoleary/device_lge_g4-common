@@ -4,3 +4,7 @@ allow mm-pp-daemon system_prop:property_service set;
 allow mm-pp-daemon surfaceflinger:binder call;
 allow mm-pp-daemon surfaceflinger_service:service_manager find;
 allow mm-pp-daemon property_socket:sock_file write;
+
+allow mm-pp-daemon { hal_camera_default mediacodec }:fd use;
+allow mm-pp-daemon ion_device:chr_file r_file_perms;
+allow mm-pp-daemon hwbinder_device:chr_file rw_file_perms;

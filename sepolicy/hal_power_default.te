@@ -1,3 +1,5 @@
 allow hal_power_default socket_device:file write;
 allow hal_power_default sysfs:file { open write };
 allow hal_power_default { hal_camera_default mediacodec }:fd use;
+allow hal_power_default ion_device:chr_file r_file_perms;
+allow hal_power_default hwbinder_device:chr_file rw_file_perms;

@@ -10,3 +10,7 @@ allow cameraserver camera_data_file:dir search;
 allow cameraserver default_android_hwservice:hwservice_manager find;
 
 allow cameraserver { hal_camera_default mediacodec }:fd use;
+
+allow cameraserver ion_device:chr_file r_file_perms;
+
+allow cameraserver hwbinder_device:chr_file rw_file_perms;
