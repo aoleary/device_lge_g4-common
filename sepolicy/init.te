@@ -63,5 +63,7 @@ allow init rootfs:file { create write };
 allow init sensors_data:dir mounton;
 allow init sysfs_dm:file { open write };
 
+allow init persist_data_file:dir mounton;
+
 dontaudit init bluetooth:process transition;
 dontaudit init btnvtool_exec:file execute_no_trans;

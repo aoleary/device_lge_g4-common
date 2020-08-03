@@ -10,3 +10,4 @@ allow fsck mpt_block_device:blk_file { read open write ioctl };
 # neverallow protected
 allow fsck block_device:blk_file { ioctl open read write };
 allow fsck mnt_vendor_file:dir getattr;
+allow fsck persist_data_file:dir getattr;
