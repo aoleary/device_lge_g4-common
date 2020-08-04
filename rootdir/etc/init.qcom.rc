@@ -889,7 +889,7 @@ service qcom-post-boot /vendor/bin/init.qcom.post_boot.sh
 service real-ril-daemon /vendor/bin/hw/rild
     socket qmux_radio/rild_oem0 stream 0777 radio system
     socket qmux_radio/qmux_client_socket stream 0777 radio system
-    user root
+    user radio
     group radio cache inet misc audio log readproc wakelock oem_2901 oem_2950 net_raw wifi diag
     capabilities BLOCK_SUSPEND NET_ADMIN NET_RAW
     writepid /dev/cpuset/system-background/tasks
@@ -898,7 +898,7 @@ service real-ril-daemon /vendor/bin/hw/rild
 # the rild wrapper which ensures proper rild handling
 service ril-daemon /vendor/bin/wrild.sh
     class main
-    user root
+    user radio
     seclabel u:r:wrild:s0
     writepid /dev/cpuset/system-background/tasks
 

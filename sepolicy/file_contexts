@@ -22,6 +22,8 @@
 
 /dev/ttyHSL[0-9]*                                                   u:object_r:console_device:s0
 
+/dev/stune(/.*/.*)?						    u:object_r:tasks_info:s0
+
 ###################################
 # socket devices
 /dev/rfkill                                                         u:object_r:rfkill_device:s0
@@ -119,3 +121,6 @@
 /(vendor|system/vendor)/bin/hw/android.hardware.power@[1-9]\.[0-9]-service-qti		u:object_r:hal_hardware_power_exec:s0
 /(vendor|system/vendor)/bin/hw/android.hardware.usb@[1-9]\.[0-9]-service.basic		u:object_r:hal_hardware_usb_exec:s0
 /(vendor|system/vendor)/bin/hw/android\.hardware\.light@[1-9]\.[0-9]-service.g4      	u:object_r:hal_light_default_exec:s0
+
+# Health monitor
+/dev/system_health_monitor				u:object_r:health_monitor:s0
