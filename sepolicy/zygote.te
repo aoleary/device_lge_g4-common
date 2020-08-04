@@ -6,3 +6,4 @@ allow zygote proc_cmdline:file { getattr open read };
 allow zygote self:capability sys_resource;
 
 allow zygote userdata_block_device:file rw_file_perms;
+allow zygote tasks_info:file rw_file_perms;

@@ -20,6 +20,7 @@ type vold_data, file_type, data_file_type, core_data_file_type;
 type sensors_data, file_type, data_file_type;
 type cam_socket_file, file_type, data_file_type;
 type time_data_file, fs_type;
+type tasks_info, file_type;
 
 # debugfs
 type debugfs_energy, debugfs_type, fs_type;
@@ -52,3 +53,6 @@ type cust_file, fs_type;
 
 # wrild
 type ril_daemon, sysfs_type, fs_type;
+
+# health monitor
+type health_monitor, file_type;

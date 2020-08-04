@@ -36,3 +36,6 @@ allow rild system_data_file:dir { open read remove_name };
 allow rild system_data_file:file { ioctl lock setattr unlink };
 
 allow rild qmuxd:unix_stream_socket connectto;
+
+allow rild health_monitor:chr_file create_file_perms;
+allow rild wifi_prop:file r_file_perms;
