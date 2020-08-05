@@ -32,9 +32,11 @@
 /dev/tty                  0666   root       root
 /dev/random               0666   root       root
 /dev/urandom              0666   root       root
+/dev/hwbinder             0666   root       root
 /dev/ashmem               0666   root       root
 /dev/binder               0666   root       root
 /dev/smem_log             0606   root       root
+/dev/stune                0666   root       root
 /dev/watchdog             0755   system     system
 
 # the DIAG device node is not world writable/readable.
@@ -137,6 +139,7 @@
 /dev/msm_vidc_dec_sec     0660   system     audio
 /dev/msm_vidc_enc         0660   system     audio
 /dev/msm_rotator          0660   system     system
+/dev/hw_random            0666   root       root
 /dev/adsprpc-smd          0664   system     system
 
 #permissions for audio
