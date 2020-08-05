@@ -33,3 +33,7 @@ allow servicemanager pmservice:process getattr;
 allow servicemanager wrild:dir search;
 allow servicemanager wrild:file { read open };
 allow servicemanager wrild:process getattr;
+
+allow servicemanager mmppdaemon:dir r_dir_perms;
+allow servicemanager mmppdaemon:file r_file_perms;
+allow servicemanager mmppdaemon:process getattr;
