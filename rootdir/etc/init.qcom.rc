@@ -54,6 +54,9 @@ on early-init
     mkdir /dev/socket/rild 0660 root radio
     mkdir /dev/socket/rild-debug 0660 radio system
 
+    # Zygote and several apps need access to foreground tasks ids
+    chmod 0666 /dev/stune/foreground/tasks
+
 on early-fs
     symlink /dev/block/platform/soc.0/${ro.boot.bootdevice} /dev/block/bootdevice
     chown root:root /dev/block/mmcblk0p35
