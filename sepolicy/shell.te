@@ -1,1 +1,5 @@
 allow shell kernel:system syslog_read;
+allow shell init_exec:lnk_file { getattr read };
+allow shell nonplat_service_contexts_file:file getattr;
+allow shell persist_file:dir getattr;
+allow shell rootfs:file getattr;

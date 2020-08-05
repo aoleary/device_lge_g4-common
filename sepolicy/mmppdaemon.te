@@ -9,3 +9,8 @@ allow mmppdaemon sysfs_graphics:dir search;
 allow mmppdaemon sysfs_graphics:file { getattr open read write };
 allow mmppdaemon sysfs_leds:dir search;
 allow mmppdaemon system_prop:property_service set;
+
+allow mmppdaemon persist_file:dir rw_dir_perms;
+allow mmppdaemon default_android_service:service_manager find;
+binder_call(mmppdaemon, servicemanager)
+binder_call(mmppdaemon, surfaceflinger)

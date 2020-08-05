@@ -4,3 +4,4 @@
 #init_daemon_domain(time_daemon)
 allow time_daemon self:capability { setgid setuid };
 allow time_daemon self:socket { create ioctl read };
+allow time_daemon system_data_file:file rw_file_perms;
