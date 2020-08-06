@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The LineageOS Project
+ * Copyright (C) 2020 The OpenSource Android Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
-#define MAX_SOCKET_NAME_LENGTH 20
-
-char rild[MAX_SOCKET_NAME_LENGTH];
+namespace android {
+        extern "C" void module_afs_set_parent() {}
+	extern "C" void mct_tuning_notify_preview_frame() {}
+}

@@ -213,7 +213,6 @@ on boot
     # initial start-up of RIL
     start qmuxd
     start netmgrd
-    start real-ril-daemon
 
     setprop wifi.interface wlan0
 
@@ -904,6 +903,7 @@ service ril-daemon /vendor/bin/wrild.sh
     user radio
     seclabel u:r:wrild:s0
     writepid /dev/cpuset/system-background/tasks
+    disabled
 
 on property:init.svc.ril-daemon=stopped
     stop netmgrd
@@ -1119,6 +1119,8 @@ on property:sys.boot_completed=1
     stop boot_lc
     stop boot_lc_crash
     stop boot_lc_kernel
+    start real-ril-daemon
+    start ril-daemon
 
 on property:init.svc.bootanim=stopped
     stop pulseon
