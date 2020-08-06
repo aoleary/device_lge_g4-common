@@ -207,11 +207,6 @@ on boot
     mkdir /dev/socket/qmux_nfc 0770 nfc nfc
     chmod 2770 /dev/socket/qmux_nfc
 
-    # initial start-up of RIL
-    start qmuxd
-    start netmgrd
-    start real-ril-daemon
-
     setprop wifi.interface wlan0
 
 #   Define TCP buffer sizes for various networks
@@ -486,6 +481,12 @@ on post-fs
 
 # msm specific files that need to be created on /data
 on post-fs-data
+    # stop cameraserver sooner. qcamerasvr service must start first
+    stop cameraserver
+    # initial start-up of ril
+    start qmuxd
+    start netmgrd
+
     start qseecomd
     # busy loop to wait for qseecomd started
     exec - root root system -- /system/vendor/bin/init.qcom.qseecomd.sh
@@ -904,13 +905,7 @@ service ril-daemon /system/bin/wrild.sh
     class main
     user root
     writepid /dev/cpuset/system-background/tasks
-
-on property:init.svc.ril-daemon=stopped
-    stop netmgrd
-    stop qmuxd
-    start qmuxd
-    start netmgrd
-    start ril-daemon
+    disabled
 
 on property:ro.data.large_tcp_window_size=true
     # Adjust socket buffer to enlarge TCP receive window for high bandwidth (e.g. DO-RevB)
@@ -993,6 +988,8 @@ on property:sys.shutdown.requested=*
     stop per_proxy
 
 on property:init.svc.bootanim=running
+    start real-ril-daemon
+    start ril-daemon
     write /sys/module/lpm_levels/system/a53/cpu0/retention/idle_enabled 0
     write /sys/module/lpm_levels/system/a53/cpu1/retention/idle_enabled 0
     write /sys/module/lpm_levels/system/a53/cpu2/retention/idle_enabled 0
@@ -1004,7 +1001,6 @@ on property:init.svc.bootanim=running
     write /sys/module/lpm_levels/parameters/sleep_disabled 0
 
 on property:init.svc.bootanim=stopped
-    stop cameraserver
     start cameraserver
 
 on property:sys.boot_completed=1
