@@ -210,6 +210,10 @@ on boot
     mkdir /dev/socket/qmux_nfc 0770 nfc nfc
     chmod 2770 /dev/socket/qmux_nfc
 
+    # initial start-up of RIL
+    start qmuxd
+    start netmgrd
+
     setprop wifi.interface wlan0
 
 #   Define TCP buffer sizes for various networks
@@ -1133,6 +1137,8 @@ on property:sys.boot_completed=1
     stop boot_lc
     stop boot_lc_crash
     stop boot_lc_kernel
+    start real-ril-daemon
+    start ril-daemon
 
     # Restrict permissions to socket file to hide Magisk & co.
 on property:sys.boot_completed=1
