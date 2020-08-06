@@ -48,6 +48,56 @@
         <fqname>@2.4::ICameraProvider/legacy/0</fqname>
     </hal>
     <hal format="hidl">
+        <name>android.hardware.soundtrigger</name>
+        <transport arch="32+64">passthrough</transport>
+        <version>2.0</version>
+        <interface>
+            <name>ISoundTriggerHw</name>
+            <instance>default</instance>
+        </interface>
+        <fqname>@2.0::ISoundTriggerHw/default</fqname>
+    </hal>
+    <hal format="hidl">
+        <name>android.hardware.authsecret</name>
+        <transport arch="32+64">passthrough</transport>
+        <version>1.0</version>
+        <interface>
+            <name>IAuthSecret</name>
+            <instance>default</instance>
+        </interface>
+        <fqname>@1.0::IAuthSecret/default</fqname>
+    </hal>
+    <hal format="hidl">
+        <name>vendor.lineage.power</name>
+        <transport arch="32+64">passthrough</transport>
+        <version>1.0</version>
+        <interface>
+            <name>ILineagePower</name>
+            <instance>default</instance>
+        </interface>
+        <fqname>@1.0::ILineagePower/default</fqname>
+    </hal>
+    <hal format="hidl">
+        <name>vendor.lineage.touch</name>
+        <transport arch="32+64">passthrough</transport>
+        <version>1.0</version>
+        <interface>
+            <name>IKeyDisabler</name>
+            <instance>default</instance>
+        </interface>
+        <interface>
+            <name>IStylusMode</name>
+            <instance>default</instance>
+        </interface>
+        <interface>
+            <name>IGloveMode</name>
+            <instance>default</instance>
+        </interface>
+        <fqname>@1.0::IKeyDisabler/default</fqname>
+        <fqname>@1.0::IStylusMode/default</fqname>
+        <fqname>@1.0::IGloveMode/default</fqname>
+    </hal>
+    <hal format="hidl">
         <name>vendor.lineage.camera.motor</name>
         <transport arch="32+64">passthrough</transport>
         <version>1.0</version>
@@ -391,14 +441,55 @@
         </interface>
         <fqname>@1.0::IContexthub/default</fqname>
     </hal>
-        <hal format="hidl">
+    <hal format="hidl">
         <name>vendor.lineage.livedisplay</name>
-        <transport>hwbinder</transport>
-        <version>1.0</version>
+        <transport arch="32+64">passthrough</transport>
+        <version>2.0</version>
         <interface>
-            <name>IColor</name>
+            <name>IColorBalance</name>
             <instance>default</instance>
         </interface>
+        <interface>
+            <name>IAdaptiveBacklight</name>
+            <instance>default</instance>
+        </interface>
+        <interface>
+            <name>IColorEnhancement</name>
+            <instance>default</instance>
+        </interface>
+        <interface>
+            <name>IAutoContrast</name>
+            <instance>default</instance>
+        </interface>
+        <interface>
+            <name>IDisplayModes</name>
+            <instance>default</instance>
+        </interface>
+        <interface>
+            <name>IDisplayColorCalibration</name>
+            <instance>default</instance>
+        </interface>
+        <interface>
+            <name>IReadingEnhancement</name>
+            <instance>default</instance>
+        </interface>
+        <interface>
+            <name>ISunlightEnhancement</name>
+            <instance>default</instance>
+        </interface>
+        <interface>
+            <name>IPictureAdjustment</name>
+            <instance>default</instance>
+        </interface>
+        <fqname>@2.0::IAdaptiveBacklight/default</fqname>
+        <fqname>@2.0::IAutoContrast/default</fqname>
+        <fqname>@2.0::IColorBalance/default</fqname>
+        <fqname>@2.0::IColorEnhancement/default</fqname>
+        <fqname>@2.0::IDisplayColorCalibration/default</fqname>
+        <fqname>@2.0::IDisplayModes/default</fqname>
+        <fqname>@2.0::IReadingEnhancement/default</fqname>
+        <fqname>@2.0::ISunlightEnhancement/default</fqname>
+        <fqname>@2.0::IPictureAdjustment/default</fqname>
     </hal>
     <hal format="hidl">
         <name>vendor.lineage.trust</name>
