@@ -119,10 +119,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.sf.compbypass.enable=0 \
     debug.hwui.use_buffer_age=false
 
-# FIFO: enable scheduling for UI and Render threads by default
-PRODUCT_PROPERTY_OVERRIDES += \
-    sys.use_fifo_ui=1
-
 # Fling Velocity
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.min.fling_velocity=50 \
