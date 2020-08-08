@@ -105,10 +105,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.opengles.version=196610 \
     ro.sf.compbypass.enable=0
 
-# FIFO: enable scheduling for UI and Render threads by default
-PRODUCT_PROPERTY_OVERRIDES += \
-    sys.use_fifo_ui=1
-
 # Fling Velocity
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.min.fling_velocity=8000 \
