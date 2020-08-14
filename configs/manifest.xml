@@ -68,6 +68,26 @@
         <fqname>@1.0::IAuthSecret/default</fqname>
     </hal>
     <hal format="hidl">
+        <name>android.hardware.oemlock</name>
+        <transport arch="32+64">passthrough</transport>
+        <version>1.0</version>
+        <interface>
+            <name>IOemLock</name>
+            <instance>default</instance>
+        </interface>
+        <fqname>@1.0::IOemLock/default</fqname>
+    </hal>
+    <hal format="hidl">
+        <name>android.hardware.weaver</name>
+        <transport arch="32+64">passthrough</transport>
+        <version>1.0</version>
+        <interface>
+            <name>IWeaver</name>
+            <instance>default</instance>
+        </interface>
+        <fqname>@1.0::IWeaver/default</fqname>
+    </hal>
+    <hal format="hidl">
         <name>vendor.lineage.power</name>
         <transport arch="32+64">passthrough</transport>
         <version>1.0</version>
@@ -255,16 +275,6 @@
         </interface>
     </hal>
     <hal format="hidl">
-        <name>android.hardware.oemlock</name>
-        <transport>hwbinder</transport>
-        <version>1.0</version>
-        <interface>
-            <name>IOemLock</name>
-            <instance>default</instance>
-        </interface>
-        <fqname>@1.0::IOemLock/default</fqname>
-    </hal>
-    <hal format="hidl">
         <name>android.hardware.power</name>
         <transport>hwbinder</transport>
         <version>1.1</version>
@@ -369,16 +379,6 @@
             <instance>default</instance>
         </interface>
         <fqname>@1.1::IVibrator/default</fqname>
-    </hal>
-    <hal format="hidl">
-        <name>android.hardware.weaver</name>
-        <transport>hwbinder</transport>
-        <version>1.0</version>
-        <interface>
-            <name>IWeaver</name>
-            <instance>default</instance>
-        </interface>
-        <fqname>@1.0::IWeaver/default</fqname>
     </hal>
     <hal format="hidl">
         <name>android.hardware.wifi</name>
