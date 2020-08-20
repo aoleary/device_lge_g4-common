@@ -43,7 +43,6 @@
 #include <fcntl.h>
 #include <errno.h>
 #include <LocDualContext.h>
-#include <platform_lib_includes.h>
 #include <cutils/properties.h>
 
 using namespace loc_core;
@@ -199,18 +198,17 @@ SIDE EFFECTS
    N/A
 
 ===========================================================================*/
-extern "C" const GpsInterface* gps_get_hardware_interface ()
+const GpsInterface* gps_get_hardware_interface ()
 {
     ENTRY_LOG_CALLFLOW();
     const GpsInterface* ret_val;
 
     char propBuf[PROPERTY_VALUE_MAX];
-    memset(propBuf, 0, sizeof(propBuf));
 
     loc_eng_read_config();
 
     // check to see if GPS should be disabled
-    platform_lib_abstraction_property_get("gps.disable", propBuf, "");
+    property_get("gps.disable", propBuf, "");
     if (propBuf[0] == '1')
     {
         LOC_LOGD("gps_get_interface returning NULL because gps.disable=1\n");
@@ -283,7 +281,6 @@ SIDE EFFECTS
 static int loc_init(GpsCallbacks* callbacks)
 {
     int retVal = -1;
-    unsigned int target = (unsigned int) -1;
     ENTRY_LOG();
     LOC_API_ADAPTER_EVENT_MASK_T event;
 
@@ -302,17 +299,6 @@ static int loc_init(GpsCallbacks* callbacks)
             LOC_API_ADAPTER_BIT_STATUS_REPORT |
             LOC_API_ADAPTER_BIT_NMEA_1HZ_REPORT |
             LOC_API_ADAPTER_BIT_NI_NOTIFY_VERIFY_REQUEST;
-
-    target = loc_get_target();
-
-    /* If platform is "auto" and external dr enabled then enable
-    ** Measurement report and SV Polynomial report
-    */
-    if((1 == gps_conf.EXTERNAL_DR_ENABLED))
-    {
-        event |= LOC_API_ADAPTER_BIT_GNSS_MEASUREMENT_REPORT |
-                LOC_API_ADAPTER_BIT_GNSS_SV_POLYNOMIAL_REPORT;
-    }
 
     LocCallbacks clientCallbacks = {local_loc_cb, /* location_cb */
                                     callbacks->status_cb, /* status_cb */
@@ -474,12 +460,8 @@ static int  loc_set_position_mode(GpsPositionMode mode,
         break;
     }
 
-    // set position sharing option to true
-    bool sharePosition = true;
-
     LocPosMode params(locMode, recurrence, min_interval,
-                      preferred_accuracy, preferred_time,
-                      sharePosition, NULL, NULL);
+                      preferred_accuracy, preferred_time, NULL, NULL);
     ret_val = loc_eng_set_position_mode(loc_afw_data, params);
 
     EXIT_LOG(%d, ret_val);
@@ -596,14 +578,10 @@ const GpsGeofencingInterface* get_geofence_interface(void)
     }
     dlerror();    /* Clear any existing error */
     get_gps_geofence_interface = (get_gps_geofence_interface_function)dlsym(handle, "gps_geofence_get_interface");
-    if ((error = dlerror()) != NULL)  {
+    if ((error = dlerror()) != NULL || NULL == get_gps_geofence_interface)  {
         LOC_LOGE ("%s, dlsym for get_gps_geofence_interface failed, error = %s\n", __func__, error);
         goto exit;
-    }
-    if (NULL == get_gps_geofence_interface)  {
-        LOC_LOGE ("%s, get_gps_geofence_interface is NULL\n", __func__);
-        goto exit;
-    }
+     }
 
     geofence_interface = get_gps_geofence_interface();
 
@@ -648,7 +626,7 @@ const void* loc_get_extension(const char* name)
    else if (strcmp(name, AGPS_RIL_INTERFACE) == 0)
    {
        char baseband[PROPERTY_VALUE_MAX];
-       platform_lib_abstraction_property_get("ro.baseband", baseband, "msm");
+       property_get("ro.baseband", baseband, "msm");
        if (strcmp(baseband, "csfb") == 0)
        {
            ret_val = &sLocEngAGpsRilInterface;
@@ -765,7 +743,7 @@ static int  loc_agps_open_with_apniptype(const char* apn, ApnIpType apnIpType)
             bearerType = AGPS_APN_BEARER_IPV4V6;
             break;
         default:
-            bearerType = AGPS_APN_BEARER_IPV4;
+            bearerType = AGPS_APN_BEARER_INVALID;
             break;
     }
 

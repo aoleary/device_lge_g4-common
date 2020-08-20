@@ -43,7 +43,8 @@
 
 #include <loc_eng.h>
 
-#include <platform_lib_includes.h>
+#include "log_util.h"
+#include "platform_lib_includes.h"
 
 using namespace loc_core;
 

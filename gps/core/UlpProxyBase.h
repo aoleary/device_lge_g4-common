@@ -30,7 +30,10 @@
 #define ULP_PROXY_BASE_H
 
 #include <gps_extended.h>
-#include "fused_location_extended.h"
+
+struct FlpExtLocation_s;
+struct FlpExtBatchOptions;
+
 namespace loc_core {
 
 class LocAdapterBase;
@@ -71,16 +74,6 @@ public:
         (void)svExt;
         return false;
     }
-    inline virtual bool reportSvMeasurement(GnssSvMeasurementSet &svMeasurementSet) {
-        (void)svMeasurementSet;
-        return false;
-    }
-
-    inline virtual bool reportSvPolynomial(GnssSvPolynomial &svPolynomial)
-    {
-       (void)svPolynomial;
-       return false;
-    }
     inline virtual bool reportStatus(GpsStatusValue status) {
 
         (void)status;
@@ -101,16 +94,11 @@ public:
         (void)active;
         return false;
     }
-    inline virtual bool reportPositions(const FlpExtLocation* locations,
+    inline virtual bool reportPositions(const struct FlpExtLocation_s* locations,
                                         int32_t number_of_locations) {
         (void)locations;
         (void)number_of_locations;
         return false;
-    }
-    inline virtual bool reportDeleteAidingData(GpsAidingData aidingData)
-    {
-       (void)aidingData;
-       return false;
     }
 };
 

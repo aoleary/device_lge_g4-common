@@ -17,7 +17,7 @@ LOCAL_SHARED_LIBRARIES := \
     liblog \
     libloc_core \
     libgps.utils \
-    libloc_pla
+    libprocessgroup
 
 LOCAL_SRC_FILES += \
     loc_eng.cpp \
@@ -36,15 +36,22 @@ LOCAL_SRC_FILES += \
     loc_eng_dmn_conn_glue_pipe.c
 
 LOCAL_CFLAGS += \
-     -fno-short-enums \
-     -D_ANDROID_
+    -fno-short-enums \
+    -D_ANDROID_ \
+    -Wno-format \
+    -Wno-mismatched-tags \
+    -Wno-null-conversion \
+    -Wno-reorder \
+    -Wno-sign-compare \
+    -Wno-unused-function \
+    -Wno-unused-parameter \
+    -Wno-unused-variable
 
 LOCAL_C_INCLUDES:= \
-    $(LOCAL_PATH) \
     $(TARGET_OUT_HEADERS)/gps.utils \
     $(TARGET_OUT_HEADERS)/libloc_core \
-    $(TARGET_OUT_HEADERS)/libflp \
-    $(TARGET_OUT_HEADERS)/libloc_pla
+    $(call project-path-for,qcom-gps)/loc_api/libloc_api_50001 \
+    $(TARGET_OUT_HEADERS)/libflp
 
 LOCAL_COPY_HEADERS_TO:= libloc_eng/
 LOCAL_COPY_HEADERS:= \
@@ -63,7 +70,7 @@ include $(BUILD_SHARED_LIBRARY)
 
 include $(CLEAR_VARS)
 
-LOCAL_MODULE := gps.$(TARGET_BOARD_PLATFORM)
+LOCAL_MODULE := gps.msm8992
 LOCAL_MODULE_OWNER := qcom
 
 LOCAL_MODULE_TAGS := optional
@@ -78,7 +85,10 @@ LOCAL_SHARED_LIBRARIES := \
     libloc_core \
     libgps.utils \
     libdl \
-    libloc_pla
+    libprocessgroup
+
+ifneq ($(filter $(TARGET_DEVICE), apq8084 msm8960), false)
+endif
 
 LOCAL_SRC_FILES += \
     loc.cpp \
@@ -87,6 +97,9 @@ LOCAL_SRC_FILES += \
 LOCAL_CFLAGS += \
     -fno-short-enums \
     -D_ANDROID_ \
+    -Wno-format \
+    -Wno-mismatched-tags \
+    -Wno-unused-parameter
 
 ifeq ($(TARGET_BUILD_VARIANT),user)
    LOCAL_CFLAGS += -DTARGET_BUILD_VARIANT_USER
@@ -100,8 +113,7 @@ endif
 LOCAL_C_INCLUDES:= \
     $(TARGET_OUT_HEADERS)/gps.utils \
     $(TARGET_OUT_HEADERS)/libloc_core \
-    $(TARGET_OUT_HEADERS)/libflp \
-    $(TARGET_OUT_HEADERS)/libloc_pla
+    $(TARGET_OUT_HEADERS)/libflp
 
 LOCAL_PRELINK_MODULE := false
 LOCAL_MODULE_RELATIVE_PATH := hw
