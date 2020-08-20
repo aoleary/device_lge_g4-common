@@ -890,7 +890,7 @@ service qcom-post-boot /system/vendor/bin/init.qcom.post_boot.sh
     disabled
     oneshot
 
-# real rild started by wrild.sh
+# real rild started by wrild.sh ONLY
 service real-ril-daemon /vendor/bin/hw/rild
     socket qmux_radio/rild_oem0 stream 0777 radio system
     socket qmux_radio/qmux_client_socket stream 0777 radio system
@@ -906,6 +906,13 @@ service ril-daemon /system/bin/wrild.sh
     user root
     writepid /dev/cpuset/system-background/tasks
     disabled
+
+on property:init.svc.ril-daemon=stopped && property:init.svc.bootanim=running
+    stop netmgrd
+    stop qmuxd
+    start qmuxd
+    start netmgrd
+    start ril-daemon
 
 on property:ro.data.large_tcp_window_size=true
     # Adjust socket buffer to enlarge TCP receive window for high bandwidth (e.g. DO-RevB)
@@ -988,7 +995,6 @@ on property:sys.shutdown.requested=*
     stop per_proxy
 
 on property:init.svc.bootanim=running
-    start real-ril-daemon
     start ril-daemon
     write /sys/module/lpm_levels/system/a53/cpu0/retention/idle_enabled 0
     write /sys/module/lpm_levels/system/a53/cpu1/retention/idle_enabled 0
