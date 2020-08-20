@@ -34,10 +34,6 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-#ifdef USE_GLIB
-const char* getprogname();
-#endif /* USE_GLIB */
-
 pid_t platform_lib_abstraction_gettid();
 #ifdef __cplusplus
 }

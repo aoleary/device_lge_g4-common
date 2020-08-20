@@ -37,7 +37,6 @@ extern "C" {
 
 int64_t systemTime(int clock);
 int64_t elapsedMillisSinceBoot();
-int64_t elapsedMicrosSinceBoot();
 
 #ifdef __cplusplus
 }
