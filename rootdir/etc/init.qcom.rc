@@ -900,7 +900,7 @@ service real-ril-daemon /vendor/bin/hw/rild
 # the rild wrapper which ensures proper rild handling
 service ril-daemon /vendor/bin/wrild.sh
     class main
-    user radio
+    user root
     seclabel u:r:wrild:s0
     writepid /dev/cpuset/system-background/tasks
     disabled
