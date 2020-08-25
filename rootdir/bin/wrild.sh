@@ -213,6 +213,14 @@ F_WOOF(){
             echo $dpid && return 3
         fi
     done
+    F_RILCHK
+    if [ "$CURSTATE" == "UNKNOWN" ] && [ -z "$CUROPER" ];then
+       F_LOG w "woof: current sim state: NO_SIGNAL"
+       F_LOG d "woof: CURSTATE is $CURSTATE , CUROPER is $CUROPER"
+       return 3
+    else
+       F_LOG d "woof: CURSTATE is $CURSTATE , CUROPER is $CUROPER"
+    fi
     F_LOG d "woof: $DOG is a good doggie (normal CPU usage) ..."
     echo 0 && return 0
 }
