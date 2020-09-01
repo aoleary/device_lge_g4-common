@@ -17,9 +17,10 @@ LOCAL_PATH:= $(call my-dir)
 include $(CLEAR_VARS)
 
 LOCAL_MODULE_TAGS := optional
-LOCAL_SRC_FILES := getmac.c
+LOCAL_SRC_FILES := hwaddrs.c
 LOCAL_PRELINK_MODULE := false
 LOCAL_MODULE := hwaddrs
 LOCAL_PROPRIETARY_MODULE := true
+LOCAL_LDLIBS := -llog
 
 include $(BUILD_EXECUTABLE)
