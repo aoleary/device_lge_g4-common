@@ -5,10 +5,10 @@ type hwaddrs_exec, exec_type, file_type;
 net_domain(hwaddrs)
 init_daemon_domain(hwaddrs)
 
-allow hwaddrs wifi_data_file:dir { write add_name };
-allow hwaddrs wifi_data_file:file { write open create };
-allow hwaddrs bluetooth_data_file:dir { write add_name };
-allow hwaddrs bluetooth_data_file:file { write open create };
+allow hwaddrs wifi_data_file:dir { write add_name getattr };
+allow hwaddrs wifi_data_file:file { write open create getattr };
+allow hwaddrs bluetooth_data_file:dir { write add_name getattr };
+allow hwaddrs bluetooth_data_file:file { write open create getattr };
 
 allow hwaddrs block_device:dir search;
 allow hwaddrs cache_block_device:dir search;

@@ -460,6 +460,9 @@ on property:persist.service.criticaltemp=0
     write /sys/devices/virtual/thermal/thermal_zone14/ctrl_crit_temp 0
 
 on post-fs
+    # WiFi and BT mac handler
+    start hwaddrs
+
     #change permissions on vmallocinfo so we can grab it from bugreports
     chown root log /proc/vmallocinfo
     chmod 0440 /proc/vmallocinfo
@@ -1041,6 +1044,7 @@ service hwaddrs /system/vendor/bin/hwaddrs
     user root
     group system wifi
     oneshot
+    disabled
 
 # Running hwaddrs under init is enforcing 0600, we need more
 on property:init.svc.hwaddrs=stopped

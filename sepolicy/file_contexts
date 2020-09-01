@@ -57,3 +57,6 @@
 
 # GNSS
 /(vendor|system/vendor)/bin/hw/android\.hardware\.gnss@[0-9]\.[0-9]-service   u:object_r:hal_gnss_default_exec:s0
+
+# Bluetooth
+/data/misc/bluedroid/bdaddr				u:object_r:bluetooth_data_file:s0
