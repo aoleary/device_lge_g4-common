@@ -60,3 +60,6 @@
 
 # Bluetooth
 /data/misc/bluedroid/bdaddr				u:object_r:bluetooth_data_file:s0
+
+# adb
+/data/adb/modules					u:object_r:adb_data_file:s0
