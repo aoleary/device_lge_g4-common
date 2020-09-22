@@ -343,9 +343,7 @@ PRODUCT_COPY_FILES += \
 
 # Power
 PRODUCT_PACKAGES += \
-    android.hardware.power@1.1-service-qti
-    #android.hardware.power@1.1-service-qti: this is the Power HAL service
-    #used for our in-built Power HAL
+    android.hardware.power-service-qti
 
 # RIL
 PRODUCT_PACKAGES += \
