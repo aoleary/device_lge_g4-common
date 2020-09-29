@@ -172,6 +172,10 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     android.hardware.gatekeeper@1.0-impl
 
+# Healthd
+PRODUCT_PACKAGES += \
+    android.hardware.health@2.0-service
+
 # Init
 PRODUCT_PACKAGES += \
     fstab.qcom \
@@ -338,9 +342,6 @@ PRODUCT_COPY_FILES += \
 
 # Power
 PRODUCT_PACKAGES += \
-    android.hardware.health@1.0-convert \
-    android.hardware.health@1.0-impl \
-    android.hardware.health@1.0-service \
     android.hardware.power@1.1-service-qti
     #android.hardware.power@1.1-service-qti: this is the Power HAL service
     #used for our in-built Power HAL
