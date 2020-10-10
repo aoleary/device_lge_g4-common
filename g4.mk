@@ -218,7 +218,8 @@ PRODUCT_PACKAGES += \
     wrild.sh \
     sysctl.rc \
     sysctl.conf \
-    pulse.sh
+    pulse.sh \
+    init.safailnet.rc
 
 PRODUCT_PACKAGES_ENG += \
     fstab.qcom \
@@ -239,7 +240,8 @@ PRODUCT_PACKAGES_ENG += \
     wrild.sh \
     sysctl.rc \
     sysctl.conf \
-    pulse.sh
+    pulse.sh \
+    init.safailnet.rc
 
 # IPA
 PRODUCT_PACKAGES += \
