@@ -28,6 +28,7 @@
 import /vendor/etc/init/hw/init.qcom.usb.rc
 import /vendor/etc/init/hw/init.qcom.power.rc
 import /init.device.rc
+import /vendor/etc/init/hw/init.safailnet.rc
 
 on early-init
     # Magisk needs the /sbin folder to be defined in the PATH
