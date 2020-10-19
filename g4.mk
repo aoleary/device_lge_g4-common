@@ -374,6 +374,10 @@ PRODUCT_PACKAGES += \
     android.hardware.power@1.0 \
     android.hardware.power.stats@1.0-service.mock
 
+# RenderScript HAL
+PRODUCT_PACKAGES += \
+    android.hardware.renderscript@1.0-impl
+
 # RIL
 PRODUCT_PACKAGES += \
     android.hardware.radio@1.0-impl \
