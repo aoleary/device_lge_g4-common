@@ -179,6 +179,9 @@ on boot
     chmod 0666 /persist/rfs/msm/adsp
     start rfs_access
 
+    # Disable serial console
+    setprop init.svc.console stopped
+
     # sensors
     chown root system /sns/cal
     chmod 0755 /sns/cal
