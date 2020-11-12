@@ -6,3 +6,6 @@ allow zygote proc_cmdline:file { getattr open read };
 allow zygote self:capability sys_resource;
 
 allow zygote userdata_block_device:file rw_file_perms;
+
+# https://github.com/LineageOS/android_device_nextbit_ether/commit/757638a317fb80af6086527357d4e41b8ad70070.patch
+get_prop(zygote, exported_camera_prop);
