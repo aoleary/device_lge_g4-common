@@ -1,0 +1,2 @@
+# https://github.com/LineageOS/android_device_nextbit_ether/commit/757638a317fb80af6086527357d4e41b8ad70070.patch
+get_prop(appdomain, exported_camera_prop);

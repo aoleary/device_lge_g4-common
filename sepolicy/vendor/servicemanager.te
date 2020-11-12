@@ -37,3 +37,6 @@ allow servicemanager wrild:process getattr;
 allow servicemanager mmppdaemon:dir r_dir_perms;
 allow servicemanager mmppdaemon:file r_file_perms;
 allow servicemanager mmppdaemon:process getattr;
+
+# E libc    : Access denied finding property "sys.init.userspace_reboot.in_progress"
+get_prop(servicemanager, userspace_reboot_exported_prop)

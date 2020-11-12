@@ -1,0 +1,2 @@
+# https://github.com/LineageOS/android_device_nextbit_ether/commit/eda27ef34b4dabb02205c7c376e943b17f03b551.patch
+get_prop(bootanim, userspace_reboot_exported_prop);

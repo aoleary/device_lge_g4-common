@@ -46,3 +46,10 @@ allow system_server hwbinder_device:chr_file rw_file_perms;
 #allow system_server debugfs_kgsl:file r_file_perms;
 allow system_server self:process execmem;
 allow system_server socket_device:sock_file write;
+
+# https://github.com/LineageOS/android_device_nextbit_ether/commit/eda27ef34b4dabb02205c7c376e943b17f03b551.patch
+get_prop(system_server, userspace_reboot_config_prop);
+get_prop(system_server, userspace_reboot_exported_prop);
+
+# https://github.com/LineageOS/android_device_nextbit_ether/commit/757638a317fb80af6086527357d4e41b8ad70070.patch
+get_prop(system_server, exported_camera_prop);
