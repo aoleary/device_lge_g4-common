@@ -140,6 +140,32 @@ on init
     chmod 775 /mnt/media_rw
     chmod 775 /mnt/media_rw/*
 
+    # Create scheduler tuning nodes
+    mkdir /dev/stune/foreground
+    mkdir /dev/stune/background
+    mkdir /dev/stune/top-app
+    mkdir /dev/stune/rt
+    chown system system /dev/stune
+    chown system system /dev/stune/foreground
+    chown system system /dev/stune/background
+    chown system system /dev/stune/top-app
+    chown system system /dev/stune/rt
+    chown system system /dev/stune/tasks
+    chown system system /dev/stune/foreground/tasks
+    chown system system /dev/stune/background/tasks
+    chown system system /dev/stune/top-app/tasks
+    chown system system /dev/stune/rt/tasks
+    write /dev/stune/tasks 0
+    write /dev/stune/foreground/tasks 0
+    write /dev/stune/background/tasks 0
+    write /dev/stune/top-app/tasks 0
+    write /dev/stune/rt/tasks 0
+    chmod 0664 /dev/stune/tasks
+    chmod 0664 /dev/stune/foreground/tasks
+    chmod 0664 /dev/stune/background/tasks
+    chmod 0664 /dev/stune/top-app/tasks
+    chmod 0664 /dev/stune/rt/tasks
+
     #R/O fs: chmod 0771 /firmware
     #R/O fs: chmod 0771 /firmware/image
     #R/O fs: mkdir /persist/data 0700 system system
