@@ -238,7 +238,7 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     debug.renderengine.backend=skiaglthreaded \
     debug.hwui.skia_atrace_enabled=false \
     ro.vendor.perf.scroll_opt=true \
-    ro.hwui.render_ahead=3
+    ro.hwui.render_ahead=1
 
 #Properties to improve gaming experiance
 PRODUCT_PROPERTY_OVERRIDES += \
