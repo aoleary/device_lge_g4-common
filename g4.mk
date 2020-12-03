@@ -103,9 +103,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PACKAGES += \
     Flashlight
 
-# Configstore
+# ConfigStore
 PRODUCT_PACKAGES += \
-    android.hardware.configstore@1.1-service
+    disable_configstore
 
 # ConsumerIR
 TARGET_PROVIDES_CONSUMERIR_HAL := true
