@@ -99,7 +99,6 @@ vendor/bin/qseecomd
 vendor/bin/rfs_access
 vendor/bin/rmt_storage
 vendor/bin/sensors.qcom
-vendor/bin/time_daemon
 vendor/bin/irsc_util
 vendor/bin/mm-qcamera-app
 vendor/bin/mm-qcamera-daemon
@@ -176,7 +175,6 @@ vendor/lib/libQtiTether.so
 vendor/lib/libSecureUILib.so
 vendor/lib/libStDrvInt.so
 vendor/lib/libSubSystemShutdown.so
-vendor/lib/libTimeService.so
 vendor/lib/libUserAgent.so
 vendor/lib/libWVStreamControlAPI_L1.so
 vendor/lib/libarcsoft_beauty_shot.so
@@ -809,7 +807,6 @@ vendor/lib64/sensors.ssc.so
 -vendor/lib64/libthermalclient.so
 -vendor/lib/libtime_genoff.so
 -vendor/lib64/libtime_genoff.so
--app/TimeService/TimeService.apk
 -priv-app/com.qualcomm.location/com.qualcomm.location.apk
 -priv-app/qcrilmsgtunnel/qcrilmsgtunnel.apk
 -vendor/lib/com.quicinc.cne.constants@1.0.so

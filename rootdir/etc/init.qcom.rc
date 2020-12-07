@@ -595,9 +595,6 @@ on post-fs-data
     # Make sure the default firmware is loaded
     write /sys/module/bcmdhd/parameters/firmware_path "/vendor/etc/firmware/fw_bcmdhd.bin"
 
-    # Create /data/time folder for time-services
-    mkdir /data/time/ 0700 system system
-
     mkdir /data/audio/ 0770 media audio
 
     # Create a folder for audio delta files
@@ -1033,12 +1030,6 @@ on property:sys.boot_completed=1
     # Enable ZRAM on boot_complete
     swapon_all /vendor/etc/fstab.qcom
     write /dev/kmsg "Boot completed"
-
-service time_daemon /vendor/bin/time_daemon
-    class late_start
-    user root
-    group root diag
-    writepid /dev/cpuset/system-background/tasks
 
 service adsprpcd /vendor/bin/adsprpcd
     class main
