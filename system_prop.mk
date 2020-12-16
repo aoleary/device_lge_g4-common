@@ -285,6 +285,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     debug.qualcomm.sns.hal=e \
     debug.qualcomm.sns.libsensor1=e
 
+# Shutdown
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.build.shutdown_timeout=2
+
 # Storage
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.sys.sdcardfs=true
