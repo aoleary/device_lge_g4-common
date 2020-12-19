@@ -59,7 +59,7 @@ on early-init
 
 on early-fs
     symlink /dev/block/platform/soc.0/${ro.boot.bootdevice} /dev/block/bootdevice
-    chown root:root /dev/block/mmcblk0p35
+    chown root root /dev/block/mmcblk0p35
     chmod 666 /dev/block/mmcblk0p35
 
     # MobiCore Daemon Paths
@@ -117,7 +117,7 @@ on init
     #R/O fs: mkdir /preload 0771 system system
     #R/O fs: mkdir /cust 0771 system system
     #R/O fs: mkdir /carrier 0770 system carrier
-    chown system carrier /carrier
+    chown system system /carrier
     chmod 0770 /carrier
     chmod 0644 /proc/cmdline
 
@@ -368,7 +368,7 @@ on boot
     chown system system /sys/devices/virtual/input/lge_touch/incoming_call
     chmod 664 /sys/devices/virtual/input/lge_touch/incoming_call
     chown system system /sys/devices/virtual/input/lge_touch/ime_status
-    chown system lgkeyguard /sys/devices/virtual/input/lge_touch/keyguard
+    chown system system /sys/devices/virtual/input/lge_touch/keyguard
     chmod 664 /sys/devices/virtual/input/lge_touch/keyguard
     chown system system /sys/devices/virtual/input/lge_touch/ts_noise_log_enable
     chmod 664 /sys/devices/virtual/input/lge_touch/ts_noise_log_enable
@@ -473,7 +473,7 @@ on post-fs
     chown root log /proc/slabinfo
     chmod 0440 /proc/slabinfo
 
-    chown system carrier /carrier
+    chown system system /carrier
     chmod 0771 /carrier
 
     # restorecon carrier partition
@@ -642,7 +642,7 @@ on post-fs-data
     mkdir /persist/data/tz 0700 system system
     mkdir /persist/tee 0700 system system
     mkdir /data/app/mcRegistry 0775 system system
-    chown root cw_access /cota
+    chown root root /cota
     #chmod 0771 /cota
     #chown system system /preload
     #chmod 0771 /preload
