@@ -27,3 +27,10 @@ allow toolbox zygote:file read;
 allow toolbox healthd:file read;
 allow toolbox ueventd:dir { getattr search };
 allow toolbox ueventd:file open;
+
+# set baseband ver
+allow toolbox baseband:fd use;
+allow toolbox baseband:fifo_file { getattr write };
+allow toolbox radio_prop:property_service set;
+allow toolbox vfat:file { open read };
+allow toolbox vfat:dir search;
