@@ -1,0 +1,11 @@
+type baseband, domain;
+type baseband_exec, exec_type, file_type;
+init_daemon_domain(baseband)
+
+# allow to show baseband version
+domain_auto_trans(baseband, toolbox_exec, toolbox)
+allow baseband self:capability sys_resource;
+allow baseband shell_exec:file { getattr read };
+allow baseband toolbox_exec:file { getattr execute };
+allow baseband system_file:file execute_no_trans;
+allow baseband vendor_toolbox_exec:file execute_no_trans;
