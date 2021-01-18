@@ -894,8 +894,7 @@ service qcom-post-boot /system/vendor/bin/init.qcom.post_boot.sh
     disabled
     oneshot
 
-# real rild started by wrild.sh ONLY
-service real-ril-daemon /vendor/bin/hw/rild
+service ril-daemon /vendor/bin/hw/rild
     socket qmux_radio/rild_oem0 stream 0777 radio system
     socket qmux_radio/qmux_client_socket stream 0777 radio system
     socket settingsd stream 660 radio system
@@ -905,8 +904,8 @@ service real-ril-daemon /vendor/bin/hw/rild
     writepid /dev/cpuset/system-background/tasks
     disabled
 
-# the rild wrapper which ensures proper rild handling
-service ril-daemon /system/bin/wrild.sh
+# the rild watchdog which ensures proper rild handling
+service wd-ril-daemon /system/bin/wrild.sh
     class main
     user root
     writepid /dev/cpuset/system-background/tasks
@@ -1015,6 +1014,7 @@ on property:init.svc.bootanim=stopped
     start cameraserver
 
 on property:sys.boot_completed=1
+    start wd-ril-daemon
     start qcom-post-boot
     # Post-boot fs tuning
     write /sys/block/mmcblk0/queue/read_ahead_kb 256

@@ -10,9 +10,10 @@
 PRTRIGGER=0
 REQRESTART=99
 MAXRET=10
+RILCHILL=240			# sleep value after RILD has been restarted before continuing
 
 # watchdog ("woof:" in logcat)
-DEBUGLOG=1                      # 0: disable debug logging, 1: enable
+DEBUGLOG=0                      # 0: disable debug logging, 1: enable
 DOGLOGS=/sdcard/Download/wdlog	# log directory when DEBUGLOG=1, path must be owned and r/w for root
 TSCPU=90                        # max allowed cpu usage threshold
 TSTIME=60	                # how many secs rild is allowed to consume TSCPU before a restart of rild is triggered
@@ -114,12 +115,12 @@ F_RILRESTART(){
             if [ -d /storage/emulated/0 ];then
                 F_LOG w "RIL restart - try $x of $MAXRET"
 		setprop wrild.ril-handling restarting-rild
-                [ $WDDEBUG == 0 ] && stop real-ril-daemon
+                [ $WDDEBUG == 0 ] && stop ril-daemon
                 sleep 1
-                [ $WDDEBUG == 0 ] && start real-ril-daemon
+                [ $WDDEBUG == 0 ] && start ril-daemon
                 F_LOG w "restarted RIL daemon as REQRESTART was set to >$REQRESTART<"
 		setprop wrild.ril-handling restarting-rild-done
-                [ $WDDEBUG == 0 ] && sleep 40
+                sleep $RILCHILL
                 PRTRIGGER=0
                 x=$((x + 1))
             else
@@ -157,6 +158,10 @@ F_DOZE(){
         F_LOG i "woof: DEBUG MODE !!!! Watchdog would have been disabled but as we debug..."
     fi
 }
+
+# delay the very first watchdog run
+[ $WDDEBUG == 0 ] && F_LOG i "woof: *yawn* ... I think .. I will sleep a bit before actually starting my work (4 min)" && sleep $RILCHILL
+[ $WDDEBUG == 1 ] && F_LOG e "woof: !!! DEBUG MODE DEBUG MODE !!! SLEEP DISABLED FOR FIRST WD RUN!"
 
 # restart RIL in defined conditions.
 F_RILRESTART 1
@@ -249,9 +254,6 @@ F_BITEDOG(){
     [ $? -eq 99 -o $? -eq 42 ] && F_DOZE
 }
 
-# delay the very first watchdog run
-[ $WDDEBUG == 0 ] && F_LOG i "woof: yawn ... I think .. I will sleep a bit before actually starting my work (2 min)" && sleep 120
-[ $WDDEBUG == 1 ] && F_LOG e "woof: !!! DEBUG MODE DEBUG MODE !!! SLEEP DISABLED FOR FIRST WD RUN!"
 
 # run forever and watch out for dogs
 WCNT=$(($TSTIME/WDFREQ))
