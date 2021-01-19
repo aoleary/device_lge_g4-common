@@ -28,6 +28,8 @@ allow rild ril_database:lnk_file { getattr read };
 allow rild system_data_file:dir { open read remove_name };
 allow rild system_data_file:file { ioctl lock setattr unlink };
 
+allow rild bluetooth_prop:file { getattr open read };
+
 # neverallow protected:
 allow rild system_data_file:file { write create };
 
