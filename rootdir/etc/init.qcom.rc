@@ -107,13 +107,6 @@ on fs
     mount none /system/etc/gps.conf /system/etc/gps_debug.conf bind
 
 on late-fs
-    # Start services for bootanim
-    start servicemanager
-    start vendor.configstore-hal
-    start surfaceflinger
-    start bootanim
-    start vendor.hwcomposer-2-1
-    start vendor.gralloc-2-0
 
     # Mount RW partitions which need run fsck
     mount_all /vendor/etc/fstab.qcom --late
@@ -497,6 +490,14 @@ on property:persist.service.criticaltemp=0
     write /sys/devices/virtual/thermal/thermal_zone14/ctrl_crit_temp 0
 
 on post-fs
+    # Start services for bootanim
+    start servicemanager
+    start vendor.configstore-hal
+    start surfaceflinger
+    start bootanim
+    start vendor.hwcomposer-2-1
+    start vendor.gralloc-2-0
+
     #change permissions on vmallocinfo so we can grab it from bugreports
     chown root log /proc/vmallocinfo
     chmod 0440 /proc/vmallocinfo
