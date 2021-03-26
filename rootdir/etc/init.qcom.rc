@@ -1171,6 +1171,9 @@ service pulseoff /vendor/bin/pulse.sh stop
     oneshot
 
 on property:sys.boot_completed=1
+    start vendor.sensors
+
+on property:sys.boot_completed=1
     stop pulseon
     start pulseoff
     stop boot_lc
