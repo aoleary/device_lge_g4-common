@@ -37,7 +37,6 @@ LOCAL_SRC_FILES := \
     ConsumerIr.cpp
 
 LOCAL_MODULE_TAGS := optional
-LOCAL_VENDOR_MODULE := true
 LOCAL_PRIVATE_PLATFORM_APIS := true
 
 include $(BUILD_EXECUTABLE)
