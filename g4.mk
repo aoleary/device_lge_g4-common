@@ -264,6 +264,10 @@ PRODUCT_PACKAGES_ENG += \
     init.safailnet.rc \
     set_tasks.sh
 
+# IO Cgroups
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.vendor.iocgrp.config=1
+
 # IPA
 PRODUCT_PACKAGES += \
     ipacm \
