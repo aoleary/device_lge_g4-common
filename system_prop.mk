@@ -119,7 +119,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Dexopt (try not to use big cores during dexopt)
 PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.boot-dex2oat-threads=4 \
-    dalvik.vm.dex2oat-threads=4 \
+    dalvik.vm.boot-dex2oat-cpu-set=0,1,2,3 \
+    dalvik.vm.dex2oat-threads=2 \
+    dalvik.vm.dex2oat-cpu-set=2,3 \
     dalvik.vm.image-dex2oat-threads=4 \
     dalvik.vm.image-dex2oat-filter=speed \
     dalvik.vm.madvise-random=true \
