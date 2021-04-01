@@ -83,21 +83,23 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.qualcomm.cabl=2
 
 # Properties to improve rendering
+    debug.composition.type=gpu \
+    debug.cpurend.vsync=false \
     debug.enable.sglscale=1 \
+    debug.egl.profiler=1 \
     debug.egl.hw=1 \
+    debug.performance.tuning=1 \
     debug.sf.hw=1 \
     debug.sf.disable_hwc=0 \
     debug.sf.recomputecrop=0 \
     debug.sf.disable_backpressure=1 \
     debug.sf.latch_unsignaled=1 \
     persist.hwc.ptor.enable=true \
-    debug.cpurend.vsync=false \
-    debug.performance.tuning=1
+    video.accelerate.hw=1
 
 # MSM8992 HAL settings
 # 196610 is decimal for 0x30002 to report major/minor versions as 3/2
 PRODUCT_PROPERTY_OVERRIDES += \
-    debug.composition.type=c2d \
     debug.mdpcomp.logs=0 \
     persist.debug.wfd.enable=1 \
     persist.demo.hdmirotationlock=false \
