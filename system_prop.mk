@@ -189,7 +189,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.telephony.default_network=12 \
     ro.ril.svlte1x=false \
     ro.ril.svdo=false \
-    persist.telephony.oosisdc=false
+    persist.telephony.oosisdc=false \
+    #Improve Speech Quality
+    ro.ril.enable.amr.wideband=1
 
 # RIL Powersaving
     persist.radio.add_power_save=1 \
