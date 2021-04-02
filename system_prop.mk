@@ -86,14 +86,17 @@ PRODUCT_PROPERTY_OVERRIDES += \
     debug.composition.type=gpu \
     debug.cpurend.vsync=false \
     debug.enable.sglscale=1 \
+    debug.enabletr=true \
     debug.egl.profiler=1 \
     debug.egl.hw=1 \
+    debug.overlayui.enable=1 \
     debug.performance.tuning=1 \
     debug.sf.hw=1 \
     debug.sf.disable_hwc=0 \
     debug.sf.recomputecrop=0 \
     debug.sf.disable_backpressure=1 \
     debug.sf.latch_unsignaled=1 \
+    hw3d.force=1 \
     persist.hwc.ptor.enable=true \
     video.accelerate.hw=1
 
@@ -108,8 +111,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.mdpcomp.4k2kSplit=1 \
     persist.mdpcomp_perfhint=50 \
     persist.metadata_dynfps.disable=true \
+    persist.sys.ui.hw=1 \
     persist.sys.wfd.virtual=0 \
-    ro.opengles.version=196610
+    ro.opengles.version=196610 \
+    ro.sf.compbypass.enable=0
 
 # FIFO: enable scheduling for UI and Render threads by default
 PRODUCT_PROPERTY_OVERRIDES += \
