@@ -109,12 +109,12 @@ on fs
 on late-fs
     # Start services for Boot Animation
     start servicemanager
+    start configstore-hal-1-0
+    start hwcomposer-2-1
     start surfaceflinger
     start bootanim
     # Make sure required HAL services started for HW service manager
-    start configstore-hal-1-0
     start gralloc-2-0
-    start hwcomposer-2-1
 
     # Mount RW partitions which need run fsck
     mount_all /vendor/etc/fstab.qcom --late
