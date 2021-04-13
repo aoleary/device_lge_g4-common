@@ -76,6 +76,7 @@ uint32_t mm_camera_util_generate_handler(uint8_t index)
     handler = g_handler_history_count;
     handler = (handler<<8) | index;
     pthread_mutex_unlock(&g_handler_lock);
+    CDBG("%s: Returning handler as %d",__func__,handler); 
     return handler;
 }
 
@@ -91,6 +92,8 @@ uint32_t mm_camera_util_generate_handler(uint8_t index)
  *==========================================================================*/
 uint8_t mm_camera_util_get_index_by_handler(uint32_t handler)
 {
+    CDBG("%s: Recieved handler as %d",__func__,(uint32_t)handler);
+    CDBG("%s: Returning index as %d",__func__,(uint8_t)(handler&0x000000ff));
     return (handler&0x000000ff);
 }
 
@@ -109,6 +112,7 @@ const char *mm_camera_util_get_dev_name(uint32_t cam_handle)
 {
     char *dev_name = NULL;
     uint8_t cam_idx = mm_camera_util_get_index_by_handler(cam_handle);
+    CDBG("%s: Recieved cam_idx as %d",__func__,cam_idx); 
     if(cam_idx < MM_CAMERA_MAX_NUM_SENSORS) {
         dev_name = g_cam_ctrl.video_dev_name[cam_idx];
     }
@@ -1811,6 +1815,7 @@ int32_t camera_open(uint8_t camera_idx, mm_camera_vtbl_t **camera_vtbl)
     cam_obj->ds_fd = -1;
     cam_obj->ref_count++;
     cam_obj->my_hdl = mm_camera_util_generate_handler(camera_idx);
+    CDBG("%s: Recieved handler with value: %d for camera_idx: %d",__func__, cam_obj->my_hdl,camera_idx);
     cam_obj->vtbl.camera_handle = cam_obj->my_hdl; /* set handler */
     cam_obj->vtbl.ops = &mm_camera_ops;
     pthread_mutex_init(&cam_obj->cam_lock, NULL);

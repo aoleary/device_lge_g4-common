@@ -277,6 +277,7 @@ int32_t mm_camera_open(mm_camera_obj_t *my_obj)
         goto on_error;
     }
     dev_name_value = mm_camera_util_get_dev_name(my_obj->my_hdl);
+    CDBG("%s: dev_name_vale = %s",__func__,dev_name_value);
     if (NULL == dev_name_value) {
         goto on_error;
     }
