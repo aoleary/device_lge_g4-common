@@ -1119,3 +1119,9 @@ on property:gsm.version.baseband=""
 
 on property:wlan.write.con_mode=*
     write /sys/module/wlan/parameters/con_mode ${wlan.write.con_mode}
+
+on property:init.svc.pulseon=stopped
+    # battery charging animation
+    write /sys/devices/soc.0/leds-qpnp-25/leds/red/trigger none
+    write /sys/devices/soc.0/leds-qpnp-25/leds/green/trigger battery-charging-blink-full-solid
+    write /sys/devices/soc.0/leds-qpnp-25/leds/blue/trigger none
