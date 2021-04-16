@@ -1092,6 +1092,27 @@ service lge-sensor-sh /system/vendor/bin/init.msm8992.sensor.sh
     seclabel u:r:sensors:s0
 # start sensor daemon as core class [END]
 
+service boot_lc /system/bin/logcat -b all -D -f /cache/debug/boot_lc_full.txt
+    user system
+    group system
+    seclabel u:r:boot_debug:s0
+    disabled
+    oneshot
+
+service boot_lc_crash /system/bin/logcat -b crash -D -f /cache/debug/boot_lc_crash.txt
+    user system
+    group system
+    seclabel u:r:boot_debug:s0
+    disabled
+    oneshot
+
+service boot_lc_kernel /system/bin/logcat -b kernel -D -f /cache/debug/boot_lc_kernel.txt
+    user system
+    group system
+    seclabel u:r:boot_debug:s0
+    disabled
+    oneshot
+
 service pulseon /sbin/pulse.sh
     user system
     seclabel u:r:pulse:s0
@@ -1105,6 +1126,9 @@ service pulseoff /sbin/pulse.sh stop
 on property:sys.boot_completed=1
     stop pulseon
     start pulseoff
+    stop boot_lc
+    stop boot_lc_crash
+    stop boot_lc_kernel
 
 on property:init.svc.bootanim=stopped
     stop pulseon
@@ -1116,6 +1140,9 @@ on property:apexd.status=ready
 on property:dev.bootcomplete=1
     stop pulseon
     start pulseoff
+    stop boot_lc
+    stop boot_lc_crash
+    stop boot_lc_kernel
 
 on property:gsm.version.baseband=""
     start baseband-sh
@@ -1128,3 +1155,13 @@ on property:init.svc.pulseon=stopped
     write /sys/devices/soc.0/leds-qpnp-25/leds/red/trigger none
     write /sys/devices/soc.0/leds-qpnp-25/leds/green/trigger battery-charging-blink-full-solid
     write /sys/devices/soc.0/leds-qpnp-25/leds/blue/trigger none
+
+on property:init.svc.logd=running
+    # debug boot process
+    mkdir /cache/debug 0770 system system
+    rm /cache/debug/boot_lc_full.txt
+    rm /cache/debug/boot_lc_crash.txt
+    rm /cache/debug/boot_lc_kernel.txt
+    start boot_lc
+    start boot_lc_kernel
+    start boot_lc_crash
