@@ -300,8 +300,9 @@ PRODUCT_PACKAGES += \
     android.hardware.health@1.0-convert \
     android.hardware.health@1.0-impl \
     android.hardware.health@1.0-service \
-    android.hardware.power@1.1-service-qti \
-    power.msm8992
+    android.hardware.power@1.1-service-qti
+    #android.hardware.power@1.1-service-qti: this is the Power HAL service
+    #used for our in-built Power HAL
 
 # RIL
 PRODUCT_PACKAGES += \
