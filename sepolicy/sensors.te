@@ -22,4 +22,4 @@ allow sensors sensors_data:file { write setattr getattr read open create unlink 
 allow sensors ctl_start_prop:property_service set;
 allow sensors touch_socket:lnk_file read;
 
-allow sensors sysfs:file read;
+allow sensors sysfs:file { read open };

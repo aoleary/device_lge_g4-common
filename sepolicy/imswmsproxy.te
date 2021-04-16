@@ -8,4 +8,4 @@ allow imswmsproxy qmuxd_socket:sock_file write;
 allow imswmsproxy diag_device:chr_file { read write ioctl open };
 allow imswmsproxy qmuxd_socket:dir { search write add_name remove_name };
 allow imswmsproxy qmuxd_socket:sock_file { create setattr unlink };
-
+allow imswmsproxy sysfs:file { open read };

@@ -6,3 +6,4 @@ init_daemon_domain(imscm)
 allow imscm imsrcs_service:service_manager add;
 allow imscm smem_log_device:chr_file { read write open ioctl };
 allow imscm servicemanager:binder { transfer call };
+allow imscm sysfs:file { open read };
