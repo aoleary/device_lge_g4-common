@@ -83,6 +83,7 @@ PRODUCT_PACKAGES += \
     android.hardware.camera.provider@2.4-external \
     android.hardware.camera.provider@2.4-external-service \
     Camera2 \
+    libmm-qcamera \
     camera.msm8992 \ 
     camera.vendor.msm8992
 
