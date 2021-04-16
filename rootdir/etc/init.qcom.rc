@@ -908,6 +908,7 @@ service ril-daemon /vendor/bin/hw/rild
 service wd-ril-daemon /system/bin/wrild.sh
     class main
     user root
+    seclabel u:r:wrild:s0
     writepid /dev/cpuset/system-background/tasks
     disabled
 
@@ -1093,10 +1094,12 @@ service lge-sensor-sh /system/vendor/bin/init.msm8992.sensor.sh
 
 service pulseon /sbin/pulse.sh
     user system
+    seclabel u:r:pulse:s0
     oneshot
 
 service pulseoff /sbin/pulse.sh stop
     user system
+    seclabel u:r:pulse:s0
     oneshot
 
 on property:sys.boot_completed=1
