@@ -1,4 +1,4 @@
 allow time_daemon time_data_file:file { open read write create };
 allow time_daemon time_data_file:dir { add_name write search };
 allow time_daemon qmuxd_socket:dir search;
-
+allow time_daemon sysfs:file { open read };

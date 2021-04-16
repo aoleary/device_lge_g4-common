@@ -7,4 +7,4 @@ allow netmgrd net_radio_prop:property_service set;
 allow netmgrd property_socket:sock_file write;
 
 allow netmgrd default_prop:property_service set;
-allow netmgrd sysfs:file read;
+allow netmgrd sysfs:file { read open };

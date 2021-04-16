@@ -40,6 +40,8 @@ allow qti_init_shell system_data_file:dir { setattr write add_name create };
 
 allow qti_init_shell { hal_camera_default mediacodec }:fd use;
 
-allow qti_init_shell diag_device:chr_file { read write };
-allow qti_init_shell qmuxd_socket:dir search;
-allow qti_init_shell self:socket create;
+allow qti_init_shell diag_device:chr_file { read write ioctl open };
+allow qti_init_shell self:socket { create ioctl read };
+allow qti_init_shell qmuxd_socket:dir { add_name write search };
+allow qti_init_shell qmuxd_socket:sock_file { create write };
+allow qti_init_shell qmuxd:unix_stream_socket connectto;
