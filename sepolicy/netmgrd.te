@@ -5,3 +5,6 @@ allow netmgrd toolbox_exec:file { read getattr open execute execute_no_trans };
 allow netmgrd init:unix_stream_socket connectto;
 allow netmgrd net_radio_prop:property_service set;
 allow netmgrd property_socket:sock_file write;
+
+allow netmgrd default_prop:property_service set;
+allow netmgrd sysfs:file read;

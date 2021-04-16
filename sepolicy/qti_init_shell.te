@@ -39,3 +39,7 @@ allow qti_init_shell system_data_file:file { getattr write create open read seta
 allow qti_init_shell system_data_file:dir { setattr write add_name create };
 
 allow qti_init_shell { hal_camera_default mediacodec }:fd use;
+
+allow qti_init_shell diag_device:chr_file { read write };
+allow qti_init_shell qmuxd_socket:dir search;
+allow qti_init_shell self:socket create;
