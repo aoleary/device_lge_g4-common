@@ -4,7 +4,7 @@ include $(CLEAR_VARS)
 
 LOCAL_CFLAGS += -D_ANDROID_
 
-LOCAL_CFLAGS += -Wall -Wextra -Werror
+LOCAL_CFLAGS += -Wall -Wextra
 
 LOCAL_C_INCLUDES += \
     frameworks/native/include/media/openmax \

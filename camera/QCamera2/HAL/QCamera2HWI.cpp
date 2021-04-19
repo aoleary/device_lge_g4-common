@@ -1283,8 +1283,10 @@ int QCamera2HardwareInterface::openCamera()
         ALOGE("camera_open failed. rc = %d, mCameraHandle = %p", rc, mCameraHandle);
         return rc;
     }
-    if (NULL == gCamCaps[mCameraId])
-        initCapabilities(mCameraId,mCameraHandle);
+    if (NULL == gCamCaps[mCameraId]){
+        //initCapabilities(mCameraId,mCameraHandle);
+        DevUtCapabilities(mCameraId,mCameraHandle);
+    }
 
     mCameraHandle->ops->register_event_notify(mCameraHandle->camera_handle,
                                               camEvtHandle,
@@ -7958,4 +7960,1039 @@ int32_t QCameraPerfLock::lock_rel()
     return ret;
 }
 
+int QCamera2HardwareInterface::DevUtCapabilities(uint32_t cameraId,mm_camera_vtbl_t *cameraHandle)
+{
+    ATRACE_CALL();
+    int rc = NO_ERROR;
+    QCameraHeapMemory *capabilityHeap = NULL;
+
+    /* Allocate memory for capability buffer */
+    capabilityHeap = new QCameraHeapMemory(QCAMERA_ION_USE_CACHE);
+    rc = capabilityHeap->allocate(1, sizeof(cam_capability_t), NON_SECURE);
+    if(rc != OK) {
+        ALOGE("%s: No memory for cappability", __func__);
+        goto allocate_failed;
+    }
+
+    /* Map memory for capability buffer */
+    memset(DATA_PTR(capabilityHeap,0), 0, sizeof(cam_capability_t));
+    rc = cameraHandle->ops->map_buf(cameraHandle->camera_handle,
+                                CAM_MAPPING_BUF_TYPE_CAPABILITY,
+                                capabilityHeap->getFd(0),
+                                sizeof(cam_capability_t));
+    if(rc < 0) {
+        ALOGE("%s: failed to map capability buffer", __func__);
+        goto map_failed;
+    }
+        gCamCaps[cameraId]->version=CAM_HAL_V1;
+
+        if(cameraId == 0)
+        {
+            CDBG_HIGH("%s : Initialising capabilities for camera id = 0",__func__);
+            gCamCaps[cameraId]->position = CAM_POSITION_BACK;
+            gCamCaps[cameraId]->auto_hdr_supported = 1;
+            gCamCaps[cameraId]->isWnrSupported = 1;
+
+            gCamCaps[cameraId]->supported_iso_modes_cnt = 4; 
+            gCamCaps[cameraId]->supported_iso_modes[0] = CAM_ISO_MODE_AUTO;
+            gCamCaps[cameraId]->supported_iso_modes[1] = CAM_ISO_MODE_DEBLUR;
+            gCamCaps[cameraId]->supported_iso_modes[2] = CAM_ISO_MODE_100;
+            gCamCaps[cameraId]->supported_iso_modes[3] = CAM_ISO_MODE_200;
+            
+            gCamCaps[cameraId]->supported_flash_modes_cnt = 3;
+            gCamCaps[cameraId]->supported_flash_modes[0] = CAM_FLASH_MODE_OFF;
+            gCamCaps[cameraId]->supported_flash_modes[1] = CAM_FLASH_MODE_AUTO;
+            gCamCaps[cameraId]->supported_flash_modes[2] = CAM_FLASH_MODE_ON;
+
+            gCamCaps[cameraId]->zoom_ratio_tbl_cnt = 1; //Disable Zoom for now
+            gCamCaps[cameraId]->zoom_ratio_tbl[0]=100;
+
+            gCamCaps[cameraId]->supported_effects_cnt=12;
+            gCamCaps[cameraId]->supported_effects[0]= CAM_EFFECT_MODE_OFF;
+            gCamCaps[cameraId]->supported_effects[1]= CAM_EFFECT_MODE_MONO;
+            gCamCaps[cameraId]->supported_effects[2]= CAM_EFFECT_MODE_NEGATIVE;
+            gCamCaps[cameraId]->supported_effects[3]= CAM_EFFECT_MODE_SOLARIZE;
+            gCamCaps[cameraId]->supported_effects[4]= CAM_EFFECT_MODE_SEPIA;
+            gCamCaps[cameraId]->supported_effects[5]= CAM_EFFECT_MODE_POSTERIZE;
+            gCamCaps[cameraId]->supported_effects[6]= CAM_EFFECT_MODE_WHITEBOARD;
+            gCamCaps[cameraId]->supported_effects[7]= CAM_EFFECT_MODE_BLACKBOARD;
+            gCamCaps[cameraId]->supported_effects[8]= CAM_EFFECT_MODE_AQUA;
+            gCamCaps[cameraId]->supported_effects[9]= CAM_EFFECT_MODE_EMBOSS;
+            gCamCaps[cameraId]->supported_effects[10]= CAM_EFFECT_MODE_SKETCH;
+            gCamCaps[cameraId]->supported_effects[11]= CAM_EFFECT_MODE_NEON;
+
+            gCamCaps[cameraId]->supported_scene_modes_cnt=21;
+            gCamCaps[cameraId]->supported_scene_modes[0] =CAM_SCENE_MODE_OFF;
+            gCamCaps[cameraId]->supported_scene_modes[1] =CAM_SCENE_MODE_AUTO;
+            gCamCaps[cameraId]->supported_scene_modes[2] =CAM_SCENE_MODE_LANDSCAPE;
+            gCamCaps[cameraId]->supported_scene_modes[3] =CAM_SCENE_MODE_SNOW;
+            gCamCaps[cameraId]->supported_scene_modes[4] =CAM_SCENE_MODE_BEACH;
+            gCamCaps[cameraId]->supported_scene_modes[5] =CAM_SCENE_MODE_SUNSET;
+            gCamCaps[cameraId]->supported_scene_modes[6] =CAM_SCENE_MODE_NIGHT;
+            gCamCaps[cameraId]->supported_scene_modes[7] =CAM_SCENE_MODE_PORTRAIT;
+            gCamCaps[cameraId]->supported_scene_modes[8] =CAM_SCENE_MODE_BACKLIGHT;
+            gCamCaps[cameraId]->supported_scene_modes[9] =CAM_SCENE_MODE_SPORTS;
+            gCamCaps[cameraId]->supported_scene_modes[10] =CAM_SCENE_MODE_ANTISHAKE;
+            gCamCaps[cameraId]->supported_scene_modes[11] =CAM_SCENE_MODE_FLOWERS;
+            gCamCaps[cameraId]->supported_scene_modes[12] =CAM_SCENE_MODE_CANDLELIGHT;
+            gCamCaps[cameraId]->supported_scene_modes[13] =CAM_SCENE_MODE_FIREWORKS;
+            gCamCaps[cameraId]->supported_scene_modes[14] =CAM_SCENE_MODE_PARTY;
+            gCamCaps[cameraId]->supported_scene_modes[15] =CAM_SCENE_MODE_NIGHT_PORTRAIT;
+            gCamCaps[cameraId]->supported_scene_modes[16] =CAM_SCENE_MODE_THEATRE;
+            gCamCaps[cameraId]->supported_scene_modes[17] =CAM_SCENE_MODE_ACTION;
+            gCamCaps[cameraId]->supported_scene_modes[18] =CAM_SCENE_MODE_AR;
+            gCamCaps[cameraId]->supported_scene_modes[19] =CAM_SCENE_MODE_FACE_PRIORITY;
+            gCamCaps[cameraId]->supported_scene_modes[20] =CAM_SCENE_MODE_BARCODE;
+            gCamCaps[cameraId]->supported_scene_modes[21] =CAM_SCENE_MODE_HDR;
+            gCamCaps[cameraId]->supported_scene_modes[22] =CAM_SCENE_MODE_MAX;
+
+            gCamCaps[cameraId]->supported_aec_modes_cnt =7;
+            gCamCaps[cameraId]->supported_aec_modes[0] = CAM_AEC_MODE_FRAME_AVERAGE;
+            gCamCaps[cameraId]->supported_aec_modes[1] = CAM_AEC_MODE_CENTER_WEIGHTED;
+            gCamCaps[cameraId]->supported_aec_modes[2] = CAM_AEC_MODE_SPOT_METERING;
+            gCamCaps[cameraId]->supported_aec_modes[3] = CAM_AEC_MODE_SMART_METERING;
+            gCamCaps[cameraId]->supported_aec_modes[4] = CAM_AEC_MODE_USER_METERING;
+            gCamCaps[cameraId]->supported_aec_modes[5]= CAM_AEC_MODE_SPOT_METERING_ADV;
+            gCamCaps[cameraId]->supported_aec_modes[6] = CAM_AEC_MODE_CENTER_WEIGHTED_ADV;
+
+            gCamCaps[cameraId]->fps_ranges_tbl_cnt = 4;
+            gCamCaps[cameraId]->min_fps =15;
+            gCamCaps[cameraId]->max_fps =30;
+            gCamCaps[cameraId]->video_min_fps=15;
+            gCamCaps[cameraId]->video_max_fps=30;
+
+            gCamCaps[cameraId]->supported_antibandings_cnt=4;
+            gCamCaps[cameraId]->supported_antibandings[0] = CAM_ANTIBANDING_MODE_OFF;
+            gCamCaps[cameraId]->supported_antibandings[1] = CAM_ANTIBANDING_MODE_60HZ;
+            gCamCaps[cameraId]->supported_antibandings[2] = CAM_ANTIBANDING_MODE_50HZ;
+            gCamCaps[cameraId]->supported_antibandings[3] = CAM_ANTIBANDING_MODE_AUTO;
+
+
+            gCamCaps[cameraId]->supported_white_balances_cnt= 11;
+            gCamCaps[caemraId]->supported_white_balances[0]= CAM_WB_MODE_AUTO;
+            gCamCaps[caemraId]->supported_white_balances[1]=CAM_WB_MODE_CUSTOM;
+            gCamCaps[caemraId]->supported_white_balances[2]=CAM_WB_MODE_INCANDESCENT;
+            gCamCaps[caemraId]->supported_white_balances[3]=CAM_WB_MODE_FLUORESCENT;
+            gCamCaps[caemraId]->supported_white_balances[4]=CAM_WB_MODE_WARM_FLUORESCENT;
+            gCamCaps[caemraId]->supported_white_balances[5]=CAM_WB_MODE_DAYLIGHT;
+            gCamCaps[caemraId]->supported_white_balances[6]=CAM_WB_MODE_CLOUDY_DAYLIGHT;
+            gCamCaps[caemraId]->supported_white_balances[7]=CAM_WB_MODE_TWILIGHT;
+            gCamCaps[caemraId]->supported_white_balances[8]=CAM_WB_MODE_SHADE;
+            gCamCaps[caemraId]->supported_white_balances[9]=CAM_WB_MODE_MANUAL;
+            gCamCaps[caemraId]->supported_white_balances[10]=CAM_WB_MODE_OFF;
+
+            gCamCaps[cameraId]->min_wb_cct = 2000;
+            gCamCaps[cameraId]->max_wb_cct = 8000;
+            gCamCaps[cameraId]->max_wb_gain = 4;
+            gCamCaps[cameraId]->min_wb_gain = 1;
+
+            gCamCaps[cameraId]->supported_focus_modes_cnt =8;
+            gCamCaps[cameraId]->supported_focus_modes[0] = CAM_FOCUS_MODE_OFF;
+            gCamCaps[cameraId]->supported_focus_modes[1] = CAM_FOCUS_MODE_AUTO;
+            gCamCaps[cameraId]->supported_focus_modes[2] = CAM_FOCUS_MODE_INFINITY;
+            gCamCaps[cameraId]->supported_focus_modes[3] = CAM_FOCUS_MODE_MACRO;
+            gCamCaps[cameraId]->supported_focus_modes[4] = CAM_FOCUS_MODE_FIXED;
+            gCamCaps[cameraId]->supported_focus_modes[5] = CAM_FOCUS_MODE_EDOF;
+            gCamCaps[cameraId]->supported_focus_modes[6] = CAM_FOCUS_MODE_CONTINOUS_VIDEO;
+            gCamCaps[cameraId]->supported_focus_modes[7] = CAM_FOCUS_MODE_CONTINOUS_PICTURE;
+
+            //Not supporting manual focus for now
+
+            gCamCaps[cameraId]->exposure_compensation_min = -12;
+            gCamCaps[cameraId]->exposure_compensation_max =  12;
+            gCamCaps[cameraId]->exposure_compensation_default = 0;
+            gCamCaps[cameraId]->exposure_compensation_step = 0.166667;
+            gCamCaps[cameraId]->exp_compensation_step.numerator =1; //Idk what I'm doing here
+            gCamCaps[cameraId]->exp_compensation_step.denominator =10;
+
+            gCamCaps[cameraId]->video_stablization_supported = (uint8_t)false;
+
+            gCamCaps[cameraId]->picture_sizes_tbl_cnt = 25;
+
+            gCamCaps[cameraId]->picture_sizes_tbl[0].height=2988 ;
+            gCamCaps[cameraId]->picture_sizes_tbl[0].width= 5312;
+
+            gCamCaps[cameraId]->picture_sizes_tbl[1].height= 2988;
+            gCamCaps[cameraId]->picture_sizes_tbl[1].width= 3984;
+
+            gCamCaps[cameraId]->picture_sizes_tbl[2].height= 2160;
+            gCamCaps[cameraId]->picture_sizes_tbl[2].width= 3840;
+
+            gCamCaps[cameraId]->picture_sizes_tbl[3].height= 2488;
+            gCamCaps[cameraId]->picture_sizes_tbl[3].width= 3264;
+
+            gCamCaps[cameraId]->picture_sizes_tbl[4].height= 1836;
+            gCamCaps[cameraId]->picture_sizes_tbl[4].width= 3264;
+
+            gCamCaps[cameraId]->picture_sizes_tbl[5].height= 1920;
+            gCamCaps[cameraId]->picture_sizes_tbl[5].width= 2560;
+
+            gCamCaps[cameraId]->picture_sizes_tbl[6].height= 1944;
+            gCamCaps[cameraId]->picture_sizes_tbl[6].width= 2592;
+            
+            gCamCaps[cameraId]->picture_sizes_tbl[7].height= 1512;
+            gCamCaps[cameraId]->picture_sizes_tbl[7].width= 2688;
+            
+            gCamCaps[cameraId]->picture_sizes_tbl[8].height= 1536;
+            gCamCaps[cameraId]->picture_sizes_tbl[8].width= 2048;
+            
+            gCamCaps[cameraId]->picture_sizes_tbl[9]].height= 1080;
+            gCamCaps[cameraId]->picture_sizes_tbl[9].width= 1920;
+            
+            gCamCaps[cameraId]->picture_sizes_tbl[10].height= 1200;
+            gCamCaps[cameraId]->picture_sizes_tbl[10].width= 1600;
+            
+            gCamCaps[cameraId]->picture_sizes_tbl[11].height= 864;
+            gCamCaps[cameraId]->picture_sizes_tbl[11].width= 1536;
+            
+            gCamCaps[cameraId]->picture_sizes_tbl[12].height= 960;
+            gCamCaps[cameraId]->picture_sizes_tbl[12].width= 1280;
+            
+            gCamCaps[cameraId]->picture_sizes_tbl[13].height= 768;
+            gCamCaps[cameraId]->picture_sizes_tbl[13].width= 1280;
+            
+            gCamCaps[cameraId]->picture_sizes_tbl[14].height= 720;
+            gCamCaps[cameraId]->picture_sizes_tbl[14].width= 1280;
+            
+            gCamCaps[cameraId]->picture_sizes_tbl[15].height= 768;
+            gCamCaps[cameraId]->picture_sizes_tbl[15].width= 1024;
+            
+            gCamCaps[cameraId]->picture_sizes_tbl[16].height= 720;
+            gCamCaps[cameraId]->picture_sizes_tbl[16].width= 880;
+            
+            gCamCaps[cameraId]->picture_sizes_tbl[17].height= 600;
+            gCamCaps[cameraId]->picture_sizes_tbl[17].width= 800;
+            
+            gCamCaps[cameraId]->picture_sizes_tbl[18].height= 480;
+            gCamCaps[cameraId]->picture_sizes_tbl[18].width= 864;
+            
+            gCamCaps[cameraId]->picture_sizes_tbl[19].height= 480;
+            gCamCaps[cameraId]->picture_sizes_tbl[19].width= 800;
+            
+            gCamCaps[cameraId]->picture_sizes_tbl[20].height= 480;
+            gCamCaps[cameraId]->picture_sizes_tbl[20].width= 720;
+            
+            gCamCaps[cameraId]->picture_sizes_tbl[21].height= 480;
+            gCamCaps[cameraId]->picture_sizes_tbl[21].width= 640;
+            
+            gCamCaps[cameraId]->picture_sizes_tbl[22].height= 360;
+            gCamCaps[cameraId]->picture_sizes_tbl[22].width= 640;
+            
+            gCamCaps[cameraId]->picture_sizes_tbl[23].height= 288;
+            gCamCaps[cameraId]->picture_sizes_tbl[23].width= 352;
+            
+            gCamCaps[cameraId]->picture_sizes_tbl[24].height= 240;
+            gCamCaps[cameraId]->picture_sizes_tbl[24].width= 320;
+            for(int i=0;i<25;i++)
+                gCamCaps[cameraId]->picture_min_duration[i]=33333000;
+         ////////////////////////////////////////////////////////////////////////////   
+            gCamCaps[cameraId]->modes_supported = 1;
+            gCamCaps[cameraId]->sesnor_mount_angles=90;
+            gCamCaps[cameraId]->focal_length = 4.42;
+            gCamCaps[cameraId]->hor_view_angle = 67.4;
+            gCamCaps[cameraId]->raw_min_duration[0]= 33333000;
+        /////////////////////////////////////////////////////////////////////////////
+            gCamCaps[cameraId]->preview_sizes_tbl_cnt = 25;
+
+            gCamCaps[cameraId]->preview_sizes_tbl[0].height=2988;
+            gCamCaps[cameraId]->preview_sizes_tbl[0].width= 5312;
+
+            gCamCaps[cameraId]->preview_sizes_tbl[1].height= 2988;
+            gCamCaps[cameraId]->preview_sizes_tbl[1].width= 3984;
+
+            gCamCaps[cameraId]->preview_sizes_tbl[2].height= 2160;
+            gCamCaps[cameraId]->preview_sizes_tbl[2].width= 3840;
+
+            gCamCaps[cameraId]->preview_sizes_tbl[3].height= 2488;
+            gCamCaps[cameraId]->preview_sizes_tbl[3].width= 3264;
+
+            gCamCaps[cameraId]->preview_sizes_tbl[4].height= 1836;
+            gCamCaps[cameraId]->preview_sizes_tbl[4].width= 3264;
+
+            gCamCaps[cameraId]->preview_sizes_tbl[5].height= 1920;
+            gCamCaps[cameraId]->preview_sizes_tbl[5].width= 2560;
+
+            gCamCaps[cameraId]->preview_sizes_tbl[6].height= 1944;
+            gCamCaps[cameraId]->preview_sizes_tbl[6].width= 2592;
+            
+            gCamCaps[cameraId]->preview_sizes_tbl[7].height= 1512;
+            gCamCaps[cameraId]->preview_sizes_tbl[7].width= 2688;
+            
+            gCamCaps[cameraId]->preview_sizes_tbl[8].height= 1536;
+            gCamCaps[cameraId]->preview_sizes_tbl[8].width= 2048;
+            
+            gCamCaps[cameraId]->preview_sizes_tbl[9]].height= 1080;
+            gCamCaps[cameraId]->preview_sizes_tbl[9].width= 1920;
+            
+            gCamCaps[cameraId]->preview_sizes_tbl[10].height= 1200;
+            gCamCaps[cameraId]->preview_sizes_tbl[10].width= 1600;
+            
+            gCamCaps[cameraId]->preview_sizes_tbl[11].height= 864;
+            gCamCaps[cameraId]->preview_sizes_tbl[11].width= 1536;
+            
+            gCamCaps[cameraId]->preview_sizes_tbl[12].height= 960;
+            gCamCaps[cameraId]->preview_sizes_tbl[12].width= 1280;
+            
+            gCamCaps[cameraId]->preview_sizes_tbl[13].height= 768;
+            gCamCaps[cameraId]->preview_sizes_tbl[13].width= 1280;
+            
+            gCamCaps[cameraId]->preview_sizes_tbl[14].height= 720;
+            gCamCaps[cameraId]->preview_sizes_tbl[14].width= 1280;
+            
+            gCamCaps[cameraId]->preview_sizes_tbl[15].height= 768;
+            gCamCaps[cameraId]->preview_sizes_tbl[15].width= 1024;
+            
+            gCamCaps[cameraId]->preview_sizes_tbl[16].height= 720;
+            gCamCaps[cameraId]->preview_sizes_tbl[16].width= 880;
+            
+            gCamCaps[cameraId]->preview_sizes_tbl[17].height= 600;
+            gCamCaps[cameraId]->preview_sizes_tbl[17].width= 800;
+            
+            gCamCaps[cameraId]->preview_sizes_tbl[18].height= 480;
+            gCamCaps[cameraId]->preview_sizes_tbl[18].width= 864;
+            
+            gCamCaps[cameraId]->preview_sizes_tbl[19].height= 480;
+            gCamCaps[cameraId]->preview_sizes_tbl[19].width= 800;
+            
+            gCamCaps[cameraId]->preview_sizes_tbl[20].height= 480;
+            gCamCaps[cameraId]->preview_sizes_tbl[20].width= 720;
+            
+            gCamCaps[cameraId]->preview_sizes_tbl[21].height= 480;
+            gCamCaps[cameraId]->preview_sizes_tbl[21].width= 640;
+            
+            gCamCaps[cameraId]->preview_sizes_tbl[22].height= 360;
+            gCamCaps[cameraId]->preview_sizes_tbl[22].width= 640;
+            
+            gCamCaps[cameraId]->preview_sizes_tbl[23].height= 288;
+            gCamCaps[cameraId]->preview_sizes_tbl[23].width= 352;
+            
+            gCamCaps[cameraId]->preview_sizes_tbl[24].height= 240;
+            gCamCaps[cameraId]->preview_sizes_tbl[24].width= 320;
+        //////////////////////////////////////////////////////////////////////////
+
+            gCamCamps[cameraId]->video_sizes_tbl_cnt=26;
+            gCamCaps[cameraId]->video_sizes_tbl[0].height=2988;
+            gCamCaps[cameraId]->video_sizes_tbl[0].width= 5312;
+
+            gCamCaps[cameraId]->video_sizes_tbl[1].height= 2988;
+            gCamCaps[cameraId]->video_sizes_tbl[1].width= 3984;
+
+            gCamCaps[cameraId]->video_sizes_tbl[2].height= 2160;
+            gCamCaps[cameraId]->video_sizes_tbl[2].width= 3840;
+
+            gCamCaps[cameraId]->video_sizes_tbl[3].height= 2488;
+            gCamCaps[cameraId]->video_sizes_tbl[3].width= 3264;
+
+            gCamCaps[cameraId]->video_sizes_tbl[4].height= 1836;
+            gCamCaps[cameraId]->video_sizes_tbl[4].width= 3264;
+
+            gCamCaps[cameraId]->video_sizes_tbl[5].height= 1920;
+            gCamCaps[cameraId]->video_sizes_tbl[5].width= 2560;
+
+            gCamCaps[cameraId]->video_sizes_tbl[6].height= 1944;
+            gCamCaps[cameraId]->video_sizes_tbl[6].width= 2592;
+            
+            gCamCaps[cameraId]->video_sizes_tbl[7].height= 1512;
+            gCamCaps[cameraId]->video_sizes_tbl[7].width= 2688;
+            
+            gCamCaps[cameraId]->video_sizes_tbl[8].height= 1536;
+            gCamCaps[cameraId]->video_sizes_tbl[8].width= 2048;
+            
+            gCamCaps[cameraId]->video_sizes_tbl[9]].height= 1080;
+            gCamCaps[cameraId]->video_sizes_tbl[9].width= 1920;
+            
+            gCamCaps[cameraId]->video_sizes_tbl[10].height= 1200;
+            gCamCaps[cameraId]->video_sizes_tbl[10].width= 1600;
+            
+            gCamCaps[cameraId]->video_sizes_tbl[11].height= 864;
+            gCamCaps[cameraId]->video_sizes_tbl[11].width= 1536;
+            
+            gCamCaps[cameraId]->video_sizes_tbl[12].height= 960;
+            gCamCaps[cameraId]->video_sizes_tbl[12].width= 1280;
+            
+            gCamCaps[cameraId]->video_sizes_tbl[13].height= 768;
+            gCamCaps[cameraId]->video_sizes_tbl[13].width= 1280;
+            
+            gCamCaps[cameraId]->video_sizes_tbl[14].height= 720;
+            gCamCaps[cameraId]->video_sizes_tbl[14].width= 1280;
+            
+            gCamCaps[cameraId]->video_sizes_tbl[15].height= 768;
+            gCamCaps[cameraId]->video_sizes_tbl[15].width= 1024;
+            
+            gCamCaps[cameraId]->video_sizes_tbl[16].height= 720;
+            gCamCaps[cameraId]->video_sizes_tbl[16].width= 880;
+            
+            gCamCaps[cameraId]->video_sizes_tbl[17].height= 600;
+            gCamCaps[cameraId]->video_sizes_tbl[17].width= 800;
+            
+            gCamCaps[cameraId]->video_sizes_tbl[18].height= 480;
+            gCamCaps[cameraId]->video_sizes_tbl[18].width= 864;
+            
+            gCamCaps[cameraId]->video_sizes_tbl[19].height= 480;
+            gCamCaps[cameraId]->video_sizes_tbl[19].width= 800;
+            
+            gCamCaps[cameraId]->video_sizes_tbl[20].height= 480;
+            gCamCaps[cameraId]->video_sizes_tbl[20].width= 720;
+            
+            gCamCaps[cameraId]->video_sizes_tbl[21].height= 480;
+            gCamCaps[cameraId]->video_sizes_tbl[21].width= 640;
+            
+            gCamCaps[cameraId]->video_sizes_tbl[22].height= 360;
+            gCamCaps[cameraId]->video_sizes_tbl[22].width= 640;
+            
+            gCamCaps[cameraId]->video_sizes_tbl[23].height= 288;
+            gCamCaps[cameraId]->video_sizes_tbl[23].width= 352;
+            
+            gCamCaps[cameraId]->video_sizes_tbl[24].height= 240;
+            gCamCaps[cameraId]->video_sizes_tbl[24].width= 320;
+
+            gCamCaps[cameraId]->video_sizes_tbl[25].height= 144;
+            gCamCaps[cameraId]->video_sizes_tbl[25].width= 176;
+
+        ////////////////////////////////////////////////////////////////////////
+
+            gCamCamps[cameraId]->video_sizes_tbl_cnt=25;
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[0].height=2988;
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[0].width= 5312;
+
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[1].height= 2988;
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[1].width= 3984;
+
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[2].height= 2160;
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[2].width= 3840;
+
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[3].height= 2488;
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[3].width= 3264;
+
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[4].height= 1836;
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[4].width= 3264;
+
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[5].height= 1920;
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[5].width= 2560;
+
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[6].height= 1944;
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[6].width= 2592;
+            
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[7].height= 1512;
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[7].width= 2688;
+            
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[8].height= 1536;
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[8].width= 2048;
+            
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[9]].height= 1080;
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[9].width= 1920;
+            
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[10].height= 1200;
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[10].width= 1600;
+            
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[11].height= 864;
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[11].width= 1536;
+            
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[12].height= 960;
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[12].width= 1280;
+            
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[13].height= 768;
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[13].width= 1280;
+            
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[14].height= 720;
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[14].width= 1280;
+            
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[15].height= 768;
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[15].width= 1024;
+            
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[16].height= 720;
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[16].width= 880;
+            
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[17].height= 600;
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[17].width= 800;
+            
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[18].height= 480;
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[18].width= 864;
+            
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[19].height= 480;
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[19].width= 800;
+            
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[20].height= 480;
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[20].width= 720;
+            
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[21].height= 480;
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[21].width= 640;
+            
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[22].height= 360;
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[22].width= 640;
+            
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[23].height= 288;
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[23].width= 352;
+            
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[24].height= 240;
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[24].width= 320;
+
+            ///////////////////////////////////////////////////////////////////////
+            gCamCaps[cameraId]->hfr_tbl_cnt=0;
+            gCamCaps[cameraId]->supported_preview_fmt_cnt = 2;
+            gCamCaps[cameraId]->supported_preview_fmts[0] = CAM_FORMAT_YUV_420_NV21;
+            gCamCaps[cameraId]->supported_preview_fmts[1] = CAM_FORMAT_YUV_420_NV12_VENUS;
+
+            gCamCaps[cameraId]->supported_raw_dim_cnt = 1;
+            gCamCaps[cameraId]->raw_dim.height= 2988;
+            gCamCaps[cameraId]->raw_dim.height = 5312;
+
+            gCamCaps[cameraId]->supported_raw_fmt_cnt=1;
+            gCamCaps[cameraId]->supported_raw_fmts=CAM_FORMAT_YUV_RAW_8BIT_YUYV;
+
+            gCamCaps[cameraId]->supported_focus_algos_cnt = 4;
+            gCamCaps[cameraId]->supported_focus_algos[0]= CAM_FOCUS_ALGO_AUTO;
+            gCamCaps[cameraId]->supported_focus_algos[1]= CAM_FOCUS_ALGO_SPOT;
+            gCamCaps[cameraId]->supported_focus_algos[2]= CAM_FOCUS_ALGO_CENTER_WEIGHTED;
+            gCamCaps[cameraId]->supported_focus_algos[3]= CAM_FOCUS_ALGO_AVERAGE;
+
+            gCamCaps[cameraId]->auto_wb_lock_supported =(uint8_t)true ;
+            gCamCaps[cameraId]->zoom_supported =(uint8_t)true ;
+            gCamCaps[cameraId]->smooth_zoom_supported =(uint8_t)false ;
+            gCamCaps[cameraId]->auto_exposure_lock_supported =(uint8_t)true ;
+            gCamCaps[cameraId]->video_snapshot_supported =(uint8_t)true;
+
+            gCamCaps[cameraId]->max_num_roi = 0 ;   // NO
+            gCamCaps[cameraId]->max_num_focus_areas = 1; //Idea
+            gCamCaps[cameraId]->max_num_metering_areas = 1; //Whats
+            gCamCaps[cameraId]->max_zoom_step = 1; //happening
+
+            gCamCaps[cameraId]->brightness_ctrl.min_value = 0;
+            gCamCaps[cameraId]->brightness_ctrl.max_value = 6;
+            gCamCaps[cameraId]->brightness_ctrl.def_value = 1;
+            gCamCaps[cameraId]->brightness_ctrl.step = 1;
+
+            gCamCaps[cameraId]->saturation_ctrl.min_value = 0;
+            gCamCaps[cameraId]->saturation_ctrl.max_value = 10;
+            gCamCaps[cameraId]->saturation_ctrl.def_value = 5;
+            gCamCaps[cameraId]->saturation_ctrl.step = 1;
+
+            gCamCaps[cameraId]->sharpness_ctrl.min_value = 0;
+            gCamCaps[cameraId]->sharpness_ctrl.max_value = 36;
+            gCamCaps[cameraId]->sharpness_ctrl.def_value = 12;
+            gCamCaps[cameraId]->sharpness_ctrl.step = 6;
+
+            gCamCaps[cameraId]->contrast_ctrl.min_value = 0;
+            gCamCaps[cameraId]->contrast_ctrl.max_value = 10;
+            gCamCaps[cameraId]->contrast_ctrl.def_value = 5;
+            gCamCaps[cameraId]->contrast_ctrl.step = 1;
+
+            gCamCaps[cameraId]->sce_ctrl.min_value = -100;
+            gCamCaps[cameraId]->sce_ctrl.max_value = 100;
+            gCamCaps[cameraId]->sce_ctrl.def_value = 10;
+            gCamCaps[cameraId]->sce_ctrl.step = 10;
+
+            gCamCaps[cameraId]->cam_hdr_bracketing_info_t.exp_val=CAM_EXP_BRACKETING_OFF;
+            gCamCaps[cameraId]->qcom_supported_feature_mask = (uint32_t) false; //Disable HDR for now
+            gCamCaps[cameraId]->min_num_pp_bufs=2;
+        }else{
+            CDBG_HIGH("%s : Initialising capabilities for camera id = 1",__func__);
+            gCamCaps[cameraId]->position = CAM_POSITION_FRONT;
+            gCamCaps[cameraId]->auto_hdr_supported = 1;
+            gCamCaps[cameraId]->isWnrSupported = 1;
+
+            gCamCaps[cameraId]->supported_iso_modes_cnt = 4; 
+            gCamCaps[cameraId]->supported_iso_modes[0] = CAM_ISO_MODE_AUTO;
+            gCamCaps[cameraId]->supported_iso_modes[1] = CAM_ISO_MODE_DEBLUR;
+            gCamCaps[cameraId]->supported_iso_modes[2] = CAM_ISO_MODE_100;
+            gCamCaps[cameraId]->supported_iso_modes[3] = CAM_ISO_MODE_200;
+            
+            gCamCaps[cameraId]->supported_flash_modes_cnt = 3;
+            gCamCaps[cameraId]->supported_flash_modes[0] = CAM_FLASH_MODE_OFF;
+            gCamCaps[cameraId]->supported_flash_modes[1] = CAM_FLASH_MODE_AUTO;
+            gCamCaps[cameraId]->supported_flash_modes[2] = CAM_FLASH_MODE_ON;
+
+            gCamCaps[cameraId]->zoom_ratio_tbl_cnt = 1; //Disable Zoom for now
+            gCamCaps[cameraId]->zoom_ratio_tbl[0]=100;
+
+            gCamCaps[cameraId]->supported_effects_cnt=12;
+            gCamCaps[cameraId]->supported_effects[0]= CAM_EFFECT_MODE_OFF;
+            gCamCaps[cameraId]->supported_effects[1]= CAM_EFFECT_MODE_MONO;
+            gCamCaps[cameraId]->supported_effects[2]= CAM_EFFECT_MODE_NEGATIVE;
+            gCamCaps[cameraId]->supported_effects[3]= CAM_EFFECT_MODE_SOLARIZE;
+            gCamCaps[cameraId]->supported_effects[4]= CAM_EFFECT_MODE_SEPIA;
+            gCamCaps[cameraId]->supported_effects[5]= CAM_EFFECT_MODE_POSTERIZE;
+            gCamCaps[cameraId]->supported_effects[6]= CAM_EFFECT_MODE_WHITEBOARD;
+            gCamCaps[cameraId]->supported_effects[7]= CAM_EFFECT_MODE_BLACKBOARD;
+            gCamCaps[cameraId]->supported_effects[8]= CAM_EFFECT_MODE_AQUA;
+            gCamCaps[cameraId]->supported_effects[9]= CAM_EFFECT_MODE_EMBOSS;
+            gCamCaps[cameraId]->supported_effects[10]= CAM_EFFECT_MODE_SKETCH;
+            gCamCaps[cameraId]->supported_effects[11]= CAM_EFFECT_MODE_NEON;
+
+            gCamCaps[cameraId]->supported_scene_modes_cnt=21;
+            gCamCaps[cameraId]->supported_scene_modes[0] =CAM_SCENE_MODE_OFF;
+            gCamCaps[cameraId]->supported_scene_modes[1] =CAM_SCENE_MODE_AUTO;
+            gCamCaps[cameraId]->supported_scene_modes[2] =CAM_SCENE_MODE_LANDSCAPE;
+            gCamCaps[cameraId]->supported_scene_modes[3] =CAM_SCENE_MODE_SNOW;
+            gCamCaps[cameraId]->supported_scene_modes[4] =CAM_SCENE_MODE_BEACH;
+            gCamCaps[cameraId]->supported_scene_modes[5] =CAM_SCENE_MODE_SUNSET;
+            gCamCaps[cameraId]->supported_scene_modes[6] =CAM_SCENE_MODE_NIGHT;
+            gCamCaps[cameraId]->supported_scene_modes[7] =CAM_SCENE_MODE_PORTRAIT;
+            gCamCaps[cameraId]->supported_scene_modes[8] =CAM_SCENE_MODE_BACKLIGHT;
+            gCamCaps[cameraId]->supported_scene_modes[9] =CAM_SCENE_MODE_SPORTS;
+            gCamCaps[cameraId]->supported_scene_modes[10] =CAM_SCENE_MODE_ANTISHAKE;
+            gCamCaps[cameraId]->supported_scene_modes[11] =CAM_SCENE_MODE_FLOWERS;
+            gCamCaps[cameraId]->supported_scene_modes[12] =CAM_SCENE_MODE_CANDLELIGHT;
+            gCamCaps[cameraId]->supported_scene_modes[13] =CAM_SCENE_MODE_FIREWORKS;
+            gCamCaps[cameraId]->supported_scene_modes[14] =CAM_SCENE_MODE_PARTY;
+            gCamCaps[cameraId]->supported_scene_modes[15] =CAM_SCENE_MODE_NIGHT_PORTRAIT;
+            gCamCaps[cameraId]->supported_scene_modes[16] =CAM_SCENE_MODE_THEATRE;
+            gCamCaps[cameraId]->supported_scene_modes[17] =CAM_SCENE_MODE_ACTION;
+            gCamCaps[cameraId]->supported_scene_modes[18] =CAM_SCENE_MODE_AR;
+            gCamCaps[cameraId]->supported_scene_modes[19] =CAM_SCENE_MODE_FACE_PRIORITY;
+            gCamCaps[cameraId]->supported_scene_modes[20] =CAM_SCENE_MODE_BARCODE;
+            gCamCaps[cameraId]->supported_scene_modes[21] =CAM_SCENE_MODE_HDR;
+            gCamCaps[cameraId]->supported_scene_modes[22] =CAM_SCENE_MODE_MAX;
+
+            gCamCaps[cameraId]->supported_aec_modes_cnt =7;
+            gCamCaps[cameraId]->supported_aec_modes[0] = CAM_AEC_MODE_FRAME_AVERAGE;
+            gCamCaps[cameraId]->supported_aec_modes[1] = CAM_AEC_MODE_CENTER_WEIGHTED;
+            gCamCaps[cameraId]->supported_aec_modes[2] = CAM_AEC_MODE_SPOT_METERING;
+            gCamCaps[cameraId]->supported_aec_modes[3] = CAM_AEC_MODE_SMART_METERING;
+            gCamCaps[cameraId]->supported_aec_modes[4] = CAM_AEC_MODE_USER_METERING;
+            gCamCaps[cameraId]->supported_aec_modes[5]= CAM_AEC_MODE_SPOT_METERING_ADV;
+            gCamCaps[cameraId]->supported_aec_modes[6] = CAM_AEC_MODE_CENTER_WEIGHTED_ADV;
+
+            gCamCaps[cameraId]->fps_ranges_tbl_cnt = 4;
+            gCamCaps[cameraId]->min_fps =15;
+            gCamCaps[cameraId]->max_fps =30;
+            gCamCaps[cameraId]->video_min_fps=15;
+            gCamCaps[cameraId]->video_max_fps=30;
+
+            gCamCaps[cameraId]->supported_antibandings_cnt=4;
+            gCamCaps[cameraId]->supported_antibandings[0] = CAM_ANTIBANDING_MODE_OFF;
+            gCamCaps[cameraId]->supported_antibandings[1] = CAM_ANTIBANDING_MODE_60HZ;
+            gCamCaps[cameraId]->supported_antibandings[2] = CAM_ANTIBANDING_MODE_50HZ;
+            gCamCaps[cameraId]->supported_antibandings[3] = CAM_ANTIBANDING_MODE_AUTO;
+
+
+            gCamCaps[cameraId]->supported_white_balances_cnt= 11;
+            gCamCaps[caemraId]->supported_white_balances[0]= CAM_WB_MODE_AUTO;
+            gCamCaps[caemraId]->supported_white_balances[1]=CAM_WB_MODE_CUSTOM;
+            gCamCaps[caemraId]->supported_white_balances[2]=CAM_WB_MODE_INCANDESCENT;
+            gCamCaps[caemraId]->supported_white_balances[3]=CAM_WB_MODE_FLUORESCENT;
+            gCamCaps[caemraId]->supported_white_balances[4]=CAM_WB_MODE_WARM_FLUORESCENT;
+            gCamCaps[caemraId]->supported_white_balances[5]=CAM_WB_MODE_DAYLIGHT;
+            gCamCaps[caemraId]->supported_white_balances[6]=CAM_WB_MODE_CLOUDY_DAYLIGHT;
+            gCamCaps[caemraId]->supported_white_balances[7]=CAM_WB_MODE_TWILIGHT;
+            gCamCaps[caemraId]->supported_white_balances[8]=CAM_WB_MODE_SHADE;
+            gCamCaps[caemraId]->supported_white_balances[9]=CAM_WB_MODE_MANUAL;
+            gCamCaps[caemraId]->supported_white_balances[10]=CAM_WB_MODE_OFF;
+
+            gCamCaps[cameraId]->min_wb_cct = 2000;
+            gCamCaps[cameraId]->max_wb_cct = 8000;
+            gCamCaps[cameraId]->max_wb_gain = 4;
+            gCamCaps[cameraId]->min_wb_gain = 1;
+
+            gCamCaps[cameraId]->supported_focus_modes_cnt =8;
+            gCamCaps[cameraId]->supported_focus_modes[0] = CAM_FOCUS_MODE_OFF;
+            gCamCaps[cameraId]->supported_focus_modes[1] = CAM_FOCUS_MODE_AUTO;
+            gCamCaps[cameraId]->supported_focus_modes[2] = CAM_FOCUS_MODE_INFINITY;
+            gCamCaps[cameraId]->supported_focus_modes[3] = CAM_FOCUS_MODE_MACRO;
+            gCamCaps[cameraId]->supported_focus_modes[4] = CAM_FOCUS_MODE_FIXED;
+            gCamCaps[cameraId]->supported_focus_modes[5] = CAM_FOCUS_MODE_EDOF;
+            gCamCaps[cameraId]->supported_focus_modes[6] = CAM_FOCUS_MODE_CONTINOUS_VIDEO;
+            gCamCaps[cameraId]->supported_focus_modes[7] = CAM_FOCUS_MODE_CONTINOUS_PICTURE;
+
+            //Not supporting manual focus for now
+
+            gCamCaps[cameraId]->exposure_compensation_min = -12;
+            gCamCaps[cameraId]->exposure_compensation_max =  12;
+            gCamCaps[cameraId]->exposure_compensation_default = 0;
+            gCamCaps[cameraId]->exposure_compensation_step = 0.166667;
+            gCamCaps[cameraId]->exp_compensation_step.numerator =1; //Idk what I'm doing here
+            gCamCaps[cameraId]->exp_compensation_step.denominator =10;
+
+            gCamCaps[cameraId]->video_stablization_supported = (uint8_t)false;
+
+            gCamCaps[cameraId]->picture_sizes_tbl_cnt = 25;
+
+            gCamCaps[cameraId]->picture_sizes_tbl[0].height=2988 ;
+            gCamCaps[cameraId]->picture_sizes_tbl[0].width= 5312;
+
+            gCamCaps[cameraId]->picture_sizes_tbl[1].height= 2988;
+            gCamCaps[cameraId]->picture_sizes_tbl[1].width= 3984;
+
+            gCamCaps[cameraId]->picture_sizes_tbl[2].height= 2160;
+            gCamCaps[cameraId]->picture_sizes_tbl[2].width= 3840;
+
+            gCamCaps[cameraId]->picture_sizes_tbl[3].height= 2488;
+            gCamCaps[cameraId]->picture_sizes_tbl[3].width= 3264;
+
+            gCamCaps[cameraId]->picture_sizes_tbl[4].height= 1836;
+            gCamCaps[cameraId]->picture_sizes_tbl[4].width= 3264;
+
+            gCamCaps[cameraId]->picture_sizes_tbl[5].height= 1920;
+            gCamCaps[cameraId]->picture_sizes_tbl[5].width= 2560;
+
+            gCamCaps[cameraId]->picture_sizes_tbl[6].height= 1944;
+            gCamCaps[cameraId]->picture_sizes_tbl[6].width= 2592;
+            
+            gCamCaps[cameraId]->picture_sizes_tbl[7].height= 1512;
+            gCamCaps[cameraId]->picture_sizes_tbl[7].width= 2688;
+            
+            gCamCaps[cameraId]->picture_sizes_tbl[8].height= 1536;
+            gCamCaps[cameraId]->picture_sizes_tbl[8].width= 2048;
+            
+            gCamCaps[cameraId]->picture_sizes_tbl[9]].height= 1080;
+            gCamCaps[cameraId]->picture_sizes_tbl[9].width= 1920;
+            
+            gCamCaps[cameraId]->picture_sizes_tbl[10].height= 1200;
+            gCamCaps[cameraId]->picture_sizes_tbl[10].width= 1600;
+            
+            gCamCaps[cameraId]->picture_sizes_tbl[11].height= 864;
+            gCamCaps[cameraId]->picture_sizes_tbl[11].width= 1536;
+            
+            gCamCaps[cameraId]->picture_sizes_tbl[12].height= 960;
+            gCamCaps[cameraId]->picture_sizes_tbl[12].width= 1280;
+            
+            gCamCaps[cameraId]->picture_sizes_tbl[13].height= 768;
+            gCamCaps[cameraId]->picture_sizes_tbl[13].width= 1280;
+            
+            gCamCaps[cameraId]->picture_sizes_tbl[14].height= 720;
+            gCamCaps[cameraId]->picture_sizes_tbl[14].width= 1280;
+            
+            gCamCaps[cameraId]->picture_sizes_tbl[15].height= 768;
+            gCamCaps[cameraId]->picture_sizes_tbl[15].width= 1024;
+            
+            gCamCaps[cameraId]->picture_sizes_tbl[16].height= 720;
+            gCamCaps[cameraId]->picture_sizes_tbl[16].width= 880;
+            
+            gCamCaps[cameraId]->picture_sizes_tbl[17].height= 600;
+            gCamCaps[cameraId]->picture_sizes_tbl[17].width= 800;
+            
+            gCamCaps[cameraId]->picture_sizes_tbl[18].height= 480;
+            gCamCaps[cameraId]->picture_sizes_tbl[18].width= 864;
+            
+            gCamCaps[cameraId]->picture_sizes_tbl[19].height= 480;
+            gCamCaps[cameraId]->picture_sizes_tbl[19].width= 800;
+            
+            gCamCaps[cameraId]->picture_sizes_tbl[20].height= 480;
+            gCamCaps[cameraId]->picture_sizes_tbl[20].width= 720;
+            
+            gCamCaps[cameraId]->picture_sizes_tbl[21].height= 480;
+            gCamCaps[cameraId]->picture_sizes_tbl[21].width= 640;
+            
+            gCamCaps[cameraId]->picture_sizes_tbl[22].height= 360;
+            gCamCaps[cameraId]->picture_sizes_tbl[22].width= 640;
+            
+            gCamCaps[cameraId]->picture_sizes_tbl[23].height= 288;
+            gCamCaps[cameraId]->picture_sizes_tbl[23].width= 352;
+            
+            gCamCaps[cameraId]->picture_sizes_tbl[24].height= 240;
+            gCamCaps[cameraId]->picture_sizes_tbl[24].width= 320;
+
+            for(int i=0;i<25;i++)
+                gCamCaps[cameraId]->picture_min_duration[i]=33333000;
+         ////////////////////////////////////////////////////////////////////////////   
+            gCamCaps[cameraId]->modes_supported = 1;
+            gCamCaps[cameraId]->sesnor_mount_angles=270;
+            gCamCaps[cameraId]->focal_length = 4.42;
+            gCamCaps[cameraId]->hor_view_angle = 67.4;
+        /////////////////////////////////////////////////////////////////////////////
+            gCamCaps[cameraId]->preview_sizes_tbl_cnt = 25;
+
+            gCamCaps[cameraId]->preview_sizes_tbl[0].height=2988;
+            gCamCaps[cameraId]->preview_sizes_tbl[0].width= 5312;
+
+            gCamCaps[cameraId]->preview_sizes_tbl[1].height= 2988;
+            gCamCaps[cameraId]->preview_sizes_tbl[1].width= 3984;
+
+            gCamCaps[cameraId]->preview_sizes_tbl[2].height= 2160;
+            gCamCaps[cameraId]->preview_sizes_tbl[2].width= 3840;
+
+            gCamCaps[cameraId]->preview_sizes_tbl[3].height= 2488;
+            gCamCaps[cameraId]->preview_sizes_tbl[3].width= 3264;
+
+            gCamCaps[cameraId]->preview_sizes_tbl[4].height= 1836;
+            gCamCaps[cameraId]->preview_sizes_tbl[4].width= 3264;
+
+            gCamCaps[cameraId]->preview_sizes_tbl[5].height= 1920;
+            gCamCaps[cameraId]->preview_sizes_tbl[5].width= 2560;
+
+            gCamCaps[cameraId]->preview_sizes_tbl[6].height= 1944;
+            gCamCaps[cameraId]->preview_sizes_tbl[6].width= 2592;
+            
+            gCamCaps[cameraId]->preview_sizes_tbl[7].height= 1512;
+            gCamCaps[cameraId]->preview_sizes_tbl[7].width= 2688;
+            
+            gCamCaps[cameraId]->preview_sizes_tbl[8].height= 1536;
+            gCamCaps[cameraId]->preview_sizes_tbl[8].width= 2048;
+            
+            gCamCaps[cameraId]->preview_sizes_tbl[9]].height= 1080;
+            gCamCaps[cameraId]->preview_sizes_tbl[9].width= 1920;
+            
+            gCamCaps[cameraId]->preview_sizes_tbl[10].height= 1200;
+            gCamCaps[cameraId]->preview_sizes_tbl[10].width= 1600;
+            
+            gCamCaps[cameraId]->preview_sizes_tbl[11].height= 864;
+            gCamCaps[cameraId]->preview_sizes_tbl[11].width= 1536;
+            
+            gCamCaps[cameraId]->preview_sizes_tbl[12].height= 960;
+            gCamCaps[cameraId]->preview_sizes_tbl[12].width= 1280;
+            
+            gCamCaps[cameraId]->preview_sizes_tbl[13].height= 768;
+            gCamCaps[cameraId]->preview_sizes_tbl[13].width= 1280;
+            
+            gCamCaps[cameraId]->preview_sizes_tbl[14].height= 720;
+            gCamCaps[cameraId]->preview_sizes_tbl[14].width= 1280;
+            
+            gCamCaps[cameraId]->preview_sizes_tbl[15].height= 768;
+            gCamCaps[cameraId]->preview_sizes_tbl[15].width= 1024;
+            
+            gCamCaps[cameraId]->preview_sizes_tbl[16].height= 720;
+            gCamCaps[cameraId]->preview_sizes_tbl[16].width= 880;
+            
+            gCamCaps[cameraId]->preview_sizes_tbl[17].height= 600;
+            gCamCaps[cameraId]->preview_sizes_tbl[17].width= 800;
+            
+            gCamCaps[cameraId]->preview_sizes_tbl[18].height= 480;
+            gCamCaps[cameraId]->preview_sizes_tbl[18].width= 864;
+            
+            gCamCaps[cameraId]->preview_sizes_tbl[19].height= 480;
+            gCamCaps[cameraId]->preview_sizes_tbl[19].width= 800;
+            
+            gCamCaps[cameraId]->preview_sizes_tbl[20].height= 480;
+            gCamCaps[cameraId]->preview_sizes_tbl[20].width= 720;
+            
+            gCamCaps[cameraId]->preview_sizes_tbl[21].height= 480;
+            gCamCaps[cameraId]->preview_sizes_tbl[21].width= 640;
+            
+            gCamCaps[cameraId]->preview_sizes_tbl[22].height= 360;
+            gCamCaps[cameraId]->preview_sizes_tbl[22].width= 640;
+            
+            gCamCaps[cameraId]->preview_sizes_tbl[23].height= 288;
+            gCamCaps[cameraId]->preview_sizes_tbl[23].width= 352;
+            
+            gCamCaps[cameraId]->preview_sizes_tbl[24].height= 240;
+            gCamCaps[cameraId]->preview_sizes_tbl[24].width= 320;
+        //////////////////////////////////////////////////////////////////////////
+
+            gCamCamps[cameraId]->video_sizes_tbl_cnt=26;
+            gCamCaps[cameraId]->video_sizes_tbl[0].height=2988;
+            gCamCaps[cameraId]->video_sizes_tbl[0].width= 5312;
+
+            gCamCaps[cameraId]->video_sizes_tbl[1].height= 2988;
+            gCamCaps[cameraId]->video_sizes_tbl[1].width= 3984;
+
+            gCamCaps[cameraId]->video_sizes_tbl[2].height= 2160;
+            gCamCaps[cameraId]->video_sizes_tbl[2].width= 3840;
+
+            gCamCaps[cameraId]->video_sizes_tbl[3].height= 2488;
+            gCamCaps[cameraId]->video_sizes_tbl[3].width= 3264;
+
+            gCamCaps[cameraId]->video_sizes_tbl[4].height= 1836;
+            gCamCaps[cameraId]->video_sizes_tbl[4].width= 3264;
+
+            gCamCaps[cameraId]->video_sizes_tbl[5].height= 1920;
+            gCamCaps[cameraId]->video_sizes_tbl[5].width= 2560;
+
+            gCamCaps[cameraId]->video_sizes_tbl[6].height= 1944;
+            gCamCaps[cameraId]->video_sizes_tbl[6].width= 2592;
+            
+            gCamCaps[cameraId]->video_sizes_tbl[7].height= 1512;
+            gCamCaps[cameraId]->video_sizes_tbl[7].width= 2688;
+            
+            gCamCaps[cameraId]->video_sizes_tbl[8].height= 1536;
+            gCamCaps[cameraId]->video_sizes_tbl[8].width= 2048;
+            
+            gCamCaps[cameraId]->video_sizes_tbl[9]].height= 1080;
+            gCamCaps[cameraId]->video_sizes_tbl[9].width= 1920;
+            
+            gCamCaps[cameraId]->video_sizes_tbl[10].height= 1200;
+            gCamCaps[cameraId]->video_sizes_tbl[10].width= 1600;
+            
+            gCamCaps[cameraId]->video_sizes_tbl[11].height= 864;
+            gCamCaps[cameraId]->video_sizes_tbl[11].width= 1536;
+            
+            gCamCaps[cameraId]->video_sizes_tbl[12].height= 960;
+            gCamCaps[cameraId]->video_sizes_tbl[12].width= 1280;
+            
+            gCamCaps[cameraId]->video_sizes_tbl[13].height= 768;
+            gCamCaps[cameraId]->video_sizes_tbl[13].width= 1280;
+            
+            gCamCaps[cameraId]->video_sizes_tbl[14].height= 720;
+            gCamCaps[cameraId]->video_sizes_tbl[14].width= 1280;
+            
+            gCamCaps[cameraId]->video_sizes_tbl[15].height= 768;
+            gCamCaps[cameraId]->video_sizes_tbl[15].width= 1024;
+            
+            gCamCaps[cameraId]->video_sizes_tbl[16].height= 720;
+            gCamCaps[cameraId]->video_sizes_tbl[16].width= 880;
+            
+            gCamCaps[cameraId]->video_sizes_tbl[17].height= 600;
+            gCamCaps[cameraId]->video_sizes_tbl[17].width= 800;
+            
+            gCamCaps[cameraId]->video_sizes_tbl[18].height= 480;
+            gCamCaps[cameraId]->video_sizes_tbl[18].width= 864;
+            
+            gCamCaps[cameraId]->video_sizes_tbl[19].height= 480;
+            gCamCaps[cameraId]->video_sizes_tbl[19].width= 800;
+            
+            gCamCaps[cameraId]->video_sizes_tbl[20].height= 480;
+            gCamCaps[cameraId]->video_sizes_tbl[20].width= 720;
+            
+            gCamCaps[cameraId]->video_sizes_tbl[21].height= 480;
+            gCamCaps[cameraId]->video_sizes_tbl[21].width= 640;
+            
+            gCamCaps[cameraId]->video_sizes_tbl[22].height= 360;
+            gCamCaps[cameraId]->video_sizes_tbl[22].width= 640;
+            
+            gCamCaps[cameraId]->video_sizes_tbl[23].height= 288;
+            gCamCaps[cameraId]->video_sizes_tbl[23].width= 352;
+            
+            gCamCaps[cameraId]->video_sizes_tbl[24].height= 240;
+            gCamCaps[cameraId]->video_sizes_tbl[24].width= 320;
+
+            gCamCaps[cameraId]->video_sizes_tbl[25].height= 144;
+            gCamCaps[cameraId]->video_sizes_tbl[25].width= 176;
+
+        ////////////////////////////////////////////////////////////////////////
+
+            gCamCamps[cameraId]->video_sizes_tbl_cnt=25;
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[0].height=2988;
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[0].width= 5312;
+
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[1].height= 2988;
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[1].width= 3984;
+
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[2].height= 2160;
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[2].width= 3840;
+
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[3].height= 2488;
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[3].width= 3264;
+
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[4].height= 1836;
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[4].width= 3264;
+
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[5].height= 1920;
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[5].width= 2560;
+
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[6].height= 1944;
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[6].width= 2592;
+            
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[7].height= 1512;
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[7].width= 2688;
+            
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[8].height= 1536;
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[8].width= 2048;
+            
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[9]].height= 1080;
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[9].width= 1920;
+            
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[10].height= 1200;
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[10].width= 1600;
+            
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[11].height= 864;
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[11].width= 1536;
+            
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[12].height= 960;
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[12].width= 1280;
+            
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[13].height= 768;
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[13].width= 1280;
+            
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[14].height= 720;
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[14].width= 1280;
+            
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[15].height= 768;
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[15].width= 1024;
+            
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[16].height= 720;
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[16].width= 880;
+            
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[17].height= 600;
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[17].width= 800;
+            
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[18].height= 480;
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[18].width= 864;
+            
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[19].height= 480;
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[19].width= 800;
+            
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[20].height= 480;
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[20].width= 720;
+            
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[21].height= 480;
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[21].width= 640;
+            
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[22].height= 360;
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[22].width= 640;
+            
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[23].height= 288;
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[23].width= 352;
+            
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[24].height= 240;
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[24].width= 320;
+
+            ///////////////////////////////////////////////////////////////////////
+            gCamCaps[cameraId]->hfr_tbl_cnt=0;
+            gCamCaps[cameraId]->supported_preview_fmt_cnt = 2;
+            gCamCaps[cameraId]->supported_preview_fmts[0] = CAM_FORMAT_YUV_420_NV21;
+            gCamCaps[cameraId]->supported_preview_fmts[1] = CAM_FORMAT_YUV_420_NV12_VENUS;
+
+            gCamCaps[cameraId]->supported_raw_dim_cnt = 1;
+            gCamCaps[cameraId]->raw_min_duration[0]= 33333000;
+            gCamCaps[cameraId]->raw_dim.height= 2988;
+            gCamCaps[cameraId]->raw_dim.height = 5312;
+
+            gCamCaps[cameraId]->supported_raw_fmt_cnt=1;
+            gCamCaps[cameraId]->supported_raw_fmts=CAM_FORMAT_YUV_RAW_8BIT_YUYV;
+
+            gCamCaps[cameraId]->supported_focus_algos_cnt = 4;
+            gCamCaps[cameraId]->supported_focus_algos[0]= CAM_FOCUS_ALGO_AUTO;
+            gCamCaps[cameraId]->supported_focus_algos[1]= CAM_FOCUS_ALGO_SPOT;
+            gCamCaps[cameraId]->supported_focus_algos[2]= CAM_FOCUS_ALGO_CENTER_WEIGHTED;
+            gCamCaps[cameraId]->supported_focus_algos[3]= CAM_FOCUS_ALGO_AVERAGE;
+
+            gCamCaps[cameraId]->auto_wb_lock_supported =(uint8_t)true ;
+            gCamCaps[cameraId]->zoom_supported =(uint8_t)true ;
+            gCamCaps[cameraId]->smooth_zoom_supported =(uint8_t)false ;
+            gCamCaps[cameraId]->auto_exposure_lock_supported =(uint8_t)true ;
+            gCamCaps[cameraId]->video_snapshot_supported =(uint8_t)true;
+
+            gCamCaps[cameraId]->max_num_roi = 0 ;   // NO
+            gCamCaps[cameraId]->max_num_focus_areas = 1; //Idea
+            gCamCaps[cameraId]->max_num_metering_areas = 1; //Whats
+            gCamCaps[cameraId]->max_zoom_step = 1; //happening
+
+            gCamCaps[cameraId]->brightness_ctrl.min_value = 0;
+            gCamCaps[cameraId]->brightness_ctrl.max_value = 6;
+            gCamCaps[cameraId]->brightness_ctrl.def_value = 1;
+            gCamCaps[cameraId]->brightness_ctrl.step = 1;
+
+            gCamCaps[cameraId]->saturation_ctrl.min_value = 0;
+            gCamCaps[cameraId]->saturation_ctrl.max_value = 10;
+            gCamCaps[cameraId]->saturation_ctrl.def_value = 5;
+            gCamCaps[cameraId]->saturation_ctrl.step = 1;
+
+            gCamCaps[cameraId]->sharpness_ctrl.min_value = 0;
+            gCamCaps[cameraId]->sharpness_ctrl.max_value = 36;
+            gCamCaps[cameraId]->sharpness_ctrl.def_value = 12;
+            gCamCaps[cameraId]->sharpness_ctrl.step = 6;
+
+            gCamCaps[cameraId]->contrast_ctrl.min_value = 0;
+            gCamCaps[cameraId]->contrast_ctrl.max_value = 10;
+            gCamCaps[cameraId]->contrast_ctrl.def_value = 5;
+            gCamCaps[cameraId]->contrast_ctrl.step = 1;
+
+            gCamCaps[cameraId]->sce_ctrl.min_value = -100;
+            gCamCaps[cameraId]->sce_ctrl.max_value = 100;
+            gCamCaps[cameraId]->sce_ctrl.def_value = 10;
+            gCamCaps[cameraId]->sce_ctrl.step = 10;
+
+            gCamCaps[cameraId]->cam_hdr_bracketing_info_t.exp_val=CAM_EXP_BRACKETING_OFF;
+            gCamCaps[cameraId]->qcom_supported_feature_mask = (uint32_t) false; //Disable HDR for now
+            gCamCaps[cameraId]->min_num_pp_bufs=2;
+        }
+            memcpy(gCamCaps[cameraId], DATA_PTR(capabilityHeap,0),
+                                        sizeof(cam_capability_t));
+        return NO_ERROR; 
+map_failed:
+    capabilityHeap->deallocate();
+    delete capabilityHeap;
+allocate_failed:
+    return rc;
+        
+}
 }; // namespace qcamera
