@@ -8946,10 +8946,10 @@ int QCamera2HardwareInterface::DevUtCapabilities(uint32_t cameraId,mm_camera_vtb
             gCamCaps[cameraId]->supported_focus_algos[3]= CAM_FOCUS_ALGO_AVERAGE;
 
             gCamCaps[cameraId]->auto_wb_lock_supported =(uint8_t)true ;
-            gCamCaps[cameraId]->zoom_supported =(uint8_t)true ;
+            gCamCaps[cameraId]->zoom_supported =(uint8_t)false ;
             gCamCaps[cameraId]->smooth_zoom_supported =(uint8_t)false ;
             gCamCaps[cameraId]->auto_exposure_lock_supported =(uint8_t)true ;
-            gCamCaps[cameraId]->video_snapshot_supported =(uint8_t)true;
+            gCamCaps[cameraId]->video_snapshot_supported =(uint8_t)false;
 
             gCamCaps[cameraId]->max_num_roi = 0 ;   // NO
             gCamCaps[cameraId]->max_num_focus_areas = 1; //Idea
