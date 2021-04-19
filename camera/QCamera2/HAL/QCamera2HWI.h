@@ -266,6 +266,7 @@ public:
 
     static int getCapabilities(uint32_t cameraId, struct camera_info *info);
     static int initCapabilities(uint32_t cameraId, mm_camera_vtbl_t *cameraHandle);
+    static int DevUtCapabilities(uint32_t cameraId,mm_camera_vtbl_t *cameraHandle);
 
     // Implementation of QCameraAllocator
     virtual QCameraMemory *allocateStreamBuf(cam_stream_type_t stream_type,
