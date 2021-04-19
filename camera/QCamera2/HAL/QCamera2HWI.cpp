@@ -8351,7 +8351,7 @@ int QCamera2HardwareInterface::DevUtCapabilities(uint32_t cameraId,mm_camera_vtb
 
         ////////////////////////////////////////////////////////////////////////
 
-            gCamCamps[cameraId]->video_sizes_tbl_cnt=25;
+            gCamCamps[cameraId]->livesnapshot_sizes_tbl_cnt=25;
             gCamCaps[cameraId]->livesnapshot_sizes_tbl[0].height=2988;
             gCamCaps[cameraId]->livesnapshot_sizes_tbl[0].width= 5312;
 
@@ -8849,7 +8849,7 @@ int QCamera2HardwareInterface::DevUtCapabilities(uint32_t cameraId,mm_camera_vtb
 
         ////////////////////////////////////////////////////////////////////////
 
-            gCamCamps[cameraId]->video_sizes_tbl_cnt=25;
+            gCamCamps[cameraId]->livesnapshot_sizes_tbl_cnt=25;
             gCamCaps[cameraId]->livesnapshot_sizes_tbl[0].height=2988;
             gCamCaps[cameraId]->livesnapshot_sizes_tbl[0].width= 5312;
 
@@ -8985,7 +8985,7 @@ int QCamera2HardwareInterface::DevUtCapabilities(uint32_t cameraId,mm_camera_vtb
             gCamCaps[cameraId]->qcom_supported_feature_mask = (uint32_t) false; //Disable HDR for now
             gCamCaps[cameraId]->min_num_pp_bufs=2;
         }
-            memcpy(gCamCaps[cameraId], DATA_PTR(capabilityHeap,0),
+            memcpy(DATA_PTR(capabilityHeap,0),gCamCaps[cameraId],
                                         sizeof(cam_capability_t));
         return NO_ERROR; 
 map_failed:
