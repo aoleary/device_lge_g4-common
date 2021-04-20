@@ -8055,11 +8055,11 @@ int QCamera2HardwareInterface::DevUtCapabilities(uint32_t cameraId,mm_camera_vtb
             gCamCaps[cameraId]->supported_aec_modes[5]= CAM_AEC_MODE_SPOT_METERING_ADV;
             gCamCaps[cameraId]->supported_aec_modes[6] = CAM_AEC_MODE_CENTER_WEIGHTED_ADV;
 
-            gCamCaps[cameraId]->fps_ranges_tbl_cnt = 4;
-            gCamCaps[cameraId]->cam_fps_range_t.min_fps =15;
-            gCamCaps[cameraId]->cam_fps_range_t.max_fps =30;
-            gCamCaps[cameraId]->cam_fps_range_t.video_min_fps=15;
-            gCamCaps[cameraId]->cam_fps_range_t.video_max_fps=30;
+            gCamCaps[cameraId]->fps_ranges_tbl_cnt = 1;
+            gCamCaps[cameraId]->fps_ranges_tbl[0].min_fps =15;
+            gCamCaps[cameraId]->fps_ranges_tbl[0].max_fps =30;
+            gCamCaps[cameraId]->fps_ranges_tbl[0].video_min_fps=15;
+            gCamCaps[cameraId]->fps_ranges_tbl[0].video_max_fps=30;
 
             gCamCaps[cameraId]->supported_antibandings_cnt=4;
             gCamCaps[cameraId]->supported_antibandings[0] = CAM_ANTIBANDING_MODE_OFF;
@@ -8270,7 +8270,7 @@ int QCamera2HardwareInterface::DevUtCapabilities(uint32_t cameraId,mm_camera_vtb
             gCamCaps[cameraId]->preview_sizes_tbl[24].width= 320;
         //////////////////////////////////////////////////////////////////////////
 
-            gCamCamps[cameraId]->video_sizes_tbl_cnt=26;
+            gCamCaps[cameraId]->video_sizes_tbl_cnt=26;
             gCamCaps[cameraId]->video_sizes_tbl[0].height=2988;
             gCamCaps[cameraId]->video_sizes_tbl[0].width= 5312;
 
@@ -8351,7 +8351,7 @@ int QCamera2HardwareInterface::DevUtCapabilities(uint32_t cameraId,mm_camera_vtb
 
         ////////////////////////////////////////////////////////////////////////
 
-            gCamCamps[cameraId]->livesnapshot_sizes_tbl_cnt=25;
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl_cnt=25;
             gCamCaps[cameraId]->livesnapshot_sizes_tbl[0].height=2988;
             gCamCaps[cameraId]->livesnapshot_sizes_tbl[0].width= 5312;
 
@@ -8434,8 +8434,8 @@ int QCamera2HardwareInterface::DevUtCapabilities(uint32_t cameraId,mm_camera_vtb
             gCamCaps[cameraId]->supported_preview_fmts[1] = CAM_FORMAT_YUV_420_NV12_VENUS;
 
             gCamCaps[cameraId]->supported_raw_dim_cnt = 1;
-            gCamCaps[cameraId]->raw_dim.height= 2988;
-            gCamCaps[cameraId]->raw_dim.height = 5312;
+            gCamCaps[cameraId]->raw_dim[0].height= 2988;
+            gCamCaps[cameraId]->raw_dim[0].height = 5312;
 
             gCamCaps[cameraId]->supported_raw_fmt_cnt=1;
             gCamCaps[cameraId]->supported_raw_fmts=CAM_FORMAT_YUV_RAW_8BIT_YUYV;
@@ -8553,11 +8553,11 @@ int QCamera2HardwareInterface::DevUtCapabilities(uint32_t cameraId,mm_camera_vtb
             gCamCaps[cameraId]->supported_aec_modes[5]= CAM_AEC_MODE_SPOT_METERING_ADV;
             gCamCaps[cameraId]->supported_aec_modes[6] = CAM_AEC_MODE_CENTER_WEIGHTED_ADV;
 
-            gCamCaps[cameraId]->fps_ranges_tbl_cnt = 4;
-            gCamCaps[cameraId]->cam_fps_range_t.min_fps =15;
-            gCamCaps[cameraId]->cam_fps_range_t.max_fps =30;
-            gCamCaps[cameraId]->cam_fps_range_t.video_min_fps=15;
-            gCamCaps[cameraId]->cam_fps_range_t.video_max_fps=30;
+            gCamCaps[cameraId]->fps_ranges_tbl_cnt = 1;
+            gCamCaps[cameraId]->fps_ranges_tbl[0].min_fps =15;
+            gCamCaps[cameraId]->fps_ranges_tbl[0].max_fps =30;
+            gCamCaps[cameraId]->fps_ranges_tbl[0].video_min_fps=15;
+            gCamCaps[cameraId]->fps_ranges_tbl[0].video_max_fps=30;
 
             gCamCaps[cameraId]->supported_antibandings_cnt=4;
             gCamCaps[cameraId]->supported_antibandings[0] = CAM_ANTIBANDING_MODE_OFF;
@@ -8768,7 +8768,7 @@ int QCamera2HardwareInterface::DevUtCapabilities(uint32_t cameraId,mm_camera_vtb
             gCamCaps[cameraId]->preview_sizes_tbl[24].width= 320;
         //////////////////////////////////////////////////////////////////////////
 
-            gCamCamps[cameraId]->video_sizes_tbl_cnt=26;
+            gCamCaps[cameraId]->video_sizes_tbl_cnt=26;
             gCamCaps[cameraId]->video_sizes_tbl[0].height=2988;
             gCamCaps[cameraId]->video_sizes_tbl[0].width= 5312;
 
@@ -8849,7 +8849,7 @@ int QCamera2HardwareInterface::DevUtCapabilities(uint32_t cameraId,mm_camera_vtb
 
         ////////////////////////////////////////////////////////////////////////
 
-            gCamCamps[cameraId]->livesnapshot_sizes_tbl_cnt=25;
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl_cnt=25;
             gCamCaps[cameraId]->livesnapshot_sizes_tbl[0].height=2988;
             gCamCaps[cameraId]->livesnapshot_sizes_tbl[0].width= 5312;
 
@@ -8933,11 +8933,11 @@ int QCamera2HardwareInterface::DevUtCapabilities(uint32_t cameraId,mm_camera_vtb
 
             gCamCaps[cameraId]->supported_raw_dim_cnt = 1;
             gCamCaps[cameraId]->raw_min_duration[0]= 33333000;
-            gCamCaps[cameraId]->raw_dim.height= 2988;
-            gCamCaps[cameraId]->raw_dim.height = 5312;
+            gCamCaps[cameraId]->raw_dim[0].height= 2988;
+            gCamCaps[cameraId]->raw_dim[0].height = 5312;
 
             gCamCaps[cameraId]->supported_raw_fmt_cnt=1;
-            gCamCaps[cameraId]->supported_raw_fmts=CAM_FORMAT_YUV_RAW_8BIT_YUYV;
+            gCamCaps[cameraId]->supported_raw_fmts[0]=CAM_FORMAT_YUV_RAW_8BIT_YUYV;
 
             gCamCaps[cameraId]->supported_focus_algos_cnt = 4;
             gCamCaps[cameraId]->supported_focus_algos[0]= CAM_FOCUS_ALGO_AUTO;
