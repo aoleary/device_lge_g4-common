@@ -8056,10 +8056,10 @@ int QCamera2HardwareInterface::DevUtCapabilities(uint32_t cameraId,mm_camera_vtb
             gCamCaps[cameraId]->supported_aec_modes[6] = CAM_AEC_MODE_CENTER_WEIGHTED_ADV;
 
             gCamCaps[cameraId]->fps_ranges_tbl_cnt = 4;
-            gCamCaps[cameraId]->min_fps =15;
-            gCamCaps[cameraId]->max_fps =30;
-            gCamCaps[cameraId]->video_min_fps=15;
-            gCamCaps[cameraId]->video_max_fps=30;
+            gCamCaps[cameraId]->cam_fps_range_t.min_fps =15;
+            gCamCaps[cameraId]->cam_fps_range_t.max_fps =30;
+            gCamCaps[cameraId]->cam_fps_range_t.video_min_fps=15;
+            gCamCaps[cameraId]->cam_fps_range_t.video_max_fps=30;
 
             gCamCaps[cameraId]->supported_antibandings_cnt=4;
             gCamCaps[cameraId]->supported_antibandings[0] = CAM_ANTIBANDING_MODE_OFF;
@@ -8069,17 +8069,17 @@ int QCamera2HardwareInterface::DevUtCapabilities(uint32_t cameraId,mm_camera_vtb
 
 
             gCamCaps[cameraId]->supported_white_balances_cnt= 11;
-            gCamCaps[caemraId]->supported_white_balances[0]= CAM_WB_MODE_AUTO;
-            gCamCaps[caemraId]->supported_white_balances[1]=CAM_WB_MODE_CUSTOM;
-            gCamCaps[caemraId]->supported_white_balances[2]=CAM_WB_MODE_INCANDESCENT;
-            gCamCaps[caemraId]->supported_white_balances[3]=CAM_WB_MODE_FLUORESCENT;
-            gCamCaps[caemraId]->supported_white_balances[4]=CAM_WB_MODE_WARM_FLUORESCENT;
-            gCamCaps[caemraId]->supported_white_balances[5]=CAM_WB_MODE_DAYLIGHT;
-            gCamCaps[caemraId]->supported_white_balances[6]=CAM_WB_MODE_CLOUDY_DAYLIGHT;
-            gCamCaps[caemraId]->supported_white_balances[7]=CAM_WB_MODE_TWILIGHT;
-            gCamCaps[caemraId]->supported_white_balances[8]=CAM_WB_MODE_SHADE;
-            gCamCaps[caemraId]->supported_white_balances[9]=CAM_WB_MODE_MANUAL;
-            gCamCaps[caemraId]->supported_white_balances[10]=CAM_WB_MODE_OFF;
+            gCamCaps[cameraId]->supported_white_balances[0]= CAM_WB_MODE_AUTO;
+            gCamCaps[cameraId]->supported_white_balances[1]=CAM_WB_MODE_CUSTOM;
+            gCamCaps[cameraId]->supported_white_balances[2]=CAM_WB_MODE_INCANDESCENT;
+            gCamCaps[cameraId]->supported_white_balances[3]=CAM_WB_MODE_FLUORESCENT;
+            gCamCaps[cameraId]->supported_white_balances[4]=CAM_WB_MODE_WARM_FLUORESCENT;
+            gCamCaps[cameraId]->supported_white_balances[5]=CAM_WB_MODE_DAYLIGHT;
+            gCamCaps[cameraId]->supported_white_balances[6]=CAM_WB_MODE_CLOUDY_DAYLIGHT;
+            gCamCaps[cameraId]->supported_white_balances[7]=CAM_WB_MODE_TWILIGHT;
+            gCamCaps[cameraId]->supported_white_balances[8]=CAM_WB_MODE_SHADE;
+            gCamCaps[cameraId]->supported_white_balances[9]=CAM_WB_MODE_MANUAL;
+            gCamCaps[cameraId]->supported_white_balances[10]=CAM_WB_MODE_OFF;
 
             gCamCaps[cameraId]->min_wb_cct = 2000;
             gCamCaps[cameraId]->max_wb_cct = 8000;
@@ -8136,7 +8136,7 @@ int QCamera2HardwareInterface::DevUtCapabilities(uint32_t cameraId,mm_camera_vtb
             gCamCaps[cameraId]->picture_sizes_tbl[8].height= 1536;
             gCamCaps[cameraId]->picture_sizes_tbl[8].width= 2048;
             
-            gCamCaps[cameraId]->picture_sizes_tbl[9]].height= 1080;
+            gCamCaps[cameraId]->picture_sizes_tbl[9].height= 1080;
             gCamCaps[cameraId]->picture_sizes_tbl[9].width= 1920;
             
             gCamCaps[cameraId]->picture_sizes_tbl[10].height= 1200;
@@ -8187,7 +8187,7 @@ int QCamera2HardwareInterface::DevUtCapabilities(uint32_t cameraId,mm_camera_vtb
                 gCamCaps[cameraId]->picture_min_duration[i]=33333000;
          ////////////////////////////////////////////////////////////////////////////   
             gCamCaps[cameraId]->modes_supported = 1;
-            gCamCaps[cameraId]->sesnor_mount_angles=90;
+            gCamCaps[cameraId]->sensor_mount_angle=90;
             gCamCaps[cameraId]->focal_length = 4.42;
             gCamCaps[cameraId]->hor_view_angle = 67.4;
             gCamCaps[cameraId]->raw_min_duration[0]= 33333000;
@@ -8221,7 +8221,7 @@ int QCamera2HardwareInterface::DevUtCapabilities(uint32_t cameraId,mm_camera_vtb
             gCamCaps[cameraId]->preview_sizes_tbl[8].height= 1536;
             gCamCaps[cameraId]->preview_sizes_tbl[8].width= 2048;
             
-            gCamCaps[cameraId]->preview_sizes_tbl[9]].height= 1080;
+            gCamCaps[cameraId]->preview_sizes_tbl[9].height= 1080;
             gCamCaps[cameraId]->preview_sizes_tbl[9].width= 1920;
             
             gCamCaps[cameraId]->preview_sizes_tbl[10].height= 1200;
@@ -8298,7 +8298,7 @@ int QCamera2HardwareInterface::DevUtCapabilities(uint32_t cameraId,mm_camera_vtb
             gCamCaps[cameraId]->video_sizes_tbl[8].height= 1536;
             gCamCaps[cameraId]->video_sizes_tbl[8].width= 2048;
             
-            gCamCaps[cameraId]->video_sizes_tbl[9]].height= 1080;
+            gCamCaps[cameraId]->video_sizes_tbl[9].height= 1080;
             gCamCaps[cameraId]->video_sizes_tbl[9].width= 1920;
             
             gCamCaps[cameraId]->video_sizes_tbl[10].height= 1200;
@@ -8379,7 +8379,7 @@ int QCamera2HardwareInterface::DevUtCapabilities(uint32_t cameraId,mm_camera_vtb
             gCamCaps[cameraId]->livesnapshot_sizes_tbl[8].height= 1536;
             gCamCaps[cameraId]->livesnapshot_sizes_tbl[8].width= 2048;
             
-            gCamCaps[cameraId]->livesnapshot_sizes_tbl[9]].height= 1080;
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[9].height= 1080;
             gCamCaps[cameraId]->livesnapshot_sizes_tbl[9].width= 1920;
             
             gCamCaps[cameraId]->livesnapshot_sizes_tbl[10].height= 1200;
@@ -8554,10 +8554,10 @@ int QCamera2HardwareInterface::DevUtCapabilities(uint32_t cameraId,mm_camera_vtb
             gCamCaps[cameraId]->supported_aec_modes[6] = CAM_AEC_MODE_CENTER_WEIGHTED_ADV;
 
             gCamCaps[cameraId]->fps_ranges_tbl_cnt = 4;
-            gCamCaps[cameraId]->min_fps =15;
-            gCamCaps[cameraId]->max_fps =30;
-            gCamCaps[cameraId]->video_min_fps=15;
-            gCamCaps[cameraId]->video_max_fps=30;
+            gCamCaps[cameraId]->cam_fps_range_t.min_fps =15;
+            gCamCaps[cameraId]->cam_fps_range_t.max_fps =30;
+            gCamCaps[cameraId]->cam_fps_range_t.video_min_fps=15;
+            gCamCaps[cameraId]->cam_fps_range_t.video_max_fps=30;
 
             gCamCaps[cameraId]->supported_antibandings_cnt=4;
             gCamCaps[cameraId]->supported_antibandings[0] = CAM_ANTIBANDING_MODE_OFF;
@@ -8567,17 +8567,17 @@ int QCamera2HardwareInterface::DevUtCapabilities(uint32_t cameraId,mm_camera_vtb
 
 
             gCamCaps[cameraId]->supported_white_balances_cnt= 11;
-            gCamCaps[caemraId]->supported_white_balances[0]= CAM_WB_MODE_AUTO;
-            gCamCaps[caemraId]->supported_white_balances[1]=CAM_WB_MODE_CUSTOM;
-            gCamCaps[caemraId]->supported_white_balances[2]=CAM_WB_MODE_INCANDESCENT;
-            gCamCaps[caemraId]->supported_white_balances[3]=CAM_WB_MODE_FLUORESCENT;
-            gCamCaps[caemraId]->supported_white_balances[4]=CAM_WB_MODE_WARM_FLUORESCENT;
-            gCamCaps[caemraId]->supported_white_balances[5]=CAM_WB_MODE_DAYLIGHT;
-            gCamCaps[caemraId]->supported_white_balances[6]=CAM_WB_MODE_CLOUDY_DAYLIGHT;
-            gCamCaps[caemraId]->supported_white_balances[7]=CAM_WB_MODE_TWILIGHT;
-            gCamCaps[caemraId]->supported_white_balances[8]=CAM_WB_MODE_SHADE;
-            gCamCaps[caemraId]->supported_white_balances[9]=CAM_WB_MODE_MANUAL;
-            gCamCaps[caemraId]->supported_white_balances[10]=CAM_WB_MODE_OFF;
+            gCamCaps[cameraId]->supported_white_balances[0]= CAM_WB_MODE_AUTO;
+            gCamCaps[cameraId]->supported_white_balances[1]=CAM_WB_MODE_CUSTOM;
+            gCamCaps[cameraId]->supported_white_balances[2]=CAM_WB_MODE_INCANDESCENT;
+            gCamCaps[cameraId]->supported_white_balances[3]=CAM_WB_MODE_FLUORESCENT;
+            gCamCaps[cameraId]->supported_white_balances[4]=CAM_WB_MODE_WARM_FLUORESCENT;
+            gCamCaps[cameraId]->supported_white_balances[5]=CAM_WB_MODE_DAYLIGHT;
+            gCamCaps[cameraId]->supported_white_balances[6]=CAM_WB_MODE_CLOUDY_DAYLIGHT;
+            gCamCaps[cameraId]->supported_white_balances[7]=CAM_WB_MODE_TWILIGHT;
+            gCamCaps[cameraId]->supported_white_balances[8]=CAM_WB_MODE_SHADE;
+            gCamCaps[cameraId]->supported_white_balances[9]=CAM_WB_MODE_MANUAL;
+            gCamCaps[cameraId]->supported_white_balances[10]=CAM_WB_MODE_OFF;
 
             gCamCaps[cameraId]->min_wb_cct = 2000;
             gCamCaps[cameraId]->max_wb_cct = 8000;
@@ -8634,7 +8634,7 @@ int QCamera2HardwareInterface::DevUtCapabilities(uint32_t cameraId,mm_camera_vtb
             gCamCaps[cameraId]->picture_sizes_tbl[8].height= 1536;
             gCamCaps[cameraId]->picture_sizes_tbl[8].width= 2048;
             
-            gCamCaps[cameraId]->picture_sizes_tbl[9]].height= 1080;
+            gCamCaps[cameraId]->picture_sizes_tbl[9].height= 1080;
             gCamCaps[cameraId]->picture_sizes_tbl[9].width= 1920;
             
             gCamCaps[cameraId]->picture_sizes_tbl[10].height= 1200;
@@ -8686,7 +8686,7 @@ int QCamera2HardwareInterface::DevUtCapabilities(uint32_t cameraId,mm_camera_vtb
                 gCamCaps[cameraId]->picture_min_duration[i]=33333000;
          ////////////////////////////////////////////////////////////////////////////   
             gCamCaps[cameraId]->modes_supported = 1;
-            gCamCaps[cameraId]->sesnor_mount_angles=270;
+            gCamCaps[cameraId]->sensor_mount_angle=270;
             gCamCaps[cameraId]->focal_length = 4.42;
             gCamCaps[cameraId]->hor_view_angle = 67.4;
         /////////////////////////////////////////////////////////////////////////////
@@ -8719,7 +8719,7 @@ int QCamera2HardwareInterface::DevUtCapabilities(uint32_t cameraId,mm_camera_vtb
             gCamCaps[cameraId]->preview_sizes_tbl[8].height= 1536;
             gCamCaps[cameraId]->preview_sizes_tbl[8].width= 2048;
             
-            gCamCaps[cameraId]->preview_sizes_tbl[9]].height= 1080;
+            gCamCaps[cameraId]->preview_sizes_tbl[9].height= 1080;
             gCamCaps[cameraId]->preview_sizes_tbl[9].width= 1920;
             
             gCamCaps[cameraId]->preview_sizes_tbl[10].height= 1200;
@@ -8796,7 +8796,7 @@ int QCamera2HardwareInterface::DevUtCapabilities(uint32_t cameraId,mm_camera_vtb
             gCamCaps[cameraId]->video_sizes_tbl[8].height= 1536;
             gCamCaps[cameraId]->video_sizes_tbl[8].width= 2048;
             
-            gCamCaps[cameraId]->video_sizes_tbl[9]].height= 1080;
+            gCamCaps[cameraId]->video_sizes_tbl[9].height= 1080;
             gCamCaps[cameraId]->video_sizes_tbl[9].width= 1920;
             
             gCamCaps[cameraId]->video_sizes_tbl[10].height= 1200;
@@ -8877,7 +8877,7 @@ int QCamera2HardwareInterface::DevUtCapabilities(uint32_t cameraId,mm_camera_vtb
             gCamCaps[cameraId]->livesnapshot_sizes_tbl[8].height= 1536;
             gCamCaps[cameraId]->livesnapshot_sizes_tbl[8].width= 2048;
             
-            gCamCaps[cameraId]->livesnapshot_sizes_tbl[9]].height= 1080;
+            gCamCaps[cameraId]->livesnapshot_sizes_tbl[9].height= 1080;
             gCamCaps[cameraId]->livesnapshot_sizes_tbl[9].width= 1920;
             
             gCamCaps[cameraId]->livesnapshot_sizes_tbl[10].height= 1200;
