@@ -8044,7 +8044,7 @@ int QCamera2HardwareInterface::DevUtCapabilities(uint32_t cameraId,mm_camera_vtb
             gCamCaps[cameraId]->supported_scene_modes[19] =CAM_SCENE_MODE_FACE_PRIORITY;
             gCamCaps[cameraId]->supported_scene_modes[20] =CAM_SCENE_MODE_BARCODE;
             gCamCaps[cameraId]->supported_scene_modes[21] =CAM_SCENE_MODE_HDR;
-            gCamCaps[cameraId]->supported_scene_modes[22] =CAM_SCENE_MODE_MAX;
+            //
 
             gCamCaps[cameraId]->supported_aec_modes_cnt =7;
             gCamCaps[cameraId]->supported_aec_modes[0] = CAM_AEC_MODE_FRAME_AVERAGE;
@@ -8438,7 +8438,7 @@ int QCamera2HardwareInterface::DevUtCapabilities(uint32_t cameraId,mm_camera_vtb
             gCamCaps[cameraId]->raw_dim[0].height = 5312;
 
             gCamCaps[cameraId]->supported_raw_fmt_cnt=1;
-            gCamCaps[cameraId]->supported_raw_fmts=CAM_FORMAT_YUV_RAW_8BIT_YUYV;
+            gCamCaps[cameraId]->supported_raw_fmts[0]=CAM_FORMAT_YUV_RAW_8BIT_YUYV;
 
             gCamCaps[cameraId]->supported_focus_algos_cnt = 4;
             gCamCaps[cameraId]->supported_focus_algos[0]= CAM_FOCUS_ALGO_AUTO;
@@ -8482,7 +8482,7 @@ int QCamera2HardwareInterface::DevUtCapabilities(uint32_t cameraId,mm_camera_vtb
             gCamCaps[cameraId]->sce_ctrl.def_value = 10;
             gCamCaps[cameraId]->sce_ctrl.step = 10;
 
-            gCamCaps[cameraId]->cam_hdr_bracketing_info_t.exp_val=CAM_EXP_BRACKETING_OFF;
+            gCamCaps[cameraId]->hdr_bracketing_setting.exp_val=CAM_EXP_BRACKETING_OFF;
             gCamCaps[cameraId]->qcom_supported_feature_mask = (uint32_t) false; //Disable HDR for now
             gCamCaps[cameraId]->min_num_pp_bufs=2;
         }else{
@@ -8542,7 +8542,7 @@ int QCamera2HardwareInterface::DevUtCapabilities(uint32_t cameraId,mm_camera_vtb
             gCamCaps[cameraId]->supported_scene_modes[19] =CAM_SCENE_MODE_FACE_PRIORITY;
             gCamCaps[cameraId]->supported_scene_modes[20] =CAM_SCENE_MODE_BARCODE;
             gCamCaps[cameraId]->supported_scene_modes[21] =CAM_SCENE_MODE_HDR;
-            gCamCaps[cameraId]->supported_scene_modes[22] =CAM_SCENE_MODE_MAX;
+            //
 
             gCamCaps[cameraId]->supported_aec_modes_cnt =7;
             gCamCaps[cameraId]->supported_aec_modes[0] = CAM_AEC_MODE_FRAME_AVERAGE;
@@ -8981,7 +8981,7 @@ int QCamera2HardwareInterface::DevUtCapabilities(uint32_t cameraId,mm_camera_vtb
             gCamCaps[cameraId]->sce_ctrl.def_value = 10;
             gCamCaps[cameraId]->sce_ctrl.step = 10;
 
-            gCamCaps[cameraId]->cam_hdr_bracketing_info_t.exp_val=CAM_EXP_BRACKETING_OFF;
+            gCamCaps[cameraId]->hdr_bracketing_setting.exp_val=CAM_EXP_BRACKETING_OFF;
             gCamCaps[cameraId]->qcom_supported_feature_mask = (uint32_t) false; //Disable HDR for now
             gCamCaps[cameraId]->min_num_pp_bufs=2;
         }
