@@ -8482,7 +8482,7 @@ int QCamera2HardwareInterface::DevUtCapabilities(uint32_t cameraId,mm_camera_vtb
             gCamCaps[cameraId]->sce_ctrl.def_value = 10;
             gCamCaps[cameraId]->sce_ctrl.step = 10;
 
-            gCamCaps[cameraId]->hdr_bracketing_setting.exp_val=CAM_EXP_BRACKETING_OFF;
+            gCamCaps[cameraId]->hdr_bracketing_setting.exp_val.mode=CAM_EXP_BRACKETING_OFF;
             gCamCaps[cameraId]->qcom_supported_feature_mask = (uint32_t) false; //Disable HDR for now
             gCamCaps[cameraId]->min_num_pp_bufs=2;
         }else{
@@ -8981,7 +8981,7 @@ int QCamera2HardwareInterface::DevUtCapabilities(uint32_t cameraId,mm_camera_vtb
             gCamCaps[cameraId]->sce_ctrl.def_value = 10;
             gCamCaps[cameraId]->sce_ctrl.step = 10;
 
-            gCamCaps[cameraId]->hdr_bracketing_setting.exp_val=CAM_EXP_BRACKETING_OFF;
+            gCamCaps[cameraId]->hdr_bracketing_setting.exp_val.mode=CAM_EXP_BRACKETING_OFF;
             gCamCaps[cameraId]->qcom_supported_feature_mask = (uint32_t) false; //Disable HDR for now
             gCamCaps[cameraId]->min_num_pp_bufs=2;
         }
