@@ -59,7 +59,11 @@
 /(vendor|system/vendor)/bin/hw/android\.hardware\.gnss@[0-9]\.[0-9]-service   u:object_r:hal_gnss_default_exec:s0
 
 # Bluetooth
-/data/misc/bluedroid/bdaddr				u:object_r:bluetooth_data_file:s0
+/data/misc/bluedroid(/.*)?				u:object_r:bluetooth_data_file:s0
+/data/misc/bluetooth(/.*)?				u:object_r:bluetooth_data_file:s0
+
+# WiFi
+/data/misc/wifi/config                            	u:object_r:wifi_data_file:s0
 
 # adb
 /data/adb/modules					u:object_r:adb_data_file:s0
