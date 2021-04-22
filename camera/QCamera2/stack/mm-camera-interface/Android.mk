@@ -27,7 +27,7 @@ LOCAL_C_INCLUDES := \
     system/media/camera/include
 
 
-LOCAL_CFLAGS += -Wall -Wextra
+LOCAL_CFLAGS += -Wall -Wextra -g3
 
 LOCAL_MODULE := libmmcamera_interface
 LOCAL_HEADER_LIBRARIES := generated_kernel_headers
