@@ -7992,13 +7992,15 @@ int QCamera2HardwareInterface::DevUtCapabilities(uint32_t cameraId,mm_camera_vtb
             gCamCaps[cameraId]->position = CAM_POSITION_BACK;
             gCamCaps[cameraId]->auto_hdr_supported = 1;
             gCamCaps[cameraId]->isWnrSupported = 1;
-
+            
+            CDBG_HIGH("%s : Initialising supported_iso_modes_cnt for camera id 0",__func__);
             gCamCaps[cameraId]->supported_iso_modes_cnt = 4; 
             gCamCaps[cameraId]->supported_iso_modes[0] = CAM_ISO_MODE_AUTO;
             gCamCaps[cameraId]->supported_iso_modes[1] = CAM_ISO_MODE_DEBLUR;
             gCamCaps[cameraId]->supported_iso_modes[2] = CAM_ISO_MODE_100;
             gCamCaps[cameraId]->supported_iso_modes[3] = CAM_ISO_MODE_200;
             
+            CDBG_HIGH("%s : Initialising supported_flash_modes for camera id 0",__func__);
             gCamCaps[cameraId]->supported_flash_modes_cnt = 3;
             gCamCaps[cameraId]->supported_flash_modes[0] = CAM_FLASH_MODE_OFF;
             gCamCaps[cameraId]->supported_flash_modes[1] = CAM_FLASH_MODE_AUTO;
@@ -8007,6 +8009,7 @@ int QCamera2HardwareInterface::DevUtCapabilities(uint32_t cameraId,mm_camera_vtb
             gCamCaps[cameraId]->zoom_ratio_tbl_cnt = 1; //Disable Zoom for now
             gCamCaps[cameraId]->zoom_ratio_tbl[0]=100;
 
+            CDBG_HIGH("%s : Initialising supported_effects for camera id 0",__func__);
             gCamCaps[cameraId]->supported_effects_cnt=12;
             gCamCaps[cameraId]->supported_effects[0]= CAM_EFFECT_MODE_OFF;
             gCamCaps[cameraId]->supported_effects[1]= CAM_EFFECT_MODE_MONO;
@@ -8021,6 +8024,7 @@ int QCamera2HardwareInterface::DevUtCapabilities(uint32_t cameraId,mm_camera_vtb
             gCamCaps[cameraId]->supported_effects[10]= CAM_EFFECT_MODE_SKETCH;
             gCamCaps[cameraId]->supported_effects[11]= CAM_EFFECT_MODE_NEON;
 
+            CDBG_HIGH("%s : Initialising supported_scene_modes for camera id 0",__func__);
             gCamCaps[cameraId]->supported_scene_modes_cnt=21;
             gCamCaps[cameraId]->supported_scene_modes[0] =CAM_SCENE_MODE_OFF;
             gCamCaps[cameraId]->supported_scene_modes[1] =CAM_SCENE_MODE_AUTO;
@@ -8046,6 +8050,7 @@ int QCamera2HardwareInterface::DevUtCapabilities(uint32_t cameraId,mm_camera_vtb
             gCamCaps[cameraId]->supported_scene_modes[21] =CAM_SCENE_MODE_HDR;
             //
 
+            CDBG_HIGH("%s : Initialising supported_aec_modes for camera id 0",__func__);
             gCamCaps[cameraId]->supported_aec_modes_cnt =7;
             gCamCaps[cameraId]->supported_aec_modes[0] = CAM_AEC_MODE_FRAME_AVERAGE;
             gCamCaps[cameraId]->supported_aec_modes[1] = CAM_AEC_MODE_CENTER_WEIGHTED;
@@ -8055,19 +8060,21 @@ int QCamera2HardwareInterface::DevUtCapabilities(uint32_t cameraId,mm_camera_vtb
             gCamCaps[cameraId]->supported_aec_modes[5]= CAM_AEC_MODE_SPOT_METERING_ADV;
             gCamCaps[cameraId]->supported_aec_modes[6] = CAM_AEC_MODE_CENTER_WEIGHTED_ADV;
 
+            CDBG_HIGH("%s : Initialising fps_ranges_tbl for camera id 0",__func__);
             gCamCaps[cameraId]->fps_ranges_tbl_cnt = 1;
             gCamCaps[cameraId]->fps_ranges_tbl[0].min_fps =15;
             gCamCaps[cameraId]->fps_ranges_tbl[0].max_fps =30;
             gCamCaps[cameraId]->fps_ranges_tbl[0].video_min_fps=15;
             gCamCaps[cameraId]->fps_ranges_tbl[0].video_max_fps=30;
 
+            CDBG_HIGH("%s : Initialising supported_antibandings for camera id 0",__func__);
             gCamCaps[cameraId]->supported_antibandings_cnt=4;
             gCamCaps[cameraId]->supported_antibandings[0] = CAM_ANTIBANDING_MODE_OFF;
             gCamCaps[cameraId]->supported_antibandings[1] = CAM_ANTIBANDING_MODE_60HZ;
             gCamCaps[cameraId]->supported_antibandings[2] = CAM_ANTIBANDING_MODE_50HZ;
             gCamCaps[cameraId]->supported_antibandings[3] = CAM_ANTIBANDING_MODE_AUTO;
 
-
+            CDBG_HIGH("%s : Initialising supported_white_balances for camera id 0",__func__);
             gCamCaps[cameraId]->supported_white_balances_cnt= 11;
             gCamCaps[cameraId]->supported_white_balances[0]= CAM_WB_MODE_AUTO;
             gCamCaps[cameraId]->supported_white_balances[1]=CAM_WB_MODE_CUSTOM;
@@ -8081,11 +8088,13 @@ int QCamera2HardwareInterface::DevUtCapabilities(uint32_t cameraId,mm_camera_vtb
             gCamCaps[cameraId]->supported_white_balances[9]=CAM_WB_MODE_MANUAL;
             gCamCaps[cameraId]->supported_white_balances[10]=CAM_WB_MODE_OFF;
 
+
             gCamCaps[cameraId]->min_wb_cct = 2000;
             gCamCaps[cameraId]->max_wb_cct = 8000;
             gCamCaps[cameraId]->max_wb_gain = 4;
             gCamCaps[cameraId]->min_wb_gain = 1;
 
+            CDBG_HIGH("%s : Initialising supported_focus_modes for camera id 0",__func__);
             gCamCaps[cameraId]->supported_focus_modes_cnt =8;
             gCamCaps[cameraId]->supported_focus_modes[0] = CAM_FOCUS_MODE_OFF;
             gCamCaps[cameraId]->supported_focus_modes[1] = CAM_FOCUS_MODE_AUTO;
@@ -8106,7 +8115,8 @@ int QCamera2HardwareInterface::DevUtCapabilities(uint32_t cameraId,mm_camera_vtb
             gCamCaps[cameraId]->exp_compensation_step.denominator =10;
 
             gCamCaps[cameraId]->video_stablization_supported = (uint8_t)false;
-
+            
+            CDBG_HIGH("%s : Initialising picture_sizes_tbl for camera id 0",__func__);
             gCamCaps[cameraId]->picture_sizes_tbl_cnt = 25;
 
             gCamCaps[cameraId]->picture_sizes_tbl[0].height=2988 ;
@@ -8192,6 +8202,7 @@ int QCamera2HardwareInterface::DevUtCapabilities(uint32_t cameraId,mm_camera_vtb
             gCamCaps[cameraId]->hor_view_angle = 67.4;
             gCamCaps[cameraId]->raw_min_duration[0]= 33333000;
         /////////////////////////////////////////////////////////////////////////////
+        CDBG_HIGH("%s : Initialising preview_sizes_tbl for camera id 0",__func__);
             gCamCaps[cameraId]->preview_sizes_tbl_cnt = 25;
 
             gCamCaps[cameraId]->preview_sizes_tbl[0].height=2988;
@@ -8269,7 +8280,7 @@ int QCamera2HardwareInterface::DevUtCapabilities(uint32_t cameraId,mm_camera_vtb
             gCamCaps[cameraId]->preview_sizes_tbl[24].height= 240;
             gCamCaps[cameraId]->preview_sizes_tbl[24].width= 320;
         //////////////////////////////////////////////////////////////////////////
-
+            CDBG_HIGH("%s : Initialising video_sizes_tbl for camera id 0",__func__);
             gCamCaps[cameraId]->video_sizes_tbl_cnt=26;
             gCamCaps[cameraId]->video_sizes_tbl[0].height=2988;
             gCamCaps[cameraId]->video_sizes_tbl[0].width= 5312;
@@ -8350,7 +8361,7 @@ int QCamera2HardwareInterface::DevUtCapabilities(uint32_t cameraId,mm_camera_vtb
             gCamCaps[cameraId]->video_sizes_tbl[25].width= 176;
 
         ////////////////////////////////////////////////////////////////////////
-
+            CDBG_HIGH("%s : Initialising livesnapshot_sizes_tbl for camera id 0",__func__);
             gCamCaps[cameraId]->livesnapshot_sizes_tbl_cnt=25;
             gCamCaps[cameraId]->livesnapshot_sizes_tbl[0].height=2988;
             gCamCaps[cameraId]->livesnapshot_sizes_tbl[0].width= 5312;
@@ -8457,31 +8468,37 @@ int QCamera2HardwareInterface::DevUtCapabilities(uint32_t cameraId,mm_camera_vtb
             gCamCaps[cameraId]->max_num_metering_areas = 1; //Whats
             gCamCaps[cameraId]->max_zoom_step = 1; //happening
 
+            CDBG_HIGH("%s : Initialising brightness_ctrl for camera id 0",__func__);
             gCamCaps[cameraId]->brightness_ctrl.min_value = 0;
             gCamCaps[cameraId]->brightness_ctrl.max_value = 6;
             gCamCaps[cameraId]->brightness_ctrl.def_value = 1;
             gCamCaps[cameraId]->brightness_ctrl.step = 1;
 
+            CDBG_HIGH("%s : Initialising saturation_ctrl for camera id 0",__func__);
             gCamCaps[cameraId]->saturation_ctrl.min_value = 0;
             gCamCaps[cameraId]->saturation_ctrl.max_value = 10;
             gCamCaps[cameraId]->saturation_ctrl.def_value = 5;
             gCamCaps[cameraId]->saturation_ctrl.step = 1;
 
+            CDBG_HIGH("%s : Initialising sharpness_ctrl for camera id 0",__func__);
             gCamCaps[cameraId]->sharpness_ctrl.min_value = 0;
             gCamCaps[cameraId]->sharpness_ctrl.max_value = 36;
             gCamCaps[cameraId]->sharpness_ctrl.def_value = 12;
             gCamCaps[cameraId]->sharpness_ctrl.step = 6;
 
+            CDBG_HIGH("%s : Initialising contrast_ctrl for camera id 0",__func__);
             gCamCaps[cameraId]->contrast_ctrl.min_value = 0;
             gCamCaps[cameraId]->contrast_ctrl.max_value = 10;
             gCamCaps[cameraId]->contrast_ctrl.def_value = 5;
             gCamCaps[cameraId]->contrast_ctrl.step = 1;
 
+            CDBG_HIGH("%s : Initialising sce_ctrl for camera id 0",__func__);
             gCamCaps[cameraId]->sce_ctrl.min_value = -100;
             gCamCaps[cameraId]->sce_ctrl.max_value = 100;
             gCamCaps[cameraId]->sce_ctrl.def_value = 10;
             gCamCaps[cameraId]->sce_ctrl.step = 10;
 
+            CDBG_HIGH("%s : Initialising hdr_bracketing_setting for camera id 0",__func__);
             gCamCaps[cameraId]->hdr_bracketing_setting.exp_val.mode=CAM_EXP_BRACKETING_OFF;
             gCamCaps[cameraId]->qcom_supported_feature_mask = (uint32_t) false; //Disable HDR for now
             gCamCaps[cameraId]->min_num_pp_bufs=2;
@@ -8985,6 +9002,7 @@ int QCamera2HardwareInterface::DevUtCapabilities(uint32_t cameraId,mm_camera_vtb
             gCamCaps[cameraId]->qcom_supported_feature_mask = (uint32_t) false; //Disable HDR for now
             gCamCaps[cameraId]->min_num_pp_bufs=2;
         }
+            CDBG_HIGH("%s : calling memcpy to set capabilityHeap from gCamCaps ",__func__);
             memcpy(DATA_PTR(capabilityHeap,0),gCamCaps[cameraId],
                                         sizeof(cam_capability_t));
         return NO_ERROR; 
