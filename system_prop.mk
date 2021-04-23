@@ -89,25 +89,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.sf.lcd_density=560 \
     qemu.hw.mainkeys=0 \
     ro.qualcomm.cabl=2
-
-# Properties to improve rendering
-    debug.composition.type=gpu \
-    debug.cpurend.vsync=false \
-    debug.enable.sglscale=1 \
-    debug.enabletr=true \
-    debug.egl.profiler=1 \
-    debug.egl.hw=1 \
-    debug.overlayui.enable=1 \
-    debug.performance.tuning=1 \
-    debug.sf.hw=1 \
-    debug.sf.disable_hwc=0 \
-    debug.sf.recomputecrop=0 \
-    debug.sf.disable_backpressure=1 \
-    debug.sf.latch_unsignaled=1 \
-    hw3d.force=1 \
-    persist.hwc.ptor.enable=true \
-    video.accelerate.hw=1
-
 # MSM8992 HAL settings
 # 196610 is decimal for 0x30002 to report major/minor versions as 3/2
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -191,6 +172,45 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.min_freq_0=384000 \
     ro.min_freq_4=384000 \
     ro.vold.umsdirtyratio=50
+
+# Properties to improve rendering
+    debug.composition.type=gpu \
+    debug.cpurend.vsync=false \
+    debug.enable.sglscale=1 \
+    debug.enabletr=true \
+    debug.egl.profiler=1 \
+    debug.egl.hw=1 \
+    debug.enabletr=true \
+    debug.overlayui.enable=1 \
+    debug.performance.tuning=1 \
+    debug.qctwa.preservebuf=1 \
+    debug.sf.hw=1 \
+    debug.sf.disable_hwc=0 \
+    debug.sf.recomputecrop=0 \
+    debug.sf.disable_backpressure=1 \
+    debug.sf.latch_unsignaled=1 \
+    dev.pm.dyn_samplingrate=1 \
+    hw3d.force=1 \
+    persist.hwc.ptor.enable=true \
+    persist.sys.composition.type=gpu \
+    ro.fb.mode=1 \
+    video.accelerate.hw=1
+
+#Properties to improve gaming experiance
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.sys.NV_FPSLIMIT=60 \
+    persist.sys.NV_POWERMODE=1 \
+    persist.sys.NV_PROFVER=15 \
+    persist.sys.NV_STEREOCTRL=0 \
+    persist.sys.NV_STEREOSEPCHG=0 \
+    persist.sys.NV_STEREOSEP=20 \
+    persist.sys.purgeable_assets=1 \
+    ro.media.dec.jpeg.memcap=8000000 \
+    ro.media.enc.hprof.vid.bps=8000000 \
+    ro.media.dec.aud.wma.enabled=1 \
+    ro.media.dec.vid.wmv.enabled=1 \
+    ro.media.cam.preview.fps=0 \
+    ro.media.codec_priority_for_thumb=so
 
 # RIL
 PRODUCT_PROPERTY_OVERRIDES += \
