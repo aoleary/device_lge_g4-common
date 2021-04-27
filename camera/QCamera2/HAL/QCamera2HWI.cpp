@@ -7984,6 +7984,12 @@ int QCamera2HardwareInterface::DevUtCapabilities(uint32_t cameraId,mm_camera_vtb
         ALOGE("%s: failed to map capability buffer", __func__);
         goto map_failed;
     }
+
+    gCamCaps[cameraId] = (cam_capability_t *)malloc(sizeof(cam_capability_t));
+     if (!gCamCaps[cameraId]) {
+        ALOGE("%s: out of memory", __func__);
+        goto query_failed;
+    }
         gCamCaps[cameraId]->version=CAM_HAL_V1;
 
         if(cameraId == 0)
@@ -9006,6 +9012,9 @@ int QCamera2HardwareInterface::DevUtCapabilities(uint32_t cameraId,mm_camera_vtb
             memcpy(DATA_PTR(capabilityHeap,0),gCamCaps[cameraId],
                                         sizeof(cam_capability_t));
         return NO_ERROR; 
+query_failed:
+    cameraHandle->ops->unmap_buf(cameraHandle->camera_handle,
+                            CAM_MAPPING_BUF_TYPE_CAPABILITY);
 map_failed:
     capabilityHeap->deallocate();
     delete capabilityHeap;
