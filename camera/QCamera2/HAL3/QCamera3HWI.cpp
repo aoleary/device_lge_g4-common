@@ -5900,7 +5900,8 @@ int QCamera3HardwareInterface::getCamInfo(uint32_t cameraId,
 
     pthread_mutex_lock(&gCamLock);
     if (NULL == gCamCapability[cameraId]) {
-        rc = initCapabilities(cameraId);
+        // rc = initCapabilities(cameraId);
+        rc = DevUt3Capabilities(cameraId);
         if (rc < 0) {
             pthread_mutex_unlock(&gCamLock);
             return rc;
@@ -7820,5 +7821,1560 @@ void QCamera3HardwareInterface::getLogLevel()
 
     return;
 }
+int QCamera3HardwareInterface::DevUt3Capabilities(uint32_t cameraId)
+{
+int rc = 0;
+    mm_camera_vtbl_t *cameraHandle = NULL;
+    QCamera3HeapMemory *capabilityHeap = NULL;
 
+    rc = camera_open((uint8_t)cameraId, &cameraHandle);
+    if (rc || !cameraHandle) {
+        ALOGE("%s: camera_open failed. rc = %d, cameraHandle = %p", __func__, rc, cameraHandle);
+        goto open_failed;
+    }
+
+    capabilityHeap = new QCamera3HeapMemory();
+    if (capabilityHeap == NULL) {
+        ALOGE("%s: creation of capabilityHeap failed", __func__);
+        goto heap_creation_failed;
+    }
+    /* Allocate memory for capability buffer */
+    rc = capabilityHeap->allocate(1, sizeof(cam_capability_t), false);
+    if(rc != OK) {
+        ALOGE("%s: No memory for cappability", __func__);
+        goto allocate_failed;
+    }
+
+    /* Map memory for capability buffer */
+    memset(DATA_PTR(capabilityHeap,0), 0, sizeof(cam_capability_t));
+    rc = cameraHandle->ops->map_buf(cameraHandle->camera_handle,
+                                CAM_MAPPING_BUF_TYPE_CAPABILITY,
+                                capabilityHeap->getFd(0),
+                                sizeof(cam_capability_t));
+    if(rc < 0) {
+        ALOGE("%s: failed to map capability buffer", __func__);
+        goto map_failed;
+    }
+
+    /* Query Capability */
+    // rc = cameraHandle->ops->query_capability(cameraHandle->camera_handle);
+    // if(rc < 0) {
+    //     ALOGE("%s: failed to query capability",__func__);
+    //     goto query_failed;
+    // }
+    gCamCapability[cameraId] = (cam_capability_t *)malloc(sizeof(cam_capability_t));
+    if (!gCamCapability[cameraId]) {
+        ALOGE("%s: out of memory", __func__);
+        goto query_failed;
+    }
+
+gCamCapability[cameraId]->version=CAM_HAL_V3;
+
+        if(cameraId == 0)
+        {
+            CDBG_HIGH("%s : Initialising capabilities for camera id = 0",__func__);
+            gCamCapability[cameraId]->position = CAM_POSITION_BACK;
+            gCamCapability[cameraId]->auto_hdr_supported = 1;
+            gCamCapability[cameraId]->isWnrSupported = 1;
+            
+            CDBG_HIGH("%s : Initialising supported_iso_modes_cnt for camera id 0",__func__);
+            gCamCapability[cameraId]->supported_iso_modes_cnt = 4; 
+            gCamCapability[cameraId]->supported_iso_modes[0] = CAM_ISO_MODE_AUTO;
+            gCamCapability[cameraId]->supported_iso_modes[1] = CAM_ISO_MODE_DEBLUR;
+            gCamCapability[cameraId]->supported_iso_modes[2] = CAM_ISO_MODE_100;
+            gCamCapability[cameraId]->supported_iso_modes[3] = CAM_ISO_MODE_200;
+            
+            CDBG_HIGH("%s : Initialising supported_flash_modes for camera id 0",__func__);
+            gCamCapability[cameraId]->supported_flash_modes_cnt = 3;
+            gCamCapability[cameraId]->supported_flash_modes[0] = CAM_FLASH_MODE_OFF;
+            gCamCapability[cameraId]->supported_flash_modes[1] = CAM_FLASH_MODE_AUTO;
+            gCamCapability[cameraId]->supported_flash_modes[2] = CAM_FLASH_MODE_ON;
+
+            gCamCapability[cameraId]->zoom_ratio_tbl_cnt = 1; //Disable Zoom for now
+            gCamCapability[cameraId]->zoom_ratio_tbl[0]=100;
+
+            CDBG_HIGH("%s : Initialising supported_effects for camera id 0",__func__);
+            gCamCapability[cameraId]->supported_effects_cnt=12;
+            gCamCapability[cameraId]->supported_effects[0]= CAM_EFFECT_MODE_OFF;
+            gCamCapability[cameraId]->supported_effects[1]= CAM_EFFECT_MODE_MONO;
+            gCamCapability[cameraId]->supported_effects[2]= CAM_EFFECT_MODE_NEGATIVE;
+            gCamCapability[cameraId]->supported_effects[3]= CAM_EFFECT_MODE_SOLARIZE;
+            gCamCapability[cameraId]->supported_effects[4]= CAM_EFFECT_MODE_SEPIA;
+            gCamCapability[cameraId]->supported_effects[5]= CAM_EFFECT_MODE_POSTERIZE;
+            gCamCapability[cameraId]->supported_effects[6]= CAM_EFFECT_MODE_WHITEBOARD;
+            gCamCapability[cameraId]->supported_effects[7]= CAM_EFFECT_MODE_BLACKBOARD;
+            gCamCapability[cameraId]->supported_effects[8]= CAM_EFFECT_MODE_AQUA;
+            gCamCapability[cameraId]->supported_effects[9]= CAM_EFFECT_MODE_EMBOSS;
+            gCamCapability[cameraId]->supported_effects[10]= CAM_EFFECT_MODE_SKETCH;
+            gCamCapability[cameraId]->supported_effects[11]= CAM_EFFECT_MODE_NEON;
+
+            CDBG_HIGH("%s : Initialising supported_scene_modes for camera id 0",__func__);
+            gCamCapability[cameraId]->supported_scene_modes_cnt=21;
+            gCamCapability[cameraId]->supported_scene_modes[0] =CAM_SCENE_MODE_OFF;
+            gCamCapability[cameraId]->supported_scene_modes[1] =CAM_SCENE_MODE_AUTO;
+            gCamCapability[cameraId]->supported_scene_modes[2] =CAM_SCENE_MODE_LANDSCAPE;
+            gCamCapability[cameraId]->supported_scene_modes[3] =CAM_SCENE_MODE_SNOW;
+            gCamCapability[cameraId]->supported_scene_modes[4] =CAM_SCENE_MODE_BEACH;
+            gCamCapability[cameraId]->supported_scene_modes[5] =CAM_SCENE_MODE_SUNSET;
+            gCamCapability[cameraId]->supported_scene_modes[6] =CAM_SCENE_MODE_NIGHT;
+            gCamCapability[cameraId]->supported_scene_modes[7] =CAM_SCENE_MODE_PORTRAIT;
+            gCamCapability[cameraId]->supported_scene_modes[8] =CAM_SCENE_MODE_BACKLIGHT;
+            gCamCapability[cameraId]->supported_scene_modes[9] =CAM_SCENE_MODE_SPORTS;
+            gCamCapability[cameraId]->supported_scene_modes[10] =CAM_SCENE_MODE_ANTISHAKE;
+            gCamCapability[cameraId]->supported_scene_modes[11] =CAM_SCENE_MODE_FLOWERS;
+            gCamCapability[cameraId]->supported_scene_modes[12] =CAM_SCENE_MODE_CANDLELIGHT;
+            gCamCapability[cameraId]->supported_scene_modes[13] =CAM_SCENE_MODE_FIREWORKS;
+            gCamCapability[cameraId]->supported_scene_modes[14] =CAM_SCENE_MODE_PARTY;
+            gCamCapability[cameraId]->supported_scene_modes[15] =CAM_SCENE_MODE_NIGHT_PORTRAIT;
+            gCamCapability[cameraId]->supported_scene_modes[16] =CAM_SCENE_MODE_THEATRE;
+            gCamCapability[cameraId]->supported_scene_modes[17] =CAM_SCENE_MODE_ACTION;
+            gCamCapability[cameraId]->supported_scene_modes[18] =CAM_SCENE_MODE_AR;
+            gCamCapability[cameraId]->supported_scene_modes[19] =CAM_SCENE_MODE_FACE_PRIORITY;
+            gCamCapability[cameraId]->supported_scene_modes[20] =CAM_SCENE_MODE_BARCODE;
+            gCamCapability[cameraId]->supported_scene_modes[21] =CAM_SCENE_MODE_HDR;
+            //
+
+            CDBG_HIGH("%s : Initialising supported_aec_modes for camera id 0",__func__);
+            gCamCapability[cameraId]->supported_aec_modes_cnt =7;
+            gCamCapability[cameraId]->supported_aec_modes[0] = CAM_AEC_MODE_FRAME_AVERAGE;
+            gCamCapability[cameraId]->supported_aec_modes[1] = CAM_AEC_MODE_CENTER_WEIGHTED;
+            gCamCapability[cameraId]->supported_aec_modes[2] = CAM_AEC_MODE_SPOT_METERING;
+            gCamCapability[cameraId]->supported_aec_modes[3] = CAM_AEC_MODE_SMART_METERING;
+            gCamCapability[cameraId]->supported_aec_modes[4] = CAM_AEC_MODE_USER_METERING;
+            gCamCapability[cameraId]->supported_aec_modes[5]= CAM_AEC_MODE_SPOT_METERING_ADV;
+            gCamCapability[cameraId]->supported_aec_modes[6] = CAM_AEC_MODE_CENTER_WEIGHTED_ADV;
+
+            CDBG_HIGH("%s : Initialising fps_ranges_tbl for camera id 0",__func__);
+            gCamCapability[cameraId]->fps_ranges_tbl_cnt = 1;
+            gCamCapability[cameraId]->fps_ranges_tbl[0].min_fps =15;
+            gCamCapability[cameraId]->fps_ranges_tbl[0].max_fps =30;
+            gCamCapability[cameraId]->fps_ranges_tbl[0].video_min_fps=15;
+            gCamCapability[cameraId]->fps_ranges_tbl[0].video_max_fps=30;
+
+            CDBG_HIGH("%s : Initialising supported_antibandings for camera id 0",__func__);
+            gCamCapability[cameraId]->supported_antibandings_cnt=4;
+            gCamCapability[cameraId]->supported_antibandings[0] = CAM_ANTIBANDING_MODE_OFF;
+            gCamCapability[cameraId]->supported_antibandings[1] = CAM_ANTIBANDING_MODE_60HZ;
+            gCamCapability[cameraId]->supported_antibandings[2] = CAM_ANTIBANDING_MODE_50HZ;
+            gCamCapability[cameraId]->supported_antibandings[3] = CAM_ANTIBANDING_MODE_AUTO;
+
+            CDBG_HIGH("%s : Initialising supported_white_balances for camera id 0",__func__);
+            gCamCapability[cameraId]->supported_white_balances_cnt= 11;
+            gCamCapability[cameraId]->supported_white_balances[0]= CAM_WB_MODE_AUTO;
+            gCamCapability[cameraId]->supported_white_balances[1]=CAM_WB_MODE_CUSTOM;
+            gCamCapability[cameraId]->supported_white_balances[2]=CAM_WB_MODE_INCANDESCENT;
+            gCamCapability[cameraId]->supported_white_balances[3]=CAM_WB_MODE_FLUORESCENT;
+            gCamCapability[cameraId]->supported_white_balances[4]=CAM_WB_MODE_WARM_FLUORESCENT;
+            gCamCapability[cameraId]->supported_white_balances[5]=CAM_WB_MODE_DAYLIGHT;
+            gCamCapability[cameraId]->supported_white_balances[6]=CAM_WB_MODE_CLOUDY_DAYLIGHT;
+            gCamCapability[cameraId]->supported_white_balances[7]=CAM_WB_MODE_TWILIGHT;
+            gCamCapability[cameraId]->supported_white_balances[8]=CAM_WB_MODE_SHADE;
+            gCamCapability[cameraId]->supported_white_balances[9]=CAM_WB_MODE_MANUAL;
+            gCamCapability[cameraId]->supported_white_balances[10]=CAM_WB_MODE_OFF;
+
+
+            gCamCapability[cameraId]->min_wb_cct = 2000;
+            gCamCapability[cameraId]->max_wb_cct = 8000;
+            gCamCapability[cameraId]->max_wb_gain = 4;
+            gCamCapability[cameraId]->min_wb_gain = 1;
+
+            CDBG_HIGH("%s : Initialising supported_focus_modes for camera id 0",__func__);
+            gCamCapability[cameraId]->supported_focus_modes_cnt =8;
+            gCamCapability[cameraId]->supported_focus_modes[0] = CAM_FOCUS_MODE_OFF;
+            gCamCapability[cameraId]->supported_focus_modes[1] = CAM_FOCUS_MODE_AUTO;
+            gCamCapability[cameraId]->supported_focus_modes[2] = CAM_FOCUS_MODE_INFINITY;
+            gCamCapability[cameraId]->supported_focus_modes[3] = CAM_FOCUS_MODE_MACRO;
+            gCamCapability[cameraId]->supported_focus_modes[4] = CAM_FOCUS_MODE_FIXED;
+            gCamCapability[cameraId]->supported_focus_modes[5] = CAM_FOCUS_MODE_EDOF;
+            gCamCapability[cameraId]->supported_focus_modes[6] = CAM_FOCUS_MODE_CONTINOUS_VIDEO;
+            gCamCapability[cameraId]->supported_focus_modes[7] = CAM_FOCUS_MODE_CONTINOUS_PICTURE;
+
+            //Not supporting manual focus for now
+
+            gCamCapability[cameraId]->exposure_compensation_min = -12;
+            gCamCapability[cameraId]->exposure_compensation_max =  12;
+            gCamCapability[cameraId]->exposure_compensation_default = 0;
+            gCamCapability[cameraId]->exposure_compensation_step = 0.166667;
+            gCamCapability[cameraId]->exp_compensation_step.numerator =1; //Idk what I'm doing here
+            gCamCapability[cameraId]->exp_compensation_step.denominator =10;
+
+            gCamCapability[cameraId]->video_stablization_supported = (uint8_t)false;
+            
+            CDBG_HIGH("%s : Initialising picture_sizes_tbl for camera id 0",__func__);
+            gCamCapability[cameraId]->picture_sizes_tbl_cnt = 25;
+
+            gCamCapability[cameraId]->picture_sizes_tbl[0].height=2988 ;
+            gCamCapability[cameraId]->picture_sizes_tbl[0].width= 5312;
+
+            gCamCapability[cameraId]->picture_sizes_tbl[1].height= 2988;
+            gCamCapability[cameraId]->picture_sizes_tbl[1].width= 3984;
+
+            gCamCapability[cameraId]->picture_sizes_tbl[2].height= 2160;
+            gCamCapability[cameraId]->picture_sizes_tbl[2].width= 3840;
+
+            gCamCapability[cameraId]->picture_sizes_tbl[3].height= 2488;
+            gCamCapability[cameraId]->picture_sizes_tbl[3].width= 3264;
+
+            gCamCapability[cameraId]->picture_sizes_tbl[4].height= 1836;
+            gCamCapability[cameraId]->picture_sizes_tbl[4].width= 3264;
+
+            gCamCapability[cameraId]->picture_sizes_tbl[5].height= 1920;
+            gCamCapability[cameraId]->picture_sizes_tbl[5].width= 2560;
+
+            gCamCapability[cameraId]->picture_sizes_tbl[6].height= 1944;
+            gCamCapability[cameraId]->picture_sizes_tbl[6].width= 2592;
+            
+            gCamCapability[cameraId]->picture_sizes_tbl[7].height= 1512;
+            gCamCapability[cameraId]->picture_sizes_tbl[7].width= 2688;
+            
+            gCamCapability[cameraId]->picture_sizes_tbl[8].height= 1536;
+            gCamCapability[cameraId]->picture_sizes_tbl[8].width= 2048;
+            
+            gCamCapability[cameraId]->picture_sizes_tbl[9].height= 1080;
+            gCamCapability[cameraId]->picture_sizes_tbl[9].width= 1920;
+            
+            gCamCapability[cameraId]->picture_sizes_tbl[10].height= 1200;
+            gCamCapability[cameraId]->picture_sizes_tbl[10].width= 1600;
+            
+            gCamCapability[cameraId]->picture_sizes_tbl[11].height= 864;
+            gCamCapability[cameraId]->picture_sizes_tbl[11].width= 1536;
+            
+            gCamCapability[cameraId]->picture_sizes_tbl[12].height= 960;
+            gCamCapability[cameraId]->picture_sizes_tbl[12].width= 1280;
+            
+            gCamCapability[cameraId]->picture_sizes_tbl[13].height= 768;
+            gCamCapability[cameraId]->picture_sizes_tbl[13].width= 1280;
+            
+            gCamCapability[cameraId]->picture_sizes_tbl[14].height= 720;
+            gCamCapability[cameraId]->picture_sizes_tbl[14].width= 1280;
+            
+            gCamCapability[cameraId]->picture_sizes_tbl[15].height= 768;
+            gCamCapability[cameraId]->picture_sizes_tbl[15].width= 1024;
+            
+            gCamCapability[cameraId]->picture_sizes_tbl[16].height= 720;
+            gCamCapability[cameraId]->picture_sizes_tbl[16].width= 880;
+            
+            gCamCapability[cameraId]->picture_sizes_tbl[17].height= 600;
+            gCamCapability[cameraId]->picture_sizes_tbl[17].width= 800;
+            
+            gCamCapability[cameraId]->picture_sizes_tbl[18].height= 480;
+            gCamCapability[cameraId]->picture_sizes_tbl[18].width= 864;
+            
+            gCamCapability[cameraId]->picture_sizes_tbl[19].height= 480;
+            gCamCapability[cameraId]->picture_sizes_tbl[19].width= 800;
+            
+            gCamCapability[cameraId]->picture_sizes_tbl[20].height= 480;
+            gCamCapability[cameraId]->picture_sizes_tbl[20].width= 720;
+            
+            gCamCapability[cameraId]->picture_sizes_tbl[21].height= 480;
+            gCamCapability[cameraId]->picture_sizes_tbl[21].width= 640;
+            
+            gCamCapability[cameraId]->picture_sizes_tbl[22].height= 360;
+            gCamCapability[cameraId]->picture_sizes_tbl[22].width= 640;
+            
+            gCamCapability[cameraId]->picture_sizes_tbl[23].height= 288;
+            gCamCapability[cameraId]->picture_sizes_tbl[23].width= 352;
+            
+            gCamCapability[cameraId]->picture_sizes_tbl[24].height= 240;
+            gCamCapability[cameraId]->picture_sizes_tbl[24].width= 320;
+            for(int i=0;i<25;i++)
+                gCamCapability[cameraId]->picture_min_duration[i]=33333000;
+         ////////////////////////////////////////////////////////////////////////////   
+            gCamCapability[cameraId]->modes_supported = 1;
+            gCamCapability[cameraId]->sensor_mount_angle=90;
+            gCamCapability[cameraId]->focal_length = 4.42;
+            gCamCapability[cameraId]->hor_view_angle = 67.4;
+            gCamCapability[cameraId]->raw_min_duration[0]= 33333000;
+        /////////////////////////////////////////////////////////////////////////////
+        CDBG_HIGH("%s : Initialising preview_sizes_tbl for camera id 0",__func__);
+            gCamCapability[cameraId]->preview_sizes_tbl_cnt = 25;
+
+            gCamCapability[cameraId]->preview_sizes_tbl[0].height=2988;
+            gCamCapability[cameraId]->preview_sizes_tbl[0].width= 5312;
+
+            gCamCapability[cameraId]->preview_sizes_tbl[1].height= 2988;
+            gCamCapability[cameraId]->preview_sizes_tbl[1].width= 3984;
+
+            gCamCapability[cameraId]->preview_sizes_tbl[2].height= 2160;
+            gCamCapability[cameraId]->preview_sizes_tbl[2].width= 3840;
+
+            gCamCapability[cameraId]->preview_sizes_tbl[3].height= 2488;
+            gCamCapability[cameraId]->preview_sizes_tbl[3].width= 3264;
+
+            gCamCapability[cameraId]->preview_sizes_tbl[4].height= 1836;
+            gCamCapability[cameraId]->preview_sizes_tbl[4].width= 3264;
+
+            gCamCapability[cameraId]->preview_sizes_tbl[5].height= 1920;
+            gCamCapability[cameraId]->preview_sizes_tbl[5].width= 2560;
+
+            gCamCapability[cameraId]->preview_sizes_tbl[6].height= 1944;
+            gCamCapability[cameraId]->preview_sizes_tbl[6].width= 2592;
+            
+            gCamCapability[cameraId]->preview_sizes_tbl[7].height= 1512;
+            gCamCapability[cameraId]->preview_sizes_tbl[7].width= 2688;
+            
+            gCamCapability[cameraId]->preview_sizes_tbl[8].height= 1536;
+            gCamCapability[cameraId]->preview_sizes_tbl[8].width= 2048;
+            
+            gCamCapability[cameraId]->preview_sizes_tbl[9].height= 1080;
+            gCamCapability[cameraId]->preview_sizes_tbl[9].width= 1920;
+            
+            gCamCapability[cameraId]->preview_sizes_tbl[10].height= 1200;
+            gCamCapability[cameraId]->preview_sizes_tbl[10].width= 1600;
+            
+            gCamCapability[cameraId]->preview_sizes_tbl[11].height= 864;
+            gCamCapability[cameraId]->preview_sizes_tbl[11].width= 1536;
+            
+            gCamCapability[cameraId]->preview_sizes_tbl[12].height= 960;
+            gCamCapability[cameraId]->preview_sizes_tbl[12].width= 1280;
+            
+            gCamCapability[cameraId]->preview_sizes_tbl[13].height= 768;
+            gCamCapability[cameraId]->preview_sizes_tbl[13].width= 1280;
+            
+            gCamCapability[cameraId]->preview_sizes_tbl[14].height= 720;
+            gCamCapability[cameraId]->preview_sizes_tbl[14].width= 1280;
+            
+            gCamCapability[cameraId]->preview_sizes_tbl[15].height= 768;
+            gCamCapability[cameraId]->preview_sizes_tbl[15].width= 1024;
+            
+            gCamCapability[cameraId]->preview_sizes_tbl[16].height= 720;
+            gCamCapability[cameraId]->preview_sizes_tbl[16].width= 880;
+            
+            gCamCapability[cameraId]->preview_sizes_tbl[17].height= 600;
+            gCamCapability[cameraId]->preview_sizes_tbl[17].width= 800;
+            
+            gCamCapability[cameraId]->preview_sizes_tbl[18].height= 480;
+            gCamCapability[cameraId]->preview_sizes_tbl[18].width= 864;
+            
+            gCamCapability[cameraId]->preview_sizes_tbl[19].height= 480;
+            gCamCapability[cameraId]->preview_sizes_tbl[19].width= 800;
+            
+            gCamCapability[cameraId]->preview_sizes_tbl[20].height= 480;
+            gCamCapability[cameraId]->preview_sizes_tbl[20].width= 720;
+            
+            gCamCapability[cameraId]->preview_sizes_tbl[21].height= 480;
+            gCamCapability[cameraId]->preview_sizes_tbl[21].width= 640;
+            
+            gCamCapability[cameraId]->preview_sizes_tbl[22].height= 360;
+            gCamCapability[cameraId]->preview_sizes_tbl[22].width= 640;
+            
+            gCamCapability[cameraId]->preview_sizes_tbl[23].height= 288;
+            gCamCapability[cameraId]->preview_sizes_tbl[23].width= 352;
+            
+            gCamCapability[cameraId]->preview_sizes_tbl[24].height= 240;
+            gCamCapability[cameraId]->preview_sizes_tbl[24].width= 320;
+        //////////////////////////////////////////////////////////////////////////
+            CDBG_HIGH("%s : Initialising video_sizes_tbl for camera id 0",__func__);
+            gCamCapability[cameraId]->video_sizes_tbl_cnt=26;
+            gCamCapability[cameraId]->video_sizes_tbl[0].height=2988;
+            gCamCapability[cameraId]->video_sizes_tbl[0].width= 5312;
+
+            gCamCapability[cameraId]->video_sizes_tbl[1].height= 2988;
+            gCamCapability[cameraId]->video_sizes_tbl[1].width= 3984;
+
+            gCamCapability[cameraId]->video_sizes_tbl[2].height= 2160;
+            gCamCapability[cameraId]->video_sizes_tbl[2].width= 3840;
+
+            gCamCapability[cameraId]->video_sizes_tbl[3].height= 2488;
+            gCamCapability[cameraId]->video_sizes_tbl[3].width= 3264;
+
+            gCamCapability[cameraId]->video_sizes_tbl[4].height= 1836;
+            gCamCapability[cameraId]->video_sizes_tbl[4].width= 3264;
+
+            gCamCapability[cameraId]->video_sizes_tbl[5].height= 1920;
+            gCamCapability[cameraId]->video_sizes_tbl[5].width= 2560;
+
+            gCamCapability[cameraId]->video_sizes_tbl[6].height= 1944;
+            gCamCapability[cameraId]->video_sizes_tbl[6].width= 2592;
+            
+            gCamCapability[cameraId]->video_sizes_tbl[7].height= 1512;
+            gCamCapability[cameraId]->video_sizes_tbl[7].width= 2688;
+            
+            gCamCapability[cameraId]->video_sizes_tbl[8].height= 1536;
+            gCamCapability[cameraId]->video_sizes_tbl[8].width= 2048;
+            
+            gCamCapability[cameraId]->video_sizes_tbl[9].height= 1080;
+            gCamCapability[cameraId]->video_sizes_tbl[9].width= 1920;
+            
+            gCamCapability[cameraId]->video_sizes_tbl[10].height= 1200;
+            gCamCapability[cameraId]->video_sizes_tbl[10].width= 1600;
+            
+            gCamCapability[cameraId]->video_sizes_tbl[11].height= 864;
+            gCamCapability[cameraId]->video_sizes_tbl[11].width= 1536;
+            
+            gCamCapability[cameraId]->video_sizes_tbl[12].height= 960;
+            gCamCapability[cameraId]->video_sizes_tbl[12].width= 1280;
+            
+            gCamCapability[cameraId]->video_sizes_tbl[13].height= 768;
+            gCamCapability[cameraId]->video_sizes_tbl[13].width= 1280;
+            
+            gCamCapability[cameraId]->video_sizes_tbl[14].height= 720;
+            gCamCapability[cameraId]->video_sizes_tbl[14].width= 1280;
+            
+            gCamCapability[cameraId]->video_sizes_tbl[15].height= 768;
+            gCamCapability[cameraId]->video_sizes_tbl[15].width= 1024;
+            
+            gCamCapability[cameraId]->video_sizes_tbl[16].height= 720;
+            gCamCapability[cameraId]->video_sizes_tbl[16].width= 880;
+            
+            gCamCapability[cameraId]->video_sizes_tbl[17].height= 600;
+            gCamCapability[cameraId]->video_sizes_tbl[17].width= 800;
+            
+            gCamCapability[cameraId]->video_sizes_tbl[18].height= 480;
+            gCamCapability[cameraId]->video_sizes_tbl[18].width= 864;
+            
+            gCamCapability[cameraId]->video_sizes_tbl[19].height= 480;
+            gCamCapability[cameraId]->video_sizes_tbl[19].width= 800;
+            
+            gCamCapability[cameraId]->video_sizes_tbl[20].height= 480;
+            gCamCapability[cameraId]->video_sizes_tbl[20].width= 720;
+            
+            gCamCapability[cameraId]->video_sizes_tbl[21].height= 480;
+            gCamCapability[cameraId]->video_sizes_tbl[21].width= 640;
+            
+            gCamCapability[cameraId]->video_sizes_tbl[22].height= 360;
+            gCamCapability[cameraId]->video_sizes_tbl[22].width= 640;
+            
+            gCamCapability[cameraId]->video_sizes_tbl[23].height= 288;
+            gCamCapability[cameraId]->video_sizes_tbl[23].width= 352;
+            
+            gCamCapability[cameraId]->video_sizes_tbl[24].height= 240;
+            gCamCapability[cameraId]->video_sizes_tbl[24].width= 320;
+
+            gCamCapability[cameraId]->video_sizes_tbl[25].height= 144;
+            gCamCapability[cameraId]->video_sizes_tbl[25].width= 176;
+
+        ////////////////////////////////////////////////////////////////////////
+            CDBG_HIGH("%s : Initialising livesnapshot_sizes_tbl for camera id 0",__func__);
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl_cnt=25;
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[0].height=2988;
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[0].width= 5312;
+
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[1].height= 2988;
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[1].width= 3984;
+
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[2].height= 2160;
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[2].width= 3840;
+
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[3].height= 2488;
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[3].width= 3264;
+
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[4].height= 1836;
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[4].width= 3264;
+
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[5].height= 1920;
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[5].width= 2560;
+
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[6].height= 1944;
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[6].width= 2592;
+            
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[7].height= 1512;
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[7].width= 2688;
+            
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[8].height= 1536;
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[8].width= 2048;
+            
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[9].height= 1080;
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[9].width= 1920;
+            
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[10].height= 1200;
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[10].width= 1600;
+            
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[11].height= 864;
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[11].width= 1536;
+            
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[12].height= 960;
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[12].width= 1280;
+            
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[13].height= 768;
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[13].width= 1280;
+            
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[14].height= 720;
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[14].width= 1280;
+            
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[15].height= 768;
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[15].width= 1024;
+            
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[16].height= 720;
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[16].width= 880;
+            
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[17].height= 600;
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[17].width= 800;
+            
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[18].height= 480;
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[18].width= 864;
+            
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[19].height= 480;
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[19].width= 800;
+            
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[20].height= 480;
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[20].width= 720;
+            
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[21].height= 480;
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[21].width= 640;
+            
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[22].height= 360;
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[22].width= 640;
+            
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[23].height= 288;
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[23].width= 352;
+            
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[24].height= 240;
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[24].width= 320;
+
+            ///////////////////////////////////////////////////////////////////////
+            gCamCapability[cameraId]->hfr_tbl_cnt=0;
+            gCamCapability[cameraId]->supported_preview_fmt_cnt = 2;
+            gCamCapability[cameraId]->supported_preview_fmts[0] = CAM_FORMAT_YUV_420_NV21;
+            gCamCapability[cameraId]->supported_preview_fmts[1] = CAM_FORMAT_YUV_420_NV12_VENUS;
+
+            gCamCapability[cameraId]->supported_raw_dim_cnt = 1;
+            gCamCapability[cameraId]->raw_dim[0].height= 2988;
+            gCamCapability[cameraId]->raw_dim[0].height = 5312;
+
+            gCamCapability[cameraId]->supported_raw_fmt_cnt=1;
+            gCamCapability[cameraId]->supported_raw_fmts[0]=CAM_FORMAT_YUV_RAW_8BIT_YUYV;
+
+            gCamCapability[cameraId]->supported_focus_algos_cnt = 4;
+            gCamCapability[cameraId]->supported_focus_algos[0]= CAM_FOCUS_ALGO_AUTO;
+            gCamCapability[cameraId]->supported_focus_algos[1]= CAM_FOCUS_ALGO_SPOT;
+            gCamCapability[cameraId]->supported_focus_algos[2]= CAM_FOCUS_ALGO_CENTER_WEIGHTED;
+            gCamCapability[cameraId]->supported_focus_algos[3]= CAM_FOCUS_ALGO_AVERAGE;
+
+            gCamCapability[cameraId]->auto_wb_lock_supported =(uint8_t)true ;
+            gCamCapability[cameraId]->zoom_supported =(uint8_t)true ;
+            gCamCapability[cameraId]->smooth_zoom_supported =(uint8_t)false ;
+            gCamCapability[cameraId]->auto_exposure_lock_supported =(uint8_t)true ;
+            gCamCapability[cameraId]->video_snapshot_supported =(uint8_t)true;
+
+            gCamCapability[cameraId]->max_num_roi = 0 ;   // NO
+            gCamCapability[cameraId]->max_num_focus_areas = 1; //Idea
+            gCamCapability[cameraId]->max_num_metering_areas = 1; //Whats
+            gCamCapability[cameraId]->max_zoom_step = 1; //happening
+
+            CDBG_HIGH("%s : Initialising brightness_ctrl for camera id 0",__func__);
+            gCamCapability[cameraId]->brightness_ctrl.min_value = 0;
+            gCamCapability[cameraId]->brightness_ctrl.max_value = 6;
+            gCamCapability[cameraId]->brightness_ctrl.def_value = 1;
+            gCamCapability[cameraId]->brightness_ctrl.step = 1;
+
+            CDBG_HIGH("%s : Initialising saturation_ctrl for camera id 0",__func__);
+            gCamCapability[cameraId]->saturation_ctrl.min_value = 0;
+            gCamCapability[cameraId]->saturation_ctrl.max_value = 10;
+            gCamCapability[cameraId]->saturation_ctrl.def_value = 5;
+            gCamCapability[cameraId]->saturation_ctrl.step = 1;
+
+            CDBG_HIGH("%s : Initialising sharpness_ctrl for camera id 0",__func__);
+            gCamCapability[cameraId]->sharpness_ctrl.min_value = 0;
+            gCamCapability[cameraId]->sharpness_ctrl.max_value = 36;
+            gCamCapability[cameraId]->sharpness_ctrl.def_value = 12;
+            gCamCapability[cameraId]->sharpness_ctrl.step = 6;
+
+            CDBG_HIGH("%s : Initialising contrast_ctrl for camera id 0",__func__);
+            gCamCapability[cameraId]->contrast_ctrl.min_value = 0;
+            gCamCapability[cameraId]->contrast_ctrl.max_value = 10;
+            gCamCapability[cameraId]->contrast_ctrl.def_value = 5;
+            gCamCapability[cameraId]->contrast_ctrl.step = 1;
+
+            CDBG_HIGH("%s : Initialising sce_ctrl for camera id 0",__func__);
+            gCamCapability[cameraId]->sce_ctrl.min_value = -100;
+            gCamCapability[cameraId]->sce_ctrl.max_value = 100;
+            gCamCapability[cameraId]->sce_ctrl.def_value = 10;
+            gCamCapability[cameraId]->sce_ctrl.step = 10;
+
+            CDBG_HIGH("%s : Initialising hdr_bracketing_setting for camera id 0",__func__);
+            gCamCapability[cameraId]->hdr_bracketing_setting.exp_val.mode=CAM_EXP_BRACKETING_OFF;
+            gCamCapability[cameraId]->qcom_supported_feature_mask = (uint32_t) false; //Disable HDR for now
+            gCamCapability[cameraId]->min_num_pp_bufs=2;
+
+            /*Start Hal3 Initialzation*/
+            gCamCapability[cameraId]->min_focus_distance = (float)10.000000;
+            gCamCapability[cameraId]->hyper_focal_distance = (float)0.20638399;
+            gCamCapability[cameraId]->focal_lengths_count=1;
+            gCamCapability[cameraId]->focal_lengths[0] = 4.42;
+
+            gCamCapability[cameraId]->apertures_count = 1;
+            gCamCapability[cameraId]->apertures=1.79;
+
+            gCamCapability[cameraId]->filter_densities_count=0;
+            gCamCapability[cameraId]->optical_stab_modes_count=0;
+
+            gCamCapability[cameraId]->lens_shading_map_size.width=17;
+            gCamCapability[cameraId]->lens_shading_map_size.width=13;
+            // gCamCapability[cameraId]->lens_shading_map;
+            // gCamCapability[cameraId]->geo_correction_map_size
+            // gCamCapability[cameraId]->lens_position;
+
+            gCamCapability[cameraId]->exposure_time_range[0] = 21634;
+            gCamCapability[cameraId]->exposure_time_range[0] = 15256406000;
+            gCamCapability[cameraId]->max_frame_duration=15256460820;
+
+            gCamCapability[cameraId]->num_color_channels=1;
+            gCamCapability[cameraId]->color_arrangement = CAM_FILTER_ARRANGEMENT_BGGR;
+
+
+
+            gCamCapability[cameraId]->sensor_physical_size[0] = 5.94899988;
+            gCamCapability[cameraId]->sensor_physical_size[1] = 3.34599996;
+
+            gCamCapability[cameraId]->pixel_array_size.width=5312;
+            gCamCapability[cameraId]->pixel_array_size.height=2988;
+
+            gCamCapability[cameraId]->active_array_size.left = 0;
+            gCamCapability[cameraId]->active_array_size.top = 0;
+            gCamCapability[cameraId]->active_array_size.width = 5312;
+            gCamCapability[cameraId]->active_array_size.height = 2988;
+
+            gCamCapability[cameraId]->white_level=1023;
+            gCamCapability[cameraId]->black_level_pattern[0] = 64;
+            gCamCapability[cameraId]->black_level_pattern[1] = 64;
+            gCamCapability[cameraId]->black_level_pattern[2] = 64;
+            gCamCapability[cameraId]->black_level_pattern[3] = 64;
+
+            gCamCapability[cameraId]->flash_charge_duration = 0;
+            gCamCapability[cameraId]->supported_flash_firing_level_cnt = 11;
+            gCamCapability[cameraId]->supported_firing_levels[0] = CAM_FORMAT_JPEG;
+            gCamCapability[cameraId]->supported_firing_levels[1] = CAM_FORMAT_YUV_420_NV12;
+            gCamCapability[cameraId]->supported_firing_levels[2] = CAM_FORMAT_YUV_420_NV21;
+            gCamCapability[cameraId]->supported_firing_levels[3] = CAM_FORMAT_YUV_420_NV21_ADRENO;
+            gCamCapability[cameraId]->supported_firing_levels[4] = CAM_FORMAT_YUV_420_YV12;
+            gCamCapability[cameraId]->supported_firing_levels[5] = CAM_FORMAT_YUV_422_NV16;
+            gCamCapability[cameraId]->supported_firing_levels[6] = CAM_FORMAT_YUV_422_NV61;
+            gCamCapability[cameraId]->supported_firing_levels[7] = CAM_FORMAT_YUV_420_NV12_VENUS;
+            gCamCapability[cameraId]->supported_firing_levels[8] = CAM_FORMAT_YUV_RAW_8BIT_YUYV;
+            gCamCapability[cameraId]->supported_firing_levels[9] = CAM_FORMAT_YUV_RAW_8BIT_YVYU;
+            gCamCapability[cameraId]->supported_firing_levels[10] = CAM_FORMAT_YUV_RAW_8BIT_UYVY;
+            gCamCapability[cameraId]->supported_firing_levels[11] = CAM_FORMAT_YUV_RAW_8BIT_VYUY;
+
+                /* Flash Firing Time */
+                // int64_t flash_firing_time;
+
+                // /* Flash Ciolor Temperature */
+                // uint8_t flash_color_temp;
+
+                // /* Flash max Energy */
+                // uint8_t flash_max_energy;
+            
+            gCamCapability[cameraId]->max_tone_map_curve_points=256;
+            gCamCapability[cameraId]->supported_scalar_format_cnt = 0; //Don't for now
+
+            gCamCapability[cameraId]->max_face_detection_count = 5;
+            gCamCapability[cameraId]->hw_analysis_supported = 0; //Don't for now
+            gCamCapability[cameraId]->histogram_supported = 0;
+            gCamCapability[cameraId]->histogram_size = 256;
+            gCamCapability[cameraId]->max_histogram_count=256;
+            gCamCapability[cameraId]->sharpness_map_size.width=0;    
+            gCamCapability[cameraId]->sharpness_map_size.height=0;
+            gCamCapability[cameraId]->supported_ae_modes_cnt=2;
+            gCamCapability[cameraId]->supported_ae_modes[0]=CAM_AE_MODE_OFF;
+            gCamCapability[cameraId]->supported_ae_modes[0]=CAM_AE_MODE_ON;
+        
+            gCamCapability[cameraId]->sensitivity_range.min_sensitivity = 50;
+            gCamCapability[cameraId]->sensitivity_range.min_sensitivity = 800;
+            gCamCapability[cameraId]->max_analog_sensitivity = 400;
+            
+            gCamCapability[cameraId]->gradient_S=3.738032e-06;
+            gCamCapability[cameraId]->offset_S=3.651935e-04;
+            gCamCapability[cameraId]->gradient_O=4.499952e-07;
+            gCamCapability[cameraId]->offset_O=-2.968624e-04;
+
+            gCamCapability[cameraId]->scene_mode_overrides.ae_mode=1;
+            gCamCapability[cameraId]->scene_mode_overrides.af_mode=0;
+            gCamCapability[cameraId]->scene_mode_overrides.awb_mode=0;
+
+
+            gCamCapability[cameraId]->scale_picture_sizes_cnt = gCamCapability[cameraId]->picture_sizes_tbl_cnt;
+            gCamCapability[cameraId]->scale_picture_sizes = gCamCapability[cameraId]->picture_sizes_tbl;
+
+            gCamCapability[cameraId]->flash_available = (uint8_t)true;
+            gCamCapability[cameraId]->base_gain_factor.numerator = 0;
+            gCamCapability[cameraId]->base_gain_factor.denominator = 128;
+
+            gCamCapability[cameraId]->ubifocus_af_bracketing_need.enable =0;
+            gCamCapability[cameraId]->refocus_af_bracketing_need.enable=0;
+            gCamCapability[cameraId]->opti_zoom_settings_need =0;
+            gCamCapability[cameraId]->stillmore_settings_need.burst_count=5;
+            gCamCapability[cameraId]->stillmore_settings_need.min_burst_count=1;
+            gCamCapability[cameraId]->stillmore_settings_need.min_burst_count=10;
+
+            // gCamCapability[cameraId]->chroma_flash_settings_need
+            gCamCapability[cameraId]->focus_dist_calibrated = (uint8_t)true;
+            gCamCapability[cameraId]->supported_test_pattern_modes_cnt =0;
+            // gCamCapability[cameraId]->stall_durations;
+            gCamCapability[cameraId]->reference_illuminant1=CAM_AWB_D65;
+            gCamCapability[cameraId]->reference_illuminant2 = CAM_AWB_A;
+            
+            #define SEC_TO_NS_FACTOR 1000000000
+            static int64_t default_jpeg_stall_durations_back[] = {
+            0.779 * SEC_TO_NS_FACTOR,  //24 MP
+            0.682 * SEC_TO_NS_FACTOR,  //21 MP
+            0.506 * SEC_TO_NS_FACTOR,  //16 MP with 16:9 aspect ratio.
+            0.425 * SEC_TO_NS_FACTOR,  //16MP
+            0.366 * SEC_TO_NS_FACTOR,  //13M
+            0.345 * SEC_TO_NS_FACTOR,  //12MP
+            0.258 * SEC_TO_NS_FACTOR,
+            0.253 * SEC_TO_NS_FACTOR,  //8MP added for 8909
+            0.243 * SEC_TO_NS_FACTOR,  //8MP
+            0.179 * SEC_TO_NS_FACTOR,
+            0.161 * SEC_TO_NS_FACTOR,  //5MP
+            0.144 * SEC_TO_NS_FACTOR,  //4MP wide
+            0.133 * SEC_TO_NS_FACTOR,  //3MP QXGA
+            0.116 * SEC_TO_NS_FACTOR,  //HD1080
+            0.108 * SEC_TO_NS_FACTOR,  //2MP UXGA
+            0.103 * SEC_TO_NS_FACTOR,  //Wide HD
+            0.099 * SEC_TO_NS_FACTOR,  //1.3MP UXGA
+            0.091 * SEC_TO_NS_FACTOR,  //WXGA
+            0.085 * SEC_TO_NS_FACTOR,  //1200 *1200
+            0.080 * SEC_TO_NS_FACTOR,  //HD720
+            0.075 * SEC_TO_NS_FACTOR,  //1MP XGA
+            0.068 * SEC_TO_NS_FACTOR,  //SVGA
+            0.067 * SEC_TO_NS_FACTOR,  //FWVGA
+            0.066 * SEC_TO_NS_FACTOR,  //WVGA
+            0.065 * SEC_TO_NS_FACTOR,  //480p
+            0.061 * SEC_TO_NS_FACTOR,  //VGA
+            0.059 * SEC_TO_NS_FACTOR,
+            0.055 * SEC_TO_NS_FACTOR,  //Portrait VGA for VT App
+            0.049 * SEC_TO_NS_FACTOR,  //HVGA for HFR support
+            0.049 * SEC_TO_NS_FACTOR,  //HVGA
+            0.048 * SEC_TO_NS_FACTOR,  //CIF
+            0.045 * SEC_TO_NS_FACTOR,  //QVGA
+            0.035 * SEC_TO_NS_FACTOR,  //Portrait QVGA for VT App
+            0.030 * SEC_TO_NS_FACTOR,  //QCIF
+            0.025 * SEC_TO_NS_FACTOR,
+            0.018 * SEC_TO_NS_FACTOR,  // Portrait QCIF for VT App
+            };
+
+            for(int i=0; i<gCamCapability[cameraId]->picture_sizes_tbl_cnt)
+                gCamCapability[cameraId]->default_jpeg_stall_durations_front[i];
+           
+            gCamCapability[cameraId]->raw16_stall_durations[0] = 0.2*SEC_TO_NS_FACTOR;
+            
+            gCamCapability[cameraId]->forward_matrix1[0][0].numerator=114; gCamCapability[cameraId]->forward_matrix1[0][0].numerator=128;
+            gCamCapability[cameraId]->forward_matrix1[0][1].numerator=-9; gCamCapability[cameraId]->forward_matrix1[0][1].numerator=128;
+            gCamCapability[cameraId]->forward_matrix1[0][2].numerator=18; gCamCapability[cameraId]->forward_matrix1[0][2].numerator=128;
+            gCamCapability[cameraId]->forward_matrix1[1][0].numerator=44; gCamCapability[cameraId]->forward_matrix1[1][0].numerator=128;
+            gCamCapability[cameraId]->forward_matrix1[1][1].numerator=102; gCamCapability[cameraId]->forward_matrix1[1][1].numerator=128;
+            gCamCapability[cameraId]->forward_matrix1[1][2].numerator=-18; gCamCapability[cameraId]->forward_matrix1[1][2].numerator=128;
+            gCamCapability[cameraId]->forward_matrix1[2][0].numerator=10; gCamCapability[cameraId]->forward_matrix1[2][0].numerator=128;
+            gCamCapability[cameraId]->forward_matrix1[2][1].numerator=-45; gCamCapability[cameraId]->forward_matrix1[2][1].numerator=128;
+            gCamCapability[cameraId]->forward_matrix1[2][2].numerator=141; gCamCapability[cameraId]->forward_matrix1[2][2].numerator=128;
+
+            gCamCapability[cameraId]->forward_matrix2[0][0].numerator=103; gCamCapability[cameraId]->forward_matrix2[0][0].numerator=128;
+            gCamCapability[cameraId]->forward_matrix2[0][1].numerator=-42; gCamCapability[cameraId]->forward_matrix2[0][1].numerator=128;
+            gCamCapability[cameraId]->forward_matrix2[0][2].numerator=63; gCamCapability[cameraId]->forward_matrix2[0][2].numerator=128;
+            gCamCapability[cameraId]->forward_matrix2[1][0].numerator=25; gCamCapability[cameraId]->forward_matrix2[1][0].numerator=128;
+            gCamCapability[cameraId]->forward_matrix2[1][1].numerator=84; gCamCapability[cameraId]->forward_matrix2[1][1].numerator=128;
+            gCamCapability[cameraId]->forward_matrix2[1][2].numerator=20; gCamCapability[cameraId]->forward_matrix2[1][2].numerator=128;
+            gCamCapability[cameraId]->forward_matrix2[2][0].numerator=4; gCamCapability[cameraId]->forward_matrix2[2][0].numerator=128;
+            gCamCapability[cameraId]->forward_matrix2[2][1].numerator=-126; gCamCapability[cameraId]->forward_matrix2[2][1].numerator=128;
+            gCamCapability[cameraId]->forward_matrix2[2][2].numerator=228; gCamCapability[cameraId]->forward_matrix2[2][2].numerator=128;
+
+
+            gCamCapability[cameraId]->color_transform1[0][0].numerator=76; gCamCapability[cameraId]->color_transform1[0][0].numerator=128;
+            gCamCapability[cameraId]->color_transform1[0][1].numerator=-10; gCamCapability[cameraId]->color_transform1[0][1].numerator=128;
+            gCamCapability[cameraId]->color_transform1[0][2].numerator=-65; gCamCapability[cameraId]->color_transform1[0][2].numerator=128;
+            gCamCapability[cameraId]->color_transform1[1][0].numerator=165; gCamCapability[cameraId]->color_transform1[1][0].numerator=128;
+            gCamCapability[cameraId]->color_transform1[1][1].numerator=23; gCamCapability[cameraId]->color_transform1[1][1].numerator=128;
+            gCamCapability[cameraId]->color_transform1[1][2].numerator=-24; gCamCapability[cameraId]->color_transform1[1][2].numerator=128;
+            gCamCapability[cameraId]->color_transform1[2][0].numerator=40; gCamCapability[cameraId]->color_transform1[2][0].numerator=128;
+            gCamCapability[cameraId]->color_transform1[2][1].numerator=-70; gCamCapability[cameraId]->color_transform1[2][1].numerator=128;
+            gCamCapability[cameraId]->color_transform1[2][2].numerator=4; gCamCapability[cameraId]->color_transform1[2][2].numerator=128;
+
+            gCamCapability[cameraId]->color_transform2[0][0].numerator=105; gCamCapability[cameraId]->color_transform2[0][0].numerator=128;
+            gCamCapability[cameraId]->color_transform2[0][1].numerator=2; gCamCapability[cameraId]->color_transform2[0][1].numerator=128;
+            gCamCapability[cameraId]->color_transform2[0][2].numerator=-51; gCamCapability[cameraId]->color_transform2[0][2].numerator=128;
+            gCamCapability[cameraId]->color_transform2[1][0].numerator=-55; gCamCapability[cameraId]->color_transform2[1][0].numerator=128;
+            gCamCapability[cameraId]->color_transform2[1][1].numerator=190; gCamCapability[cameraId]->color_transform2[1][1].numerator=128;
+            gCamCapability[cameraId]->color_transform2[1][2].numerator=-4; gCamCapability[cameraId]->color_transform2[1][2].numerator=128;
+            gCamCapability[cameraId]->color_transform2[2][0].numerator=-11; gCamCapability[cameraId]->color_transform2[2][0].numerator=128;
+            gCamCapability[cameraId]->color_transform2[2][1].numerator=-38; gCamCapability[cameraId]->color_transform2[2][1].numerator=128;
+            gCamCapability[cameraId]->color_transform2[2][2].numerator=67; gCamCapability[cameraId]->color_transform2[2][2].numerator=128;
+
+            gCamCapability[cameraId]->calibration_transform1[0][0].numerator=124; gCamCapability[cameraId]->calibration_transform1[0][0].numerator=128;
+            gCamCapability[cameraId]->calibration_transform1[0][1].numerator=0; gCamCapability[cameraId]->calibration_transform1[0][1].numerator=128;
+            gCamCapability[cameraId]->calibration_transform1[0][2].numerator=0; gCamCapability[cameraId]->calibration_transform1[0][2].numerator=128;
+            gCamCapability[cameraId]->calibration_transform1[1][0].numerator=0; gCamCapability[cameraId]->calibration_transform1[1][0].numerator=128;
+            gCamCapability[cameraId]->calibration_transform1[1][1].numerator=128; gCamCapability[cameraId]->calibration_transform1[1][1].numerator=128;
+            gCamCapability[cameraId]->calibration_transform1[1][2].numerator=0; gCamCapability[cameraId]->calibration_transform1[1][2].numerator=128;
+            gCamCapability[cameraId]->calibration_transform1[2][0].numerator=0; gCamCapability[cameraId]->calibration_transform1[2][0].numerator=128;
+            gCamCapability[cameraId]->calibration_transform1[2][1].numerator=0; gCamCapability[cameraId]->calibration_transform1[2][1].numerator=128;
+            gCamCapability[cameraId]->calibration_transform1[2][2].numerator=133; gCamCapability[cameraId]->calibration_transform1[2][2].numerator=128;
+
+            gCamCapability[cameraId]->calibration_transform2[0][0].numerator=123; gCamCapability[cameraId]->calibration_transform2[0][0].numerator=128;
+            gCamCapability[cameraId]->calibration_transform2[0][1].numerator=0; gCamCapability[cameraId]->calibration_transform2[0][1].numerator=128;
+            gCamCapability[cameraId]->calibration_transform2[0][2].numerator=0; gCamCapability[cameraId]->calibration_transform2[0][2].numerator=128;
+            gCamCapability[cameraId]->calibration_transform2[1][0].numerator=0; gCamCapability[cameraId]->calibration_transform2[1][0].numerator=128;
+            gCamCapability[cameraId]->calibration_transform2[1][1].numerator=128; gCamCapability[cameraId]->calibration_transform2[1][1].numerator=128;
+            gCamCapability[cameraId]->calibration_transform2[1][2].numerator=0; gCamCapability[cameraId]->calibration_transform2[1][2].numerator=128;
+            gCamCapability[cameraId]->calibration_transform2[2][0].numerator=0; gCamCapability[cameraId]->calibration_transform2[2][0].numerator=128;
+            gCamCapability[cameraId]->calibration_transform2[2][1].numerator=0; gCamCapability[cameraId]->calibration_transform2[2][1].numerator=128;
+            gCamCapability[cameraId]->calibration_transform2[2][2].numerator=135; gCamCapability[cameraId]->calibration_transform2[2][2].numerator=128;
+
+            gCamCapability[cameraId]->opaque_raw_fmt = MIPI_RAW;
+            gCamCapability[cameraId]->true_portrait_settings_need = 100 /* idk man*/+ 25 + 800*800;
+            gCamCapability[cameraId]->sensor_type.sens_type=CAM_SENSOR_YUV;
+            gCamCapability[cameraId]->sensor_type.native_format=CAM_FORMAT_YUV_420_NV21;
+            gCamCapability[cameraId]->aberration_modes_count = 1;
+            gCamCapability[cameraId]->aberration_modes = CAM_COLOR_CORRECTION_ABERRATION_OFF;
+            gCamCapability[cameraId]->isTimestampCalibrated = 0;
+            gCamCapability[cameraId]->max_viewfinder_size.width = 5132; gCamCapability[cameraId]->max_viewfinder_size.height = 2988;
+            gCamCapability[cameraId]->no_per_frame_control_support = (uint8_t)false;
+            gCamCapability[cameraId]->supported_is_types_cnt=0;
+            gCamCapability[cameraId]->max_batch_bufs_supported = 12;
+
+        }else{
+            CDBG_HIGH("%s : Initialising capabilities for camera id = 1",__func__);
+            gCamCapability[cameraId]->position = CAM_POSITION_FRONT;
+            gCamCapability[cameraId]->auto_hdr_supported = 1;
+            gCamCapability[cameraId]->isWnrSupported = 1;
+
+            gCamCapability[cameraId]->supported_iso_modes_cnt = 4; 
+            gCamCapability[cameraId]->supported_iso_modes[0] = CAM_ISO_MODE_AUTO;
+            gCamCapability[cameraId]->supported_iso_modes[1] = CAM_ISO_MODE_DEBLUR;
+            gCamCapability[cameraId]->supported_iso_modes[2] = CAM_ISO_MODE_100;
+            gCamCapability[cameraId]->supported_iso_modes[3] = CAM_ISO_MODE_200;
+            
+            gCamCapability[cameraId]->supported_flash_modes_cnt = 3;
+            gCamCapability[cameraId]->supported_flash_modes[0] = CAM_FLASH_MODE_OFF;
+            gCamCapability[cameraId]->supported_flash_modes[1] = CAM_FLASH_MODE_AUTO;
+            gCamCapability[cameraId]->supported_flash_modes[2] = CAM_FLASH_MODE_ON;
+
+            gCamCapability[cameraId]->zoom_ratio_tbl_cnt = 1; //Disable Zoom for now
+            gCamCapability[cameraId]->zoom_ratio_tbl[0]=100;
+
+            gCamCapability[cameraId]->supported_effects_cnt=12;
+            gCamCapability[cameraId]->supported_effects[0]= CAM_EFFECT_MODE_OFF;
+            gCamCapability[cameraId]->supported_effects[1]= CAM_EFFECT_MODE_MONO;
+            gCamCapability[cameraId]->supported_effects[2]= CAM_EFFECT_MODE_NEGATIVE;
+            gCamCapability[cameraId]->supported_effects[3]= CAM_EFFECT_MODE_SOLARIZE;
+            gCamCapability[cameraId]->supported_effects[4]= CAM_EFFECT_MODE_SEPIA;
+            gCamCapability[cameraId]->supported_effects[5]= CAM_EFFECT_MODE_POSTERIZE;
+            gCamCapability[cameraId]->supported_effects[6]= CAM_EFFECT_MODE_WHITEBOARD;
+            gCamCapability[cameraId]->supported_effects[7]= CAM_EFFECT_MODE_BLACKBOARD;
+            gCamCapability[cameraId]->supported_effects[8]= CAM_EFFECT_MODE_AQUA;
+            gCamCapability[cameraId]->supported_effects[9]= CAM_EFFECT_MODE_EMBOSS;
+            gCamCapability[cameraId]->supported_effects[10]= CAM_EFFECT_MODE_SKETCH;
+            gCamCapability[cameraId]->supported_effects[11]= CAM_EFFECT_MODE_NEON;
+
+            gCamCapability[cameraId]->supported_scene_modes_cnt=21;
+            gCamCapability[cameraId]->supported_scene_modes[0] =CAM_SCENE_MODE_OFF;
+            gCamCapability[cameraId]->supported_scene_modes[1] =CAM_SCENE_MODE_AUTO;
+            gCamCapability[cameraId]->supported_scene_modes[2] =CAM_SCENE_MODE_LANDSCAPE;
+            gCamCapability[cameraId]->supported_scene_modes[3] =CAM_SCENE_MODE_SNOW;
+            gCamCapability[cameraId]->supported_scene_modes[4] =CAM_SCENE_MODE_BEACH;
+            gCamCapability[cameraId]->supported_scene_modes[5] =CAM_SCENE_MODE_SUNSET;
+            gCamCapability[cameraId]->supported_scene_modes[6] =CAM_SCENE_MODE_NIGHT;
+            gCamCapability[cameraId]->supported_scene_modes[7] =CAM_SCENE_MODE_PORTRAIT;
+            gCamCapability[cameraId]->supported_scene_modes[8] =CAM_SCENE_MODE_BACKLIGHT;
+            gCamCapability[cameraId]->supported_scene_modes[9] =CAM_SCENE_MODE_SPORTS;
+            gCamCapability[cameraId]->supported_scene_modes[10] =CAM_SCENE_MODE_ANTISHAKE;
+            gCamCapability[cameraId]->supported_scene_modes[11] =CAM_SCENE_MODE_FLOWERS;
+            gCamCapability[cameraId]->supported_scene_modes[12] =CAM_SCENE_MODE_CANDLELIGHT;
+            gCamCapability[cameraId]->supported_scene_modes[13] =CAM_SCENE_MODE_FIREWORKS;
+            gCamCapability[cameraId]->supported_scene_modes[14] =CAM_SCENE_MODE_PARTY;
+            gCamCapability[cameraId]->supported_scene_modes[15] =CAM_SCENE_MODE_NIGHT_PORTRAIT;
+            gCamCapability[cameraId]->supported_scene_modes[16] =CAM_SCENE_MODE_THEATRE;
+            gCamCapability[cameraId]->supported_scene_modes[17] =CAM_SCENE_MODE_ACTION;
+            gCamCapability[cameraId]->supported_scene_modes[18] =CAM_SCENE_MODE_AR;
+            gCamCapability[cameraId]->supported_scene_modes[19] =CAM_SCENE_MODE_FACE_PRIORITY;
+            gCamCapability[cameraId]->supported_scene_modes[20] =CAM_SCENE_MODE_BARCODE;
+            gCamCapability[cameraId]->supported_scene_modes[21] =CAM_SCENE_MODE_HDR;
+            //
+
+            gCamCapability[cameraId]->supported_aec_modes_cnt =7;
+            gCamCapability[cameraId]->supported_aec_modes[0] = CAM_AEC_MODE_FRAME_AVERAGE;
+            gCamCapability[cameraId]->supported_aec_modes[1] = CAM_AEC_MODE_CENTER_WEIGHTED;
+            gCamCapability[cameraId]->supported_aec_modes[2] = CAM_AEC_MODE_SPOT_METERING;
+            gCamCapability[cameraId]->supported_aec_modes[3] = CAM_AEC_MODE_SMART_METERING;
+            gCamCapability[cameraId]->supported_aec_modes[4] = CAM_AEC_MODE_USER_METERING;
+            gCamCapability[cameraId]->supported_aec_modes[5]= CAM_AEC_MODE_SPOT_METERING_ADV;
+            gCamCapability[cameraId]->supported_aec_modes[6] = CAM_AEC_MODE_CENTER_WEIGHTED_ADV;
+
+            gCamCapability[cameraId]->fps_ranges_tbl_cnt = 1;
+            gCamCapability[cameraId]->fps_ranges_tbl[0].min_fps =15;
+            gCamCapability[cameraId]->fps_ranges_tbl[0].max_fps =30;
+            gCamCapability[cameraId]->fps_ranges_tbl[0].video_min_fps=15;
+            gCamCapability[cameraId]->fps_ranges_tbl[0].video_max_fps=30;
+
+            gCamCapability[cameraId]->supported_antibandings_cnt=4;
+            gCamCapability[cameraId]->supported_antibandings[0] = CAM_ANTIBANDING_MODE_OFF;
+            gCamCapability[cameraId]->supported_antibandings[1] = CAM_ANTIBANDING_MODE_60HZ;
+            gCamCapability[cameraId]->supported_antibandings[2] = CAM_ANTIBANDING_MODE_50HZ;
+            gCamCapability[cameraId]->supported_antibandings[3] = CAM_ANTIBANDING_MODE_AUTO;
+
+
+            gCamCapability[cameraId]->supported_white_balances_cnt= 11;
+            gCamCapability[cameraId]->supported_white_balances[0]= CAM_WB_MODE_AUTO;
+            gCamCapability[cameraId]->supported_white_balances[1]=CAM_WB_MODE_CUSTOM;
+            gCamCapability[cameraId]->supported_white_balances[2]=CAM_WB_MODE_INCANDESCENT;
+            gCamCapability[cameraId]->supported_white_balances[3]=CAM_WB_MODE_FLUORESCENT;
+            gCamCapability[cameraId]->supported_white_balances[4]=CAM_WB_MODE_WARM_FLUORESCENT;
+            gCamCapability[cameraId]->supported_white_balances[5]=CAM_WB_MODE_DAYLIGHT;
+            gCamCapability[cameraId]->supported_white_balances[6]=CAM_WB_MODE_CLOUDY_DAYLIGHT;
+            gCamCapability[cameraId]->supported_white_balances[7]=CAM_WB_MODE_TWILIGHT;
+            gCamCapability[cameraId]->supported_white_balances[8]=CAM_WB_MODE_SHADE;
+            gCamCapability[cameraId]->supported_white_balances[9]=CAM_WB_MODE_MANUAL;
+            gCamCapability[cameraId]->supported_white_balances[10]=CAM_WB_MODE_OFF;
+
+            gCamCapability[cameraId]->min_wb_cct = 2000;
+            gCamCapability[cameraId]->max_wb_cct = 8000;
+            gCamCapability[cameraId]->max_wb_gain = 4;
+            gCamCapability[cameraId]->min_wb_gain = 1;
+
+            gCamCapability[cameraId]->supported_focus_modes_cnt =8;
+            gCamCapability[cameraId]->supported_focus_modes[0] = CAM_FOCUS_MODE_OFF;
+            gCamCapability[cameraId]->supported_focus_modes[1] = CAM_FOCUS_MODE_AUTO;
+            gCamCapability[cameraId]->supported_focus_modes[2] = CAM_FOCUS_MODE_INFINITY;
+            gCamCapability[cameraId]->supported_focus_modes[3] = CAM_FOCUS_MODE_MACRO;
+            gCamCapability[cameraId]->supported_focus_modes[4] = CAM_FOCUS_MODE_FIXED;
+            gCamCapability[cameraId]->supported_focus_modes[5] = CAM_FOCUS_MODE_EDOF;
+            gCamCapability[cameraId]->supported_focus_modes[6] = CAM_FOCUS_MODE_CONTINOUS_VIDEO;
+            gCamCapability[cameraId]->supported_focus_modes[7] = CAM_FOCUS_MODE_CONTINOUS_PICTURE;
+
+            //Not supporting manual focus for now
+
+            gCamCapability[cameraId]->exposure_compensation_min = -12;
+            gCamCapability[cameraId]->exposure_compensation_max =  12;
+            gCamCapability[cameraId]->exposure_compensation_default = 0;
+            gCamCapability[cameraId]->exposure_compensation_step = 0.166667;
+            gCamCapability[cameraId]->exp_compensation_step.numerator =1; //Idk what I'm doing here
+            gCamCapability[cameraId]->exp_compensation_step.denominator =10;
+
+            gCamCapability[cameraId]->video_stablization_supported = (uint8_t)false;
+
+            gCamCapability[cameraId]->picture_sizes_tbl_cnt = 25;
+
+            gCamCapability[cameraId]->picture_sizes_tbl[0].height=2988 ;
+            gCamCapability[cameraId]->picture_sizes_tbl[0].width= 5312;
+
+            gCamCapability[cameraId]->picture_sizes_tbl[1].height= 2988;
+            gCamCapability[cameraId]->picture_sizes_tbl[1].width= 3984;
+
+            gCamCapability[cameraId]->picture_sizes_tbl[2].height= 2160;
+            gCamCapability[cameraId]->picture_sizes_tbl[2].width= 3840;
+
+            gCamCapability[cameraId]->picture_sizes_tbl[3].height= 2488;
+            gCamCapability[cameraId]->picture_sizes_tbl[3].width= 3264;
+
+            gCamCapability[cameraId]->picture_sizes_tbl[4].height= 1836;
+            gCamCapability[cameraId]->picture_sizes_tbl[4].width= 3264;
+
+            gCamCapability[cameraId]->picture_sizes_tbl[5].height= 1920;
+            gCamCapability[cameraId]->picture_sizes_tbl[5].width= 2560;
+
+            gCamCapability[cameraId]->picture_sizes_tbl[6].height= 1944;
+            gCamCapability[cameraId]->picture_sizes_tbl[6].width= 2592;
+            
+            gCamCapability[cameraId]->picture_sizes_tbl[7].height= 1512;
+            gCamCapability[cameraId]->picture_sizes_tbl[7].width= 2688;
+            
+            gCamCapability[cameraId]->picture_sizes_tbl[8].height= 1536;
+            gCamCapability[cameraId]->picture_sizes_tbl[8].width= 2048;
+            
+            gCamCapability[cameraId]->picture_sizes_tbl[9].height= 1080;
+            gCamCapability[cameraId]->picture_sizes_tbl[9].width= 1920;
+            
+            gCamCapability[cameraId]->picture_sizes_tbl[10].height= 1200;
+            gCamCapability[cameraId]->picture_sizes_tbl[10].width= 1600;
+            
+            gCamCapability[cameraId]->picture_sizes_tbl[11].height= 864;
+            gCamCapability[cameraId]->picture_sizes_tbl[11].width= 1536;
+            
+            gCamCapability[cameraId]->picture_sizes_tbl[12].height= 960;
+            gCamCapability[cameraId]->picture_sizes_tbl[12].width= 1280;
+            
+            gCamCapability[cameraId]->picture_sizes_tbl[13].height= 768;
+            gCamCapability[cameraId]->picture_sizes_tbl[13].width= 1280;
+            
+            gCamCapability[cameraId]->picture_sizes_tbl[14].height= 720;
+            gCamCapability[cameraId]->picture_sizes_tbl[14].width= 1280;
+            
+            gCamCapability[cameraId]->picture_sizes_tbl[15].height= 768;
+            gCamCapability[cameraId]->picture_sizes_tbl[15].width= 1024;
+            
+            gCamCapability[cameraId]->picture_sizes_tbl[16].height= 720;
+            gCamCapability[cameraId]->picture_sizes_tbl[16].width= 880;
+            
+            gCamCapability[cameraId]->picture_sizes_tbl[17].height= 600;
+            gCamCapability[cameraId]->picture_sizes_tbl[17].width= 800;
+            
+            gCamCapability[cameraId]->picture_sizes_tbl[18].height= 480;
+            gCamCapability[cameraId]->picture_sizes_tbl[18].width= 864;
+            
+            gCamCapability[cameraId]->picture_sizes_tbl[19].height= 480;
+            gCamCapability[cameraId]->picture_sizes_tbl[19].width= 800;
+            
+            gCamCapability[cameraId]->picture_sizes_tbl[20].height= 480;
+            gCamCapability[cameraId]->picture_sizes_tbl[20].width= 720;
+            
+            gCamCapability[cameraId]->picture_sizes_tbl[21].height= 480;
+            gCamCapability[cameraId]->picture_sizes_tbl[21].width= 640;
+            
+            gCamCapability[cameraId]->picture_sizes_tbl[22].height= 360;
+            gCamCapability[cameraId]->picture_sizes_tbl[22].width= 640;
+            
+            gCamCapability[cameraId]->picture_sizes_tbl[23].height= 288;
+            gCamCapability[cameraId]->picture_sizes_tbl[23].width= 352;
+            
+            gCamCapability[cameraId]->picture_sizes_tbl[24].height= 240;
+            gCamCapability[cameraId]->picture_sizes_tbl[24].width= 320;
+
+            for(int i=0;i<25;i++)
+                gCamCapability[cameraId]->picture_min_duration[i]=33333000;
+         ////////////////////////////////////////////////////////////////////////////   
+            gCamCapability[cameraId]->modes_supported = 1;
+            gCamCapability[cameraId]->sensor_mount_angle=270;
+            gCamCapability[cameraId]->focal_length = 4.42;
+            gCamCapability[cameraId]->hor_view_angle = 67.4;
+        /////////////////////////////////////////////////////////////////////////////
+            gCamCapability[cameraId]->preview_sizes_tbl_cnt = 25;
+
+            gCamCapability[cameraId]->preview_sizes_tbl[0].height=2988;
+            gCamCapability[cameraId]->preview_sizes_tbl[0].width= 5312;
+
+            gCamCapability[cameraId]->preview_sizes_tbl[1].height= 2988;
+            gCamCapability[cameraId]->preview_sizes_tbl[1].width= 3984;
+
+            gCamCapability[cameraId]->preview_sizes_tbl[2].height= 2160;
+            gCamCapability[cameraId]->preview_sizes_tbl[2].width= 3840;
+
+            gCamCapability[cameraId]->preview_sizes_tbl[3].height= 2488;
+            gCamCapability[cameraId]->preview_sizes_tbl[3].width= 3264;
+
+            gCamCapability[cameraId]->preview_sizes_tbl[4].height= 1836;
+            gCamCapability[cameraId]->preview_sizes_tbl[4].width= 3264;
+
+            gCamCapability[cameraId]->preview_sizes_tbl[5].height= 1920;
+            gCamCapability[cameraId]->preview_sizes_tbl[5].width= 2560;
+
+            gCamCapability[cameraId]->preview_sizes_tbl[6].height= 1944;
+            gCamCapability[cameraId]->preview_sizes_tbl[6].width= 2592;
+            
+            gCamCapability[cameraId]->preview_sizes_tbl[7].height= 1512;
+            gCamCapability[cameraId]->preview_sizes_tbl[7].width= 2688;
+            
+            gCamCapability[cameraId]->preview_sizes_tbl[8].height= 1536;
+            gCamCapability[cameraId]->preview_sizes_tbl[8].width= 2048;
+            
+            gCamCapability[cameraId]->preview_sizes_tbl[9].height= 1080;
+            gCamCapability[cameraId]->preview_sizes_tbl[9].width= 1920;
+            
+            gCamCapability[cameraId]->preview_sizes_tbl[10].height= 1200;
+            gCamCapability[cameraId]->preview_sizes_tbl[10].width= 1600;
+            
+            gCamCapability[cameraId]->preview_sizes_tbl[11].height= 864;
+            gCamCapability[cameraId]->preview_sizes_tbl[11].width= 1536;
+            
+            gCamCapability[cameraId]->preview_sizes_tbl[12].height= 960;
+            gCamCapability[cameraId]->preview_sizes_tbl[12].width= 1280;
+            
+            gCamCapability[cameraId]->preview_sizes_tbl[13].height= 768;
+            gCamCapability[cameraId]->preview_sizes_tbl[13].width= 1280;
+            
+            gCamCapability[cameraId]->preview_sizes_tbl[14].height= 720;
+            gCamCapability[cameraId]->preview_sizes_tbl[14].width= 1280;
+            
+            gCamCapability[cameraId]->preview_sizes_tbl[15].height= 768;
+            gCamCapability[cameraId]->preview_sizes_tbl[15].width= 1024;
+            
+            gCamCapability[cameraId]->preview_sizes_tbl[16].height= 720;
+            gCamCapability[cameraId]->preview_sizes_tbl[16].width= 880;
+            
+            gCamCapability[cameraId]->preview_sizes_tbl[17].height= 600;
+            gCamCapability[cameraId]->preview_sizes_tbl[17].width= 800;
+            
+            gCamCapability[cameraId]->preview_sizes_tbl[18].height= 480;
+            gCamCapability[cameraId]->preview_sizes_tbl[18].width= 864;
+            
+            gCamCapability[cameraId]->preview_sizes_tbl[19].height= 480;
+            gCamCapability[cameraId]->preview_sizes_tbl[19].width= 800;
+            
+            gCamCapability[cameraId]->preview_sizes_tbl[20].height= 480;
+            gCamCapability[cameraId]->preview_sizes_tbl[20].width= 720;
+            
+            gCamCapability[cameraId]->preview_sizes_tbl[21].height= 480;
+            gCamCapability[cameraId]->preview_sizes_tbl[21].width= 640;
+            
+            gCamCapability[cameraId]->preview_sizes_tbl[22].height= 360;
+            gCamCapability[cameraId]->preview_sizes_tbl[22].width= 640;
+            
+            gCamCapability[cameraId]->preview_sizes_tbl[23].height= 288;
+            gCamCapability[cameraId]->preview_sizes_tbl[23].width= 352;
+            
+            gCamCapability[cameraId]->preview_sizes_tbl[24].height= 240;
+            gCamCapability[cameraId]->preview_sizes_tbl[24].width= 320;
+        //////////////////////////////////////////////////////////////////////////
+
+            gCamCapability[cameraId]->video_sizes_tbl_cnt=26;
+            gCamCapability[cameraId]->video_sizes_tbl[0].height=2988;
+            gCamCapability[cameraId]->video_sizes_tbl[0].width= 5312;
+
+            gCamCapability[cameraId]->video_sizes_tbl[1].height= 2988;
+            gCamCapability[cameraId]->video_sizes_tbl[1].width= 3984;
+
+            gCamCapability[cameraId]->video_sizes_tbl[2].height= 2160;
+            gCamCapability[cameraId]->video_sizes_tbl[2].width= 3840;
+
+            gCamCapability[cameraId]->video_sizes_tbl[3].height= 2488;
+            gCamCapability[cameraId]->video_sizes_tbl[3].width= 3264;
+
+            gCamCapability[cameraId]->video_sizes_tbl[4].height= 1836;
+            gCamCapability[cameraId]->video_sizes_tbl[4].width= 3264;
+
+            gCamCapability[cameraId]->video_sizes_tbl[5].height= 1920;
+            gCamCapability[cameraId]->video_sizes_tbl[5].width= 2560;
+
+            gCamCapability[cameraId]->video_sizes_tbl[6].height= 1944;
+            gCamCapability[cameraId]->video_sizes_tbl[6].width= 2592;
+            
+            gCamCapability[cameraId]->video_sizes_tbl[7].height= 1512;
+            gCamCapability[cameraId]->video_sizes_tbl[7].width= 2688;
+            
+            gCamCapability[cameraId]->video_sizes_tbl[8].height= 1536;
+            gCamCapability[cameraId]->video_sizes_tbl[8].width= 2048;
+            
+            gCamCapability[cameraId]->video_sizes_tbl[9].height= 1080;
+            gCamCapability[cameraId]->video_sizes_tbl[9].width= 1920;
+            
+            gCamCapability[cameraId]->video_sizes_tbl[10].height= 1200;
+            gCamCapability[cameraId]->video_sizes_tbl[10].width= 1600;
+            
+            gCamCapability[cameraId]->video_sizes_tbl[11].height= 864;
+            gCamCapability[cameraId]->video_sizes_tbl[11].width= 1536;
+            
+            gCamCapability[cameraId]->video_sizes_tbl[12].height= 960;
+            gCamCapability[cameraId]->video_sizes_tbl[12].width= 1280;
+            
+            gCamCapability[cameraId]->video_sizes_tbl[13].height= 768;
+            gCamCapability[cameraId]->video_sizes_tbl[13].width= 1280;
+            
+            gCamCapability[cameraId]->video_sizes_tbl[14].height= 720;
+            gCamCapability[cameraId]->video_sizes_tbl[14].width= 1280;
+            
+            gCamCapability[cameraId]->video_sizes_tbl[15].height= 768;
+            gCamCapability[cameraId]->video_sizes_tbl[15].width= 1024;
+            
+            gCamCapability[cameraId]->video_sizes_tbl[16].height= 720;
+            gCamCapability[cameraId]->video_sizes_tbl[16].width= 880;
+            
+            gCamCapability[cameraId]->video_sizes_tbl[17].height= 600;
+            gCamCapability[cameraId]->video_sizes_tbl[17].width= 800;
+            
+            gCamCapability[cameraId]->video_sizes_tbl[18].height= 480;
+            gCamCapability[cameraId]->video_sizes_tbl[18].width= 864;
+            
+            gCamCapability[cameraId]->video_sizes_tbl[19].height= 480;
+            gCamCapability[cameraId]->video_sizes_tbl[19].width= 800;
+            
+            gCamCapability[cameraId]->video_sizes_tbl[20].height= 480;
+            gCamCapability[cameraId]->video_sizes_tbl[20].width= 720;
+            
+            gCamCapability[cameraId]->video_sizes_tbl[21].height= 480;
+            gCamCapability[cameraId]->video_sizes_tbl[21].width= 640;
+            
+            gCamCapability[cameraId]->video_sizes_tbl[22].height= 360;
+            gCamCapability[cameraId]->video_sizes_tbl[22].width= 640;
+            
+            gCamCapability[cameraId]->video_sizes_tbl[23].height= 288;
+            gCamCapability[cameraId]->video_sizes_tbl[23].width= 352;
+            
+            gCamCapability[cameraId]->video_sizes_tbl[24].height= 240;
+            gCamCapability[cameraId]->video_sizes_tbl[24].width= 320;
+
+            gCamCapability[cameraId]->video_sizes_tbl[25].height= 144;
+            gCamCapability[cameraId]->video_sizes_tbl[25].width= 176;
+
+        ////////////////////////////////////////////////////////////////////////
+
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl_cnt=25;
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[0].height=2988;
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[0].width= 5312;
+
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[1].height= 2988;
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[1].width= 3984;
+
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[2].height= 2160;
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[2].width= 3840;
+
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[3].height= 2488;
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[3].width= 3264;
+
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[4].height= 1836;
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[4].width= 3264;
+
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[5].height= 1920;
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[5].width= 2560;
+
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[6].height= 1944;
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[6].width= 2592;
+            
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[7].height= 1512;
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[7].width= 2688;
+            
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[8].height= 1536;
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[8].width= 2048;
+            
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[9].height= 1080;
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[9].width= 1920;
+            
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[10].height= 1200;
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[10].width= 1600;
+            
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[11].height= 864;
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[11].width= 1536;
+            
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[12].height= 960;
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[12].width= 1280;
+            
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[13].height= 768;
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[13].width= 1280;
+            
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[14].height= 720;
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[14].width= 1280;
+            
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[15].height= 768;
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[15].width= 1024;
+            
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[16].height= 720;
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[16].width= 880;
+            
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[17].height= 600;
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[17].width= 800;
+            
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[18].height= 480;
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[18].width= 864;
+            
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[19].height= 480;
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[19].width= 800;
+            
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[20].height= 480;
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[20].width= 720;
+            
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[21].height= 480;
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[21].width= 640;
+            
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[22].height= 360;
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[22].width= 640;
+            
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[23].height= 288;
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[23].width= 352;
+            
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[24].height= 240;
+            gCamCapability[cameraId]->livesnapshot_sizes_tbl[24].width= 320;
+
+            ///////////////////////////////////////////////////////////////////////
+            gCamCapability[cameraId]->hfr_tbl_cnt=0;
+            gCamCapability[cameraId]->supported_preview_fmt_cnt = 2;
+            gCamCapability[cameraId]->supported_preview_fmts[0] = CAM_FORMAT_YUV_420_NV21;
+            gCamCapability[cameraId]->supported_preview_fmts[1] = CAM_FORMAT_YUV_420_NV12_VENUS;
+
+            gCamCapability[cameraId]->supported_raw_dim_cnt = 1;
+            gCamCapability[cameraId]->raw_min_duration[0]= 33333000;
+            gCamCapability[cameraId]->raw_dim[0].height= 2988;
+            gCamCapability[cameraId]->raw_dim[0].height = 5312;
+
+            gCamCapability[cameraId]->supported_raw_fmt_cnt=1;
+            gCamCapability[cameraId]->supported_raw_fmts[0]=CAM_FORMAT_YUV_RAW_8BIT_YUYV;
+
+            gCamCapability[cameraId]->supported_focus_algos_cnt = 4;
+            gCamCapability[cameraId]->supported_focus_algos[0]= CAM_FOCUS_ALGO_AUTO;
+            gCamCapability[cameraId]->supported_focus_algos[1]= CAM_FOCUS_ALGO_SPOT;
+            gCamCapability[cameraId]->supported_focus_algos[2]= CAM_FOCUS_ALGO_CENTER_WEIGHTED;
+            gCamCapability[cameraId]->supported_focus_algos[3]= CAM_FOCUS_ALGO_AVERAGE;
+
+            gCamCapability[cameraId]->auto_wb_lock_supported =(uint8_t)true ;
+            gCamCapability[cameraId]->zoom_supported =(uint8_t)false ;
+            gCamCapability[cameraId]->smooth_zoom_supported =(uint8_t)false ;
+            gCamCapability[cameraId]->auto_exposure_lock_supported =(uint8_t)true ;
+            gCamCapability[cameraId]->video_snapshot_supported =(uint8_t)false;
+
+            gCamCapability[cameraId]->max_num_roi = 0 ;   // NO
+            gCamCapability[cameraId]->max_num_focus_areas = 1; //Idea
+            gCamCapability[cameraId]->max_num_metering_areas = 1; //Whats
+            gCamCapability[cameraId]->max_zoom_step = 1; //happening
+
+            gCamCapability[cameraId]->brightness_ctrl.min_value = 0;
+            gCamCapability[cameraId]->brightness_ctrl.max_value = 6;
+            gCamCapability[cameraId]->brightness_ctrl.def_value = 1;
+            gCamCapability[cameraId]->brightness_ctrl.step = 1;
+
+            gCamCapability[cameraId]->saturation_ctrl.min_value = 0;
+            gCamCapability[cameraId]->saturation_ctrl.max_value = 10;
+            gCamCapability[cameraId]->saturation_ctrl.def_value = 5;
+            gCamCapability[cameraId]->saturation_ctrl.step = 1;
+
+            gCamCapability[cameraId]->sharpness_ctrl.min_value = 0;
+            gCamCapability[cameraId]->sharpness_ctrl.max_value = 36;
+            gCamCapability[cameraId]->sharpness_ctrl.def_value = 12;
+            gCamCapability[cameraId]->sharpness_ctrl.step = 6;
+
+            gCamCapability[cameraId]->contrast_ctrl.min_value = 0;
+            gCamCapability[cameraId]->contrast_ctrl.max_value = 10;
+            gCamCapability[cameraId]->contrast_ctrl.def_value = 5;
+            gCamCapability[cameraId]->contrast_ctrl.step = 1;
+
+            gCamCapability[cameraId]->sce_ctrl.min_value = -100;
+            gCamCapability[cameraId]->sce_ctrl.max_value = 100;
+            gCamCapability[cameraId]->sce_ctrl.def_value = 10;
+            gCamCapability[cameraId]->sce_ctrl.step = 10;
+
+            gCamCapability[cameraId]->hdr_bracketing_setting.exp_val.mode=CAM_EXP_BRACKETING_OFF;
+            gCamCapability[cameraId]->qcom_supported_feature_mask = (uint32_t) false; //Disable HDR for now
+            gCamCapability[cameraId]->min_num_pp_bufs=2;
+
+                        /*Start Hal3 Initialzation*/ 
+                        //TODO : ACTUALLY SET THIS FOR FRONT CAMER 
+                        //AT THIS POINT ITS JUST COPY FROM BACK
+            gCamCapability[cameraId]->min_focus_distance = (float)10.000000;
+            gCamCapability[cameraId]->hyper_focal_distance = (float)0.20638399;
+            gCamCapability[cameraId]->focal_lengths_count=1;
+            gCamCapability[cameraId]->focal_lengths[0] = 4.42;
+
+            gCamCapability[cameraId]->apertures_count = 1;
+            gCamCapability[cameraId]->apertures=1.79;
+
+            gCamCapability[cameraId]->filter_densities_count=0;
+            gCamCapability[cameraId]->optical_stab_modes_count=0;
+
+            gCamCapability[cameraId]->lens_shading_map_size.width=17;
+            gCamCapability[cameraId]->lens_shading_map_size.width=13;
+            // gCamCapability[cameraId]->lens_shading_map;
+            // gCamCapability[cameraId]->geo_correction_map_size
+            // gCamCapability[cameraId]->lens_position;
+
+            gCamCapability[cameraId]->exposure_time_range[0] = 21634;
+            gCamCapability[cameraId]->exposure_time_range[0] = 15256406000;
+            gCamCapability[cameraId]->max_frame_duration=15256460820;
+
+            gCamCapability[cameraId]->num_color_channels=1;
+            gCamCapability[cameraId]->color_arrangement = CAM_FILTER_ARRANGEMENT_BGGR;
+
+
+
+            gCamCapability[cameraId]->sensor_physical_size[0] = 5.94899988;
+            gCamCapability[cameraId]->sensor_physical_size[1] = 3.34599996;
+
+            gCamCapability[cameraId]->pixel_array_size.width=5312;
+            gCamCapability[cameraId]->pixel_array_size.height=2988;
+
+            gCamCapability[cameraId]->active_array_size.left = 0;
+            gCamCapability[cameraId]->active_array_size.top = 0;
+            gCamCapability[cameraId]->active_array_size.width = 5312;
+            gCamCapability[cameraId]->active_array_size.height = 2988;
+
+            gCamCapability[cameraId]->white_level=1023;
+            gCamCapability[cameraId]->black_level_pattern[0] = 64;
+            gCamCapability[cameraId]->black_level_pattern[1] = 64;
+            gCamCapability[cameraId]->black_level_pattern[2] = 64;
+            gCamCapability[cameraId]->black_level_pattern[3] = 64;
+
+            gCamCapability[cameraId]->flash_charge_duration = 0;
+            gCamCapability[cameraId]->supported_flash_firing_level_cnt = 11;
+            gCamCapability[cameraId]->supported_firing_levels[0] = CAM_FORMAT_JPEG;
+            gCamCapability[cameraId]->supported_firing_levels[1] = CAM_FORMAT_YUV_420_NV12;
+            gCamCapability[cameraId]->supported_firing_levels[2] = CAM_FORMAT_YUV_420_NV21;
+            gCamCapability[cameraId]->supported_firing_levels[3] = CAM_FORMAT_YUV_420_NV21_ADRENO;
+            gCamCapability[cameraId]->supported_firing_levels[4] = CAM_FORMAT_YUV_420_YV12;
+            gCamCapability[cameraId]->supported_firing_levels[5] = CAM_FORMAT_YUV_422_NV16;
+            gCamCapability[cameraId]->supported_firing_levels[6] = CAM_FORMAT_YUV_422_NV61;
+            gCamCapability[cameraId]->supported_firing_levels[7] = CAM_FORMAT_YUV_420_NV12_VENUS;
+            gCamCapability[cameraId]->supported_firing_levels[8] = CAM_FORMAT_YUV_RAW_8BIT_YUYV;
+            gCamCapability[cameraId]->supported_firing_levels[9] = CAM_FORMAT_YUV_RAW_8BIT_YVYU;
+            gCamCapability[cameraId]->supported_firing_levels[10] = CAM_FORMAT_YUV_RAW_8BIT_UYVY;
+            gCamCapability[cameraId]->supported_firing_levels[11] = CAM_FORMAT_YUV_RAW_8BIT_VYUY;
+
+                /* Flash Firing Time */
+                // int64_t flash_firing_time;
+
+                // /* Flash Ciolor Temperature */
+                // uint8_t flash_color_temp;
+
+                // /* Flash max Energy */
+                // uint8_t flash_max_energy;
+            
+            gCamCapability[cameraId]->max_tone_map_curve_points=256;
+            gCamCapability[cameraId]->supported_scalar_format_cnt = 0; //Don't for now
+
+            gCamCapability[cameraId]->max_face_detection_count = 5;
+            gCamCapability[cameraId]->hw_analysis_supported = 0; //Don't for now
+            gCamCapability[cameraId]->histogram_supported = 0;
+            gCamCapability[cameraId]->histogram_size = 256;
+            gCamCapability[cameraId]->max_histogram_count=256;
+            gCamCapability[cameraId]->sharpness_map_size.width=0;    
+            gCamCapability[cameraId]->sharpness_map_size.height=0;
+            gCamCapability[cameraId]->supported_ae_modes_cnt=2;
+            gCamCapability[cameraId]->supported_ae_modes[0]=CAM_AE_MODE_OFF;
+            gCamCapability[cameraId]->supported_ae_modes[0]=CAM_AE_MODE_ON;
+        
+            gCamCapability[cameraId]->sensitivity_range.min_sensitivity = 50;
+            gCamCapability[cameraId]->sensitivity_range.min_sensitivity = 800;
+            gCamCapability[cameraId]->max_analog_sensitivity = 400;
+            
+            gCamCapability[cameraId]->gradient_S=3.738032e-06;
+            gCamCapability[cameraId]->offset_S=3.651935e-04;
+            gCamCapability[cameraId]->gradient_O=4.499952e-07;
+            gCamCapability[cameraId]->offset_O=-2.968624e-04;
+
+            gCamCapability[cameraId]->scene_mode_overrides.ae_mode=1;
+            gCamCapability[cameraId]->scene_mode_overrides.af_mode=0;
+            gCamCapability[cameraId]->scene_mode_overrides.awb_mode=0;
+
+
+            gCamCapability[cameraId]->scale_picture_sizes_cnt = gCamCapability[cameraId]->picture_sizes_tbl_cnt;
+            gCamCapability[cameraId]->scale_picture_sizes = gCamCapability[cameraId]->picture_sizes_tbl;
+
+            gCamCapability[cameraId]->flash_available = (uint8_t)true;
+            gCamCapability[cameraId]->base_gain_factor.numerator = 0;
+            gCamCapability[cameraId]->base_gain_factor.denominator = 128;
+
+            gCamCapability[cameraId]->ubifocus_af_bracketing_need.enable =0;
+            gCamCapability[cameraId]->refocus_af_bracketing_need.enable=0;
+            gCamCapability[cameraId]->opti_zoom_settings_need =0;
+            gCamCapability[cameraId]->stillmore_settings_need.burst_count=5;
+            gCamCapability[cameraId]->stillmore_settings_need.min_burst_count=1;
+            gCamCapability[cameraId]->stillmore_settings_need.min_burst_count=10;
+
+            // gCamCapability[cameraId]->chroma_flash_settings_need
+            gCamCapability[cameraId]->focus_dist_calibrated = (uint8_t)true;
+            gCamCapability[cameraId]->supported_test_pattern_modes_cnt =0;
+            // gCamCapability[cameraId]->stall_durations;
+            gCamCapability[cameraId]->reference_illuminant1=CAM_AWB_D65;
+            gCamCapability[cameraId]->reference_illuminant2 = CAM_AWB_A;
+            
+            #define SEC_TO_NS_FACTOR 1000000000
+            static int64_t default_jpeg_stall_durations_back[] = {
+            0.779 * SEC_TO_NS_FACTOR,  //24 MP
+            0.682 * SEC_TO_NS_FACTOR,  //21 MP
+            0.506 * SEC_TO_NS_FACTOR,  //16 MP with 16:9 aspect ratio.
+            0.425 * SEC_TO_NS_FACTOR,  //16MP
+            0.366 * SEC_TO_NS_FACTOR,  //13M
+            0.345 * SEC_TO_NS_FACTOR,  //12MP
+            0.258 * SEC_TO_NS_FACTOR,
+            0.253 * SEC_TO_NS_FACTOR,  //8MP added for 8909
+            0.243 * SEC_TO_NS_FACTOR,  //8MP
+            0.179 * SEC_TO_NS_FACTOR,
+            0.161 * SEC_TO_NS_FACTOR,  //5MP
+            0.144 * SEC_TO_NS_FACTOR,  //4MP wide
+            0.133 * SEC_TO_NS_FACTOR,  //3MP QXGA
+            0.116 * SEC_TO_NS_FACTOR,  //HD1080
+            0.108 * SEC_TO_NS_FACTOR,  //2MP UXGA
+            0.103 * SEC_TO_NS_FACTOR,  //Wide HD
+            0.099 * SEC_TO_NS_FACTOR,  //1.3MP UXGA
+            0.091 * SEC_TO_NS_FACTOR,  //WXGA
+            0.085 * SEC_TO_NS_FACTOR,  //1200 *1200
+            0.080 * SEC_TO_NS_FACTOR,  //HD720
+            0.075 * SEC_TO_NS_FACTOR,  //1MP XGA
+            0.068 * SEC_TO_NS_FACTOR,  //SVGA
+            0.067 * SEC_TO_NS_FACTOR,  //FWVGA
+            0.066 * SEC_TO_NS_FACTOR,  //WVGA
+            0.065 * SEC_TO_NS_FACTOR,  //480p
+            0.061 * SEC_TO_NS_FACTOR,  //VGA
+            0.059 * SEC_TO_NS_FACTOR,
+            0.055 * SEC_TO_NS_FACTOR,  //Portrait VGA for VT App
+            0.049 * SEC_TO_NS_FACTOR,  //HVGA for HFR support
+            0.049 * SEC_TO_NS_FACTOR,  //HVGA
+            0.048 * SEC_TO_NS_FACTOR,  //CIF
+            0.045 * SEC_TO_NS_FACTOR,  //QVGA
+            0.035 * SEC_TO_NS_FACTOR,  //Portrait QVGA for VT App
+            0.030 * SEC_TO_NS_FACTOR,  //QCIF
+            0.025 * SEC_TO_NS_FACTOR,
+            0.018 * SEC_TO_NS_FACTOR,  // Portrait QCIF for VT App
+            };
+
+            for(int i=0; i<gCamCapability[cameraId]->picture_sizes_tbl_cnt)
+                gCamCapability[cameraId]->default_jpeg_stall_durations_front[i];
+           
+            gCamCapability[cameraId]->raw16_stall_durations[0] = 0.2*SEC_TO_NS_FACTOR;
+            
+            gCamCapability[cameraId]->forward_matrix1[0][0].numerator=114; gCamCapability[cameraId]->forward_matrix1[0][0].numerator=128;
+            gCamCapability[cameraId]->forward_matrix1[0][1].numerator=-9; gCamCapability[cameraId]->forward_matrix1[0][1].numerator=128;
+            gCamCapability[cameraId]->forward_matrix1[0][2].numerator=18; gCamCapability[cameraId]->forward_matrix1[0][2].numerator=128;
+            gCamCapability[cameraId]->forward_matrix1[1][0].numerator=44; gCamCapability[cameraId]->forward_matrix1[1][0].numerator=128;
+            gCamCapability[cameraId]->forward_matrix1[1][1].numerator=102; gCamCapability[cameraId]->forward_matrix1[1][1].numerator=128;
+            gCamCapability[cameraId]->forward_matrix1[1][2].numerator=-18; gCamCapability[cameraId]->forward_matrix1[1][2].numerator=128;
+            gCamCapability[cameraId]->forward_matrix1[2][0].numerator=10; gCamCapability[cameraId]->forward_matrix1[2][0].numerator=128;
+            gCamCapability[cameraId]->forward_matrix1[2][1].numerator=-45; gCamCapability[cameraId]->forward_matrix1[2][1].numerator=128;
+            gCamCapability[cameraId]->forward_matrix1[2][2].numerator=141; gCamCapability[cameraId]->forward_matrix1[2][2].numerator=128;
+
+            gCamCapability[cameraId]->forward_matrix2[0][0].numerator=103; gCamCapability[cameraId]->forward_matrix2[0][0].numerator=128;
+            gCamCapability[cameraId]->forward_matrix2[0][1].numerator=-42; gCamCapability[cameraId]->forward_matrix2[0][1].numerator=128;
+            gCamCapability[cameraId]->forward_matrix2[0][2].numerator=63; gCamCapability[cameraId]->forward_matrix2[0][2].numerator=128;
+            gCamCapability[cameraId]->forward_matrix2[1][0].numerator=25; gCamCapability[cameraId]->forward_matrix2[1][0].numerator=128;
+            gCamCapability[cameraId]->forward_matrix2[1][1].numerator=84; gCamCapability[cameraId]->forward_matrix2[1][1].numerator=128;
+            gCamCapability[cameraId]->forward_matrix2[1][2].numerator=20; gCamCapability[cameraId]->forward_matrix2[1][2].numerator=128;
+            gCamCapability[cameraId]->forward_matrix2[2][0].numerator=4; gCamCapability[cameraId]->forward_matrix2[2][0].numerator=128;
+            gCamCapability[cameraId]->forward_matrix2[2][1].numerator=-126; gCamCapability[cameraId]->forward_matrix2[2][1].numerator=128;
+            gCamCapability[cameraId]->forward_matrix2[2][2].numerator=228; gCamCapability[cameraId]->forward_matrix2[2][2].numerator=128;
+
+
+            gCamCapability[cameraId]->color_transform1[0][0].numerator=76; gCamCapability[cameraId]->color_transform1[0][0].numerator=128;
+            gCamCapability[cameraId]->color_transform1[0][1].numerator=-10; gCamCapability[cameraId]->color_transform1[0][1].numerator=128;
+            gCamCapability[cameraId]->color_transform1[0][2].numerator=-65; gCamCapability[cameraId]->color_transform1[0][2].numerator=128;
+            gCamCapability[cameraId]->color_transform1[1][0].numerator=165; gCamCapability[cameraId]->color_transform1[1][0].numerator=128;
+            gCamCapability[cameraId]->color_transform1[1][1].numerator=23; gCamCapability[cameraId]->color_transform1[1][1].numerator=128;
+            gCamCapability[cameraId]->color_transform1[1][2].numerator=-24; gCamCapability[cameraId]->color_transform1[1][2].numerator=128;
+            gCamCapability[cameraId]->color_transform1[2][0].numerator=40; gCamCapability[cameraId]->color_transform1[2][0].numerator=128;
+            gCamCapability[cameraId]->color_transform1[2][1].numerator=-70; gCamCapability[cameraId]->color_transform1[2][1].numerator=128;
+            gCamCapability[cameraId]->color_transform1[2][2].numerator=4; gCamCapability[cameraId]->color_transform1[2][2].numerator=128;
+
+            gCamCapability[cameraId]->color_transform2[0][0].numerator=105; gCamCapability[cameraId]->color_transform2[0][0].numerator=128;
+            gCamCapability[cameraId]->color_transform2[0][1].numerator=2; gCamCapability[cameraId]->color_transform2[0][1].numerator=128;
+            gCamCapability[cameraId]->color_transform2[0][2].numerator=-51; gCamCapability[cameraId]->color_transform2[0][2].numerator=128;
+            gCamCapability[cameraId]->color_transform2[1][0].numerator=-55; gCamCapability[cameraId]->color_transform2[1][0].numerator=128;
+            gCamCapability[cameraId]->color_transform2[1][1].numerator=190; gCamCapability[cameraId]->color_transform2[1][1].numerator=128;
+            gCamCapability[cameraId]->color_transform2[1][2].numerator=-4; gCamCapability[cameraId]->color_transform2[1][2].numerator=128;
+            gCamCapability[cameraId]->color_transform2[2][0].numerator=-11; gCamCapability[cameraId]->color_transform2[2][0].numerator=128;
+            gCamCapability[cameraId]->color_transform2[2][1].numerator=-38; gCamCapability[cameraId]->color_transform2[2][1].numerator=128;
+            gCamCapability[cameraId]->color_transform2[2][2].numerator=67; gCamCapability[cameraId]->color_transform2[2][2].numerator=128;
+
+            gCamCapability[cameraId]->calibration_transform1[0][0].numerator=124; gCamCapability[cameraId]->calibration_transform1[0][0].numerator=128;
+            gCamCapability[cameraId]->calibration_transform1[0][1].numerator=0; gCamCapability[cameraId]->calibration_transform1[0][1].numerator=128;
+            gCamCapability[cameraId]->calibration_transform1[0][2].numerator=0; gCamCapability[cameraId]->calibration_transform1[0][2].numerator=128;
+            gCamCapability[cameraId]->calibration_transform1[1][0].numerator=0; gCamCapability[cameraId]->calibration_transform1[1][0].numerator=128;
+            gCamCapability[cameraId]->calibration_transform1[1][1].numerator=128; gCamCapability[cameraId]->calibration_transform1[1][1].numerator=128;
+            gCamCapability[cameraId]->calibration_transform1[1][2].numerator=0; gCamCapability[cameraId]->calibration_transform1[1][2].numerator=128;
+            gCamCapability[cameraId]->calibration_transform1[2][0].numerator=0; gCamCapability[cameraId]->calibration_transform1[2][0].numerator=128;
+            gCamCapability[cameraId]->calibration_transform1[2][1].numerator=0; gCamCapability[cameraId]->calibration_transform1[2][1].numerator=128;
+            gCamCapability[cameraId]->calibration_transform1[2][2].numerator=133; gCamCapability[cameraId]->calibration_transform1[2][2].numerator=128;
+
+            gCamCapability[cameraId]->calibration_transform2[0][0].numerator=123; gCamCapability[cameraId]->calibration_transform2[0][0].numerator=128;
+            gCamCapability[cameraId]->calibration_transform2[0][1].numerator=0; gCamCapability[cameraId]->calibration_transform2[0][1].numerator=128;
+            gCamCapability[cameraId]->calibration_transform2[0][2].numerator=0; gCamCapability[cameraId]->calibration_transform2[0][2].numerator=128;
+            gCamCapability[cameraId]->calibration_transform2[1][0].numerator=0; gCamCapability[cameraId]->calibration_transform2[1][0].numerator=128;
+            gCamCapability[cameraId]->calibration_transform2[1][1].numerator=128; gCamCapability[cameraId]->calibration_transform2[1][1].numerator=128;
+            gCamCapability[cameraId]->calibration_transform2[1][2].numerator=0; gCamCapability[cameraId]->calibration_transform2[1][2].numerator=128;
+            gCamCapability[cameraId]->calibration_transform2[2][0].numerator=0; gCamCapability[cameraId]->calibration_transform2[2][0].numerator=128;
+            gCamCapability[cameraId]->calibration_transform2[2][1].numerator=0; gCamCapability[cameraId]->calibration_transform2[2][1].numerator=128;
+            gCamCapability[cameraId]->calibration_transform2[2][2].numerator=135; gCamCapability[cameraId]->calibration_transform2[2][2].numerator=128;
+
+            gCamCapability[cameraId]->opaque_raw_fmt = MIPI_RAW;
+            gCamCapability[cameraId]->true_portrait_settings_need = 100 /* idk man*/+ 25 + 800*800;
+            gCamCapability[cameraId]->sensor_type.sens_type=CAM_SENSOR_YUV;
+            gCamCapability[cameraId]->sensor_type.native_format=CAM_FORMAT_YUV_420_NV21;
+            gCamCapability[cameraId]->aberration_modes_count = 1;
+            gCamCapability[cameraId]->aberration_modes = CAM_COLOR_CORRECTION_ABERRATION_OFF;
+            gCamCapability[cameraId]->isTimestampCalibrated = 0;
+            gCamCapability[cameraId]->max_viewfinder_size.width = 5132; gCamCapability[cameraId]->max_viewfinder_size.height = 2988;
+            gCamCapability[cameraId]->no_per_frame_control_support = (uint8_t)false;
+            gCamCapability[cameraId]->supported_is_types_cnt=0;
+            gCamCapability[cameraId]->max_batch_bufs_supported = 12;
+        }
+
+    memcpy(gCamCapability[cameraId], DATA_PTR(capabilityHeap,0),
+                                        sizeof(cam_capability_t));
+    rc = 0;
+
+query_failed:
+    cameraHandle->ops->unmap_buf(cameraHandle->camera_handle,
+                            CAM_MAPPING_BUF_TYPE_CAPABILITY);
+map_failed:
+    capabilityHeap->deallocate();
+allocate_failed:
+    delete capabilityHeap;
+heap_creation_failed:
+    cameraHandle->ops->close_camera(cameraHandle->camera_handle);
+    cameraHandle = NULL;
+open_failed:
+    return rc;
+}
 }; //end namespace qcamera
