@@ -8444,7 +8444,7 @@ gCamCapability[cameraId]->version=CAM_HAL_V3;
             gCamCapability[cameraId]->supported_firing_levels[8] = CAM_FORMAT_YUV_RAW_8BIT_YUYV;
             gCamCapability[cameraId]->supported_firing_levels[9] = CAM_FORMAT_YUV_RAW_8BIT_YVYU;
             gCamCapability[cameraId]->supported_firing_levels[10] = CAM_FORMAT_YUV_RAW_8BIT_UYVY;
-            gCamCapability[cameraId]->supported_firing_levels[11] = CAM_FORMAT_YUV_RAW_8BIT_VYUY;
+            // gCamCapability[cameraId]->supported_firing_levels[11] = CAM_FORMAT_YUV_RAW_8BIT_VYUY;
 
                 /* Flash Firing Time */
                 // int64_t flash_firing_time;
@@ -8484,7 +8484,10 @@ gCamCapability[cameraId]->version=CAM_HAL_V3;
             }
 
             gCamCapability[cameraId]->scale_picture_sizes_cnt = gCamCapability[cameraId]->picture_sizes_tbl_cnt;
-            gCamCapability[cameraId]->scale_picture_sizes = gCamCapability[cameraId]->picture_sizes_tbl;
+            for(int i-0; i<gCamCapability[cameraId]->picture_sizes_tbl_cnt;i++ ){
+             gCamCapability[cameraId]->scale_picture_sizes[i].width = gCamCapability[cameraId]->picture_sizes_tbl[i].width;
+             gCamCapability[cameraId]->scale_picture_sizes[i].height = gCamCapability[cameraId]->picture_sizes_tbl[i].height;
+            }
 
             gCamCapability[cameraId]->flash_available = (uint8_t)true;
             gCamCapability[cameraId]->base_gain_factor.numerator = 0;
@@ -8492,7 +8495,7 @@ gCamCapability[cameraId]->version=CAM_HAL_V3;
 
             gCamCapability[cameraId]->ubifocus_af_bracketing_need.enable =0;
             gCamCapability[cameraId]->refocus_af_bracketing_need.enable=0;
-            gCamCapability[cameraId]->opti_zoom_settings_need =0;
+            gCamCapability[cameraId]->opti_zoom_settings_need.enable =0;
             gCamCapability[cameraId]->stillmore_settings_need.burst_count=5;
             gCamCapability[cameraId]->stillmore_settings_need.min_burst_count=1;
             gCamCapability[cameraId]->stillmore_settings_need.min_burst_count=10;
@@ -8544,10 +8547,10 @@ gCamCapability[cameraId]->version=CAM_HAL_V3;
             0.018 * SEC_TO_NS_FACTOR,  // Portrait QCIF for VT App
             };
 
-            for(int i=0; i<gCamCapability[cameraId]->picture_sizes_tbl_cnt)
-                gCamCapability[cameraId]->default_jpeg_stall_durations_front[i];
+            for(int i=0; i<gCamCapability[cameraId]->picture_sizes_tbl_cnt;i++)
+                gCamCapability[cameraId]->jpeg_stall_durations[i] = default_jpeg_stall_durations_back[i];
            
-            gCamCapability[cameraId]->raw16_stall_durations[0] = 0.2*SEC_TO_NS_FACTOR;
+            gCamCapability[cameraId]->raw16_stall_durations[0] = 2*SEC_TO_NS_FACTOR/10;
             
             gCamCapability[cameraId]->forward_matrix1[0][0].numerator=114; gCamCapability[cameraId]->forward_matrix1[0][0].numerator=128;
             gCamCapability[cameraId]->forward_matrix1[0][1].numerator=-9; gCamCapability[cameraId]->forward_matrix1[0][1].numerator=128;
@@ -8611,11 +8614,11 @@ gCamCapability[cameraId]->version=CAM_HAL_V3;
             gCamCapability[cameraId]->calibration_transform2[2][2].numerator=135; gCamCapability[cameraId]->calibration_transform2[2][2].numerator=128;
 
             gCamCapability[cameraId]->opaque_raw_fmt = MIPI_RAW;
-            gCamCapability[cameraId]->true_portrait_settings_need = 100 /* idk man*/+ 25 + 800*800;
+            gCamCapability[cameraId]->true_portrait_settings_need.meta_max_size = 100 /* idk man*/+ 25 + 800*800;
             gCamCapability[cameraId]->sensor_type.sens_type=CAM_SENSOR_YUV;
             gCamCapability[cameraId]->sensor_type.native_format=CAM_FORMAT_YUV_420_NV21;
             gCamCapability[cameraId]->aberration_modes_count = 1;
-            gCamCapability[cameraId]->aberration_modes = CAM_COLOR_CORRECTION_ABERRATION_OFF;
+            gCamCapability[cameraId]->aberration_modes[0] = CAM_COLOR_CORRECTION_ABERRATION_OFF;
             gCamCapability[cameraId]->isTimestampCalibrated = 0;
             gCamCapability[cameraId]->max_viewfinder_size.width = 5132; gCamCapability[cameraId]->max_viewfinder_size.height = 2988;
             gCamCapability[cameraId]->no_per_frame_control_support = (uint8_t)false;
@@ -9181,7 +9184,7 @@ gCamCapability[cameraId]->version=CAM_HAL_V3;
             gCamCapability[cameraId]->supported_firing_levels[8] = CAM_FORMAT_YUV_RAW_8BIT_YUYV;
             gCamCapability[cameraId]->supported_firing_levels[9] = CAM_FORMAT_YUV_RAW_8BIT_YVYU;
             gCamCapability[cameraId]->supported_firing_levels[10] = CAM_FORMAT_YUV_RAW_8BIT_UYVY;
-            gCamCapability[cameraId]->supported_firing_levels[11] = CAM_FORMAT_YUV_RAW_8BIT_VYUY;
+            // gCamCapability[cameraId]->supported_firing_levels[11] = CAM_FORMAT_YUV_RAW_8BIT_VYUY;
 
                 /* Flash Firing Time */
                 // int64_t flash_firing_time;
@@ -9220,16 +9223,17 @@ gCamCapability[cameraId]->version=CAM_HAL_V3;
                 gCamCapability[cameraId]->scene_mode_overrides[i].awb_mode=0;
             }
 
-            gCamCapability[cameraId]->scale_picture_sizes_cnt = gCamCapability[cameraId]->picture_sizes_tbl_cnt;
-            gCamCapability[cameraId]->scale_picture_sizes = gCamCapability[cameraId]->picture_sizes_tbl;
-
+            for(int i-0; i<gCamCapability[cameraId]->picture_sizes_tbl_cnt;i++ ){
+             gCamCapability[cameraId]->scale_picture_sizes[i].width = gCamCapability[cameraId]->picture_sizes_tbl[i].width;
+             gCamCapability[cameraId]->scale_picture_sizes[i].height = gCamCapability[cameraId]->picture_sizes_tbl[i].height;
+            }
             gCamCapability[cameraId]->flash_available = (uint8_t)true;
             gCamCapability[cameraId]->base_gain_factor.numerator = 0;
             gCamCapability[cameraId]->base_gain_factor.denominator = 128;
 
             gCamCapability[cameraId]->ubifocus_af_bracketing_need.enable =0;
             gCamCapability[cameraId]->refocus_af_bracketing_need.enable=0;
-            gCamCapability[cameraId]->opti_zoom_settings_need =0;
+            gCamCapability[cameraId]->opti_zoom_settings_need.enable =0;
             gCamCapability[cameraId]->stillmore_settings_need.burst_count=5;
             gCamCapability[cameraId]->stillmore_settings_need.min_burst_count=1;
             gCamCapability[cameraId]->stillmore_settings_need.min_burst_count=10;
@@ -9281,10 +9285,10 @@ gCamCapability[cameraId]->version=CAM_HAL_V3;
             0.018 * SEC_TO_NS_FACTOR,  // Portrait QCIF for VT App
             };
 
-            for(int i=0; i<gCamCapability[cameraId]->picture_sizes_tbl_cnt)
-                gCamCapability[cameraId]->default_jpeg_stall_durations_front[i];
+            for(int i=0; i<gCamCapability[cameraId]->picture_sizes_tbl_cnt;i++)
+                gCamCapability[cameraId]->jpeg_stall_durations[i] = default_jpeg_stall_durations_back[i];
            
-            gCamCapability[cameraId]->raw16_stall_durations[0] = 0.2*SEC_TO_NS_FACTOR;
+            gCamCapability[cameraId]->raw16_stall_durations[0] = 2*SEC_TO_NS_FACTOR/10;
             
             gCamCapability[cameraId]->forward_matrix1[0][0].numerator=114; gCamCapability[cameraId]->forward_matrix1[0][0].numerator=128;
             gCamCapability[cameraId]->forward_matrix1[0][1].numerator=-9; gCamCapability[cameraId]->forward_matrix1[0][1].numerator=128;
@@ -9348,11 +9352,11 @@ gCamCapability[cameraId]->version=CAM_HAL_V3;
             gCamCapability[cameraId]->calibration_transform2[2][2].numerator=135; gCamCapability[cameraId]->calibration_transform2[2][2].numerator=128;
 
             gCamCapability[cameraId]->opaque_raw_fmt = MIPI_RAW;
-            gCamCapability[cameraId]->true_portrait_settings_need = 100 /* idk man*/+ 25 + 800*800;
+            gCamCapability[cameraId]->true_portrait_settings_need.meta_max_size = 100 /* idk man*/+ 25 + 800*800;
             gCamCapability[cameraId]->sensor_type.sens_type=CAM_SENSOR_YUV;
             gCamCapability[cameraId]->sensor_type.native_format=CAM_FORMAT_YUV_420_NV21;
             gCamCapability[cameraId]->aberration_modes_count = 1;
-            gCamCapability[cameraId]->aberration_modes = CAM_COLOR_CORRECTION_ABERRATION_OFF;
+            gCamCapability[cameraId]->aberration_modes[0] = CAM_COLOR_CORRECTION_ABERRATION_OFF;
             gCamCapability[cameraId]->isTimestampCalibrated = 0;
             gCamCapability[cameraId]->max_viewfinder_size.width = 5132; gCamCapability[cameraId]->max_viewfinder_size.height = 2988;
             gCamCapability[cameraId]->no_per_frame_control_support = (uint8_t)false;
