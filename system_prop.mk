@@ -47,9 +47,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
     vendor.camera.hal1.packagelist=com.skype.raider,com.whatsapp,com.instagram.android \
     ro.qc.sdk.camera.facialproc=false \
     ro.qc.sdk.gestures.camera=false \
-    camera2.portability.force_api=1 \
+    camera2.portability.force_api=0 \
     ro.factorytest=0 \
-    persist.camera.HAL3.enabled=0 \
+    persist.camera.HAL3.enabled=1 \
      persist.camera.global.debug=6 \
     persist.camera.zsl.mode=1
 
