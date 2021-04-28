@@ -9360,8 +9360,7 @@ gCamCapability[cameraId]->version=CAM_HAL_V3;
             gCamCapability[cameraId]->max_batch_bufs_supported = 12;
         }
 
-    memcpy(gCamCapability[cameraId], DATA_PTR(capabilityHeap,0),
-                                        sizeof(cam_capability_t));
+    memcpy(DATA_PTR(capabilityHeap,0),gCamCapability[cameraId],sizeof(cam_capability_t));
     rc = 0;
 
 query_failed:
