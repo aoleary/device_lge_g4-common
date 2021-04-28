@@ -8394,7 +8394,7 @@ gCamCapability[cameraId]->version=CAM_HAL_V3;
             gCamCapability[cameraId]->focal_lengths[0] = 4.42;
 
             gCamCapability[cameraId]->apertures_count = 1;
-            gCamCapability[cameraId]->apertures=1.79;
+            gCamCapability[cameraId]->apertures[0]=1.79;
 
             gCamCapability[cameraId]->filter_densities_count=0;
             gCamCapability[cameraId]->optical_stab_modes_count=0;
@@ -8477,11 +8477,11 @@ gCamCapability[cameraId]->version=CAM_HAL_V3;
             gCamCapability[cameraId]->offset_S=3.651935e-04;
             gCamCapability[cameraId]->gradient_O=4.499952e-07;
             gCamCapability[cameraId]->offset_O=-2.968624e-04;
-
-            gCamCapability[cameraId]->scene_mode_overrides.ae_mode=1;
-            gCamCapability[cameraId]->scene_mode_overrides.af_mode=0;
-            gCamCapability[cameraId]->scene_mode_overrides.awb_mode=0;
-
+            for(int i=0; i<22;i++){
+                gCamCapability[cameraId]->scene_mode_overrides[i].ae_mode=1;
+                gCamCapability[cameraId]->scene_mode_overrides[i].af_mode=0;
+                gCamCapability[cameraId]->scene_mode_overrides[i].awb_mode=0;
+            }
 
             gCamCapability[cameraId]->scale_picture_sizes_cnt = gCamCapability[cameraId]->picture_sizes_tbl_cnt;
             gCamCapability[cameraId]->scale_picture_sizes = gCamCapability[cameraId]->picture_sizes_tbl;
@@ -8505,7 +8505,7 @@ gCamCapability[cameraId]->version=CAM_HAL_V3;
             gCamCapability[cameraId]->reference_illuminant2 = CAM_AWB_A;
             
             #define SEC_TO_NS_FACTOR 1000000000
-            static int64_t default_jpeg_stall_durations_back[] = {
+            static float default_jpeg_stall_durations_back[] = {
             0.779 * SEC_TO_NS_FACTOR,  //24 MP
             0.682 * SEC_TO_NS_FACTOR,  //21 MP
             0.506 * SEC_TO_NS_FACTOR,  //16 MP with 16:9 aspect ratio.
@@ -9131,7 +9131,7 @@ gCamCapability[cameraId]->version=CAM_HAL_V3;
             gCamCapability[cameraId]->focal_lengths[0] = 4.42;
 
             gCamCapability[cameraId]->apertures_count = 1;
-            gCamCapability[cameraId]->apertures=1.79;
+            gCamCapability[cameraId]->apertures[0]=1.79;
 
             gCamCapability[cameraId]->filter_densities_count=0;
             gCamCapability[cameraId]->optical_stab_modes_count=0;
@@ -9214,11 +9214,11 @@ gCamCapability[cameraId]->version=CAM_HAL_V3;
             gCamCapability[cameraId]->offset_S=3.651935e-04;
             gCamCapability[cameraId]->gradient_O=4.499952e-07;
             gCamCapability[cameraId]->offset_O=-2.968624e-04;
-
-            gCamCapability[cameraId]->scene_mode_overrides.ae_mode=1;
-            gCamCapability[cameraId]->scene_mode_overrides.af_mode=0;
-            gCamCapability[cameraId]->scene_mode_overrides.awb_mode=0;
-
+            for(int i=0; i<22;i++){
+                gCamCapability[cameraId]->scene_mode_overrides[i].ae_mode=1;
+                gCamCapability[cameraId]->scene_mode_overrides[i].af_mode=0;
+                gCamCapability[cameraId]->scene_mode_overrides[i].awb_mode=0;
+            }
 
             gCamCapability[cameraId]->scale_picture_sizes_cnt = gCamCapability[cameraId]->picture_sizes_tbl_cnt;
             gCamCapability[cameraId]->scale_picture_sizes = gCamCapability[cameraId]->picture_sizes_tbl;
@@ -9242,7 +9242,7 @@ gCamCapability[cameraId]->version=CAM_HAL_V3;
             gCamCapability[cameraId]->reference_illuminant2 = CAM_AWB_A;
             
             #define SEC_TO_NS_FACTOR 1000000000
-            static int64_t default_jpeg_stall_durations_back[] = {
+            static float default_jpeg_stall_durations_back[] = {
             0.779 * SEC_TO_NS_FACTOR,  //24 MP
             0.682 * SEC_TO_NS_FACTOR,  //21 MP
             0.506 * SEC_TO_NS_FACTOR,  //16 MP with 16:9 aspect ratio.
