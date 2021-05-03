@@ -97,3 +97,6 @@ allow init vfat:dir mounton;
 allow init vfat:file { getattr open read };
 allow init video_device:chr_file { ioctl write };
 allow init video_device:chr_file { open read };
+
+allow init hal_power_stats_hwservice:hwservice_manager { find };
+allow init hal_power_stats_hwservice:hwservice_manager { add };
