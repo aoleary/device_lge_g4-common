@@ -39,4 +39,7 @@
     <bool name="def_dtmf_tones_enabled">false</bool>
     <bool name="def_sound_effects_enabled">false</bool>
     <bool name="def_charging_sounds_enabled">false</bool>
+
+    <!-- Default for Settings.Global.DEVICE_NAME $1=MODEL-->
+    <string name="def_device_name_simple">LG G4</string>
 </resources>
