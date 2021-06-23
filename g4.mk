@@ -202,6 +202,10 @@ PRODUCT_PACKAGES += \
     android.hardware.gatekeeper@1.0-impl \
     android.hardware.gatekeeper@1.0-service
 
+# Google Recorder
+PRODUCT_PACKAGES += \
+    TARGET_SUPPORTS_GOOGLE_RECORDER := true
+
 # Healthd
 PRODUCT_PACKAGES += \
     android.hardware.health@2.1-impl \
