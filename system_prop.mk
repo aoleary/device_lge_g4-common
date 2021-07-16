@@ -72,9 +72,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     bluetooth.core.le.vendor_capabilities.enabled=false
 
 # Blur - Diable Blur in A12+
-ro.surface_flinger.supports_background_blur=0
-ro.sf.blurs_are_expensive=0
-ro.launcher.blur.appLaunch=0
+    persist.sys.sf.disable_blurs=1
+    ro.surface_flinger.supports_background_blur=0
+    ro.sf.blurs_are_expensive=0
+    ro.launcher.blur.appLaunch=0
 
 # Camera
 PRODUCT_PROPERTY_OVERRIDES += \
