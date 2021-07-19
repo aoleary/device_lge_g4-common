@@ -274,6 +274,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     debug.hwui.renderer=opengl
 
+# UI Smoothening
+persist.service.lgospd.enable=0
+persist.service.pcsync.enable=0
+
 # WiFi Scan Interval (default = 15s)
 PRODUCT_PROPERTY_OVERRIDES += \
     wifi.supplicant_scan_interval=600
