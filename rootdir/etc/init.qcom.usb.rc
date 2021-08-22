@@ -150,5 +150,5 @@ on property:sys.usb.config=diag,adb
     start adbd
     setprop sys.usb.state ${sys.usb.config}
 
-on charger 
+on charger
     setprop sys.usb.config mtp
