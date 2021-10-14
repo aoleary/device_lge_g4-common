@@ -384,9 +384,6 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/ctbk_val.cfg:system/etc/motorola/mdmctbk/ctbk_val.cfg \
     $(LOCAL_PATH)/configs/carrierconfig-com.android.carrierconfig-89300100160427481402.xml:data/user_de/0/com.android.phone/files/carrierconfig-com.android.carrierconfig-89300100160427481402.xml
 
-PRODUCT_PROPERTY_OVERRIDES += \
-    rild.libpath=/vendor/lib64/libril-qc-qmi-1.so
-
 # Radio
 PRODUCT_PACKAGES += \
     ebtables \
