@@ -224,7 +224,8 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     persist.hwc.ptor.enable=true \
     persist.sys.composition.type=gpu \
     ro.fb.mode=1 \
-    video.accelerate.hw=1
+    video.accelerate.hw=1 \
+    debug.renderengine.backend=threaded
 
 #Properties to improve gaming experiance
 PRODUCT_PROPERTY_OVERRIDES += \
