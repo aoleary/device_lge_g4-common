@@ -424,6 +424,8 @@ PRODUCT_PACKAGES += \
 
 # System properties
 -include $(LOCAL_PATH)/system_prop.mk
+PRODUCT_PROPERTY_OVERRIDES += \
+     persist.sys.binary_xml=false
 
 # Thermal
 PRODUCT_PACKAGES += \
