@@ -62,3 +62,6 @@ type ril_daemon, sysfs_type, fs_type;
 
 # sfX debug
 type boot_log_file, file_type, data_file_type, core_data_file_type;
+
+# Define sysfs_disk_stat
+type sysfs_disk_stat, fs_type, sysfs_type;
