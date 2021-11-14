@@ -424,7 +424,8 @@ PRODUCT_PACKAGES += \
     libfence_shim \
     ims_rtp_shim \
     slim_shim \
-    libaudioclient_shim
+    libaudioclient_shim \
+    libshims_thermal
 
 # System properties
 -include $(LOCAL_PATH)/system_prop.mk
