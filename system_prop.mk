@@ -204,6 +204,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Media
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.media.treble_omx=false \
+    persist.mm.enable.prefetch=true \
     mm.enable.qcom_parser=3379827 \
     mm.enable.smoothstreaming=true \
     media.aac_51_output_enabled=true \
