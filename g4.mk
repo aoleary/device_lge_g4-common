@@ -401,7 +401,8 @@ PRODUCT_PACKAGES += \
     libqsap_sdk \
     librmnetctl \
     libxml2 \
-    android.system.net.netd@1.0
+    android.system.net.netd@1.0 \
+    ro.telephony.default_network=12
 
 # RenderScript
 PRODUCT_PACKAGES += \
