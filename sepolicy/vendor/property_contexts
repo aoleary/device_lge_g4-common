@@ -1,6 +1,6 @@
 #persist.camera.                         u:object_r:camera_prop:s0
-ro.qualcomm.bluetooth.                  u:object_r:qti_init_prop:s0
-ro.bluetooth.                           u:object_r:qti_init_prop:s0
+#ro.qualcomm.bluetooth.                  u:object_r:qti_init_prop:s0
+#ro.bluetooth.                           u:object_r:qti_init_prop:s0
 #persist.data.rear.                      u:object_r:camera_prop:s0
 #persist.data.front.                     u:object_r:camera_prop:s0
 wrild.                                  u:object_r:wrild_prop:s0
