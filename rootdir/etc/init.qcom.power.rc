@@ -45,7 +45,7 @@ on charger
     write /sys/module/lpm_levels/system/a53/a53-l2-retention/idle_enabled 0
     write /sys/module/lpm_levels/system/a57/a57-l2-retention/idle_enabled 0
 
-service charger /sbin/healthd -c
+service charger /system/bin/charger
     class charger
-    critical
-    seclabel u:r:healthd:s0
+    group log system graphics
+    seclabel u:r:charger:s0
