@@ -217,6 +217,7 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     debug.sf.recomputecrop=0 \
     debug.sf.disable_backpressure=1 \
     debug.sf.latch_unsignaled=1 \
+    ro.surface_flinger.protected_contents=true \
     dev.pm.dyn_samplingrate=1 \
     hw3d.force=1 \
     persist.hwc.ptor.enable=true \
