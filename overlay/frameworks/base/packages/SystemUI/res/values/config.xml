@@ -44,7 +44,7 @@
     <bool name="doze_pulse_on_pick_up">true</bool>
 
     <!-- Doze: check proximity sensor before pulsing from intent? -->
-    <bool name="doze_proximity_check_before_pulse_intent">true</bool>
+    <bool name="doze_proximity_check_before_pulse_intent">false</bool>
 
     <!-- Doze: does this device support STATE_DOZE and STATE_DOZE_SUSPEND?  -->
     <bool name="doze_display_state_supported">false</bool>
