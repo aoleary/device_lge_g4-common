@@ -69,6 +69,3 @@
 
 # set baseband version
 /(vendor|system/vendor)/bin/init.baseband.sh		u:object_r:baseband_exec:s0
-
-# sfX debug
-/cache/debug(/.*)? 					u:object_r:boot_log_file:s0
