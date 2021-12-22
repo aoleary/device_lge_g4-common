@@ -209,12 +209,13 @@ SELINUX_IGNORE_NEVERALLOWS := true
 # Shims
 TARGET_LD_SHIM_LIBS := \
     /system/vendor/lib/libwvm.so|libshims_wvm.so \
-    /system/lib64/libmdmcutback.so|libqsap_shim.so \
+  77  /system/lib64/libmdmcutback.so|libqsap_shim.so \
     /system/lib/libshim_camera.so:/system/lib/libcamera_client.so|libshim_cameraclient.so \
     /system/vendor/lib/libmmcamera_stillmore_lib.so|/system/lib/libshim_cameraclient.so \
     /system/vendor/lib/hw/camera.msm8992.so|/system/vendor/lib/libfence_shim.so \
     /system/vendor/lib64/lib-rtpcore.so|/system/vendor/lib64/ims_rtp_shim.so \
-    /system/vendor/bin/slim_daemon|/system/vendor/lib64/slim_shim.so
+    /system/vendor/bin/slim_daemon|/system/vendor/lib64/slim_shim.so \
+    /system/lib/libc.so|/system/vendor/lib/libpthread_shim.so
 
 # Thermal
 USE_DEVICE_SPECIFIC_THERMAL := true

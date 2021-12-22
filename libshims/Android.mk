@@ -4,7 +4,7 @@
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#      http://www.apache.org/licenses/LICENSE-2.0
+#      http://www.apache.org/licenses/LICENSE-2.02
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -58,3 +58,16 @@ LOCAL_PROPRIETARY_MODULE := true
 LOCAL_VENDOR_MODULE := true
 LOCAL_CFLAGS_arm64 := -DLIBSHIMS_64BIT
 include $(BUILD_SHARED_LIBRARY)
+
+# Pthread
+include $(CLEAR_VARS)
+LOCAL_SRC_FILES := pthread_shim.cpp
+LOCAL_SHARED_LIBRARIES := liblog
+LOCAL_C_INCLUDES := $(TOP)/bionic/libc/bionic/
+LOCAL_C_INCLUDES += $(TOP)/bionic/libstdc++/include
+LOCAL_C_INCLUDES += $(TOP)/bionic/libc
+LOCAL_C_INCLUDES += $(TOP)/bionic/libc/async_safe/include
+LOCAL_MODULE := libpthread_shim
+LOCAL_MODULE_TAGS := optional
+LOCAL_PROPRIETARY_MODULE := true
+include $(BUILD_SHARED_LIBRAR)

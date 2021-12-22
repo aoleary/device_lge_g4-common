@@ -406,7 +406,8 @@ PRODUCT_PACKAGES += \
     libqsap_shim \
     libfence_shim \
     ims_rtp_shim \
-    slim_shim
+    slim_shim \
+    libpthread_shim
 
 # System properties
 -include $(LOCAL_PATH)/system_prop.mk
