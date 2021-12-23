@@ -109,7 +109,7 @@
 /sys/class/leds(/.*)/brightness                                         u:object_r:flashlight_app_data_file:s0
 
 # GNSS
-/(vendor|system/vendor)/bin/hw/android\.hardware\.gnss@[0-9]\.[0-9]-service   u:object_r:hal_gnss_default_exec:s0
+#/(vendor|system/vendor)/bin/hw/android\.hardware\.gnss@[0-9]\.[0-9]-service   u:object_r:hal_gnss_default_exec:s0
 
 # Bluetooth
 /data/misc/bluedroid/bdaddr				u:object_r:bluetooth_data_file:s0
