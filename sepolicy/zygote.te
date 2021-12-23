@@ -5,6 +5,4 @@ allow zygote untrusted_app:process ptrace;
 allow zygote proc_cmdline:file { getattr open read };
 allow zygote self:capability sys_resource;
 
-allow zygote tasks_info:file rw_file_perms;
-allow zygote tasks_info:dir rw_dir_perms;
 allow zygote userdata_block_device:file rw_file_perms;

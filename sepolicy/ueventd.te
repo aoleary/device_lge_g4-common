@@ -5,5 +5,4 @@ allow ueventd console_device:lnk_file relabelto;
 allow ueventd vfat:dir search;
 allow ueventd vfat:file { getattr open read };
 
-allow ueventd health_monitor:chr_file { create setattr };
 allow ueventd self:capability sys_nice;
