@@ -155,7 +155,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     net.dns2=9.9.9.9
 
 # LMKD
-PRODUCT_PROPERTY_OVERRIDES += \
+PRODUCT_PROPERTY_OVERRIDES +=
+        pm.dexopt.downgrade_after_inactive_days=7 \
 	ro.lmk.critical_upgrade=true \
 	ro.lmk.upgrade_pressure=40 \
 	ro.lmk.downgrade_pressure=60 \
