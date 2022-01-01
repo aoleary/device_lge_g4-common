@@ -624,10 +624,8 @@ typedef struct {
 } RIL_SIM_IO_v5;
 
 typedef struct {
-    int reserved0;  /* Unknown field used by LG's qcril */
     int command;    /* one of the commands listed for TS 27.007 +CRSM*/
     int fileid;     /* EF id */
-    int reserved1;  /* Unknown field used by LG's qcril */
     char *path;     /* "pathid" from TS 27.007 +CRSM command.
                        Path is in hex asciii format eg "7f205f70"
                        Path must always be provided.
@@ -1114,10 +1112,6 @@ typedef struct
   int              pin1_replaced;   /* applicable to USIM, CSIM & ISIM */
   RIL_PinState     pin1;
   RIL_PinState     pin2;
-  int              reserved0;       /* Unknown field used by LG's qcril */
-  int              reserved1;       /* Unknown field used by LG's qcril */
-  int              reserved2;       /* Unknown field used by LG's qcril */
-  int              reserved3;       /* Unknown field used by LG's qcril */
 } RIL_AppStatus;
 
 /* Deprecated, use RIL_CardStatus_v6 */
@@ -1362,8 +1356,6 @@ typedef struct {
     RIL_EVDO_SignalStrength     EVDO_SignalStrength;
     RIL_LTE_SignalStrength_v8   LTE_SignalStrength;
     RIL_TD_SCDMA_SignalStrength TD_SCDMA_SignalStrength;
-    int reserved0;       /* Unknown field used by LG's qcril */
-    int reserved1;       /* Unknown field used by LG's qcril */
 } RIL_SignalStrength_v10;
 
 typedef struct {
