@@ -1186,6 +1186,10 @@ on property:sys.boot_completed=1
 on property:sys.boot_completed=1
     chmod 440 /proc/net/unix
 
+    # Stop NFC on boot since its rarely used on the G4
+on property:sys.boot_completed=1
+    exec u:object_r:system_file:s0 -- /system/bin/svc nfc disable
+
 on property:init.svc.bootanim=stopped
     stop pulseon
     start pulseoff
