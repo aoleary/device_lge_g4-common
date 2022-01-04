@@ -70,6 +70,7 @@
         <permission name="android.permission.READ_PHONE_STATE"/>
         <permission name="android.permission.READ_SEARCH_INDEXABLES"/>
         <permission name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+        <permission name="android.permission.WRITE_DEVICE_CONFIG"/>
         <permission name="android.permission.WRITE_SECURE_SETTINGS"/>
         <permission name="com.google.android.gms.permission.ACTIVITY_RECOGNITION"/>
         <permission name="com.google.android.providers.gsf.permission.READ_GSERVICES"/>
