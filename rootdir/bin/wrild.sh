@@ -13,7 +13,7 @@ MAXRET=30			# max rild restart retries when serious issues found
 RILCHILL=240			# sleep value after RILD has been restarted before continuing
 
 # debug logging when a serious issue occurs
-DEBUGLOG=0                      # 0: disable debug logging, 1: create a log when rild must be restarted
+DEBUGLOG=1                      # 0: disable debug logging, 1: create a log when rild must be restarted
 DOGLOGS=/sdcard/Download/wdlog	# log directory when DEBUGLOG=1, path must be owned and r/w for root
 
 # cpu monitoring
