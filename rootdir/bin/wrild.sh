@@ -4,34 +4,41 @@
 # workaround for randomly no SIM on boot (https://github.com/Suicide-Squirrel/issues_oreo/issues/6)
 # plus a watchdog for rild high-cpu load in rare cases
 #
+# License:              GPLv3
+# Copyright 2019-2022:  steadfasterX <steadfasterX - AT - gmail #DOT# com>
 ###################################################################################################
 
 # rild
-PRTRIGGER=0
-REQRESTART=99
-MAXRET=10
+MAXRET=30			# max rild restart retries when serious issues found
 RILCHILL=240			# sleep value after RILD has been restarted before continuing
 
-# watchdog ("woof:" in logcat)
-DEBUGLOG=0                      # 0: disable debug logging, 1: enable
+# debug logging when a serious issue occurs
+DEBUGLOG=0                      # 0: disable debug logging, 1: create a log when rild must be restarted
 DOGLOGS=/sdcard/Download/wdlog	# log directory when DEBUGLOG=1, path must be owned and r/w for root
+
+# cpu monitoring
 TSCPU=90                        # max allowed cpu usage threshold
 TSTIME=60	                # how many secs rild is allowed to consume TSCPU before a restart of rild is triggered
-WDFREQ=20	                # check frequency of the watchdog in secs
+WDFREQ=20	                # check frequency of the cpu usage in secs
 # The total check amount(!) will be calculated as: TSTIME / WDFREQ
 # Examples:
 # 60 / 5  = 12 checks over the 60 sec time frame
 # 60 / 20 =  3 checks over the 60 sec time frame
 
 # a "|" delimited list of apps/package names (case insensive) which are able to accept/do calls
-# if one of these apps are in the foreground(!) the watchdog will skip any actions
-# a package name is something like com.microsoft.office.lync15 but office.lync or lync is fully enough as well
+# if one of these apps are in foreground or background the watchdog will skip any actions
+# a package name is something like "com.microsoft.office.lync15" but "office.lync" or just "lync" is fine, too
 CALLAPPS="dialer|call|whatsapp|thoughtcrime.securesms|telegram|challegram|viber|threema|slack|facebook.orca|facebook.mlite|skype|office.lync|microsoft.teams|imoim|tachyon"
 
 
-# internal watchdog debug mode. never touch this!
-WDDEBUG=0
 #####################################################################################
+# NO CHANGES BEHIND THIS LINE
+#####################################################################################
+
+# internal variables - never touch these!
+WDDEBUG=0	# watchdog debug mode - NEVER use WDDEBUG=1 productive!
+PRTRIGGER=0	# init value
+REQRESTART=99	# init value
 
 # initial value for wrild property
 setprop wrild.ril-handling starting
@@ -153,14 +160,14 @@ F_RILRESTART(){
 # endless sleep
 F_DOZE(){
     if [ $WDDEBUG == 0 ];then
-        while true; do F_LOG i "Watchdog has been disabled :("  && sleep 86400 ;done
+        while true; do F_LOG i "Watchdog has been disabled :'("  && sleep 86400 ;done
     else
         F_LOG i "woof: DEBUG MODE !!!! Watchdog would have been disabled but as we debug..."
     fi
 }
 
 # delay the very first watchdog run
-[ $WDDEBUG == 0 ] && F_LOG i "woof: *yawn* ... I think .. I will sleep a bit before actually starting my work (4 min)" && sleep $RILCHILL
+[ $WDDEBUG == 0 ] && F_LOG d "woof: *yawn* ... I think .. I will sleep a bit before actually starting my work (4 min)" && sleep $RILCHILL
 [ $WDDEBUG == 1 ] && F_LOG e "woof: !!! DEBUG MODE DEBUG MODE !!! SLEEP DISABLED FOR FIRST WD RUN!"
 
 # restart RIL in defined conditions.
@@ -204,13 +211,12 @@ F_WOOF(){
     DOG="$1"
     F_LOG d "woof: sniffing for $DOG"
     for dog in $(ps -A -opid:1,cmd:4,pcpu:0 | grep -v wrild | grep " $DOG"| tr " " "," | cut -d  "," -f 1,3);do
-	#dpid=$(echo "${dog/,*/}"| egrep -o '[0-9]+')
 	dpid="${dog/,*/}"
         dcpu=$(printf "%.0f" "${dog/*,/}")
 	# if we found a dog which breaks the threshold immediately inform the watch proc & catch logs
 	if [ "$dcpu" -ge "$TSCPU" ];then 
-            F_LOG w "woof: $dog - current cpu usage: $dcpu %, pid: $dpid"
-            echo $dpid && return 3
+            F_LOG e "woof: $dog - current cpu usage: $dcpu %, pid: $dpid"
+            echo $dpid && return 4
         fi
     done
     F_RILCHK
@@ -276,7 +282,11 @@ while true; do
 	WCNT=$((WCNT - 1))
 	if [ "$WCNT" -gt 0 ];then
             [ $WDDEBUG == 1 ] && F_LOG e "woof: !!!! DEBUG MODE DEBUG MODE !!!!"
-	    F_LOG i "woof: rild ($DOGPID) eats more CPU than is good for us - over ${TSCPU}% ... (countdown: $WCNT)"
+            if [ $WOOFRET -eq 4 ];then
+                F_LOG w "woof: rild ($DOGPID) eats more CPU than is good for us - more than ${TSCPU}% (countdown: $WCNT)!"
+            else
+                F_LOG w "woof: rild ($DOGPID) damn.. no cell service (countdown: $WCNT)!"
+            fi
 	else
             [ $WDDEBUG == 1 ] && F_LOG e "woof: !!!! DEBUG MODE DEBUG MODE !!!!"
 	    # trigger and give it time to come back
