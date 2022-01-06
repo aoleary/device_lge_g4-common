@@ -59,7 +59,7 @@ F_RILCHK(){
     ENCSTATE=$(getprop vold.decrypt)
     PROPSIM=$(getprop wrild.sim.count)
     if [ -z "$PROPSIM" ];then
-        SIMCOUNT=$(logcat -b all -d |egrep "insertedSimCount.*[01]" | egrep -o "[01]" | tail -n1)
+        SIMCOUNT=$(logcat -t "$BEFBITE" -b all -d | egrep -o "SIM_COUNT:.*"| cut -d ":" -f2 | egrep -o "[01]" | tail -n1)
         setprop wrild.sim.count $SIMCOUNT
     else
         F_LOG i "using previous detected sim count.."
@@ -162,13 +162,13 @@ F_DOZE(){
     if [ $WDDEBUG == 0 ];then
         while true; do F_LOG i "Watchdog has been disabled :'("  && sleep 86400 ;done
     else
-        F_LOG i "woof: DEBUG MODE !!!! Watchdog would have been disabled but as we debug..."
+        F_LOG i "DEBUG MODE !!!! Watchdog would have been disabled but as we debug..."
     fi
 }
 
 # delay the very first watchdog run
-[ $WDDEBUG == 0 ] && F_LOG d "woof: *yawn* ... I think .. I will sleep a bit before actually starting my work (4 min)" && sleep $RILCHILL
-[ $WDDEBUG == 1 ] && F_LOG e "woof: !!! DEBUG MODE DEBUG MODE !!! SLEEP DISABLED FOR FIRST WD RUN!"
+[ $WDDEBUG == 0 ] && F_LOG d "*yawn* ... I think .. I will sleep a bit before actually starting my work (4 min)" && sleep $RILCHILL
+[ $WDDEBUG == 1 ] && F_LOG e "!!! DEBUG MODE DEBUG MODE !!! SLEEP DISABLED FOR FIRST WD RUN!"
 
 # restart RIL in defined conditions.
 F_RILRESTART 1
@@ -187,47 +187,63 @@ F_LOG i "RIL handling finished. Going to background with pid >$MYPID<"
 #
 ###############################################################################################
 
-F_LOG i "woof: watchdog is starting...."
+F_LOG i "watchdog is starting...."
 
 # debug logs - if enabled
 [ -d "$DOGLOGS" ] && rm -rf $DOGLOGS
 F_LOGRIL(){
     if [ "$DEBUGLOG" -ne 0 ];then
-        mkdir $DOGLOGS
-        F_LOG i "woof: debug logging started"
-        LOGPID=$1
-        #TIMESTMP="$(date +%F-%H-%M-%S)"
-        TIMESTMP="$(date +%F)"
-        logcat -b all -d -D >> $DOGLOGS/${TIMESTMP}_${LOGPID}_logcat.txt \
-            && F_LOG w "woof: debug log written: $DOGLOGS/${TIMESTMP}_${LOGPID}_logcat.txt"
-        [ $WDDEBUG == 0 ] && logcat -b all -c && F_LOG w "woof: CLEARED LOGCAT" 
-        echo -e "\n\n$(date):\n\n $(dmesg -c)" >> $DOGLOGS/${TIMESTMP}_${LOGPID}_dmesg.txt && F_LOG w "woof: debug log written: $DOGLOGS/${TIMESTMP}_${LOGPID}_dmesg.txt"
-        echo -e "\n\n$(date):\n\n $(ps -A)" >> $DOGLOGS/${TIMESTMP}_${LOGPID}_ps.txt && F_LOG w "woof: debug log written: $DOGLOGS/${TIMESTMP}_${LOGPID}_ps.txt"
+        if [ ! -d "$DOGLOGS" ];then
+            mkdir -p $DOGLOGS && F_LOG i "$DOGLOGS created successfully."
+        fi
+        if [ ! -d "$DOGLOGS" ];then
+            F_LOG e "$DOGLOGS could NOT be created (check for denials in logcat)! Cannot log anything sorry.."
+        else
+            F_LOG i "debug logging started"
+            LOGPID=$1
+            TIMESTMP="$(date +%F)"
+
+            logcat -t "$BEFBITE" -b all -d -D > $DOGLOGS/${TIMESTMP}_${LOGPID}_logcat.txt \
+                && F_LOG w "debug log written: $DOGLOGS/${TIMESTMP}_${LOGPID}_logcat.txt"
+            logcat -t "$BEFBITE" -b all -d -D --pid=$LOGPID > $DOGLOGS/${TIMESTMP}_${LOGPID}_rild.txt \
+                && F_LOG w "debug log written: $DOGLOGS/${TIMESTMP}_${LOGPID}_rild.txt"
+
+            if [ $WDDEBUG -eq 0 ];then
+                logcat -b all -c
+                F_LOG w "CLEARED LOGCAT"
+            fi
+
+            echo -e "\n\n$(date):\n\n $(dmesg -c)" > $DOGLOGS/${TIMESTMP}_${LOGPID}_dmesg.txt \
+                && F_LOG w "debug log written: $DOGLOGS/${TIMESTMP}_${LOGPID}_dmesg.txt"
+            echo -e "\n\n$(date):\n\n $(ps -A)" > $DOGLOGS/${TIMESTMP}_${LOGPID}_ps.txt \
+                && F_LOG w "debug log written: $DOGLOGS/${TIMESTMP}_${LOGPID}_ps.txt"
+        fi
+        F_LOG d "finished $FUNCNAME"
     fi
 }
 
 # watch the dog
 F_WOOF(){
     DOG="$1"
-    F_LOG d "woof: sniffing for $DOG"
+    F_LOG d "sniffing for $DOG"
     for dog in $(ps -A -opid:1,cmd:4,pcpu:0 | grep -v wrild | grep " $DOG"| tr " " "," | cut -d  "," -f 1,3);do
 	dpid="${dog/,*/}"
         dcpu=$(printf "%.0f" "${dog/*,/}")
 	# if we found a dog which breaks the threshold immediately inform the watch proc & catch logs
 	if [ "$dcpu" -ge "$TSCPU" ];then 
-            F_LOG e "woof: $dog - current cpu usage: $dcpu %, pid: $dpid"
+            F_LOG e "$dog - current cpu usage: $dcpu %, pid: $dpid"
             echo $dpid && return 4
         fi
     done
     F_RILCHK
     if [ "$CURSTATE" == "UNKNOWN" ] && [ -z "$CUROPER" ];then
-       F_LOG w "woof: current sim state: NO_SIGNAL"
-       F_LOG d "woof: CURSTATE is $CURSTATE , CUROPER is $CUROPER"
+       F_LOG w "current sim state: NO_SIGNAL"
+       F_LOG d "CURSTATE is $CURSTATE , CUROPER is $CUROPER"
        return 3
     else
-       F_LOG d "woof: CURSTATE is $CURSTATE , CUROPER is $CUROPER"
+       F_LOG d "CURSTATE is $CURSTATE , CUROPER is $CUROPER"
     fi
-    F_LOG d "woof: $DOG is a good doggie (normal CPU usage) ..."
+    F_LOG d "$DOG is a good doggie (normal CPU usage) ..."
     echo 0 && return 0
 }
 
@@ -241,11 +257,11 @@ F_BITEDOG(){
         mCallState=0) # idle
         ;;
         mCallState=1) # ringing
-            F_LOG w "woof: will not bite the dog because it barks (ringing)"
+            F_LOG w "will not bite the dog because it barks (ringing)"
             return 3
         ;;
         mCallState=2) # active call
-            F_LOG w "woof: will not bite the dog because he would bite back (active call)"
+            F_LOG w "will not bite the dog because he would bite back (active call)"
             return 4
         ;;
     esac
@@ -253,14 +269,14 @@ F_BITEDOG(){
     # dragon: 3rd party app with calling support - foreground
     unset CAPP
     CAPP=$(dumpsys window windows | grep mCurrentFocus | egrep -oi "$CALLAPPS" | head -n 1)
-    [ ! -z $CAPP ] && F_LOG w "woof: will not bite the dog because he has supercow powers (found a calling app in foreground: $CAPP)" && return 5
+    [ ! -z $CAPP ] && F_LOG w "will not bite the dog because he has supercow powers (found a calling app in foreground: $CAPP)" && return 5
 
     # dragon: 3rd party app within a call - in background
     unset CAPP
     CAPP=$(dumpsys window windows |grep topApp | egrep -i "$CALLAPPS" | egrep -i "voip|call" | head -n 1 | tr -d " ")
-    [ ! -z $CAPP ] && F_LOG w "woof: will not bite the dog because he is HIGH (active call in background) ..." && F_LOG w "woof: calling app in background: $CAPP" && return 6
+    [ ! -z $CAPP ] && F_LOG w "will not bite the dog because he is HIGH (active call in background) ..." && F_LOG w "calling app in background: $CAPP" && return 6
 
-    F_LOG w "woof: woof! saying goodbye to rild? We will see.."
+    F_LOG w "woof! saying goodbye to rild? We will see.."
     F_LOGRIL $DPID
     # reset operator id to ensure RIL gets restarted
     [ $WDDEBUG == 0 ] && setprop gsm.sim.operator.numeric ""
@@ -273,24 +289,26 @@ F_BITEDOG(){
 WCNT=$(($TSTIME/WDFREQ))
 [ $WDDEBUG == 1 ] && WCNT=2 && TSCPU=0
 while true; do
+    export BEFBITE=$(date "+%F %T.%3N")
     DOGPID=$(F_WOOF rild)
     WOOFRET=$?
     if [ $WOOFRET -eq 0 ];then
-	F_LOG d "woof: all fine ... shhhh... don't wake sleeping dogs ..."
+	F_LOG d "all fine ... shhhh... don't wake sleeping dogs ..."
         WCNT=$(($TSTIME/WDFREQ))
     else
 	WCNT=$((WCNT - 1))
 	if [ "$WCNT" -gt 0 ];then
-            [ $WDDEBUG == 1 ] && F_LOG e "woof: !!!! DEBUG MODE DEBUG MODE !!!!"
+            [ $WDDEBUG == 1 ] && F_LOG e "!!!! DEBUG MODE DEBUG MODE !!!!"
             if [ $WOOFRET -eq 4 ];then
-                F_LOG w "woof: rild ($DOGPID) eats more CPU than is good for us - more than ${TSCPU}% (countdown: $WCNT)!"
+                F_LOG w "rild ($DOGPID) eats more CPU than is good for us - more than ${TSCPU}% (countdown: $WCNT)!"
             else
-                F_LOG w "woof: rild ($DOGPID) damn.. no cell service (countdown: $WCNT)!"
+                F_LOG w "rild ($DOGPID) damn.. no cell service (countdown: $WCNT)!"
             fi
 	else
-            [ $WDDEBUG == 1 ] && F_LOG e "woof: !!!! DEBUG MODE DEBUG MODE !!!!"
+            export BEFBITE=$(date "+%F %T.%3N")
+            [ $WDDEBUG == 1 ] && F_LOG e "!!!! DEBUG MODE DEBUG MODE !!!!"
 	    # trigger and give it time to come back
-	    F_LOG w "woof: the hunt is open! run rild RUN ... (restarting $DOGPID)"
+	    F_LOG w "the hunt is open! run rild RUN ... (restarting $DOGPID)"
             F_BITEDOG $DOGPID
 	    [ $WDDEBUG == 0 ] && sleep 30
             WCNT=$(($TSTIME/WDFREQ))
