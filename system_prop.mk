@@ -42,6 +42,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.bt.bdaddr_path="/data/misc/bluetooth/bdaddr" \
     persist.bt.enableAptXHD=true
 
+# Blur - Diable Blur in A12+
+ro.surface_flinger.supports_background_blur=0
+ro.sf.blurs_are_expensive=0
+
 # Boot animation
 TARGET_SCREEN_HEIGHT := 2560
 TARGET_SCREEN_WIDTH := 1440
