@@ -59,7 +59,7 @@ F_RILCHK(){
     ENCSTATE=$(getprop vold.decrypt)
     PROPSIM=$(getprop wrild.sim.count)
     if [ -z "$PROPSIM" ];then
-        SIMCOUNT=$(logcat -t "$BEFBITE" -b all -d | egrep -o "SIM_COUNT:.*"| cut -d ":" -f2 | egrep -o "[01]" | tail -n1)
+        SIMCOUNT=$(logcat -b all -d | egrep -o "SIM_COUNT:.*"| cut -d ":" -f2 | egrep -o "[01]" | tail -n1)
         setprop wrild.sim.count $SIMCOUNT
     else
         F_LOG i "using previous detected sim count.."
