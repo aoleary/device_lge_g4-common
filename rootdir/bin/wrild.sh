@@ -207,16 +207,17 @@ F_LOGRIL(){
                 && F_LOG w "debug log written: $DOGLOGS/${TIMESTMP}_${LOGPID}_logcat.txt"
             logcat -t "$BEFBITE" -b all -d -D --pid=$LOGPID > $DOGLOGS/${TIMESTMP}_${LOGPID}_rild.txt \
                 && F_LOG w "debug log written: $DOGLOGS/${TIMESTMP}_${LOGPID}_rild.txt"
+            echo -e "\n\n$(date):\n\n $(dmesg -c)" > $DOGLOGS/${TIMESTMP}_${LOGPID}_dmesg.txt \
+                && F_LOG w "debug log written: $DOGLOGS/${TIMESTMP}_${LOGPID}_dmesg.txt"
+            echo -e "\n\n$(date):\n\n $(ps -A)" > $DOGLOGS/${TIMESTMP}_${LOGPID}_ps.txt \
+                && F_LOG w "debug log written: $DOGLOGS/${TIMESTMP}_${LOGPID}_ps.txt"
+            logcat -s WRILD -d > $DOGLOGS/${TIMESTMP}_${LOGPID}_wrild.txt \
+                && F_LOG w "debug log written: $DOGLOGS/${TIMESTMP}_${LOGPID}_wrild.txt"
 
             if [ $WDDEBUG -eq 0 ];then
                 logcat -b all -c
                 F_LOG w "CLEARED LOGCAT"
             fi
-
-            echo -e "\n\n$(date):\n\n $(dmesg -c)" > $DOGLOGS/${TIMESTMP}_${LOGPID}_dmesg.txt \
-                && F_LOG w "debug log written: $DOGLOGS/${TIMESTMP}_${LOGPID}_dmesg.txt"
-            echo -e "\n\n$(date):\n\n $(ps -A)" > $DOGLOGS/${TIMESTMP}_${LOGPID}_ps.txt \
-                && F_LOG w "debug log written: $DOGLOGS/${TIMESTMP}_${LOGPID}_ps.txt"
         fi
         F_LOG d "finished $FUNCNAME"
     fi
