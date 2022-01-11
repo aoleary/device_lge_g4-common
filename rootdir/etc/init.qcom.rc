@@ -76,9 +76,6 @@ on fs
     mount_all /vendor/etc/fstab.qcom
 
     # debug boot process
-    rm /cache/boot_lc_full.txt
-    rm /cache/boot_lc_crash.txt
-    rm /cache/boot_lc_kernel.txt
     start boot_lc
     start boot_lc_kernel
     start boot_lc_crash
@@ -1140,9 +1137,6 @@ service pulseoff /vendor/bin/pulse.sh stop
 on property:sys.boot_completed=1
     stop pulseon
     start pulseoff
-    stop boot_lc
-    stop boot_lc_crash
-    stop boot_lc_kernel
     start real-ril-daemon
     start ril-daemon
 
@@ -1160,9 +1154,6 @@ on property:apexd.status=ready
 on property:dev.bootcomplete=1
     stop pulseon
     start pulseoff
-    stop boot_lc
-    stop boot_lc_crash
-    stop boot_lc_kernel
 
 on property:gsm.version.baseband=""
     start baseband-sh
