@@ -5,7 +5,7 @@ LOCAL_PATH := $(call my-dir)
 #
 
 include $(CLEAR_VARS)
-LOCAL_MODULE := FootejCamera2
+LOCAL_MODULE := Camera_2
 LOCAL_SRC_FILES := $(LOCAL_MODULE).apk
 LOCAL_MODULE_CLASS := APPS
 LOCAL_OVERRIDES_PACKAGES := Snap Camera2
