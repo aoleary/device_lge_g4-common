@@ -84,8 +84,7 @@ PRODUCT_PACKAGES += \
     android.hardware.camera.provider@2.4-external \
     android.hardware.camera.provider@2.4-external-service \
     android.hardware.camera.provider@2.4-legacy \
-    libqomx_core \
-    Camera_2
+    libqomx_core
 
 # Enable camera EIS
 # eis.enable: enables electronic image stabilization
