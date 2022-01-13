@@ -789,8 +789,7 @@ service qcom-c_main-sh /vendor/bin/init.class_main.sh
 
 service baseband-sh /vendor/bin/init.baseband.sh
     class late_start
-    user system
-    seclabel u:r:baseband:s0
+    user root
     oneshot
     disabled
 
