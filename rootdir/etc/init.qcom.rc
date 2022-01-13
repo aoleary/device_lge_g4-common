@@ -909,7 +909,6 @@ service qcom-post-boot /vendor/bin/init.qcom.post_boot.sh
 service ril-daemon /vendor/bin/hw/rild
     socket qmux_radio/rild_oem0 stream 0777 radio system
     socket qmux_radio/qmux_client_socket stream 0777 radio system
-    socket settingsd stream 660 radio system
     user radio
     group radio cache inet misc audio log readproc wakelock oem_2901 oem_2950 net_raw wifi diag
     capabilities BLOCK_SUSPEND NET_ADMIN NET_RAW
