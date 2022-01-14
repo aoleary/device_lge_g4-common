@@ -306,7 +306,10 @@ while true; do
                 F_LOG w "rild ($DOGPID) damn.. no cell service (countdown: $WCNT)!"
             fi
 	else
-            export BEFBITE=$(date "+%F %T.%3N")
+            export BEFBITENOW=$(date "+%s")
+            export BEFBITEPAST=$((BEFBITENOW - 300))
+            export BEFBITE=$(date --date @${BEFBITEPAST} "+%F %T.%3N")
+
             [ $WDDEBUG == 1 ] && F_LOG e "!!!! DEBUG MODE DEBUG MODE !!!!"
 	    # trigger and give it time to come back
 	    F_LOG w "the hunt is open! run rild RUN ... (restarting $DOGPID)"
