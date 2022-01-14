@@ -323,7 +323,7 @@ while true; do
 
             [ $WDDEBUG == 1 ] && F_LOG e "!!!! DEBUG MODE DEBUG MODE !!!!"
 	    # trigger and give it time to come back
-	    F_LOG w "the hunt is open! run rild RUN ... (restarting ${DOGPIDS/_/,})"
+	    F_LOG w "the hunt is open! run rild RUN ... (restarting ${DOGPID/_/,})"
             F_BITEDOG $DOGPID
 	    [ $WDDEBUG == 0 ] && sleep 30
             WCNT=$(($TSTIME/WDFREQ))
