@@ -192,6 +192,7 @@ F_LOG i "watchdog is starting...."
 # debug logs - if enabled
 [ -d "$DOGLOGS" ] && rm -rf $DOGLOGS
 F_LOGRIL(){
+    unset LOGPID
     if [ "$DEBUGLOG" -ne 0 ];then
         if [ ! -d "$DOGLOGS" ];then
             mkdir -p $DOGLOGS && F_LOG i "$DOGLOGS created successfully."
@@ -200,20 +201,22 @@ F_LOGRIL(){
             F_LOG e "$DOGLOGS could NOT be created (check for denials in logcat)! Cannot log anything sorry.."
         else
             F_LOG i "debug logging started"
-            LOGPID=$1
+            LOGPID="$1"
             TIMESTMP="$(date +%F)"
-
+	    
             logcat -t "$BEFBITE" -b all -d -D > $DOGLOGS/${TIMESTMP}_${LOGPID}_logcat.txt \
                 && F_LOG w "debug log written: $DOGLOGS/${TIMESTMP}_${LOGPID}_logcat.txt"
-            logcat -t "$BEFBITE" -b all -d -D --pid=$LOGPID > $DOGLOGS/${TIMESTMP}_${LOGPID}_rild.txt \
-                && F_LOG w "debug log written: $DOGLOGS/${TIMESTMP}_${LOGPID}_rild.txt"
             echo -e "\n\n$(date):\n\n $(dmesg -c)" > $DOGLOGS/${TIMESTMP}_${LOGPID}_dmesg.txt \
                 && F_LOG w "debug log written: $DOGLOGS/${TIMESTMP}_${LOGPID}_dmesg.txt"
             echo -e "\n\n$(date):\n\n $(ps -A)" > $DOGLOGS/${TIMESTMP}_${LOGPID}_ps.txt \
                 && F_LOG w "debug log written: $DOGLOGS/${TIMESTMP}_${LOGPID}_ps.txt"
             logcat -s WRILD -d > $DOGLOGS/${TIMESTMP}_${LOGPID}_wrild.txt \
                 && F_LOG w "debug log written: $DOGLOGS/${TIMESTMP}_${LOGPID}_wrild.txt"
-
+	    for lpid in $(echo "$LOGPID" | tr "_" " ");do
+                logcat -t "$BEFBITE" -b all -d -D --pid=$lpid > $DOGLOGS/${TIMESTMP}_${lpid}_rild.txt \
+                && F_LOG w "debug log written: $DOGLOGS/${TIMESTMP}_${lpid}_rild.txt"
+	    done
+	    
             if [ $WDDEBUG -eq 0 ];then
                 logcat -b all -c
                 F_LOG w "CLEARED LOGCAT"
@@ -227,25 +230,33 @@ F_LOGRIL(){
 F_WOOF(){
     DOG="$1"
     F_LOG d "sniffing for $DOG"
-    for dog in $(ps -A -opid:1,cmd:4,pcpu:0 | grep -v wrild | grep " $DOG"| tr " " "," | cut -d  "," -f 1,3);do
+    unset DOGPIDS DOGPID1 DOGPID2
+    for dog in $(ps -A -opid:1,cmd:4,pcpu:1 | grep -v wrild | grep " $DOG"| tr " " "," | cut -d  "," -f 1,3);do
 	dpid="${dog/,*/}"
         dcpu=$(printf "%.0f" "${dog/*,/}")
 	# if we found a dog which breaks the threshold immediately inform the watch proc & catch logs
 	if [ "$dcpu" -ge "$TSCPU" ];then 
             F_LOG e "$dog - current cpu usage: $dcpu %, pid: $dpid"
             echo $dpid && return 4
-        fi
+	fi
+	if [ -z "$DOGPID1" ];then
+	    DOGPID1="$dpid"
+	    DOGPIDS="$DOGPID1"
+	else
+	    DOGPID2="$dpid"
+	    DOGPIDS="$DOGPID1_$DOGPID2"
+	fi
     done
     F_RILCHK
     if [ "$CURSTATE" == "UNKNOWN" ] && [ -z "$CUROPER" ];then
        F_LOG w "current sim state: NO_SIGNAL"
-       F_LOG d "CURSTATE is $CURSTATE , CUROPER is $CUROPER"
-       return 3
+       F_LOG d "CURSTATE is $CURSTATE , CUROPER is $CUROPER, $DOG pid(s): ${DOGPIDS/_/,}"
+       echo $DOGPIDS && return 3
     else
        F_LOG d "CURSTATE is $CURSTATE , CUROPER is $CUROPER"
     fi
-    F_LOG d "$DOG is a good doggie (normal CPU usage) ..."
-    echo 0 && return 0
+    F_LOG d "$DOG (${DOGPIDS/_/,}) is a good doggie (service available, normal CPU usage) ..."
+    echo $DOGPIDS && return 0
 }
 
 # bite the dog - but BEWARE OF THE DRAGONS!
@@ -277,7 +288,7 @@ F_BITEDOG(){
     CAPP=$(dumpsys window windows |grep topApp | egrep -i "$CALLAPPS" | egrep -i "voip|call" | head -n 1 | tr -d " ")
     [ ! -z $CAPP ] && F_LOG w "will not bite the dog because he is HIGH (active call in background) ..." && F_LOG w "calling app in background: $CAPP" && return 6
 
-    F_LOG w "woof! saying goodbye to rild? We will see.."
+    F_LOG w "woof! saying goodbye to rild (${DPID/_/,})? We will see.."
     F_LOGRIL $DPID
     # reset operator id to ensure RIL gets restarted
     [ $WDDEBUG == 0 ] && setprop gsm.sim.operator.numeric ""
@@ -303,7 +314,7 @@ while true; do
             if [ $WOOFRET -eq 4 ];then
                 F_LOG w "rild ($DOGPID) eats more CPU than is good for us - more than ${TSCPU}% (countdown: $WCNT)!"
             else
-                F_LOG w "rild ($DOGPID) damn.. no cell service (countdown: $WCNT)!"
+                F_LOG w "rild (${DOGPID/_/,}) damn.. no cell service (countdown: $WCNT)!"
             fi
 	else
             export BEFBITENOW=$(date "+%s")
@@ -312,7 +323,7 @@ while true; do
 
             [ $WDDEBUG == 1 ] && F_LOG e "!!!! DEBUG MODE DEBUG MODE !!!!"
 	    # trigger and give it time to come back
-	    F_LOG w "the hunt is open! run rild RUN ... (restarting $DOGPID)"
+	    F_LOG w "the hunt is open! run rild RUN ... (restarting ${DOGPIDS/_/,})"
             F_BITEDOG $DOGPID
 	    [ $WDDEBUG == 0 ] && sleep 30
             WCNT=$(($TSTIME/WDFREQ))
