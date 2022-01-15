@@ -247,7 +247,7 @@ F_WOOF(){
 	    DOGPIDS="$DOGPID1_$DOGPID2"
 	fi
     done
-    F_RILCHK
+    RET=$(F_RILCHK)
     if [ "$CURSTATE" == "UNKNOWN" ] && [ -z "$CUROPER" ];then
        F_LOG w "current sim state: NO_SIGNAL"
        F_LOG d "CURSTATE is $CURSTATE , CUROPER is $CUROPER, $DOG pid(s): ${DOGPIDS/_/,}"
