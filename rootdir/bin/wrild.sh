@@ -190,7 +190,6 @@ F_LOG i "RIL handling finished. Going to background with pid >$MYPID<"
 F_LOG i "watchdog is starting...."
 
 # debug logs - if enabled
-[ -d "$DOGLOGS" ] && rm -rf $DOGLOGS
 F_LOGRIL(){
     unset LOGPID
     if [ "$DEBUGLOG" -ne 0 ];then
