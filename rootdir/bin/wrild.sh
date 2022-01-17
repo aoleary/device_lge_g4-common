@@ -9,7 +9,7 @@
 ###################################################################################################
 
 # rild
-MAXRET=30			# max rild restart retries when serious issues found
+MAXRET=300			# max rild restart retries when serious issues found
 RILCHILL=240			# sleep value after RILD has been restarted before continuing
 
 # debug logging when a serious issue occurs
