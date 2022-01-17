@@ -7,6 +7,7 @@
 # License:              GPLv3
 # Copyright 2019-2022:  steadfasterX <steadfasterX - AT - gmail #DOT# com>
 ###################################################################################################
+WRILDVER=v22.1
 
 # rild
 MAXRET=300			# max rild restart retries when serious issues found
@@ -46,7 +47,7 @@ setprop wrild.ril-handling starting
 # logging func
 F_LOG(){
     # d: DEBUG  e: ERROR  f: FATAL  i: INFO  v: VERBOSE  w: WARN  s: SILENT
-    log -t WRILD -p "$1" "${0##*/}: $2"
+    log -t WRILD -p "$1" "${0##*/} ($WRILDVER): $2"
 }
 
 # check for the current RIL and device state
