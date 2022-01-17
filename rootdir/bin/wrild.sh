@@ -212,7 +212,7 @@ F_LOGRIL(){
             logcat -s WRILD -d > $DOGLOGS/${TIMESTMP}_${LOGPID}_wrild.txt \
                 && F_LOG w "debug log written: $DOGLOGS/${TIMESTMP}_${LOGPID}_wrild.txt"
 	    for lpid in $(echo "$LOGPID" | tr "_" " ");do
-                logcat -t "$BEFBITE" -b all -d -D --pid=$lpid > $DOGLOGS/${TIMESTMP}_${lpid}_rild.txt \
+                logcat -t -b all -d -D --pid=$lpid > $DOGLOGS/${TIMESTMP}_${lpid}_rild.txt \
                 && F_LOG w "debug log written: $DOGLOGS/${TIMESTMP}_${lpid}_rild.txt"
 	    done
 	    
