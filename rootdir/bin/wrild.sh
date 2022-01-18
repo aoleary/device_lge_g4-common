@@ -7,7 +7,7 @@
 # License:              GPLv3
 # Copyright 2019-2022:  steadfasterX <steadfasterX - AT - gmail #DOT# com>
 ###################################################################################################
-WRILDVER=v22.1
+WRILDVER=v22.2
 
 # rild
 MAXRET=300			# max rild restart retries when serious issues found
@@ -318,7 +318,7 @@ while true; do
             fi
 	else
             export BEFBITENOW=$(date "+%s")
-            export BEFBITEPAST=$((BEFBITENOW - 300))
+            export BEFBITEPAST=$((BEFBITENOW - 600))
             export BEFBITE=$(date --date @${BEFBITEPAST} "+%F %T.%3N")
 
             [ $WDDEBUG == 1 ] && F_LOG e "!!!! DEBUG MODE DEBUG MODE !!!!"
