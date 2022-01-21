@@ -7,7 +7,7 @@
 # License:              GPLv3
 # Copyright 2019-2022:  steadfasterX <steadfasterX - AT - gmail #DOT# com>
 ###################################################################################################
-WRILDVER=v22.2
+WRILDVER=v22.3
 
 # rild
 MAXRET=300			# max rild restart retries when serious issues found
@@ -204,6 +204,9 @@ F_LOGRIL(){
             LOGPID="$1"
             TIMESTMP="$(date +%F)"
 	    
+            logcat -b all -d -D > $DOGLOGS/${TIMESTMP}_${LOGPID}_logcatfull.txt \
+                && F_LOG w "debug log written: $DOGLOGS/${TIMESTMP}_${LOGPID}_logcatfull.txt"
+		
             logcat -t "$BEFBITE" -b all -d -D > $DOGLOGS/${TIMESTMP}_${LOGPID}_logcat.txt \
                 && F_LOG w "debug log written: $DOGLOGS/${TIMESTMP}_${LOGPID}_logcat.txt"
             echo -e "\n\n$(date):\n\n $(dmesg -c)" > $DOGLOGS/${TIMESTMP}_${LOGPID}_dmesg.txt \
@@ -217,7 +220,7 @@ F_LOGRIL(){
                 && F_LOG w "debug log written: $DOGLOGS/${TIMESTMP}_${lpid}_rild.txt"
 	    done
 	    
-            if [ $WDDEBUG -eq 0 ];then
+            if [ $WDDEBUG -eq 1 ];then
                 logcat -b all -c
                 F_LOG w "CLEARED LOGCAT"
             fi
