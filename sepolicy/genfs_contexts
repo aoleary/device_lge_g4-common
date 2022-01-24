@@ -5,3 +5,6 @@ genfscon debugfs /energyawareness                     u:object_r:debugfs_energy:
 genfscon debugfs /rmt_storage                         u:object_r:debugfs_rmt:s0
 genfscon debugfs /sys/kernel/debug/rmt_storage        u:object_r:debugfs_rmt:s0
 genfscon debugfs /rfs_access                          u:object_r:debugfs_rfs:s0
+
+# ProcFS
+genfscon proc /sys/vm/dirty_writeback_centisecs                       u:object_r:proc_dirty:s0
