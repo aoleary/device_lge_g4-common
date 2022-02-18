@@ -283,7 +283,6 @@ PRODUCT_COPY_FILES += \
 
 # NFC
 PRODUCT_PACKAGES += \
-    android.hardware.nfc@1.1-service \
     com.android.nfc_extras \
     Tag \
     NfcNci
