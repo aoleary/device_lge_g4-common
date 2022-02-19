@@ -109,7 +109,8 @@ PRODUCT_COPY_FILES += \
 
 # Configstore
 PRODUCT_PACKAGES += \
-    android.hardware.configstore@1.0-service
+    android.hardware.configstore@1.0-service \
+    android.hardware.configstore@1.1-service
 
 # ConsumerIR
 TARGET_PROVIDES_CONSUMERIR_HAL := true
