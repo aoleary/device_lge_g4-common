@@ -86,9 +86,6 @@ on fs
     start boot_lc_kernel
     start boot_lc_crash
 
-    # Start HW service manager early
-    start hwservicemanager
-
     # These directories have different labeling in stock rom.
     # Jumping between stock and AOSP needs restorecon -F to apply our labeling.
     exec u:r:vendor_init:s0 root root -- /vendor/bin/toybox_vendor \
@@ -115,11 +112,6 @@ on late-fs
     start bootanim
     # Mount RW partitions which need run fsck
     mount_all /vendor/etc/fstab.qcom --late
-
-    # Make sure HW service manager started and start required HAL services
-    wait_for_prop hwservicemanager.ready true
-    start configstore-hal-1-0
-    start gralloc-2-0
 
 on init
     # ZRAM setup
