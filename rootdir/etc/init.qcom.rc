@@ -76,7 +76,7 @@ on early-fs
 on fs
     wait /dev/block/platform/soc.0/${ro.boot.bootdevice}
     symlink /dev/block/platform/soc.0/${ro.boot.bootdevice} /dev/block/bootdevice
-    mount_all /vendor/etc/fstab.qcom --early
+    mount_all /vendor/etc/fstab.qcom
 
     # debug boot process
     rm /cache/boot_lc_full.txt
@@ -104,14 +104,6 @@ on fs
     # do not block adb which is default since Android 10 and can cause adb issues / crashes
     setprop persist.adb.nonblocking_ffs 0
     setprop ro.adb.nonblocking_ffs 0
-
-on late-fs
-    # Start services for Boot Animation
-    start servicemanager
-    start surfaceflinger
-    start bootanim
-    # Mount RW partitions which need run fsck
-    mount_all /vendor/etc/fstab.qcom --late
 
 on init
     # ZRAM setup
