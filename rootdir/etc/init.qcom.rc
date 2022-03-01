@@ -60,6 +60,7 @@ on early-init
 on early-fs
     #start early-log logcat logger
     start early-log
+    start mount-info
 
     symlink /dev/block/platform/soc.0/${ro.boot.bootdevice} /dev/block/bootdevice
     chown root root /dev/block/mmcblk0p35
@@ -1178,3 +1179,9 @@ on property:apexd.status=ready
 service early-log /system/bin/sh /vendor/bin/early_log.sh
     user root
     disabled
+
+# Early mount info
+service mount-info /system/bin/sh /vendor/bin/mount_info.sh
+    user root
+    disabled
+
