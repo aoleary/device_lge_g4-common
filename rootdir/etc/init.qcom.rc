@@ -506,7 +506,8 @@ on post-fs
     chmod 0771 /carrier
 
     # restorecon carrier partition
-    restorecon_recursive /carrier
+    exec u:r:vendor_init:s0 root root -- /vendor/bin/toybox_vendor \
+      restorecon -RF  /carrier
 
     # We restorecon /preload in case preload folder has been reset.
     restorecon_recursive /preload
@@ -686,7 +687,8 @@ on post-fs-data
 
     # Z2G4-BSP-TS@lge.com make directory for sns.reg used by sensordaemon
     mkdir /sns/cal/ 0774 system system
-    restorecon_recursive /sns
+    exec u:r:vendor_init:s0 root root -- /vendor/bin/toybox_vendor \
+      restorecon -RF  /sns
 
 service imsqmidaemon /vendor/bin/imsqmidaemon
     class main
