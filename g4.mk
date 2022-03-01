@@ -207,8 +207,7 @@ PRODUCT_PACKAGES += \
     sysctl.rc \
     sysctl.conf \
     pulse.sh \
-    early_log.sh \
-    mount_info.sh
+    early_log.sh
 
 PRODUCT_PACKAGES_ENG += \
     fstab.qcom \
