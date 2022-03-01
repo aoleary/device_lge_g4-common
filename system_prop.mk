@@ -49,7 +49,6 @@ TARGET_BOOT_ANIMATION_RES := 1440
 
 # Camera
 PRODUCT_PROPERTY_OVERRIDES += \
-    vendor.camera.hal1.packagelist=com.skype.raider,com.instagram.android \
     ro.qc.sdk.camera.facialproc=false \
     ro.qc.sdk.gestures.camera=false \
     camera2.portability.force_api=1 \
