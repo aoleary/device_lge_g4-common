@@ -75,6 +75,12 @@ PRODUCT_PACKAGES += \
     hwaddrs \
     libprotobuf-cpp-full
 
+# Bluetooth A2DP
+PRODUCT_PACKAGES += \
+  audio.a2dp.default \
+  android.hardware.bluetooth.a2dp@1.0-impl \
+  android.hardware.bluetooth.a2dp@1.0-service
+
 # Bootloader
 PRODUCT_PACKAGES += \
     android.hardware.oemlock@1.0-service
