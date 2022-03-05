@@ -15,6 +15,7 @@
 #
 
 $(call inherit-product-if-exists, vendor/lge/g4-common/g4-common-vendor.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/product_launched_with_l_mr1.mk)
 
 # APEX
 PRODUCT_COPY_FILES += \
