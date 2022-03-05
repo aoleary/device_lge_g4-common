@@ -1163,13 +1163,11 @@ service boot_lc_kernel /system/bin/logcat -b kernel -D -f /cache/boot_lc_kernel.
 service pulseon /vendor/bin/pulse.sh
     user system
     seclabel u:r:pulse:s0
-    writepid /dev/cpuset/system-background/tasks
     oneshot
 
 service pulseoff /vendor/bin/pulse.sh stop
     user system
     seclabel u:r:pulse:s0
-    writepid /dev/cpuset/system-background/tasks
     oneshot
 
 on property:sys.boot_completed=1
