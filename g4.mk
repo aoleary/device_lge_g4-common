@@ -117,6 +117,11 @@ PRODUCT_PACKAGES += \
     android.hardware.ir@1.0-impl \
     consumerir.msm8992
 
+# Control groups and task profiles
+PRODUCT_COPY_FILES += \
+    system/core/libprocessgroup/profiles/cgroups_28.json:$(TARGET_COPY_OUT_VENDOR)/etc/cgroups.json \
+    system/core/libprocessgroup/profiles/task_profiles_28.json:$(TARGET_COPY_OUT_VENDOR)/etc/task_profiles.json
+
 # Dex - Pre-opt SystemUI
 PRODUCT_DEXPREOPT_SPEED_APPS += \
     SystemUI
