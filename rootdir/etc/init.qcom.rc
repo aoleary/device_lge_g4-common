@@ -58,9 +58,6 @@ on early-init
     chmod 0666 /dev/stune/foreground/tasks
 
 on early-fs
-    #start early-log logcat logger
-    start early-log
-
     symlink /dev/block/platform/soc.0/${ro.boot.bootdevice} /dev/block/bootdevice
     chown root root /dev/block/mmcblk0p35
     chmod 666 /dev/block/mmcblk0p35
@@ -1174,8 +1171,3 @@ on property:wlan.write.con_mode=*
 
 on property:apexd.status=ready
     mount none /system/etc/swcodec/ld.config.txt /apex/com.android.media.swcodec/etc/ld.config.txt bind
-
-# Early log
-service early-log /system/bin/sh /vendor/bin/early_log.sh
-    user root
-    disabled

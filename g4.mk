@@ -208,8 +208,7 @@ PRODUCT_PACKAGES += \
     wrild.sh \
     sysctl.rc \
     sysctl.conf \
-    pulse.sh \
-    early_log.sh
+    pulse.sh
 
 PRODUCT_PACKAGES_ENG += \
     fstab.qcom \
