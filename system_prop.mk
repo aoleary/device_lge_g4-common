@@ -232,6 +232,7 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     debug.hwui.renderer=skiagl \
     renderthread.skia.reduceopstasksplitting=true \
     debug.renderengine.backend=skiaglthreaded \
+    debug.hwui.skia_atrace_enabled=false \
     ro.vendor.perf.scroll_opt=true
 
 #Properties to improve gaming experiance
