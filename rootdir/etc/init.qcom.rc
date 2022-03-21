@@ -74,9 +74,6 @@ on fs
     wait /dev/block/platform/soc.0/${ro.boot.bootdevice}
     symlink /dev/block/platform/soc.0/${ro.boot.bootdevice} /dev/block/bootdevice
 
-    # Start HW service manager early
-    start hwservicemanager
-
     mount_all /vendor/etc/fstab.qcom --early
 
     # debug boot process
@@ -107,14 +104,13 @@ on fs
     setprop ro.adb.nonblocking_ffs 0
 
 on late-fs
-    # Start services for Boot Animation
+    # Start services for bootanim
+    start hwservicemanager
     start servicemanager
-    start configstore-hal-1-0
-    start hwcomposer-2-1
+    start vendor.configstore-hal
     start surfaceflinger
     start bootanim
-    # Make sure required HAL services started for HW service manager
-    start gralloc-2-0
+    start vendor.gralloc-2-0
 
     # Mount RW partitions which need run fsck
     mount_all /vendor/etc/fstab.qcom --late
