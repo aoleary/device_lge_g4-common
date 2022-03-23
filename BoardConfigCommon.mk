@@ -222,7 +222,8 @@ TARGET_LD_SHIM_LIBS := \
     /system/vendor/lib/hw/camera.msm8992.so|/system/vendor/lib/libfence_shim.so \
     /system/vendor/lib64/lib-rtpcore.so|/system/vendor/lib64/ims_rtp_shim.so \
     /system/vendor/bin/slim_daemon|/system/vendor/lib64/slim_shim.so \
-    /system/vendor/lib/libril-qc-qmi-1.so|libaudioclient_shim.so
+    /system/vendor/lib/libril-qc-qmi-1.so|libaudioclient_shim.so \
+    /system/vendor/lib64/libril-qc-qmi-1.so|libaudioclient_shim.so
 
 # Thermal
 USE_DEVICE_SPECIFIC_THERMAL := true
