@@ -131,3 +131,10 @@
 /(vendor|system/vendor)/bin/hw/android.hardware.power@[1-9]\.[0-9]-service-qti		u:object_r:hal_hardware_power_exec:s0
 /(vendor|system/vendor)/bin/hw/android.hardware.usb@[1-9]\.[0-9]-service.basic		u:object_r:hal_hardware_usb_exec:s0
 /(vendor|system/vendor)/bin/hw/android\.hardware\.light@[1-9]\.[0-9]-service.g4      	u:object_r:hal_light_default_exec:s0
+
+# A11 specific labels
+/firmware(/.*)?        u:object_r:firmware_file:s0
+/mpt(/.*)?             u:object_r:mpt_file:s0
+/persist(/.*)?         u:object_r:persist_file:s0
+/persist-lg(/.*)?      u:object_r:persist-lg_file:s0
+/sns(/.*)?             u:object_r:sns_file:s0

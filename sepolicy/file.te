@@ -42,6 +42,13 @@ type multimedia_data_file, fs_type;
 type secclk_data_file, fs_type;
 type widevine_data_file, fs_type;
 
+# A11 specific labels
+type firmware_file, file_type;
+type mpt_file, file_type;
+type persist_file, file_type;
+type persist-lg_file, file_type;
+type sns_file, file_type;
+
 # /mpt
 type mpt_file, fs_type;
 
