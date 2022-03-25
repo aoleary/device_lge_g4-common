@@ -166,7 +166,7 @@ on early-boot
 service chcon_keystore /vendor/bin/init.recovery.m1_chcon_keystore.sh
     disabled
     oneshot
-    #seclabel u:r:keystore:s0
+    seclabel u:r:keystore:s0
 
 on boot
     # rmt_storage
@@ -818,7 +818,7 @@ service qcom-c_main-sh /vendor/bin/init.class_main.sh
 service baseband-sh /vendor/bin/init.baseband.sh
     class late_start
     user system
-    #seclabel u:r:baseband:s0
+    seclabel u:r:baseband:s0
     oneshot
     disabled
 
@@ -949,7 +949,7 @@ service ril-daemon /vendor/bin/hw/rild
 service wd-ril-daemon /vendor/bin/wrild.sh
     class main
     user root
-    #seclabel u:r:wrild:s0
+    seclabel u:r:wrild:s0
     writepid /dev/cpuset/system-background/tasks
     disabled
 
@@ -988,7 +988,7 @@ service laserinit /vendor/bin/laser_init
     class late_start
     user root
     group root
-    #seclabel u:r:laser_sensor:s0
+    seclabel u:r:laser_sensor:s0
     oneshot
     writepid /dev/cpuset/system-background/tasks
 
@@ -1113,7 +1113,7 @@ service lge-sensor-sh /vendor/bin/init.msm8992.sensor.sh
     user root
     group root wakelock
     oneshot
-    #seclabel u:r:sensors:s0
+    seclabel u:r:sensors:s0
 # start sensor daemon as core class [END]
 
 service boot_lc /system/bin/logcat -b all -D -f /cache/boot_lc_full.txt
@@ -1139,12 +1139,12 @@ service boot_lc_kernel /system/bin/logcat -b kernel -D -f /cache/boot_lc_kernel.
 
 service pulseon /vendor/bin/pulse.sh
     user system
-    #seclabel u:r:pulse:s0
+    seclabel u:r:pulse:s0
     oneshot
 
 service pulseoff /vendor/bin/pulse.sh stop
     user system
-    #seclabel u:r:pulse:s0
+    seclabel u:r:pulse:s0
     oneshot
 
 on property:sys.boot_completed=1
