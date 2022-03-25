@@ -223,6 +223,9 @@ on boot
     chown wifi wifi /dev/rfkill
     chmod 0600 /dev/rfkill
 
+    # Fix Magish in A11
+    mkdir /data/adb 0700 root root
+
     #Create QMUX deamon socket area
     mkdir /dev/socket/qmux_radio 0775 radio radio
     mkdir /data/misc/radio/modem_config/mcfg_sw 0770 radio radio
