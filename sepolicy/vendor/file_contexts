@@ -7,7 +7,7 @@
 /dev/block/mmcblk0p25                                               u:object_r:modemst2_block_device:s0
 /dev/block/mmcblk0p26                                               u:object_r:fsg_block_device:s0
 /dev/block/mmcblk0p27                                               u:object_r:fsc_block_device:s0
-/dev/block/mmcblk0p28                                               u:object_r:ssd_block_device:s0
+#/dev/block/mmcblk0p28                                               u:object_r:ssd_block_device:s0
 /dev/block/mmcblk0p32                                               u:object_r:metadata_block_device:s0
 /dev/block/mmcblk0p35                                               u:object_r:frp_block_device:s0
 /dev/block/mmcblk0p40                                               u:object_r:persist-lg_block_device:s0
@@ -38,7 +38,7 @@
 /persist/wlan_mac\.bin             u:object_r:persist_wifi_file:s0
 /persist/sensorcal\.json           u:object_r:persist_sensortool_file:s0
 /persist/calibration(/.*)?         u:object_r:persist_camera_file:s0
-/persist/sensors(/.*)?         	   u:object_r:persist_sensors_file:s0
+#/persist/sensors(/.*)?         	   u:object_r:persist_sensors_file:s0
 
 # DRM
 /persist-lg(/.*)?			u:object_r:persist_lg_data_file:s0
@@ -92,7 +92,7 @@
 /data/system_de/[0-9]/spblob                             u:object_r:vold_data:s0
 /data/system_de/[0-9]/spblob(/.*)?                       u:object_r:vold_data:s0
 /sdcard/Android/data                                     u:object_r:data_file:s0
-/data/misc/camera/cam_socket[0-9]*                       u:object_r:cam_socket_file:s0
+#/data/misc/camera/cam_socket[0-9]*                       u:object_r:cam_socket_file:s0
 /data/system/time(/.*)?                                  u:object_r:time_data_file:s0
 
 ###################################
