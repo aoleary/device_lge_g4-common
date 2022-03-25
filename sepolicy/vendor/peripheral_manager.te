@@ -1,4 +1,4 @@
-type per_mgr, domain;
+#type per_mgr, domain;
 
 binder_use(per_mgr)
 binder_service(per_mgr)

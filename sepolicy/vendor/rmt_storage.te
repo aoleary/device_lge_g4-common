@@ -5,8 +5,8 @@ allow rmt_storage fsg_block_device:blk_file { open read write };
 allow rmt_storage self:capability sys_admin;
 allow rmt_storage self:capability net_raw;
 
-allow rmt_storage debugfs_rmt_storage:dir search;
-allow rmt_storage debugfs_rmt_storage:file { open write };
+#allow rmt_storage debugfs_rmt_storage:dir search;
+#allow rmt_storage debugfs_rmt_storage:file { open write };
 allow rmt_storage sysfs:file { getattr open read };
 
 # debugfs access

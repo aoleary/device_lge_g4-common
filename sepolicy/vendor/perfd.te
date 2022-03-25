@@ -1,3 +1,3 @@
-type perfd, domain;
+#type perfd, domain;
 
 allow perfd socket_device:file write;

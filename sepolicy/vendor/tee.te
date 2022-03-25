@@ -13,5 +13,5 @@ allow tee unlabeled:dir search;
 
 allow tee system_prop:property_service set;
 
-allow tee disk_block_device:blk_file { getattr ioctl open read write };
-allow tee ssd_block_device:blk_file { open read write };
+#allow tee disk_block_device:blk_file { getattr ioctl open read write };
+#allow tee ssd_block_device:blk_file { open read write };

@@ -4,11 +4,11 @@ allow flags_health_check bootloader_boot_reason_prop:file r_file_perms;
 
 allow flags_health_check boottime_prop:file r_file_perms;
 allow flags_health_check bpf_progs_loaded_prop:file r_file_perms;
-allow flags_health_check bservice_prop:file r_file_perms;
-allow flags_health_check cnd_prop:file r_file_perms;
+#allow flags_health_check bservice_prop:file r_file_perms;
+#allow flags_health_check cnd_prop:file r_file_perms;
 
-allow flags_health_check cnd_vendor_prop:file r_file_perms;
-allow flags_health_check crash_cnt_prop:file r_file_perms;
-allow flags_health_check crash_detect_prop:file r_file_perms;
+#allow flags_health_check cnd_vendor_prop:file r_file_perms;
+#allow flags_health_check crash_cnt_prop:file r_file_perms;
+#allow flags_health_check crash_detect_prop:file r_file_perms;
 allow flags_health_check ctl_adbd_prop:file r_file_perms;
 allow flags_health_check ctl_bootanim_prop:file r_file_perms;

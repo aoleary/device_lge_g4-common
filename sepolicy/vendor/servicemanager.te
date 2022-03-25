@@ -12,9 +12,9 @@ allow servicemanager imscm:process getattr;
 #allow servicemanager mm-pp-daemon:dir search;
 #allow servicemanager mm-pp-daemon:file { open read };
 #allow servicemanager mm-pp-daemon:process getattr;
-allow servicemanager vendor_per_mgr:dir search;
-allow servicemanager vendor_per_mgr:file { open read };
-allow servicemanager vendor_per_mgr:process getattr;
+#allow servicemanager vendor_per_mgr:dir search;
+#allow servicemanager vendor_per_mgr:file { open read };
+#allow servicemanager vendor_per_mgr:process getattr;
 
 allow servicemanager mediaswcodec:dir search;
 allow servicemanager mediaswcodec:file { open read };

@@ -1,5 +1,5 @@
-type energyawareness, domain; 
-type energyawareness_exec, exec_type, file_type;
+#type energyawareness, domain; 
+#type energyawareness_exec, exec_type, file_type;
 init_daemon_domain(energyawareness)
 
 allow energyawareness device:chr_file { ioctl open read write };
@@ -13,8 +13,8 @@ allow energyawareness uio_device:chr_file { open read write };
 
 # debugfs access        
 userdebug_or_eng(`      
-  allow energyawareness debugfs_energy:dir search;      
-  allow energyawareness debugfs_energy:file rw_file_perms;      
+#  allow energyawareness debugfs_energy:dir search;      
+#  allow energyawareness debugfs_energy:file rw_file_perms;      
   allow rfs_access debugfs_rfs:dir search;      
   allow rfs_access debugfs_rfs:file rw_file_perms;      
   allow rmt_storage debugfs_rmt:dir search;     

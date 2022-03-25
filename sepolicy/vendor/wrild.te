@@ -117,5 +117,5 @@ define(`wrild_dont_audit', `{
     zygote
 }')
 
-dontaudit wrild wrild_dont_audit:{ file dir } { read getattr };
-dontaudit wrild wrild_dont_audit:{ dir } { search };
+#dontaudit wrild wrild_dont_audit:{ file dir } { read getattr };
+#dontaudit wrild wrild_dont_audit:{ dir } { search };

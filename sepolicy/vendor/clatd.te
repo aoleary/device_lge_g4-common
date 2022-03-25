@@ -1,1 +1,1 @@
-allow clatd system_file:file lock;
+#allow clatd system_file:file lock;

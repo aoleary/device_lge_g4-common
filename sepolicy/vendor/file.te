@@ -16,12 +16,12 @@ type touch_socket, file_type, mlstrustedobject;
 type ril_database, file_type, data_file_type;
 type vold_data, file_type, data_file_type, core_data_file_type;
 type sensors_data, file_type, data_file_type;
-type cam_socket_file, file_type, data_file_type;
-type time_data_file, fs_type;
+#type cam_socket_file, file_type, data_file_type;
+#type time_data_file, fs_type;
 
 # debugfs
-type debugfs_energy, debugfs_type, fs_type;
-type debugfs_rmt, debugfs_type, fs_type;
+#type debugfs_energy, debugfs_type, fs_type;
+#type debugfs_rmt, debugfs_type, fs_type;
 type debugfs_rfs, debugfs_type, fs_type;
 
 # Flashlight
@@ -43,9 +43,9 @@ type secclk_data_file, fs_type;
 type widevine_data_file, fs_type;
 
 # A11 specific labels
-type firmware_file, file_type;
-type mpt_file, file_type;
-type persist_file, file_type;
+#type firmware_file, file_type;
+#type mpt_file, file_type;
+#type persist_file, file_type;
 type persist-lg_file, file_type;
 type sns_file, file_type;
 

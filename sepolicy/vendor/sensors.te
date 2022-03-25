@@ -23,7 +23,7 @@ allow sensors sysfs:file { read open };
 allow sensors sensors_data:dir { search getattr read open };
 allow sensors sensors_data:file { write getattr read open };
 
-allow sensors latency_device:chr_file { open write };
+#allow sensors latency_device:chr_file { open write };
 allow sensors persist_file:dir { open read setattr };
 allow sensors persist_file:file { append open read };
 allow sensors self:capability net_raw;

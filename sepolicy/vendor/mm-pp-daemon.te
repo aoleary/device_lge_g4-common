@@ -7,8 +7,8 @@ allow mm-pp-daemon property_socket:sock_file write;
 
 allow mm-pp-daemon { hal_camera_default mediacodec }:fd use;
 allow mm-pp-daemon ion_device:chr_file r_file_perms;
-allow mm-pp-daemon hwbinder_device:chr_file rw_file_perms;
-type mm-pp-daemon, domain;
-type mm-pp-daemon_exec, exec_type, vendor_file_type, file_type;
+#allow mm-pp-daemon hwbinder_device:chr_file rw_file_perms;
+#type mm-pp-daemon, domain;
+#type mm-pp-daemon_exec, exec_type, vendor_file_type, file_type;
 
 init_daemon_domain(mm-pp-daemon)
