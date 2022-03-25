@@ -17,7 +17,7 @@
 /dev/block/mmcblk0p49                                               u:object_r:cache_block_device:s0
 /dev/block/mmcblk0p50                                               u:object_r:userdata_block_device:s0
 /dev/block/dm-[0-9]                                                 u:object_r:userdata_block_device:s0
-/dev/block/mmcblk0rpmb                                              u:object_r:disk_block_device:s0
+#/dev/block/mmcblk0rpmb                                              u:object_r:disk_block_device:s0
 
 /dev/ttyHSL[0-9]*                                                   u:object_r:console_device:s0
 
@@ -26,14 +26,14 @@
 /dev/rfkill                                                         u:object_r:rfkill_device:s0
 /dev/pn547                                                          u:object_r:nfc_device:s0
 /dev/soundtrigger_dma_drv                                           u:object_r:audio_device:s0
-/dev/socket/perfd                                                   u:object_r:mpctl_socket:s0
+#/dev/socket/perfd                                                   u:object_r:mpctl_socket:s0
 /(system|system/vendor)/bin/touch                                   u:object_r:touch_socket:s0
 
 
 # Persist files
-/persist(/.*)?                     u:object_r:persist_file:s0
-/persist/data(/.*)?                u:object_r:persist_data_file:s0
-/persist/data/tz(/.*)?             u:object_r:persist_drm_file:s0
+#/persist(/.*)?                     u:object_r:persist_file:s0
+#/persist/data(/.*)?                u:object_r:persist_data_file:s0
+#/persist/data/tz(/.*)?             u:object_r:persist_drm_file:s0
 /persist/data/app_g(/.*)?          u:object_r:persist_drm_file:s0
 /persist/wlan_mac\.bin             u:object_r:persist_wifi_file:s0
 /persist/sensorcal\.json           u:object_r:persist_sensortool_file:s0
@@ -41,7 +41,7 @@
 #/persist/sensors(/.*)?         	   u:object_r:persist_sensors_file:s0
 
 # DRM
-/persist-lg(/.*)?			u:object_r:persist_lg_data_file:s0
+#/persist-lg(/.*)?			u:object_r:persist_lg_data_file:s0
 /persist-lg/firmware			u:object_r:firmware_data_file:s0
 /persist-lg/kmstore			u:object_r:kmstore_data_file:s0
 /persist-lg/mms				u:object_r:mms_data_file:s0
@@ -49,8 +49,8 @@
 /persist-lg/secclk			u:object_r:secclk_data_file:s0
 /persist-lg/widevine			u:object_r:widevine_data_file:s0
 
-/firmware(/.*)?				u:object_r:vfat:s0
-/mpt(/.*)?				u:object_r:mpt_file:s0
+#/firmware(/.*)?				u:object_r:vfat:s0
+#/mpt(/.*)?				u:object_r:mpt_file:s0
 
 ###################################
 # System files
@@ -60,9 +60,9 @@
 /(system|system/vendor)/bin/laser_init                   u:object_r:laser_sensor_exec:s0
 /(system|system/vendor)/bin/logwrapper                   u:object_r:system_file:s0
 /(system|system/vendor)/bin/surfaceflinger               u:object_r:surfaceflinger_exec:s0
-/(vendor|system/vendor)/bin/imscmservice                 u:object_r:imscm_exec:s0
+#/(vendor|system/vendor)/bin/imscmservice                 u:object_r:imscm_exec:s0
 /(vendor|system/vendor)/bin/imswmsproxy                  u:object_r:imswmsproxy_exec:s0
-/(vendor|system/vendor)/bin/imsdatadaemon                u:object_r:imsdatadaemon_exec:s0
+#/(vendor|system/vendor)/bin/imsdatadaemon                u:object_r:imsdatadaemon_exec:s0
 /(vendor|system/vendor)/bin/bdaddr_loader                u:object_r:bdaddr_loader_exec:s0
 /(vendor|system/vendor)/bin/init\.msm8992\.sensor\.sh    u:object_r:qti_init_shell_exec:s0
 /(vendor|system/vendor)/bin/init\.qcom\.fm\.sh           u:object_r:qti_init_shell_exec:s0
@@ -70,21 +70,21 @@
 /(vendor|system/vendor)/bin/init\..*\.sh     		 u:object_r:qti_init_shell_exec:s0
 /(vendor|system/vendor)/bin/wrild.sh                     u:object_r:wrild_exec:s0
 /(vendor|system/vendor)/etc/motorola(/.*)?               u:object_r:ril_database:s0
-/(vendor|system/vendor)/bin/mm-qcamera-daemon		 u:object_r:mmqcamd_exec:s0
-/(vendor|system/vendor)/bin/pm-proxy            	 u:object_r:pm_proxy_exec:s0
-/(vendor|system/vendor)/bin/qti            	 	 u:object_r:qti_exec:s0
-/(vendor|system/vendor)/bin/qmuxd            	 	 u:object_r:qmuxd_exec:s0
-/(vendor|system/vendor)/bin/qseecomd           	 	 u:object_r:qseecomd_exec:s0
-/(vendor|system/vendor)/bin/time_daemon            	 u:object_r:time_daemon_exec:s0
-/(vendor|system/vendor)/bin/rmt_storage            	 u:object_r:rmt_storage_exec:s0
-/(vendor|system/vendor)/bin/rfs_access            	 u:object_r:rfs_access_exec:s0
+#/(vendor|system/vendor)/bin/mm-qcamera-daemon		 u:object_r:mmqcamd_exec:s0
+#/(vendor|system/vendor)/bin/pm-proxy            	 u:object_r:pm_proxy_exec:s0
+#/(vendor|system/vendor)/bin/qti            	 	 u:object_r:qti_exec:s0
+#/(vendor|system/vendor)/bin/qmuxd            	 	 u:object_r:qmuxd_exec:s0
+#/(vendor|system/vendor)/bin/qseecomd           	 	 u:object_r:qseecomd_exec:s0
+#/(vendor|system/vendor)/bin/time_daemon            	 u:object_r:time_daemon_exec:s0
+#/(vendor|system/vendor)/bin/rmt_storage            	 u:object_r:rmt_storage_exec:s0
+#/(vendor|system/vendor)/bin/rfs_access            	 u:object_r:rfs_access_exec:s0
 /(vendor|system/vendor)/bin/sensors.qcom            	 u:object_r:sensors_exec:s0
-/(vendor|system/vendor)/bin/pm-service            	 u:object_r:pmservice_exec:s0
-/(vendor|system/vendor)/bin/netmgrd            	  	 u:object_r:netmgrd_exec:s0
-/(vendor|system/vendor)/bin/mm-pp-daemon         	 u:object_r:mmppdaemon_exec:s0
-/(vendor|system/vendor)/bin/imsqmidaemon         	 u:object_r:imsqmidaemon_exec:s0
-/(vendor|system/vendor)/bin/irsc_util         	 	 u:object_r:irsc_util_exec:s0
-/(vendor|system/vendor)/bin/energy-awareness        	 u:object_r:energyawareness_exec:s0
+#/(vendor|system/vendor)/bin/pm-service            	 u:object_r:pmservice_exec:s0
+#/(vendor|system/vendor)/bin/netmgrd            	  	 u:object_r:netmgrd_exec:s0
+#/(vendor|system/vendor)/bin/mm-pp-daemon         	 u:object_r:mmppdaemon_exec:s0
+#/(vendor|system/vendor)/bin/imsqmidaemon         	 u:object_r:imsqmidaemon_exec:s0
+#/(vendor|system/vendor)/bin/irsc_util         	 	 u:object_r:irsc_util_exec:s0
+#/(vendor|system/vendor)/bin/energy-awareness        	 u:object_r:energyawareness_exec:s0
 
 ###################################
 # Data System files
@@ -98,7 +98,7 @@
 ###################################
 # Other partition files
 #
-/sns(/.*)?                                           u:object_r:sensors_data:s0
+#/sns(/.*)?                                           u:object_r:sensors_data:s0
 
 # torch/flashlight
 /sys/devices/soc.0/qpnp-flash-led-26/leds/led:torch_[0-1]/brightness	u:object_r:flashlight_app_data_file:s0
@@ -133,8 +133,8 @@
 /(vendor|system/vendor)/bin/hw/android\.hardware\.light@[1-9]\.[0-9]-service.g4      	u:object_r:hal_light_default_exec:s0
 
 # A11 specific labels
-/firmware(/.*)?        u:object_r:firmware_file:s0
+#/firmware(/.*)?        u:object_r:firmware_file:s0
 /mpt(/.*)?             u:object_r:mpt_file:s0
-/persist(/.*)?         u:object_r:persist_file:s0
+#/persist(/.*)?         u:object_r:persist_file:s0
 /persist-lg(/.*)?      u:object_r:persist-lg_file:s0
 /sns(/.*)?             u:object_r:sns_file:s0
