@@ -46,7 +46,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     bluetooth.profile.asha.central.enabled=true \
     bluetooth.profile.avrcp.target.enabled=true \
     bluetooth.profile.bap.broadcast.assist.enabled=true \
-    bluetooth.profile.bap.unicast.server.enabled=true \
+    bluetooth.profile.bap.unicast.client.enabled=true \
     bluetooth.profile.bas.client.enabled=true \
     bluetooth.profile.csip.set_coordinator.enabled=true \
     bluetooth.profile.gatt.enabled=true \
@@ -61,8 +61,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     bluetooth.profile.pan.panu.enabled=true \
     bluetooth.profile.pbap.server.enabled=true \
     bluetooth.profile.sap.server.enabled=true \
-    bluetooth.profile.tbs.server.enabled=true \
-    bluetooth.profile.vc.server.enabled=true
+    bluetooth.profile.ccp.server.enabled=true \
+    bluetooth.profile.vcp.controller.enabled=true
 
 # Blur - Diable Blur in A12+
 ro.surface_flinger.supports_background_blur=0
