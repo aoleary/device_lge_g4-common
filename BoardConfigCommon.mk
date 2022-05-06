@@ -148,8 +148,11 @@ TARGET_PLATFORM_DEVICE_BASE := /devices/soc.0/
 # Kernel
 BOARD_KERNEL_CMDLINE := androidboot.selinux=permissive
 BOARD_KERNEL_CMDLINE += androidboot.init_fatal_reboot_target=recovery
-BOARD_KERNEL_CMDLINE += console=ttyHSL0,115200,n8 androidboot.console=ttyHSL0 androidboot.hardware=qcom androidboot.wificountrycode=us
-BOARD_KERNEL_CMDLINE += user_debug=31 ehci-hcd.park=3 lpm_levels.sleep_disabled=1 msm_rtb.filter=0x37 boot_cpus=0-5 lge_monitor_thermal.enable=1 fakebattery=enable
+BOARD_KERNEL_CMDLINE += androidboot.hardware=qcom androidboot.wificountrycode=us
+BOARD_KERNEL_CMDLINE += ehci-hcd.park=3 lpm_levels.sleep_disabled=1 msm_rtb.filter=0x37 boot_cpus=0-5 lge_monitor_thermal.enable=1 fakebattery=enable
+# the following should be set only until the ROM is stable (enough)
+# https://android.googlesource.com/kernel/msm/+/android-msm-marlin-3.18-nougat-dr1/arch/arm/Kconfig.debug#69
+BOARD_KERNEL_CMDLINE += user_debug=31
 BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_PAGESIZE := 4096
 BOARD_KERNEL_SEPARATED_DT := true
