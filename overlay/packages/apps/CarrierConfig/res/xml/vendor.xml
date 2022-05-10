@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8' standalone='yes' ?>
+<carrier_config_list>
+    <carrier_config>
+        <!-- fixes empty signal bar when on 4G/LTE -->
+        <int name="parameters_used_for_lte_signal_bar_int" value="3" />
+    </carrier_config>
+</carrier_config_list>
