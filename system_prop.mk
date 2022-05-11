@@ -98,8 +98,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     pm.dexopt.bg-dexopt=everything \
     pm.dexopt.boot=verify \
     pm.dexopt.install=quicken \
-    dalvik.vm.image-dex2oat-filter=speed \
-    ro.vendor.qti.am.reschedule_service=true
+    ro.vendor.qti.am.reschedule_service=true \
+    dalvik.vm.systemuicompilerfilter=speed
 
 # Display
 PRODUCT_PROPERTY_OVERRIDES += \
