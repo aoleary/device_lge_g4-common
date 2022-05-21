@@ -440,10 +440,6 @@
     <!-- Minimum color temperature, in Kelvin, supported by Night display. -->
     <integer name="config_nightDisplayColorTemperatureMin">1200</integer>
 
-    <!-- List of comma separated package names for which we the system will not show crash, ANR,
-         etc. dialogs. -->
-    <string name="config_appsNotReportingCrashes">com.google.android.tts</string>
-
     <!-- Whether to allow process with 
 media UID to access CameraServiceProxy -->
     <bool name="config_allowMediaUidForCameraServiceProxy">true</bool>
@@ -535,4 +531,7 @@ media UID to access CameraServiceProxy -->
          True - we'll show the prompt to user, False - we'll not show it.
     -->
     <bool name="config_bg_prompt_abusive_apps_to_bg_restricted">true</bool>
+
+    <!-- Suppress Intent Filter Verification Service crashes and System UI ANRs (both AOSP bugs) -->
+    <string translatable="false" name="config_appsNotReportingCrashes">com.android.statementservice,com.android.systemui,com.google.android.tts</string>
 </resources>
