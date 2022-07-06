@@ -164,13 +164,6 @@ on early-boot
 
     write /sys/kernel/boot_adsp/boot 1
 
-    start chcon_keystore
-
-service chcon_keystore /vendor/bin/init.recovery.m1_chcon_keystore.sh
-    disabled
-    oneshot
-    seclabel u:r:keystore:s0
-
 on boot
     # rmt_storage
     start rmt_storage
@@ -435,8 +428,6 @@ on boot
     chown system system /sys/devices/virtual/input/lge_touch/quick_cover_status
     chmod 664 /sys/devices/virtual/input/lge_touch/quick_cover_status
 # END touch_knock_on
-
-    start chcon_keystore
 
 # Double tap to wake gesture
     chown system radio /sys/devices/virtual/input/lge_touch/tap2wake

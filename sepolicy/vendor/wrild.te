@@ -78,7 +78,6 @@ define(`wrild_dont_audit', `{
     installd
     isolated_app
     kernel
-    keystore
     lmkd
     logd
     mediacodec
