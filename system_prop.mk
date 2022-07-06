@@ -200,7 +200,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.min_freq_0=384000 \
     ro.min_freq_4=384000 \
     ro.vendor.qti.sys.fw.bg_apps_limit=32 \
-    ro.vold.umsdirtyratio=50
+    ro.vold.umsdirtyratio=50 \
+    vendor.perf.gestureflingboost.enable=true
 
 # Properties for Surfaceflinger
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
