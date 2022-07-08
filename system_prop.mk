@@ -216,6 +216,7 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     debug.overlayui.enable=1 \
     debug.performance.tuning=1 \
     debug.qctwa.preservebuf=1 \
+    debug.sdm.support_writeback=0 \
     debug.sf.hw=1 \
     debug.sf.disable_hwc=0 \
     debug.sf.recomputecrop=0 \
