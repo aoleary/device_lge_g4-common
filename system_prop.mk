@@ -70,14 +70,7 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.surface_flinger.has_HDR_display=true
     ro.surface_flinger.max_frame_buffer_acquired_buffers=3 \
     ro.surface_flinger.max_virtual_display_dimension=2048 \
-    ro.surface_flinger.use_color_management=true \
-    debug.sf.use_phase_offsets_as_durations=1 \
-    debug.sf.late.sf.duration=10500000 \
-    debug.sf.late.app.duration=20500000 \
-    debug.sf.early.sf.duration=21000000 \
-    debug.sf.early.app.duration=16500000 \
-    debug.sf.earlyGl.sf.duration=13500000 \
-    debug.sf.earlyGl.app.duration=21000000
+    ro.surface_flinger.use_color_management=true
 
 # DRM
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -197,6 +190,16 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.min_freq_0=384000 \
     ro.min_freq_4=384000 \
     ro.vold.umsdirtyratio=50
+
+# Properties for Surfaceflinger
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+    debug.sf.use_phase_offsets_as_durations=1 \
+    debug.sf.late.sf.duration=27600000 \
+    debug.sf.late.app.duration=27600000 \
+    debug.sf.early.sf.duration=27600000 \
+    debug.sf.early.app.duration=27600000 \
+    debug.sf.earlyGl.sf.duration=27600000 \
+    debug.sf.earlyGl.app.duration=27600000
 
 # Properties to improve rendering
     debug.composition.type=gpu \
