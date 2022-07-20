@@ -179,13 +179,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.camera.cpp.duplication=false \
     ro.config.avoid_gfx_accel=true
 
-# Memory Optimizations
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.vendor.qti.am.reschedule_service=true \
-    ro.vendor.qti.sys.fw.bservice_enable=true \
-    ro.vendor.qti.sys.fw.bservice_age=5000 \
-    ro.vendor.qti.sys.fw.bservice_limit=5
-
 # Perf
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.dpm.feature=1 \
