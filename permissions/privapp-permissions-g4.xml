@@ -256,4 +256,10 @@
         <permission name="android.permission.SYSTEM_CAMERA"/>
         <permission name="android.permission.WRITE_MEDIA_STORAGE"/>
     </privapp-permissions>
+
+    <privapp-permissions package="com.android.wallpaper">
+        <permission name="android.permission.BIND_WALLPAPER"/>
+        <permission name="android.permission.READ_WALLPAPER_INTERNAL"/>
+        <permission name="android.permission.SET_WALLPAPER_COMPONENT"/>
+    </privapp-permissions>
 </permissions>
