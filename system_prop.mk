@@ -141,6 +141,13 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.qc.sdk.izat.premium_enabled=0 \
     ro.qc.sdk.izat.service_mask=0x0
 
+# IORapd
+PRODUCT_SYSTEM_PROPERTIES += \
+    ro.iorapd.enable=false \
+    iorapd.perfetto.enable=false \
+    iorapd.readahead.enable=false \
+    persist.device_config.runtime_native_boot.iorap_readahead_enable=false
+
 #INTERNET: improve download/upload performance
 PRODUCT_PROPERTY_OVERRIDES += \
     net.tcp.buffersize.default=4096,87380,256960,4096, 16384,256960 \
