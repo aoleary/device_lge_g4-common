@@ -224,7 +224,10 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     persist.hwc.ptor.enable=true \
     persist.sys.composition.type=gpu \
     ro.fb.mode=1 \
-    video.accelerate.hw=1
+    video.accelerate.hw=1 \
+    debug.hwui.renderer=skiagl \
+    renderthread.skia.reduceopstasksplitting=true \
+    debug.renderengine.backend=skiaglthreaded
 
 #Properties to improve gaming experiance
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -285,10 +288,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Storage
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.sys.sdcardfs=true
-
-# Fix graphical glitches on skiagl
-PRODUCT_PROPERTY_OVERRIDES += \
-    debug.hwui.renderer=opengl
 
 # UI Smoothening
 persist.service.lgospd.enable=0
