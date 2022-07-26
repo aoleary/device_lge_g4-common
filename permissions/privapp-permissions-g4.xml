@@ -262,4 +262,8 @@
         <permission name="android.permission.READ_WALLPAPER_INTERNAL"/>
         <permission name="android.permission.SET_WALLPAPER_COMPONENT"/>
     </privapp-permissions>
+
+    <privapp-permissions package="com.google.android.gms">
+        <permission name="android.permission.WRITE_DEVICE_CONFIG"/>
+    </privapp-permissions>
 </permissions>
