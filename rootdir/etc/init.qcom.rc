@@ -765,6 +765,7 @@ service timekeep /vendor/bin/timekeep restore
    class late_start
    user root
    group root
+   writepid /dev/cpuset/system-background/tasks
    oneshot
 
 service ppd /vendor/bin/mm-pp-daemon
@@ -780,11 +781,13 @@ service bdaddr_loader /vendor/bin/bdaddr_loader
     class late_start
     user root
     group bluetooth net_bt_admin
+    writepid /dev/cpuset/system-background/tasks
     oneshot
 
 service config_bluetooth /vendor/bin/init.qcom.bt.sh "onboot"
     class core
     user root
+    writepid /dev/cpuset/system-background/tasks
     oneshot
 
 on property:init.svc.surfaceflinger=stopped
@@ -805,17 +808,20 @@ on property:persist.env.fastdorm.enabled=true
 service irsc_util /vendor/bin/irsc_util "/etc/sec_config"
     class main
     user root
+    writepid /dev/cpuset/system-background/tasks
     oneshot
 
 service qcom-c_main-sh /vendor/bin/init.class_main.sh
     class main
     user root
+    writepid /dev/cpuset/system-background/tasks
     oneshot
 
 service baseband-sh /vendor/bin/init.baseband.sh
     class late_start
     user system
     seclabel u:r:baseband:s0
+    writepid /dev/cpuset/system-background/tasks
     oneshot
     disabled
 
@@ -851,6 +857,7 @@ service config_bt_addr /vendor/bin/sh -c "/vendor/bin/btnvtool -O"
     class core
     user bluetooth
     group bluetooth radio
+    writepid /dev/cpuset/system-background/tasks
     oneshot
 
 # QMUX must be in multiple groups to support external process connections
@@ -880,6 +887,7 @@ service qti /vendor/bin/qti
     class main
     user radio
     group radio oem_2901 diag usb net_admin
+    writepid /dev/cpuset/system-background/tasks
     disabled
 
 service sensors /vendor/bin/sensors.qcom
@@ -901,12 +909,14 @@ service btwlancoex /vendor/bin/init.qcom.coex.sh
     class late_start
     user bluetooth
     group bluetooth net_bt_admin inet net_admin net_raw
+    writepid /dev/cpuset/system-background/tasks
     disabled
 
 service fm_dl /vendor/bin/init.qcom.fm.sh
     class late_start
     user root
     group system
+    writepid /dev/cpuset/system-background/tasks
     disabled
     oneshot
 
@@ -917,6 +927,7 @@ on property:crypto.driver.load=1
 service drmdiag /system/bin/drmdiagapp
      class late_start
      user root
+     writepid /dev/cpuset/system-background/tasks
      disabled
      oneshot
 
@@ -972,6 +983,7 @@ service msm_irqbalance /vendor/bin/msm_irqbalance -f /vendor/etc/msm_irqbalance.
 service qcom-usb-sh /vendor/bin/init.qcom.usb.sh
     class core
     user root
+    writepid /dev/cpuset/system-background/tasks
     oneshot
 
 #start camera server as daemon
@@ -1062,17 +1074,20 @@ service charger /vendor/bin/charger
     group log system graphics
     capabilities SYS_BOOT
     seclabel u:r:charger:s0
+    writepid /dev/cpuset/system-background/tasks
 
 service energy-awareness /vendor/bin/energy-awareness
     class main
     user root
     group system
+    writepid /dev/cpuset/system-background/tasks
     oneshot
 
 service hwaddrs /vendor/bin/hwaddrs
     class core
     user root
     group system wifi
+    writepid /dev/cpuset/system-background/tasks
     oneshot
     disabled
 
@@ -1117,12 +1132,14 @@ service lge-sensor-sh /vendor/bin/init.msm8992.sensor.sh
     group root wakelock
     oneshot
     seclabel u:r:sensors:s0
+    writepid /dev/cpuset/system-background/tasks
 # start sensor daemon as core class [END]
 
 service boot_lc /system/bin/logcat -b all -D -f /cache/boot_lc_full.txt
     class main
     user root
     group root system
+    writepid /dev/cpuset/system-background/tasks
     disabled
     oneshot
 
@@ -1130,6 +1147,7 @@ service boot_lc_crash /system/bin/logcat -b crash -D -f /cache/boot_lc_crash.txt
     class main
     user root
     group root system
+    writepid /dev/cpuset/system-background/tasks
     disabled
     oneshot
 
@@ -1137,17 +1155,20 @@ service boot_lc_kernel /system/bin/logcat -b kernel -D -f /cache/boot_lc_kernel.
     class main
     user root
     group root system
+    writepid /dev/cpuset/system-background/tasks
     disabled
     oneshot
 
 service pulseon /vendor/bin/pulse.sh
     user system
     seclabel u:r:pulse:s0
+    writepid /dev/cpuset/system-background/tasks
     oneshot
 
 service pulseoff /vendor/bin/pulse.sh stop
     user system
     seclabel u:r:pulse:s0
+    writepid /dev/cpuset/system-background/tasks
     oneshot
 
 on property:sys.boot_completed=1
