@@ -493,9 +493,6 @@ on property:persist.service.criticaltemp=0
     write /sys/devices/virtual/thermal/thermal_zone14/ctrl_crit_temp 0
 
 on post-fs
-    # WiFi and BT mac handler
-    start hwaddrs
-
     #change permissions on vmallocinfo so we can grab it from bugreports
     chown root log /proc/vmallocinfo
     chmod 0440 /proc/vmallocinfo
@@ -518,6 +515,9 @@ on post-fs
 
 # msm specific files that need to be created on /data
 on post-fs-data
+    # WiFi and BT mac handler
+    start hwaddrs
+
     # stop cameraserver sooner. qcamerasvr service must start first
     stop cameraserver
     # initial start-up of ril
