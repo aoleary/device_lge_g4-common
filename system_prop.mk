@@ -269,7 +269,8 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     debug.hwui.skia_atrace_enabled=false \
     debug.sf.enable_egl_image_tracker=1 \
     ro.vendor.perf.scroll_opt=true \
-    ro.hwui.render_ahead=1
+    ro.hwui.render_ahead=1 \
+    debug.sf.enable_transaction_tracing=false
 
 #Properties to improve gaming experiance
 PRODUCT_PROPERTY_OVERRIDES += \
