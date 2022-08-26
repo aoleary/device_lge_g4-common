@@ -1160,7 +1160,7 @@ service boot_lc_kernel /system/bin/logcat -b kernel -D -f /cache/boot_lc_kernel.
     disabled
     oneshot
 
-service pulseon /vendor/bin/pulse.sh
+service pulseon /vendor/bin/pulse.sh stop
     user system
     seclabel u:r:pulse:s0
     oneshot
