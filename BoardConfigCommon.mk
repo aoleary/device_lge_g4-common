@@ -253,5 +253,8 @@ WIFI_DRIVER_FW_PATH_PARAM := "/sys/module/bcmdhd/parameters/firmware_path"
 WIFI_DRIVER_FW_PATH_STA := "/vendor/firmware/fw_bcmdhd.bin"
 WPA_SUPPLICANT_VERSION := VER_0_8_X
 
+# Security patch level
+VENDOR_SECURITY_PATCH := 2017-07-01
+
 # inherit from the proprietary version
 -include vendor/lge/g4-common/BoardConfigVendor.mk
