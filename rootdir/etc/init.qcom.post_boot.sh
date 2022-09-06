@@ -90,7 +90,7 @@ case "$target" in
         echo "4:1632000 5:1632000" > /sys/module/msm_performance/parameters/cpu_max_freq
 
         # Dynamic Stune Boost
-        echo 20 > /sys/module/cpu_boost/parameters/dynamic_stune_boost
+        echo 40 > /sys/module/cpu_boost/parameters/dynamic_stune_boost
 
         #enable rps static configuration
         echo 8 >  /sys/class/net/rmnet_ipa0/queues/rx-0/rps_cpus
