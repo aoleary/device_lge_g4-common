@@ -221,6 +221,7 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     debug.sf.recomputecrop=0 \
     debug.sf.disable_client_composition_cache=1 \
     debug.sf.latch_unsignaled=1 \
+    debug.sf.enable_enable_hwc_vds=0 \
     ro.surface_flinger.protected_contents=true \
     dev.pm.dyn_samplingrate=1 \
     hw3d.force=1 \
