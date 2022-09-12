@@ -15,7 +15,7 @@
 #/dev/block/platform/soc.0/f9824900.sdhci/by-name/cache		/cache          ext4    nosuid,nodev,barrier=1,noatime,noauto_da_alloc,errors=continue,journal_async_commit,user_xattr,discard      wait,check
 
 /dev/block/platform/soc.0/f9824900.sdhci/by-name/cust	      /mnt/vendor/cust          ext4    nosuid,nodev,barrier=1,noatime,noauto_da_alloc,errors=continue,journal_async_commit,user_xattr,discard      wait,check
-/dev/block/platform/soc.0/f9824900.sdhci/by-name/userdata     /data           ext4    defaults      wait,check,encryptable=/dev/block/platform/soc.0/f9824900.sdhci/by-name/encrypt,latemount
+/dev/block/platform/soc.0/f9824900.sdhci/by-name/userdata     /data           ext4    defaults      wait,check,latemount
 #/dev/block/platform/soc.0/f9824900.sdhci/by-name/userdata     /data           f2fs    rw,nosuid,nodev,noatime,nodiratime,inline_xattr,discard             wait,check,encryptable=/dev/block/platform/soc.0/f9824900.sdhci/by-name/encrypt
 /dev/block/platform/soc.0/f9824900.sdhci/by-name/persist      /persist        ext4    nosuid,nodev,barrier=1,data=ordered,nodelalloc,errors=panic,user_xattr         wait,notrim
 /dev/block/platform/soc.0/f9824900.sdhci/by-name/persistent   /persistent     emmc    defaults                                                            defaults
@@ -29,5 +29,5 @@
 
 /dev/block/platform/soc.0/f9824900.sdhci/by-name/grow         /misc           emmc    defaults                                                            defaults
 
-/devices/soc.0/f98a4900.sdhci/mmc_host*        auto        auto    defaults        voldmanaged=sdcard1:auto,encryptable=/dev/block/platform/soc.0/f9824900.sdhci/by-name/encrypt
+/devices/soc.0/f98a4900.sdhci/mmc_host*        auto        auto    defaults        voldmanaged=sdcard1:auto
 /devices/soc.0/f9200000.ssusb/f9200000.dwc3/xhci-hcd.0.auto/usb*        auto        auto    defaults        voldmanaged=usb:auto
