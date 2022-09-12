@@ -226,6 +226,7 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     debug.sf.enable_planner_prediction=false \
     debug.sf.latch_unsignaled=0 \
     debug.sf.auto_latch_unsignaled=false \
+    debug.sf.disable_client_composition_cache=1 \
     dev.pm.dyn_samplingrate=1 \
     hw3d.force=1 \
     persist.hwc.ptor.enable=true \
