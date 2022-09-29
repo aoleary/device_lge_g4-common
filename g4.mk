@@ -169,6 +169,10 @@ PRODUCT_PACKAGES += \
 # Filesystem
 TARGET_FS_CONFIG_GEN := $(LOCAL_PATH)/config.fs
 
+# GAAPs Remove unwanted packages
+PRODUCT_PACKAGES += \
+    RemovePackages
+
 # GPS
 PRODUCT_PACKAGES += \
     android.hardware.gnss@1.0-impl.legacy \
