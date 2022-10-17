@@ -1,4 +1,6 @@
 # Devices
+# Cust block device
+type cust_block_device, dev_type;
 # Disk block device
 type disk_block_device, dev_type;
 # SSD block device
@@ -51,6 +53,9 @@ type sns_file, file_type;
 
 # /mpt
 type mpt_file, fs_type;
+
+# /cust
+type cust_file, fs_type;
 
 # wrild
 type ril_daemon, sysfs_type, fs_type;

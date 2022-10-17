@@ -148,6 +148,7 @@ on init
     #R/O fs: mkdir /fataldevlog 0700 root root
     #R/O fs: mkdir /cota 0771 root cw_access
     #R/O fs: mkdir /preload 0771 system system
+    #R/O fs: mkdir /cust 0771 system system
     #R/O fs: mkdir /carrier 0770 system carrier
     chown system system /carrier
     chmod 0770 /carrier
