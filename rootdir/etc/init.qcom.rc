@@ -125,6 +125,9 @@ on early-boot
     # unique boot led blinking
     start pulseon
 
+    # Enable suspend to RAM
+    write /sys/power/mem_sleep "deep"
+
     # set RLIMIT_MEMLOCK to 64MB
     setrlimit 8 67108864 67108864
 
