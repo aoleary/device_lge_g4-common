@@ -213,6 +213,21 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     debug.sf.earlyGl.sf.duration=27600000 \
     debug.sf.earlyGl.app.duration=27600000
 
+# Properties to improve general performance (disable certain logs)
+    persist.service.lgospd.enable=0 \
+    persist.service.pcsync.enable=0 \
+    profiler.force_disable_ulog=true \
+    profiler.force_disable_ulog=1 \
+    profiler.force_disable_err_rpt=1 \
+    profiler.force_disable_err_rpt=true \
+    profiler.hung.dumpdobugreport=false \
+    debugtool.anrhistory=0 \
+    debug.mdpcomp.logs=0 \
+    profiler.debugmonitor=false \
+    profiler.launch=false \
+    logcat.live=disable \
+    persist.camera.debug.logfile=0 \
+
 # Properties to improve rendering
     debug.composition.type=gpu \
     debug.cpurend.vsync=false \
