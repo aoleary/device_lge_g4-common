@@ -216,10 +216,10 @@ TARGET_PROCESS_SDK_VERSION_OVERRIDE += \
     /vendor/bin/hw/rild=27
 
 # Sepolicy
-include device/qcom/sepolicy-legacy/sepolicy.mk
-BOARD_VENDOR_SEPOLICY_DIRS += $(COMMON_PATH)/sepolicy/vendor
-SYSTEM_EXT_PRIVATE_SEPOLICY_DIRS += $(COMMON_PATH)/sepolicy/vendor/private
-BOARD_SEPOLICY_VERS := $(PLATFORM_SDK_VERSION).0
+#include device/qcom/sepolicy-legacy/sepolicy.mk
+#BOARD_VENDOR_SEPOLICY_DIRS += $(COMMON_PATH)/sepolicy/vendor
+#SYSTEM_EXT_PRIVATE_SEPOLICY_DIRS += $(COMMON_PATH)/sepolicy/vendor/private
+#BOARD_SEPOLICY_VERS := $(PLATFORM_SDK_VERSION).0
 SELINUX_IGNORE_NEVERALLOWS := true
 
 # Shims
