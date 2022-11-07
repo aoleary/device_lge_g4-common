@@ -1145,7 +1145,6 @@ service boot_lc /system/bin/logcat -b all -D -f /cache/boot_lc_full.txt
     class main
     user root
     group root system
-    writepid /dev/cpuset/system-background/tasks
     disabled
     oneshot
 
@@ -1153,7 +1152,6 @@ service boot_lc_crash /system/bin/logcat -b crash -D -f /cache/boot_lc_crash.txt
     class main
     user root
     group root system
-    writepid /dev/cpuset/system-background/tasks
     disabled
     oneshot
 
@@ -1161,7 +1159,6 @@ service boot_lc_kernel /system/bin/logcat -b kernel -D -f /cache/boot_lc_kernel.
     class main
     user root
     group root system
-    writepid /dev/cpuset/system-background/tasks
     disabled
     oneshot
 
