@@ -79,9 +79,31 @@ case "$target" in
         echo 0 > /sys/devices/system/cpu/cpu5/online
         # online CPU4
         echo 1 > /sys/devices/system/cpu/cpu4/online
-        echo conservative > /sys/devices/system/cpu/cpu4/cpufreq/scaling_governor
+
+        # Boost cpus for 40 sec after boot, to reduce lag and bad 
+        # ux that lasts for about 1 min after booting
+        echo "performance" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+        echo "performance" > /sys/devices/system/cpu/cpu4/cpufreq/scaling_governor
+
+        sleep 40
+
         # configure CPU0
         echo interactive_pro > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+        # tune cpufreq-interactive_pro
+        echo 1 > /sys/devices/system/cpu/cpufreq/interactive_pro/io_is_busy
+        echo 1 > /sys/devices/system/cpu/cpufreq/interactive_pro/use_migration_notif 
+        echo 1 > /sys/devices/system/cpu/cpufreq/interactive_pro/use_sched_load 
+        echo 1 > /sys/devices/system/cpu/cpufreq/interactive_pro/fast_ramp_down
+        echo 1 > /sys/devices/system/cpu/cpufreq/interactive_pro/ignore_hispeed_on_notif
+        # configure CPU4
+        echo conservative > /sys/devices/system/cpu/cpu4/cpufreq/scaling_governor
+        # tune cpufreq-conservative
+        echo 1 > /sys/devices/system/cpu/cpufreq/conservative/io_is_busy
+        echo 1 > /sys/devices/system/cpu/cpufreq/conservative/use_migration_notif
+        echo 1 > /sys/devices/system/cpu/cpufreq/conservative/use_sched_load
+        echo 1 > /sys/devices/system/cpu/cpufreq/conservative/fast_ramp_down
+        echo 1 > /sys/devices/system/cpu/cpufreq/conservative/ignore_hispeed_on_notif
+
         # restore A57's max
         cat /sys/devices/system/cpu/cpu4/cpufreq/cpuinfo_max_freq > /sys/devices/system/cpu/cpu4/cpufreq/scaling_max_freq
         # plugin remaining A57s
