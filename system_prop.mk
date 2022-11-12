@@ -105,7 +105,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.sf.lcd_density=560 \
     qemu.hw.mainkeys=0 \
-    ro.qualcomm.cabl=2
+    ro.qualcomm.cabl=2 \
+    ro.config.avoid_gfx_accel=true
 # MSM8992 HAL settings
 # 196610 is decimal for 0x30002 to report major/minor versions as 3/2
 PRODUCT_PROPERTY_OVERRIDES += \
