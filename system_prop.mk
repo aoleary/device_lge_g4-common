@@ -203,7 +203,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.extension_library=libqti-perfd-client.so \
     ro.min_freq_0=384000 \
     ro.min_freq_4=384000 \
-    ro.vendor.qti.sys.fw.bg_apps_limit=32 \
     ro.vold.umsdirtyratio=50 \
     vendor.perf.gestureflingboost.enable=true
 
@@ -262,6 +261,17 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.media.cam.preview.fps=0 \
     ro.media.codec_priority_for_thumb=so \
     debug.egl.force_msaa=1
+
+# Ram Management
+ro.config.fha_enable=true
+ro.sys.fw.bg_apps_limit=32
+ro.config.dha_cached_max=16
+ro.config.dha_empty_max=42
+ro.config.dha_empty_init=32
+ro.config.dha_lmk_scale=0.545
+ro.config.dha_th_rate=2.3
+ro.config.sdha_apps_bg_max=32
+ro.config.sdha_apps_bg_min=8
 
 # RIL
 PRODUCT_PROPERTY_OVERRIDES += \
