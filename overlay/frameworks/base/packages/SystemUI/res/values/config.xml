@@ -42,7 +42,7 @@
 
     <!-- The default tiles to display in QuickSettings -->
     <string name="quick_settings_tiles_default" translatable="false">
-        wifi,bt,nfc,rotation,location,cell,dnd,airplane,custom(com.abhi.flashlight/.TorchTile)
+        internet,bt,custom(com.abhi.flashlight/.TorchTile),rotation,location,cell,dnd,airplane
     </string>
 
 <!-- Begin: Doze mode -->
