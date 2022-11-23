@@ -57,7 +57,7 @@ LOCAL_MODULE       := sysctl.conf
 LOCAL_MODULE_TAGS  := optional
 LOCAL_MODULE_CLASS := ETC
 LOCAL_SRC_FILES    := etc/sysctl.conf
-LOCAL_MODULE_PATH  := $(TARGET_VENDOR_OUT_ETC)
+LOCAL_MODULE_PATH  := $(TARGET_OUT_VENDOR_ETC)
 include $(BUILD_PREBUILT)
 
 # Configuration scripts
