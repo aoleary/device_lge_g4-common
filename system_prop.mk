@@ -249,7 +249,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.media.dec.aud.wma.enabled=1 \
     ro.media.dec.vid.wmv.enabled=1 \
     ro.media.cam.preview.fps=0 \
-    ro.media.codec_priority_for_thumb=so
+    ro.media.codec_priority_for_thumb=so \
+    debug.egl.force_msaa=1
 
 # RIL
 PRODUCT_PROPERTY_OVERRIDES += \
