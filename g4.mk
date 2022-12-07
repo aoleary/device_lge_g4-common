@@ -40,7 +40,6 @@ PRODUCT_PACKAGES += \
     libtinycompress \
     libtinyxml \
     tinymix \
-    audio.a2dp.default \
     audio.primary.msm8992 \
     audio.r_submix.default \
     audio.usb.default \
@@ -74,12 +73,6 @@ PRODUCT_PACKAGES += \
     libbt-vendor \
     hwaddrs \
     libprotobuf-cpp-full
-
-# Bluetooth A2DP
-PRODUCT_PACKAGES += \
-  audio.a2dp.default \
-  android.hardware.bluetooth.a2dp@1.0-impl \
-  android.hardware.bluetooth.a2dp@1.0-service
 
 # Boot animation
 TARGET_BOOTANIMATION_HALF_RES := true
