@@ -336,3 +336,7 @@ ro.vndk.version=current
 # WiFi Scan Interval (default = 15s)
 PRODUCT_PROPERTY_OVERRIDES += \
     wifi.supplicant_scan_interval=600
+
+# Zygote
+PRODUCT_PROPERTY_OVERRIDES += \
+    zygote.critical_window.minute=10
