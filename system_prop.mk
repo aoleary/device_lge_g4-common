@@ -121,8 +121,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Fling Velocity
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.min.fling_velocity=50 \
-    ro.max.fling_velocity=20000
+    persist.sys.scrollingcache=0 \
+    ro.min.fling_velocity=70 \
+    ro.max.fling_velocity=21000
 
 # FRP
 PRODUCT_PROPERTY_OVERRIDES += \
