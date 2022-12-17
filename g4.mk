@@ -97,7 +97,7 @@ PRODUCT_PACKAGES += \
     android.hardware.camera.provider@2.4-external-service \
     android.hardware.camera.provider@2.4-legacy \
     libqomx_core \
-    Camera2
+    GoogleCameraGo
 
 # Enable camera EIS
 # eis.enable: enables electronic image stabilization
