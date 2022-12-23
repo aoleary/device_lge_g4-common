@@ -31,7 +31,7 @@
 #include <system/audio.h>
 #include <tinyalsa/asoundlib.h>
 #include <tinycompress/tinycompress.h>
-#include <msm8974/platform.h>
+#include <platform.h>
 #include <audio_hw.h>
 
 #include <stdio.h>
