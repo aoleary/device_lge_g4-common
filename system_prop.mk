@@ -125,6 +125,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.metadata_dynfps.disable=true \
     persist.sys.ui.hw=1 \
     persist.sys.wfd.virtual=0 \
+    ro.hardware.egl=adreno \
     ro.opengles.version=196610 \
     ro.sf.compbypass.enable=0 \
     debug.hwui.use_buffer_age=false
