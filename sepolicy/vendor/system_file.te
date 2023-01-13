@@ -1,0 +1,2 @@
+allow system_file settings_service:service_manager find;
+allow system_file nfc_service:service_manager find;
