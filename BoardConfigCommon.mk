@@ -148,7 +148,7 @@ HWUI_COMPILE_FOR_PERF := true
 TARGET_PLATFORM_DEVICE_BASE := /devices/soc.0/
 
 # Kernel
-BOARD_KERNEL_CMDLINE := androidboot.selinux=permissive
+#BOARD_KERNEL_CMDLINE := androidboot.selinux=permissive
 BOARD_KERNEL_CMDLINE += androidboot.init_fatal_reboot_target=recovery
 BOARD_KERNEL_CMDLINE += androidboot.hardware=qcom androidboot.wificountrycode=us
 BOARD_KERNEL_CMDLINE += ehci-hcd.park=3 lpm_levels.sleep_disabled=1 msm_rtb.filter=0x37 boot_cpus=0-5 lge_monitor_thermal.enable=1 fakebattery=enable
