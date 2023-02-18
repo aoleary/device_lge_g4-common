@@ -80,6 +80,9 @@ TARGET_USES_QCOM_MM_AUDIO := true
 
 USE_CUSTOM_AUDIO_POLICY := 1
 
+# Battery Saver
+TARGET_POWERHAL_MODE_EXT := $(COMMON_PATH)/power-libperfmgr/power-mode.cpp
+
 # Bluetooth
 BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_BCM := true

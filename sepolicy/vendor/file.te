@@ -59,3 +59,6 @@ type cust_file, fs_type;
 
 # wrild
 type ril_daemon, sysfs_type, fs_type;
+
+# Battery Saver
+type sysfs_battery_saver, fs_type, sysfs_type;
