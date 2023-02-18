@@ -114,7 +114,7 @@ on fs
 
 on late-fs
 
-    # Mount RW partitions which need run fsck
+    #Mount RW partitions which need run fsck
     mount_all /vendor/etc/fstab.qcom --late
 
 on init
@@ -122,6 +122,10 @@ on init
     symlink /dev/block/platform/soc.0/${ro.boot.bootdevice} /dev/block/bootdevice
 
     mount_all /vendor/etc/fstab.qcom --early
+
+    # Battery Saver 
+    chown system system /sys/module/battery_saver/parameters/enabled
+    chmod 0664 /sys/module/battery_saver/parameters/enabled
 
     # Start qseecomd early as we mount /system early
     # vold needs keymaster which needs qseecomd
