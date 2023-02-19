@@ -324,11 +324,13 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.sys.sdcardfs=true
 
 # UI Smoothening
-persist.service.lgospd.enable=0
-persist.service.pcsync.enable=0
+PRODUCT_PROPERTY_OVERRIDES += \
+   persist.service.lgospd.enable=0
+   persist.service.pcsync.enable=0
 
 # VNDK
-ro.vndk.version=current
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.vndk.version=current
 
 # WiFi Scan Interval (default = 15s)
 PRODUCT_PROPERTY_OVERRIDES += \
