@@ -286,6 +286,10 @@ PRODUCT_PACKAGES += \
     android.hardware.keymaster@3.0-service \
     android.hardware.authsecret@1.0-service
 
+# Lineage Health
+PRODUCT_PACKAGES += \
+    vendor.lineage.health-service.default
+
 # Live Wallpapers
 PRODUCT_PACKAGES += \
 	LiveWallpapers \
