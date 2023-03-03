@@ -197,6 +197,9 @@ on early-boot
     setrlimit 8 67108864 67108864
 
     write /sys/kernel/boot_adsp/boot 1
+ 
+       # Charger
+    chown system system /sys/class/power_supply/battery/charging_enabled
 
 on boot
     # rmt_storage
