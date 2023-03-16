@@ -45,6 +45,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Blur - Diable Blur in A12+
 ro.surface_flinger.supports_background_blur=0
 ro.sf.blurs_are_expensive=0
+ro.launcher.blur.appLaunch=0
 
 # Boot animation
 TARGET_SCREEN_HEIGHT := 2560
