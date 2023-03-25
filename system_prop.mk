@@ -222,7 +222,8 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     video.accelerate.hw=1 \
     debug.hwui.renderer=skiagl \
     renderthread.skia.reduceopstasksplitting=true \
-    debug.renderengine.backend=skiaglthreaded
+    debug.renderengine.backend=skiaglthreaded \
+    ro.hwui.render_ahead=10
 
 #Properties to improve gaming experiance
 PRODUCT_PROPERTY_OVERRIDES += \
