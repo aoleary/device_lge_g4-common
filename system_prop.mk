@@ -296,7 +296,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.ril.svdo=false \
     persist.telephony.oosisdc=false \
     #Improve Speech Quality
-    ro.ril.enable.amr.wideband=1
+    ro.ril.enable.amr.wideband=1 \
+    ro.telephony.block_binder_thread_on_incoming_calls=false
 
 # RIL Powersaving
     persist.radio.add_power_save=1 \
