@@ -71,7 +71,7 @@ case "$target" in
             echo -n enable > $mode
         done
 
-# Available Freqs in kernel
+# Available CPU Freqs in kernel
 # Little: 384000 460800 600000 672000 787200 864000 960000 1248000 1440000
 # Big: 384000 480000 633600 768000 864000 960000 1248000 1344000 1440000 1536000 1632000 1689600 1824000
 
@@ -91,6 +91,12 @@ case "$target" in
 
         # Dynamic Stune Boost
         echo 40 > /sys/module/cpu_boost/parameters/dynamic_stune_boost
+
+        # GPU Input Boost
+# Available CPU Freqs in kernel
+# 180000000 300000000 367000000 450000000 490000000 600000000
+        echo 450000000 > /sys/module/governor_msm_adreno_tz/parameters/boost_freq
+        echo 500 > /sys/module/governor_msm_adreno_tz/parameters/boost_duration
 
         #enable rps static configuration
         echo 8 >  /sys/class/net/rmnet_ipa0/queues/rx-0/rps_cpus
