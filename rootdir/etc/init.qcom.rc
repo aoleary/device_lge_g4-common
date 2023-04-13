@@ -161,7 +161,7 @@ on init
     write /dev/stune/top-app/tasks 0
     write /dev/stune/rt/tasks 0
     chmod 0664 /dev/stune/tasks
-    chmod 0664 /dev/stune/foreground/tasks
+    chmod 0775 /dev/stune/foreground/tasks
     chmod 0664 /dev/stune/background/tasks
     chmod 0664 /dev/stune/top-app/tasks
     chmod 0664 /dev/stune/rt/tasks
@@ -1016,7 +1016,7 @@ service qcamerasvr /vendor/bin/mm-qcamera-daemon
     class late_start
     user camera
     group camera system inet input graphics
-    writepid /dev/cpuset/camera-daemon/tasks
+    writepid /dev/cpuset/camera-daemon/tasks /dev/stune/camera-daemon/tasks
 
 service laserinit /vendor/bin/laser_init
     class late_start
