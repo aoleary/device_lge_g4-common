@@ -217,7 +217,6 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     debug.enabletr=true \
     debug.overlayui.enable=1 \
     debug.sf.hw=1 \
-    debug.sf.enable_gl_backpressure=1 \
     debug.sf.recomputecrop=0 \
     debug.sf.disable_backpressure=1 \
     ro.surface_flinger.enable_layer_caching=false \
