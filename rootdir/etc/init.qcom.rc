@@ -955,7 +955,7 @@ service qcamerasvr /system/vendor/bin/mm-qcamera-daemon
     class main
     user camera
     group camera system inet input graphics
-    writepid /dev/cpuset/system-background/tasks
+    writepid /dev/cpuset/camera-daemon/tasks
 
 service laserinit /system/vendor/bin/laser_init
     class late_start
