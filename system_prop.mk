@@ -212,7 +212,6 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     debug.sf.disable_backpressure=1 \
     ro.surface_flinger.enable_layer_caching=false \
     debug.sf.enable_planner_prediction=false \
-    debug.sf.disable_client_composition_cache=1 \
     debug.sf.latch_unsignaled=0 \
     dev.pm.dyn_samplingrate=1 \
     hw3d.force=1 \
