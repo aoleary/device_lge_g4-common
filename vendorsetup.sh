@@ -1,3 +1,9 @@
+# BCR
+if [ ! -d "vendor/bcr" ]
+then
+git clone https://github.com/Chaitanyakm/vendor_bcr -b main vendor/bcr
+fi
+
 # V4A
 if [ ! -d "packages/apps/ViPER4AndroidFX" ]
 then
