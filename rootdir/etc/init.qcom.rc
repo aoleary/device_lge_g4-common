@@ -705,14 +705,12 @@ service imsqmidaemon /vendor/bin/imsqmidaemon
     user system
     socket ims_qmid stream 0660 system radio
     group radio net_raw log diag
-    writepid /dev/cpuset/system-background/tasks
 
 service imsdatadaemon /vendor/bin/imsdatadaemon
     class main
     user system
     socket ims_datad stream 0660 system radio
     group system wifi radio inet net_raw log diag net_admin
-    writepid /dev/cpuset/system-background/tasks
     disabled
 
 on property:sys.ims.QMI_DAEMON_STATUS=1
@@ -723,7 +721,6 @@ service ims_rtp_daemon /vendor/bin/ims_rtp_daemon
     user system
     socket ims_rtpd stream 0660 system radio
     group radio diag inet log
-    writepid /dev/cpuset/system-background/tasks
     disabled
 
 on property:sys.ims.DATA_DAEMON_STATUS=1
@@ -733,7 +730,6 @@ service imscmservice /vendor/bin/imscmservice
     class main
     user system
     group radio diag log
-    writepid /dev/cpuset/system-background/tasks
 
 on property:persist.sys.ssr.restart_level=*
     start ssr_setup
@@ -782,7 +778,6 @@ service ppd /vendor/bin/mm-pp-daemon
     #seclabel u:r:mm-pp-daemon:s0
     socket pps stream 0660 system system
     group system graphics
-    writepid /dev/cpuset/system-background/tasks
     disabled
 
 service bdaddr_loader /vendor/bin/bdaddr_loader
@@ -842,13 +837,11 @@ service rmt_storage /vendor/bin/rmt_storage
     group root wakelock
     shutdown critical
     ioprio rt 0
-    writepid /dev/cpuset/system-background/tasks
 
 service rfs_access /vendor/bin/rfs_access
    class core
    user root
    group system net_raw wakelock
-   writepid /dev/cpuset/system-background/tasks
 
 on property:wc_transport.start_hci=true
     start start_hci_filter
@@ -867,14 +860,12 @@ service qmuxd /vendor/bin/qmuxd
     class main
     user root
     group radio audio bluetooth gps nfc diag
-    writepid /dev/cpuset/system-background/tasks
     disabled
 
 service netmgrd /vendor/bin/netmgrd
     class main
     user root
     group radio root wifi wakelock inet oem_2950
-    writepid /dev/cpuset/system-background/tasks
     disabled
 
 service ipacm-diag /vendor/bin/ipacm-diag
@@ -882,7 +873,6 @@ service ipacm-diag /vendor/bin/ipacm-diag
     user system
     socket ipacm_log_file dgram 660 system net_admin
     group net_admin oem_2950
-    writepid /dev/cpuset/system-background/tasks
     disabled
 
 service qti /vendor/bin/qti
@@ -894,8 +884,7 @@ service qti /vendor/bin/qti
 service vendor.sensors /vendor/bin/sensors.qcom
     class core
     user root
-    group root system wakelock input
-    writepid /dev/cpuset/system-background/tasks
+    group input root system wakelock
 
 on property:ro.use_data_netmgrd=false
     # netmgr not supported on specific target
@@ -948,7 +937,6 @@ service ril-daemon /vendor/bin/hw/rild
     user root
     group radio cache inet misc audio log readproc wakelock oem_2901 oem_2950 net_raw wifi diag
     capabilities BLOCK_SUSPEND NET_ADMIN NET_RAW
-    writepid /dev/cpuset/system-background/tasks
     disabled
 
 # the rild watchdog which ensures proper rild handling
@@ -956,7 +944,6 @@ service wd-ril-daemon /vendor/bin/wrild.sh
     class main
     user root
     seclabel u:r:wrild:s0
-    writepid /dev/cpuset/system-background/tasks
     disabled
 
 on property:init.svc.ril-daemon=stopped && property:init.svc.bootanim=running
@@ -975,7 +962,6 @@ service msm_irqbalance /vendor/bin/msm_irqbalance -f /vendor/etc/msm_irqbalance.
     class core
     user root
     group root
-    writepid /dev/cpuset/system-background/tasks
 
 # init.qcom.usb.sh configure RNDIS to go through HW IPA
 service qcom-usb-sh /vendor/bin/init.qcom.usb.sh
@@ -996,14 +982,12 @@ service laserinit /vendor/bin/laser_init
     group root
     seclabel u:r:laser_sensor:s0
     oneshot
-    writepid /dev/cpuset/system-background/tasks
 
 service vendor.qseecomd /vendor/bin/qseecomd
     class core
     user root
     group root
     shutdown critical
-    writepid /dev/cpuset/system-background/tasks
 
 service thermal-engine /vendor/bin/thermal-engine
     class main
@@ -1012,7 +996,6 @@ service thermal-engine /vendor/bin/thermal-engine
     socket thermal-recv-client stream 0660 root system
     socket thermal-recv-passive-client stream 0666 root system
     group root
-    writepid /dev/cpuset/system-background/tasks
 
 service per_mgr /vendor/bin/pm-service
     class core
@@ -1020,14 +1003,12 @@ service per_mgr /vendor/bin/pm-service
     group system net_raw
     socket seempdw dgram 0666 system system
     ioprio rt 4
-    writepid /dev/cpuset/system-background/tasks
 
 service per_proxy /vendor/bin/pm-proxy
     class core
     user system
     group system net_raw
     disabled
-    writepid /dev/cpuset/system-background/tasks
 
 on property:init.svc.per_mgr=running
     start per_proxy
@@ -1066,7 +1047,6 @@ service adsprpcd /vendor/bin/adsprpcd
     class main
     user media
     group media
-    writepid /dev/cpuset/system-background/tasks
 
 service charger /vendor/bin/charger
     class charger
@@ -1119,7 +1099,6 @@ service imswmsproxy /vendor/bin/imswmsproxy
     class main
     user system
     group radio system net_admin net_raw
-    writepid /dev/cpuset/system-background/tasks
 
 # start sensor daemon as core class [START]
 service lge-sensor-sh /vendor/bin/init.msm8992.sensor.sh
