@@ -10,3 +10,7 @@ allow audioserver socket_device:file write;
 allow audioserver unlabeled:dir search;
 
 allow audioserver { hal_camera_default mediacodec }:fd use;
+
+# V4A
+allow audioserver unlabeled:file { read write open getattr };
+allow hal_audio_default hal_audio_default:process { execmem };
