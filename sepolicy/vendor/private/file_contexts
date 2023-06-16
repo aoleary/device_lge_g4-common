@@ -1,2 +1,0 @@
-# sfX debug
-/cache/debug(/.*)? 					u:object_r:boot_log_file:s0

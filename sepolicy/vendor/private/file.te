@@ -1,4 +1,0 @@
-#type dpmd_data_file, fs_type;
-
-# sfX debug
-type boot_log_file, file_type, data_file_type, core_data_file_type;

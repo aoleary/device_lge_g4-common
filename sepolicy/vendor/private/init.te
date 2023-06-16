@@ -1,1 +1,0 @@
-allow init boot_debug:process { noatsecure rlimitinh siginh transition };
