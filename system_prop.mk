@@ -67,7 +67,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     bluetooth.profile.pbap.server.enabled?=true \
     bluetooth.profile.sap.server.enabled?=true \
     bluetooth.sco.disable_enhanced_connection=1 \
-    bluetooth.le.disable_apcf_extended_features=1
+    bluetooth.le.disable_apcf_extended_features=1 \
+    persist.bluetooth.a2dp_offload.disabled=true \
+    persist.bluetooth.bluetooth_audio_hal.disabled=false \
+    ro.bluetooth.a2dp_offload.supported=false
 
 # Blur - Diable Blur in A12+
 ro.surface_flinger.supports_background_blur=0
