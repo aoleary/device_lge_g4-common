@@ -96,7 +96,12 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.factorytest=0 \
 # Enable low power video mode for 4K encode
     vidc.debug.perf.mode=2 \
-    vidc.enc.dcvs.extra-buff-count=2
+    vidc.enc.dcvs.extra-buff-count=2 \
+# Add required properties for camera access in Enforcing
+    persist.vendor.camera.privapp.list=org.codeaurora.snapcam,com.android.camera,com.google.camera \
+    vendor.camera.aux.packagelist=org.codeaurora.snapcam,com.android.camera,com.google.camera \
+    vendor.camera.aux.packageexcludelist=org.telegram.messenger,com.microsoft.teams,com.discord
+
 
 # Charger
 PRODUCT_PRODUCT_PROPERTIES += \
