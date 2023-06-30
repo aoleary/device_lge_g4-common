@@ -236,15 +236,9 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.surface_flinger.start_graphics_allocator_service=true \
     ro.surface_flinger.use_context_priority=true \
     debug.sf.enable_planner_prediction=false \
-    debug.sf.early_phase_offset_ns=1500000 \
-    debug.sf.early_app_phase_offset_ns=1500000 \
-    debug.sf.early_gl_phase_offset_ns=3000000 \
-    debug.sf.early_gl_app_phase_offset_ns=15000000 \
     ro.surface_flinger.set_idle_timer_ms=80 \
     ro.surface_flinger.set_touch_timer_ms=200 \
     ro.surface_flinger.set_display_power_timer_ms=1000 \
-    ro.surface_flinger.vsync_event_phase_offset_ns=1000000 \
-    ro.surface_flinger.vsync_sf_event_phase_offset_ns=1000000 \
     ro.surface_flinger.support_kernel_idle_timer=true \
     debug.sf.layer_caching_active_layer_timeout_ms=1000
 
