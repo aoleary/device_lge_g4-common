@@ -219,6 +219,7 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     debug.qctwa.preservebuf=1 \
     debug.sf.hw=1 \
     debug.sf.disable_hwc=0 \
+    debug.sf.enable_gl_backpressure=1 \
     debug.sf.recomputecrop=0 \
     ro.surface_flinger.enable_layer_caching=false \
     debug.sf.enable_planner_prediction=false \
