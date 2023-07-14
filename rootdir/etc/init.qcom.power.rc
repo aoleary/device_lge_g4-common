@@ -1,10 +1,10 @@
 on boot
     # Update foreground and background cpusets
-    write /dev/cpuset/foreground/cpus 0-5
-    write /dev/cpuset/background/cpus 0-1
-    write /dev/cpuset/system-background/cpus 0-1
-    write /dev/cpuset/restricted/cpus 0-3
-    write /dev/cpuset/top-app/cpus 0-5
+    write /dev/cpuset/foreground/cpus 0,2,3,4,5
+    write /dev/cpuset/background/cpus 1
+    write /dev/cpuset/system-background/cpus 1
+    write /dev/cpuset/restricted/cpus 1
+    write /dev/cpuset/top-app/cpus 0,2,3,4,5
 
     # Create an stune group for the camera-daemon
     mkdir /dev/stune/camera-daemon
