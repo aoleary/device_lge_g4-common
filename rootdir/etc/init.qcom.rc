@@ -59,6 +59,11 @@ on early-init
 
     # Zygote and several apps need access to foreground tasks ids
     chmod 0666 /dev/stune/foreground/tasks
+   
+    # Set readahead to 2048KB during boot only
+    setprop sys.io.scheduler "noop"
+    write /sys/block/mmcblk0/queue/read_ahead_kb 2048
+    write /sys/block/mmcblk1/queue/read_ahead_kb 2048
 
 on early-fs
     symlink /dev/block/platform/soc.0/${ro.boot.bootdevice} /dev/block/bootdevice
@@ -536,10 +541,6 @@ on post-fs-data
     start qseecomd
     # busy loop to wait for qseecomd started
     exec - root root system -- /vendor/bin/init.qcom.qseecomd.sh
-
-    # Post-boot tuning: set readahead to 2048KB during boot only
-    write /sys/block/mmcblk0/queue/read_ahead_kb 2048
-    write /sys/block/mmcblk1/queue/read_ahead_kb 2048
 
     # Mark the copy complete flag to not completed
     write /data/misc/radio/copy_complete 0
@@ -1046,9 +1047,12 @@ on property:init.svc.bootanim=running
     write /sys/module/lpm_levels/system/a57/a57-l2-retention/idle_enabled 0
     write /sys/module/lpm_levels/system/a53/a53-l2-retention/idle_enabled 0
     write /sys/module/lpm_levels/parameters/sleep_disabled 0
+    # Switch to NOOP while booting
+    write /sys/block/mmcblk0/queue/scheduler noop
 
 on property:init.svc.bootanim=stopped
     start cameraserver
+    setprop sys.io.scheduler maple
 
 on property:sys.boot_completed=1
     start wd-ril-daemon
