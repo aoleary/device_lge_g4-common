@@ -182,6 +182,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     net.dns1=1.1.1.1\
     net.dns2=9.9.9.9
 
+#Logcat - increase log verbosity
+PRODUCT_PROPERTY_OVERRIDES += \
+    sys.init_log_level=7
+
 # LMKD
 PRODUCT_PROPERTY_OVERRIDES += \
 	ro.lmk.critical_upgrade=true \
