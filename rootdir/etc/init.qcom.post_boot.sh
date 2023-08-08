@@ -248,4 +248,5 @@ if [ -c /dev/coresight-stm ]; then
     fi
 fi
 
-
+# Tune task scheduler to prefer idle cpus to place task
+sysctl -w kernel.sched_prefer_idle=1
