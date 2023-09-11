@@ -212,12 +212,13 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Properties for Surfaceflinger
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    debug.sf.late.sf.duration=27600000 \
-    debug.sf.late.app.duration=27600000 \
-    debug.sf.early.sf.duration=27600000 \
-    debug.sf.early.app.duration=27600000 \
-    debug.sf.earlyGl.sf.duration=27600000 \
-    debug.sf.earlyGl.app.duration=27600000
+    debug.sf.early.app.duration=24000000 \
+    debug.sf.early.sf.duration=30000000 \
+    debug.sf.earlyGl.app.duration=24000000 \
+    debug.sf.earlyGl.sf.duration=30000000 \
+    debug.sf.hwc.min.duration=23000000 \
+    debug.sf.late.app.duration=24000000 \
+    debug.sf.late.sf.duration=30000000
 
 # Properties to improve rendering
     debug.composition.type=gpu \
