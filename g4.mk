@@ -100,7 +100,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PACKAGES += \
     camera.device@3.4-external-impl \
     camera.device@3.5-external-impl \
-    android.hardware.camera.provider@2.4-impl-legacy \
+    android.hardware.camera.provider@2.4-impl \
     android.hardware.camera.provider@2.4-service \
     android.hardware.camera.provider@2.4-external \
     android.hardware.camera.provider@2.4-external-service \
