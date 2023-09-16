@@ -30,9 +30,9 @@
     <bool name="def_wifi_on">true</bool>
 
     <!-- Speed up animations -->
-    <fraction name="def_window_animation_scale">50%</fraction>
-    <fraction name="def_window_transition_scale">50%</fraction>
-    <fraction name="def_animator_duration_scale">50%</fraction>
+    <fraction name="def_window_animation_scale">25%</fraction>
+    <fraction name="def_window_transition_scale">25%</fraction>
+    <fraction name="def_animator_duration_scale">25%</fraction>
 
     <!-- Disable all sound effects -->
     <integer name="def_lockscreen_sounds_enabled">0</integer>
