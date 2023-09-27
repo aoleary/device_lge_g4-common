@@ -236,14 +236,16 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.surface_flinger.use_context_priority=true \
     debug.sf.enable_planner_prediction=false \
     debug.sf.disable_client_composition_cache=1 \
-    debug.sf.early_phase_offset_ns=11600000 \
-    debug.sf.early_app_phase_offset_ns=11600000 \
+    debug.sf.early_phase_offset_ns=1500000 \
+    debug.sf.early_app_phase_offset_ns=1500000 \
     debug.sf.early_gl_phase_offset_ns=3000000 \
     debug.sf.early_gl_app_phase_offset_ns=15000000 \
-    debug.sf.phase_offset_threshold_for_next_vsync_ns=11600000 \
-    debug.sf.layer_caching_active_layer_timeout_ms=1000 \
+    ro.surface_flinger.set_idle_timer_ms=9000 \
+    ro.surface_flinger.set_touch_timer_ms=5000 \
+    ro.surface_flinger.set_display_power_timer_ms=10000 \
     ro.surface_flinger.vsync_event_phase_offset_ns=2000000 \
-    ro.surface_flinger.vsync_sf_event_phase_offset_ns=6000000
+    ro.surface_flinger.vsync_sf_event_phase_offset_ns=6000000 \
+    debug.sf.layer_caching_active_layer_timeout_ms=1000
 
 # Properties to improve rendering
     debug.cpurend.vsync=false \
