@@ -73,13 +73,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     vidc.debug.perf.mode=2 \
     vidc.enc.dcvs.extra-buff-count=2
 
-# Configstore
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    ro.surface_flinger.force_hwc_copy_for_virtual_displays=true \
-    ro.surface_flinger.max_frame_buffer_acquired_buffers=3 \
-    ro.surface_flinger.max_virtual_display_dimension=2048 \
-    ro.surface_flinger.use_color_management=true
-
 # DRM
 PRODUCT_PROPERTY_OVERRIDES += \
     drm.service.enabled=true
@@ -192,13 +185,27 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Properties for Surfaceflinger
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    debug.sf.early.app.duration=24000000 \
-    debug.sf.early.sf.duration=30000000 \
-    debug.sf.earlyGl.app.duration=24000000 \
-    debug.sf.earlyGl.sf.duration=30000000 \
-    debug.sf.hwc.min.duration=23000000 \
-    debug.sf.late.app.duration=24000000 \
-    debug.sf.late.sf.duration=30000000
+    ro.surface_flinger.max_virtual_display_dimension=2048 \
+    ro.surface_flinger.max_frame_buffer_acquired_buffers=3 \
+    ro.surface_flinger.force_hwc_copy_for_virtual_displays=true \
+    ro.surface_flinger.use_color_management=false \
+    ro.surface_flinger.has_HDR_display=false \
+    ro.surface_flinger.has_wide_color_display=false \
+    ro.surface_flinger.enable_layer_caching=false \
+    ro.surface_flinger.start_graphics_allocator_service=true \
+    ro.surface_flinger.use_context_priority=true \
+    debug.sf.enable_planner_prediction=false \
+    debug.sf.disable_client_composition_cache=1 \
+    debug.sf.early_phase_offset_ns=1500000 \
+    debug.sf.early_app_phase_offset_ns=1500000 \
+    debug.sf.early_gl_phase_offset_ns=3000000 \
+    debug.sf.early_gl_app_phase_offset_ns=15000000 \
+    ro.surface_flinger.set_idle_timer_ms=9000 \
+    ro.surface_flinger.set_touch_timer_ms=5000 \
+    ro.surface_flinger.set_display_power_timer_ms=10000 \
+    ro.surface_flinger.vsync_event_phase_offset_ns=2000000 \
+    ro.surface_flinger.vsync_sf_event_phase_offset_ns=6000000 \
+    debug.mdpcomp.idletime=600
 
 # Properties to improve rendering
     debug.composition.type=gpu \
