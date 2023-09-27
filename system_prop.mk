@@ -201,7 +201,8 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     debug.sf.early_app_phase_offset_ns=11600000 \
     debug.sf.early_gl_phase_offset_ns=3000000 \
     debug.sf.early_gl_app_phase_offset_ns=15000000 \
-    debug.sf.phase_offset_threshold_for_next_vsync_ns=11600000
+    debug.sf.phase_offset_threshold_for_next_vsync_ns=11600000 \
+    debug.sf.layer_caching_active_layer_timeout_ms=1000 \
     ro.surface_flinger.vsync_event_phase_offset_ns=2000000 \
     ro.surface_flinger.vsync_sf_event_phase_offset_ns=6000000
 
