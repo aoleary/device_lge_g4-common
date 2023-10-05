@@ -201,7 +201,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Properties for Surfaceflinger
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    debug.sf.use_phase_offsets_as_durations=1 \
     debug.sf.early.app.duration=24000000 \
     debug.sf.early.sf.duration=30000000 \
     debug.sf.earlyGl.app.duration=24000000 \
