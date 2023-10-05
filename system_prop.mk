@@ -249,7 +249,6 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     debug.renderengine.backend=skiaglthreaded \
     debug.hwui.skia_atrace_enabled=false \
     debug.sf.enable_egl_image_tracker=1 \
-    ro.vendor.perf.scroll_opt=true \
     ro.hwui.render_ahead=1 \
     ro.surface_flinger.set_idle_timer_ms=80 \
     ro.surface_flinger.set_touch_timer_ms=200 \
