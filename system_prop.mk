@@ -281,7 +281,6 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     debug.renderengine.backend=skiaglthreaded \
     debug.hwui.skia_atrace_enabled=false \
     debug.sf.enable_egl_image_tracker=1 \
-    ro.vendor.perf.scroll_opt=true \
     ro.hwui.render_ahead=1 \
     debug.sf.enable_transaction_tracing=false
 
