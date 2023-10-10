@@ -90,7 +90,9 @@ case "$target" in
         echo "4:1632000 5:1632000" > /sys/module/msm_performance/parameters/cpu_max_freq
 
         # Dynamic Stune Boost
-        echo 40 > /sys/module/cpu_boost/parameters/dynamic_stune_boost
+        echo 30 > /sys/module/cpu_boost/parameters/dynamic_stune_boost
+        echo 500 > /sys/module/cpu_boost/parameters/dynamic_stune_boost_ms
+        echo 30 > /dev/stune/top-app/schedtune.sched_boost
 
         # GPU Input Boost
 # Available CPU Freqs in kernel
