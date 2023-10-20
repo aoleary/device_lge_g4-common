@@ -1,15 +1,7 @@
 genfscon proc /bluetooth/sleep/btwrite                u:object_r:proc_bluetooth_writable:s0
 genfscon proc /bluetooth/sleep/lpm                    u:object_r:proc_bluetooth_writable:s0
 
-<<<<<<< HEAD
 genfscon debugfs /rfs_access                          u:object_r:debugfs_rfs:s0
-=======
-# Real-time clock
-genfscon sysfs /devices/soc/qpnp-rtc-8/rtc                              u:object_r:sysfs_rtc:s0
-
-# debugfs
-genfscon debugfs /ufshcd0                  u:object_r:debugfs_ufs:s0
 
 # ProcFS
 genfscon proc /sys/vm/dirty_writeback_centisecs                       u:object_r:proc_dirty:s0
->>>>>>> 94b1037a8... griffin: init: Apply aggressive write caching.

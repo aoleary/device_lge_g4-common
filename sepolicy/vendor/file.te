@@ -27,7 +27,7 @@ type sensors_data, file_type, data_file_type;
 type debugfs_rfs, debugfs_type, fs_type;
 
 # Flashlight
-type flashlight_app_data_file, sysfs_type, fs_type;
+type flashlight_app_data_file, app_data_file_type, sysfs_type, fs_type;
 
 # bluetooth
 type bt_data_file, sysfs_type, fs_type;
