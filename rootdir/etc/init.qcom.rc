@@ -1225,6 +1225,20 @@ on property:sys.boot_completed=1
     wait /path-does-not-exist 20
     exec u:object_r:system_file:s0 -- /system/bin/settings put global animator_duration_scale 0.5
 
+on property:sys.boot_completed=1
+    write /sys/block/mmcblk0/queue/scheduler cfq
+    write /sys/block/mmcblk0/queue/iosched/quantum 64
+    write /sys/block/mmcblk0/queue/iosched/group_idle 1
+    write /sys/block/mmcblk0/queue/iosched/slice_async 25
+    write /sys/block/mmcblk0/queue/rq_affinity 2
+    write /sys/block/mmcblk0/queue/nr_requests 64
+    write /sys/block/mmcblk1/queue/scheduler cfq
+    write /sys/block/mmcblk1/queue/iosched/quantum 64
+    write /sys/block/mmcblk1/queue/iosched/group_idle 1
+    write /sys/block/mmcblk1/queue/iosched/slice_async 25
+    write /sys/block/mmcblk1/queue/rq_affinity 2
+    write /sys/block/mmcblk1/queue/nr_requests 64
+
 on property:init.svc.bootanim=stopped
     stop pulseon
     start pulseoff
