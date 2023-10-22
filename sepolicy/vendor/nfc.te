@@ -3,3 +3,4 @@ allow nfc vendor_data_file:lnk_file r_file_perms;
 allow nfc nfc_vendor_data_file:dir rw_dir_perms;
 allow nfc nfc_vendor_data_file:file { getattr open read write };
 allow nfc nfc_vendor_data_file:lnk_file r_file_perms;
+allow system_file nfc_service:service_manager { find };
