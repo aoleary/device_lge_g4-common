@@ -76,8 +76,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Configstore
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.surface_flinger.force_hwc_copy_for_virtual_displays=true \
-    ro.surface_flinger.has_wide_color_display=true
-    ro.surface_flinger.has_HDR_display=true
     ro.surface_flinger.max_frame_buffer_acquired_buffers=3 \
     ro.surface_flinger.max_virtual_display_dimension=2048 \
     ro.surface_flinger.use_color_management=true
