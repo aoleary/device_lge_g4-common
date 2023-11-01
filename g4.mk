@@ -441,7 +441,8 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/base_qcril.db:system/etc/motorola/base_qcril.db \
     $(LOCAL_PATH)/configs/qmi_fw.conf:system/etc/qmi_fw.conf \
     $(LOCAL_PATH)/configs/ctbk_val.cfg:system/etc/motorola/mdmctbk/ctbk_val.cfg \
-    $(LOCAL_PATH)/configs/carrierconfig-com.android.carrierconfig-89300100160427481402.xml:data/user_de/0/com.android.phone/files/carrierconfig-com.android.carrierconfig-89300100160427481402.xml
+    $(LOCAL_PATH)/configs/carrierconfig-com.android.carrierconfig-89300100160427481402.xml:data/user_de/0/com.android.phone/files/carrierconfig-com.android.carrierconfig-89300100160427481402.xml \
+    prebuilts/vndk/v33/arm64/arch-arm64-armv8-a/shared/vndk-sp/libutils.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libutils-v33.so
 
 # Radio
 PRODUCT_PACKAGES += \
