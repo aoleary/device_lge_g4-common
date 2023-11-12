@@ -227,7 +227,7 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.fb.mode=1 \
     video.accelerate.hw=1 \
     debug.hwui.renderer=opengl \
-    ro.hwui.render_ahead=10
+    ro.hwui.render_ahead=20
 
 #Properties to improve gaming experiance
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -245,11 +245,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.media.cam.preview.fps=0 \
     ro.media.codec_priority_for_thumb=so
 
-=======
-    ro.hwui.render_ahead=10 \
-    vendor.display.disable_rotator_downscale=1
-
->>>>>>> bc1883b (g4-common: remove garbage from system props)
 # RIL
 PRODUCT_PROPERTY_OVERRIDES += \
     rild.libpath=/vendor/lib64/libril-qc-qmi-1.so \
