@@ -262,7 +262,7 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.fb.mode=1 \
     video.accelerate.hw=1 \
     debug.hwui.renderer=opengl \
-    ro.hwui.render_ahead=10 \
+    ro.hwui.render_ahead=20 \
     vendor.display.disable_rotator_downscale=1
 
 # RIL
