@@ -203,18 +203,13 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     debug.mdpcomp.idletime=600
 
 # Properties to improve rendering
-    debug.composition.type=gpu \
     debug.cpurend.vsync=false \
     debug.enable.sglscale=1 \
     debug.enabletr=true \
-    debug.egl.profiler=1 \
     debug.egl.hw=1 \
     debug.enabletr=true \
     debug.overlayui.enable=1 \
-    debug.performance.tuning=1 \
-    debug.qctwa.preservebuf=1 \
     debug.sf.hw=1 \
-    debug.sf.disable_hwc=0 \
     debug.sf.enable_gl_backpressure=1 \
     debug.sf.recomputecrop=0 \
     debug.sf.disable_backpressure=1 \
@@ -223,14 +218,11 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     debug.sf.disable_client_composition_cache=1 \
     debug.sf.latch_unsignaled=0 \
     dev.pm.dyn_samplingrate=1 \
-    hw3d.force=1 \
     persist.hwc.ptor.enable=true \
     persist.sys.composition.type=gpu \
     ro.fb.mode=1 \
     video.accelerate.hw=1 \
     debug.hwui.renderer=opengl \
-    renderthread.skia.reduceopstasksplitting=true \
-    debug.renderengine.backend=skiaglthreaded \
     ro.hwui.render_ahead=10
 
 #Properties to improve gaming experiance
@@ -249,6 +241,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.media.cam.preview.fps=0 \
     ro.media.codec_priority_for_thumb=so
 
+=======
+    ro.hwui.render_ahead=10 \
+    vendor.display.disable_rotator_downscale=1
+
+>>>>>>> bc1883b (g4-common: remove garbage from system props)
 # RIL
 PRODUCT_PROPERTY_OVERRIDES += \
     rild.libpath=/vendor/lib64/libril-qc-qmi-1.so \
