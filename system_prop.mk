@@ -215,70 +215,27 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     debug.mdpcomp.idletime=600
 
 # Properties to improve rendering
-    debug.composition.type=gpu \
     debug.cpurend.vsync=false \
     debug.enable.sglscale=1 \
     debug.enabletr=true \
-    debug.egl.profiler=1 \
     debug.egl.hw=1 \
     debug.enabletr=true \
     debug.overlayui.enable=1 \
-    debug.performance.tuning=1 \
-    debug.qctwa.preservebuf=1 \
     debug.sf.hw=1 \
-    debug.sf.disable_hwc=0 \
     debug.sf.enable_gl_backpressure=1 \
     debug.sf.recomputecrop=0 \
     ro.surface_flinger.enable_layer_caching=false \
     debug.sf.enable_planner_prediction=false \
     debug.sf.latch_unsignaled=0 \
-    debug.sf.auto_latch_unsignaled=false \
     debug.sf.disable_client_composition_cache=1 \
+    debug.sf.auto_latch_unsignaled=true \
     dev.pm.dyn_samplingrate=1 \
-    hw3d.force=1 \
     persist.hwc.ptor.enable=true \
     persist.sys.composition.type=gpu \
     ro.fb.mode=1 \
     video.accelerate.hw=1 \
     debug.hwui.renderer=opengl \
-    renderthread.skia.reduceopstasksplitting=true \
-    debug.renderengine.backend=skiaglthreaded \
-    debug.hwui.skia_atrace_enabled=false \
-    debug.sf.enable_egl_image_tracker=1 \
-    ro.hwui.render_ahead=10 \
-    ro.surface_flinger.set_idle_timer_ms=80 \
-    ro.surface_flinger.set_touch_timer_ms=200 \
-    ro.surface_flinger.set_display_power_timer_ms=1000 \
-    ro.surface_flinger.use_content_detection_for_refresh_rate=true \
-    debug.sf.enable_transaction_tracing=false
-
-#Properties to improve gaming experiance
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.sys.NV_FPSLIMIT=60 \
-    persist.sys.NV_POWERMODE=1 \
-    persist.sys.NV_PROFVER=15 \
-    persist.sys.NV_STEREOCTRL=0 \
-    persist.sys.NV_STEREOSEPCHG=0 \
-    persist.sys.NV_STEREOSEP=20 \
-    persist.sys.purgeable_assets=1 \
-    ro.media.dec.jpeg.memcap=8000000 \
-    ro.media.enc.hprof.vid.bps=8000000 \
-    ro.media.dec.aud.wma.enabled=1 \
-    ro.media.dec.vid.wmv.enabled=1 \
-    ro.media.cam.preview.fps=0 \
-    ro.media.codec_priority_for_thumb=so \
-    debug.egl.force_msaa=1
-
-# Ram Management
-ro.config.fha_enable=true
-ro.sys.fw.bg_apps_limit=32
-ro.config.dha_cached_max=16
-ro.config.dha_empty_max=42
-ro.config.dha_empty_init=32
-ro.config.dha_lmk_scale=0.545
-ro.config.dha_th_rate=2.3
-ro.config.sdha_apps_bg_max=32
-ro.config.sdha_apps_bg_min=8
+    ro.hwui.render_ahead=10
 
 # RIL
 PRODUCT_PROPERTY_OVERRIDES += \
