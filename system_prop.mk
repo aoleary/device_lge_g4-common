@@ -225,22 +225,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     debug.hwui.renderer=opengl \
     ro.hwui.render_ahead=3
 
-#Properties to improve gaming experiance
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.sys.NV_FPSLIMIT=60 \
-    persist.sys.NV_POWERMODE=1 \
-    persist.sys.NV_PROFVER=15 \
-    persist.sys.NV_STEREOCTRL=0 \
-    persist.sys.NV_STEREOSEPCHG=0 \
-    persist.sys.NV_STEREOSEP=20 \
-    persist.sys.purgeable_assets=1 \
-    ro.media.dec.jpeg.memcap=8000000 \
-    ro.media.enc.hprof.vid.bps=8000000 \
-    ro.media.dec.aud.wma.enabled=1 \
-    ro.media.dec.vid.wmv.enabled=1 \
-    ro.media.cam.preview.fps=0 \
-    ro.media.codec_priority_for_thumb=so
-
 # RIL
 PRODUCT_PROPERTY_OVERRIDES += \
     rild.libpath=/vendor/lib64/libril-qc-qmi-1.so \
