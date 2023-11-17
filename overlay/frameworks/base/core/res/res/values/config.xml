@@ -548,4 +548,10 @@ media UID to access CameraServiceProxy -->
         <item>google/bullhead/bullhead:8.0.0/OPR6.170623.013/4283548:user/release-keys</item> <!-- Build.FINGERPRINT -->
     </string-array>
 
+    <!-- Default value for proximity check on screen wake
+         NOTE ! - Enable for devices that have a fast response proximity sensor (ideally < 300ms)-->
+    <bool name="config_proximityCheckOnWake">true</bool>
+    <integer name="config_proximityCheckTimeout">300</integer>
+    <bool name="config_proximityCheckOnWakeEnabledByDefault">true</bool>
+
 </resources>
