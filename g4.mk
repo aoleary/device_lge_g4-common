@@ -139,9 +139,12 @@ PRODUCT_COPY_FILES += \
 
 # Dex - Pre-opt SystemUI
 PRODUCT_DEXPREOPT_SPEED_APPS += \
+    Launcher3QuickStep \
     Settings \
+    SettingsGoogle \
     SystemUI \
-    GoogleDialer
+    SystemUIGoogle
+
 # Speed profile services and wifi-service to reduce RAM and storage
 PRODUCT_SYSTEM_SERVER_COMPILER_FILTER := speed-profile
 PRODUCT_USE_PROFILE_FOR_BOOT_IMAGE := true
