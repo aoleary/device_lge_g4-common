@@ -75,26 +75,59 @@ case "$target" in
 # Little: 384000 460800 600000 672000 787200 864000 960000 1248000 1440000
 # Big: 384000 480000 633600 768000 864000 960000 1248000 1344000 1440000 1536000 1632000 1689600 1824000
 
-        # ensure at most one A57 is online when thermal hotplug is disabled
-        echo 0 > /sys/devices/system/cpu/cpu5/online
-        # online CPU4
-        echo 1 > /sys/devices/system/cpu/cpu4/online
-        echo conservative > /sys/devices/system/cpu/cpu4/cpufreq/scaling_governor
-        # configure CPU0
-        echo interactive_pro > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
-        # restore A57's max
-        cat /sys/devices/system/cpu/cpu4/cpufreq/cpuinfo_max_freq > /sys/devices/system/cpu/cpu4/cpufreq/scaling_max_freq
-        # plugin remaining A57s
+# configure governor settings for little cluster
+	echo impulse > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+	echo 1440000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq		#Core 4 Maximum Frequency = 1440MHz
+	echo "80 384000:33 460800:25 600000:50 672000:65 787200:70 864000:85 960000:90 1248000:92 1440000:98" > /sys/devices/system/cpu/cpu0/cpufreq/impulse/target_loads #Set normal max frequency target_loads
+
+#Tweak Impulse Governor
+	echo 85 > /sys/devices/system/cpu/cpu0/cpufreq/impulse/go_hispeed_load
+	echo 0 > /sys/devices/system/cpu/cpu0/cpufreq/impulse/above_hispeed_delay
+	echo 40000 > /sys/devices/system/cpu/cpu0/cpufreq/impulse/timer_rate
+	echo 960000 > /sys/devices/system/cpu/cpu0/cpufreq/impulse/hispeed_freq
+	echo -1 > /sys/devices/system/cpu/cpu0/cpufreq/impulse/timer_slack
+	echo 50000 > /sys/devices/system/cpu/cpu0/cpufreq/impulse/min_sample_time
+	echo 0 > /sys/devices/system/cpu/cpu0/cpufreq/impulse/powersave_bias
+	echo 0 > /sys/devices/system/cpu/cpu0/cpufreq/impulse/align_windows
+	echo 166667 > /sys/devices/system/cpu/cpu0/cpufreq/impulse/max_freq_hysteresis
+
+# online CPU4
+        write /sys/devices/system/cpu/cpu4/online 1
+
+# configure governor settings for big cluster
+	echo interactive > /sys/devices/system/cpu/cpu4/cpufreq/scaling_governor
+	echo 1824000 > /sys/devices/system/cpu/cpu4/cpufreq/scaling_max_freq		#Core 4 Maximum Frequency = 1824MHz
+	echo "74 768000:73 864000:64 960000:80 1248000:61 1344000:69 1440000:64 1536000:74 1632000:69 1689600:67 1824000:72" > /sys/devices/system/cpu/cpu4/cpufreq/interactive/target_loads #Set normal max frequency target_loads
+
+
+# restore A57's max
+        cat /sys/devices/system/cpu/cpu4/cpufreq/cpuinfo_max_freq /sys/devices/system/cpu/cpu4/cpufreq/scaling_max_freq
+
+	#Tweak interactive Governor
+	echo 90 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/go_hispeed_load
+	echo 0 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/above_hispeed_delay
+	echo 20000 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/timer_rate
+	echo 1440000 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/hispeed_freq
+	echo -1 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/timer_slack
+	echo 30000 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/min_sample_time
+	echo 0 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/boost
+	echo 0 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/align_windows
+	echo 1 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/use_migration_notif
+	echo 0 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/use_sched_load
+	echo 20000 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/max_freq_hysteresis
+	echo 80000 > /sys/devices/system/cpu/cpu4/cpufreq/interactive/boostpulse_duration
+
+# plugin remaining A57s
         echo 1 > /sys/devices/system/cpu/cpu5/online
-        # Restore CPU 4 max freq from msm_performance
-        echo "4:1632000 5:1632000" > /sys/module/msm_performance/parameters/cpu_max_freq
 
-        # Dynamic Stune Boost
-        echo 30 > /sys/module/cpu_boost/parameters/dynamic_stune_boost
-        echo 500 > /sys/module/cpu_boost/parameters/dynamic_stune_boost_ms
-        echo 30 > /dev/stune/top-app/schedtune.sched_boost
+#Enable Input Boost for LITTLE cluster @600MHz for 40ms
+	echo Enabling Input Boost at 600 MHz for the LITTLE cluster
+	echo 1 > /sys/module/cpu_boost/parameters/input_boost_enabled
+	echo "0:600000 2:600000 3:600000 4:0 5:0" > /sys/module/cpu_boost/parameters/input_boost_freq # Dont boost CPU1 (as its isolated for background activity)
+	echo 0 > /sys/module/cpu_boost/parameters/boost_ms
+	echo 40 > /sys/module/cpu_boost/parameters/input_boost_ms
 
-        # GPU Input Boost
+# GPU Input Boost
 # Available CPU Freqs in kernel
 # 180000000 300000000 367000000 450000000 490000000 600000000
         echo 450000000 > /sys/module/governor_msm_adreno_tz/parameters/boost_freq
