@@ -292,16 +292,6 @@
         </interface>
         <fqname>@1.0::IThermal/default</fqname>
     </hal>
-    <hal format="hidl">
-        <name>android.hardware.vibrator</name>
-        <transport arch="32+64">passthrough</transport>
-        <version>1.1</version>
-        <interface>
-            <name>IVibrator</name>
-            <instance>default</instance>
-        </interface>
-        <fqname>@1.1::IVibrator/default</fqname>
-    </hal>
     <!--hal format="hidl">
         <name>android.hardware.wifi.offload</name>
         <transport>hwbinder</transport>
