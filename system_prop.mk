@@ -255,6 +255,14 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.build.security_patch=2017-07-01
 
+# RIL Powersaving
+    persist.radio.add_power_save=1 \
+    pm.sleep_mode=1 \
+    ro.ril.disable.power.collapse=0 \
+    ro.ril.fast.dormancy.rule=1 \
+    ro.ril.fast.dormancy.timeout=3 \
+    ro.mot.eri.losalert.delay=1000
+
 # Sensors
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.qc.sdk.sensors.gestures=true \
