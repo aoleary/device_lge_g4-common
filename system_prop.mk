@@ -42,17 +42,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.config.media_vol_steps=25 \
     ro.config.vc_call_vol_steps=7
 
-# Battery Saving props
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.radio.add_power_save=1 \
-    pm.sleep_mode=1 \
-    power.saving.mode=1 \
-    ro.ril.disable.power.collapse=0 \
-    ro.ril.fast.dormancy.rule=1 \
-    ro.ril.fast.dormancy.timeout=3 \
-    ro.mot.eri.losalert.delay=1000 \
-    ro.vendor.use_data_netmgrd=true
-
 # Bluetooth
 PRODUCT_PROPERTY_OVERRIDES += \
     bluetooth.device.default_name="LG G4" \
@@ -291,6 +280,14 @@ PRODUCT_PROPERTY_OVERRIDES += \
     #Improve Speech Quality
     ro.ril.enable.amr.wideband=1 \
     ro.telephony.block_binder_thread_on_incoming_calls=false
+
+# RIL Powersaving
+    persist.radio.add_power_save=1 \
+    pm.sleep_mode=1 \
+    ro.ril.disable.power.collapse=0 \
+    ro.ril.fast.dormancy.rule=1 \
+    ro.ril.fast.dormancy.timeout=3 \
+    ro.mot.eri.losalert.delay=1000
 
 # Sensors
 PRODUCT_PROPERTY_OVERRIDES += \
