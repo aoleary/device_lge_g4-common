@@ -39,6 +39,7 @@ LOCAL_SRC_FILES := ipa_nat_test000.c \
 
 
 LOCAL_SHARED_LIBRARIES := libipanat
+LOCAL_VENDOR_MODULE := true
 
 LOCAL_MODULE_PATH := $(TARGET_OUT_DATA)/kernel-tests/ip_accelerator
 LOCAL_CFLAGS += \

@@ -20,6 +20,7 @@ LOCAL_CFLAGS += \
 LOCAL_MODULE := libipanat
 LOCAL_MODULE_TAGS := optional
 LOCAL_PRELINK_MODULE := false
+LOCAL_VENDOR_MODULE := true
 #LOCAL_CLANG := false
 
 include $(BUILD_SHARED_LIBRARY)
