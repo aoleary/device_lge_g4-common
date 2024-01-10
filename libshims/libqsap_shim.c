@@ -3,7 +3,7 @@
 #include <sys/socket.h>
 #include <linux/wireless.h>
 
-#include "cutils/log.h"
+#include "log.h"
 
 #include <string.h>
 

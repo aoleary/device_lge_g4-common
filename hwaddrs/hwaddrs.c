@@ -15,7 +15,7 @@
  */
 
 #define LOG_TAG  "WIFI_BT_MAC"
-#include <utils/Log.h>
+#include "Log.h"
 
 #include <unistd.h>
 #include <stdio.h>
