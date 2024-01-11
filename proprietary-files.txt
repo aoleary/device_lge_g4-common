@@ -89,7 +89,6 @@ vendor/bin/imsdatadaemon
 vendor/bin/imsqmidaemon
 vendor/bin/imswmsproxy
 vendor/bin/ipacm-diag
-vendor/bin/mm-pp-daemon
 vendor/bin/msm_irqbalance
 vendor/bin/netmgrd
 vendor/bin/pm-proxy

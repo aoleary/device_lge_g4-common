@@ -806,15 +806,6 @@ service timekeep /vendor/bin/timekeep restore
    group root
    oneshot
 
-service ppd /vendor/bin/mm-pp-daemon
-    class late_start
-    user system
-    #seclabel u:r:mm-pp-daemon:s0
-    socket pps stream 0660 system system
-    group system graphics
-    writepid /dev/cpuset/system-background/tasks
-    disabled
-
 service bdaddr_loader /vendor/bin/bdaddr_loader
     class late_start
     user root
