@@ -36,6 +36,8 @@ PRODUCT_PACKAGES += \
     android.hardware.audio.effect@2.0-impl \
     android.hardware.audio.effect@7.0 \
     android.hardware.audio.effect@7.0-impl \
+    android.hardware.soundtrigger@2.0 \
+    android.hardware.soundtrigger@2.0-core \
     android.hardware.soundtrigger@2.2-impl \
     libaudio-resampler \
     libaudioroute \
