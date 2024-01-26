@@ -1076,8 +1076,6 @@ on property:sys.boot_completed=1
     start wd-ril-daemon
     start qcom-post-boot
     write /dev/kmsg "Boot completed"
-    #Reinit lmkd to reconfigure lmkd properties
-    setprop lmkd.reinit 1
 
 service adsprpcd /vendor/bin/adsprpcd
     class main
