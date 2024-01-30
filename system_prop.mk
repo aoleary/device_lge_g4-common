@@ -2,7 +2,6 @@
 PRODUCT_PROPERTY_OVERRIDES += \
 persist.sys.usb.config=mtp,adb \
 persist.vendor.usb.config=mtp,adb \
-ro.adb.secure=0 \
 ro.debuggable=1
 
 # Audio
