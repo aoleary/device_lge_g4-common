@@ -51,11 +51,6 @@ ro.surface_flinger.supports_background_blur=0
 ro.sf.blurs_are_expensive=0
 ro.launcher.blur.appLaunch=0
 
-# Boot animation
-TARGET_SCREEN_HEIGHT := 2560
-TARGET_SCREEN_WIDTH := 1440
-TARGET_BOOT_ANIMATION_RES := 1440
-
 # Camera
 PRODUCT_PROPERTY_OVERRIDES += \
     vendor.camera.hal1.packagelist=com.skype.raider,com.instagram.android \
