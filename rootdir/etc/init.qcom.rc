@@ -50,9 +50,6 @@ on early-init
     mkdir /mnt/pstore 660 system system
     mount pstore /mnt/pstore /mnt/pstore
 
-    # Setup zram options
-    write /sys/block/zram0/max_comp_streams 4
-
     # Ril sockets
     mkdir /dev/socket/netmgr 0750 radio radio
     mkdir /dev/socket/rild 0660 root radio
@@ -137,10 +134,6 @@ on init
     # Start qseecomd early as we mount /system early
     # vold needs keymaster which needs qseecomd
     start vendor.qseecomd
-
-    # ZRAM setup
-    write /sys/block/zram0/comp_algorithm lzo
-    write /proc/sys/vm/page-cluster 0
 
     mkdir /mnt/shell/emulated 0700 shell shell
     #R/O fs: mkdir /storage/emulated 0555 root root
@@ -1077,8 +1070,6 @@ on property:init.svc.bootanim=stopped
 on property:sys.boot_completed=1
     start wd-ril-daemon
     start qcom-post-boot
-    # Enable ZRAM on boot_complete
-    swapon_all /vendor/etc/fstab.qcom
     write /dev/kmsg "Boot completed"
 
 service adsprpcd /vendor/bin/adsprpcd
