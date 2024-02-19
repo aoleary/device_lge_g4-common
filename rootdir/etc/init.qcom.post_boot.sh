@@ -123,7 +123,7 @@ case "$target" in
 #Enable Input Boost for LITTLE cluster @600MHz for 40ms
 	echo Enabling Input Boost at 600 MHz for the LITTLE cluster
 	echo 1 > /sys/module/cpu_boost/parameters/input_boost_enabled
-	echo "0:600000 2:600000 3:600000 4:0 5:0" > /sys/module/cpu_boost/parameters/input_boost_freq # Dont boost CPU1 (as its isolated for background activity)
+	echo "0:600000 1:600000 2:600000 3:600000 4:0 5:0" > /sys/module/cpu_boost/parameters/input_boost_freq
 	echo 0 > /sys/module/cpu_boost/parameters/boost_ms
 	echo 40 > /sys/module/cpu_boost/parameters/input_boost_ms
 
