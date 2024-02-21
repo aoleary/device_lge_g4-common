@@ -354,7 +354,7 @@ PRODUCT_PACKAGES += \
     charger_res_images
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/charger/charger:$(TARGET_COPY_OUT_VENDOR)/bin/charger
+    $(LOCAL_PATH)/charger/charger:$(TARGET_COPY_OUT_SYSTEM)/bin/charger
 
 # Trust
 PRODUCT_PACKAGES += \
