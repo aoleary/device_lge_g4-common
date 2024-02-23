@@ -1166,6 +1166,12 @@ service boot_lc_kernel /system/bin/logcat -b kernel -D -f /cache/boot_lc_kernel.
     disabled
     oneshot
 
+service kill_pulse /vendor/bin/kill_pulse.sh
+    disabled
+    user root
+    group system
+    oneshot
+
 service pulseon /vendor/bin/pulse.sh
     user system
     seclabel u:r:pulse:s0
@@ -1182,6 +1188,7 @@ on property:sys.boot_completed=1
 on property:sys.boot_completed=1
     stop pulseon
     start pulseoff
+    start kill_pulse
     stop boot_lc
     stop boot_lc_crash
     stop boot_lc_kernel

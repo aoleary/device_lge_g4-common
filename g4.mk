@@ -240,6 +240,7 @@ PRODUCT_PACKAGES += \
     wrild.sh \
     sysctl.rc \
     sysctl.conf \
+    kill_pulse.sh \
     pulse.sh \
     init.safailnet.rc \
     set_tasks.sh
@@ -263,6 +264,7 @@ PRODUCT_PACKAGES_ENG += \
     wrild.sh \
     sysctl.rc \
     sysctl.conf \
+    kill_pulse.sh \
     pulse.sh \
     init.safailnet.rc \
     set_tasks.sh
