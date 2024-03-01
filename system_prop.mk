@@ -121,12 +121,16 @@ PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.dex2oat-threads=4 \
     dalvik.vm.image-dex2oat-threads=4 \
     dalvik.vm.image-dex2oat-filter=speed \
+    dalvik.vm.madvise-random=true \
+    dalvik.vm.systemuicompilerfilter=speed \
     pm.dexopt.first-boot=quicken \
     pm.dexopt.bg-dexopt=everything \
     pm.dexopt.boot=verify \
     pm.dexopt.install=quicken \
     ro.vendor.qti.am.reschedule_service=true \
-    dalvik.vm.systemuicompilerfilter=speed
+# filter unused apps
+    pm.dexopt.downgrade_after_inactive_days=10 \
+    pm.dexopt.shared=quicken
 
 # Display
 PRODUCT_PROPERTY_OVERRIDES += \
