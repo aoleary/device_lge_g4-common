@@ -125,7 +125,7 @@ case "$target" in
 	echo 1 > /sys/module/cpu_boost/parameters/input_boost_enabled
 	echo "0:787200 1:787200 2:787200 3:787200 4:0 5:0" > /sys/module/cpu_boost/parameters/input_boost_freq
 	echo 0 > /sys/module/cpu_boost/parameters/boost_ms
-	echo 60 > /sys/module/cpu_boost/parameters/input_boost_ms
+	echo 80 > /sys/module/cpu_boost/parameters/input_boost_ms
 
 # GPU Input Boost
 # Available CPU Freqs in kernel
