@@ -260,12 +260,9 @@ fi
 # Tune task scheduler to prefer idle cpus to place task
 sysctl -w kernel.sched_prefer_idle=1
 
-# Tune task scheduler to reduce possibility 
-# to pick some heavy task to the same cpu 
-# with ui-threads
-sysctl -w kernel.sched_spill_load=85
-sysctl -w kernel.sched_window_stats_policy=2
-sysctl -w kernel.sched_ravg_hist_size=2
+# Tune task scheduler to reduce possibility
+# to pick some heavy task to the same cpu with ui-threads
+sysctl -w kernel.sched_spill_load=100
 
 # Virtual memory management
 echo 0 > /proc/sys/vm/extra_free_kbytes
