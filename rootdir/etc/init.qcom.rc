@@ -1241,6 +1241,10 @@ on property:sys.boot_completed=1
     write /sys/block/mmcblk1/queue/rq_affinity 2
     write /sys/block/mmcblk1/queue/nr_requests 64
 
+    # Disable process_reclaim
+on property:vendor.post_boot.parsed=1
+    write /sys/module/process_reclaim/parameters/enable_process_reclaim 0
+
 on property:init.svc.bootanim=stopped
     stop pulseon
     start pulseoff
