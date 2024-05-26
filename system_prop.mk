@@ -162,10 +162,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.min.fling_velocity=70 \
     ro.max.fling_velocity=21000
 
-# FRP
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.frp.pst=/dev/block/bootdevice/by-name/persistent
-
 # GPS
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.gps.qc_nlp_in_use=1 \
