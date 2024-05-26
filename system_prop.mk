@@ -167,10 +167,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.vendor.qti.inputopts.movetouchslop=0.6 \
     ro.qcom.adreno.qgl.ShaderStorageImageExtendedFormats=0
 
-# FRP
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.frp.pst=/dev/block/bootdevice/by-name/persistent
-
 # GPS
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.gps.qc_nlp_in_use=1 \
