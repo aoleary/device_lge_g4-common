@@ -19,3 +19,4 @@ echo $(pgrep wcnss_service) > /dev/cpuset/background/tasks
 echo $(pgrep composer) > /dev/cpuset/top-app/tasks
 echo $(pgrep mdss_dsi_event) > /dev/cpuset/top-app/tasks
 echo $(pgrep kgsl_worker_thr) > /dev/cpuset/top-app/tasks
+echo $(pgrep surfaceflinger) > /dev/cpuset/top-app/tasks
