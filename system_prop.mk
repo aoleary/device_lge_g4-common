@@ -43,7 +43,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Bluetooth
 PRODUCT_PROPERTY_OVERRIDES += \
-    bluetooth.device.default_name="LG G4" \
     bluetooth.chip.vendor=brcm \
     qcom.bluetooth.soc=rome \
     ro.bt.bdaddr_path="/data/misc/bluetooth/bdaddr" \
