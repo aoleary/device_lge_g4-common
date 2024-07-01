@@ -539,3 +539,6 @@ PRODUCT_COPY_FILES += \
 
 # Enable extendrom
 $(call inherit-product-if-exists, vendor/extendrom/config/common.mk)
+
+#Sign builds to pass Play Certification
+-include vendor/lineage-priv/keys/keys.mk
