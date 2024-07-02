@@ -250,7 +250,6 @@ PRODUCT_PACKAGES += \
     init.qcom.qseecomd.sh \
     wrild.sh \
     sysctl.rc \
-    sysctl.conf \
     kill_pulse.sh \
     pulse.sh \
     init.safailnet.rc \
@@ -274,7 +273,6 @@ PRODUCT_PACKAGES_ENG += \
     init.qcom.qseecomd.sh \
     wrild.sh \
     sysctl.rc \
-    sysctl.conf \
     kill_pulse.sh \
     pulse.sh \
     init.safailnet.rc \
