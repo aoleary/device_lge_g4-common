@@ -100,6 +100,7 @@ PRODUCT_PACKAGES += \
 
 # BPF bypass
 PRODUCT_PROPERTY_OVERRIDES += \
+    bpf.progs_loaded=1 \
     ro.kernel.ebpf.supported=false
 
 # Camera
