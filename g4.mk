@@ -538,3 +538,9 @@ PRODUCT_COPY_FILES += \
 
 # Enable extendrom
 $(call inherit-product-if-exists, vendor/extendrom/config/common.mk)
+
+## This is a workaround for the Bluetooth sanitize shadow call stack (SCS)
+## crash reported here: https://issuetracker.google.com/issues/302408537.
+## For details of the root cause and the cts vts tests comparison between
+## the preloading and non-preloading builds, please check the above issue.
+PRODUCT_PROPERTY_OVERRIDES += ro.zygote.disable_gl_preload=1
