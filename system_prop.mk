@@ -71,6 +71,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.bluetooth.bluetooth_audio_hal.disabled=false \
     ro.bluetooth.a2dp_offload.supported=false \
     bluetooth.core.le.vendor_capabilities.enabled=false
+    ro.bluetooth.a2dp_offload.supported=false \
+    persist.bluetooth.a2dp_offload.disabled=true
 
 # Blur - Diable Blur in A12+
 ro.surface_flinger.supports_background_blur=0
