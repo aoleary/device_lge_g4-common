@@ -18,6 +18,8 @@ type touch_socket, file_type, mlstrustedobject;
 type ril_database, file_type, data_file_type;
 type vold_data, file_type, data_file_type, core_data_file_type;
 type sensors_data, file_type, data_file_type;
+type sensors_data_file, file_type, data_file_type;
+
 #type cam_socket_file, file_type, data_file_type;
 #type time_data_file, fs_type;
 
