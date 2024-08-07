@@ -34,6 +34,8 @@ on early-init
     export PATH /sbin:/product/bin:/apex/com.android.runtime/bin:/apex/com.android.art/bin:/system_ext/bin:/system/bin:/system/xbin:/odm/bin:/vendor/bin:/vendor/xbin
 
     # boot led on (blink will be handled by pulseon service)
+    # led: BLUE (reached early-init)
+    # (blink will be handled by pulseon service)
     write /sys/class/leds/green/brightness 0
     write /sys/class/leds/blue/brightness 254
     write /sys/class/leds/red/brightness 0
@@ -130,6 +132,11 @@ on init
     # Start qseecomd early as we mount /system early
     # vold needs keymaster which needs qseecomd
     start vendor.qseecomd
+
+    # led: RED (reached init)
+    write /sys/class/leds/green/brightness 0
+    write /sys/class/leds/blue/brightness 0
+    write /sys/class/leds/red/brightness 254
 
     mkdir /mnt/shell/emulated 0700 shell shell
     #R/O fs: mkdir /storage/emulated 0555 root root
