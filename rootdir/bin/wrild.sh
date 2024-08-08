@@ -5,9 +5,9 @@
 # plus a watchdog for rild high-cpu load in rare cases
 #
 # License:              GPLv3
-# Copyright 2019-2022:  steadfasterX <steadfasterX - AT - gmail #DOT# com>
+# Copyright 2019-2024:  steadfasterX <steadfasterX - AT - gmail #DOT# com>
 ###################################################################################################
-WRILDVER=v22.3
+WRILDVER=v24.1
 
 # rild
 MAXRET=300			# max rild restart retries when serious issues found
@@ -166,6 +166,15 @@ F_DOZE(){
         F_LOG i "DEBUG MODE !!!! Watchdog would have been disabled but as we debug..."
     fi
 }
+
+# check if we are alone..
+STATE=$(ps -fA |grep wrild.sh | grep -v grep)
+STATECNT=$(echo -e "$STATE" | wc -l)
+if [ $STATECNT -gt 1 ];then
+    F_LOG w "Hm.. seems we are already running?! Will not spawn a second one!"
+    F_LOG d "$STATE"
+    exit
+fi
 
 # delay the very first watchdog run
 [ $WDDEBUG == 0 ] && F_LOG d "*yawn* ... I think .. I will sleep a bit before actually starting my work (4 min)" && sleep $RILCHILL
