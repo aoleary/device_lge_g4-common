@@ -46,8 +46,14 @@ setprop wrild.ril-handling starting
 
 # logging func
 F_LOG(){
+    LOGLEV="$1"
     # d: DEBUG  e: ERROR  f: FATAL  i: INFO  v: VERBOSE  w: WARN  s: SILENT
-    log -t WRILD -p "$1" "${0##*/} ($WRILDVER): $2"
+    case $LOGLEV in
+	d|v) # decrease verbosity when debug off
+	[ "$WDDEBUG" -eq 0 ] && return
+	;;
+    esac
+    log -t WRILD -p "$LOGLEV" "${0##*/} ($WRILDVER): $2"
 }
 
 # check for the current RIL and device state
@@ -63,15 +69,15 @@ F_RILCHK(){
         SIMCOUNT=$(logcat -b all -d | egrep -o "SIM_COUNT:.*"| cut -d ":" -f2 | egrep -o "[01]" | tail -n1)
         setprop wrild.sim.count $SIMCOUNT
     else
-        F_LOG i "using previous detected sim count.."
+        F_LOG d "using previous detected sim count.."
         SIMCOUNT=$PROPSIM
     fi
 
-    F_LOG "i" "sys.boot_completed >$DBOOTED<"
-    F_LOG "i" "gsm.sim.state >$CURSTATE<"
-    F_LOG "i" "gsm.sim.operator.numeric >$CUROPER<"
-    F_LOG "i" "init.svc.bootanim >$CURANIM<"
-    F_LOG "i" "enc, encstate: >$ENC<, >$ENCSTATE<"
+    F_LOG "d" "sys.boot_completed >$DBOOTED<"
+    F_LOG "d" "gsm.sim.state >$CURSTATE<"
+    F_LOG "d" "gsm.sim.operator.numeric >$CUROPER<"
+    F_LOG "d" "init.svc.bootanim >$CURANIM<"
+    F_LOG "d" "enc, encstate: >$ENC<, >$ENCSTATE<"
     F_LOG "i" "sim count: >$SIMCOUNT<"
 
     if [ "$CURSTATE" == "READY" ] && [ ! -z "$CUROPER" ]; then
@@ -85,7 +91,7 @@ F_RILCHK(){
     elif [ "$CURSTATE" == "PIN_REQUIRED" ]; then
         echo 9
     elif [ "$CURSTATE" == "LOADED" ] && [ -z "$CUROPER" ];then
-        F_LOG i "LOADED but no operator yet .. sleeping 25s"
+        F_LOG d "LOADED but no operator yet .. sleeping 25s"
 	setprop wrild.ril-handling waiting-for-operatorid
         sleep 25
         echo 1
@@ -94,7 +100,7 @@ F_RILCHK(){
     elif [ "$SIMCOUNT" == "0" ];then
         echo 42
     else
-        F_LOG i "No condition met (yet) .. sleeping 10s"
+        F_LOG d "No condition met (yet) .. sleeping 10s"
 	setprop wrild.ril-handling no-condition-met
         sleep 10
         echo 1
@@ -115,7 +121,7 @@ F_RILRESTART(){
             F_LOG i "PIN_REQUIRED detected. waiting 40s for user input.." && sleep 40
             PRTRIGGER=1
         elif [ "$REQRESTART" -eq 7 ];then
-            F_LOG i "Boot (still) in progress ... hanging around for 10s ..." && sleep 10
+            F_LOG d "Boot (still) in progress ... hanging around for 10s ..." && sleep 10
 	    setprop wrild.ril-handling systemboot-in-progress
             x=1
         elif [ "$REQRESTART" -eq 1 ];then
@@ -132,7 +138,7 @@ F_RILRESTART(){
                 PRTRIGGER=0
                 x=$((x + 1))
             else
-                F_LOG w "Skipping restart as /data isn't mounted yet ..." && sleep 5
+                F_LOG d "Skipping restart as /data isn't mounted yet ..." && sleep 5
 		setprop wrild.ril-handling data-not-mounted-yet
             fi
         elif [ "$REQRESTART" -eq 9 ] ;then
@@ -163,7 +169,7 @@ F_DOZE(){
     if [ $WDDEBUG == 0 ];then
         while true; do F_LOG i "Watchdog has been disabled :'("  && sleep 86400 ;done
     else
-        F_LOG i "DEBUG MODE !!!! Watchdog would have been disabled but as we debug..."
+        F_LOG e "DEBUG MODE !!!! Watchdog would have been disabled but as we debug..."
     fi
 }
 
@@ -171,13 +177,13 @@ F_DOZE(){
 STATE=$(ps -fA |grep wrild.sh | grep -v grep)
 STATECNT=$(echo -e "$STATE" | wc -l)
 if [ $STATECNT -gt 1 ];then
-    F_LOG w "Hm.. seems we are already running?! Will not spawn a second one!"
+    F_LOG e "Hm.. seems we are already running?! Will not spawn a second one!"
     F_LOG d "$STATE"
     exit
 fi
 
 # delay the very first watchdog run
-[ $WDDEBUG == 0 ] && F_LOG d "*yawn* ... I think .. I will sleep a bit before actually starting my work (4 min)" && sleep $RILCHILL
+[ $WDDEBUG == 0 ] && F_LOG i "*yawn* ... I think .. I will sleep a bit before actually starting my work (4 min)" && sleep $RILCHILL
 [ $WDDEBUG == 1 ] && F_LOG e "!!! DEBUG MODE DEBUG MODE !!! SLEEP DISABLED FOR FIRST WD RUN!"
 
 # restart RIL in defined conditions.
@@ -204,17 +210,17 @@ F_LOGRIL(){
     unset LOGPID
     if [ "$DEBUGLOG" -ne 0 ];then
         if [ ! -d "$DOGLOGS" ];then
-            mkdir -p $DOGLOGS && F_LOG i "$DOGLOGS created successfully."
+            mkdir -p $DOGLOGS && F_LOG d "$DOGLOGS created successfully."
         fi
         if [ ! -d "$DOGLOGS" ];then
             F_LOG e "$DOGLOGS could NOT be created (check for denials in logcat)! Cannot log anything sorry.."
         else
-            F_LOG i "debug logging started"
+            F_LOG d "debug logging started"
             LOGPID="$1"
             TIMESTMP="$(date +%F)"
 	    
             logcat -b all -d -D > $DOGLOGS/${TIMESTMP}_${LOGPID}_logcatfull.txt \
-                && F_LOG w "debug log written: $DOGLOGS/${TIMESTMP}_${LOGPID}_logcatfull.txt"
+                && F_LOG d "debug log written: $DOGLOGS/${TIMESTMP}_${LOGPID}_logcatfull.txt"
 		
             logcat -t "$BEFBITE" -b all -d -D > $DOGLOGS/${TIMESTMP}_${LOGPID}_logcat.txt \
                 && F_LOG w "debug log written: $DOGLOGS/${TIMESTMP}_${LOGPID}_logcat.txt"
