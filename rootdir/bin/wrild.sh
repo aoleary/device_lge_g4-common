@@ -97,7 +97,7 @@ F_RILCHK(){
         echo 1
     elif [ "$CURSTATE" == "LOADED" ] && [ ! -z "$CUROPER" ];then
         echo 0
-    elif [ "$SIMCOUNT" == "0" ];then
+    elif [ "$SIMCOUNT" == "0" ]||[ -z "$SIMCOUNT" ];then
         echo 42
     else
         F_LOG d "No condition met (yet) .. sleeping 10s"
@@ -112,8 +112,7 @@ F_RILRESTART(){
     while [ "$REQRESTART" -ne 0 ];do
         REQRESTART=$(F_RILCHK)
     
-        # PIN_REQUIRED means usually the user get prompted - unfortunately 
-        # sometimes there is no prompt.
+        # PIN_REQUIRED means usually the user get prompted - unfortunately sometimes there is no prompt.
         # this will restart RIL not on the first but every second run only (which should be safe) and
         # let the user enough time to enter the PIN if the prompt appears
         if [ "$REQRESTART" -eq 9 ]&&[ $PRTRIGGER -eq 0 ];then
@@ -125,8 +124,9 @@ F_RILRESTART(){
 	    setprop wrild.ril-handling systemboot-in-progress
             x=1
         elif [ "$REQRESTART" -eq 1 ];then
+	    DATAREADY=$(getprop vold.post_fs_data_done)
             [ $WDDEBUG == 1 ] && F_LOG e "!!!! DEBUG MODE DEBUG MODE - NO ACTION TAKEN !!!!"
-            if [ -d /storage/emulated/0 ];then
+            if [ "$DATAREADY" == "1" ];then
                 F_LOG w "RIL restart - try $x of $MAXRET"
 		setprop wrild.ril-handling restarting-rild
                 [ $WDDEBUG == 0 ] && stop ril-daemon
@@ -150,7 +150,7 @@ F_RILRESTART(){
 	    setprop wrild.ril-handling rild-up
 	    break
         elif [ "$REQRESTART" -eq 42 ];then
-            F_LOG e "No SIM detected!" && return $REQRESTART
+            F_LOG w "No SIM detected!" && return $REQRESTART
 	    setprop wrild.ril-handling no-sim
         else
             F_LOG e "unusual state detected . waiting 20s before another try .." && sleep 20
@@ -226,7 +226,7 @@ F_LOGRIL(){
                 && F_LOG w "debug log written: $DOGLOGS/${TIMESTMP}_${LOGPID}_logcat.txt"
             echo -e "\n\n$(date):\n\n $(dmesg -c)" > $DOGLOGS/${TIMESTMP}_${LOGPID}_dmesg.txt \
                 && F_LOG w "debug log written: $DOGLOGS/${TIMESTMP}_${LOGPID}_dmesg.txt"
-            echo -e "\n\n$(date):\n\n $(ps -A)" > $DOGLOGS/${TIMESTMP}_${LOGPID}_ps.txt \
+            echo -e "\n\n$(date):\n\n $(ps -Af)" > $DOGLOGS/${TIMESTMP}_${LOGPID}_ps.txt \
                 && F_LOG w "debug log written: $DOGLOGS/${TIMESTMP}_${LOGPID}_ps.txt"
             logcat -s WRILD -d > $DOGLOGS/${TIMESTMP}_${LOGPID}_wrild.txt \
                 && F_LOG w "debug log written: $DOGLOGS/${TIMESTMP}_${LOGPID}_wrild.txt"
