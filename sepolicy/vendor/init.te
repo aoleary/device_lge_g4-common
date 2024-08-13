@@ -8,7 +8,6 @@ allow init block_device:blk_file setattr;
 allow init bluetooth:process { siginh rlimitinh noatsecure transition };
 #allow init btnvtool_exec:file execute_no_trans;
 allow init cache_block_device:blk_file relabelto;
-#allow init cameraserver:fd use;
 #allow init debugfs_rmt_storage:file write;
 allow init default_android_hwservice:hwservice_manager add;
 allow init device:chr_file { getattr ioctl };

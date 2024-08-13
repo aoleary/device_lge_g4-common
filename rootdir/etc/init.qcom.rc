@@ -577,8 +577,6 @@ on post-fs-data
     # WiFi and BT mac handler
     start hwaddrs
 
-    # stop cameraserver sooner. qcamerasvr service must start first
-    stop cameraserver
     # initial start-up of ril
     start qmuxd
     start netmgrd
@@ -1085,7 +1083,6 @@ on property:init.svc.bootanim=running
     write /sys/module/lpm_levels/parameters/sleep_disabled 0
 
 on property:init.svc.bootanim=stopped
-    start cameraserver
     setprop sys.io.scheduler maple
 
 on property:sys.boot_completed=1
