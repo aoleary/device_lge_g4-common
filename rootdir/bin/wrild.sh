@@ -66,7 +66,12 @@ F_RILCHK(){
     ENCSTATE=$(getprop vold.decrypt)
     PROPSIM=$(getprop wrild.sim.count)
     if [ -z "$PROPSIM" ];then
-        SIMCOUNT=$(logcat -b all -d | egrep -o "SIM_COUNT:.*"| cut -d ":" -f2 | egrep -o "[01]" | tail -n1)
+        SSIM=0
+        for p in multi_sim_data_call multi_sim_sms multi_sim_voice_call;do
+            SSIM=$(settings list global |grep $p)
+            [ "$SSIM" -eq 1 ] && break
+        done
+        SIMCOUNT=$SSIM
         setprop wrild.sim.count $SIMCOUNT
     else
         F_LOG d "using previous detected sim count.."
@@ -167,7 +172,7 @@ F_RILRESTART(){
 # endless sleep
 F_DOZE(){
     if [ $WDDEBUG == 0 ];then
-        while true; do F_LOG i "Watchdog has been disabled :'("  && sleep 86400 ;done
+        while true; do F_LOG w "Watchdog has been disabled, bye.."  && sleep 86400 ;done
     else
         F_LOG e "DEBUG MODE !!!! Watchdog would have been disabled but as we debug..."
     fi
