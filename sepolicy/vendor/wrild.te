@@ -55,7 +55,6 @@ allow wrild wrild_prop:file { getattr open read };
 define(`wrild_dont_audit', `{
     adsprpcd
     audioserver
-    cameraserver
     drmserver
     gatekeeperd
     hal_cas_default
