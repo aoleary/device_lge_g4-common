@@ -252,7 +252,6 @@ PRODUCT_PACKAGES += \
     sysctl.rc \
     kill_pulse.sh \
     pulse.sh \
-    init.safailnet.rc \
     set_tasks.sh
 
 PRODUCT_PACKAGES_ENG += \
@@ -275,7 +274,6 @@ PRODUCT_PACKAGES_ENG += \
     sysctl.rc \
     kill_pulse.sh \
     pulse.sh \
-    init.safailnet.rc \
     set_tasks.sh
 
 # IO Cgroups
