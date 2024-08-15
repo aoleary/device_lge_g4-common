@@ -238,7 +238,6 @@ PRODUCT_PACKAGES += \
     wrild.sh \
     sysctl.rc \
     pulse.sh \
-    init.safailnet.rc \
     set_tasks.sh
 
 PRODUCT_PACKAGES_ENG += \
@@ -260,7 +259,6 @@ PRODUCT_PACKAGES_ENG += \
     wrild.sh \
     sysctl.rc \
     pulse.sh \
-    init.safailnet.rc \
     set_tasks.sh
 
 # IO Cgroups
