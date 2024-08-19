@@ -124,6 +124,11 @@ on late-fs
     mount_all /vendor/etc/fstab.qcom --late
 
 on init
+    # led: RED (reached init)
+    write /sys/class/leds/green/brightness 0
+    write /sys/class/leds/blue/brightness 0
+    write /sys/class/leds/red/brightness 254
+
     wait /dev/block/platform/soc.0/${ro.boot.bootdevice}
     symlink /dev/block/platform/soc.0/${ro.boot.bootdevice} /dev/block/bootdevice
 
@@ -132,11 +137,6 @@ on init
     # Start qseecomd early as we mount /system early
     # vold needs keymaster which needs qseecomd
     start vendor.qseecomd
-
-    # led: RED (reached init)
-    write /sys/class/leds/green/brightness 0
-    write /sys/class/leds/blue/brightness 0
-    write /sys/class/leds/red/brightness 254
 
     mkdir /mnt/shell/emulated 0700 shell shell
     #R/O fs: mkdir /storage/emulated 0555 root root
