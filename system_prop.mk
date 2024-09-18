@@ -4,6 +4,9 @@ persist.sys.usb.config=mtp,adb \
 persist.vendor.usb.config=mtp,adb \
 ro.debuggable=1
 
+# ANR workaround : Increase watchdog timeout multiplier
+    ro.hw_timeout_multiplier=6
+
 # Audio
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.audio.sdk.fluencetype=fluencepro \
