@@ -93,6 +93,12 @@ TARGET_USES_MEDIA_EXTENSIONS := true
 TARGET_PROCESS_SDK_VERSION_OVERRIDE := \
     /vendor/bin/mm-qcamera-daemon=24
 
+# Charger
+WITH_LINEAGE_CHARGER := false
+BOARD_CHARGER_DISABLE_INIT_BLANK := true
+BOARD_CHARGER_ENABLE_SUSPEND := false
+BACKLIGHT_PATH := "/sys/class/leds/lcd-backlight/brightness"
+
 # DATA IPA CFG MGR
 USE_DEVICE_SPECIFIC_DATA_IPA_CFG_MGR := true
 
@@ -189,10 +195,6 @@ BOARD_NFC_CHIPSET := pn547
 BOARD_NFC_HAL_SUFFIX := msm8992
 BOARD_NFC_DEVICE := "/dev/pn547"
 
-# Offline Charger
-WITH_LINEAGE_CHARGER := false
-BOARD_HEALTHD_CUSTOM_CHARGER_RES := $(COMMON_PATH)/charger/images
-
 # Platform
 TARGET_BOARD_PLATFORM := msm8992
 TARGET_BOARD_PLATFORM_GPU := qcom-adreno418
@@ -201,7 +203,6 @@ TARGET_NO_BOOTLOADER := true
 TARGET_USES_QCOM_BSP := true
 
 # Power
-BACKLIGHT_PATH := "/sys/class/leds/lcd-backlight/brightness"
 TARGET_TAP_TO_WAKE_NODE := "/sys/devices/virtual/input/lge_touch/tap2wake"
 TARGET_HAS_NO_WLAN_STATS := true
 TARGET_HAS_NO_POWER_STATS := true
