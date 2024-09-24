@@ -201,6 +201,11 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/gps/etc/sap.conf:system/etc/sap.conf \
     $(LOCAL_PATH)/gps/etc/xtwifi.conf:system/etc/xtwifi.conf
 
+# Gatekeeper
+PRODUCT_PACKAGES += \
+    android.hardware.gatekeeper@1.0-impl \
+    android.hardware.gatekeeper@1.0-service
+
 # Google Recorder
 PRODUCT_PACKAGES += \
     TARGET_SUPPORTS_GOOGLE_RECORDER := true
@@ -289,6 +294,12 @@ PRODUCT_PACKAGES_DEBUG += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/modules/mcDrvModule.ko:/system/lib/modules/mcDrvModule.ko \
     $(LOCAL_PATH)/configs/modules/mcKernelApi.ko:/system/lib/modules/mcKernelApi.ko
+
+# Keymaster
+PRODUCT_PACKAGES += \
+    android.hardware.keymaster@3.0-impl \
+    android.hardware.keymaster@3.0-service \
+    android.hardware.authsecret@1.0-service
 
 # Lineage Health
 PRODUCT_PACKAGES += \
@@ -478,11 +489,6 @@ PRODUCT_PACKAGES += \
     slim_shim \
     libaudioclient_shim \
     libshims_thermal
-
- # Software Keymaster & Gatekeeper HAL
-PRODUCT_PACKAGES += \
-    android.hardware.keymaster@4.1-service \
-    android.hardware.gatekeeper@1.0-service.software
 
 # System properties
 -include $(LOCAL_PATH)/system_prop.mk
