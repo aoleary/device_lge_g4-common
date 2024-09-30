@@ -421,8 +421,9 @@ PRODUCT_COPY_FILES += \
 
 # Power
 PRODUCT_PACKAGES += \
-    android.hardware.power-service-qti \
-    android.hardware.power@1.0
+    android.hardware.power@1.1-service \
+    power.g4
+    # power.g4: this is the Power HAL service used for our in-built Power HAL
 
 # RenderScript HAL
 PRODUCT_PACKAGES += \
