@@ -1480,23 +1480,23 @@
     <path name="handset-mic">
         <path name="main-mic" />
         <ctl name="ADC3 Volume" value="12" />
-        <ctl name="DEC4 Volume" value="100" />
+        <ctl name="DEC4 Volume" value="84" />
     </path>
 
     <!-- CM: audio-record IN handset dmic -->
     <path name="handset-stereo-dmic-ef">
         <path name="dual-mic-handset" />
         <ctl name="ADC3 Volume" value="11" />
-        <ctl name="DEC4 Volume" value="100" />
+        <ctl name="DEC4 Volume" value="84" />
         <ctl name="ADC4 Volume" value="11" />
-        <ctl name="DEC3 Volume" value="100" />
+        <ctl name="DEC3 Volume" value="84" />
     </path>
 
     <!-- CM: audio-record IN handset mic -->
     <path name="voice-memo">
         <path name="handset-mic" />
         <ctl name="ADC3 Volume" value="10" />
-        <ctl name="DEC4 Volume" value="100" />
+        <ctl name="DEC4 Volume" value="84" />
     </path>
 
     <!-- audio record with headset -->
@@ -1510,16 +1510,16 @@
     <path name="speaker-mic">
         <path name="2nd-mic" />
         <ctl name="ADC4 Volume" value="11" />
-        <ctl name="DEC3 Volume" value="100" />
+        <ctl name="DEC3 Volume" value="84" />
     </path>
 
     <!-- CM: audio-record IN speaker dmic -->
     <path name="speaker-stereo-dmic-ef">
         <path name="dual-mic-speaker" />
         <ctl name="ADC3 Volume" value="11" />
-        <ctl name="DEC4 Volume" value="100" />
+        <ctl name="DEC4 Volume" value="84" />
         <ctl name="ADC4 Volume" value="11" />
-        <ctl name="DEC3 Volume" value="100" />
+        <ctl name="DEC3 Volume" value="84" />
     </path>
 
     <!-- CM: audio-record IN headset mic -->
@@ -1533,9 +1533,9 @@
     <path name="voice-call-dual-mic-handset">
         <path name="dual-mic-handset" />
         <ctl name="ADC3 Volume" value="11" />
-        <ctl name="DEC4 Volume" value="100" />
+        <ctl name="DEC4 Volume" value="84" />
         <ctl name="ADC4 Volume" value="11" />
-        <ctl name="DEC3 Volume" value="100" />
+        <ctl name="DEC3 Volume" value="84" />
         <ctl name="IIR1 INP1 MUX" value="DEC4" />
     </path>
 
@@ -1543,41 +1543,41 @@
     <path name="voice-dmic-ef-tmus">
         <path name="voice-call-dual-mic-handset" />
         <ctl name="ADC3 Volume" value="12" />
-        <ctl name="DEC4 Volume" value="100" />
+        <ctl name="DEC4 Volume" value="84" />
         <ctl name="ADC4 Volume" value="12" />
-        <ctl name="DEC3 Volume" value="100" />
+        <ctl name="DEC3 Volume" value="84" />
     </path>
 
     <!-- CM: voice-call IN handset mic (h815) --> 
     <path name="voice-dmic-ef">
         <path name="voice-call-dual-mic-handset" />
         <ctl name="ADC3 Volume" value="12" />
-        <ctl name="DEC4 Volume" value="100" />
+        <ctl name="DEC4 Volume" value="84" />
         <ctl name="ADC4 Volume" value="12" />
-        <ctl name="DEC3 Volume" value="100" />
+        <ctl name="DEC3 Volume" value="84" />
     </path>
 
     <!-- CM: voice-call IN speaker mic -->
     <path name="voice-speaker-dmic-ef">
         <path name="dual-mic-speaker" />
         <ctl name="ADC3 Volume" value="11" />
-        <ctl name="DEC4 Volume" value="100" />
+        <ctl name="DEC4 Volume" value="92" />
         <ctl name="ADC4 Volume" value="11" />
-        <ctl name="DEC3 Volume" value="100" />
+        <ctl name="DEC3 Volume" value="92" />
     </path>
 
     <!-- CM: voip IN handset mic -->
     <path name="voip-main-mic-comm">
         <path name="main-mic" />
         <ctl name="ADC3 Volume" value="12" />
-        <ctl name="DEC4 Volume" value="100" />
+        <ctl name="DEC4 Volume" value="84" />
     </path>
 
     <!-- CM: voip IN speaker mic -->
     <path name="voip-sub-mic-comm">
         <path name="2nd-mic" />
         <ctl name="ADC4 Volume" value="12" />
-        <ctl name="DEC3 Volume" value="100" />
+        <ctl name="DEC3 Volume" value="84" />
     </path>
 
     <!-- CM: voip IN headset mic -->
@@ -1638,7 +1638,7 @@
     <path name="voice-speaker-mic">
         <path name="2nd-mic" />
         <ctl name="ADC4 Volume" value="11" />
-        <ctl name="DEC3 Volume" value="100" />
+        <ctl name="DEC3 Volume" value="84" />
     </path>
 
     <path name="voice-headphones">
@@ -1786,7 +1786,7 @@
     <path name="voice-rec-mic">
         <path name="main-mic" />
         <ctl name="ADC3 Volume" value="12" />
-        <ctl name="DEC4 Volume" value="100" />
+        <ctl name="DEC4 Volume" value="84" />
     </path>
 
     <path name="camcorder-mic">
@@ -2254,7 +2254,7 @@
     <path name="loopback-speaker-mic">
         <path name="2nd-mic" />
         <ctl name="ADC4 Volume" value="11" />
-        <ctl name="DEC3 Volume" value="100" />
+        <ctl name="DEC3 Volume" value="84" />
     </path>
 
     <path name="loopback-headset-mic">
@@ -2272,14 +2272,14 @@
     <path name="loopback-submic1">
         <path name="2nd-mic" />
         <ctl name="ADC4 Volume" value="12" />
-        <ctl name="DEC3 Volume" value="100" />
+        <ctl name="DEC3 Volume" value="84" />
     </path>
 
     <!-- speaker loopback use submic3 for p1 -->
     <path name="loopback-submic3">
         <path name="2nd-mic" />
         <ctl name="ADC4 Volume" value="12" />
-        <ctl name="DEC3 Volume" value="100" />
+        <ctl name="DEC3 Volume" value="84" />
     </path>
 
      <path name="loopback-bt-mic">
