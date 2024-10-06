@@ -165,6 +165,14 @@ PRODUCT_PROPERTY_OVERRIDES += \
     net.dns1=1.1.1.1\
     net.dns2=9.9.9.9
 
+# Low memory killer daemon
+PRODUCT_PROPERTY_OVERRIDES += \
+ro.lmk.use_psi=true \
+ro.lmk.psi_partial_stall_ms=70 \
+ro.lmk.psi_complete_stall_ms=400 \
+ro.lmk.thrashing_limit=0 \
+ro.lmk.swap_free_low_percentage=20
+
 # Media
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.media.treble_omx=false \
