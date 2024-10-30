@@ -80,7 +80,7 @@ case "$target" in
 	echo 1440000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq		#Core 4 Maximum Frequency = 1440MHz
         echo 0 > /sys/devices/system/cpu/cpufreq/schedutil/up_rate_limit_us
         echo 5000 > /sys/devices/system/cpu/cpufreq/schedutil/down_rate_limit_us
-        echo 85 > /sys/devices/system/cpu/cpufreq/schedutil/hispeed_load
+        echo 70 > /sys/devices/system/cpu/cpufreq/schedutil/hispeed_load
 
 # online CPU4
         write /sys/devices/system/cpu/cpu4/online 1
@@ -90,7 +90,7 @@ case "$target" in
 	echo 1824000 > /sys/devices/system/cpu/cpu4/cpufreq/scaling_max_freq		#Core 4 Maximum Frequency = 1824MHz
         echo 0 > /sys/devices/system/cpu/cpufreq/schedutil/up_rate_limit_us
         echo 5000 > /sys/devices/system/cpu/cpufreq/schedutil/down_rate_limit_us
-        echo 85 > /sys/devices/system/cpu/cpufreq/schedutil/hispeed_load
+        echo 70 > /sys/devices/system/cpu/cpufreq/schedutil/hispeed_load
 
 # restore A57's max
         cat /sys/devices/system/cpu/cpu4/cpufreq/cpuinfo_max_freq /sys/devices/system/cpu/cpu4/cpufreq/scaling_max_freq
