@@ -99,7 +99,7 @@ case "$target" in
         echo 1 > /sys/devices/system/cpu/cpu5/online
 
 # Dynamic Stune Boost
-        echo 80 > /sys/module/cpu_boost/parameters/dynamic_stune_boost
+        echo 120 > /sys/module/cpu_boost/parameters/dynamic_stune_boost
 
 # GPU Input Boost
 # Available CPU Freqs in kernel
