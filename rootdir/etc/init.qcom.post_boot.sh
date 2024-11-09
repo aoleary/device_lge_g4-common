@@ -151,25 +151,6 @@ case "$target" in
 	    echo "N" > /sys/module/lpm_levels/system/a57/cpu4/standalone_pc/suspend_enabled
 	    echo "N" > /sys/module/lpm_levels/system/a57/cpu5/standalone_pc/suspend_enabled
 
-# Configure core_ctl module parameters
-            echo 2 /sys/devices/system/cpu/cpu4/core_ctl/max_cpus
-            echo 1 /sys/devices/system/cpu/cpu4/core_ctl/min_cpus
-            echo 60 /sys/devices/system/cpu/cpu4/core_ctl/busy_up_thres
-            echo 30 /sys/devices/system/cpu/cpu4/core_ctl/busy_down_thres
-            echo 100 /sys/devices/system/cpu/cpu4/core_ctl/offline_delay_ms
-            echo 2 /sys/devices/system/cpu/cpu4/core_ctl/task_thres
-            echo 1 /sys/devices/system/cpu/cpu4/core_ctl/is_big_cluster
-            echo 4 /sys/devices/system/cpu/cpu0/core_ctl/max_cpus
-            echo 4 /sys/devices/system/cpu/cpu0/core_ctl/min_cpus
-            echo 0 /sys/devices/system/cpu/cpu0/core_ctl/busy_up_thres
-            echo 0 /sys/devices/system/cpu/cpu0/core_ctl/busy_down_thres
-            echo 100 /sys/devices/system/cpu/cpu0/core_ctl/offline_delay_ms
-            echo 4 /sys/devices/system/cpu/cpu0/core_ctl/task_thres
-            echo 1 /sys/devices/system/cpu/cpu0/core_ctl/not_preferred
-            echo 0 /sys/devices/system/cpu/cpu0/core_ctl/is_big_cluster
-            chown system:system /sys/devices/system/cpu/cpu4/core_ctl/min_cpus
-            chown system:system /sys/devices/system/cpu/cpu4/core_ctl/max_cpus
-
         # re-enable thermal and BCL hotplug
         echo 1 > /sys/module/msm_thermal/core_control/enabled
         for mode in /sys/devices/soc.0/qcom,bcl.*/mode
