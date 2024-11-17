@@ -3,7 +3,6 @@
 # move janky tasks to background cpuset
 echo $(pgrep mmcqd/0 | head -n 1) > /dev/cpuset/background/tasks
 echo $(pgrep mmcqd/1 | head -n 1) > /dev/cpuset/background/tasks
-echo $(pgrep msm_watchdog) > /dev/cpuset/background/tasks
 echo $(pgrep irqbalance) > /dev/cpuset/background/tasks
 echo $(pgrep rild | head -n 1) > /dev/cpuset/background/tasks
 echo $(pgrep rild | head -n 2 | sed /$(head -n1)/d) > /dev/cpuset/background/tasks
@@ -22,3 +21,4 @@ echo $(pgrep mdss_dsi_event) > /dev/cpuset/top-app/tasks
 echo $(pgrep kgsl_worker_thr) > /dev/cpuset/top-app/tasks
 echo $(pgrep surfaceflinger) > /dev/cpuset/top-app/tasks
 echo $(pgrep android.hardware.graphics.composer) > /dev/cpuset/top-app/tasks
+echo $(pgrep msm_watchdog) > /dev/cpuset/top-app/tasks
