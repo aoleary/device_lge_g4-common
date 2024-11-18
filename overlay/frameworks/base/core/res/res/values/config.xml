@@ -529,12 +529,13 @@ media UID to access CameraServiceProxy -->
 -->
     <string name="db_wal_sync_mode" translatable="false">OFF</string>
 
-    <!-- Disable intrusive gms components. -->
+    <!-- Disable intrusive gms/system components. -->
     <string-array name="config_deviceDisabledComponents" translatable="false">
         <item>com.google.android.gms/com.google.android.gms.nearby.discovery.service.DiscoveryService</item>
         <item>com.google.android.gms/com.google.android.gms.nearby.messages.service.NearbyMessagesService</item>
         <item>com.google.android.gms/.chimera.GmsIntentOperationService$PersistentTrustedReceiver</item>
         <item>com.google.android.gms/.stats.service.DropBoxEntryAddedReceiver</item>
+        <item>com.android.settings/com.android.settings.SettingsDumpService</item>
     </string-array>
 
     <!-- Suppress Intent Filter Verification Service crashes and System UI ANRs (both AOSP bugs) -->
