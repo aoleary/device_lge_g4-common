@@ -430,10 +430,6 @@ PRODUCT_PACKAGES += \
     android.system.net.netd@1.0 \
     ro.telephony.default_network=12
 
-# RenderScript
-PRODUCT_PACKAGES += \
-    android.hardware.renderscript@1.0-impl
-
 # Seccomp
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/seccomp/mediacodec.policy:system/vendor/etc/seccomp_policy/mediacodec.policy \
