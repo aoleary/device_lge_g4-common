@@ -599,9 +599,37 @@ on post-fs-data
     # NFC libnfc-nxpConfigState.bin
     mkdir /data/vendor/nfc/ 0770 nfc nfc
 
-    # Create folder for mm-qcamera-daemon
-    mkdir /data/camera 0770 media camera
-    chmod 0666 /dev/media0
+    # Set proper permissions on cam devices
+    chown camera camera /dev/media0
+    chown camera camera /dev/media1
+    chown camera camera /dev/media2
+    chown camera camera /dev/v4l-subdev0
+    chown camera camera /dev/v4l-subdev1
+    chown camera camera /dev/v4l-subdev2
+    chown camera camera /dev/v4l-subdev3
+    chown camera camera /dev/v4l-subdev4
+    chown camera camera /dev/v4l-subdev5
+    chown camera camera /dev/v4l-subdev6
+    chown camera camera /dev/v4l-subdev7
+    chown camera camera /dev/v4l-subdev8
+    chown camera camera /dev/v4l-subdev9
+    chown camera camera /dev/v4l-subdev10
+    chown camera camera /dev/v4l-subdev11
+    chown camera camera /dev/v4l-subdev12
+    chown camera camera /dev/v4l-subdev13
+    chown camera camera /dev/v4l-subdev14
+    chown camera camera /dev/v4l-subdev15
+    chown camera camera /dev/v4l-subdev16
+    chown camera camera /dev/v4l-subdev17
+    chown camera camera /dev/v4l-subdev18
+    chown camera camera /dev/v4l-subdev19
+    chown camera camera /dev/v4l-subdev20
+    chown camera camera /dev/v4l-subdev21
+    chown camera camera /dev/video0
+    chown camera camera /dev/video1
+    chown camera camera /dev/video2
+    chown camera camera /dev/video32
+    chown camera camera /dev/video33
 
     # Create folder for camera sockets
     mkdir /data/misc/camera 0771 camera camera
