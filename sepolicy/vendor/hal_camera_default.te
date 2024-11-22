@@ -2,3 +2,62 @@ allow hal_camera_default camera_data_file:sock_file write;
 allow hal_camera_default default_prop:property_service set;
 allow hal_camera_default mmqcamd:unix_dgram_socket sendto;
 
+get_prop(hal_camera_default, exported_camera_prop)
+
+##########################################################################################
+# NONE of the following was found by a denial log entry (logcat/dmesg)!
+# ALL of them were identified by trial+error and are the minimal set of required policies
+# to get the G4 cam working when enforcing
+##########################################################################################
+
+# fixes:
+# Unable to set property "persist.camera.preview.count" + Unable to set property "persist.camera.ais.hal"
+# magiskpolicy: allow hal_camera_g4 coredomain_socket sock_file { ioctl read write create getattr setattr lock relabelfrom relabelto append map unlink link rename execute quotaon mounton audit_access open execmod watch watch_mount watch_sb watch_with_perm watch_reads }
+allow hal_camera_default coredomain_socket:sock_file { read write };
+
+# fixes:
+# "Binder driver /dev/vndbinder is unavailable. Using /dev/binder instead.
+# magiskpolicy: allow hal_camera_g4 dev_type chr_file { ioctl read write create getattr setattr lock relabelfrom relabelto append map unlink link rename execute quotaon mounton audit_access open execmod watch watch_mount watch_sb watch_with_perm watch_reads execute_no_trans entrypoint }
+allow hal_camera_default dev_type:chr_file { ioctl open read write };
+
+# fixes:
+# Access denied finding property \"persist.camera.offlineraw\"  and others
+# magiskpolicy: allow hal_camera_g4 property_type file { ioctl read write create getattr setattr lock relabelfrom relabelto append map unlink link rename execute quotaon mounton audit_access open execmod watch watch_mount watch_sb watch_with_perm watch_reads execute_no_trans entrypoint }
+allow hal_camera_default property_type:file { read open getattr };
+
+# fixes:
+# camera crash after taking a picture
+# magiskpolicy: allow hal_camera_g4 property_type property_service { set }
+allow hal_camera_default property_type:property_service { set };
+
+# fixes:
+# CamPrvdr@2.4-legacy\0", iov_len=20}, {iov_base="initialize: Camera info query failed!
+# magiskpolicy: allow domain hal_camera_g4 fd { use }
+allow domain hal_camera_default:fd { use };
+
+# fixes:
+# app crash on startup
+# java.lang.RuntimeException: Unable to start activity ComponentInfo{com.android.camera2/com.android.camera.CameraActivity}: java.lang.ArrayIndexOutOfBoundsException
+# magiskpolicy: allow binderservicedomain hal_camera_g4 binder { impersonate call set_context_mgr transfer }
+allow binderservicedomain hal_camera_default:binder { call transfer };
+
+# fixes:
+# app crash on startup:
+# Unable to start activity ComponentInfo{com.android.camera2/com.android.camera.CameraActivity}: java.lang.ArrayIndexOutOfBoundsException:
+# magiskpolicy: allow hal_camera_g4 domain binder { impersonate call set_context_mgr transfer }
+allow hal_camera_default domain:binder { call transfer };
+
+# fixes:
+# "Can't connect to the camera." when app starts
+# magiskpolicy: allow hal_camera_g4 bluetoothdomain fd { use }
+allow hal_camera_default bluetoothdomain:fd { use };
+
+# fixes:
+# "Unable to set property \"persist.camera.preview.count\" to \"255\": connection failed; errno=13 (Permission denied)\0", iov_len=112}], 6) = 129
+# magiskpolicy: allow hal_camera_g4 domain unix_stream_socket { ioctl read write create getattr setattr lock relabelfrom relabelto append map bind connect listen accept getopt setopt shutdown recvfrom sendto name_bind connectto }
+allow hal_camera_default domain:unix_stream_socket { connectto };
+
+# fixes:
+# connect(9<socket:[394961]>, {sa_family=AF_UNIX, sun_path="/data/misc/camera/cam_socket1"}, 110)         = -1 EACCES (Permission denied)
+# magiskpolicy: allow hal_camera_g4 domain unix_dgram_socket { ioctl read write create getattr setattr lock relabelfrom relabelto append map bind connect listen accept getopt setopt shutdown recvfrom sendto name_bind }
+allow hal_camera_default domain:unix_dgram_socket { sendto };
