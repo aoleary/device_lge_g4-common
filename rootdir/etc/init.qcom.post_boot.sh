@@ -267,10 +267,10 @@ sysctl -w kernel.sched_spill_load=85
 sysctl -w kernel.sched_window_stats_policy=2
 sysctl -w kernel.sched_ravg_hist_size=2
 
-# Disable wsf for all targets beacause we are using efk.
-# wsf Range : 1..1000 So set to bare minimum value 1.
-echo 1 > /proc/sys/vm/watermark_scale_factor
-echo 10800 > /proc/sys/vm/extra_free_kbytes
+# Disable efk and tune wsf.
+ echo 0 > /proc/sys/vm/extra_free_kbytes
+ echo 300 > /proc/sys/vm/watermark_scale_factor
+ echo 10572 > /proc/sys/vm/min_free_kbytes
 
 # Set allocstall_threshold to 0
 echo 0 > /sys/module/vmpressure/parameters/allocstall_threshold
