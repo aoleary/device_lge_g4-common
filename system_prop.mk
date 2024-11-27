@@ -127,7 +127,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.wfd.virtual=0 \
     ro.hardware.egl=adreno \
     ro.opengles.version=196610 \
-    ro.sf.compbypass.enable=0
+    ro.sf.compbypass.enable=0 \
+    debug.hwui.use_buffer_age=false
 
 # Fling Velocity
 PRODUCT_PROPERTY_OVERRIDES += \
