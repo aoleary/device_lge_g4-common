@@ -631,6 +631,9 @@ on post-fs-data
     # Create folder for camera sockets
     mkdir /data/misc/camera 0771 camera camera
 
+    # inform qcamerasvr that it can start
+    setprop sys.camerasetup.ready 1
+
     mkdir /data/misc/ipa 0700 net_admin net_admin
 
     mkdir /data/misc/bluetooth 0771 bluetooth bluetooth
@@ -1045,12 +1048,26 @@ service qcom-usb-sh /vendor/bin/init.qcom.usb.sh
     user root
     oneshot
 
-#start camera server as daemon
+####### START: CAMERA SERVER HANDLING
+
+# do not autostart the camera server, this will be handled
+# by the prop sys.camerasetup.ready=1 instead as it requires
+# several preparations first.
+# sys.qcamerasvr.ready=1 can be used to start depending services
+# like vendor.camera-provider-2-4-ext and vendor.camera-provider-2-4
+
+on property:sys.camerasetup.ready=1
+    start qcamerasvr
+    setprop sys.qcamerasvr.ready 1
+
+# start camera server as daemon
 service qcamerasvr /vendor/bin/mm-qcamera-daemon
-    class late_start
     user camera
     group camera system inet input graphics
     writepid /dev/cpuset/camera-daemon/tasks /dev/stune/camera-daemon/tasks
+    disabled
+
+####### END: CAMERA SERVER HANDLING
 
 service laserinit /vendor/bin/laser_init
     class late_start

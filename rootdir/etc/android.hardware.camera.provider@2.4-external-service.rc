@@ -1,7 +1,6 @@
 # set correct user
 service vendor.camera-provider-2-4-ext /vendor/bin/hw/android.hardware.camera.provider@2.4-external-service
     interface android.hardware.camera.provider@2.4::ICameraProvider external/0
-    class hal
     user camera
     group audio camera input drmrpc usb
     ioprio rt 4
