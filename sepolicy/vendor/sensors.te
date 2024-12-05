@@ -33,3 +33,12 @@ allow sensors socket_device:sock_file { create getattr setattr write };
 
 # https://android.googlesource.com/device/lge/hammerhead/+/9ae16c2016141cc578a4bd7f6baa69f39e1900c9
 allow sensors self:capability dac_override;
+
+# accessing /sns/cal/ (sns.reg)
+allow sensors sns_file:dir { read open search getattr };
+
+# accessing /sns/cal/sns.reg
+allow sensors sns_file:file { read create getattr write unlink open };
+
+# unlinking /dev/socket/sensor_ctl_socket
+allow sensors socket_device:sock_file { unlink };

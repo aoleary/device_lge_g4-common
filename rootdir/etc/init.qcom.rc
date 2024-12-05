@@ -949,11 +949,13 @@ service qti /vendor/bin/qti
     group radio oem_2901 diag usb net_admin
     disabled
 
+# do not auto-start the service by a class as it requires
+# several preparations done in the "lge-sensor-sh" service
 service vendor.sensors /vendor/bin/sensors.qcom
-    class core
     user root
     group root system wakelock input
     task_profiles ServiceCapacityLow
+    disabled
 
 on property:ro.use_data_netmgrd=false
     # netmgr not supported on specific target
@@ -1188,6 +1190,7 @@ service imswmsproxy /vendor/bin/imswmsproxy
     group radio system net_admin net_raw
     task_profiles ServiceCapacityLow
 
+# this will actually start "service sensors" after finishing preparations
 # start sensor daemon as core class [START]
 service lge-sensor-sh /vendor/bin/init.msm8992.sensor.sh
     class core
