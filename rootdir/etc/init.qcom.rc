@@ -130,6 +130,8 @@ on init
     # Start qseecomd early as we mount /system early
     # vold needs keymaster which needs qseecomd
     start vendor.qseecomd
+    # busy loop to wait for qseecomd started
+    exec - root root system -- /vendor/bin/init.qcom.qseecomd.sh
 
     mkdir /mnt/shell/emulated 0700 shell shell
     #R/O fs: mkdir /storage/emulated 0555 root root
@@ -580,10 +582,6 @@ on post-fs-data
     # initial start-up of ril
     start qmuxd
     start netmgrd
-
-    start qseecomd
-    # busy loop to wait for qseecomd started
-    exec - root root system -- /vendor/bin/init.qcom.qseecomd.sh
 
     # Mark the copy complete flag to not completed
     write /data/misc/radio/copy_complete 0
