@@ -279,3 +279,9 @@ echo 0 > /sys/module/vmpressure/parameters/allocstall_threshold
 echo 1 > /proc/sys/vm/kswapd_threads
 
 echo 5430 > /proc/sys/vm/min_free_kbytes
+
+# Limit background tasks IO bandwidth
+echo "179:0 8388608" > /dev/blkio/background/blkio.throttle.read_bps_device
+echo "179:0 4194304" > /dev/blkio/background/blkio.throttle.write_bps_device
+echo "179:64 8388608" > /dev/blkio/background/blkio.throttle.read_bps_device
+echo "179:64 4194304" > /dev/blkio/background/blkio.throttle.write_bps_device
