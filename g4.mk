@@ -98,10 +98,6 @@ TARGET_BOOTANIMATION_TEXTURE_CACHE := true
 PRODUCT_PACKAGES += \
     android.hardware.oemlock@1.0-service
 
-# BPF bypass
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.kernel.ebpf.supported=false
-
 # Camera
 PRODUCT_PACKAGES += \
     camera.device@3.4-external-impl \
