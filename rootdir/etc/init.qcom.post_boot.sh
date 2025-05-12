@@ -77,20 +77,20 @@ case "$target" in
 
 # configure governor settings for little cluster
 	echo schedutil > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
-	echo 1440000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq		#Core 4 Maximum Frequency = 1440MHz
         echo 0 > /sys/devices/system/cpu/cpufreq/schedutil/up_rate_limit_us
-        echo 5000 > /sys/devices/system/cpu/cpufreq/schedutil/down_rate_limit_us
-        echo 70 > /sys/devices/system/cpu/cpufreq/schedutil/hispeed_load
+        echo 0 > /sys/devices/system/cpu/cpufreq/schedutil/down_rate_limit_us
+        echo 99 > /sys/devices/system/cpu/cpufreq/schedutil/hispeed_load
+        echo 1440000 > /sys/devices/system/cpu/cpu0/cpufreq/schedutil/hispeed_freq      #Core 4 Maximum Frequency = 1440MHz
 
 # online CPU4
         write /sys/devices/system/cpu/cpu4/online 1
 
 # configure governor settings for big cluster
 	echo schedutil > /sys/devices/system/cpu/cpu4/cpufreq/scaling_governor
-	echo 1824000 > /sys/devices/system/cpu/cpu4/cpufreq/scaling_max_freq		#Core 4 Maximum Frequency = 1824MHz
         echo 0 > /sys/devices/system/cpu/cpufreq/schedutil/up_rate_limit_us
-        echo 5000 > /sys/devices/system/cpu/cpufreq/schedutil/down_rate_limit_us
-        echo 70 > /sys/devices/system/cpu/cpufreq/schedutil/hispeed_load
+        echo 0 > /sys/devices/system/cpu/cpufreq/schedutil/down_rate_limit_us
+        echo 99 > /sys/devices/system/cpu/cpufreq/schedutil/hispeed_load
+        echo 1824000 > /sys/devices/system/cpu/cpu4/cpufreq/schedutil/hispeed_freq      #Core 5 Maximum Frequency = 1824MHz
 
 # restore A57's max
         cat /sys/devices/system/cpu/cpu4/cpufreq/cpuinfo_max_freq /sys/devices/system/cpu/cpu4/cpufreq/scaling_max_freq
