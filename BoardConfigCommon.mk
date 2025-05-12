@@ -208,17 +208,10 @@ TARGET_KEYMASTER_WAIT_FOR_QSEE := true
 TARGET_PROVIDES_LIBLIGHT := true
 
 # Lineage Health
-SOONG_CONFIG_NAMESPACES += lineage_health
-SOONG_CONFIG_lineage_health += charging_control_charging_path
-SOONG_CONFIG_lineage_health += charging_control_charging_enabled
-SOONG_CONFIG_lineage_health += charging_control_charging_disabled
-SOONG_CONFIG_lineage_health += charging_control_supports_bypass
-
-SOONG_CONFIG_lineage_health_charging_control_charging_path := /sys/class/power_supply/battery/charging_enabled
-SOONG_CONFIG_lineage_health_charging_control_charging_enabled := 0
-SOONG_CONFIG_lineage_health_charging_control_charging_disabled := 1
-SOONG_CONFIG_lineage_health_charging_control_supports_bypass := false
-
+$(call soong_config_set,lineage_health,charging_control_charging_path,/sys/class/power_supply/battery/charging_enabled)
+$(call soong_config_set,lineage_health,charging_control_charging_enabled,0)
+$(call soong_config_set,lineage_health,charging_control_charging_disabled,1)
+$(call soong_config_set,lineage_health,charging_control_supports_bypass,false)
 
 # LineageHW
 BOARD_HARDWARE_CLASS += $(COMMON_PATH)/lineagehw
