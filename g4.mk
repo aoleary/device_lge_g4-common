@@ -237,8 +237,7 @@ PRODUCT_PACKAGES += \
     wrild.sh \
     sysctl.rc \
     pulse.sh \
-    init.safailnet.rc \
-    set_tasks.sh
+    init.safailnet.rc
 
 PRODUCT_PACKAGES_ENG += \
     fstab.qcom \
@@ -259,8 +258,7 @@ PRODUCT_PACKAGES_ENG += \
     wrild.sh \
     sysctl.rc \
     pulse.sh \
-    init.safailnet.rc \
-    set_tasks.sh
+    init.safailnet.rc
 
 # IO Cgroups
 PRODUCT_PROPERTY_OVERRIDES += \
