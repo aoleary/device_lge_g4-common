@@ -1,0 +1,61 @@
+// Copyright (C) 2020 The LineageOS Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+// cameraclient
+cc_library_shared {
+    name: "libshim_cameraclient",
+    srcs: ["cameraclient_shim.cpp"],
+
+}
+
+// Fence
+cc_library_shared {
+    name: "libfence_shim",
+    srcs: ["fence.cpp"],
+
+    proprietary: true,
+    vendor: true,
+}
+
+// RTP
+cc_library_shared {
+    name: "ims_rtp_shim",
+    srcs: ["rtp.cpp"],
+
+    proprietary: true,
+    arch: {
+        arm64: {
+            cflags: ["-DLIBSHIMS_64BIT"],
+        },
+    },
+}
+
+// Slim_shim
+
+// AudioSystem
+cc_library_shared {
+    name: "libaudioclient_shim_g4",
+    srcs: ["libaudioclient_shim.cpp"],
+
+    shared_libs: ["libaudioclient"],
+
+}
+
+cc_library_shared {
+    name: "libshims_thermal",
+    srcs: ["libshims_thermal.cpp"],
+    cflags: ["-Wno-unused-parameter"],
+
+    vendor: true,
+}
