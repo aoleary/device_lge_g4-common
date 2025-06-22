@@ -3,25 +3,18 @@ cc_library_shared {
 
     srcs: ["*.c"],
 
-    local_include_dirs: [
-        "libmdmdetect",
-    ],
-
     include_dirs: [
-        "$(TARGET_OUT_HEADERS)/common/inc",
+        ".",
     ],
 
     shared_libs: [
         "libcutils",
         "libutils",
+        "liblog",
     ],
 
     cflags: [
         "-Wall",
-    ],
-
-    ldflags: [
-        "-llog",
     ],
 
     proprietary: true,
