@@ -20,7 +20,11 @@ from extract_utils.main import (
 
 namespace_imports = [
     'device/lge/g4-common',
-    'hardware/qcom-caf/msm8994',
+    'hardware/qcom-caf/msm8992',
+    'hardware/qcom-caf/msm8992/display',
+    'hardware/qcom-caf/msm8992/media',
+    'hardware/qcom-caf/msm8992/audio',
+    'vendor/qcom/opensource/dataservices',
 ]
 
 blob_fixups: blob_fixups_user_type = {
@@ -50,10 +54,14 @@ blob_fixups: blob_fixups_user_type = {
         'vendor/bin/LKCore',
         'vendor/lib/libchromaflash.so',
         'vendor/lib/libmorpho_superzoom.so',
-	'vendor/lib/libUserAgent.so',
-	'vendor/lib64/libUserAgent.so',
-	'vendor/lib/libAlAisWrap.so',
-	'vendor/bin/RIDLClient.exe',
+	    'vendor/lib/libUserAgent.so',
+	    'vendor/lib64/libUserAgent.so',
+	    'vendor/lib/libAlAisWrap.so',
+        'vendor/lib/libuiblur.so',
+	    'vendor/bin/RIDLClient.exe',
+        'vendor/lib/libmmcamera2_is.so',
+        'vendor/lib/libmmcamera_hdr_gb_lib.so',
+        'vendor/lib/libarcsoft_beauty_shot.so'
     ): blob_fixup()
         .replace_needed('libstdc++.so', 'libstdc++_vendor.so'),
     (
@@ -65,26 +73,61 @@ blob_fixups: blob_fixups_user_type = {
         'vendor/lib/libsettings.so',
         'vendor/lib64/libsettings.so',
     ): blob_fixup()
-        .replace_needed('libprotobuf-cpp-full-29a.so', 'libprotobuf-cpp-full-29.so'),
+        .replace_needed('libprotobuf-cpp-full-29a.so', 'libprotobuf-cpp-full-v29.so'),
     (
-        'vendor/lib/libwvm.so',
+        'vendor/lib/libcneapiclient.so',
+        'vendor/lib64/libcneapiclient.so',
+        'vendor/lib/libcne.so',
+        'vendor/lib64/libcne.so',
+        'vendor/lib/libwms.so',
+        'vendor/lib64/libwms.so',
+        'vendor/lib/libwqe.so',
+        'vendor/lib64/libwqe.so',
     ): blob_fixup()
-        .add_needed('libshims_wvm.so'),
+        .replace_needed('libprotobuf-cpp-lite-29a.so', 'libprotobuf-cpp-lite-v29.so'),
+#    (
+#        'vendor/lib/libwvm.so',
+#    ): blob_fixup()
+#        .add_needed('libshim_wvm.so'),
+   # (
+   #     'system/lib64/libmdmcutback.so',
+   # ): blob_fixup()
+   #     .add_needed('libqsap_shim.so'),
+    (
+        'vendor/lib/libmmcamera_stillmore_lib.so',
+    ): blob_fixup()
+        .add_needed('libshim_cameraclient.so'),
+    (
+        'vendor/lib/hw/camera.msm8992.so',
+    ): blob_fixup()
+        .add_needed('libfence_shim.so'),
+    (
+        'vendor/lib64/lib-rtpcore.so',
+    ): blob_fixup()
+        .add_needed('ims_rtp_shim.so'),
+    (
+        'vendor/bin/slim_daemon',
+    ): blob_fixup()
+        .add_needed('slim_shim.so'),
+    (
+        'vendor/lib/libril-qc-qmi-1.so',
+        'vendor/lib64/libril-qc-qmi-1.so',
+    ): blob_fixup()
+        .add_needed('libaudioclient_shim.so'),
+    (
+        'vendor/bin/thermal-engine',
+        'vendor/lib64/libmm-abl.so',
+    ): blob_fixup()
+        .add_needed('libshims_thermal.so'),
+    (
+        'vendor/lib/libwfdhdcpcp.so',
+    ): blob_fixup()
+        .remove_needed('libDxHdcp.so'),
 }  # fmt: skip
 
 
-#TARGET_LD_SHIM_LIBS := \
-#    /system/vendor/lib/libwvm.so|libshims_wvm.so \
-#    /system/lib64/libmdmcutback.so|libqsap_shim.so \
-#    /system/lib/libshim_camera.so:/system/lib/libcamera_client.so|libshim_cameraclient.so \
-#    /system/vendor/lib/libmmcamera_stillmore_lib.so|/system/lib/libshim_cameraclient.so \
-#    /system/vendor/lib/hw/camera.msm8992.so|/system/vendor/lib/libfence_shim.so \
-#    /system/vendor/lib64/lib-rtpcore.so|/system/vendor/lib64/ims_rtp_shim.so \
-#    /system/vendor/bin/slim_daemon|/system/vendor/lib64/slim_shim.so \
-#    /system/vendor/lib/libril-qc-qmi-1.so|libaudioclient_shim.so \
-#    /system/vendor/lib64/libril-qc-qmi-1.so|libaudioclient_shim.so \
-#    /system/vendor/bin/thermal-engine|libshims_thermal.so \
-#    /system/vendor/lib64/libmm-abl.so|libshims_thermal.so
+#    /system/lib/libshim_camera.so:/system/lib/libcamera_client.so|libshim_cameraclient.so \ #FIX ME
+
 
 
 module = ExtractUtilsModule(
