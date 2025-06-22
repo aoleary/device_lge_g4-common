@@ -42,7 +42,17 @@ cc_library_shared {
 }
 
 // Slim_shim
+cc_library_shared {
+    name: "slim_shim",
+    srcs: ["slim_shim.cpp"],
 
+    proprietary: true,
+    arch: {
+        arm64: {
+            cflags: ["-DLIBSHIMS_64BIT"],
+        },
+    },
+}
 // AudioSystem
 cc_library_shared {
     name: "libaudioclient_shim_g4",
