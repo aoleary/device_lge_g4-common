@@ -131,6 +131,7 @@ blob_fixups: blob_fixups_user_type = {
         'vendor/lib64/libril-qcril-hook-oem.so',
         'vendor/lib64/libvss_common_core.so',
         'vendor/lib64/libvss_nv_core.so',
+        'vendor/bin/hw/rild',
     ): blob_fixup()
         .replace_needed('libril.so', 'libril_lge.so'),
 }  # fmt: skip

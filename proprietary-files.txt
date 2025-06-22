@@ -505,6 +505,9 @@ vendor/lib/libqti-iop-client.so
 vendor/lib/libqti-perfd-client.so
 vendor/lib/libqti_performance.so
 vendor/lib/libquipc_os_api.so
+# rild is source build per android version but needs to be freshly pulled patched and pinned per android version
+#replace libril.so with libril_lge.so
+vendor/bin/hw/rild|6ab437848d4e9e68f91dcd744ee20142b50e2bf4
 vendor/lib/libril-qc-ltedirectdisc.so
 vendor/lib/libril-qc-qmi-1.so
 vendor/lib/libril-qc-radioconfig.so
