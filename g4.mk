@@ -17,6 +17,10 @@
 $(call inherit-product-if-exists, vendor/lge/g4-common/g4-common-vendor.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/product_launched_with_l_mr1.mk)
 
+PRODUCT_USE_DYNAMIC_PARTITIONS := true
+PRODUCT_RETROFIT_DYNAMIC_PARTITIONS := true
+PRODUCT_BUILD_SUPER_PARTITION := true
+
 # Adaptive Suspend
 PRODUCT_PROPERTY_OVERRIDES += \
     suspend.short_suspend_threshold_millis=2000 \
@@ -125,10 +129,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.camera.eis.enable=1 \
     persist.camera.is_type=4
-
-# rootless torch tile workaround
-PRODUCT_PACKAGES += \
-    Flashlight
 
 # Configstore
 PRODUCT_PACKAGES += \
@@ -482,17 +482,8 @@ PRODUCT_COPY_FILES += \
 
 # Shims
 PRODUCT_PACKAGES += \
-    libshims_wvm \
-    libqsap_shim \
-    libcne_shim \
-    libshim_cameraclient \
-    libqsap_shim \
-    libfence_shim \
-    ims_rtp_shim \
-    slim_shim \
-    libaudioclient_shim \
-    libshims_thermal
-
+    libcne_shim
+    
 # System properties
 -include $(LOCAL_PATH)/system_prop.mk
 PRODUCT_PROPERTY_OVERRIDES += \
