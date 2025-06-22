@@ -123,6 +123,16 @@ blob_fixups: blob_fixups_user_type = {
         'vendor/lib/libwfdhdcpcp.so',
     ): blob_fixup()
         .remove_needed('libDxHdcp.so'),
+    (
+        'vendor/lib/libril-qc-qmi-1.so',
+        'vendor/lib/libril-qcril-hook-oem.so',
+        'vendor/lib/libvss_common_core.so',
+        'vendor/lib64/libril-qc-qmi-1.so',
+        'vendor/lib64/libril-qcril-hook-oem.so',
+        'vendor/lib64/libvss_common_core.so',
+        'vendor/lib64/libvss_nv_core.so',
+    ): blob_fixup()
+        .replace_needed('libril.so', 'libril_lge.so'),
 }  # fmt: skip
 
 
