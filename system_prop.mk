@@ -1,8 +1,7 @@
-#ADB Debugging
+	#ADB Debugging
 PRODUCT_PROPERTY_OVERRIDES += \
 persist.sys.usb.config=mtp,adb \
-persist.vendor.usb.config=mtp,adb \
-ro.debuggable=1
+persist.vendor.usb.config=mtp,adb
 
 # ANR workaround : Increase watchdog timeout multiplier
     ro.hw_timeout_multiplier=6
@@ -130,10 +129,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.image-dex2oat-threads=4 \
     dalvik.vm.madvise-random=true \
     dalvik.vm.systemuicompilerfilter=speed \
-    pm.dexopt.first-boot=verify \
     pm.dexopt.bg-dexopt=everything \
-    pm.dexopt.boot=verify \
-    pm.dexopt.install=verify \
     ro.vendor.qti.am.reschedule_service=true \
 # filter unused apps
     pm.dexopt.downgrade_after_inactive_days=10 \
