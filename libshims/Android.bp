@@ -37,7 +37,6 @@ cc_library_shared {
     name: "libfence_shim",
     srcs: ["fence.cpp"],
 
-    proprietary: true,
     vendor: true,
 }
 
@@ -46,7 +45,7 @@ cc_library_shared {
     name: "ims_rtp_shim",
     srcs: ["rtp.cpp"],
 
-    proprietary: true,
+    vendor: true,
     arch: {
         arm64: {
             cflags: ["-DLIBSHIMS_64BIT"],
@@ -59,7 +58,7 @@ cc_library_shared {
     name: "slim_shim",
     srcs: ["slim_shim.cpp"],
 
-    proprietary: true,
+    vendor: true,
     arch: {
         arm64: {
             cflags: ["-DLIBSHIMS_64BIT"],

@@ -106,11 +106,6 @@ TARGET_BOOTANIMATION_TEXTURE_CACHE := true
 PRODUCT_PACKAGES += \
     android.hardware.oemlock@1.0-service
 
-# BPF bypass
-PRODUCT_PROPERTY_OVERRIDES += \
-    bpf.progs_loaded=1 \
-    ro.kernel.ebpf.supported=false
-
 # Camera
 PRODUCT_PACKAGES += \
     camera.device@3.4-external-impl \
@@ -481,7 +476,14 @@ PRODUCT_COPY_FILES += \
 
 # Shims
 PRODUCT_PACKAGES += \
-    libcne_shim
+    libcne_shim \
+    libqsap_shim \
+    libshim_cameraclient \
+    libfence_shim \
+    ims_rtp_shim \
+    slim_shim \
+    libaudioclient_shim_g4 \
+    libshims_thermal
     
 # System properties
 -include $(LOCAL_PATH)/system_prop.mk
