@@ -12,6 +12,19 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+cc_library_shared {
+    name: "libqsap_shim",
+    srcs: ["libqsap_shim.c"],
+    shared_libs: [
+        "libqsap_sdk",
+        "liblog",
+    ],
+    include_dirs: ["device/lge/g4-common/softap/sdk"],
+
+    proprietary: true,
+}
+
+
 // cameraclient
 cc_library_shared {
     name: "libshim_cameraclient",
