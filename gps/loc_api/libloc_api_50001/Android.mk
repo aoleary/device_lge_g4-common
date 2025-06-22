@@ -2,9 +2,9 @@ LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
 
-LOCAL_MODULE := libloc_eng
+LOCAL_MODULE := libloc_eng1
 LOCAL_MODULE_OWNER := qcom
-
+LOCAL_VENDOR_MODULE := true
 LOCAL_MODULE_TAGS := optional
 
 LOCAL_SHARED_LIBRARIES := \
@@ -63,7 +63,7 @@ include $(CLEAR_VARS)
 
 LOCAL_MODULE := gps.msm8992
 LOCAL_MODULE_OWNER := qcom
-
+LOCAL_VENDOR_MODULE := true
 LOCAL_MODULE_TAGS := optional
 
 ## Libs
