@@ -251,7 +251,8 @@ PRODUCT_PACKAGES += \
     sysctl.rc \
     kill_pulse.sh \
     pulse.sh \
-    init.safailnet.rc
+    init.safailnet.rc \
+    target_config.sh
 
 PRODUCT_PACKAGES_ENG += \
     fstab.qcom \
@@ -273,7 +274,8 @@ PRODUCT_PACKAGES_ENG += \
     sysctl.rc \
     kill_pulse.sh \
     pulse.sh \
-    init.safailnet.rc
+    init.safailnet.rc \
+    target_config.sh
 
 # IO Cgroups
 PRODUCT_PROPERTY_OVERRIDES += \
