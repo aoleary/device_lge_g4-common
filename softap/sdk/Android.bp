@@ -1,0 +1,58 @@
+cc_library_shared {
+    name: "libqsap_sdk",
+
+    srcs: [
+        "qsap_api.c",
+        "qsap.c",
+    ],
+
+    local_include_dirs: [
+        ".", // For qsap_api.h and qsap.h
+    ],
+
+    include_dirs: [
+        "external/libnl/include",
+        "external/wpa_supplicant_8/wpa_supplicant/src/drivers",
+    ],
+
+    shared_libs: [
+        "libnetutils",
+        "libutils",
+        "libbinder",
+        "libcutils",
+        "libhardware_legacy",
+        "libnl",
+        "liblog",
+    ],
+
+    header_libs: [
+        "libcutils_headers",
+    ],
+
+    export_include_dirs: [
+        ".", // Exported headers
+    ],
+
+    cflags: [
+        "-Wall",
+        "-Werror",
+        "-Wno-unused-variable",
+        "-Wno-unused-value",
+        "-Wno-format",
+        "-Wno-sometimes-uninitialized",
+        "-Wno-enum-conversion",
+        "-Wno-unused-parameter",
+        "-Wno-implicit-function-declaration",
+        "-DSDK_VERSION=\"0.0.1.0\"",
+    ],
+
+    vendor: true,
+    proprietary: true,
+}
+
+// Exported headers as a header-only library
+cc_library_headers {
+    name: "libqsap_headers",
+    export_include_dirs: ["."],
+    vendor: true,
+}
