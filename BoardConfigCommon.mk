@@ -202,10 +202,17 @@ TARGET_KEYMASTER_WAIT_FOR_QSEE := true
 TARGET_PROVIDES_LIBLIGHT := true
 
 # Lineage Health
-TARGET_HEALTH_CHARGING_CONTROL_CHARGING_PATH := /sys/class/power_supply/battery/charging_enabled
-TARGET_HEALTH_CHARGING_CONTROL_CHARGING_ENABLED := 0
-TARGET_HEALTH_CHARGING_CONTROL_CHARGING_DISABLED := 1
-TARGET_HEALTH_CHARGING_CONTROL_SUPPORTS_BYPASS := false
+SOONG_CONFIG_NAMESPACES += lineage_health
+SOONG_CONFIG_lineage_health += charging_control_charging_path
+SOONG_CONFIG_lineage_health += charging_control_charging_enabled
+SOONG_CONFIG_lineage_health += charging_control_charging_disabled
+SOONG_CONFIG_lineage_health += charging_control_supports_bypass
+
+SOONG_CONFIG_lineage_health_charging_control_charging_path := /sys/class/power_supply/battery/charging_enabled
+SOONG_CONFIG_lineage_health_charging_control_charging_enabled := 0
+SOONG_CONFIG_lineage_health_charging_control_charging_disabled := 1
+SOONG_CONFIG_lineage_health_charging_control_supports_bypass := false
+
 
 # LineageHW
 BOARD_HARDWARE_CLASS += $(COMMON_PATH)/lineagehw
@@ -216,8 +223,7 @@ BOARD_NFC_HAL_SUFFIX := msm8992
 BOARD_NFC_DEVICE := "/dev/pn547"
 
 # Offline Charger
-WITH_LINEAGE_CHARGER := false
-BOARD_HEALTHD_CUSTOM_CHARGER_RES := $(COMMON_PATH)/charger/images
+BOARD_CHARGER_DISABLE_INIT_BLANK := true
 
 # Platform
 TARGET_BOARD_PLATFORM := msm8992
