@@ -1135,14 +1135,6 @@ service adsprpcd /vendor/bin/adsprpcd
     group media
     task_profiles ServiceCapacityLow
 
-service charger /system/bin/charger
-    class charger
-    user system
-    group log system graphics input
-    capabilities SYS_BOOT
-    seclabel u:r:charger:s0
-    task_profiles ServiceCapacityLow
-
 service energy-awareness /vendor/bin/energy-awareness
     class main
     user root
