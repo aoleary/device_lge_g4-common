@@ -69,22 +69,22 @@ blob_fixups: blob_fixups_user_type = {
         'vendor/lib64/libbccQTI.so',
     ): blob_fixup()
         .remove_needed('libLLVM.so'), #FIX ME
-    (
-        'vendor/lib/libsettings.so',
-        'vendor/lib64/libsettings.so',
-    ): blob_fixup()
-        .replace_needed('libprotobuf-cpp-full-29a.so', 'libprotobuf-cpp-full-v29.so'),
-    (
-        'vendor/lib/libcneapiclient.so',
-        'vendor/lib64/libcneapiclient.so',
-        'vendor/lib/libcne.so',
-        'vendor/lib64/libcne.so',
-        'vendor/lib/libwms.so',
-        'vendor/lib64/libwms.so',
-        'vendor/lib/libwqe.so',
-        'vendor/lib64/libwqe.so',
-    ): blob_fixup()
-        .replace_needed('libprotobuf-cpp-lite-29a.so', 'libprotobuf-cpp-lite-v29.so'),
+#    (
+#        'vendor/lib/libsettings.so',
+#        'vendor/lib64/libsettings.so',
+#    ): blob_fixup()
+#        .replace_needed('libprotobuf-cpp-full-29a.so', 'libprotobuf-cpp-full-v29.so'),
+#    (
+#        'vendor/lib/libcneapiclient.so',
+#        'vendor/lib64/libcneapiclient.so',
+#        'vendor/lib/libcne.so',
+#        'vendor/lib64/libcne.so',
+#        'vendor/lib/libwms.so',
+#        'vendor/lib64/libwms.so',
+#        'vendor/lib/libwqe.so',
+#        'vendor/lib64/libwqe.so',
+#    ): blob_fixup()
+#        .replace_needed('libprotobuf-cpp-lite-29a.so', 'libprotobuf-cpp-lite-v29.so'),
 #    (
 #        'vendor/lib/libwvm.so',
 #    ): blob_fixup()
@@ -134,6 +134,25 @@ blob_fixups: blob_fixups_user_type = {
         'vendor/bin/hw/rild',
     ): blob_fixup()
         .replace_needed('libril.so', 'libril_lge.so'),
+    (
+        'vendor/bin/qseecom_sample_client'
+        'vendor/lib/drm/libdrmwvmplugin.so',
+        'vendor/lib/libSecureUILib.so',
+        'vendor/lib/libdrmdecrypt.so',
+        'vendor/lib/liboemcrypto.so',
+        'vendor/lib/libpvr.so',
+        'vendor/lib/librmp.so',
+        'vendor/lib/libsi.so',
+        'vendor/lib/libtzdrmgenprov.so',
+        'vendor/lib/libwvm.so',
+        'vendor/lib64/libSecureUILib.so',
+        'vendor/lib64/libmdtp.so',
+        'vendor/lib64/libpvr.so',
+        'vendor/lib64/librmp.so',
+        'vendor/lib64/libsi.so',
+        'vendor/lib64/libtzdrmgenprov.so',
+    ): blob_fixup()
+        .binary_regex_replace(b'system/etc/firmware', b'vendor/firmware\x00\x00\x00\x00'),
 }  # fmt: skip
 
 
