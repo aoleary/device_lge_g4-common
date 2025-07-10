@@ -20,6 +20,7 @@ from extract_utils.main import (
 
 namespace_imports = [
     'device/lge/g4-common',
+    'device/lge/g4-common/camera',
     'hardware/qcom-caf/msm8992',
     'hardware/qcom-caf/msm8992/display',
     'hardware/qcom-caf/msm8992/media',
@@ -28,11 +29,6 @@ namespace_imports = [
 ]
 
 blob_fixups: blob_fixups_user_type = {
-    (
-        'system/lib/hw/lgkm.msm8992.so',
-        'system/lib64/hw/lgkm.msm8992.so',
-    ): blob_fixup()
-        .remove_needed('libsecureks.so'),
     (
         'vendor/lib/libtinyxml.so',
         'vendor/lib64/libtinyxml.so',
@@ -74,10 +70,6 @@ blob_fixups: blob_fixups_user_type = {
     ): blob_fixup()
         .add_needed('libshim_cameraclient.so'),
     (
-        'vendor/lib/hw/camera.msm8992.so',
-    ): blob_fixup()
-        .add_needed('libfence_shim.so'),
-    (
         'vendor/lib64/lib-rtpcore.so',
     ): blob_fixup()
         .add_needed('ims_rtp_shim.so'),
@@ -93,7 +85,6 @@ blob_fixups: blob_fixups_user_type = {
         .remove_needed('libmedia.so')
         .replace_needed('libril.so', 'libril_lge.so'),
     (
-        'vendor/bin/thermal-engine',
         'vendor/lib64/libmm-abl.so',
     ): blob_fixup()
         .add_needed('libshims_thermal.so'),
@@ -140,6 +131,11 @@ blob_fixups: blob_fixups_user_type = {
  #       .add_needed('libshim_cameraclient.so')
 
 }  # fmt: skip
+#    (
+#        'system/lib/hw/lgkm.msm8992.so',
+#        'system/lib64/hw/lgkm.msm8992.so',
+#    ): blob_fixup()
+#        .remove_needed('libsecureks.so'),
     #    (
 #        'vendor/lib/libsettings.so',
 #        'vendor/lib64/libsettings.so',
@@ -165,6 +161,11 @@ blob_fixups: blob_fixups_user_type = {
    # ): blob_fixup()
    #     .add_needed('libqsap_shim.so'),
 
+
+       #(
+       # 'vendor/lib/hw/camera.msm8992.so',
+    #): blob_fixup()
+    #    .add_needed('libfence_shim.so'),
 #    /system/lib/libshim_camera.so:/system/lib/libcamera_client.so|libshim_cameraclient.so \ #FIX ME
 
 

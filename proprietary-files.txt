@@ -30,11 +30,13 @@ system/firmware/image/keymaster.b02:vendor/firmware/image/keymaster.b02
 system/firmware/image/keymaster.b03:vendor/firmware/image/keymaster.b03
 system/firmware/image/keymaster.mdt:vendor/firmware/image/keymaster.mdt
 system/framework/com.quicinc.cne.jar
-system/lib/hw/lgkm.default.so
-system/lib/hw/lgkm.msm8992.so
-#system/lib/hw/sensors.msm8992.so
-system/lib/hw/wbc_hal.default.so
-system/lib/hw/sensors.hal.tof.so
+system/lib/hw/lgkm.default.so:vendor/lib/hw/lgkm.default.so
+system/lib/hw/lgkm.msm8992.so:vendor/lib/hw/lgkm.msm8992.so
+system/lib/libsecureks.so:vendor/lib/libsecureks.so
+system/lib64/libsecureks.so:vendor/lib64/libsecureks.so
+#system/lib/hw/sensors.msm8992.so:vendor/lib/hw/sensors.msm8992.so
+system/lib/hw/wbc_hal.default.so:vendor/lib/hw/wbc_hal.default.so
+#system/lib/hw/sensors.hal.tof.so
 system/lib/soundfx/libqcomvoiceprocessingdescriptors.so
 system/lib/libVDBase.so
 system/lib/libVDLowLightAPI.so
@@ -43,7 +45,7 @@ system/lib/libaptX_encoder.so
 system/lib/libaptXHD_encoder.so
 system/lib/libalmcascore.so
 system/lib/libalmcaswrap.so
-system/lib/liblgkm.so
+system/lib/liblgkm.so:vendor/lib/liblgkm.so
 system/lib/liblgmabl.so
 system/lib/libmdmcutback.so
 system/lib/libmotext_inf.so
@@ -59,11 +61,11 @@ system/lib/libvss_nv_idl.so:vendor/lib/libvss_nv_idl.so
 system/lib/libvss_nv_iface.so:vendor/lib/libvss_nv_iface.so
 system/lib64/libaptX_encoder.so
 system/lib64/libaptXHD_encoder.so
-system/lib64/hw/lgkm.default.so
-system/lib64/hw/lgkm.msm8992.so
-#system/lib64/hw/sensors.msm8992.so
-system/lib64/hw/wbc_hal.default.so
-system/lib64/liblgkm.so
+system/lib64/hw/lgkm.default.so:vendor/lib64/hw/lgkm.default.so
+system/lib64/hw/lgkm.msm8992.so:vendor/lib64/hw/lgkm.msm8992.so
+#system/lib64/hw/sensors.msm8992.so:vendor/lib64/hw/sensors.msm8992.so
+system/lib64/hw/wbc_hal.default.so:vendor/lib64/hw/wbc_hal.default.so
+system/lib64/liblgkm.so:vendor/lib64/liblgkm.so
 system/lib64/liblgmabl.so
 system/lib64/libmdmcutback.so
 system/lib64/libmotext_inf.so
@@ -128,7 +130,7 @@ vendor/lib/hw/audio.a2dp.default.so
 #kanged from angler
 vendor/lib64/hw/sound_trigger.primary.msm8994.so|8631f7147232af5b3a4d11a38295e8225f0bd4d5
 vendor/lib/hw/sound_trigger.primary.msm8994.so|efcdaead44faa10eeef6f1ef004071e8d3ef4136
-vendor/lib/hw/camera.msm8992.so
+#vendor/lib/hw/camera.msm8992.so
 #system/lib/libcamera_client.so:vendor/lib/libcamera_client.so
 #system/lib64/libcamera_client.so:vendor/lib64/libcamera_client.so
 vendor/lib/hw/activity_recognition.msm8992.so
@@ -457,9 +459,9 @@ vendor/lib/libmmcamera_tuning.so
 vendor/lib/libmmcamera_tuning_lookup.so
 vendor/lib/libseemore.so
 vendor/lib/libmm-qcamera.so
-vendor/lib/libmmcamera_interface.so
-vendor/lib/libqomx_core.so
-vendor/lib/libmmjpeg_interface.so
+#vendor/lib/libmmcamera_interface.so
+#vendor/lib/libqomx_core.so
+#vendor/lib/libmmjpeg_interface.so
 vendor/lib/libmorpho_image_stab31.so
 vendor/lib/libmorpho_superzoom.so
 vendor/lib/libmmhttpstack.so
