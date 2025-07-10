@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 The LineageOS Project
+ * Copyright (C) 2025 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -10,16 +10,13 @@
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * See the License for the specific language governing permissions ands
  * limitations under the License.
  */
 
-#include <media/AudioSystem.h>
-
-extern "C" uintptr_t _ZN7android11AudioSystem16addErrorCallbackEPFviE(
-        android::audio_error_callback cb);
-
-extern "C" void _ZN7android11AudioSystem16setErrorCallbackEPFviE(
-        android::audio_error_callback cb) {
-    _ZN7android11AudioSystem16addErrorCallbackEPFviE(cb);
-}
+extern "C" void _ZN7android11AudioSystem16addErrorCallbackEPFviE() {}
+extern "C" void _ZN7android11AudioSystem16setErrorCallbackEPFviE() {}
+extern "C" void _ZN7android11AudioSystem13getParametersEiRKNS_7String8E() {}
+extern "C" void _ZN7android11AudioSystem13setParametersEiRKNS_7String8E() {}
+extern "C" void _ZN7android2spINS_12ProcessStateEED1Ev() {}
+extern "C" void _ZN7android2spINS_12ProcessStateEED2Ev() {}
