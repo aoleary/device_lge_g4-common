@@ -29,6 +29,7 @@ cc_library_shared {
 cc_library_shared {
     name: "libshim_cameraclient",
     srcs: ["cameraclient_shim.cpp"],
+    vendor: true,
 
 }
 
