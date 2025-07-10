@@ -1,6 +1,6 @@
 cc_library_shared {
-    // The module name is hardcoded to camera.msm8994 for oneplus2.
-    name: "camera.msm8994",
+    // The module name is hardcoded to camera.msm8992 for LG G4.
+    name: "camera.msm8992",
     relative_install_path: "hw",
     vendor: true,
     compile_multilib: "32",

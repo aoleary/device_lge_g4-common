@@ -76,7 +76,7 @@ cc_library_shared {
 
     include_dirs: [
         "frameworks/native/include/media/openmax",
-        "device/oneplus/oneplus2/camera/mm-image-codec/qomx_core/inc",
+        "device/lge/g4-common/camera/mm-image-codec/qomx_core/inc",
     ],
 
     shared_libs: [
