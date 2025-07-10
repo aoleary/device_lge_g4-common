@@ -1,0 +1,28 @@
+cc_library_shared {
+    name: "sensors.hal.tof",
+    relative_install_path: "hw",
+    vendor: true,
+
+    srcs: [
+        "sensors.cpp",
+        "SensorBase.cpp",
+        "ProximitySensor.cpp",
+        "InputEventReader.cpp",
+    ],
+
+    cflags: [
+        "-DLOG_TAG=\"Sensors\"",
+    ],
+
+    shared_libs: [
+        "liblog",
+        "libcutils",
+        "libutils",
+        "libhardware",
+    ],
+
+    header_libs: [
+        "generated_kernel_headers",
+        "libhardware_headers",
+    ],
+}

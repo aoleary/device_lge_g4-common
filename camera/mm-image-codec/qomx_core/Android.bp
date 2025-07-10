@@ -1,0 +1,32 @@
+cc_library_shared {
+    name: "libqomx_core",
+    vendor: true,
+    compile_multilib: "32",
+
+    srcs: ["qomx_core.c"],
+
+    export_include_dirs: ["inc"],
+
+
+    cflags: [
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-g",
+        "-O0",
+    ],
+
+    local_include_dirs: [
+        "inc",
+    ],
+
+    include_dirs: [
+        "frameworks/native/include/media/openmax",
+    ],
+
+    shared_libs: [
+        "libcutils",
+        "libdl",
+        "liblog",
+    ],
+}

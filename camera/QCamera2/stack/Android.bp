@@ -1,0 +1,93 @@
+cc_library_shared {
+    name: "libmmcamera_interface",
+    vendor: true,
+    compile_multilib: "32",
+
+    srcs: [
+        "mm-camera-interface/src/mm_camera_interface.c",
+        "mm-camera-interface/src/mm_camera.c",
+        "mm-camera-interface/src/mm_camera_channel.c",
+        "mm-camera-interface/src/mm_camera_stream.c",
+        "mm-camera-interface/src/mm_camera_thread.c",
+        "mm-camera-interface/src/mm_camera_sock.c",
+    ],
+
+    cflags: [
+        "-D_ANDROID_",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-DVENUS_PRESENT",
+    ],
+
+    include_dirs: [
+        "system/media/camera/include",
+    ],
+
+    local_include_dirs: [
+        "mm-camera-interface/inc",
+        "common",
+    ],
+
+    shared_libs: [
+        "libdl",
+        "libhardware",
+        "libcutils",
+        "liblog",
+    ],
+
+    header_libs: [
+        "generated_kernel_headers",
+        "media_plugin_headers",
+        "camera_common_headers",
+        "camera_headers",
+    ],
+}
+
+cc_library_shared {
+    name: "libmmjpeg_interface",
+    vendor: true,
+    compile_multilib: "32",
+
+    srcs: [
+        "mm-jpeg-interface/src/mm_jpeg_queue.c",
+        "mm-jpeg-interface/src/mm_jpeg_exif.c",
+        "mm-jpeg-interface/src/mm_jpeg.c",
+        "mm-jpeg-interface/src/mm_jpeg_interface.c",
+        "mm-jpeg-interface/src/mm_jpeg_ionbuf.c",
+        "mm-jpeg-interface/src/mm_jpegdec_interface.c",
+        "mm-jpeg-interface/src/mm_jpegdec.c",
+    ],
+
+    cflags: [
+        "-D_ANDROID_",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-DMM_JPEG_CONCURRENT_SESSIONS_COUNT=2",
+        "-DMM_JPEG_USE_PIPELINE",
+
+    ],
+
+    local_include_dirs: [
+        "mm-jpeg-interface/inc",
+        "common",
+    ],
+
+    include_dirs: [
+        "frameworks/native/include/media/openmax",
+        "device/oneplus/oneplus2/camera/mm-image-codec/qomx_core/inc",
+    ],
+
+    shared_libs: [
+        "libdl",
+        "libcutils",
+        "liblog",
+        "libqomx_core",
+    ],
+
+    header_libs: [
+        "generated_kernel_headers",
+        "camera_common_headers",
+    ],
+}

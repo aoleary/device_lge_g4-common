@@ -68,31 +68,7 @@ blob_fixups: blob_fixups_user_type = {
         'vendor/lib/libbccQTI.so',
         'vendor/lib64/libbccQTI.so',
     ): blob_fixup()
-        .remove_needed('libLLVM.so'), #FIX ME
-#    (
-#        'vendor/lib/libsettings.so',
-#        'vendor/lib64/libsettings.so',
-#    ): blob_fixup()
-#        .replace_needed('libprotobuf-cpp-full-29a.so', 'libprotobuf-cpp-full-v29.so'),
-#    (
-#        'vendor/lib/libcneapiclient.so',
-#        'vendor/lib64/libcneapiclient.so',
-#        'vendor/lib/libcne.so',
-#        'vendor/lib64/libcne.so',
-#        'vendor/lib/libwms.so',
-#        'vendor/lib64/libwms.so',
-#        'vendor/lib/libwqe.so',
-#        'vendor/lib64/libwqe.so',
-#    ): blob_fixup()
-#        .replace_needed('libprotobuf-cpp-lite-29a.so', 'libprotobuf-cpp-lite-v29.so'),
-#    (
-#        'vendor/lib/libwvm.so',
-#    ): blob_fixup()
-#        .add_needed('libshim_wvm.so'),
-   # (
-   #     'system/lib64/libmdmcutback.so',
-   # ): blob_fixup()
-   #     .add_needed('libqsap_shim.so'),
+        .remove_needed('libLLVM.so'),
     (
         'vendor/lib/libmmcamera_stillmore_lib.so',
     ): blob_fixup()
@@ -113,7 +89,9 @@ blob_fixups: blob_fixups_user_type = {
         'vendor/lib/libril-qc-qmi-1.so',
         'vendor/lib64/libril-qc-qmi-1.so',
     ): blob_fixup()
-        .add_needed('libaudioclient_shim.so'),
+        .add_needed('libaudioclient_shim.so')
+        .remove_needed('libmedia.so')
+        .replace_needed('libril.so', 'libril_lge.so'),
     (
         'vendor/bin/thermal-engine',
         'vendor/lib64/libmm-abl.so',
@@ -124,10 +102,8 @@ blob_fixups: blob_fixups_user_type = {
     ): blob_fixup()
         .remove_needed('libDxHdcp.so'),
     (
-        'vendor/lib/libril-qc-qmi-1.so',
         'vendor/lib/libril-qcril-hook-oem.so',
         'vendor/lib/libvss_common_core.so',
-        'vendor/lib64/libril-qc-qmi-1.so',
         'vendor/lib64/libril-qcril-hook-oem.so',
         'vendor/lib64/libvss_common_core.so',
         'vendor/lib64/libvss_nv_core.so',
@@ -153,8 +129,41 @@ blob_fixups: blob_fixups_user_type = {
         'vendor/lib64/libtzdrmgenprov.so',
     ): blob_fixup()
         .binary_regex_replace(b'system/etc/firmware', b'vendor/firmware\x00\x00\x00\x00'),
-}  # fmt: skip
+    (
+        'vendor/lib/libmmcamera2_stats_modules.so'
+    ): blob_fixup()
+        .replace_needed('libandroid.so', 'libsensorndkbridge.so')
+ #   (
+ #       'vendor/lib/libcamera_client.so',
+ #       'vendor/lib64/libcamera_client.so'
+ #   ): blob_fixup()
+ #       .add_needed('libshim_cameraclient.so')
 
+}  # fmt: skip
+    #    (
+#        'vendor/lib/libsettings.so',
+#        'vendor/lib64/libsettings.so',
+#    ): blob_fixup()
+#        .replace_needed('libprotobuf-cpp-full-29a.so', 'libprotobuf-cpp-full-v29.so'),
+#    (
+#        'vendor/lib/libcneapiclient.so',
+#        'vendor/lib64/libcneapiclient.so',
+#        'vendor/lib/libcne.so',
+#        'vendor/lib64/libcne.so',
+#        'vendor/lib/libwms.so',
+#        'vendor/lib64/libwms.so',
+#        'vendor/lib/libwqe.so',
+#        'vendor/lib64/libwqe.so',
+#    ): blob_fixup()
+#        .replace_needed('libprotobuf-cpp-lite-29a.so', 'libprotobuf-cpp-lite-v29.so'),
+#    (
+#        'vendor/lib/libwvm.so',
+#    ): blob_fixup()
+#        .add_needed('libshim_wvm.so'),
+   # (
+   #     'system/lib64/libmdmcutback.so',
+   # ): blob_fixup()
+   #     .add_needed('libqsap_shim.so'),
 
 #    /system/lib/libshim_camera.so:/system/lib/libcamera_client.so|libshim_cameraclient.so \ #FIX ME
 
