@@ -70,7 +70,7 @@ cc_library_shared {
 cc_library_shared {
     name: "libaudioclient_shim_g4",
     srcs: ["libaudioclient_shim.cpp"],
-
+    vendor: true,
     shared_libs: ["libaudioclient"],
 
 }
