@@ -34,14 +34,10 @@ PRODUCT_PRODUCT_PROPERTIES += \
 # Audio
 PRODUCT_PACKAGES += \
     android.hardware.audio.service \
-    android.hardware.audio@2.0-impl \
     android.hardware.audio@7.0 \
     android.hardware.audio@7.0-impl \
-    android.hardware.audio.effect@2.0-impl \
     android.hardware.audio.effect@7.0 \
     android.hardware.audio.effect@7.0-impl \
-    android.hardware.soundtrigger@2.0 \
-    android.hardware.soundtrigger@2.0-core \
     android.hardware.soundtrigger@2.2-impl \
     libaudio-resampler \
     libaudioroute \
@@ -133,7 +129,6 @@ PRODUCT_PACKAGES += \
     disable_configstore
 
 # ConsumerIR
-TARGET_PROVIDES_CONSUMERIR_HAL := true
 PRODUCT_PACKAGES += \
     android.hardware.ir@1.0-impl \
     consumerir.msm8992
@@ -189,7 +184,8 @@ TARGET_FS_CONFIG_GEN := $(LOCAL_PATH)/config.fs
 PRODUCT_PACKAGES += \
     android.hardware.gnss@1.0-impl \
     android.hardware.gnss@1.0-service \
-    quipc.conf
+    quipc.conf \
+    gps.msm8992
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/gps/etc/flp.conf:$(TARGET_COPY_OUT_VENDOR)/etc/flp.conf \
@@ -410,7 +406,7 @@ PRODUCT_COPY_FILES += \
 # Power
 PRODUCT_PACKAGES += \
     android.hardware.power-service-qti \
-    android.hardware.power@1.0
+    android.hardware.power.stats@1.0-service.mock
 
 # RenderScript HAL
 PRODUCT_PACKAGES += \
@@ -488,7 +484,7 @@ PRODUCT_PACKAGES += \
     thermal.msm8992
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/thermal-engine.conf:$(TARGET_COPY_OUT_VENDOR)/etc/thermal-engine-8992.conf
+    $(LOCAL_PATH)/configs/thermal-engine.conf:$(TARGET_COPY_OUT_VENDOR)/etc/thermal-engine.conf
 
 # Timekeep
 PRODUCT_PACKAGES += \
@@ -505,7 +501,7 @@ PRODUCT_PACKAGES += \
 
 # Wifi
 PRODUCT_PACKAGES += \
-    android.hardware.wifi@1.0-service \
+    android.hardware.wifi@1.0-service.legacy \
     libqsap_sdk \
     libQWiFiSoftApCfg \
     libwpa_client \
