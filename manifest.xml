@@ -86,16 +86,6 @@
         </interface>
     </hal>
     <hal format="hidl">
-        <name>android.hardware.oemlock</name>
-        <transport arch="32+64">passthrough</transport>
-        <version>1.0</version>
-        <interface>
-            <name>IOemLock</name>
-            <instance>default</instance>
-        </interface>
-        <fqname>@1.0::IOemLock/default</fqname>
-    </hal>
-    <hal format="hidl">
         <name>android.hardware.renderscript</name>
         <transport arch="32+64">passthrough</transport>
         <version>1.0</version>
@@ -103,36 +93,6 @@
             <name>IDevice</name>
             <instance>default</instance>
         </interface>
-    </hal>
-    <hal format="hidl">
-        <name>vendor.lineage.touch</name>
-        <transport arch="32+64">passthrough</transport>
-        <version>1.0</version>
-        <interface>
-            <name>IKeyDisabler</name>
-            <instance>default</instance>
-        </interface>
-        <interface>
-            <name>IStylusMode</name>
-            <instance>default</instance>
-        </interface>
-        <interface>
-            <name>IGloveMode</name>
-            <instance>default</instance>
-        </interface>
-        <fqname>@1.0::IKeyDisabler/default</fqname>
-        <fqname>@1.0::IStylusMode/default</fqname>
-        <fqname>@1.0::IGloveMode/default</fqname>
-    </hal>
-    <hal format="hidl">
-        <name>vendor.lineage.camera.motor</name>
-        <transport arch="32+64">passthrough</transport>
-        <version>1.0</version>
-        <interface>
-            <name>ICameraMotor</name>
-            <instance>default</instance>
-        </interface>
-        <fqname>@1.0::ICameraMotor/default</fqname>
     </hal>
     <hal format="hidl">
         <name>android.hardware.drm</name>
@@ -143,16 +103,6 @@
             <instance>default</instance>
         </interface>
         <fqname>@1.0::IDrmFactory/default</fqname>
-    </hal>
-    <hal format="hidl">
-        <name>android.hardware.gatekeeper</name>
-        <transport>hwbinder</transport>
-        <version>1.0</version>
-        <interface>
-            <name>IGatekeeper</name>
-            <instance>default</instance>
-        </interface>
-        <fqname>@1.0::IGatekeeper/default</fqname>
     </hal>
     <hal format="hidl">
         <name>android.hardware.gnss</name>
@@ -202,16 +152,6 @@
             <instance>default</instance>
         </interface>
         <fqname>@1.0::IConsumerIr/default</fqname>
-    </hal>
-    <hal format="hidl">
-        <name>android.hardware.keymaster</name>
-        <transport>hwbinder</transport>
-        <version>3.0</version>
-        <interface>
-            <name>IKeymasterDevice</name>
-            <instance>default</instance>
-        </interface>
-        <fqname>@3.0::IKeymasterDevice/default</fqname>
     </hal>
     <hal format="hidl">
         <name>android.hardware.light</name>
@@ -320,16 +260,6 @@
         </interface>
         <fqname>@1.0::IThermal/default</fqname>
     </hal>
-    <!--hal format="hidl">
-        <name>android.hardware.wifi.offload</name>
-        <transport>hwbinder</transport>
-        <version>1.0</version>
-        <interface>
-            <name>IOffload</name>
-            <instance>default</instance>
-        </interface>
-        <fqname>@1.0::IOffload/default</fqname>
-    </hal>-->
     <hal format="hidl">
         <name>android.hardware.vr</name>
         <transport arch="32+64">passthrough</transport>
@@ -346,15 +276,6 @@
         <version>1.0</version>
         <interface>
             <name>IVibrator</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
-    <hal format="hidl">
-        <name>vendor.lineage.livedisplay</name>
-        <transport>hwbinder</transport>
-        <version>2.0</version>
-        <interface>
-            <name>IDisplayColorCalibration</name>
             <instance>default</instance>
         </interface>
     </hal>

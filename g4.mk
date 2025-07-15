@@ -96,10 +96,6 @@ TARGET_BOOTANIMATION_MULTITHREAD_DECODE := true
 TARGET_BOOTANIMATION_PRELOAD := true
 TARGET_BOOTANIMATION_TEXTURE_CACHE := true
 
-# Bootloader
-PRODUCT_PACKAGES += \
-    android.hardware.oemlock@1.0-service
-
 # Camera
 PRODUCT_PACKAGES += \
     camera.device@3.4-external-impl \
@@ -275,18 +271,15 @@ PRODUCT_PACKAGES += \
     ipacm-diag \
     IPACM_cfg.xml
 
-PRODUCT_PACKAGES_DEBUG += \
-    ipa_nat_test \
-
 # Kernel modules
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/modules/mcDrvModule.ko:$(TARGET_COPY_OUT_VENDOR)/lib/modules/mcDrvModule.ko \
     $(LOCAL_PATH)/configs/modules/mcKernelApi.ko:$(TARGET_COPY_OUT_VENDOR)/lib/modules/mcKernelApi.ko
 
-# Keymaster
+# Keymaster HAL
 PRODUCT_PACKAGES += \
-    android.hardware.keymaster@3.0-impl \
-    android.hardware.keymaster@3.0-service \
+    android.hardware.keymaster@4.1-service \
+    android.hardware.gatekeeper@1.0-service.software \
     android.hardware.authsecret@1.0-service
 
 # Lineage Health
@@ -428,7 +421,6 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/base_qcril.db:$(TARGET_COPY_OUT_VENDOR)/etc/motorola/base_qcril.db \
     $(LOCAL_PATH)/configs/qmi_fw.conf:$(TARGET_COPY_OUT_VENDOR)/etc/qmi_fw.conf \
     $(LOCAL_PATH)/configs/ctbk_val.cfg:$(TARGET_COPY_OUT_VENDOR)/etc/motorola/mdmctbk/ctbk_val.cfg \
-    $(LOCAL_PATH)/configs/carrierconfig-com.android.carrierconfig-89300100160427481402.xml:data/user_de/0/com.android.phone/files/carrierconfig-com.android.carrierconfig-89300100160427481402.xml \
     prebuilts/vndk/v33/arm64/arch-arm64-armv8-a/shared/vndk-sp/libutils.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libutils-v33.so
 
 # Radio
@@ -441,8 +433,7 @@ PRODUCT_PACKAGES += \
     libqsap_sdk \
     librmnetctl \
     libxml2 \
-    android.system.net.netd@1.0 \
-    ro.telephony.default_network=12
+    android.system.net.netd@1.0
 
 # Seccomp
 PRODUCT_COPY_FILES += \

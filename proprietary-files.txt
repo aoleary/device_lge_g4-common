@@ -52,7 +52,7 @@ system/lib/libmotext_inf.so
 system/lib/libprotobuf-cpp-full.so:vendor/lib/libprotobuf-cpp-full-29a.so
 system/lib/libprotobuf-cpp-lite.so:vendor/lib/libprotobuf-cpp-lite-29a.so
 system/lib/libqmimotext.so
-system/lib/libuicc.so
+system/lib/libuicc.so:vendor/lib/libuicc.so
 system/lib/libvss_common_core.so:vendor/lib/libvss_common_core.so
 system/lib/libvss_common_idl.so:vendor/lib/libvss_common_idl.so
 system/lib/libvss_common_iface.so:vendor/lib/libvss_common_iface.so
@@ -72,7 +72,7 @@ system/lib64/libmotext_inf.so
 system/lib64/libprotobuf-cpp-full.so:vendor/lib64/libprotobuf-cpp-full-29a.so
 system/lib64/libprotobuf-cpp-lite.so:vendor/lib64/libprotobuf-cpp-lite-29a.so
 system/lib64/libqmimotext.so
-system/lib64/libuicc.so
+system/lib64/libuicc.so:vendor/lib64/libuicc.so
 system/lib64/libvss_common_core.so:vendor/lib64/libvss_common_core.so
 system/lib64/libvss_common_idl.so:vendor/lib64/libvss_common_idl.so
 system/lib64/libvss_common_iface.so:vendor/lib64/libvss_common_iface.so
