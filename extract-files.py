@@ -124,6 +124,7 @@ blob_fixups: blob_fixups_user_type = {
         'vendor/lib/libmmcamera2_stats_modules.so'
     ): blob_fixup()
         .replace_needed('libandroid.so', 'libsensorndkbridge.so')
+        .binary_regex_replace(b'system/lib/hw/sensors.hal.tof.so', b'vendor/lib/hw/sensors.hal.tof.so'),
  #   (
  #       'vendor/lib/libcamera_client.so',
  #       'vendor/lib64/libcamera_client.so'
