@@ -776,9 +776,8 @@ vendor/lib64/libcir_driver.so
 #kanged from angler
 system/lib/libfrsdk.so
 system/lib64/libfrsdk.so
-#
-system/lib/libloc_api_v02.so
-system/lib64/libloc_api_v02.so
+system/lib/libloc_api_v02.so:vendor/lib/libloc_api_v02.so
+system/lib64/libloc_api_v02.so:vendor/lib64/libloc_api_v02.so
 system/lib/libloc_ds_api.so
 system/lib64/libloc_ds_api.so
 vendor/lib/libFlacSwDec.so
@@ -789,11 +788,9 @@ vendor/lib/libthermalclient.so
 vendor/lib64/libthermalclient.so
 vendor/lib/libtime_genoff.so
 vendor/lib64/libtime_genoff.so
-system/priv-app/com.qualcomm.location/com.qualcomm.location.apk
 system/priv-app/qcrilmsgtunnel/qcrilmsgtunnel.apk
 vendor/lib/com.quicinc.cne.constants@1.0.so
 vendor/lib64/com.quicinc.cne.constants@1.0.so
-system/framework/com.qti.location.sdk.jar
 system/etc/permissions/com.qti.location.sdk.xml
 system/framework/com.qti.snapdragon.sdk.display.jar
 system/etc/permissions/com.qti.snapdragon.sdk.display.xml
