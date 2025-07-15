@@ -8,6 +8,8 @@ LOCAL_VENDOR_MODULE := true
 LOCAL_MODULE_TAGS := optional
 
 LOCAL_SHARED_LIBRARIES := \
+    libhardware \
+    libhardware_legacy \
     libutils \
     libcutils \
     libdl \
@@ -68,6 +70,8 @@ LOCAL_MODULE_TAGS := optional
 
 ## Libs
 LOCAL_SHARED_LIBRARIES := \
+    libhardware \
+    libhardware_legacy \
     libutils \
     libcutils \
     liblog \
