@@ -177,7 +177,7 @@ TARGET_PLATFORM_DEVICE_BASE := /devices/soc.0/
 BOARD_KERNEL_CMDLINE := androidboot.selinux=permissive
 BOARD_KERNEL_CMDLINE += androidboot.init_fatal_reboot_target=recovery
 BOARD_KERNEL_CMDLINE += androidboot.hardware=qcom androidboot.wificountrycode=us
-BOARD_KERNEL_CMDLINE += ehci-hcd.park=3 lpm_levels.sleep_disabled=1 msm_rtb.filter=0x37 boot_cpus=0-5 lge_monitor_thermal.enable=1 fakebattery=enable
+BOARD_KERNEL_CMDLINE += ehci-hcd.park=3 lpm_levels.sleep_disabled=1 msm_rtb.filter=0x37 lge_monitor_thermal.enable=1 fakebattery=enable
 # the following should be set only until the ROM is stable (enough)
 # https://android.googlesource.com/kernel/msm/+/android-msm-marlin-3.18-nougat-dr1/arch/arm/Kconfig.debug#69
 BOARD_KERNEL_CMDLINE += user_debug=31 androidboot.boot_devices=soc.0/f9824900.sdhci
@@ -191,10 +191,14 @@ TARGET_KERNEL_ARCH := arm64
 TARGET_KERNEL_HEADER_ARCH := arm64
 TARGET_KERNEL_SOURCE := kernel/lge/msm8992
 BOARD_BOOTIMG_HEADER_VERSION := 0
-TARGET_KERNEL_NEW_GCC_COMPILE := true
 TARGET_KERNEL_LLVM_BINUTILS := false
 TARGET_KERNEL_CLANG_COMPILE := false
 NEED_KERNEL_MODULE_SYSTEM := true
+TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
+KERNEL_TOOLCHAIN := $(COMMON_PATH)/../../../prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9/bin
+
+BOARD_CUSTOM_BOOTIMG := true
+BOARD_CUSTOM_BOOTIMG_MK := $(COMMON_PATH)/mkbootimg.mk
 
 # Keymaster
 TARGET_PROVIDES_KEYMASTER := true
