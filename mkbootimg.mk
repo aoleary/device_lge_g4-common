@@ -14,6 +14,9 @@ LOCAL_MKBOOTIMG := $(LOCAL_PATH)/mkbootimg/mkbootimg.py
 # Path to device tree image
 INSTALLED_DTIMAGE_TARGET := $(PRODUCT_OUT)/dt.img
 
+INSTALLED_KERNEL_TARGET := $(PRODUCT_OUT)/kernel
+
+
 # Rule to build dt.img with dtbTool_lgg4
 $(INSTALLED_DTIMAGE_TARGET): $(INSTALLED_KERNEL_TARGET) | dtbTool_lgg4
 	$(call pretty,"Building device tree image: $@")
@@ -27,6 +30,7 @@ $(INSTALLED_BOOTIMAGE_TARGET): $(LOCAL_MKBOOTIMG) $(INTERNAL_BOOTIMAGE_FILES) $(
 		$(INTERNAL_MKBOOTIMG_VERSION_ARGS) \
 		$(BOARD_MKBOOTIMG_ARGS) \
 		--dt $(INSTALLED_DTIMAGE_TARGET) \
+		--kernel $(INSTALLED_KERNEL_TARGET) \
 		--output $@
 	$(hide) $(call assert-max-image-size,$@,$(BOARD_BOOTIMAGE_PARTITION_SIZE))
 
