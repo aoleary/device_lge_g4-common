@@ -229,3 +229,6 @@ echo 0 > /sys/module/vmpressure/parameters/allocstall_threshold
 echo 4 > /proc/sys/vm/kswapd_threads
 
 echo 5430 > /proc/sys/vm/min_free_kbytes
+
+# Fix timekeep restore
+/vendor/bin/timekeep restore
