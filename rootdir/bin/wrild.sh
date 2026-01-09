@@ -5,22 +5,22 @@
 # plus a watchdog for rild high-cpu load in rare cases
 #
 # License:              GPLv3
-# Copyright 2019-2024:  steadfasterX <steadfasterX - AT - gmail #DOT# com>
+# Copyright 2019-2026:  steadfasterX <steadfasterX - AT - gmail #DOT# com>
 ###################################################################################################
-WRILDVER=v24.1
+WRILDVER=v26.2
 
 # rild
-MAXRET=300			# max rild restart retries when serious issues found
-RILCHILL=240			# sleep value after RILD has been restarted before continuing
+export MAXRET=300			# max rild restart retries when serious issues found
+export RILCHILL=120			# sleep value after RILD has been restarted before continuing
 
 # debug logging when a serious issue occurs
-DEBUGLOG=1                      # 0: disable debug logging, 1: create a log when rild must be restarted
-DOGLOGS=/sdcard/Download/wdlog	# log directory when DEBUGLOG=1, path must be owned and r/w for root
+export DEBUGLOG=0                       # 0: disable debug logging, 1: create a log when rild must be restarted
+export DOGLOGS=/sdcard/Download/wdlog	# log directory when DEBUGLOG=1, path must be owned and r/w for root
 
 # cpu monitoring
-TSCPU=90                        # max allowed cpu usage threshold
-TSTIME=60	                # how many secs rild is allowed to consume TSCPU before a restart of rild is triggered
-WDFREQ=20	                # check frequency of the cpu usage in secs
+export TSCPU=50                     # max allowed cpu usage threshold
+export TSTIME=60	                # how many secs rild is allowed to consume TSCPU before a restart of rild is triggered
+export WDFREQ=20	                # check frequency of the cpu usage in secs
 # The total check amount(!) will be calculated as: TSTIME / WDFREQ
 # Examples:
 # 60 / 5  = 12 checks over the 60 sec time frame
@@ -29,8 +29,7 @@ WDFREQ=20	                # check frequency of the cpu usage in secs
 # a "|" delimited list of apps/package names (case insensive) which are able to accept/do calls
 # if one of these apps are in foreground or background the watchdog will skip any actions
 # a package name is something like "com.microsoft.office.lync15" but "office.lync" or just "lync" is fine, too
-CALLAPPS="dialer|call|whatsapp|thoughtcrime.securesms|telegram|challegram|viber|threema|slack|facebook.orca|facebook.mlite|skype|office.lync|microsoft.teams|imoim|tachyon"
-
+export CALLAPPS="dialer|call|whatsapp|thoughtcrime.securesms|telegram|challegram|viber|threema|slack|facebook.orca|facebook.mlite|skype|office.lync|microsoft.teams|imoim|tachyon"
 
 #####################################################################################
 # NO CHANGES BEHIND THIS LINE
@@ -39,10 +38,11 @@ CALLAPPS="dialer|call|whatsapp|thoughtcrime.securesms|telegram|challegram|viber|
 # internal variables - never touch these!
 WDDEBUG=0	# watchdog debug mode - NEVER use WDDEBUG=1 productive!
 PRTRIGGER=0	# init value
-REQRESTART=99	# init value
+REQRESTART=88	# init value
 
-# initial value for wrild property
+# initial value for wrild properties
 setprop wrild.ril-handling starting
+setprop wrild.sim.count ""
 
 # logging func
 F_LOG(){
@@ -72,9 +72,19 @@ F_RILCHK(){
             [ "$SSIM" -eq 1 ] && break
         done
         SIMCOUNT=$SSIM
-        setprop wrild.sim.count $SIMCOUNT
+	if [ "${#SIMCOUNT}" -eq 1 ];then
+            setprop wrild.sim.count "$SIMCOUNT"
+	else
+            SIMCOUNT=$(logcat -b all -d -T '2000' | grep -vi wrild | grep -oE "SIM_COUNT:.*"| cut -d ":" -f2 | grep -E -o "[01]" | tail -n1)
+		if [ "${#SIMCOUNT}" -eq 1 ];then
+			setprop wrild.sim.count "$SIMCOUNT"
+		else
+			F_LOG e "SIMCOUNT zero?!"
+			setprop wrild.sim.count 0
+		fi
+	fi
     else
-        F_LOG d "using previous detected sim count.."
+        F_LOG d "using previously detected sim count.."
         SIMCOUNT=$PROPSIM
     fi
 
@@ -105,9 +115,9 @@ F_RILCHK(){
     elif [ "$SIMCOUNT" == "0" ]||[ -z "$SIMCOUNT" ];then
         echo 42
     else
-        F_LOG d "No condition met (yet) .. sleeping 10s"
+        F_LOG d "No condition met (yet) .. sleeping 30s"
 	setprop wrild.ril-handling no-condition-met
-        sleep 10
+        sleep 30
         echo 1
     fi
 }
@@ -115,12 +125,13 @@ F_RILCHK(){
 F_RILRESTART(){
     x=$1
     while [ "$REQRESTART" -ne 0 ];do
-        REQRESTART=$(F_RILCHK)
-    
-        # PIN_REQUIRED means usually the user get prompted - unfortunately sometimes there is no prompt.
-        # this will restart RIL not on the first but every second run only (which should be safe) and
-        # let the user enough time to enter the PIN if the prompt appears
-        if [ "$REQRESTART" -eq 9 ]&&[ $PRTRIGGER -eq 0 ];then
+        if [ "$REQRESTART" -eq 88 ] ;then
+            F_LOG d "first run..."
+            setprop wrild.ril-handling init
+        elif [ "$REQRESTART" -eq 9 ]&&[ $PRTRIGGER -eq 0 ];then
+            # PIN_REQUIRED means usually the user get prompted - unfortunately sometimes there is no prompt.
+            # this will restart RIL not on the first but every second run only (which should be safe) and
+            # let the user enough time to enter the PIN if the prompt appears
 	    setprop wrild.ril-handling waiting-for-pin
             F_LOG i "PIN_REQUIRED detected. waiting 40s for user input.." && sleep 40
             PRTRIGGER=1
@@ -158,7 +169,7 @@ F_RILRESTART(){
             F_LOG w "No SIM detected!" && return $REQRESTART
 	    setprop wrild.ril-handling no-sim
         else
-            F_LOG e "unusual state detected . waiting 20s before another try .." && sleep 20
+            F_LOG e "unusual state detected ($REQRESTART). waiting 20s before another try .." && sleep 20
 	    setprop wrild.ril-handling weird-state
         fi
         if [[ $x -eq $MAXRET ]];then
@@ -166,6 +177,7 @@ F_RILRESTART(){
 	    setprop wrild.ril-handling too-many-retries
             return 99
         fi
+        REQRESTART=$(F_RILCHK)
     done
 }
 
@@ -188,7 +200,7 @@ if [ $STATECNT -gt 1 ];then
 fi
 
 # delay the very first watchdog run
-[ $WDDEBUG == 0 ] && F_LOG i "*yawn* ... I think .. I will sleep a bit before actually starting my work (4 min)" && sleep $RILCHILL
+[ $WDDEBUG == 0 ] && F_LOG i "*yawn* ... I think .. I will sleep a bit before actually starting my work ($(($RILCHILL/60)) min)" && sleep $RILCHILL
 [ $WDDEBUG == 1 ] && F_LOG e "!!! DEBUG MODE DEBUG MODE !!! SLEEP DISABLED FOR FIRST WD RUN!"
 
 # restart RIL in defined conditions.
@@ -223,7 +235,6 @@ F_LOGRIL(){
             F_LOG d "debug logging started"
             LOGPID="$1"
             TIMESTMP="$(date +%F)"
-	    
             logcat -b all -d -D > $DOGLOGS/${TIMESTMP}_${LOGPID}_logcatfull.txt \
                 && F_LOG d "debug log written: $DOGLOGS/${TIMESTMP}_${LOGPID}_logcatfull.txt"
 		
@@ -235,7 +246,7 @@ F_LOGRIL(){
                 && F_LOG w "debug log written: $DOGLOGS/${TIMESTMP}_${LOGPID}_ps.txt"
             logcat -s WRILD -d > $DOGLOGS/${TIMESTMP}_${LOGPID}_wrild.txt \
                 && F_LOG w "debug log written: $DOGLOGS/${TIMESTMP}_${LOGPID}_wrild.txt"
-	    for lpid in $(echo "$LOGPID" | tr "_" " ");do
+        for lpid in $(echo "$LOGPID" | tr "_" " ");do
                 logcat -t -b all -d -D --pid=$lpid > $DOGLOGS/${TIMESTMP}_${lpid}_rild.txt \
                 && F_LOG w "debug log written: $DOGLOGS/${TIMESTMP}_${lpid}_rild.txt"
 	    done
@@ -255,31 +266,38 @@ F_WOOF(){
     F_LOG d "sniffing for $DOG"
     unset DOGPIDS DOGPID1 DOGPID2
     for dog in $(ps -A -opid:1,cmd:4,pcpu:1 | grep -v wrild | grep " $DOG"| tr " " "," | cut -d  "," -f 1,3);do
-	dpid="${dog/,*/}"
+        dpid="${dog/,*/}"
         dcpu=$(printf "%.0f" "${dog/*,/}")
-	# if we found a dog which breaks the threshold immediately inform the watch proc & catch logs
-	if [ "$dcpu" -ge "$TSCPU" ];then 
-            F_LOG e "$dog - current cpu usage: $dcpu %, pid: $dpid"
-            echo $dpid && return 4
-	fi
-	if [ -z "$DOGPID1" ];then
-	    DOGPID1="$dpid"
-	    DOGPIDS="$DOGPID1"
-	else
-	    DOGPID2="$dpid"
-	    DOGPIDS="$DOGPID1_$DOGPID2"
-	fi
+        # if we found a dog which breaks the threshold immediately inform the watch proc & catch logs
+        if [ "$dcpu" -ge "$TSCPU" ];then 
+                F_LOG e "$dog - current cpu usage: $dcpu %, pid: $dpid"
+                echo $dpid && return 4
+        fi
+        if [ -z "$DOGPID1" ];then
+            DOGPID1="$dpid"
+            DOGPIDS="$DOGPID1"
+        else
+            DOGPID2="$dpid"
+            DOGPIDS="$DOGPID1_$DOGPID2"
+        fi
     done
+    if [ ${#dpid} -lt 3 ];then
+        F_LOG e "no PID found for $DOG! forcing a restart!"
+        REQRESTART=1 F_RILRESTART 2
+        return $?
+    else
+        F_LOG d "#dpid: ${#dpid}"
+    fi
     F_RILCHK > /dev/null 2>&1
     if [ "$CURSTATE" == "UNKNOWN" ] && [ -z "$CUROPER" ];then
-       F_LOG w "current sim state: NO_SIGNAL"
-       F_LOG d "CURSTATE is $CURSTATE , CUROPER is $CUROPER, $DOG pid(s): ${DOGPIDS/_/,}"
-       echo $DOGPIDS && return 3
+        F_LOG w "current sim state: NO_SIGNAL"
+        F_LOG d "CURSTATE is $CURSTATE , CUROPER is $CUROPER, $DOG pid(s): ${DOGPIDS/_/,}"
+        echo "$DOGPIDS" && return 3
     else
-       F_LOG d "CURSTATE is $CURSTATE , CUROPER is $CUROPER"
+        F_LOG d "CURSTATE is $CURSTATE , CUROPER is $CUROPER"
     fi
-    F_LOG d "$DOG (${DOGPIDS/_/,}) is a good doggie (service available, normal CPU usage) ..."
-    echo $DOGPIDS && return 0
+    F_LOG d "$DOG (${DOGPIDS/_/,}) is a good doggie (service available, acceptable CPU usage of ${dcpu}%/${TSCPU}%) ..."
+    echo "$DOGPIDS" && return 0
 }
 
 # bite the dog - but BEWARE OF THE DRAGONS!
@@ -322,7 +340,7 @@ F_BITEDOG(){
 
 # run forever and watch out for dogs
 WCNT=$(($TSTIME/WDFREQ))
-[ $WDDEBUG == 1 ] && WCNT=2 && TSCPU=0
+[ $WDDEBUG == 1 ] && WCNT=2 #&& TSCPU=0
 while true; do
     export BEFBITE=$(date "+%F %T.%3N")
     DOGPID=$(F_WOOF rild)
