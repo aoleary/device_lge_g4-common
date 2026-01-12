@@ -68,6 +68,7 @@ PRODUCT_COPY_FILES += \
     frameworks/av/services/audiopolicy/config/r_submix_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/r_submix_audio_policy_configuration.xml \
     frameworks/av/services/audiopolicy/config/usb_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/usb_audio_policy_configuration.xml \
     frameworks/av/services/audiopolicy/config/default_volume_tables.xml:$(TARGET_COPY_OUT_VENDOR)/etc/default_volume_tables.xml \
+    frameworks/av/services/audiopolicy/config/bluetooth_audio_policy_configuration_7_0.xml:$(TARGET_COPY_OUT_VENDOR)/etc/bluetooth_audio_policy_configuration_7_0.xml \
     $(LOCAL_PATH)/audio/sound_trigger_mixer_paths.xml:$(TARGET_COPY_OUT_VENDOR)/etc/sound_trigger_mixer_paths.xml \
     $(LOCAL_PATH)/audio/sound_trigger_platform_info.xml:$(TARGET_COPY_OUT_VENDOR)/etc/sound_trigger_platform_info.xml
 
@@ -98,17 +99,13 @@ TARGET_BOOTANIMATION_TEXTURE_CACHE := true
 
 # Camera
 PRODUCT_PACKAGES += \
-    camera.device@3.4-external-impl \
-    camera.device@3.5-external-impl \
+    camera.device@3.4-impl \
     android.hardware.camera.provider@2.4-impl \
     android.hardware.camera.provider@2.4-service \
-    android.hardware.camera.provider@2.4-external \
-    android.hardware.camera.provider@2.4-external-service \
     android.hardware.camera.provider@2.4-legacy \
     libqomx_core \
     Aperture \
     camera.msm8992 \
-    sensors.hal.tof \
     libmmcamera_interface.so \
     libqomx_core.so \
     vendor/lib/libmmjpeg_interface.so
@@ -145,7 +142,6 @@ PRODUCT_DEXPREOPT_SPEED_APPS += \
 # Speed profile services and wifi-service to reduce RAM and storage
 PRODUCT_SYSTEM_SERVER_COMPILER_FILTER := speed-profile
 PRODUCT_USE_PROFILE_FOR_BOOT_IMAGE := true
-PRODUCT_DEX_PREOPT_BOOT_IMAGE_PROFILE_LOCATION := frameworks/base/config/boot-image-profile.txt
 PRODUCT_ALWAYS_PREOPT_EXTRACTED_APK := true
 
 # Display
@@ -175,6 +171,10 @@ PRODUCT_PACKAGES += \
 
 # Filesystem
 TARGET_FS_CONFIG_GEN := $(LOCAL_PATH)/config.fs
+
+# FMRadio
+PRODUCT_PACKAGES += \
+    FMRadio
 
 # GPS
 PRODUCT_PACKAGES += \
@@ -218,28 +218,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Init
 PRODUCT_PACKAGES += \
-    fstab.qcom \
-    init.qcom.rc \
-    init.qcom.power.rc \
-    init.qcom.usb.rc \
-    ueventd.qcom.rc \
-    init.qcom.coex.sh \
-    init.qcom.fm.sh \
-    init.class_main.sh \
-    init.qcom.post_boot.sh \
-    init.qcom.uicc.sh \
-    init.msm8992.sensor.sh \
-    init.baseband.sh \
-    init.qcom.bt.sh \
-    init.qcom.usb.sh \
-    init.qcom.qseecomd.sh \
-    wrild.sh \
-    sysctl.rc \
-    kill_pulse.sh \
-    pulse.sh \
-    set_tasks.sh
-
-PRODUCT_PACKAGES_ENG += \
     fstab.qcom \
     init.qcom.rc \
     init.qcom.power.rc \
@@ -484,15 +462,16 @@ PRODUCT_PACKAGES += \
 
 # USB
 PRODUCT_PACKAGES += \
-    android.hardware.usb@1.0-service.basic
+    android.hardware.usb@1.3-service.basic
 
 # Vibrator
 PRODUCT_PACKAGES += \
-    android.hardware.vibrator@1.0-impl
+    android.hardware.vibrator@1.0-impl \
+    android.hardware.vibrator@1.0-service
 
 # Wifi
 PRODUCT_PACKAGES += \
-    android.hardware.wifi@1.0-service.legacy \
+    android.hardware.wifi-service \
     libqsap_sdk \
     libQWiFiSoftApCfg \
     libwpa_client \
