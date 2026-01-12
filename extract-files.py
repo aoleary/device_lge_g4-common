@@ -81,7 +81,7 @@ blob_fixups: blob_fixups_user_type = {
         'vendor/lib/libril-qc-qmi-1.so',
         'vendor/lib64/libril-qc-qmi-1.so',
     ): blob_fixup()
-        .add_needed('libaudioclient_shim.so')
+        .add_needed('libaudioclient_shim_g4.so')
         .remove_needed('libmedia.so')
         .replace_needed('libril.so', 'libril_lge.so'),
     (
@@ -125,11 +125,19 @@ blob_fixups: blob_fixups_user_type = {
     ): blob_fixup()
         .replace_needed('libandroid.so', 'libsensorndkbridge.so')
         .binary_regex_replace(b'system/lib/hw/sensors.hal.tof.so', b'vendor/lib/hw/sensors.hal.tof.so'),
- #   (
- #       'vendor/lib/libcamera_client.so',
- #       'vendor/lib64/libcamera_client.so'
- #   ): blob_fixup()
- #       .add_needed('libshim_cameraclient.so')
+    (
+        'vendor/bin/netmgrd'
+    ): blob_fixup()
+        .binary_regex_replace(b'system/etc/data/netmgr_config.xml', b'vendor/etc/data/netmgr_config.xml'),
+    (
+        'vendor/bin/qmuxd'
+    ): blob_fixup()
+        .binary_regex_replace(b'system/etc/data/qmi_config.xml', b'vendor/etc/data/qmi_config.xml'),
+    (
+        'vendor/lib/libdsi_netctrl.so',
+        'vendor/lib64/libdsi_netctrl.so',
+    ): blob_fixup()
+        .binary_regex_replace(b'system/etc/data/dsi_config.xml', b'vendor/etc/data/dsi_config.xml')
 
 }  # fmt: skip
 #    (
