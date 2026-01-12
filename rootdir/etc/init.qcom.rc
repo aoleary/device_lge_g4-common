@@ -1096,6 +1096,13 @@ service per_mgr /vendor/bin/pm-service
     ioprio rt 4
     task_profiles ServiceCapacityLow
 
+
+service charger /system/bin/charger
+    class charger
+    group log system graphics
+    capabilities SYS_BOOT
+    seclabel u:r:charger:s0
+
 service per_proxy /vendor/bin/pm-proxy
     class core
     user system
