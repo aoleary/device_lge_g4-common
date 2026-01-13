@@ -20,6 +20,7 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/product_launched_with_l_mr1.mk
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
 PRODUCT_RETROFIT_DYNAMIC_PARTITIONS := true
 PRODUCT_BUILD_SUPER_PARTITION := true
+PRODUCT_ENABLE_UFFD_GC := false
 
 # Adaptive Suspend
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -83,9 +84,9 @@ PRODUCT_PACKAGES += \
     android.hardware.bluetooth.audio@2.1-impl \
     android.hardware.bluetooth.audio-impl \
     audio.bluetooth.default \
-    libbt-vendor \
     hwaddrs \
     libprotobuf-cpp-full
+#    libbt-vendor \
 
 # Boot animation
 TARGET_BOOTANIMATION_HALF_RES := true
@@ -106,9 +107,9 @@ PRODUCT_PACKAGES += \
     libqomx_core \
     Aperture \
     camera.msm8992 \
-    libmmcamera_interface.so \
-    libqomx_core.so \
-    vendor/lib/libmmjpeg_interface.so
+    libmmcamera_interface \
+    libqomx_core \
+    libmmjpeg_interface
 
 # Enable camera EIS
 # eis.enable: enables electronic image stabilization
@@ -180,8 +181,9 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.gnss@1.0-impl \
     android.hardware.gnss@1.0-service \
-    quipc.conf \
     gps.msm8992
+
+#    quipc.conf \
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/gps/etc/flp.conf:$(TARGET_COPY_OUT_VENDOR)/etc/flp.conf \
@@ -234,7 +236,6 @@ PRODUCT_PACKAGES += \
     init.qcom.usb.sh \
     init.qcom.qseecomd.sh \
     wrild.sh \
-    sysctl.rc \
     kill_pulse.sh \
     pulse.sh \
     set_tasks.sh
@@ -245,9 +246,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # IPA
 PRODUCT_PACKAGES += \
-    ipacm \
-    ipacm-diag \
-    IPACM_cfg.xml
+    ipacm-diag
+        #ipacm
 
 # Kernel modules
 PRODUCT_COPY_FILES += \
@@ -256,9 +256,8 @@ PRODUCT_COPY_FILES += \
 
 # Keymaster HAL
 PRODUCT_PACKAGES += \
-    android.hardware.keymaster@4.1-service \
-    android.hardware.gatekeeper@1.0-service.software \
-    android.hardware.authsecret@1.0-service
+    android.hardware.security.keymint-service \
+    com.android.hardware.gatekeeper.nonsecure
 
 # Lineage Health
 PRODUCT_PACKAGES += \
@@ -266,27 +265,20 @@ PRODUCT_PACKAGES += \
 
 # Live Wallpapers
 PRODUCT_PACKAGES += \
-	LiveWallpapers \
 	LiveWallpapersPicker \
-	MagicSmokeWallpapers \
-	VisualizationWallpapers \
 	librs_jni
 
 # LiveDisplay
-PRODUCT_PACKAGES += \
-    vendor.lineage.livedisplay@2.0-service-sysfs
+#PRODUCT_PACKAGES += \
+    #vendor.lineage.livedisplay@2.0-service-sysfs
 
 # MP-CTL
 PRODUCT_PACKAGES += \
-    libqti-perfd \
     libqti-perfd-client \
-    perfd \
-    libqti-perfd-client
 
 # Media
 PRODUCT_PACKAGES += \
     libc2dcolorconvert \
-    libextmedia_jni \
     libOmxAacEnc \
     libOmxAmrEnc \
     libOmxCore \
@@ -295,7 +287,6 @@ PRODUCT_PACKAGES += \
     libOmxVdec \
     libOmxVenc \
     libstagefrighthw \
-    libstagefright_soft_flacdec \
     libminijail
 
 PRODUCT_COPY_FILES += \
@@ -328,8 +319,8 @@ PRODUCT_PACKAGES += \
     charger_res_images
 
 # Trust
-PRODUCT_PACKAGES += \
-    vendor.lineage.trust@1.0-service
+#PRODUCT_PACKAGES += \
+    #vendor.lineage.trust@1.0-service
 
 # Overlay
 DEVICE_PACKAGE_OVERLAYS += \
@@ -385,33 +376,28 @@ PRODUCT_PACKAGES += \
 
 # RIL
 PRODUCT_PACKAGES += \
-    android.hardware.radio@1.0-impl \
-    android.hardware.radio.deprecated@1.0-impl \
-    android.hardware.radio.deprecated@1.0-service \
     librmnetctl \
-    libsecril-client-sap \
     libprotobuf-cpp-full \
     libmdmdetect \
-    rild_socket \
     libxml2
+    #    libsecril-client-sap \
+    #    android.hardware.radio@1.0-impl \
+     #   android.hardware.radio.deprecated@1.0-impl \
+    #android.hardware.radio.deprecated@1.0-service \
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/base_qcril.db:$(TARGET_COPY_OUT_VENDOR)/etc/motorola/base_qcril.db \
     $(LOCAL_PATH)/configs/qmi_fw.conf:$(TARGET_COPY_OUT_VENDOR)/etc/qmi_fw.conf \
     $(LOCAL_PATH)/configs/ctbk_val.cfg:$(TARGET_COPY_OUT_VENDOR)/etc/motorola/mdmctbk/ctbk_val.cfg \
-    prebuilts/vndk/v33/arm64/arch-arm64-armv8-a/shared/vndk-sp/libutils.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libutils-v33.so
 
 # Radio
 PRODUCT_PACKAGES += \
-    ebtables \
-    ethertypes \
-    libnl_2 \
-    libbson \
-    libcnefeatureconfig \
     libqsap_sdk \
     librmnetctl \
     libxml2 \
     android.system.net.netd@1.0
+
+    #    libcnefeatureconfig \
 
 # Seccomp
 PRODUCT_COPY_FILES += \
@@ -432,7 +418,6 @@ PRODUCT_COPY_FILES += \
 
 # Shims
 PRODUCT_PACKAGES += \
-    libcne_shim \
     libqsap_shim \
     libshim_cameraclient \
     libfence_shim \
@@ -473,13 +458,9 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.wifi-service \
     libqsap_sdk \
-    libQWiFiSoftApCfg \
     libwpa_client \
-    readmac \
     wificond \
-    wifilogd \
     hostapd \
-    dhcpcd.conf \
     wpa_supplicant \
     wpa_supplicant.conf
 
