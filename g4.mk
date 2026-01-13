@@ -18,7 +18,6 @@ $(call inherit-product-if-exists, vendor/lge/g4-common/g4-common-vendor.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/product_launched_with_l_mr1.mk)
 
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
-PRODUCT_RETROFIT_DYNAMIC_PARTITIONS := true
 PRODUCT_BUILD_SUPER_PARTITION := true
 PRODUCT_ENABLE_UFFD_GC := false
 
