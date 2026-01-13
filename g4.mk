@@ -84,8 +84,8 @@ PRODUCT_PACKAGES += \
     android.hardware.bluetooth.audio-impl \
     audio.bluetooth.default \
     hwaddrs \
-    libprotobuf-cpp-full
-#    libbt-vendor \
+    libprotobuf-cpp-full \
+    libbt-vendor \
 
 # Boot animation
 TARGET_BOOTANIMATION_HALF_RES := true

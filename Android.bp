@@ -8,4 +8,10 @@ soong_namespace {
     imports: [
         "vendor/lge/g4-common",
     ],
+
 }
+
+    filegroup{
+    name: "vnd_g4.txt",
+    srcs: ["bluetooth/vnd_g4.txt"]
+    }

@@ -84,9 +84,9 @@ USE_CUSTOM_AUDIO_POLICY := 1
 
 # Bluetooth
 BOARD_HAVE_BLUETOOTH := true
-BOARD_HAVE_BLUETOOTH_BCM := true
-BOARD_CUSTOM_BT_CONFIG := device/lge/g4-common/bluetooth/libbt_vndcfg.txt
-BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/lge/g4-common/bluetooth
+PRODUCT_SOONG_NAMESPACES += hardware/broadcom/libbt
+$(call soong_config_set,brcm_libbt,custom_bt_config,//device/lge/g4-common:vnd_g4.txt)
+$(call soong_config_set,brcm_libbt,bdroid_buildcfg_include_dir,$(COMMON_PATH)/bluetooth)
 
 # Camera
 USE_DEVICE_SPECIFIC_CAMERA := true
@@ -200,10 +200,6 @@ TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
 BOARD_CUSTOM_BOOTIMG := true
 BOARD_CUSTOM_BOOTIMG_MK := $(COMMON_PATH)/mkbootimg.mk
 
-# Keymaster
-TARGET_PROVIDES_KEYMASTER := true
-TARGET_KEYMASTER_WAIT_FOR_QSEE := true
-
 # Lights
 TARGET_PROVIDES_LIBLIGHT := true
 
@@ -211,7 +207,7 @@ TARGET_PROVIDES_LIBLIGHT := true
 $(call soong_config_set,lineage_health,charging_control_charging_path,/sys/class/power_supply/battery/charging_enabled)
 $(call soong_config_set,lineage_health,charging_control_charging_enabled,0)
 $(call soong_config_set,lineage_health,charging_control_charging_disabled,1)
-$(call soong_config_set_bool,lineage_health,charging_control_supports_bypass,false)
+$(call soong_config_set,lineage_health,charging_control_supports_bypass,false)
 
 # LineageHW
 BOARD_HARDWARE_CLASS += $(COMMON_PATH)/lineagehw
