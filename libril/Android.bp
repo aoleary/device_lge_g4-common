@@ -15,12 +15,12 @@
 package {
     // See: http://go/android-license-faq
     default_applicable_licenses: [
-        "hardware_ril_libril_license",
+        "hardware_ril_libril_license_lge",
     ],
 }
 
 license {
-    name: "hardware_ril_libril_license",
+    name: "hardware_ril_libril_license_lge",
     visibility: [":__subpackages__"],
     license_kinds: [
         "SPDX-license-identifier-Apache-2.0",
