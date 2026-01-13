@@ -48,6 +48,7 @@ cc_library_shared {
     ],
 
     include_dirs: [
+        "device/lge/g4-common/include",
         "frameworks/native/include/media/hardware",
         "frameworks/native/include/media/openmax",
         "system/media/camera/include",

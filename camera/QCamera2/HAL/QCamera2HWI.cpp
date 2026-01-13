@@ -40,6 +40,7 @@
 #include <utils/Trace.h>
 #include <gralloc_priv.h>
 #include <dlfcn.h>
+#include <system/camera.h>
 
 #include "QCamera2HWI.h"
 #include "QCameraMem.h"
