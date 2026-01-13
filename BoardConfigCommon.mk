@@ -195,7 +195,7 @@ TARGET_KERNEL_LLVM_BINUTILS := false
 TARGET_KERNEL_CLANG_COMPILE := false
 NEED_KERNEL_MODULE_SYSTEM := true
 TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
-KERNEL_TOOLCHAIN := $(COMMON_PATH)/../../../prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9/bin
+#KERNEL_TOOLCHAIN := $(COMMON_PATH)/../../../prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9/bin
 
 BOARD_CUSTOM_BOOTIMG := true
 BOARD_CUSTOM_BOOTIMG_MK := $(COMMON_PATH)/mkbootimg.mk
