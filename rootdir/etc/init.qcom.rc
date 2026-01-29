@@ -81,6 +81,7 @@ on early-fs
 on fs
     #Start hwservicemanager on fs
     start hwservicemanager
+    start bind_acdb
 
     # debug boot process
     rm /cache/boot_lc_full.txt
@@ -807,6 +808,14 @@ service imscmservice /vendor/bin/imscmservice
     user system
     group radio diag log
     task_profiles ServiceCapacityLow
+
+
+service bind_acdb /vendor/bin/sh /vendor/bin/mountacdb.sh
+    class core
+    user root
+    oneshot
+
+
 
 on property:persist.sys.ssr.restart_level=*
     start ssr_setup

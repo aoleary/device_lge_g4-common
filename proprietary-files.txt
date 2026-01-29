@@ -107,8 +107,10 @@ vendor/bin/RIDLClient.exe
 vendor/bin/audioflacapp
 vendor/bin/qti
 vendor/bin/slim_daemon
+
 #kanged from angler
 vendor/bin/thermal-engine|349a0196572d565660a81e1899c6abb87f4f1aed
+
 vendor/firmware/BCM4339_003.001.009.0117.0620_LGE_P1_EU.hcd
 vendor/firmware/libpn547_fw.so
 vendor/firmware/libpn547_fw_22.so
@@ -133,7 +135,6 @@ vendor/lib/hw/sound_trigger.primary.msm8992.so|1ebfc985a800342c929fbd57c6547b6ae
 #system/lib64/libcamera_client.so:vendor/lib64/libcamera_client.so
 vendor/lib/hw/activity_recognition.msm8992.so
 vendor/lib/hw/flp.default.so
-vendor/lib/hw/gatekeeper.msm8992.so
 vendor/lib/lib-dplmedia.so
 vendor/lib/lib-ims-rcscmjni.so
 vendor/lib/lib-imsSDP.so
@@ -166,12 +167,6 @@ vendor/lib/libI420colorconvert.so
 vendor/lib/libMcClient.so
 vendor/lib/libMcRegistry.so
 vendor/lib/libHDR.so
-vendor/lib/libOmxAacDec.so
-vendor/lib/libOmxAmrwbplusDec.so
-vendor/lib/libOmxEvrcDec.so
-#vendor/lib/libOmxMux.so
-vendor/lib/libOmxQcelp13Dec.so
-vendor/lib/libOmxWmaDec.so
 vendor/lib/libOpenCL.so
 vendor/lib/libQBLAS-0.11.38.so
 vendor/lib/libQSEEComAPI.so
@@ -184,9 +179,8 @@ vendor/lib/libWVStreamControlAPI_L1.so
 vendor/lib/libarcsoft_beauty_shot.so
 vendor/lib/libacdb-fts.so
 vendor/lib/libacdbmapper.so
-#kanged from angler
-vendor/lib/libacdbloader.so|a26a733d72153a66732ed53bca1627c48c4903b4
-vendor/lib64/libacdbloader.so|d9cd8ba6ef5d46adb220a421df789eee2e5d4aa4
+vendor/lib/libacdbloader.so
+vendor/lib64/libacdbloader.so
 vendor/lib/libacdbrtac.so
 vendor/lib/libactuator_ad5823.so
 vendor/lib/libactuator_ad5823_camcorder.so
@@ -583,7 +577,6 @@ vendor/lib64/egl/libq3dtools_adreno.so
 vendor/lib64/egl/libq3dtools_esx.so
 vendor/lib64/hw/activity_recognition.msm8992.so
 vendor/lib64/hw/flp.default.so
-vendor/lib64/hw/gatekeeper.msm8992.so
 vendor/lib64/lib-dplmedia.so
 vendor/lib64/lib-ims-rcscmjni.so
 vendor/lib64/lib-imsSDP.so
@@ -613,10 +606,7 @@ vendor/lib64/libHevcSwEncoder.so
 vendor/lib64/libI420colorconvert.so
 vendor/lib64/libMcClient.so
 vendor/lib64/libMcRegistry.so
-vendor/lib64/libOmxAacDec.so
-vendor/lib64/libOmxAmrwbplusDec.so
 #vendor/lib64/libOmxMux.so
-vendor/lib64/libOmxWmaDec.so
 vendor/lib64/libOpenCL.so
 vendor/lib64/libQBLAS-0.11.38.so
 vendor/lib64/libQSEEComAPI.so
@@ -804,3 +794,4 @@ system/framework/izat.xt.srv.jar
 system/framework/qcnvitems.jar
 system/framework/qcrilhook.jar
 system/etc/permissions/qcrilhook.xml
+
