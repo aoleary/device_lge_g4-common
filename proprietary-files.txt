@@ -108,6 +108,8 @@ vendor/bin/slim_daemon
 
 #kanged from angler
 vendor/bin/thermal-engine|349a0196572d565660a81e1899c6abb87f4f1aed
+system/lib/libpowermanager.so:vendor/lib/libpowermanager_vendor.so
+system/lib64/libpowermanager.so:vendor/lib64/libpowermanager_vendor.so
 
 vendor/firmware/BCM4339_003.001.009.0117.0620_LGE_P1_EU.hcd
 vendor/firmware/libpn547_fw.so

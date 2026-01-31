@@ -158,6 +158,10 @@ blob_fixups: blob_fixups_user_type = {
         'vendor/lib64/libcamera_client_vendor.so',
     ): blob_fixup()
         .add_needed('libgui_shim_vendor.so'),
+    (
+        'vendor/bin/thermal-engine',
+    ): blob_fixup()
+        .replace_needed('libpowermanager.so', ' libpowermanager_vendor.so'),
 }  # fmt: skip
 #    (
 #        'system/lib/hw/lgkm.msm8992.so',
