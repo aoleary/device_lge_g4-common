@@ -1,6 +1,0 @@
-soong_namespace {
-    imports: [
-        "hardware/qcom-caf/msm8992/display",
-        "hardware/qcom-caf/msm8992/media"
-    ],
-}
