@@ -20,7 +20,6 @@ from extract_utils.main import (
 
 namespace_imports = [
     'device/lge/g4-common',
-    'device/lge/g4-common/camera',
     'hardware/qcom-caf/msm8992',
     'hardware/qcom-caf/msm8992/display',
     'hardware/qcom-caf/msm8992/media',
@@ -57,8 +56,17 @@ blob_fixups: blob_fixups_user_type = {
 	    'vendor/bin/RIDLClient.exe',
         'vendor/lib/libmmcamera2_is.so',
         'vendor/lib/libmmcamera_hdr_gb_lib.so',
-        'vendor/lib/libarcsoft_beauty_shot.so'
+        'vendor/lib/libalmcascore.so',
+        'vendor/lib/libalmcaswrap.so',
+        'vendor/lib/libVDLowLightAPI.so',
+        'vendor/lib/libVDBase.so',
+        'vendor/lib/libalhdri.so',
     ): blob_fixup()
+        .replace_needed('libstdc++.so', 'libstdc++_vendor.so'),
+    (
+        'vendor/lib/libarcsoft_beauty_shot.so',
+    ): blob_fixup()
+        .replace_needed('libandroid.so', 'libsensorndkbridge.so')
         .replace_needed('libstdc++.so', 'libstdc++_vendor.so'),
     (
         'vendor/lib/libbccQTI.so',
@@ -85,6 +93,7 @@ blob_fixups: blob_fixups_user_type = {
         .remove_needed('libmedia.so')
         .replace_needed('libril.so', 'libril_lge.so'),
     (
+        'vendor/lib/libmm-abl.so',
         'vendor/lib64/libmm-abl.so',
     ): blob_fixup()
         .add_needed('libshims_thermal.so'),
@@ -137,8 +146,18 @@ blob_fixups: blob_fixups_user_type = {
         'vendor/lib/libdsi_netctrl.so',
         'vendor/lib64/libdsi_netctrl.so',
     ): blob_fixup()
-        .binary_regex_replace(b'system/etc/data/dsi_config.xml', b'vendor/etc/data/dsi_config.xml')
-
+        .binary_regex_replace(b'system/etc/data/dsi_config.xml', b'vendor/etc/data/dsi_config.xml'),
+    (
+        'vendor/lib/hw/camera.msm8992.so',
+    ): blob_fixup()
+        .add_needed('libfence_shim.so')
+        .replace_needed('libandroid.so', 'libsensorndkbridge.so')
+        .replace_needed('libcamera_client.so', 'libcamera_client_vendor.so'),
+    (
+        'vendor/lib/libcamera_client_vendor.so',
+        'vendor/lib64/libcamera_client_vendor.so',
+    ): blob_fixup()
+        .add_needed('libgui_shim_vendor.so'),
 }  # fmt: skip
 #    (
 #        'system/lib/hw/lgkm.msm8992.so',
@@ -171,12 +190,14 @@ blob_fixups: blob_fixups_user_type = {
    #     .add_needed('libqsap_shim.so'),
 
 
-       #(
-       # 'vendor/lib/hw/camera.msm8992.so',
-    #): blob_fixup()
-    #    .add_needed('libfence_shim.so'),
-#    /system/lib/libshim_camera.so:/system/lib/libcamera_client.so|libshim_cameraclient.so \ #FIX ME
 
+#    /system/lib/libshim_camera.so:/system/lib/libcamera_client.so|libshim_cameraclient.so \ #FIX ME
+   # (        'vendor/lib/libmm-qdcm.so.so',
+   #          'vendor/lib64/libmm-qdcm.so.so',
+   #          'vendor/bin/thermal-engine',
+   # )
+   # : blob_fixup()
+   #      .replace_needed('libpowermanager.so', 'libpowermanager_vendor.so'),
 
 
 module = ExtractUtilsModule(

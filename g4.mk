@@ -103,12 +103,7 @@ PRODUCT_PACKAGES += \
     android.hardware.camera.provider@2.4-impl \
     android.hardware.camera.provider@2.4-service \
     android.hardware.camera.provider@2.4-legacy \
-    libqomx_core \
-    Aperture \
-    camera.msm8992 \
-    libmmcamera_interface \
-    libqomx_core \
-    libmmjpeg_interface
+    Aperture
 
 # Enable camera EIS
 # eis.enable: enables electronic image stabilization
@@ -422,7 +417,8 @@ PRODUCT_PACKAGES += \
     ims_rtp_shim \
     slim_shim \
     libaudioclient_shim_g4 \
-    libshims_thermal
+    libshims_thermal \
+    libgui_shim_vendor
     
 # System properties
 -include $(LOCAL_PATH)/system_prop.mk

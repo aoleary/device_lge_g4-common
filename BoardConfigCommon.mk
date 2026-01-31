@@ -159,7 +159,6 @@ PRODUCT_SOONG_NAMESPACES += hardware/qcom-caf/msm8992/audio
 PRODUCT_SOONG_NAMESPACES += hardware/qcom-caf/msm8992/display
 PRODUCT_SOONG_NAMESPACES += hardware/qcom-caf/msm8992/media
 PRODUCT_SOONG_NAMESPACES += device/lge/g4-common
-PRODUCT_SOONG_NAMESPACES += device/lge/g4-common/camera
 
 
 # HIDL
