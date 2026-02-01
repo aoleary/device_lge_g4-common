@@ -71,14 +71,15 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.bluetooth.a2dp_offload.disabled=true \
     persist.bluetooth.bluetooth_audio_hal.disabled=false \
     ro.bluetooth.a2dp_offload.supported=false \
-    bluetooth.core.le.vendor_capabilities.enabled=false
+    bluetooth.core.le.vendor_capabilities.enabled=false \
     ro.bluetooth.a2dp_offload.supported=false \
     persist.bluetooth.a2dp_offload.disabled=true
 
 # Blur - Diable Blur in A12+
-    persist.sys.sf.disable_blurs=1
-    ro.surface_flinger.supports_background_blur=0
-    ro.sf.blurs_are_expensive=0
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.sys.sf.disable_blurs=1 \
+    ro.surface_flinger.supports_background_blur=0 \
+    ro.sf.blurs_are_expensive=0 \
     ro.launcher.blur.appLaunch=0
 
 # Camera
@@ -93,10 +94,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.ts.rtmakeup=false \
     camera.no_navigation_bar=true \
     ro.factorytest=0 \
-# Enable low power video mode for 4K encode
     vidc.debug.perf.mode=2 \
     vidc.enc.dcvs.extra-buff-count=2 \
-# Add required properties for camera access in Enforcing
     persist.vendor.camera.privapp.list=org.codeaurora.snapcam,com.android.camera,com.google.camera \
     vendor.camera.aux.packagelist=org.codeaurora.snapcam,com.android.camera,com.google.camera \
     vendor.camera.aux.packageexcludelist=org.telegram.messenger,com.microsoft.teams,com.discord
@@ -158,7 +157,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.scrollingcache=0 \
     ro.min.fling_velocity=70 \
     ro.max.fling_velocity=21000 \
-    # Additional props
     ro.vendor.qti.cgroup_follow.enable=true \
     persist.vendor.qti.inputopts.enable=true \
     persist.vendor.qti.inputopts.movetouchslop=0.6 \
@@ -202,8 +200,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     mm.enable.qcom_parser=3379827 \
     mm.enable.smoothstreaming=true \
     media.aac_51_output_enabled=true \
-    media.stagefright.legacyencoder=true
-    media.stagefright.less-secure=true
+    media.stagefright.legacyencoder=true \
+    media.stagefright.less-secure=true \
     vidc.debug.level=1 \
     vidc.debug.perf.mode=2 \
     vidc.enc.dcvs.extra-buff-count=2 \
@@ -240,9 +238,7 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.surface_flinger.set_touch_timer_ms=200 \
     ro.surface_flinger.set_display_power_timer_ms=1000 \
     ro.surface_flinger.support_kernel_idle_timer=true \
-    debug.sf.layer_caching_active_layer_timeout_ms=1000
-
-# Properties to improve rendering
+    debug.sf.layer_caching_active_layer_timeout_ms=1000 \
     debug.cpurend.vsync=false \
     debug.enable.sglscale=1 \
     debug.enabletr=true \
@@ -286,11 +282,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.ril.svlte1x=false \
     ro.ril.svdo=false \
     persist.telephony.oosisdc=false \
-    #Improve Speech Quality
     ro.ril.enable.amr.wideband=1 \
     ro.telephony.block_binder_thread_on_incoming_calls=false
 
 # RIL Powersaving
+PRODUCT_PROPERTY_OVERRIDES += \
     persist.radio.add_power_save=1 \
     pm.sleep_mode=1 \
     ro.ril.disable.power.collapse=0 \
@@ -316,7 +312,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # UI Smoothening
 PRODUCT_PROPERTY_OVERRIDES += \
-   persist.service.lgospd.enable=0
+   persist.service.lgospd.enable=0 \
    persist.service.pcsync.enable=0
 
 # WiFi Scan Interval (default = 15s)
