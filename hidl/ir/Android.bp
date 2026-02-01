@@ -1,4 +1,5 @@
 // Copyright (C) 2013 The Android Open Source Project
+// Copyright (C) 2018 The LineageOS Project
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,15 +13,29 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-cc_library_shared {
-    name: "consumerir.msm8992",
+cc_binary {
+
+    name: "android.hardware.ir@1.0-service.lge",
+    init_rc: ["android.hardware.ir@1.0-service.lge.rc"],
     relative_install_path: "hw",
-    srcs: ["consumerir.c"],
     shared_libs: [
         "liblog",
         "libcutils",
-        "libcir_driver",
+        "libdl",
+        "libxml2",
+        "libhidlbase",
+
         "libhardware",
+        "libutils",
+        "android.hardware.ir@1.0",
+        "libcir_driver",
     ],
+
+    srcs: [
+        "service.cpp",
+        "ConsumerIr.cpp",
+    ],
+
     vendor: true,
+
 }

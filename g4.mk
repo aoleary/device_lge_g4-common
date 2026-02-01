@@ -118,8 +118,7 @@ PRODUCT_PACKAGES += \
 
 # ConsumerIR
 PRODUCT_PACKAGES += \
-    android.hardware.ir@1.0-impl \
-    consumerir.msm8992
+    android.hardware.ir@1.0-service.lge
 
 # Control groups and task profiles
 PRODUCT_COPY_FILES += \
