@@ -208,9 +208,6 @@ $(call soong_config_set,lineage_health,charging_control_charging_enabled,1)
 $(call soong_config_set,lineage_health,charging_control_charging_disabled,0)
 $(call soong_config_set,lineage_health,charging_control_supports_bypass,false)
 
-# LineageHW
-BOARD_HARDWARE_CLASS += $(COMMON_PATH)/lineagehw
-
 # NFC
 BOARD_NFC_CHIPSET := pn547
 BOARD_NFC_HAL_SUFFIX := msm8992
