@@ -118,7 +118,7 @@ PRODUCT_PACKAGES += \
 
 # ConsumerIR
 PRODUCT_PACKAGES += \
-    android.hardware.ir@-service.lge
+    android.hardware.ir-service.lge
 
 # Control groups and task profiles
 PRODUCT_COPY_FILES += \
