@@ -5,23 +5,23 @@
 //
 
 soong_config_module_type {
-    name: "lge_vibrator",
+    name: "msm8994_vibrator",
     module_type: "cc_defaults",
-    config_namespace: "lgeVibratorVars",
+    config_namespace: "msm8994VibratorVars",
     bool_variables: ["duration_amplitude"],
     properties: ["cflags"],
 }
 
-lge_vibrator {
-    name: "lge_vibrator_defaults",
+msm8994_vibrator {
+    name: "msm8994_vibrator_defaults",
 }
 
 cc_binary {
-    name: "android.hardware.vibrator-service.lge",
-    defaults: ["lge_vibrator_defaults"],
+    name: "android.hardware.vibrator-service.msm8994",
+    defaults: ["msm8994_vibrator_defaults"],
     relative_install_path: "hw",
-    init_rc: ["android.hardware.vibrator-service.lge.rc"],
-    vintf_fragments: ["android.hardware.vibrator-service.lge.xml"],
+    init_rc: ["android.hardware.vibrator-service.msm8994.rc"],
+    vintf_fragments: ["android.hardware.vibrator-service.msm8994.xml"],
     srcs: [
         "Vibrator.cpp",
         "service.cpp",

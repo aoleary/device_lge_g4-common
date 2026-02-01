@@ -441,7 +441,7 @@ PRODUCT_PACKAGES += \
 
 # Vibrator
 PRODUCT_PACKAGES += \
-    android.hardware.vibrator-service.lge
+    android.hardware.vibrator-service.msm8994
 
 # Wifi
 PRODUCT_PACKAGES += \
