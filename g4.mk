@@ -149,7 +149,6 @@ PRODUCT_PACKAGES += \
     gralloc.msm8992 \
     hwcomposer.msm8992 \
     memtrack.msm8992 \
-    android.hardware.light@2.0-service.g4 \
     liboverlay \
     libhdmi \
     libqdutils \
@@ -246,6 +245,10 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     android.hardware.security.keymint-service \
     com.android.hardware.gatekeeper.nonsecure
+
+# Lights
+PRODUCT_PACKAGES += \
+    android.hardware.light-service.lge
 
 # Lineage Health
 PRODUCT_PACKAGES += \
