@@ -28,7 +28,6 @@ cc_binary {
         "libutils",
         "android.hardware.ir-V1-ndk",
         "libhardware",
-        "libcir_driver",
     ],
 
     srcs: ["main.cpp"],

@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2021 The Android Open Source Project
+ * Copyright (C) 2026 j0sh1x<aljoshua.hell@gmail.com>
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,20 +21,21 @@
 #include <android/binder_interface_utils.h>
 #include <android/binder_manager.h>
 #include <android/binder_process.h>
-#include <hardware/consumerir.h>
-#include <numeric>
 
 #include <log/log.h>
+#include <dlfcn.h>
+
+#include <vector>
+#include <string>
 
 // LG specific defines
 #define IR_DEVICE "/dev/ttyHSL1"
 #define LG_IR_BAUD_RATE 115200
+#define CIR_DRIVER_LIB "libcir_driver.so"
 
 using ::aidl::android::hardware::ir::ConsumerIrFreqRange;
 
 namespace aidl::android::hardware::ir {
-
-extern "C" { extern int transmitIr(const char *dev, int baudRate, int frequency, int pattern[], int pattern_len); }
 
 enum LG_TRANSMIT_IR_RETURN_CODES {
     IR_SUCCESS,
@@ -48,6 +50,12 @@ enum LG_TRANSMIT_IR_RETURN_CODES {
     IR_MAX_DURATIONS_EXCEEDED
 };
 
+using transmitIr_t = int (*)(const char* dev,
+                             int baudRate,
+                             int frequency,
+                             int* pattern,
+                             int pattern_len);
+
 static const std::vector<ConsumerIrFreqRange> kCarrierFreqRanges = {
     {30000, 30000},
     {33000, 33000},
@@ -60,20 +68,47 @@ static const std::vector<ConsumerIrFreqRange> kCarrierFreqRanges = {
 class ConsumerIr : public BnConsumerIr {
   public:
     ConsumerIr();
+    ~ConsumerIr();
+
   private:
-    ::ndk::ScopedAStatus getCarrierFreqs(std::vector<ConsumerIrFreqRange>* _aidl_return) override;
-    ::ndk::ScopedAStatus transmit(int32_t in_carrierFreqHz,
-                                  const std::vector<int32_t>& in_pattern) override;
-    consumerir_device_t *mDevice = nullptr;
+    ::ndk::ScopedAStatus getCarrierFreqs(
+            std::vector<ConsumerIrFreqRange>* _aidl_return) override;
+
+    ::ndk::ScopedAStatus transmit(
+            int32_t in_carrierFreqHz,
+            const std::vector<int32_t>& in_pattern) override;
+
+    void* mLibHandle = nullptr;
+    transmitIr_t mTransmitIr = nullptr;
 };
 
 ConsumerIr::ConsumerIr() {
-    ALOGI("ConsumerIr AIDL service initialized (direct transmitIr backend)");
+    ALOGI("ConsumerIr AIDL service initializing (libc_ir backend)");
+
+    mLibHandle = dlopen(CIR_DRIVER_LIB, RTLD_NOW);
+    if (!mLibHandle) {
+        ALOGE("Failed to dlopen %s: %s", CIR_DRIVER_LIB, dlerror());
+        return;
+    }
+
+    mTransmitIr = reinterpret_cast<transmitIr_t>(
+            dlsym(mLibHandle, "transmitIr"));
+
+    if (!mTransmitIr) {
+        ALOGE("Failed to dlsym transmitIr: %s", dlerror());
+        dlclose(mLibHandle);
+        mLibHandle = nullptr;
+    }
+}
+
+ConsumerIr::~ConsumerIr() {
+    if (mLibHandle) {
+        dlclose(mLibHandle);
+    }
 }
 
 ::ndk::ScopedAStatus ConsumerIr::getCarrierFreqs(
         std::vector<ConsumerIrFreqRange>* _aidl_return) {
-
     *_aidl_return = kCarrierFreqRanges;
     return ::ndk::ScopedAStatus::ok();
 }
@@ -82,16 +117,19 @@ ConsumerIr::ConsumerIr() {
         int32_t in_carrierFreqHz,
         const std::vector<int32_t>& in_pattern) {
 
-    size_t entries = in_pattern.size();
+    if (!mTransmitIr) {
+        ALOGE("transmitIr symbol not available");
+        return ::ndk::ScopedAStatus::fromServiceSpecificError(IR_FAIL);
+    }
 
     ALOGD("transmitting pattern at %d Hz", in_carrierFreqHz);
 
-    int rc = transmitIr(
+    int rc = mTransmitIr(
             IR_DEVICE,
             LG_IR_BAUD_RATE,
             in_carrierFreqHz,
-            const_cast<int32_t*>(in_pattern.data()),
-            sizeof(int32_t) * entries);
+            const_cast<int*>(in_pattern.data()),
+            sizeof(int32_t) * in_pattern.size());
 
     if (rc != IR_SUCCESS) {
         ALOGE("transmitIr() failed, error %d", rc);
@@ -107,12 +145,16 @@ using aidl::android::hardware::ir::ConsumerIr;
 
 int main() {
     auto binder = ::ndk::SharedRefBase::make<ConsumerIr>();
-    const std::string name = std::string() + ConsumerIr::descriptor + "/default";
-    CHECK_EQ(STATUS_OK, AServiceManager_addService(binder->asBinder().get(), name.c_str()))
+    const std::string name =
+            std::string() + ConsumerIr::descriptor + "/default";
+
+    CHECK_EQ(STATUS_OK,
+             AServiceManager_addService(
+                 binder->asBinder().get(), name.c_str()))
             << "Failed to register " << name;
 
     ABinderProcess_setThreadPoolMaxThreadCount(0);
     ABinderProcess_joinThreadPool();
 
-    return EXIT_FAILURE;  // should not reached
+    return EXIT_FAILURE;  // should not be reached
 }
