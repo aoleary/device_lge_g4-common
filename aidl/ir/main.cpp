@@ -16,7 +16,6 @@
  */
 
 #include <aidl/android/hardware/ir/BnConsumerIr.h>
-#include <aidl/android/hardware/ir/ConsumerIrFreqRange.h>
 #include <android-base/logging.h>
 #include <android/binder_interface_utils.h>
 #include <android/binder_manager.h>
@@ -25,13 +24,9 @@
 #include <log/log.h>
 #include <dlfcn.h>
 
-#include <vector>
-#include <string>
+#include <lge_ir.h>
 
-// LG specific defines
-#define IR_DEVICE "/dev/ttyHSL1"
-#define LG_IR_BAUD_RATE 115200
-#define CIR_DRIVER_LIB "libcir_driver.so"
+#include <string>
 
 using ::aidl::android::hardware::ir::ConsumerIrFreqRange;
 
@@ -55,15 +50,6 @@ using transmitIr_t = int (*)(const char* dev,
                              int frequency,
                              int* pattern,
                              int pattern_len);
-
-static const std::vector<ConsumerIrFreqRange> kCarrierFreqRanges = {
-    {30000, 30000},
-    {33000, 33000},
-    {36000, 36000},
-    {38000, 38000},
-    {40000, 40000},
-    {56000, 56000},
-};
 
 class ConsumerIr : public BnConsumerIr {
   public:
