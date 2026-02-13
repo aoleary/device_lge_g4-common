@@ -151,32 +151,15 @@
             <name>ISap</name>
             <instance>slot1</instance>
         </interface>
-        <fqname>@1.0::IRadio/slot1</fqname>
-        <fqname>@1.0::ISap/slot1</fqname>
-        <fqname>@1.1::IRadio/slot1</fqname>
-        <fqname>@1.1::ISap/slot1</fqname>
-    </hal>
-    <hal format="hidl">
-        <name>android.hardware.secure_element</name>
-	<transport arch="32+64">passthrough</transport>
-        <version>1.0</version>
-        <interface>
-            <name>ISecureElement</name>
-            <instance>eSE1</instance>
-            <instance>SIM1</instance>
-        </interface>
-        <fqname>@1.0::ISecureElement/eSE1</fqname>
-        <fqname>@1.0::ISecureElement/SIM1</fqname>
     </hal>
     <hal format="hidl">
         <name>android.hardware.radio.deprecated</name>
-        <transport arch="32+64">passthrough</transport>
+        <transport>hwbinder</transport>
         <version>1.0</version>
         <interface>
             <name>IOemHook</name>
             <instance>slot1</instance>
         </interface>
-        <fqname>@1.0::IOemHook/slot1</fqname>
     </hal>
     <hal format="hidl">
         <name>android.hardware.radio.config</name>
@@ -195,13 +178,6 @@
             <name>ISensors</name>
             <instance>default</instance>
         </interface>
-        <interface>
-            <name>ISensorManager</name> 
-            <instance>default</instance>
-        </interface> 
-        <fqname>@1.0::ISensors/default</fqname>
-        <fqname>@2.1::ISensors/default</fqname>
-        <fqname>@1.0::ISensorManager/default</fqname>
     </hal>
     <hal format="hidl">
         <name>android.hardware.thermal</name>
