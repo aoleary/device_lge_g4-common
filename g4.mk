@@ -105,13 +105,6 @@ PRODUCT_PACKAGES += \
     android.hardware.camera.provider@2.4-legacy \
     Aperture
 
-# Enable camera EIS
-# eis.enable: enables electronic image stabilization
-# is_type: sets image stabilization type
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.camera.eis.enable=1 \
-    persist.camera.is_type=4
-
 # Configstore
 PRODUCT_PACKAGES += \
     disable_configstore
@@ -235,11 +228,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PACKAGES += \
     ipacm-diag
         #ipacm
-
-# Kernel modules
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/modules/mcDrvModule.ko:$(TARGET_COPY_OUT_VENDOR)/lib/modules/mcDrvModule.ko \
-    $(LOCAL_PATH)/configs/modules/mcKernelApi.ko:$(TARGET_COPY_OUT_VENDOR)/lib/modules/mcKernelApi.ko
 
 # Keymaster HAL
 PRODUCT_PACKAGES += \
@@ -400,8 +388,7 @@ PRODUCT_COPY_FILES += \
 # Sensors
 PRODUCT_PACKAGES += \
     android.frameworks.sensorservice@1.0.vendor \
-    android.hardware.sensors@1.0-impl \
-    android.hardware.sensors@1.0-service \
+    android.hardware.sensors@1.0-impl
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/sensors/sensor_def_common.conf:$(TARGET_COPY_OUT_VENDOR)/etc/sensors/sensor_def_common.conf \
@@ -417,7 +404,8 @@ PRODUCT_PACKAGES += \
     slim_shim \
     libaudioclient_shim_g4 \
     libshims_thermal \
-    libgui_shim_vendor
+    libgui_shim_vendor \
+    libcutils_shim \
     
 # System properties
 -include $(LOCAL_PATH)/system_prop.mk
@@ -461,9 +449,6 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/wifi/bcmdhd.cal:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/bcmdhd.cal
 
 $(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/firmware/bcm4339/device-bcm.mk)
-
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/wifi/WCNSS_qcom_cfg.ini:/$(TARGET_COPY_OUT_VENDOR)/firmware/wlan/qca_cld/WCNSS_qcom_cfg.ini
 
 ## This is a workaround for the Bluetooth sanitize shadow call stack (SCS)
 ## crash reported here: https://issuetracker.google.com/issues/302408537.

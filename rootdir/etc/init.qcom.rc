@@ -42,7 +42,6 @@ on early-init
 
     # Symlink diag to diag_lge to unbreak LG proprietary tools
     symlink /dev/diag /dev/diag_lge
-    symlink /system/vendor /odm
 
     mount debugfs debugfs /sys/kernel/debug
     #R/O fs: symlink /data/tombstones /tombstones
