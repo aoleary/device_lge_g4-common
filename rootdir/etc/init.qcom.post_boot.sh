@@ -24,7 +24,7 @@
 # WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
 # OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-#
+
 # LGE_CHANGE_S, [LGE_DATA][LGP_DATA_TCPIP_NSRM]
 targetProd=`getprop ro.product.name`
 case "$targetProd" in
@@ -75,11 +75,10 @@ case "$target" in
 # Little: 384000 460800 600000 672000 787200 864000 960000 1248000 1440000
 # Big: 384000 480000 633600 768000 864000 960000 1248000 1344000 1440000 1536000 1632000 1689600 1824000
 
-# configure governor settings for little cluster
-	echo schedutil > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
-        echo 0 > /sys/devices/system/cpu/cpufreq/schedutil/up_rate_limit_us
-        echo 300 > /sys/devices/system/cpu/cpufreq/schedutil/down_rate_limit_us
-        echo 99 > /sys/devices/system/cpu/cpufreq/schedutil/hispeed_load
+# configure governor settings for little cluster		echo schedutil > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+        echo 200 > /sys/devices/system/cpu/cpufreq/schedutil/up_rate_limit_us
+        echo 900 > /sys/devices/system/cpu/cpufreq/schedutil/down_rate_limit_us
+        echo 80 > /sys/devices/system/cpu/cpufreq/schedutil/hispeed_load
         echo 1440000 > /sys/devices/system/cpu/cpu0/cpufreq/schedutil/hispeed_freq      #Core 4 Maximum Frequency = 1440MHz
 
 # online CPU4
@@ -87,9 +86,9 @@ case "$target" in
 
 # configure governor settings for big cluster
 	echo schedutil > /sys/devices/system/cpu/cpu4/cpufreq/scaling_governor
-        echo 0 > /sys/devices/system/cpu/cpufreq/schedutil/up_rate_limit_us
-        echo 300 > /sys/devices/system/cpu/cpufreq/schedutil/down_rate_limit_us
-        echo 99 > /sys/devices/system/cpu/cpufreq/schedutil/hispeed_load
+        echo 200 > /sys/devices/system/cpu/cpufreq/schedutil/up_rate_limit_us
+        echo 900 > /sys/devices/system/cpu/cpufreq/schedutil/down_rate_limit_us
+        echo 80 > /sys/devices/system/cpu/cpufreq/schedutil/hispeed_load
         echo 1824000 > /sys/devices/system/cpu/cpu4/cpufreq/schedutil/hispeed_freq      #Core 5 Maximum Frequency = 1824MHz
 
 # restore A57's max
@@ -99,7 +98,7 @@ case "$target" in
         echo 1 > /sys/devices/system/cpu/cpu5/online
 
 # Dynamic Stune Boost
-        echo 120 > /sys/module/cpu_boost/parameters/dynamic_stune_boost
+        echo 45 > /sys/module/cpu_boost/parameters/dynamic_stune_boost   # Adjusted to avoid overboost
 
 # GPU Input Boost
 # Available CPU Freqs in kernel
@@ -207,6 +206,7 @@ if [ -c /dev/coresight-stm ]; then
     fi
 fi
 
+# Setup uclamp
 echo 5 > /dev/cpuctl/background/cpu.uclamp.max
 echo 40 > /dev/cpuctl/system-background/cpu.uclamp.max
 echo 50 > /dev/cpuctl/foreground/cpu.uclamp.max
@@ -220,15 +220,20 @@ echo 1 > /dev/cpuctl/camera-daemon/cpu.uclamp.latency_sensitive
 # Disable wsf for all targets beacause we are using efk.
 # wsf Range : 1..1000 So set to bare minimum value 1.
 echo 1 > /proc/sys/vm/watermark_scale_factor
-echo 10800 > /proc/sys/vm/extra_free_kbytes
+echo 16384 > /proc/sys/vm/extra_free_kbytes
 
-# Set allocstall_threshold to 0
+# PSI signal freshness
+echo 0 > /proc/sys/vm/stat_interval
+
+# Set allocstall_threshold to 0 (optimized for PSI)
 echo 0 > /sys/module/vmpressure/parameters/allocstall_threshold
 
 # Set kswapd threads
 echo 4 > /proc/sys/vm/kswapd_threads
 
-echo 5430 > /proc/sys/vm/min_free_kbytes
+# Minimum free memory before reclaim kicks in
+echo 7168 > /proc/sys/vm/min_free_kbytes
 
 # Fix timekeep restore
 /vendor/bin/timekeep restore
+
