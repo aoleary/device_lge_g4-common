@@ -100,6 +100,15 @@ case "$target" in
 # Dynamic Stune Boost
         echo 45 > /sys/module/cpu_boost/parameters/dynamic_stune_boost   # Adjusted to avoid overboost
 
+# Input Boost Integration
+	echo 1  > /sys/module/cpu_boost/parameters/input_boost_enabled
+
+	echo "0:960000 1:960000 2:960000 3:960000 4:1248000 5:1248000" \
+	> /sys/module/cpu_boost/parameters/input_boost_freq
+
+	echo 0  > /sys/module/cpu_boost/parameters/boost_ms
+	echo 40 > /sys/module/cpu_boost/parameters/input_boost_ms
+
 # GPU Input Boost
 # Available CPU Freqs in kernel
 # 180000000 300000000 367000000 450000000 490000000 600000000
