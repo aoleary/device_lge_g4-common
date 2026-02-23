@@ -368,13 +368,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     charger_res_images
 
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/charger/charger:$(TARGET_COPY_OUT_SYSTEM)/bin/charger
-
-# Trust
-PRODUCT_PACKAGES += \
-    vendor.lineage.trust@1.0-service
-
 # Overlay
 DEVICE_PACKAGE_OVERLAYS += \
     $(LOCAL_PATH)/overlay
@@ -504,6 +497,10 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     timekeep \
     TimeKeep
+
+# Trust
+PRODUCT_PACKAGES += \
+    vendor.lineage.trust@1.0-service
 
 # USB
 PRODUCT_PACKAGES += \

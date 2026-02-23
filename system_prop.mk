@@ -97,11 +97,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     vendor.camera.aux.packagelist=org.codeaurora.snapcam,com.android.camera,com.google.camera \
     vendor.camera.aux.packageexcludelist=org.telegram.messenger,com.microsoft.teams,com.discord
 
-
-# Charger
-PRODUCT_PRODUCT_PROPERTIES += \
-    ro.charger.enable_suspend=true
-
 # DRM
 PRODUCT_PROPERTY_OVERRIDES += \
     drm.service.enabled=true
