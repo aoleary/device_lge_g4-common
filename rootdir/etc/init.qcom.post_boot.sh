@@ -76,8 +76,8 @@ case "$target" in
 # Big: 384000 480000 633600 768000 864000 960000 1248000 1344000 1440000 1536000 1632000 1689600 1824000
 
 # configure governor settings for little cluster		echo schedutil > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
-        echo 200 > /sys/devices/system/cpu/cpufreq/schedutil/up_rate_limit_us
-        echo 900 > /sys/devices/system/cpu/cpufreq/schedutil/down_rate_limit_us
+        echo 85 > /sys/devices/system/cpu/cpufreq/schedutil/up_rate_limit_us
+        echo 1150 > /sys/devices/system/cpu/cpufreq/schedutil/down_rate_limit_us
         echo 80 > /sys/devices/system/cpu/cpufreq/schedutil/hispeed_load
         echo 1440000 > /sys/devices/system/cpu/cpu0/cpufreq/schedutil/hispeed_freq      #Core 4 Maximum Frequency = 1440MHz
 
@@ -86,8 +86,8 @@ case "$target" in
 
 # configure governor settings for big cluster
 	echo schedutil > /sys/devices/system/cpu/cpu4/cpufreq/scaling_governor
-        echo 200 > /sys/devices/system/cpu/cpufreq/schedutil/up_rate_limit_us
-        echo 900 > /sys/devices/system/cpu/cpufreq/schedutil/down_rate_limit_us
+        echo 85 > /sys/devices/system/cpu/cpufreq/schedutil/up_rate_limit_us
+        echo 1150 > /sys/devices/system/cpu/cpufreq/schedutil/down_rate_limit_us
         echo 80 > /sys/devices/system/cpu/cpufreq/schedutil/hispeed_load
         echo 1824000 > /sys/devices/system/cpu/cpu4/cpufreq/schedutil/hispeed_freq      #Core 5 Maximum Frequency = 1824MHz
 
@@ -98,7 +98,7 @@ case "$target" in
         echo 1 > /sys/devices/system/cpu/cpu5/online
 
 # Dynamic Stune Boost
-        echo 45 > /sys/module/cpu_boost/parameters/dynamic_stune_boost   # Adjusted to avoid overboost
+        echo 43 > /sys/module/cpu_boost/parameters/dynamic_stune_boost   # Adjusted to avoid overboost
 
 # Input Boost Integration
 	echo 1  > /sys/module/cpu_boost/parameters/input_boost_enabled
@@ -107,13 +107,13 @@ case "$target" in
 	> /sys/module/cpu_boost/parameters/input_boost_freq
 
 	echo 0  > /sys/module/cpu_boost/parameters/boost_ms
-	echo 40 > /sys/module/cpu_boost/parameters/input_boost_ms
+	echo 60 > /sys/module/cpu_boost/parameters/input_boost_ms
 
 # GPU Input Boost
 # Available CPU Freqs in kernel
 # 180000000 300000000 367000000 450000000 490000000 600000000
         echo 450000000 > /sys/module/governor_msm_adreno_tz/parameters/boost_freq
-        echo 500 > /sys/module/governor_msm_adreno_tz/parameters/boost_duration
+        echo 260 > /sys/module/governor_msm_adreno_tz/parameters/boost_duration
 
         #enable rps static configuration
         echo 8 >  /sys/class/net/rmnet_ipa0/queues/rx-0/rps_cpus
@@ -218,8 +218,8 @@ fi
 # Setup uclamp
 echo 5 > /dev/cpuctl/background/cpu.uclamp.max
 echo 40 > /dev/cpuctl/system-background/cpu.uclamp.max
-echo 50 > /dev/cpuctl/foreground/cpu.uclamp.max
-echo 30 > /dev/cpuctl/foreground/cpu.uclamp.min
+echo 60 > /dev/cpuctl/foreground/cpu.uclamp.max
+echo 32 > /dev/cpuctl/foreground/cpu.uclamp.min
 echo 5 > /dev/cpuctl/dex2oat/cpu.uclamp.max
 echo max > /dev/cpuctl/top-app/cpu.uclamp.min
 echo 1 > /dev/cpuctl/top-app/cpu.uclamp.latency_sensitive
@@ -229,19 +229,19 @@ echo 1 > /dev/cpuctl/camera-daemon/cpu.uclamp.latency_sensitive
 # Disable wsf for all targets beacause we are using efk.
 # wsf Range : 1..1000 So set to bare minimum value 1.
 echo 1 > /proc/sys/vm/watermark_scale_factor
-echo 16384 > /proc/sys/vm/extra_free_kbytes
+echo 24576 > /proc/sys/vm/extra_free_kbytes
 
 # PSI signal freshness
 echo 0 > /proc/sys/vm/stat_interval
 
 # Set allocstall_threshold to 0 (optimized for PSI)
-echo 0 > /sys/module/vmpressure/parameters/allocstall_threshold
+echo 17 > /sys/module/vmpressure/parameters/allocstall_threshold
 
 # Set kswapd threads
 echo 4 > /proc/sys/vm/kswapd_threads
 
 # Minimum free memory before reclaim kicks in
-echo 7168 > /proc/sys/vm/min_free_kbytes
+echo 9216 > /proc/sys/vm/min_free_kbytes
 
 # Fix timekeep restore
 /vendor/bin/timekeep restore
