@@ -30,6 +30,7 @@ on enable-low-power
     write /sys/class/kgsl/kgsl-3d0/default_pwrlevel 5
 
 on charger
+    write /sys/class/graphics/fb0/blank 0
     # disable FPS clk
     write /sys/bus/spi/drivers/fpc1020/spi1.2/clk_enable 0
 
