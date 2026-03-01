@@ -1230,11 +1230,11 @@ on property:sys.boot_completed=1
     # Set IO Scheduler parameter
 on property:sys.boot_completed=1
     # Anxiety tuning
-    write /sys/block/mmcblk0/queue/iosched/quantum 56
+    write /sys/block/mmcblk0/queue/iosched/quantum 48
     write /sys/block/mmcblk0/queue/iosched/group_idle 1
-    write /sys/block/mmcblk0/queue/iosched/slice_async 18
+    write /sys/block/mmcblk0/queue/iosched/slice_async 20
     write /sys/block/mmcblk0/queue/rq_affinity 2
-    write /sys/block/mmcblk0/queue/nr_requests 64
+    write /sys/block/mmcblk0/queue/nr_requests 96
     write /sys/block/mmcblk0/queue/read_ahead_kb 128
 
     # Disable process_reclaim
