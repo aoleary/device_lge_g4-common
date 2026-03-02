@@ -50,72 +50,58 @@ case "$target" in
         chown media:media /dev/soundtrigger_dma_drv
         touch /dev/socket/perfd
         chmod 0777 /dev/socket/perfd
-        # disable thermal bcl hotplug to switch governor
+
+        # Give services time to settle
+        sleep 3
+
+        # Temporarily disable thermal core control to switch governors cleanly
         echo 0 > /sys/module/msm_thermal/core_control/enabled
-        for mode in /sys/devices/soc.0/qcom,bcl.*/mode
-        do
-            echo -n disable > $mode
-        done
-        for hotplug_mask in /sys/devices/soc.0/qcom,bcl.*/hotplug_mask
-        do
-            bcl_hotplug_mask=`cat $hotplug_mask`
-            echo 0 > $hotplug_mask
-        done
-        for hotplug_soc_mask in /sys/devices/soc.0/qcom,bcl.*/hotplug_soc_mask
-        do
-            bcl_soc_hotplug_mask=`cat $hotplug_soc_mask`
-            echo 0 > $hotplug_soc_mask
-        done
-        for mode in /sys/devices/soc.0/qcom,bcl.*/mode
-        do
-            echo -n enable > $mode
-        done
 
-# Available CPU Freqs in kernel
-# Little: 384000 460800 600000 672000 787200 864000 960000 1248000 1440000
-# Big: 384000 480000 633600 768000 864000 960000 1248000 1344000 1440000 1536000 1632000 1689600 1824000
+        # ==============================
+        # CPU GOVERNOR CONFIGURATION
+        # ==============================
 
-# configure governor settings for little cluster		echo schedutil > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
-        echo 75 > /sys/devices/system/cpu/cpufreq/schedutil/up_rate_limit_us
-        echo 1300 > /sys/devices/system/cpu/cpufreq/schedutil/down_rate_limit_us
-        echo 80 > /sys/devices/system/cpu/cpufreq/schedutil/hispeed_load
-        echo 1440000 > /sys/devices/system/cpu/cpu0/cpufreq/schedutil/hispeed_freq      #Core 4 Maximum Frequency = 1440MHz
+        # Little cluster
+        echo schedutil > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
 
-# online CPU4
-        write /sys/devices/system/cpu/cpu4/online 1
-
-# configure governor settings for big cluster
-	echo schedutil > /sys/devices/system/cpu/cpu4/cpufreq/scaling_governor
-        echo 75 > /sys/devices/system/cpu/cpufreq/schedutil/up_rate_limit_us
-        echo 1300 > /sys/devices/system/cpu/cpufreq/schedutil/down_rate_limit_us
-        echo 80 > /sys/devices/system/cpu/cpufreq/schedutil/hispeed_load
-        echo 1824000 > /sys/devices/system/cpu/cpu4/cpufreq/schedutil/hispeed_freq      #Core 5 Maximum Frequency = 1824MHz
-
-# restore A57's max
-        cat /sys/devices/system/cpu/cpu4/cpufreq/cpuinfo_max_freq /sys/devices/system/cpu/cpu4/cpufreq/scaling_max_freq
-
-# plugin remaining A57s
+        # Big cluster online
+        echo 1 > /sys/devices/system/cpu/cpu4/online
+        echo schedutil > /sys/devices/system/cpu/cpu4/cpufreq/scaling_governor
         echo 1 > /sys/devices/system/cpu/cpu5/online
 
-# Dynamic Stune Boost
-        echo 45 > /sys/module/cpu_boost/parameters/dynamic_stune_boost   # Adjusted to avoid overboost
+        # Shared schedutil tuning (balanced)
+        echo 75   > /sys/devices/system/cpu/cpufreq/schedutil/up_rate_limit_us
+        echo 1300 > /sys/devices/system/cpu/cpufreq/schedutil/down_rate_limit_us
+        echo 80   > /sys/devices/system/cpu/cpufreq/schedutil/hispeed_load
 
-# Input Boost Integration
-	echo 1  > /sys/module/cpu_boost/parameters/input_boost_enabled
+        # Hispeed frequencies (prevent unnecessary big jumps)
+        echo 1440000 > /sys/devices/system/cpu/cpu0/cpufreq/schedutil/hispeed_freq
+        echo 1824000 > /sys/devices/system/cpu/cpu4/cpufreq/schedutil/hispeed_freq
 
-	echo "0:960000 1:960000 2:960000 3:960000 4:1248000 5:1248000" \
-	> /sys/module/cpu_boost/parameters/input_boost_freq
+        # ==============================
+        # INPUT BOOST (Short + Efficient)
+        # ==============================
 
-	echo 0  > /sys/module/cpu_boost/parameters/boost_ms
-	echo 65 > /sys/module/cpu_boost/parameters/input_boost_ms
+        echo 1  > /sys/module/cpu_boost/parameters/input_boost_enabled
+        echo "0:960000 1:960000 2:960000 3:960000 4:1248000 5:1248000" \
+        > /sys/module/cpu_boost/parameters/input_boost_freq
+        echo 60  > /sys/module/cpu_boost/parameters/input_boost_ms
+        echo 0   > /sys/module/cpu_boost/parameters/boost_ms
 
-# GPU Input Boost
-# Available CPU Freqs in kernel
-# 180000000 300000000 367000000 450000000 490000000 600000000
+        # Moderate scheduler boost bias
+        echo 35 > /sys/module/cpu_boost/parameters/dynamic_stune_boost
+
+        # ==============================
+        # GPU BOOST (Shortened)
+        # ==============================
+
         echo 450000000 > /sys/module/governor_msm_adreno_tz/parameters/boost_freq
-        echo 280 > /sys/module/governor_msm_adreno_tz/parameters/boost_duration
+        echo 180       > /sys/module/governor_msm_adreno_tz/parameters/boost_duration
 
-        #enable rps static configuration
+        # ==============================
+        # RPS Static Configuration
+        # ==============================
+
         echo 8 >  /sys/class/net/rmnet_ipa0/queues/rx-0/rps_cpus
         for devfreq_gov in /sys/class/devfreq/qcom,cpubw*/governor
         do
@@ -126,60 +112,44 @@ case "$target" in
             echo "cpufreq" > $devfreq_gov
         done
 
-        # Disable sched_boost
-        # echo 0 > /proc/sys/kernel/sched_boost
-
-		# Set Memory parameters
+	# Set Memory parameters
         configure_memory_parameters
         restorecon -R /sys/devices/system/cpu
 
-	    # Disable CPU retention
-	    echo 0 > /sys/module/lpm_levels/system/a53/cpu0/retention/idle_enabled
-	    echo 0 > /sys/module/lpm_levels/system/a53/cpu1/retention/idle_enabled
-	    echo 0 > /sys/module/lpm_levels/system/a53/cpu2/retention/idle_enabled
-	    echo 0 > /sys/module/lpm_levels/system/a53/cpu3/retention/idle_enabled
-	    echo 0 > /sys/module/lpm_levels/system/a57/cpu4/retention/idle_enabled
-	    echo 0 > /sys/module/lpm_levels/system/a57/cpu5/retention/idle_enabled
+        # ==============================
+        # MEMORY / VM ALIGNMENT
+        # ==============================
 
-	    # Disable L2 retention
-	    echo 0 > /sys/module/lpm_levels/system/a53/a53-l2-retention/idle_enabled
-	    echo 0 > /sys/module/lpm_levels/system/a57/a57-l2-retention/idle_enabled
+        echo 1      > /proc/sys/vm/watermark_scale_factor
+        echo 24576  > /proc/sys/vm/extra_free_kbytes
+        echo 9216   > /proc/sys/vm/min_free_kbytes
+        echo 16     > /sys/module/vmpressure/parameters/allocstall_threshold
+        echo 2      > /proc/sys/vm/kswapd_threads
+        echo 0      > /proc/sys/vm/stat_interval
 
-	    # Disable CPU Standalone Power Collapse
-	    echo "N" > /sys/module/lpm_levels/system/a53/cpu0/standalone_pc/idle_enabled
-	    echo "N" > /sys/module/lpm_levels/system/a53/cpu1/standalone_pc/idle_enabled
-	    echo "N" > /sys/module/lpm_levels/system/a53/cpu2/standalone_pc/idle_enabled
-	    echo "N" > /sys/module/lpm_levels/system/a53/cpu3/standalone_pc/idle_enabled
-	    echo "N" > /sys/module/lpm_levels/system/a57/cpu4/standalone_pc/idle_enabled
-	    echo "N" > /sys/module/lpm_levels/system/a57/cpu5/standalone_pc/idle_enabled
-	    echo "N" > /sys/module/lpm_levels/system/a53/cpu0/standalone_pc/suspend_enabled
-	    echo "N" > /sys/module/lpm_levels/system/a53/cpu1/standalone_pc/suspend_enabled
-	    echo "N" > /sys/module/lpm_levels/system/a53/cpu2/standalone_pc/suspend_enabled
-	    echo "N" > /sys/module/lpm_levels/system/a53/cpu3/standalone_pc/suspend_enabled
-	    echo "N" > /sys/module/lpm_levels/system/a57/cpu4/standalone_pc/suspend_enabled
-	    echo "N" > /sys/module/lpm_levels/system/a57/cpu5/standalone_pc/suspend_enabled
+        # ==============================
+        # UCLAMP (Keep as-is, good setup)
+        # ==============================
 
-        # re-enable thermal and BCL hotplug
+        echo 5   > /dev/cpuctl/background/cpu.uclamp.max
+        echo 40  > /dev/cpuctl/system-background/cpu.uclamp.max
+        echo 62  > /dev/cpuctl/foreground/cpu.uclamp.max
+        echo 34  > /dev/cpuctl/foreground/cpu.uclamp.min
+        echo 5   > /dev/cpuctl/dex2oat/cpu.uclamp.max
+        echo max > /dev/cpuctl/top-app/cpu.uclamp.min
+        echo 1   > /dev/cpuctl/top-app/cpu.uclamp.latency_sensitive
+        echo max > /dev/cpuctl/camera-daemon/cpu.uclamp.min
+        echo 1   > /dev/cpuctl/camera-daemon/cpu.uclamp.latency_sensitive
+
+        # ==============================
+        # RE-ENABLE THERMAL CONTROL
+        # ==============================
+
         echo 1 > /sys/module/msm_thermal/core_control/enabled
-        for mode in /sys/devices/soc.0/qcom,bcl.*/mode
-        do
-            echo -n disable > $mode
-        done
-        for hotplug_mask in /sys/devices/soc.0/qcom,bcl.*/hotplug_mask
-        do
-            echo $bcl_hotplug_mask > $hotplug_mask
-        done
-        for hotplug_soc_mask in /sys/devices/soc.0/qcom,bcl.*/hotplug_soc_mask
-        do
-            echo $bcl_soc_hotplug_mask > $hotplug_soc_mask
-        done
-        for mode in /sys/devices/soc.0/qcom,bcl.*/mode
-        do
-            echo -n enable > $mode
-        done
 
-        # enable low power mode sleep
+        # Ensure deep sleep allowed
         echo 0 > /sys/module/lpm_levels/parameters/sleep_disabled
+
     ;;
 esac
 
@@ -215,34 +185,5 @@ if [ -c /dev/coresight-stm ]; then
     fi
 fi
 
-# Setup uclamp
-echo 5 > /dev/cpuctl/background/cpu.uclamp.max
-echo 40 > /dev/cpuctl/system-background/cpu.uclamp.max
-echo 62 > /dev/cpuctl/foreground/cpu.uclamp.max
-echo 34 > /dev/cpuctl/foreground/cpu.uclamp.min
-echo 5 > /dev/cpuctl/dex2oat/cpu.uclamp.max
-echo max > /dev/cpuctl/top-app/cpu.uclamp.min
-echo 1 > /dev/cpuctl/top-app/cpu.uclamp.latency_sensitive
-echo max > /dev/cpuctl/camera-daemon/cpu.uclamp.min
-echo 1 > /dev/cpuctl/camera-daemon/cpu.uclamp.latency_sensitive
-
-# Disable wsf for all targets beacause we are using efk.
-# wsf Range : 1..1000 So set to bare minimum value 1.
-echo 1 > /proc/sys/vm/watermark_scale_factor
-echo 24576 > /proc/sys/vm/extra_free_kbytes
-
-# PSI signal freshness
-echo 0 > /proc/sys/vm/stat_interval
-
-# Set allocstall_threshold to 0 (optimized for PSI)
-echo 16 > /sys/module/vmpressure/parameters/allocstall_threshold
-
-# Set kswapd threads
-echo 4 > /proc/sys/vm/kswapd_threads
-
-# Minimum free memory before reclaim kicks in
-echo 9216 > /proc/sys/vm/min_free_kbytes
-
 # Fix timekeep restore
 /vendor/bin/timekeep restore
-
