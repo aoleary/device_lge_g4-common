@@ -14,7 +14,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.vendor.audio.fluence.voicecomm=true \
     persist.vendor.audio.fluence.voicerec=false \
     persist.speaker.prot.enable=true \
-    ro.config.vc_call_vol_steps=7 \
     persist.vendor.audio.calfile0=/etc/acdbdata/Bluetooth_cal.acdb \
     persist.vendor.audio.calfile1=/etc/acdbdata/General_cal.acdb \
     persist.vendor.audio.calfile2=/etc/acdbdata/Global_cal.acdb \
@@ -39,8 +38,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     audio_hal.period_size=192 \
     ro.audio.flinger_standbytime_ms=300 \
     use.voice.path.for.pcm.voip=false \
-    ro.config.media_vol_steps=25 \
-    ro.config.vc_call_vol_steps=7
+    ro.config.media_vol_steps=25
 
 # Bluetooth
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -48,16 +46,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     qcom.bluetooth.soc=rome \
     ro.bt.bdaddr_path="/data/misc/bluetooth/bdaddr" \
     persist.bt.enableAptXHD=true
-
-# Blur - Diable Blur in A12+
-ro.surface_flinger.supports_background_blur=0
-ro.sf.blurs_are_expensive=0
-ro.launcher.blur.appLaunch=0
-
-# Boot animation
-TARGET_SCREEN_HEIGHT := 2560
-TARGET_SCREEN_WIDTH := 1440
-TARGET_BOOT_ANIMATION_RES := 1440
 
 # Camera
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -72,6 +60,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     camera.no_navigation_bar=true \
     ro.factorytest=0 \
 # Enable low power video mode for 4K encode
+    vidc.debug.level=1 \
     vidc.debug.perf.mode=2 \
     vidc.enc.dcvs.extra-buff-count=2
 
@@ -155,11 +144,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 #INTERNET: improve download/upload performance
 PRODUCT_PROPERTY_OVERRIDES += \
-    net.tcp.buffersize.default=4096,87380,256960,4096, 16384,256960 \
-    net.tcp.buffersize.wifi=4096,87380,256960,4096,163 84,256960 \
-    net.tcp.buffersize.umts=4096,87380,256960,4096,163 84,256960 \
-    net.tcp.buffersize.gprs=4096,87380,256960,4096,163 84,256960 \
-    net.tcp.buffersize.edge=4096,87380,256960,4096,163 84,256960 \
+    net.tcp.buffersize.default=4096,87380,256960,4096,16384,256960 \
+    net.tcp.buffersize.wifi=4096,87380,256960,4096,16384,256960 \
+    net.tcp.buffersize.umts=4096,87380,256960,4096,16384,256960 \
+    net.tcp.buffersize.gprs=4096,87380,256960,4096,16384,256960 \
+    net.tcp.buffersize.edge=4096,87380,256960,4096,16384,256960 \
     net.rmnet0.dns1=8.8.8.8 \
     net.rmnet0.dns2=8.8.4.4 \
     net.dns1=1.1.1.1\
@@ -181,19 +170,14 @@ PRODUCT_PROPERTY_OVERRIDES += \
     mm.enable.qcom_parser=3379827 \
     mm.enable.smoothstreaming=true \
     media.aac_51_output_enabled=true \
-    media.stagefright.legacyencoder=true
-    media.stagefright.less-secure=true
-    vidc.debug.level=1 \
-    vidc.debug.perf.mode=2 \
-    vidc.enc.dcvs.extra-buff-count=2 \
-    persist.camera.cpp.duplication=false \
-    ro.config.avoid_gfx_accel=true
+    media.stagefright.legacyencoder=true \
+    media.stagefright.less-secure=true \
+    persist.camera.cpp.duplication=false
 
 # Perf
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.dpm.feature=1 \
     persist.timed.enable=true \
-    ro.qualcomm.cabl=2 \
     ro.qualcomm.perf.cores_online=2 \
     ro.vendor.extension_library=libqti-perfd-client.so \
     ro.min_freq_0=384000 \
@@ -221,6 +205,7 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     debug.sf.layer_caching_active_layer_timeout_ms=1000
 
 # Properties to improve rendering
+PRODUCT_PROPERTY_OVERRIDES += \
     debug.cpurend.vsync=false \
     debug.enable.sglscale=1 \
     debug.enabletr=true \
@@ -231,7 +216,7 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.surface_flinger.enable_layer_caching=false \
     debug.sf.enable_planner_prediction=false \
     debug.sdm.support_writeback=0 \
-    debug.sf.latch_unsignaled=0\
+    debug.sf.latch_unsignaled=0 \
     debug.sf.auto_latch_unsignaled=0 \
     debug.sf.disable_client_composition_cache=0 \
     debug.sf.disable_backpressure=1 \
@@ -290,6 +275,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.ril.enable.amr.wideband=1
 
 # RIL Powersaving
+PRODUCT_PROPERTY_OVERRIDES += \
     persist.radio.add_power_save=1 \
     pm.sleep_mode=1 \
     ro.ril.disable.power.collapse=0 \
@@ -314,8 +300,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.sys.sdcardfs=true
 
 # UI Smoothening
-persist.service.lgospd.enable=0
-persist.service.pcsync.enable=0
+PRODUCT_PROPERTY_OVERRIDES += \
+   persist.service.lgospd.enable=0 \
+   persist.service.pcsync.enable=0
 
 # WiFi Scan Interval (default = 15s)
 PRODUCT_PROPERTY_OVERRIDES += \
