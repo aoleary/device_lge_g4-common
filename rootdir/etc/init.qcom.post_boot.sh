@@ -50,8 +50,10 @@ case "$target" in
         chown media:media /dev/soundtrigger_dma_drv
         touch /dev/socket/perfd
         chmod 0777 /dev/socket/perfd
-        # disable thermal bcl hotplug to switch governor
+
+        # Temporarily disable thermal core control to switch governors cleanly
         echo 0 > /sys/module/msm_thermal/core_control/enabled
+
         for mode in /sys/devices/soc.0/qcom,bcl.*/mode
         do
             echo -n disable > $mode
@@ -77,19 +79,18 @@ case "$target" in
 
 # configure governor settings for little cluster
         echo schedutil > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
-        echo 100 > /sys/devices/system/cpu/cpufreq/schedutil/up_rate_limit_us
-        echo 800 > /sys/devices/system/cpu/cpufreq/schedutil/down_rate_limit_us
+        echo 120 > /sys/devices/system/cpu/cpufreq/schedutil/up_rate_limit_us
+        echo 600 > /sys/devices/system/cpu/cpufreq/schedutil/down_rate_limit_us
         echo 88 > /sys/devices/system/cpu/cpufreq/schedutil/hispeed_load
         echo 1440000 > /sys/devices/system/cpu/cpu0/cpufreq/schedutil/hispeed_freq      #Core 4 Maximum Frequency = 1440MHz
 
 # online CPU4
-        write /sys/devices/system/cpu/cpu4/online 1
+        echo 1 > /sys/devices/system/cpu/cpu4/online
 
 # configure governor settings for big cluster
         echo schedutil > /sys/devices/system/cpu/cpu4/cpufreq/scaling_governor
-	echo schedutil > /sys/devices/system/cpu/cpu4/cpufreq/scaling_governor
-        echo 100 > /sys/devices/system/cpu/cpufreq/schedutil/up_rate_limit_us
-        echo 800 > /sys/devices/system/cpu/cpufreq/schedutil/down_rate_limit_us
+        echo 120 > /sys/devices/system/cpu/cpufreq/schedutil/up_rate_limit_us
+        echo 600 > /sys/devices/system/cpu/cpufreq/schedutil/down_rate_limit_us
         echo 88 > /sys/devices/system/cpu/cpufreq/schedutil/hispeed_load
         echo 1824000 > /sys/devices/system/cpu/cpu4/cpufreq/schedutil/hispeed_freq      #Core 5 Maximum Frequency = 1824MHz
 
@@ -100,10 +101,10 @@ case "$target" in
         echo 1 > /sys/devices/system/cpu/cpu5/online
 
 # Sheduler tuning
-        echo 95  > /proc/sys/kernel/sched_upmigrate
-        echo 85  > /proc/sys/kernel/sched_downmigrate
-        echo 10  > /proc/sys/kernel/sched_upmigrate_min_nice
-        echo 110 > /proc/sys/kernel/sched_wakeup_load_threshold
+        echo 90  > /proc/sys/kernel/sched_upmigrate
+        echo 80  > /proc/sys/kernel/sched_downmigrate
+        echo 9   > /proc/sys/kernel/sched_upmigrate_min_nice
+        echo 100 > /proc/sys/kernel/sched_wakeup_load_threshold
         echo 20  > /proc/sys/kernel/sched_small_task
         echo 1   > /proc/sys/kernel/sched_migration_fixup
 
@@ -111,10 +112,10 @@ case "$target" in
         echo 43 > /sys/module/cpu_boost/parameters/dynamic_stune_boost   # Adjusted to avoid overboost
 
 # GPU Input Boost
-# Available CPU Freqs in kernel
+# Available GPU Freqs in kernel
 # 180000000 300000000 367000000 450000000 490000000 600000000
         echo 450000000 > /sys/module/governor_msm_adreno_tz/parameters/boost_freq
-        echo 300 > /sys/module/governor_msm_adreno_tz/parameters/boost_duration
+        echo 180       > /sys/module/governor_msm_adreno_tz/parameters/boost_duration
 
         #enable rps static configuration
         echo 8 >  /sys/class/net/rmnet_ipa0/queues/rx-0/rps_cpus
@@ -127,10 +128,7 @@ case "$target" in
             echo "cpufreq" > $devfreq_gov
         done
 
-        # Disable sched_boost
-        # echo 0 > /proc/sys/kernel/sched_boost
-
-		# Set Memory parameters
+	# Set Memory parameters
         configure_memory_parameters
         restorecon -R /sys/devices/system/cpu
 
@@ -181,8 +179,9 @@ case "$target" in
             echo -n enable > $mode
         done
 
-        # enable low power mode sleep
+        # Ensure deep sleep allowed
         echo 0 > /sys/module/lpm_levels/parameters/sleep_disabled
+
     ;;
 esac
 
@@ -219,7 +218,7 @@ if [ -c /dev/coresight-stm ]; then
 fi
 
 # Setup uclamp
-echo 5 > /dev/cpuctl/	background/cpu.uclamp.max
+echo 5 > /dev/cpuctl/background/cpu.uclamp.max
 echo 30 > /dev/cpuctl/system-background/cpu.uclamp.max
 echo 50 > /dev/cpuctl/foreground/cpu.uclamp.max
 echo 24 > /dev/cpuctl/foreground/cpu.uclamp.min
@@ -248,4 +247,3 @@ echo 9216 > /proc/sys/vm/min_free_kbytes
 
 # Fix timekeep restore
 /vendor/bin/timekeep restore
-
