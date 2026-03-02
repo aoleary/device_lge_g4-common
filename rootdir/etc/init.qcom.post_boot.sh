@@ -54,19 +54,12 @@ case "$target" in
         # Give services time to settle
         sleep 3
 
-        # Temporarily disable thermal core control to switch governors cleanly
-        echo 0 > /sys/module/msm_thermal/core_control/enabled
-
         # ==============================
         # CPU GOVERNOR CONFIGURATION
         # ==============================
 
-        # Little cluster
-        echo schedutil > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
-
         # Big cluster online
         echo 1 > /sys/devices/system/cpu/cpu4/online
-        echo schedutil > /sys/devices/system/cpu/cpu4/cpufreq/scaling_governor
         echo 1 > /sys/devices/system/cpu/cpu5/online
 
         # Shared schedutil tuning (balanced)
@@ -128,7 +121,7 @@ case "$target" in
         echo 0      > /proc/sys/vm/stat_interval
 
         # ==============================
-        # UCLAMP (Keep as-is, good setup)
+        # UCLAMP
         # ==============================
 
         echo 5   > /dev/cpuctl/background/cpu.uclamp.max
