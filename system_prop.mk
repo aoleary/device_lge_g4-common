@@ -262,8 +262,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.hwc.ptor.enable=true \
     ro.fb.mode=1 \
     video.accelerate.hw=1 \
-    debug.hwui.renderer=opengl \
-    ro.hwui.render_ahead=3 \
+    debug.hwui.renderer=skiagl \
+    debug.hwui.use_buffer_age=false \
+    ro.hwui.texture_cache_size=48 \
+    ro.hwui.layer_cache_size=32 \
+    ro.hwui.render_ahead=2 \
     vendor.display.disable_rotator_downscale=1
 
 # RIL
