@@ -201,10 +201,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Low memory killer daemon
 PRODUCT_PROPERTY_OVERRIDES += \
    ro.lmk.use_psi=true \
-   ro.lmk.psi_partial_stall_ms=80 \
-   ro.lmk.psi_complete_stall_ms=180 \
-   ro.lmk.thrashing_limit=30 \
-   ro.lmk.thrashing_limit_decay=50
+   ro.lmk.psi_partial_stall_ms=120 \
+   ro.lmk.psi_complete_stall_ms=250 \
+   ro.lmk.thrashing_limit=45 \
+   ro.lmk.thrashing_limit_decay=60
 
 # Media
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -239,9 +239,8 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.surface_flinger.enable_layer_caching=false \
     ro.surface_flinger.start_graphics_allocator_service=true \
     ro.surface_flinger.use_context_priority=true \
-    debug.sf.enable_planner_prediction=false \
     debug.sf.enable_gl_backpressure=1 \
-    ro.surface_flinger.set_idle_timer_ms=80 \
+    ro.surface_flinger.set_idle_timer_ms=250 \
     ro.surface_flinger.set_touch_timer_ms=200 \
     ro.surface_flinger.set_display_power_timer_ms=1000 \
     ro.surface_flinger.support_kernel_idle_timer=true \
@@ -250,7 +249,7 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 # Properties to improve rendering
 PRODUCT_PROPERTY_OVERRIDES += \
     debug.sdm.support_writeback=0 \
-    debug.sf.latch_unsignaled=0 \
+    debug.sf.latch_unsignaled=1 \
     debug.sf.auto_latch_unsignaled=0 \
     debug.sf.use_phase_offsets_as_durations=1 \
     debug.sf.early.app.duration=13666666 \

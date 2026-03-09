@@ -63,9 +63,9 @@ case "$target" in
         echo 1 > /sys/devices/system/cpu/cpu5/online
 
         # Shared schedutil tuning (balanced)
-        echo 75   > /sys/devices/system/cpu/cpufreq/schedutil/up_rate_limit_us
-        echo 1300 > /sys/devices/system/cpu/cpufreq/schedutil/down_rate_limit_us
-        echo 80   > /sys/devices/system/cpu/cpufreq/schedutil/hispeed_load
+        echo 0    > /sys/devices/system/cpu/cpufreq/schedutil/up_rate_limit_us
+        echo 2000 > /sys/devices/system/cpu/cpufreq/schedutil/down_rate_limit_us
+        echo 85   > /sys/devices/system/cpu/cpufreq/schedutil/hispeed_load
 
         # Hispeed frequencies (prevent unnecessary big jumps)
         echo 1440000 > /sys/devices/system/cpu/cpu0/cpufreq/schedutil/hispeed_freq
@@ -78,7 +78,7 @@ case "$target" in
         echo 1  > /sys/module/cpu_boost/parameters/input_boost_enabled
         echo "0:960000 1:960000 2:960000 3:960000 4:1248000 5:1248000" \
         > /sys/module/cpu_boost/parameters/input_boost_freq
-        echo 60  > /sys/module/cpu_boost/parameters/input_boost_ms
+        echo 45  > /sys/module/cpu_boost/parameters/input_boost_ms
         echo 0   > /sys/module/cpu_boost/parameters/boost_ms
 
         # Moderate scheduler boost bias
@@ -113,9 +113,9 @@ case "$target" in
         # MEMORY / VM ALIGNMENT
         # ==============================
 
-        echo 1      > /proc/sys/vm/watermark_scale_factor
-        echo 24576  > /proc/sys/vm/extra_free_kbytes
-        echo 9216   > /proc/sys/vm/min_free_kbytes
+        echo 10     > /proc/sys/vm/watermark_scale_factor
+        echo 32768  > /proc/sys/vm/extra_free_kbytes
+        echo 16384  > /proc/sys/vm/min_free_kbytes
         echo 16     > /sys/module/vmpressure/parameters/allocstall_threshold
         echo 2      > /proc/sys/vm/kswapd_threads
         echo 0      > /proc/sys/vm/stat_interval
