@@ -229,7 +229,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.vold.umsdirtyratio=50 \
     vendor.perf.gestureflingboost.enable=true
 
-# Properties for Surfaceflinger
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.surface_flinger.max_virtual_display_dimension=2048 \
     ro.surface_flinger.max_frame_buffer_acquired_buffers=3 \
@@ -241,7 +240,7 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.surface_flinger.start_graphics_allocator_service=true \
     ro.surface_flinger.use_context_priority=true \
     debug.sf.enable_planner_prediction=false \
-    debug.sf.enable_gl_backpressure=0 \
+    debug.sf.enable_gl_backpressure=1 \
     ro.surface_flinger.set_idle_timer_ms=80 \
     ro.surface_flinger.set_touch_timer_ms=200 \
     ro.surface_flinger.set_display_power_timer_ms=1000 \
@@ -250,17 +249,9 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 
 # Properties to improve rendering
 PRODUCT_PROPERTY_OVERRIDES += \
-    debug.cpurend.vsync=false \
-    debug.enable.sglscale=1 \
-    debug.enabletr=true \
-    debug.egl.hw=0 \
     debug.sdm.support_writeback=0 \
     debug.sf.latch_unsignaled=0 \
     debug.sf.auto_latch_unsignaled=0 \
-    debug.sf.disable_backpressure=1 \
-    debug.sf.disable_gl_backpressure=1 \
-    debug.sf.predict_hwc_composition_strategy=0 \
-    debug.sf.recomputecrop=0 \
     debug.sf.use_phase_offsets_as_durations=1 \
     debug.sf.early.app.duration=13666666 \
     debug.sf.early.sf.duration=15666666 \
@@ -270,11 +261,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     debug.sf.late.sf.duration=15666666 \
     dev.pm.dyn_samplingrate=1 \
     persist.hwc.ptor.enable=true \
-    persist.sys.composition.type=gpu \
     ro.fb.mode=1 \
     video.accelerate.hw=1 \
     debug.hwui.renderer=opengl \
-    ro.hwui.render_ahead=20 \
+    ro.hwui.render_ahead=3 \
     vendor.display.disable_rotator_downscale=1
 
 # RIL
