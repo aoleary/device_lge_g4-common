@@ -152,13 +152,13 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Fling Velocity
 PRODUCT_PROPERTY_OVERRIDES += \
-    persist.sys.scrollingcache=0 \
-    ro.min.fling_velocity=70 \
-    ro.max.fling_velocity=21000 \
+    persist.sys.scrollingcache=1 \
+    ro.min.fling_velocity=180 \
+    ro.max.fling_velocity=20000 \
     # Additional props
     ro.vendor.qti.cgroup_follow.enable=true \
     persist.vendor.qti.inputopts.enable=true \
-    persist.vendor.qti.inputopts.movetouchslop=0.6 \
+    persist.vendor.qti.inputopts.movetouchslop=0.7 \
     ro.qcom.adreno.qgl.ShaderStorageImageExtendedFormats=0
 
 # FRP

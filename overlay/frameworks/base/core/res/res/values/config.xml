@@ -466,10 +466,10 @@ media UID to access CameraServiceProxy -->
     <bool name="config_allowMediaUidForCameraServiceProxy">true</bool>
 
     <!-- Minimum velocity to initiate a fling, as measured in dips per second. -->
-    <dimen name="config_viewMinFlingVelocity">70dp</dimen>
+    <dimen name="config_viewMinFlingVelocity">180dp</dimen>
 
     <!-- Maximum velocity to initiate a fling, as measured in dips per second. -->
-    <dimen name="config_viewMaxFlingVelocity">21000dp</dimen>
+    <dimen name="config_viewMaxFlingVelocity">20000dp</dimen>
 
     <!-- Flag indicating whether the surface flinger is inefficient
          at performing a blur.  Used by parts of the UI to turn off
