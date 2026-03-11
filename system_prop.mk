@@ -123,7 +123,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.scrollingcache=1 \
     ro.min.fling_velocity=180 \
-    ro.max.fling_velocity=20000 \
+    ro.max.fling_velocity=24000 \
     # Additional props
     ro.vendor.qti.cgroup_follow.enable=true \
     persist.vendor.qti.inputopts.enable=true \

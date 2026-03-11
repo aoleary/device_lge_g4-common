@@ -41,32 +41,15 @@
 
          Must be overridden in platform specific overlays -->
     <integer-array name="config_autoBrightnessLevels">
-        <item>20</item>
-        <item>60</item>
+        <item>10</item>
+        <item>40</item>
         <item>100</item>
-        <item>200</item>
-        <item>300</item>
-        <item>400</item>
+        <item>250</item>
         <item>500</item>
-        <item>600</item>
-        <item>700</item>
-        <item>800</item>
         <item>1000</item>
-        <item>1200</item>
-        <item>1400</item>
-        <item>1600</item>
-        <item>1800</item>
         <item>2000</item>
-        <item>2200</item>
-        <item>2400</item>
-        <item>2600</item>
-        <item>2800</item>
-        <item>3000</item>
-        <item>3200</item>
-        <item>3400</item>
-        <item>3600</item>
-        <item>3800</item>
         <item>4000</item>
+        <item>6000</item>
     </integer-array>
 
     <!-- Array of output values for LCD backlight corresponding to the LUX values
@@ -138,7 +121,7 @@
     </integer-array>
 
     <!-- Minimum screen brightness allowed by the power manager. -->
-    <integer name="config_screenBrightnessDim">20</integer>
+    <integer name="config_screenBrightnessDim">10</integer>
 
     <!-- Default screen brightness setting.
          Must be in the range specified by minimum and maximum. -->
@@ -153,8 +136,8 @@
          when adapting to brighter or darker environments.  This parameter controls how quickly
          brightness changes occur in response to an observed change in light level that exceeds the
          hysteresis threshold. -->
-    <integer name="config_autoBrightnessBrighteningLightDebounce">3000</integer>
-    <integer name="config_autoBrightnessDarkeningLightDebounce">6000</integer>
+    <integer name="config_autoBrightnessBrighteningLightDebounce">2000</integer>
+    <integer name="config_autoBrightnessDarkeningLightDebounce">4000</integer>
 
     <!-- If this is true, the screen will come on when you unplug usb/power/whatever. -->
     <bool name="config_unplugTurnsOnScreen">false</bool>
@@ -311,7 +294,7 @@
          * The remote submix module "audio.r_submix.default" must be installed on the device.
          * The device must be provisioned with HDCP keys (for protected content).
     -->
-    <bool name="config_enableWifiDisplay">true</bool>
+    <bool name="config_enableWifiDisplay">false</bool>
 
     <!-- Set to true if the wifi display supports compositing content stored
          in gralloc protected buffers.  For this to be true, there must exist
@@ -415,7 +398,7 @@
 
     <!-- Values for global GPS configuration -->
     <string-array translatable="false" name="config_gpsParameters">
-        <item>SUPL_HOST=supl.nokia.com</item>
+        <item>SUPL_HOST=supl.google.com</item>
         <item>SUPL_PORT=7275</item>
         <item>SUPL_VER=0x20000</item>
         <item>SUPL_MODE=1</item>
@@ -524,13 +507,13 @@
     <string translatable="false" name="config_appsNotReportingCrashes">com.android.statementservice,com.android.systemui,com.google.android.tts</string>
 
     <!-- The amount to scale fullscreen snapshots for Overview and snapshot starting windows. -->
-    <item name="config_highResTaskSnapshotScale" format="float" type="dimen">0.8</item>
+    <item name="config_highResTaskSnapshotScale" format="float" type="dimen">0.6</item>
     <!-- The amount to scale reduced scale snapshots for Overview and snapshot starting windows.
          Reduced scale snapshots are loaded before full screen snapshots to improve load times and
          minimize the chance the user will see an empty task card. If set to 0, reduced scale
          snapshots are disabled, and snapshots will only be stored at config_highResTaskSnapshotScale
          -->
-    <item name="config_lowResTaskSnapshotScale" format="float" type="dimen">0.3</item>
+    <item name="config_lowResTaskSnapshotScale" format="float" type="dimen">0.2</item>
 
     <!--Useful if you want to improve signal reception -->
     <bool name="config_ignoreRssnrSignalLevel">true</bool>
