@@ -173,6 +173,19 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.qc.sdk.izat.premium_enabled=0 \
     ro.qc.sdk.izat.service_mask=0x0
 
+# HWUI tuning for Adreno 418
+PRODUCT_SYSTEM_PROPERTIES += \
+	ro.hwui.texture_cache_size=48 \
+	ro.hwui.layer_cache_size=32 \
+	ro.hwui.r_buffer_cache_size=8 \
+	ro.hwui.path_cache_size=16 \
+	ro.hwui.gradient_cache_size=2 \
+	ro.hwui.drop_shadow_cache_size=6 \
+	ro.hwui.text_small_cache_width=1024 \
+	ro.hwui.text_small_cache_height=1024 \
+	ro.hwui.text_large_cache_width=2048 \
+	ro.hwui.text_large_cache_height=1024
+
 # IORapd
 PRODUCT_SYSTEM_PROPERTIES += \
     ro.iorapd.enable=false \
@@ -238,11 +251,11 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.surface_flinger.start_graphics_allocator_service=true \
     ro.surface_flinger.use_context_priority=true \
     debug.sf.enable_gl_backpressure=1 \
-    ro.surface_flinger.set_idle_timer_ms=250 \
+    ro.surface_flinger.set_idle_timer_ms=5000 \
     ro.surface_flinger.set_touch_timer_ms=200 \
     ro.surface_flinger.set_display_power_timer_ms=1000 \
     ro.surface_flinger.support_kernel_idle_timer=true \
-    debug.sf.layer_caching_active_layer_timeout_ms=1000
+    debug.sf.layer_caching_active_layer_timeout_ms=3000
 
 # Properties to improve rendering
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -262,8 +275,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     video.accelerate.hw=1 \
     debug.hwui.renderer=skiagl \
     debug.hwui.use_buffer_age=false \
-    ro.hwui.texture_cache_size=48 \
-    ro.hwui.layer_cache_size=32 \
+    debug.hwui.show_dirty_regions=false \
+    debug.hwui.profile=false \
+    debug.hwui.overdraw=false \
+    ro.hwui.disable_scissor_opt=false \
     ro.hwui.render_ahead=2 \
     vendor.display.disable_rotator_downscale=1
 
