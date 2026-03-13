@@ -32,7 +32,7 @@ firmware/image/keymaster.mdt
 framework/com.quicinc.cne.jar
 lib/hw/lgkm.default.so
 lib/hw/lgkm.msm8992.so
-lib/hw/sensors.msm8992.so
+lib/hw/sensors.msm8992.so:lib/hw/sensors.msm8992.real.so
 lib/hw/wbc_hal.default.so
 lib/hw/sensors.hal.tof.so
 lib/soundfx/libqcomvoiceprocessingdescriptors.so
@@ -61,7 +61,7 @@ lib64/libaptX_encoder.so
 lib64/libaptXHD_encoder.so
 lib64/hw/lgkm.default.so
 lib64/hw/lgkm.msm8992.so
-lib64/hw/sensors.msm8992.so
+lib64/hw/sensors.msm8992.so:lib64/hw/sensors.msm8992.real.so
 lib64/hw/wbc_hal.default.so
 lib64/liblgkm.so
 lib64/liblgmabl.so

@@ -1,0 +1,27 @@
+cc_library_shared {
+    name: "sensors.msm8992.shim",
+    stem: "sensors.msm8992",
+    relative_install_path: "hw",
+
+    srcs: [
+        "sensors_shim.cpp",
+    ],
+
+    cflags: [
+        "-Wall",
+        "-Werror",
+    ],
+
+    cppflags: [
+        "-std=gnu++17",
+    ],
+
+    shared_libs: [
+        "liblog",
+        "libdl",
+        "libhardware",
+    ],
+
+    vendor: false,
+    compile_multilib: "both",
+}
