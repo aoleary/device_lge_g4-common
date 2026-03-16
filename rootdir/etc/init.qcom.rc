@@ -57,12 +57,16 @@ on early-init
 
     # Zygote and several apps need access to foreground tasks ids
     chmod 0666 /dev/stune/foreground/tasks
-   
-    # Set anxiety while booting
-    write /sys/block/mmcblk0/queue/scheduler anxiety
-    write /sys/block/mmcblk0/queue/read_ahead_kb 256
-    write /sys/block/mmcblk1/queue/read_ahead_kb 256
 
+    # Optimize boot
+    write /sys/block/mmcblk0/queue/scheduler noop
+    write /sys/block/mmcblk0/queue/read_ahead_kb 64
+    write /sys/block/mmcblk0/queue/nomerges 2
+    write /sys/block/mmcblk0/queue/nr_requests 128
+    write /sys/block/mmcblk0/queue/rq_affinity 1
+    write /sys/devices/system/cpu/cpufreq/schedutil/up_rate_limit_us 0
+    write /sys/devices/system/cpu/cpufreq/schedutil/down_rate_limit_us 500
+   
 on early-fs
     symlink /dev/block/platform/soc.0/${ro.boot.bootdevice} /dev/block/bootdevice
     chown root root /dev/block/mmcblk0p35
@@ -561,8 +565,6 @@ on post-fs
 
 # msm specific files that need to be created on /data
 on post-fs-data
-    # Scheduler selection
-    write /sys/block/mmcblk0/queue/scheduler anxiety
 
     # VM dirty tuning
     write /proc/sys/vm/dirty_background_ratio 5
@@ -1229,7 +1231,8 @@ on property:sys.boot_completed=1
 
     # Set IO Scheduler parameter
 on property:sys.boot_completed=1
-    # Anxiety tuning
+    # Set Anxiety as IO scheduler
+    write /sys/block/mmcblk0/queue/scheduler anxiety
     write /sys/block/mmcblk0/queue/iosched/quantum 48
     write /sys/block/mmcblk0/queue/iosched/group_idle 1
     write /sys/block/mmcblk0/queue/iosched/slice_async 20
