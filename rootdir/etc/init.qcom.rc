@@ -1225,30 +1225,37 @@ on property:sys.boot_completed=1
 
     # Set IO Scheduler parameter
 on property:sys.boot_completed=1
-    # Anxiety tuning
-    write /sys/block/mmcblk0/queue/iosched/fifo_batch 12
-    write /sys/block/mmcblk0/queue/iosched/quantum 48
-    write /sys/block/mmcblk0/queue/iosched/group_idle 0
-    write /sys/block/mmcblk0/queue/iosched/read_expire 48
-    write /sys/block/mmcblk0/queue/iosched/write_expire 160
-    write /sys/block/mmcblk0/queue/iosched/slice_async 18
-    write /sys/block/mmcblk0/queue/iosched/slice_sync 44
+    write /sys/block/mmcblk0/queue/scheduler maple
+    
+    write /sys/block/mmcblk0/queue/iosched/writes_starved 2
+    write /sys/block/mmcblk0/queue/iosched/sync_read_expire 200
+    write /sys/block/mmcblk0/queue/iosched/sync_write_expire 450
+    write /sys/block/mmcblk0/queue/iosched/async_read_expire 300
+    write /sys/block/mmcblk0/queue/iosched/async_write_expire 700
+    write /sys/block/mmcblk0/queue/iosched/fifo_batch 4
+    write /sys/block/mmcblk0/queue/iosched/sleep_latency_multiple 10
+    
+    write /sys/block/mmcblk0/queue/read_ahead_kb 128
     write /sys/block/mmcblk0/queue/nr_requests 64
-    write /sys/block/mmcblk0/queue/iostats 0
-    write /sys/block/mmcblk0/queue/nomerges 0
-    write /sys/block/mmcblk0/queue/rq_affinity 2
+    write /sys/block/mmcblk0/queue/rq_affinity 1
+    write /sys/block/mmcblk0/queue/nomerges 1
+    write /sys/block/mmcblk0/queue/rotational 0
 
-    write /sys/block/mmcblk0/queue/iosched/quantum 128
-    write /sys/block/mmcblk0/queue/iosched/group_idle 1
-    write /sys/block/mmcblk0/queue/iosched/read_expire 64
-    write /sys/block/mmcblk0/queue/iosched/write_expire 128
-    write /sys/block/mmcblk0/queue/iosched/slice_async 40
-    write /sys/block/mmcblk0/queue/iosched/slice_sync 60
-    write /sys/block/mmcblk0/queue/add_random 0
-    write /sys/block/mmcblk0/queue/iostats 0
-    write /sys/block/mmcblk0/queue/nomerges 0
-    write /sys/block/mmcblk0/queue/nr_requests 128
-    write /sys/block/mmcblk0/queue/rq_affinity 2
+   write /sys/block/mmcblk1/queue/scheduler maple
+   
+   write /sys/block/mmcblk1/queue/iosched/writes_starved 1
+   write /sys/block/mmcblk1/queue/iosched/sync_read_expire 250
+   write /sys/block/mmcblk1/queue/iosched/sync_write_expire 500
+   write /sys/block/mmcblk1/queue/iosched/async_read_expire 400
+   write /sys/block/mmcblk1/queue/iosched/async_write_expire 800
+   write /sys/block/mmcblk1/queue/iosched/fifo_batch 8
+   write /sys/block/mmcblk1/queue/iosched/sleep_latency_multiple 10
+   
+   write /sys/block/mmcblk1/queue/read_ahead_kb 256
+   write /sys/block/mmcblk1/queue/nr_requests 32
+   write /sys/block/mmcblk1/queue/rq_affinity 1
+   write /sys/block/mmcblk1/queue/nomerges 0
+   write /sys/block/mmcblk1/queue/rotational 0
 
     # Disable process_reclaim
 on property:vendor.post_boot.parsed=1
