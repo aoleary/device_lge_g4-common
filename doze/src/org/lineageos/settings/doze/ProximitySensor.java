@@ -39,10 +39,10 @@ public class ProximitySensor implements SensorEventListener {
     // Minimum time until the device is considered to have been in the pocket: 2s
     private static final int POCKET_MIN_DELTA_NS = 2000 * 1000 * 1000;
 
-    private final SensorManager mSensorManager;
-    private final Sensor mSensor;
-    private final Context mContext;
-    private final ExecutorService mExecutorService;
+    private SensorManager mSensorManager;
+    private Sensor mSensor;
+    private Context mContext;
+    private ExecutorService mExecutorService;
 
     private boolean mSawNear = false;
     private long mInPocketTime = 0;
@@ -60,21 +60,9 @@ public class ProximitySensor implements SensorEventListener {
 
     @Override
     public void onSensorChanged(SensorEvent event) {
-        final float value = event.values[0];
-        final float effectiveThreshold = Math.min(1.0f, mSensor.getMaximumRange());
-        final boolean isNear = value >= 0.0f && value < effectiveThreshold;
-
-        if (DEBUG) {
-            Log.d(TAG, "value=" + value
-                    + " maxRange=" + mSensor.getMaximumRange()
-                    + " effectiveThreshold=" + effectiveThreshold
-                    + " isNear=" + isNear
-                    + " mSawNear=" + mSawNear);
-        }
-
+        boolean isNear = event.values[0] < mSensor.getMaximumRange();
         if (mSawNear && !isNear) {
             if (shouldPulse(event.timestamp)) {
-                if (DEBUG) Log.d(TAG, "Triggering doze pulse");
                 Utils.wakeOrLaunchDozePulse(mContext);
             }
         } else {
@@ -104,8 +92,6 @@ public class ProximitySensor implements SensorEventListener {
     protected void enable() {
         if (DEBUG) Log.d(TAG, "Enabling");
         submit(() -> {
-            mSawNear = false;
-            mInPocketTime = 0;
             mSensorManager.registerListener(this, mSensor,
                     SensorManager.SENSOR_DELAY_NORMAL);
         });
@@ -115,8 +101,6 @@ public class ProximitySensor implements SensorEventListener {
         if (DEBUG) Log.d(TAG, "Disabling");
         submit(() -> {
             mSensorManager.unregisterListener(this, mSensor);
-            mSawNear = false;
-            mInPocketTime = 0;
         });
     }
 }
