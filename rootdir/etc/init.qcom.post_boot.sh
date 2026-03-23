@@ -54,13 +54,31 @@ case "$target" in
         # Give services time to settle
         sleep 3
 
+	echo "[post_boot] starting msm8992 post_boot" > /dev/kmsg
+	echo "[post_boot] before online mask: $(cat /sys/devices/system/cpu/online)" > /dev/kmsg
+	echo "[post_boot] before offline mask: $(cat /sys/devices/system/cpu/offline)" > /dev/kmsg
+
         # ==============================
         # CPU GOVERNOR CONFIGURATION
         # ==============================
 
         # Big cluster online
-        echo 1 > /sys/devices/system/cpu/cpu4/online
-        echo 1 > /sys/devices/system/cpu/cpu5/online
+	echo "[post_boot] trying cpu4 online" > /dev/kmsg
+	echo 1 > /sys/devices/system/cpu/cpu4/online
+	echo "[post_boot] cpu4 node says: $(cat /sys/devices/system/cpu/cpu4/online 2>/dev/null)" > /dev/kmsg
+	echo "[post_boot] after cpu4 global online: $(cat /sys/devices/system/cpu/online)" > /dev/kmsg
+	
+	echo "[post_boot] trying cpu5 online" > /dev/kmsg
+	echo 1 > /sys/devices/system/cpu/cpu5/online
+	echo "[post_boot] cpu5 node says: $(cat /sys/devices/system/cpu/cpu5/online 2>/dev/null)" > /dev/kmsg
+	echo "[post_boot] after cpu5 global online: $(cat /sys/devices/system/cpu/online)" > /dev/kmsg
+	echo "[post_boot] after cpu5 global offline: $(cat /sys/devices/system/cpu/offline)" > /dev/kmsg
+
+	if [ -d /sys/devices/system/cpu/cpu4/cpufreq ]; then
+		echo "[post_boot] cpu4 cpufreq exists" > /dev/kmsg
+	else
+		echo "[post_boot] cpu4 cpufreq missing" > /dev/kmsg
+	fi
 
         # Shared schedutil tuning (balanced)
         echo 0    > /sys/devices/system/cpu/cpufreq/schedutil/up_rate_limit_us
@@ -180,3 +198,5 @@ fi
 
 # Fix timekeep restore
 /vendor/bin/timekeep restore
+
+echo "[post_boot] finished msm8992 post_boot" > /dev/kmsg

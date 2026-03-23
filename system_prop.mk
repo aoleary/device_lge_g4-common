@@ -286,30 +286,21 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     vendor.rild.libpath=/vendor/lib64/libril-qc-qmi-1.so \
     ril.subscription.types=NV,RUIM \
-    persist.data.mode=concurrent \
-    persist.data.netmgrd.qos.enable=true \
-    persist.data.qmi.adb_logmask=0 \
     persist.qcril.disable_retry=true \
     persist.radio.apm_sim_not_pwdn=1 \
     persist.radio.custom_ecc=1 \
     persist.radio.sib16_support=1 \
-    ro.data.large_tcp_window_size=true \
-    ro.use_data_netmgrd=true \
     ro.ril.svlte1x=false \
     ro.ril.svdo=false \
     persist.telephony.oosisdc=false \
-    #Improve Speech Quality
     ro.ril.enable.amr.wideband=1 \
     ro.telephony.block_binder_thread_on_incoming_calls=false
 
-# RIL Powersaving
+# RIL powersaving
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.radio.add_power_save=1 \
     pm.sleep_mode=1 \
-    ro.ril.disable.power.collapse=0 \
-    ro.ril.fast.dormancy.rule=1 \
-    ro.ril.fast.dormancy.timeout=3 \
-    ro.mot.eri.losalert.delay=1000
+    ro.ril.disable.power.collapse=0
 
 # Sensors
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -331,10 +322,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # VNDK
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vndk.version=current
-
-# WiFi Scan Interval (default = 15s)
-PRODUCT_PROPERTY_OVERRIDES += \
-    wifi.supplicant_scan_interval=600
 
 # Zygote
 PRODUCT_PROPERTY_OVERRIDES += \
