@@ -17,8 +17,6 @@
 $(call inherit-product-if-exists, vendor/lge/g4-common/g4-common-vendor.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/product_launched_with_l_mr1.mk)
 
-PRODUCT_USE_DYNAMIC_PARTITIONS := true
-PRODUCT_BUILD_SUPER_PARTITION := true
 PRODUCT_ENABLE_UFFD_GC := false
 
 # Adaptive Suspend
@@ -85,7 +83,7 @@ PRODUCT_PACKAGES += \
     audio.bluetooth.default \
     hwaddrs \
     libprotobuf-cpp-full \
-    libbt-vendor \
+    libbt-vendor
 
 # Boot animation
 TARGET_BOOTANIMATION_HALF_RES := true
@@ -405,8 +403,8 @@ PRODUCT_PACKAGES += \
     libaudioclient_shim_g4 \
     libshims_thermal \
     libgui_shim_vendor \
-    libcutils_shim \
-    
+    libcutils_shim
+
 # System properties
 -include $(LOCAL_PATH)/system_prop.mk
 PRODUCT_PROPERTY_OVERRIDES += \

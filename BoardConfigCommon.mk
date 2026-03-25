@@ -77,6 +77,9 @@ TARGET_USES_QCOM_MM_AUDIO := true
 
 USE_CUSTOM_AUDIO_POLICY := 1
 
+# Apex
+OVERRIDE_TARGET_FLATTEN_APEX := true
+
 # Bluetooth
 BOARD_HAVE_BLUETOOTH := true
 PRODUCT_SOONG_NAMESPACES += hardware/broadcom/libbt
@@ -108,36 +111,21 @@ TARGET_SCREEN_DENSITY := 560
 # Filesystem
 BOARD_FLASH_BLOCK_SIZE := 262144 # (BOARD_KERNEL_PAGESIZE * 64)
 BOARD_BOOTIMAGE_PARTITION_SIZE := 41943040
+BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_CACHEIMAGE_PARTITION_SIZE := 1291845632
 BOARD_PERSISTIMAGE_PARTITION_SIZE := 33554432
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 41943040
-
-BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
-BOARD_SYSTEMIMAGE_FILE_SYSTEM_TYPE := ext4
-BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4
-BOARD_PRODUCTIMAGE_FILE_SYSTEM_TYPE := ext4
-BOARD_SYSTEM_EXTIMAGE_FILE_SYSTEM_TYPE := ext4
-
-TARGET_COPY_OUT_SYSTEM := system
-TARGET_COPY_OUT_VENDOR := vendor
-TARGET_COPY_OUT_PRODUCT := product
-TARGET_COPY_OUT_SYSTEM_EXT := system_ext
-
-BOARD_SUPER_PARTITION_GROUPS := qcom_dynamic_partitions
-BOARD_QCOM_DYNAMIC_PARTITIONS_PARTITION_LIST := system vendor product system_ext
-BOARD_SUPER_PARTITION_METADATA_DEVICE := system
-BOARD_SUPER_PARTITION_BLOCK_DEVICES := system
-BOARD_VENDORIMAGE_PARTITION_RESERVED_SIZE := 100000000
-BOARD_SYSTEMIMAGE_PARTITION_RESERVED_SIZE := 100000000
-BOARD_PRODUCTIMAGE_PARTITION_RESERVED_SIZE := 100000000
-BOARD_SYSTEMEXT_IMAGE_PARTITION_RESERVED_SIZE := 100000000
-
+TARGET_KERNEL_CLANG_COMPILE := false
 TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_USERIMAGES_USE_F2FS := true
+TARGET_RECOVERY_FSTAB := $(COMMON_PATH)/rootdir/etc/fstab.qcom
+TARGET_USERIMAGES_USE_F2FS := true
+TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_EXFAT_DRIVER := sdfat
 TARGET_VFAT_DRIVER := sdfat
 BOARD_ROOT_EXTRA_FOLDERS := firmware mpt persist persist-lg sns
-
+# Install kernel modules on system
+NEED_KERNEL_MODULE_SYSTEM := true
 
 # GPS
 BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := msm8992
@@ -155,7 +143,6 @@ PRODUCT_SOONG_NAMESPACES += hardware/qcom-caf/msm8992/display
 PRODUCT_SOONG_NAMESPACES += hardware/qcom-caf/msm8992/media
 PRODUCT_SOONG_NAMESPACES += device/lge/g4-common
 PRODUCT_SOONG_NAMESPACES += hardware/lge
-
 
 # HIDL
 DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE := \
@@ -175,7 +162,7 @@ BOARD_KERNEL_CMDLINE += androidboot.hardware=qcom androidboot.wificountrycode=us
 BOARD_KERNEL_CMDLINE += ehci-hcd.park=3 lpm_levels.sleep_disabled=1 msm_rtb.filter=0x37 lge_monitor_thermal.enable=1 fakebattery=enable
 # the following should be set only until the ROM is stable (enough)
 # https://android.googlesource.com/kernel/msm/+/android-msm-marlin-3.18-nougat-dr1/arch/arm/Kconfig.debug#69
-BOARD_KERNEL_CMDLINE += user_debug=31 androidboot.boot_devices=soc.0/f9824900.sdhci androidboot.super_partition=system
+BOARD_KERNEL_CMDLINE += user_debug=31
 BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_PAGESIZE := 4096
 BOARD_KERNEL_SEPARATED_DT := true
@@ -231,9 +218,6 @@ TARGET_VENDOR_PROP += $(COMMON_PATH)/vendor.prop
 BOARD_USES_QCOM_HARDWARE := true
 BOARD_USES_QC_TIME_SERVICES := true
 
-#Recovery 
-TARGET_RECOVERY_FSTAB := $(COMMON_PATH)/rootdir/etc/fstab.qcom
-
 # RIL
 TARGET_PROCESS_SDK_VERSION_OVERRIDE += \
     /vendor/bin/hw/rild=27
@@ -244,6 +228,20 @@ BOARD_VENDOR_SEPOLICY_DIRS += $(COMMON_PATH)/sepolicy/vendor
 #PRODUCT_PRIVATE_SEPOLICY_DIRS += $(COMMON_PATH)/sepolicy/vendor/private
 #BOARD_SEPOLICY_VERS := $(PLATFORM_SDK_VERSION).0
 SELINUX_IGNORE_NEVERALLOWS := true
+
+# Shims
+TARGET_LD_SHIM_LIBS := \
+    /system/vendor/lib/libwvm.so|libshims_wvm.so \
+    /system/lib64/libmdmcutback.so|libqsap_shim.so \
+    /system/lib/libshim_camera.so:/system/lib/libcamera_client.so|libshim_cameraclient.so \
+    /system/vendor/lib/libmmcamera_stillmore_lib.so|/system/lib/libshim_cameraclient.so \
+    /system/vendor/lib/hw/camera.msm8992.so|/system/vendor/lib/libfence_shim.so \
+    /system/vendor/lib64/lib-rtpcore.so|/system/vendor/lib64/ims_rtp_shim.so \
+    /system/vendor/bin/slim_daemon|/system/vendor/lib64/slim_shim.so \
+    /system/vendor/lib/libril-qc-qmi-1.so|libaudioclient_shim.so \
+    /system/vendor/lib64/libril-qc-qmi-1.so|libaudioclient_shim.so \
+    /system/vendor/bin/thermal-engine|libshims_thermal.so \
+    /system/vendor/lib64/libmm-abl.so|libshims_thermal.so
 
 # Thermal
 USE_DEVICE_SPECIFIC_THERMAL := true
