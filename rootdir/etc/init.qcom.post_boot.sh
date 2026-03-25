@@ -244,3 +244,7 @@ echo 9216 > /proc/sys/vm/min_free_kbytes
 
 # Fix timekeep restore
 /vendor/bin/timekeep restore
+
+# Write heartbeat intervals
+settings put global gcm_heartbeat_interval_ms 900000
+settings put global gcm_heartbeat_interval_ms_wifi 1800000
