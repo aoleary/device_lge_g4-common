@@ -200,3 +200,19 @@ fi
 /vendor/bin/timekeep restore
 
 echo "[post_boot] finished msm8992 post_boot" > /dev/kmsg
+
+# Modify GMS Heartbeat parameters
+# Wait until Android framework is fully up
+until [ "$(getprop sys.boot_completed)" = "1" ]; do
+    sleep 2
+done
+
+# Extra delay so SettingsProvider is definitely ready
+sleep 20
+
+# Write heartbeat intervals
+settings put global gcm_heartbeat_interval_ms 900000
+settings put global gcm_heartbeat_interval_ms_wifi 1800000
+
+# Log result
+log -t post_boot "gcm mobile=$(settings get global gcm_heartbeat_interval_ms) wifi=$(settings get global gcm_heartbeat_interval_ms_wifi)"
