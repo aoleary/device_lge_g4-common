@@ -165,3 +165,11 @@ LOCAL_MODULE_CLASS := EXECUTABLES
 LOCAL_SRC_FILES    := etc/target_config.sh
 LOCAL_VENDOR_MODULE    := true
 include $(BUILD_PREBUILT)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE       := g4_idle_tune.sh
+LOCAL_MODULE_TAGS  := optional
+LOCAL_MODULE_CLASS := EXECUTABLES
+LOCAL_SRC_FILES    := etc/g4_idle_tune.sh
+LOCAL_VENDOR_MODULE    := true
+include $(BUILD_PREBUILT)

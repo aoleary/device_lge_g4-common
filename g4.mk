@@ -252,7 +252,8 @@ PRODUCT_PACKAGES += \
     kill_pulse.sh \
     pulse.sh \
     init.safailnet.rc \
-    target_config.sh
+    target_config.sh \
+    g4_idle_tune.sh
 
 PRODUCT_PACKAGES_ENG += \
     fstab.qcom \
@@ -275,7 +276,8 @@ PRODUCT_PACKAGES_ENG += \
     kill_pulse.sh \
     pulse.sh \
     init.safailnet.rc \
-    target_config.sh
+    target_config.sh \
+    g4_idle_tune.sh
 
 # IO Cgroups
 PRODUCT_PROPERTY_OVERRIDES += \
