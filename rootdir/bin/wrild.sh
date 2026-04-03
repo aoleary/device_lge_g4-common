@@ -7,18 +7,18 @@
 # License:              GPLv3
 # Copyright 2019-2026:  steadfasterX <steadfasterX - AT - gmail #DOT# com>
 ###################################################################################################
-WRILDVER=v26.2
+WRILDVER=v26.3
 
 # rild
-export MAXRET=300			# max rild restart retries when serious issues found
-export RILCHILL=120			# sleep value after RILD has been restarted before continuing
+export MAXRET=900			# max rild restart retries when serious issues found
+export RILCHILL=60			# sleep value after RILD has been restarted before continuing
 
 # debug logging when a serious issue occurs
 export DEBUGLOG=0                       # 0: disable debug logging, 1: create a log when rild must be restarted
 export DOGLOGS=/sdcard/Download/wdlog	# log directory when DEBUGLOG=1, path must be owned and r/w for root
 
 # cpu monitoring
-export TSCPU=50                     # max allowed cpu usage threshold
+export TSCPU=50                         # max allowed cpu usage threshold
 export TSTIME=60	                # how many secs rild is allowed to consume TSCPU before a restart of rild is triggered
 export WDFREQ=20	                # check frequency of the cpu usage in secs
 # The total check amount(!) will be calculated as: TSTIME / WDFREQ
