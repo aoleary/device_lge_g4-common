@@ -150,25 +150,12 @@
     </config_params>
 
     <backend_names>
-    <!-- Output devices -->
-    <device name="SND_DEVICE_OUT_SPEAKER" backend="speaker" />
-    <device name="SND_DEVICE_OUT_VOICE_SPEAKER" backend="voice-speaker" />
-    <device name="SND_DEVICE_OUT_HANDSET" backend="handset" />
-    <device name="SND_DEVICE_OUT_HEADPHONES" backend="headphones" />
-    <device name="SND_DEVICE_OUT_LINE" backend="headphones" />
-    <device name="SND_DEVICE_OUT_SPEAKER_AND_HEADPHONES" backend="speaker-and-headphones" />
-    <device name="SND_DEVICE_OUT_SPEAKER_AND_LINE" backend="speaker-and-headphones" />
-    <device name="SND_DEVICE_OUT_VOICE_HEADPHONES" backend="headphones" />
-    <device name="SND_DEVICE_OUT_VOICE_LINE" backend="headphones" />
-
-    <device name="SND_DEVICE_OUT_BT_SCO" backend="bt-sco" />
-    <device name="SND_DEVICE_OUT_BT_SCO_WB" backend="bt-sco" />
-
-    <!-- Input devices -->
-    <device name="SND_DEVICE_IN_BT_SCO_MIC" backend="bt-sco" />
-    <device name="SND_DEVICE_IN_BT_SCO_MIC_NREC" backend="bt-sco" />
-    <device name="SND_DEVICE_IN_BT_SCO_MIC_WB" backend="bt-sco" />
-    <device name="SND_DEVICE_IN_BT_SCO_MIC_WB_NREC" backend="bt-sco" />
+        <!-- Output devices -->
+        <device name="SND_DEVICE_OUT_SPEAKER" backend="speaker" />
+        <device name="SND_DEVICE_OUT_VOICE_SPEAKER" backend="voice-speaker" />
+        <device name="SND_DEVICE_OUT_HANDSET" backend="handset" />
+        <device name="SND_DEVICE_OUT_HEADPHONES" backend="headphones" />
+        <device name="SND_DEVICE_OUT_HEADPHONES" backend="headphones-hi-res-regulation" />
     
 <!--
 >>>>>>> bugfix/bt-audio
@@ -192,16 +179,10 @@
     </bit_width_configs>
 
     <device_names>
-    <!-- Output devices -->
-    <device name="SND_DEVICE_OUT_BT_SCO" alias="bt-sco"/>
-    <device name="SND_DEVICE_OUT_BT_SCO_WB" alias="bt-sco"/>
+        <!-- Output devices -->
+        <!-- device name="SND_DEVICE_OUT_BT_SCO" alias="bt-sco"/>-->
 
-    <!-- Input devices -->
-    <device name="SND_DEVICE_IN_BT_SCO_MIC" alias="bt-sco" />
-    <device name="SND_DEVICE_IN_BT_SCO_MIC_NREC" alias="bt-sco" />
-    <device name="SND_DEVICE_IN_BT_SCO_MIC_WB" alias="bt-sco" />
-    <device name="SND_DEVICE_IN_BT_SCO_MIC_WB_NREC" alias="bt-sco" />
-
+        <!-- Input devices -->
         <device name="SND_DEVICE_IN_VOICE_DMIC" alias="voice-dmic-ef" /> <!-- handset mic for voice-call earpiece -->
         <device name="SND_DEVICE_IN_HANDSET_DMIC" alias="voice-dmic-ef" /> <!-- handset mic for voice-call earpiece -->
         <device name="SND_DEVICE_IN_HANDSET_DMIC_AEC" alias="voice-dmic-ef" /> <!-- handset mic for voice-call earpiece -->

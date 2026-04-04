@@ -114,7 +114,7 @@ on fs
     mount none /system/etc/gps.conf /system/etc/gps_debug.conf bind
 
     # Run target_config.sh in su context to avoid denials.
-    exec u:r:su:s0 root root -- /system/bin/sh /vendor/bin/target_config.sh
+    exec u:r:su:s0 root root -- /system/bin/sh /system/vendor/bin/target_config.sh
 
 on late-fs
 
@@ -1092,7 +1092,6 @@ on property:init.svc.bootanim=stopped
 
 on property:sys.boot_completed=1
     start wd-ril-daemon
-    start g4_idle_tune
     start qcom-post-boot
     write /dev/kmsg "Boot completed"
 
@@ -1114,12 +1113,6 @@ service energy-awareness /vendor/bin/energy-awareness
     class main
     user root
     group system
-    oneshot
-
-service g4_idle_tune /system/bin/sh /vendor/bin/g4_idle_tune.sh
-    class late_start
-    user root
-    group root system wifi inet net_admin net_raw radio
     oneshot
 
 service hwaddrs /vendor/bin/hwaddrs
