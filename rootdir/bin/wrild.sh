@@ -7,7 +7,7 @@
 # License:              GPLv3
 # Copyright 2019-2026:  steadfasterX <steadfasterX - AT - gmail #DOT# com>
 ###################################################################################################
-WRILDVER=v26.3
+WRILDVER=v26.4
 
 # rild
 export MAXRET=900			# max rild restart retries when serious issues found
@@ -96,6 +96,7 @@ F_RILCHK(){
     F_LOG "i" "sim count: >$SIMCOUNT<"
 
     if [ "$CURSTATE" == "READY" ] && [ ! -z "$CUROPER" ]; then
+	[ "${SIMCOUNT}" == "0" ] && setprop wrild.sim.count 1
         echo 0
     elif [ "$DBOOTED" != "1" ];then
 	echo 7
@@ -104,13 +105,16 @@ F_RILCHK(){
     elif [ "$ENC" == "encrypted" ] && [ "$ENCSTATE" != "trigger_restart_framework" ];then
         echo 7
     elif [ "$CURSTATE" == "PIN_REQUIRED" ]; then
+	[ "${SIMCOUNT}" == "0" ] && setprop wrild.sim.count 1
         echo 9
     elif [ "$CURSTATE" == "LOADED" ] && [ -z "$CUROPER" ];then
+	[ "${SIMCOUNT}" == "0" ] && setprop wrild.sim.count 1
         F_LOG d "LOADED but no operator yet .. sleeping 25s"
 	setprop wrild.ril-handling waiting-for-operatorid
         sleep 25
         echo 1
     elif [ "$CURSTATE" == "LOADED" ] && [ ! -z "$CUROPER" ];then
+	[ "${SIMCOUNT}" == "0" ] && setprop wrild.sim.count 1
         echo 0
     elif [ "$SIMCOUNT" == "0" ]||[ -z "$SIMCOUNT" ];then
         echo 42
@@ -209,6 +213,7 @@ RRET=$?
 
 MYPID=$(ps -opid,cmd|grep wrild.sh| egrep -o "[0-9]+")
 F_LOG i "RIL handling finished. Going to background with pid >$MYPID<"
+setprop wrild.ril-handling watchdog
 
 # when too many retries (returncode:99) the watchdog does not need to be started
 # but we keep wrild running as we are a service
