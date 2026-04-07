@@ -46,8 +46,10 @@ allow wrild storage_file:dir search;
 allow wrild storage_file:lnk_file read;
 allow wrild system_server:binder call;
 allow wrild window_service:service_manager find;
+
 allow wrild wrild_prop:property_service set;
 allow wrild wrild_prop:file { getattr open read };
+allow wrild settings_service:service_manager find;
 
 # wrild.sh uses ps and so will spam the log for unneeded stuff
 # wildcard not possible and as we override neverallows thats the only known way.
