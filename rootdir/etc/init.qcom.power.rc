@@ -31,6 +31,10 @@ on enable-low-power
 
 on charger
     write /sys/class/graphics/fb0/blank 0
+    # Log a marker to pstore/syslog
+    exec /system/bin/sh -c 'echo "CHARGER: on charger trigger fired, fb0 unblank requested" > /dev/kmsg'
+    start charger_dbg
+
     # disable FPS clk
     write /sys/bus/spi/drivers/fpc1020/spi1.2/clk_enable 0
 

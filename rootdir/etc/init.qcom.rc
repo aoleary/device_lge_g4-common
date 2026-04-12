@@ -1109,6 +1109,12 @@ service charger /system/bin/charger
     seclabel u:r:charger:s0
     task_profiles ServiceCapacityLow
 
+service charger_dbg /system/bin/sh /system/bin/charger_dbg.sh
+    class main
+    user root
+    group root system log graphics input
+    oneshot
+
 service energy-awareness /vendor/bin/energy-awareness
     class main
     user root

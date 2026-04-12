@@ -368,6 +368,9 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     charger_res_images
 
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/charger/charger_dbg.sh:$(TARGET_COPY_OUT_SYSTEM)/bin/charger_dbg.sh
+
 # Overlay
 DEVICE_PACKAGE_OVERLAYS += \
     $(LOCAL_PATH)/overlay
