@@ -115,9 +115,6 @@ on fs
 
     mount none /system/etc/gps.conf /system/etc/gps_debug.conf bind
 
-    # Run target_config.sh in su context to avoid denials.
-    exec u:r:su:s0 root root -- /system/bin/sh /system/vendor/bin/target_config.sh
-
 on late-fs
 
     # Mount RW partitions which need run fsck
@@ -267,11 +264,6 @@ on boot
 
     # For BCM FM Radio
     setprop ro.fm.module BCM
-
-    #Tune ZRAM
-    write /proc/sys/vm/swappiness 100
-    write /proc/sys/vm/page-cluster 0
-    write /proc/sys/vm/overcommit_memory 1
 
     # WiFi
     chown wifi wifi /dev/rfkill
@@ -576,17 +568,6 @@ on post-fs
 
 # msm specific files that need to be created on /data
 on post-fs-data
-
-    # VM dirty tuning
-    write /proc/sys/vm/dirty_background_ratio 5
-    write /proc/sys/vm/dirty_ratio 15
-    write /proc/sys/vm/dirty_expire_centisecs 1500
-    write /proc/sys/vm/dirty_writeback_centisecs 500
-
-    # VM cache behavior
-    write /proc/sys/vm/page-cluster 0
-    write /proc/sys/vm/stat_interval 10
-    write /proc/sys/vm/vfs_cache_pressure 80
 
     # WiFi and BT mac handler
     start hwaddrs
