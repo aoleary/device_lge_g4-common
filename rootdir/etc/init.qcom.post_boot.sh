@@ -189,22 +189,20 @@ case "$target" in
         # --------------------------------------------------
         # init.qcom.rc currently uses noop very early for boot speed.
         # Here we switch to Maple for normal runtime.
-        write_if_exists /sys/block/mmcblk0/queue/scheduler maple
-        write_if_exists /sys/block/mmcblk0/queue/read_ahead_kb 128
-        write_if_exists /sys/block/mmcblk0/queue/nomerges 1
-        write_if_exists /sys/block/mmcblk0/queue/nr_requests 64
-        write_if_exists /sys/block/mmcblk0/queue/rq_affinity 2
-        write_if_exists /sys/block/mmcblk0/queue/discard_max_bytes 134217728
+	write_if_exists /sys/block/mmcblk0/queue/scheduler maple
 
-        # Maple knobs, only if present
-        set_maple_param quantum 32
-        set_maple_param fifo_batch 8
-        set_maple_param sync_read_expire 1200
-        set_maple_param sync_write_expire 1800
-        set_maple_param async_read_expire 800
-        set_maple_param async_write_expire 1500
-        set_maple_param writes_starved 2
-        set_maple_param sleep_latency_multiple 10
+	write_if_exists /sys/block/mmcblk0/queue/iosched/fifo_batch 8
+	write_if_exists /sys/block/mmcblk0/queue/iosched/writes_starved 2
+	write_if_exists /sys/block/mmcblk0/queue/iosched/sync_read_expire 120
+	write_if_exists /sys/block/mmcblk0/queue/iosched/sync_write_expire 180
+	write_if_exists /sys/block/mmcblk0/queue/iosched/async_read_expire 80
+	write_if_exists /sys/block/mmcblk0/queue/iosched/async_write_expire 150
+	write_if_exists /sys/block/mmcblk0/queue/iosched/sleep_latency_multiple 4
+
+	write_if_exists /sys/block/mmcblk0/queue/read_ahead_kb 128
+	write_if_exists /sys/block/mmcblk0/queue/nr_requests 64
+	write_if_exists /sys/block/mmcblk0/queue/rq_affinity 2
+	write_if_exists /sys/block/mmcblk0/queue/nomerges 1
 
         # --------------------------------------------------
         # memory bandwidth / devfreq
