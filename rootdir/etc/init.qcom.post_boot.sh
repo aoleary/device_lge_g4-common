@@ -105,19 +105,23 @@ case "$target" in
         # Battery-biased balanced profile:
         # fast ramp up for touch/UI bursts, slower drop for stability,
         # but no forced big cluster wake-up.
-        write_if_exists /sys/devices/system/cpu/cpufreq/schedutil/up_rate_limit_us 500
-        write_if_exists /sys/devices/system/cpu/cpufreq/schedutil/down_rate_limit_us 4000
-        write_if_exists /sys/devices/system/cpu/cpufreq/schedutil/hispeed_load 90
+        write_if_exists /sys/devices/system/cpu/cpu0/cpufreq/schedutil/up_rate_limit_us 500
+        write_if_exists /sys/devices/system/cpu/cpu0/cpufreq/schedutil/down_rate_limit_us 4000
+        write_if_exists /sys/devices/system/cpu/cpu0/cpufreq/schedutil/hispeed_load 90
 
         # cluster-specific hispeed limits
         # little: enough for UI
-        # big: only attractive under real pressure
+        # big: doesnt actually activate via this parameter
         set_schedutil_cluster cpu0 1248000
-        set_schedutil_cluster cpu4 1440000
 
         # Optional policy min floors
         write_if_exists /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 384000
         write_if_exists /sys/devices/system/cpu/cpu4/cpufreq/scaling_min_freq 384000
+
+        # schedutil adaptive tunables
+        write_if_exists /sys/devices/system/cpu/cpu0/cpufreq/schedutil/boost_pct 8
+        write_if_exists /sys/devices/system/cpu/cpu0/cpufreq/schedutil/target_load_shift 3
+        write_if_exists /sys/devices/system/cpu/cpu0/cpufreq/schedutil/down_throttle_util 70
 
         # --------------------------------------------------
         # scheduler core thresholds (from target_config.sh, integrated)
@@ -203,6 +207,16 @@ case "$target" in
 	write_if_exists /sys/block/mmcblk0/queue/nr_requests 64
 	write_if_exists /sys/block/mmcblk0/queue/rq_affinity 2
 	write_if_exists /sys/block/mmcblk0/queue/nomerges 1
+
+        # schedutil adaptive tunables
+        write_if_exists /sys/devices/system/cpu/cpu0/cpufreq/schedutil/boost_pct 8
+        write_if_exists /sys/devices/system/cpu/cpu0/cpufreq/schedutil/target_load_shift 3
+        write_if_exists /sys/devices/system/cpu/cpu0/cpufreq/schedutil/down_throttle_util 70
+
+        # Maple adaptive tunables
+        write_if_exists /sys/block/mmcblk0/queue/iosched/read_bias_pct 115
+        write_if_exists /sys/block/mmcblk0/queue/iosched/write_bias_pct 100
+        write_if_exists /sys/block/mmcblk0/queue/iosched/suspend_starved_limit 1
 
         # --------------------------------------------------
         # memory bandwidth / devfreq
