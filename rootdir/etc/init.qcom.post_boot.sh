@@ -123,6 +123,12 @@ case "$target" in
         write_if_exists /sys/devices/system/cpu/cpu0/cpufreq/schedutil/target_load_shift 3
         write_if_exists /sys/devices/system/cpu/cpu0/cpufreq/schedutil/down_throttle_util 70
 
+        # Sysfs tunables for idle-based big cluster offlining
+	echo 1    > /sys/module/msm_performance/parameters/bigcluster_idle_offline_enable
+	echo 1    > /sys/module/msm_performance/parameters/bigcluster_idle_min_cpus
+	echo 2000 > /sys/module/msm_performance/parameters/bigcluster_idle_delay_ms
+	echo 20   > /sys/module/msm_performance/parameters/bigcluster_idle_load
+
         # --------------------------------------------------
         # scheduler core thresholds (from target_config.sh, integrated)
         # --------------------------------------------------
