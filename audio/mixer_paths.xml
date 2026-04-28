@@ -944,12 +944,12 @@
     </path>
 
     <path name="voice-call bt-sco">
+        <ctl name="AUX PCM SampleRate" value="8000" />
         <ctl name="SEC_AUX_PCM_RX_Voice Mixer CSVoice" value="1" />
         <ctl name="Voice_Tx Mixer SEC_AUX_PCM_TX_Voice" value="1" />
     </path>
 
     <path name="voice-call bt-sco-wb">
-        <ctl name="AUX PCM SampleRate" value="16000" />
         <path name="voice-call bt-sco" />
     </path>
 
@@ -1173,17 +1173,17 @@
     </path>
 
     <path name="hfp-sco">
+        <ctl name="AUX PCM SampleRate" value="8000" />
         <ctl name="HFP_AUX_UL_HL Switch" value="1" />
         <ctl name="SLIMBUS_0_RX Port Mixer SEC_AUX_PCM_UL_TX" value="1" />
         <ctl name="SEC_AUX_PCM_RX Audio Mixer MultiMedia6" value="1" />
         <ctl name="MultiMedia6 Mixer SLIM_0_TX" value="1" />
         <ctl name="SLIMBUS_DL_HL Switch" value="1" />
-   </path>
+    </path>
 
-   <path name="hfp-sco-wb">
-        <ctl name="AUX PCM SampleRate" value="16000" />
+    <path name="hfp-sco-wb">
         <path name="hfp-sco" />
-   </path>
+    </path>
 
     <path name="volte-call">
         <ctl name="SLIM_0_RX_Voice Mixer VoLTE" value="1" />
@@ -1808,15 +1808,27 @@
     </path>
 
     <path name="bt-sco-headset">
+        <ctl name="AUX PCM SampleRate" value="8000" />
+        <ctl name="SEC_AUX_PCM_RX_Voice Mixer CSVoice" value="1" />
+        <ctl name="SEC_AUX_PCM_RX Audio Mixer MultiMedia6" value="1" />
+        <ctl name="HFP_AUX_UL_HL Switch" value="1" />
+        <ctl name="SLIMBUS_DL_HL Switch" value="1" />
     </path>
 
     <path name="bt-sco-mic">
+        <ctl name="AUX PCM SampleRate" value="8000" />
+        <ctl name="Voice_Tx Mixer SEC_AUX_PCM_TX_Voice" value="1" />
+        <ctl name="SLIMBUS_0_RX Port Mixer SEC_AUX_PCM_UL_TX" value="1" />
+        <ctl name="MultiMedia6 Mixer SLIM_0_TX" value="1" />
+        <ctl name="HFP_AUX_UL_HL Switch" value="1" />
     </path>
 
     <path name="bt-sco-headset-wb">
+        <path name="bt-sco-headset" />
     </path>
 
     <path name="bt-sco-mic-wb">
+        <path name="bt-sco-mic" />
     </path>
 
     <path name="usb-headset-mic">
