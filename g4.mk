@@ -49,7 +49,6 @@ PRODUCT_PACKAGES += \
     libtinycompress \
     libtinyxml \
     tinymix \
-    audio.primary.msm8992 \
     audio.r_submix.default \
     audio.usb.default \
     audio_amplifier.default
@@ -138,10 +137,6 @@ PRODUCT_PACKAGES += \
     android.hardware.graphics.composer@2.1-service \
     android.hardware.graphics.mapper@2.0-impl-2.1 \
     android.hardware.memtrack@1.0-impl \
-    copybit.msm8992 \
-    gralloc.msm8992 \
-    hwcomposer.msm8992 \
-    memtrack.msm8992 \
     liboverlay \
     libhdmi \
     libqdutils \
@@ -236,7 +231,6 @@ PRODUCT_PACKAGES += \
 
 # Lights
 PRODUCT_PACKAGES += \
-    android.hardware.light-service.lge
 
 # Lineage Health
 PRODUCT_PACKAGES += \
@@ -423,8 +417,6 @@ PRODUCT_COPY_FILES += \
 
 # Timekeep
 PRODUCT_PACKAGES += \
-    timekeep \
-    TimeKeep
 
 # USB
 PRODUCT_PACKAGES += \
