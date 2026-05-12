@@ -294,8 +294,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.ril.svdo=false \
     persist.telephony.oosisdc=false \
     ro.ril.enable.amr.wideband=1 \
-    ro.telephony.block_binder_thread_on_incoming_calls=false \
-    ro.telephony.default_network=12
+    ro.telephony.block_binder_thread_on_incoming_calls=false
 
 # RIL powersaving
 PRODUCT_PROPERTY_OVERRIDES += \
