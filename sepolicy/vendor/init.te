@@ -3,7 +3,7 @@ allow init sysfs_graphics:file { open read write };
 
 allow init app_data_file:dir search;
 allow init app_data_file:file setattr;
-allow init binder_per_mgr_service:service_manager { add find };
+allow init vendor_per_mgr_service:service_manager { add find };
 allow init block_device:blk_file setattr;
 allow init bluetooth:process { siginh rlimitinh noatsecure transition };
 #allow init btnvtool_exec:file execute_no_trans;

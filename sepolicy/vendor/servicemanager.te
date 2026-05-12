@@ -1,6 +1,6 @@
-allow servicemanager per_mgr:dir search;
-allow servicemanager per_mgr:file { read open };
-allow servicemanager per_mgr:process getattr;
+allow servicemanager vendor_per_mgr:dir search;
+allow servicemanager vendor_per_mgr:file { read open };
+allow servicemanager vendor_per_mgr:process getattr;
 allow servicemanager rild:dir search;
 allow servicemanager rild:file { read open };
 allow servicemanager rild:process getattr;

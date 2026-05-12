@@ -3,7 +3,7 @@ type pm_proxy_exec, exec_type, file_type;
 
 init_daemon_domain(pm_proxy)
 
-allow pm_proxy binder_per_mgr_service:service_manager find;
+allow pm_proxy vendor_per_mgr_service:service_manager find;
 allow pm_proxy init:binder { call transfer };
 allow pm_proxy pmservice:binder { call transfer };
 allow pm_proxy servicemanager:binder call;

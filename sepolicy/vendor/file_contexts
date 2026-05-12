@@ -80,7 +80,7 @@
 #/(vendor|system/vendor)/bin/rmt_storage            	 u:object_r:rmt_storage_exec:s0
 #/(vendor|system/vendor)/bin/rfs_access            	 u:object_r:rfs_access_exec:s0
 /(vendor|system/vendor)/bin/sensors.qcom            	 u:object_r:sensors_exec:s0
-#/(vendor|system/vendor)/bin/pm-service            	 u:object_r:pmservice_exec:s0
+/(vendor|system/vendor)/bin/pm-service            	 u:object_r:pmservice_exec:s0
 #/(vendor|system/vendor)/bin/netmgrd            	  	 u:object_r:netmgrd_exec:s0
 #/(vendor|system/vendor)/bin/mm-pp-daemon         	 u:object_r:mmppdaemon_exec:s0
 #/(vendor|system/vendor)/bin/imsqmidaemon         	 u:object_r:imsqmidaemon_exec:s0

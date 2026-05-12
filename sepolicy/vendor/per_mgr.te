@@ -1,4 +1,4 @@
-allow per_mgr default_android_service:service_manager { find };
-allow per_mgr self:capability net_raw;
-allow per_mgr servicemanager:binder { transfer call };
-allow per_mgr smem_log_device:chr_file { read write ioctl open };
+allow vendor_per_mgr default_android_service:service_manager { find };
+allow vendor_per_mgr self:capability net_raw;
+allow vendor_per_mgr servicemanager:binder { transfer call };
+allow vendor_per_mgr smem_log_device:chr_file { read write ioctl open };

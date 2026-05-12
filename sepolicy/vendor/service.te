@@ -1,1 +1,1 @@
-#type binder_per_mgr_service, service_manager_type;
+type vendor_per_mgr_service, vndservice_manager_type;
