@@ -118,17 +118,6 @@ case "$target" in
         write_if_exists /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 384000
         write_if_exists /sys/devices/system/cpu/cpu4/cpufreq/scaling_min_freq 384000
 
-        # schedutil adaptive tunables
-        write_if_exists /sys/devices/system/cpu/cpu0/cpufreq/schedutil/boost_pct 8
-        write_if_exists /sys/devices/system/cpu/cpu0/cpufreq/schedutil/target_load_shift 3
-        write_if_exists /sys/devices/system/cpu/cpu0/cpufreq/schedutil/down_throttle_util 70
-
-        # Sysfs tunables for idle-based big cluster offlining
-	echo 1    > /sys/module/msm_performance/parameters/bigcluster_idle_offline_enable
-	echo 1    > /sys/module/msm_performance/parameters/bigcluster_idle_min_cpus
-	echo 2000 > /sys/module/msm_performance/parameters/bigcluster_idle_delay_ms
-	echo 20   > /sys/module/msm_performance/parameters/bigcluster_idle_load
-
         # --------------------------------------------------
         # scheduler core thresholds (from target_config.sh, integrated)
         # --------------------------------------------------
@@ -213,16 +202,6 @@ case "$target" in
 	write_if_exists /sys/block/mmcblk0/queue/nr_requests 64
 	write_if_exists /sys/block/mmcblk0/queue/rq_affinity 2
 	write_if_exists /sys/block/mmcblk0/queue/nomerges 1
-
-        # schedutil adaptive tunables
-        write_if_exists /sys/devices/system/cpu/cpu0/cpufreq/schedutil/boost_pct 8
-        write_if_exists /sys/devices/system/cpu/cpu0/cpufreq/schedutil/target_load_shift 3
-        write_if_exists /sys/devices/system/cpu/cpu0/cpufreq/schedutil/down_throttle_util 70
-
-        # Maple adaptive tunables
-        write_if_exists /sys/block/mmcblk0/queue/iosched/read_bias_pct 115
-        write_if_exists /sys/block/mmcblk0/queue/iosched/write_bias_pct 100
-        write_if_exists /sys/block/mmcblk0/queue/iosched/suspend_starved_limit 1
 
         # --------------------------------------------------
         # memory bandwidth / devfreq
