@@ -106,7 +106,7 @@ case "$target" in
         # fast ramp up for touch/UI bursts, slower drop for stability,
         # but no forced big cluster wake-up.
         write_if_exists /sys/devices/system/cpu/cpu0/cpufreq/schedutil/up_rate_limit_us 500
-        write_if_exists /sys/devices/system/cpu/cpu0/cpufreq/schedutil/down_rate_limit_us 4000
+        write_if_exists /sys/devices/system/cpu/cpu0/cpufreq/schedutil/down_rate_limit_us 12000
         write_if_exists /sys/devices/system/cpu/cpu0/cpufreq/schedutil/hispeed_load 90
 
         # cluster-specific hispeed limits
@@ -134,9 +134,9 @@ case "$target" in
         write_if_exists /dev/cpuctl/background/cpu.uclamp.max 5
         write_if_exists /dev/cpuctl/system-background/cpu.uclamp.max 35
         write_if_exists /dev/cpuctl/foreground/cpu.uclamp.max 60
-        write_if_exists /dev/cpuctl/foreground/cpu.uclamp.min 20
+        write_if_exists /dev/cpuctl/foreground/cpu.uclamp.min 10
         write_if_exists /dev/cpuctl/dex2oat/cpu.uclamp.max 40
-        write_if_exists /dev/cpuctl/top-app/cpu.uclamp.min 35
+        write_if_exists /dev/cpuctl/top-app/cpu.uclamp.min 20
         write_if_exists /dev/cpuctl/top-app/cpu.uclamp.max max
         write_if_exists /dev/cpuctl/top-app/cpu.uclamp.latency_sensitive 1
         write_if_exists /dev/cpuctl/camera-daemon/cpu.uclamp.min 40
@@ -158,7 +158,7 @@ case "$target" in
         # --------------------------------------------------
         # Light touch. Enough to avoid obvious frame hiccups.
         write_if_exists /sys/module/governor_msm_adreno_tz/parameters/boost_freq 315000000
-        write_if_exists /sys/module/governor_msm_adreno_tz/parameters/boost_duration 120
+        write_if_exists /sys/module/governor_msm_adreno_tz/parameters/boost_duration 60
 
         # --------------------------------------------------
         # zram / vm / reclaim
@@ -173,13 +173,13 @@ case "$target" in
         write_if_exists /proc/sys/vm/watermark_scale_factor 10
         write_if_exists /proc/sys/vm/extra_free_kbytes 24576
         write_if_exists /proc/sys/vm/min_free_kbytes 12288
-        write_if_exists /proc/sys/vm/kswapd_threads 2
-        write_if_exists /proc/sys/vm/stat_interval 10
+        write_if_exists /proc/sys/vm/kswapd_threads 1
+        write_if_exists /proc/sys/vm/stat_interval 30
         write_if_exists /proc/sys/vm/vfs_cache_pressure 80
         write_if_exists /proc/sys/vm/dirty_background_ratio 5
         write_if_exists /proc/sys/vm/dirty_ratio 15
         write_if_exists /proc/sys/vm/dirty_expire_centisecs 1500
-        write_if_exists /proc/sys/vm/dirty_writeback_centisecs 500
+        write_if_exists /proc/sys/vm/dirty_writeback_centisecs 1500
 
         write_if_exists /sys/module/vmpressure/parameters/allocstall_threshold 16
 
