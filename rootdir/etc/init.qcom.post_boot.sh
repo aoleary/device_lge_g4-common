@@ -126,29 +126,31 @@ case "$target" in
         configure_memory_parameters
         restorecon -R /sys/devices/system/cpu
 
-	    # Disable CPU retention
-	    echo 0 > /sys/module/lpm_levels/system/a53/cpu0/retention/idle_enabled
-	    echo 0 > /sys/module/lpm_levels/system/a53/cpu1/retention/idle_enabled
-	    echo 0 > /sys/module/lpm_levels/system/a53/cpu2/retention/idle_enabled
-	    echo 0 > /sys/module/lpm_levels/system/a53/cpu3/retention/idle_enabled
-	    echo 0 > /sys/module/lpm_levels/system/a57/cpu4/retention/idle_enabled
-	    echo 0 > /sys/module/lpm_levels/system/a57/cpu5/retention/idle_enabled
+	    # Enable CPU retention
+	    echo 1 > /sys/module/lpm_levels/system/a53/cpu0/retention/idle_enabled
+	    echo 1 > /sys/module/lpm_levels/system/a53/cpu1/retention/idle_enabled
+	    echo 1 > /sys/module/lpm_levels/system/a53/cpu2/retention/idle_enabled
+	    echo 1 > /sys/module/lpm_levels/system/a53/cpu3/retention/idle_enabled
+	    echo 1 > /sys/module/lpm_levels/system/a57/cpu4/retention/idle_enabled
+	    echo 1 > /sys/module/lpm_levels/system/a57/cpu5/retention/idle_enabled
 
-	    # Disable L2 retention
-	    echo 0 > /sys/module/lpm_levels/system/a53/a53-l2-retention/idle_enabled
+	    # Enable L2 retention
+	    echo 1 > /sys/module/lpm_levels/system/a53/a53-l2-retention/idle_enabled
 	    echo 0 > /sys/module/lpm_levels/system/a57/a57-l2-retention/idle_enabled
 
-	    # Disable CPU Standalone Power Collapse
-	    echo "N" > /sys/module/lpm_levels/system/a53/cpu0/standalone_pc/idle_enabled
-	    echo "N" > /sys/module/lpm_levels/system/a53/cpu1/standalone_pc/idle_enabled
-	    echo "N" > /sys/module/lpm_levels/system/a53/cpu2/standalone_pc/idle_enabled
-	    echo "N" > /sys/module/lpm_levels/system/a53/cpu3/standalone_pc/idle_enabled
+	    # Enable CPU Standalone Power Collapse
+	    echo "Y" > /sys/module/lpm_levels/system/a53/cpu0/standalone_pc/idle_enabled
+	    echo "Y" > /sys/module/lpm_levels/system/a53/cpu1/standalone_pc/idle_enabled
+	    echo "Y" > /sys/module/lpm_levels/system/a53/cpu2/standalone_pc/idle_enabled
+	    echo "Y" > /sys/module/lpm_levels/system/a53/cpu3/standalone_pc/idle_enabled
 	    echo "N" > /sys/module/lpm_levels/system/a57/cpu4/standalone_pc/idle_enabled
 	    echo "N" > /sys/module/lpm_levels/system/a57/cpu5/standalone_pc/idle_enabled
-	    echo "N" > /sys/module/lpm_levels/system/a53/cpu0/standalone_pc/suspend_enabled
-	    echo "N" > /sys/module/lpm_levels/system/a53/cpu1/standalone_pc/suspend_enabled
-	    echo "N" > /sys/module/lpm_levels/system/a53/cpu2/standalone_pc/suspend_enabled
-	    echo "N" > /sys/module/lpm_levels/system/a53/cpu3/standalone_pc/suspend_enabled
+
+	    # Suspend behavior (battery-optimized
+	    echo "Y" > /sys/module/lpm_levels/system/a53/cpu0/standalone_pc/suspend_enabled
+	    echo "Y" > /sys/module/lpm_levels/system/a53/cpu1/standalone_pc/suspend_enabled
+	    echo "Y" > /sys/module/lpm_levels/system/a53/cpu2/standalone_pc/suspend_enabled
+	    echo "Y" > /sys/module/lpm_levels/system/a53/cpu3/standalone_pc/suspend_enabled
 	    echo "N" > /sys/module/lpm_levels/system/a57/cpu4/standalone_pc/suspend_enabled
 	    echo "N" > /sys/module/lpm_levels/system/a57/cpu5/standalone_pc/suspend_enabled
 
