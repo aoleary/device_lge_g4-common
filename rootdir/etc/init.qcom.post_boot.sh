@@ -99,6 +99,14 @@ case "$target" in
 # plugin remaining A57s
         echo 1 > /sys/devices/system/cpu/cpu5/online
 
+# Sheduler tuning
+        echo 95  > /proc/sys/kernel/sched_upmigrate
+        echo 85  > /proc/sys/kernel/sched_downmigrate
+        echo 10  > /proc/sys/kernel/sched_upmigrate_min_nice
+        echo 110 > /proc/sys/kernel/sched_wakeup_load_threshold
+        echo 20  > /proc/sys/kernel/sched_small_task
+        echo 1   > /proc/sys/kernel/sched_migration_fixup
+
 # Dynamic Stune Boost
         echo 43 > /sys/module/cpu_boost/parameters/dynamic_stune_boost   # Adjusted to avoid overboost
 
