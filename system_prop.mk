@@ -199,22 +199,6 @@ PRODUCT_SYSTEM_PROPERTIES += \
     iorapd.readahead.enable=false \
     persist.device_config.runtime_native_boot.iorap_readahead_enable=false
 
-#INTERNET: improve download/upload performance
-PRODUCT_PROPERTY_OVERRIDES += \
-    net.tcp.buffersize.default=4096,87380,256960,4096,16384,256960 \
-    net.tcp.buffersize.wifi=4096,87380,256960,4096,16384,256960 \
-    net.tcp.buffersize.umts=4096,87380,256960,4096,16384,256960 \
-    net.tcp.buffersize.gprs=4096,87380,256960,4096,16384,256960 \
-    net.tcp.buffersize.edge=4096,87380,256960,4096,16384,256960 \
-    net.rmnet0.dns1=8.8.8.8 \
-    net.rmnet0.dns2=8.8.4.4 \
-    net.dns1=1.1.1.1\
-    net.dns2=9.9.9.9
-
-#Logcat - increase log verbosity
-PRODUCT_PROPERTY_OVERRIDES += \
-    sys.init_log_level=7
-
 # Low memory killer daemon
 PRODUCT_PROPERTY_OVERRIDES += \
    ro.lmk.use_psi=true \
@@ -302,17 +286,20 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # RIL
 PRODUCT_PROPERTY_OVERRIDES += \
+<<<<<<< HEAD
     vendor.rild.libpath=/vendor/lib64/libril-qc-qmi-1.so \
     ril.subscription.types=NV,RUIM \
     persist.data.mode=concurrent \
+=======
+    rild.libpath=/vendor/lib64/libril-qc-qmi-1.so \
+>>>>>>> 3d5fe3e (g4-common: remove deprecated RIL props)
     persist.data.netmgrd.qos.enable=true \
-    persist.data.qmi.adb_logmask=0 \
     persist.qcril.disable_retry=true \
     persist.radio.apm_sim_not_pwdn=1 \
     persist.radio.custom_ecc=1 \
     persist.radio.sib16_support=1 \
-    ro.data.large_tcp_window_size=true \
     ro.use_data_netmgrd=true \
+<<<<<<< HEAD
     ro.ril.svlte1x=false \
     ro.ril.svdo=false \
     persist.telephony.oosisdc=false \
@@ -322,12 +309,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # RIL Powersaving
 PRODUCT_PROPERTY_OVERRIDES += \
+=======
+    ro.ril.enable.amr.wideband=1 \
+>>>>>>> 3d5fe3e (g4-common: remove deprecated RIL props)
     persist.radio.add_power_save=1 \
-    pm.sleep_mode=1 \
-    ro.ril.disable.power.collapse=0 \
-    ro.ril.fast.dormancy.rule=1 \
-    ro.ril.fast.dormancy.timeout=3 \
-    ro.mot.eri.losalert.delay=1000
+    ro.ril.disable.power.collapse=0
 
 # Sensors
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -350,6 +336,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
    persist.service.lgospd.enable=0
    persist.service.pcsync.enable=0
 
+<<<<<<< HEAD
 # VNDK
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vndk.version=current
@@ -358,6 +345,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     wifi.supplicant_scan_interval=600
 
+=======
+>>>>>>> 3d5fe3e (g4-common: remove deprecated RIL props)
 # Zygote
 PRODUCT_PROPERTY_OVERRIDES += \
     zygote.critical_window.minute=10
