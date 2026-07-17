@@ -108,9 +108,6 @@ case "$target" in
         echo 20  > /proc/sys/kernel/sched_small_task
         echo 1   > /proc/sys/kernel/sched_migration_fixup
 
-# Dynamic Stune Boost
-        echo 43 > /sys/module/cpu_boost/parameters/dynamic_stune_boost   # Adjusted to avoid overboost
-
 # GPU Input Boost
 # Available GPU Freqs in kernel
 # 180000000 300000000 367000000 450000000 490000000 600000000
