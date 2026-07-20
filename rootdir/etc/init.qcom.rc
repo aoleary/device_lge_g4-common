@@ -62,9 +62,8 @@ on early-init
    
     # Set anxiety while booting
     write /sys/block/mmcblk0/queue/scheduler anxiety
+    write /sys/block/mmcblk0/queue/nr_requests 32
     write /sys/block/mmcblk0/queue/read_ahead_kb 128
-    write /sys/block/mmcblk1/queue/scheduler anxiety
-    write /sys/block/mmcblk1/queue/read_ahead_kb 512
 
 on early-fs
     symlink /dev/block/platform/soc.0/${ro.boot.bootdevice} /dev/block/bootdevice
@@ -94,17 +93,17 @@ on fs
     # These directories have different labeling in stock rom.
     # Jumping between stock and AOSP needs restorecon -F to apply our labeling.
     exec u:r:vendor_init:s0 root root -- /vendor/bin/toybox_vendor \
-      restorecon -RF  /carrier
+      restorecon_recursive  /carrier
     exec u:r:vendor_init:s0 root root -- /vendor/bin/toybox_vendor \
-      restorecon -RF /firmware	
+      restorecon_recursive /firmware	
     exec u:r:vendor_init:s0 root root -- /vendor/bin/toybox_vendor \
-      restorecon -RF  /mpt
+      restorecon_recursive  /mpt
     exec u:r:vendor_init:s0 root root -- /vendor/bin/toybox_vendor \
-      restorecon -RF /persist
+      restorecon_recursive /persist
     exec u:r:vendor_init:s0 root root -- /vendor/bin/toybox_vendor \
-      restorecon -RF  /persist-lg
+      restorecon_recursive  /persist-lg
     exec u:r:vendor_init:s0 root root -- /vendor/bin/toybox_vendor \
-      restorecon -RF  /sns
+      restorecon_recursive  /sns
 
     # do not block adb which is default since Android 10 and can cause adb issues / crashes
     setprop persist.adb.nonblocking_ffs 0
@@ -558,7 +557,7 @@ on post-fs
 
     # restorecon carrier partition
     exec u:r:vendor_init:s0 root root -- /vendor/bin/toybox_vendor \
-      restorecon -RF  /carrier
+      restorecon_recursive  /carrier
 
     # We restorecon /preload in case preload folder has been reset.
     restorecon_recursive /preload
@@ -568,6 +567,7 @@ on post-fs
 
 # msm specific files that need to be created on /data
 on post-fs-data
+    swapon_all /vendor/etc/fstab.qcom
 
     # VM dirty tuning
     write /proc/sys/vm/dirty_background_ratio 5
@@ -750,7 +750,7 @@ on post-fs-data
     # Z2G4-BSP-TS@lge.com make directory for sns.reg used by sensordaemon
     mkdir /sns/cal/ 0774 system system
     exec u:r:vendor_init:s0 root root -- /vendor/bin/toybox_vendor \
-      restorecon -RF  /sns
+      restorecon_recursive  /sns
 
 service imsqmidaemon /vendor/bin/imsqmidaemon
     class main
@@ -1222,40 +1222,6 @@ on property:sys.boot_completed=1
 on property:sys.boot_completed=1
     wait /path-does-not-exist 20
     exec u:object_r:system_file:s0 -- /system/bin/settings put global animator_duration_scale 0.5
-
-    # Set IO Scheduler parameter
-on property:sys.boot_completed=1
-    write /sys/block/mmcblk0/queue/scheduler maple
-    
-    write /sys/block/mmcblk0/queue/iosched/writes_starved 2
-    write /sys/block/mmcblk0/queue/iosched/sync_read_expire 200
-    write /sys/block/mmcblk0/queue/iosched/sync_write_expire 450
-    write /sys/block/mmcblk0/queue/iosched/async_read_expire 300
-    write /sys/block/mmcblk0/queue/iosched/async_write_expire 700
-    write /sys/block/mmcblk0/queue/iosched/fifo_batch 4
-    write /sys/block/mmcblk0/queue/iosched/sleep_latency_multiple 10
-    
-    write /sys/block/mmcblk0/queue/read_ahead_kb 128
-    write /sys/block/mmcblk0/queue/nr_requests 64
-    write /sys/block/mmcblk0/queue/rq_affinity 1
-    write /sys/block/mmcblk0/queue/nomerges 1
-    write /sys/block/mmcblk0/queue/rotational 0
-
-   write /sys/block/mmcblk1/queue/scheduler maple
-   
-   write /sys/block/mmcblk1/queue/iosched/writes_starved 1
-   write /sys/block/mmcblk1/queue/iosched/sync_read_expire 250
-   write /sys/block/mmcblk1/queue/iosched/sync_write_expire 500
-   write /sys/block/mmcblk1/queue/iosched/async_read_expire 400
-   write /sys/block/mmcblk1/queue/iosched/async_write_expire 800
-   write /sys/block/mmcblk1/queue/iosched/fifo_batch 8
-   write /sys/block/mmcblk1/queue/iosched/sleep_latency_multiple 10
-   
-   write /sys/block/mmcblk1/queue/read_ahead_kb 256
-   write /sys/block/mmcblk1/queue/nr_requests 32
-   write /sys/block/mmcblk1/queue/rq_affinity 1
-   write /sys/block/mmcblk1/queue/nomerges 0
-   write /sys/block/mmcblk1/queue/rotational 0
 
     # Disable process_reclaim
 on property:vendor.post_boot.parsed=1
