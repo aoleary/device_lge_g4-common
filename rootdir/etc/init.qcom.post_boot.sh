@@ -114,6 +114,17 @@ case "$target" in
         echo 450000000 > /sys/module/governor_msm_adreno_tz/parameters/boost_freq
         echo 180       > /sys/module/governor_msm_adreno_tz/parameters/boost_duration
 
+    # VM tuning
+        echo 5 > /proc/sys/vm/dirty_background_ratio
+        echo 15 > /proc/sys/vm/dirty_ratio
+        echo 1500 > /proc/sys/vm/dirty_expire_centisecs
+        echo 1000 > /proc/sys/vm/dirty_writeback_centisecs
+
+    # VM cache behaviour
+        echo 0 > /proc/sys/vm/page_cluster
+        echo 10 > /proc/sys/vm/stat_interval
+        echo 80 > /proc/sys/vm/vfs_cache_pressure
+
     # Set IO Scheduler parameter
         echo maple /sys/block/mmcblk0/queue/scheduler
 

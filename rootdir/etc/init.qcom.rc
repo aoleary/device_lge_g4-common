@@ -569,17 +569,6 @@ on post-fs
 on post-fs-data
     swapon_all /vendor/etc/fstab.qcom
 
-    # VM dirty tuning
-    write /proc/sys/vm/dirty_background_ratio 5
-    write /proc/sys/vm/dirty_ratio 15
-    write /proc/sys/vm/dirty_expire_centisecs 1500
-    write /proc/sys/vm/dirty_writeback_centisecs 1000
-
-    # VM cache behavior
-    write /proc/sys/vm/page-cluster 0
-    write /proc/sys/vm/stat_interval 10
-    write /proc/sys/vm/vfs_cache_pressure 80
-
     # WiFi and BT mac handler
     start hwaddrs
 
@@ -944,7 +933,7 @@ service qti /vendor/bin/qti
     disabled
 
 service sensors /vendor/bin/sensors.qcom
-    class core
+    class late_start
     user root
     group root system wakelock
     writepid /dev/cpuset/system-background/tasks
@@ -1024,7 +1013,7 @@ on property:ro.data.large_tcp_window_size=true
 
 service msm_irqbalance /vendor/bin/msm_irqbalance -f /vendor/etc/msm_irqbalance.conf
     socket msm_irqbalance seqpacket 660 root system
-    class core
+    class late_start
     user root
     group root
     writepid /dev/cpuset/system-background/tasks
@@ -1101,7 +1090,7 @@ on property:sys.boot_completed=1
     write /dev/kmsg "Boot completed"
 
 service adsprpcd /vendor/bin/adsprpcd
-    class main
+    class late_start
     user media
     group media
     writepid /dev/cpuset/system-background/tasks
