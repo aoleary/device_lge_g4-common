@@ -271,20 +271,20 @@ echo 1 > /dev/cpuctl/camera-daemon/cpu.uclamp.latency_sensitive
 
 # Disable wsf for all targets beacause we are using efk.
 # wsf Range : 1..1000 So set to bare minimum value 1.
-echo 1 > /proc/sys/vm/watermark_scale_factor
+echo 8 > /proc/sys/vm/watermark_scale_factor
 echo 24576 > /proc/sys/vm/extra_free_kbytes
 
 # PSI signal freshness
-echo 0 > /proc/sys/vm/stat_interval
+echo 1 > /proc/sys/vm/stat_interval
 
 # Set allocstall_threshold to 0 (optimized for PSI)
-echo 17 > /sys/module/vmpressure/parameters/allocstall_threshold
+echo 0 > /sys/module/vmpressure/parameters/allocstall_threshold
 
 # Set kswapd threads
-echo 4 > /proc/sys/vm/kswapd_threads
+echo 2 > /proc/sys/vm/kswapd_threads
 
 # Minimum free memory before reclaim kicks in
-echo 9216 > /proc/sys/vm/min_free_kbytes
+echo 16384 > /proc/sys/vm/min_free_kbytes
 
 # Fix timekeep restore
 /vendor/bin/timekeep restore
