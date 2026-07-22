@@ -158,9 +158,9 @@ PRODUCT_SYSTEM_PROPERTIES += \
 # Low memory killer daemon
 PRODUCT_PROPERTY_OVERRIDES += \
    ro.lmk.use_psi=true \
-   ro.lmk.psi_partial_stall_ms=80 \
+   ro.lmk.psi_partial_stall_ms=120 \
    ro.lmk.psi_complete_stall_ms=400 \
-   ro.lmk.thrashing_limit=30 \
+   ro.lmk.thrashing_limit=40 \
    ro.lmk.thrashing_limit_decay=50 \
    ro.lmk.swap_free_low_percentage=10
 
