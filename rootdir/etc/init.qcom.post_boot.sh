@@ -108,6 +108,17 @@ case "$target" in
         echo 20  > /proc/sys/kernel/sched_small_task
         echo 1   > /proc/sys/kernel/sched_migration_fixup
 
+# Setup uclamp
+        echo 5 > /dev/cpuctl/background/cpu.uclamp.max
+        echo 30 > /dev/cpuctl/system-background/cpu.uclamp.max
+        echo 50 > /dev/cpuctl/foreground/cpu.uclamp.max
+        echo 24 > /dev/cpuctl/foreground/cpu.uclamp.min
+        echo 5 > /dev/cpuctl/dex2oat/cpu.uclamp.max
+        echo max > /dev/cpuctl/top-app/cpu.uclamp.min
+        echo 1 > /dev/cpuctl/top-app/cpu.uclamp.latency_sensitive
+        echo max > /dev/cpuctl/camera-daemon/cpu.uclamp.min
+        echo 1 > /dev/cpuctl/camera-daemon/cpu.uclamp.latency_sensitive
+
 # GPU Input Boost
 # Available GPU Freqs in kernel
 # 180000000 300000000 367000000 450000000 490000000 600000000
@@ -122,8 +133,17 @@ case "$target" in
 
     # VM cache behaviour
         echo 0 > /proc/sys/vm/page_cluster
-        echo 10 > /proc/sys/vm/stat_interval
+        echo 1 > /proc/sys/vm/stat_interval
         echo 80 > /proc/sys/vm/vfs_cache_pressure
+
+    # PSI / memory pressure tuning
+        echo 24576 > /proc/sys/vm/extra_free_kbytes
+
+    # Set allocstall_threshold to 0 (optimized for PSI)
+        echo 0 > /sys/module/vmpressure/parameters/allocstall_threshold
+
+    # Minimum free memory before reclaim kicks in
+        echo 16384 > /proc/sys/vm/min_free_kbytes
 
     # Set IO Scheduler parameter
         echo maple /sys/block/mmcblk0/queue/scheduler
@@ -257,34 +277,6 @@ if [ -c /dev/coresight-stm ]; then
         fi
     fi
 fi
-
-# Setup uclamp
-echo 5 > /dev/cpuctl/background/cpu.uclamp.max
-echo 30 > /dev/cpuctl/system-background/cpu.uclamp.max
-echo 50 > /dev/cpuctl/foreground/cpu.uclamp.max
-echo 24 > /dev/cpuctl/foreground/cpu.uclamp.min
-echo 5 > /dev/cpuctl/dex2oat/cpu.uclamp.max
-echo max > /dev/cpuctl/top-app/cpu.uclamp.min
-echo 1 > /dev/cpuctl/top-app/cpu.uclamp.latency_sensitive
-echo max > /dev/cpuctl/camera-daemon/cpu.uclamp.min
-echo 1 > /dev/cpuctl/camera-daemon/cpu.uclamp.latency_sensitive
-
-# Disable wsf for all targets beacause we are using efk.
-# wsf Range : 1..1000 So set to bare minimum value 1.
-echo 8 > /proc/sys/vm/watermark_scale_factor
-echo 24576 > /proc/sys/vm/extra_free_kbytes
-
-# PSI signal freshness
-echo 1 > /proc/sys/vm/stat_interval
-
-# Set allocstall_threshold to 0 (optimized for PSI)
-echo 0 > /sys/module/vmpressure/parameters/allocstall_threshold
-
-# Set kswapd threads
-echo 2 > /proc/sys/vm/kswapd_threads
-
-# Minimum free memory before reclaim kicks in
-echo 16384 > /proc/sys/vm/min_free_kbytes
 
 # Fix timekeep restore
 /vendor/bin/timekeep restore
