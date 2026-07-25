@@ -243,7 +243,7 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.surface_flinger.use_context_priority=true \
     debug.sf.enable_planner_prediction=false \
     debug.sf.enable_gl_backpressure=1 \
-    ro.surface_flinger.set_idle_timer_ms=1000 \
+    ro.surface_flinger.set_idle_timer_ms=2500 \
     ro.surface_flinger.set_touch_timer_ms=200 \
     ro.surface_flinger.set_display_power_timer_ms=1000 \
     ro.surface_flinger.support_kernel_idle_timer=true \
@@ -271,47 +271,20 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.hwc.ptor.enable=true \
     ro.fb.mode=1 \
     video.accelerate.hw=1 \
-    debug.hwui.renderer=opengl \
-<<<<<<< HEAD
-    ro.hwui.render_ahead=3 \
-    vendor.display.disable_rotator_downscale=1
-=======
-    debug.hwui.use_buffer_age=false \
-    debug.hwui.show_dirty_regions=false \
-    debug.hwui.profile=false \
-    debug.hwui.overdraw=false \
-    ro.hwui.disable_scissor_opt=false \
-    ro.hwui.render_ahead=2
->>>>>>> d12e088 (g4-common: tune HWUI texture sizes/caches and SurfaceFlinger tweaks)
+    debug.hwui.renderer=skiagl \
+    debug.hwui.use_buffer_age=true \
+    debug.hwui.use_partial_updates=true
 
 # RIL
 PRODUCT_PROPERTY_OVERRIDES += \
-<<<<<<< HEAD
     vendor.rild.libpath=/vendor/lib64/libril-qc-qmi-1.so \
-    ril.subscription.types=NV,RUIM \
-    persist.data.mode=concurrent \
-=======
-    rild.libpath=/vendor/lib64/libril-qc-qmi-1.so \
->>>>>>> 3d5fe3e (g4-common: remove deprecated RIL props)
     persist.data.netmgrd.qos.enable=true \
     persist.qcril.disable_retry=true \
     persist.radio.apm_sim_not_pwdn=1 \
     persist.radio.custom_ecc=1 \
     persist.radio.sib16_support=1 \
     ro.use_data_netmgrd=true \
-<<<<<<< HEAD
-    ro.ril.svlte1x=false \
-    ro.ril.svdo=false \
-    persist.telephony.oosisdc=false \
-    #Improve Speech Quality
     ro.ril.enable.amr.wideband=1 \
-    ro.telephony.block_binder_thread_on_incoming_calls=false
-
-# RIL Powersaving
-PRODUCT_PROPERTY_OVERRIDES += \
-=======
-    ro.ril.enable.amr.wideband=1 \
->>>>>>> 3d5fe3e (g4-common: remove deprecated RIL props)
     persist.radio.add_power_save=1 \
     ro.ril.disable.power.collapse=0
 
