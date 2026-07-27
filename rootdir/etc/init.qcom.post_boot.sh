@@ -148,13 +148,14 @@ case "$target" in
     # Set IO Scheduler parameter
         echo maple /sys/block/mmcblk0/queue/scheduler
 
-        echo 2 /sys/block/mmcblk0/queue/iosched/writes_starved
+        echo 3 /sys/block/mmcblk0/queue/iosched/writes_starved
         echo 200 /sys/block/mmcblk0/queue/iosched/sync_read_expire
         echo 450 /sys/block/mmcblk0/queue/iosched/sync_write_expire
         echo 300 /sys/block/mmcblk0/queue/iosched/async_read_expire
         echo 700 /sys/block/mmcblk0/queue/iosched/async_write_expire
-        echo 4 /sys/block/mmcblk0/queue/iosched/fifo_batch
+        echo 8 /sys/block/mmcblk0/queue/iosched/fifo_batch
         echo 10 /sys/block/mmcblk0/queue/iosched/sleep_latency_multiple
+        echo 1 > /sys/block/mmcblk0/queue/iosched/suspend_starved_limit
 
         echo 128 /sys/block/mmcblk0/queue/read_ahead_kb
         echo 64 /sys/block/mmcblk0/queue/nr_requests
@@ -171,6 +172,7 @@ case "$target" in
        echo 800 /sys/block/mmcblk1/queue/iosched/async_write_expire
        echo 8 /sys/block/mmcblk1/queue/iosched/fifo_batch
        echo 10 /sys/block/mmcblk1/queue/iosched/sleep_latency_multiple
+       echo 1 > /sys/block/mmcblk0/queue/iosched/suspend_starved_limit
 
        echo 256 /sys/block/mmcblk1/queue/read_ahead_kb
        echo 32 /sys/block/mmcblk1/queue/nr_requests
