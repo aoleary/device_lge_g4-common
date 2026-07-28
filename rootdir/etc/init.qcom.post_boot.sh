@@ -146,39 +146,41 @@ case "$target" in
         echo 16384 > /proc/sys/vm/min_free_kbytes
 
     # Set IO Scheduler parameter
-        echo maple /sys/block/mmcblk0/queue/scheduler
+        echo maple > /sys/block/mmcblk0/queue/scheduler
 
-        echo 2 /sys/block/mmcblk0/queue/iosched/writes_starved
-        echo 200 /sys/block/mmcblk0/queue/iosched/sync_read_expire
-        echo 450 /sys/block/mmcblk0/queue/iosched/sync_write_expire
-        echo 300 /sys/block/mmcblk0/queue/iosched/async_read_expire
-        echo 700 /sys/block/mmcblk0/queue/iosched/async_write_expire
-        echo 8 /sys/block/mmcblk0/queue/iosched/fifo_batch
-        echo 10 /sys/block/mmcblk0/queue/iosched/sleep_latency_multiple
+        echo 2 > /sys/block/mmcblk0/queue/iosched/writes_starved
+        echo 200 > /sys/block/mmcblk0/queue/iosched/sync_read_expire
+        echo 450 > /sys/block/mmcblk0/queue/iosched/sync_write_expire
+        echo 300 > /sys/block/mmcblk0/queue/iosched/async_read_expire
+        echo 700 > /sys/block/mmcblk0/queue/iosched/async_write_expire
+        echo 8 > /sys/block/mmcblk0/queue/iosched/fifo_batch
+        echo 10 > /sys/block/mmcblk0/queue/iosched/sleep_latency_multiple
         echo 1 > /sys/block/mmcblk0/queue/iosched/suspend_starved_limit
 
-        echo 128 /sys/block/mmcblk0/queue/read_ahead_kb
-        echo 64 /sys/block/mmcblk0/queue/nr_requests
-        echo 1 /sys/block/mmcblk0/queue/rq_affinity
-        echo 1 /sys/block/mmcblk0/queue/nomerges
-        echo 0 /sys/block/mmcblk0/queue/rotational
+        echo 70 > /sys/block/mmcblk0/queue/iosched/read_bias_pct
+        echo 30 > /sys/block/mmcblk0/queue/iosched/write_bias_pct
+        echo 128 > /sys/block/mmcblk0/queue/read_ahead_kb
+        echo 64 > /sys/block/mmcblk0/queue/nr_requests
+        echo 1 > /sys/block/mmcblk0/queue/rq_affinity
+        echo 1 > /sys/block/mmcblk0/queue/nomerges
+        echo 0 > /sys/block/mmcblk0/queue/rotational
 
-       echo maple /sys/block/mmcblk1/queue/scheduler
+       echo maple > /sys/block/mmcblk1/queue/scheduler
 
-       echo 1 /sys/block/mmcblk1/queue/iosched/writes_starved
-       echo 250 /sys/block/mmcblk1/queue/iosched/sync_read_expire
-       echo 500 /sys/block/mmcblk1/queue/iosched/sync_write_expire
-       echo 400 /sys/block/mmcblk1/queue/iosched/async_read_expire
-       echo 800 /sys/block/mmcblk1/queue/iosched/async_write_expire
-       echo 8 /sys/block/mmcblk1/queue/iosched/fifo_batch
-       echo 10 /sys/block/mmcblk1/queue/iosched/sleep_latency_multiple
+       echo 1 > /sys/block/mmcblk1/queue/iosched/writes_starved
+       echo 250 > /sys/block/mmcblk1/queue/iosched/sync_read_expire
+       echo 500 > /sys/block/mmcblk1/queue/iosched/sync_write_expire
+       echo 400 > /sys/block/mmcblk1/queue/iosched/async_read_expire
+       echo 800 > /sys/block/mmcblk1/queue/iosched/async_write_expire
+       echo 8 > /sys/block/mmcblk1/queue/iosched/fifo_batch
+       echo 10 > /sys/block/mmcblk1/queue/iosched/sleep_latency_multiple
        echo 1 > /sys/block/mmcblk0/queue/iosched/suspend_starved_limit
 
-       echo 256 /sys/block/mmcblk1/queue/read_ahead_kb
-       echo 32 /sys/block/mmcblk1/queue/nr_requests
-       echo 1 /sys/block/mmcblk1/queue/rq_affinity
-       echo 0 /sys/block/mmcblk1/queue/nomerges
-       echo 0 /sys/block/mmcblk1/queue/rotational
+       echo 256 > /sys/block/mmcblk1/queue/read_ahead_kb
+       echo 32 > /sys/block/mmcblk1/queue/nr_requests
+       echo 1 > /sys/block/mmcblk1/queue/rq_affinity
+       echo 0 > /sys/block/mmcblk1/queue/nomerges
+       echo 0 > /sys/block/mmcblk1/queue/rotational
 
         #enable rps static configuration
         echo 8 >  /sys/class/net/rmnet_ipa0/queues/rx-0/rps_cpus
