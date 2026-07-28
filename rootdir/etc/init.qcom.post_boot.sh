@@ -148,7 +148,7 @@ case "$target" in
     # Set IO Scheduler parameter
         echo maple /sys/block/mmcblk0/queue/scheduler
 
-        echo 3 /sys/block/mmcblk0/queue/iosched/writes_starved
+        echo 2 /sys/block/mmcblk0/queue/iosched/writes_starved
         echo 200 /sys/block/mmcblk0/queue/iosched/sync_read_expire
         echo 450 /sys/block/mmcblk0/queue/iosched/sync_write_expire
         echo 300 /sys/block/mmcblk0/queue/iosched/async_read_expire
