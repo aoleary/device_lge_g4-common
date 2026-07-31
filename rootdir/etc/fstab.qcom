@@ -36,4 +36,4 @@
 # zramsize=740245504 based on zramsize=$((((memtotal_kb/4) / ${nr_zramdev}) * 1024)) taken from stock
 # max_comp_streams is NOT used, bc: "ZRAM will always allocate multiple compression streams - one per online CPUs - thus allowing several concurrent compression operations"
 # zram_backingdev_size is NOT used bc this require CONFIG_ZRAM_WRITEBACK which is not avail in our kernel
-/dev/block/zram0						none           swap   defaults		zramsize=740245504
+/dev/block/zram0						none           swap   defaults		zramsize=1073741824
