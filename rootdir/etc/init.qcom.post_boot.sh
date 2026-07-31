@@ -82,6 +82,7 @@ case "$target" in
         echo 120 > /sys/devices/system/cpu/cpufreq/schedutil/up_rate_limit_us
         echo 600 > /sys/devices/system/cpu/cpufreq/schedutil/down_rate_limit_us
         echo 88 > /sys/devices/system/cpu/cpufreq/schedutil/hispeed_load
+        echo 600000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
         echo 1440000 > /sys/devices/system/cpu/cpu0/cpufreq/schedutil/hispeed_freq      #Core 4 Maximum Frequency = 1440MHz
 
 # online CPU4
@@ -92,6 +93,7 @@ case "$target" in
         echo 120 > /sys/devices/system/cpu/cpufreq/schedutil/up_rate_limit_us
         echo 600 > /sys/devices/system/cpu/cpufreq/schedutil/down_rate_limit_us
         echo 88 > /sys/devices/system/cpu/cpufreq/schedutil/hispeed_load
+        echo 768000 > /sys/devices/system/cpu/cpu4/cpufreq/scaling_min_freq
         echo 1824000 > /sys/devices/system/cpu/cpu4/cpufreq/schedutil/hispeed_freq      #Core 5 Maximum Frequency = 1824MHz
 
 # restore A57's max
