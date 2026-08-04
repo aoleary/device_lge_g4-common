@@ -127,6 +127,11 @@ case "$target" in
         echo 450000000 > /sys/module/governor_msm_adreno_tz/parameters/boost_freq
         echo 180       > /sys/module/governor_msm_adreno_tz/parameters/boost_duration
 
+    #Tune ZRAM
+        echo 70 > /proc/sys/vm/swappiness
+        echo 1 >  /proc/sys/vm/overcommit_memory
+        echo 1 >  /proc/sys/vm/page-cluster
+
     # VM tuning
         echo 5 > /proc/sys/vm/dirty_background_ratio
         echo 15 > /proc/sys/vm/dirty_ratio
@@ -139,7 +144,7 @@ case "$target" in
         echo 80 > /proc/sys/vm/vfs_cache_pressure
 
     # PSI / memory pressure tuning
-        echo 24576 > /proc/sys/vm/extra_free_kbytes
+        echo 32768 > /proc/sys/vm/extra_free_kbytes
 
     # Set allocstall_threshold to 0 (optimized for PSI)
         echo 0 > /sys/module/vmpressure/parameters/allocstall_threshold

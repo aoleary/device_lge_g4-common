@@ -259,11 +259,6 @@ on boot
     # For BCM FM Radio
     setprop ro.fm.module BCM
 
-    #Tune ZRAM
-    write /proc/sys/vm/swappiness 60
-    write /proc/sys/vm/page-cluster 0
-    write /proc/sys/vm/overcommit_memory 1
-
     # WiFi
     chown wifi wifi /dev/rfkill
     chmod 0600 /dev/rfkill
