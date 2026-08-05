@@ -118,12 +118,6 @@ case "$target" in
         echo max > /dev/cpuctl/camera-daemon/cpu.uclamp.min
         echo 1 > /dev/cpuctl/camera-daemon/cpu.uclamp.latency_sensitive
 
-# GPU Input Boost
-# Available GPU Freqs in kernel
-# 180000000 300000000 367000000 450000000 490000000 600000000
-        echo 450000000 > /sys/module/governor_msm_adreno_tz/parameters/boost_freq
-        echo 180       > /sys/module/governor_msm_adreno_tz/parameters/boost_duration
-
     #Tune ZRAM
         echo 80 > /proc/sys/vm/swappiness
         echo 1 >  /proc/sys/vm/overcommit_memory
