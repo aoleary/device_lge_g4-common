@@ -26,6 +26,9 @@
     <!-- Set to true to turn on BT by default -->
     <bool name="def_bluetooth_on">false</bool>
 
+    <!-- Set default Navigation Mode to Gestures-->
+    <integer name="def_navigation_mode">2</integer>
+
     <!-- Set to true to turn on Wifi by default -->
     <bool name="def_wifi_on">true</bool>
 
