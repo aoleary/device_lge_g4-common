@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<permissions>
+
+<feature name="android.hardware.telephony"/>
+<feature name="android.hardware.telephony.gsm"/>
+<feature name="android.hardware.camera"/>
+<feature name="android.hardware.camera.autofocus"/>
+<feature name="android.hardware.wifi"/>
+<feature name="android.hardware.bluetooth"/>
+<feature name="android.hardware.sensor.accelerometer"/>
+<feature name="android.hardware.sensor.proximity"/>
+
+</permissions>
