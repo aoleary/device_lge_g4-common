@@ -1,0 +1,8 @@
+
+# Play Integrity runtime
+
+on post-fs-data
+
+    setprop service.adb.root 0
+    setprop persist.sys.usb.config mtp
+
