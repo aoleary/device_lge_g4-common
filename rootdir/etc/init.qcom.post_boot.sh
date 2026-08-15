@@ -93,7 +93,7 @@ case "$target" in
         echo 120 > /sys/devices/system/cpu/cpufreq/schedutil/up_rate_limit_us
         echo 1500 > /sys/devices/system/cpu/cpufreq/schedutil/down_rate_limit_us
         echo 85 > /sys/devices/system/cpu/cpufreq/schedutil/hispeed_load
-        echo 768000 > /sys/devices/system/cpu/cpu4/cpufreq/scaling_min_freq
+        echo 384000 > /sys/devices/system/cpu/cpu4/cpufreq/scaling_min_freq
         echo 1824000 > /sys/devices/system/cpu/cpu4/cpufreq/schedutil/hispeed_freq      #Core 5 Maximum Frequency = 1824MHz
 
 # plugin remaining A57s
