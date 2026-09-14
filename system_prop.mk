@@ -309,7 +309,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
    persist.service.lgospd.enable=0
    persist.service.pcsync.enable=0
 
-<<<<<<< HEAD
 # VNDK
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vndk.version=current
@@ -318,8 +317,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     wifi.supplicant_scan_interval=600
 
-=======
->>>>>>> 3d5fe3e (g4-common: remove deprecated RIL props)
 # Zygote
 PRODUCT_PROPERTY_OVERRIDES += \
     zygote.critical_window.minute=10
