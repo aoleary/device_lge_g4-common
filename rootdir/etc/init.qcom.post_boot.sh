@@ -79,9 +79,9 @@ case "$target" in
 
 # configure governor settings for little cluster
         echo schedutil > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
-        echo 250 > /sys/devices/system/cpu/cpufreq/schedutil/up_rate_limit_us
-        echo 2500 > /sys/devices/system/cpu/cpufreq/schedutil/down_rate_limit_us
-        echo 90 > /sys/devices/system/cpu/cpufreq/schedutil/hispeed_load
+        echo 500 > /sys/devices/system/cpu/cpufreq/schedutil/up_rate_limit_us
+        echo 3000 > /sys/devices/system/cpu/cpufreq/schedutil/down_rate_limit_us
+        echo 85 > /sys/devices/system/cpu/cpufreq/schedutil/hispeed_load
         echo 600000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
         echo 1440000 > /sys/devices/system/cpu/cpu0/cpufreq/schedutil/hispeed_freq      #Core 4 Maximum Frequency = 1440MHz
 
@@ -90,8 +90,8 @@ case "$target" in
 
 # configure governor settings for big cluster
         echo schedutil > /sys/devices/system/cpu/cpu4/cpufreq/scaling_governor
-        echo 120 > /sys/devices/system/cpu/cpufreq/schedutil/up_rate_limit_us
-        echo 1500 > /sys/devices/system/cpu/cpufreq/schedutil/down_rate_limit_us
+        echo 500 > /sys/devices/system/cpu/cpufreq/schedutil/up_rate_limit_us
+        echo 3000 > /sys/devices/system/cpu/cpufreq/schedutil/down_rate_limit_us
         echo 85 > /sys/devices/system/cpu/cpufreq/schedutil/hispeed_load
         echo 384000 > /sys/devices/system/cpu/cpu4/cpufreq/scaling_min_freq
         echo 1824000 > /sys/devices/system/cpu/cpu4/cpufreq/schedutil/hispeed_freq      #Core 5 Maximum Frequency = 1824MHz
@@ -100,10 +100,10 @@ case "$target" in
         echo 1 > /sys/devices/system/cpu/cpu5/online
 
 # Sheduler tuning
-        echo 90  > /proc/sys/kernel/sched_upmigrate
+        echo 75  > /proc/sys/kernel/sched_upmigrate
         echo 80  > /proc/sys/kernel/sched_downmigrate
         echo 9   > /proc/sys/kernel/sched_upmigrate_min_nice
-        echo 100 > /proc/sys/kernel/sched_wakeup_load_threshold
+        echo 85 > /proc/sys/kernel/sched_wakeup_load_threshold
         echo 20  > /proc/sys/kernel/sched_small_task
         echo 1   > /proc/sys/kernel/sched_migration_fixup
 
@@ -135,7 +135,7 @@ case "$target" in
         echo 80 > /proc/sys/vm/vfs_cache_pressure
 
     # PSI / memory pressure tuning
-        echo 49152 > /proc/sys/vm/extra_free_kbytes
+        echo 32768 > /proc/sys/vm/extra_free_kbytes
 
     # Set allocstall_threshold to 0 (optimized for PSI)
         echo 0 > /sys/module/vmpressure/parameters/allocstall_threshold
@@ -160,7 +160,7 @@ case "$target" in
         echo 128 > /sys/block/mmcblk0/queue/read_ahead_kb
         echo 64 > /sys/block/mmcblk0/queue/nr_requests
         echo 1 > /sys/block/mmcblk0/queue/rq_affinity
-        echo 1 > /sys/block/mmcblk0/queue/nomerges
+        echo 0 > /sys/block/mmcblk0/queue/nomerges
         echo 0 > /sys/block/mmcblk0/queue/rotational
 
        echo maple > /sys/block/mmcblk1/queue/scheduler
