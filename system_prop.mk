@@ -99,8 +99,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.sf.lcd_density=560 \
     qemu.hw.mainkeys=0 \
-    ro.qualcomm.cabl=2 \
-    ro.config.avoid_gfx_accel=true
+    ro.qualcomm.cabl=2
 # MSM8992 HAL settings
 # 196610 is decimal for 0x30002 to report major/minor versions as 3/2
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -193,32 +192,20 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.surface_flinger.use_color_management=false \
     ro.surface_flinger.has_HDR_display=false \
     ro.surface_flinger.has_wide_color_display=false \
-    ro.surface_flinger.enable_layer_caching=false \
     ro.surface_flinger.start_graphics_allocator_service=true \
     ro.surface_flinger.use_context_priority=true \
-    debug.sf.enable_planner_prediction=false \
     debug.sf.enable_gl_backpressure=1 \
     ro.surface_flinger.set_idle_timer_ms=2500 \
     ro.surface_flinger.set_touch_timer_ms=200 \
     ro.surface_flinger.set_display_power_timer_ms=1000 \
-    ro.surface_flinger.support_kernel_idle_timer=true \
-    debug.sf.layer_caching_active_layer_timeout_ms=3000
+    ro.surface_flinger.support_kernel_idle_timer=true
 
 # Properties to improve rendering
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.surface_flinger.enable_layer_caching=false \
     debug.sf.enable_planner_prediction=false \
     debug.sdm.support_writeback=0 \
-    debug.sf.latch_unsignaled=0 \
-    debug.sf.auto_latch_unsignaled=0 \
     debug.sf.disable_client_composition_cache=0 \
-    debug.sf.use_phase_offsets_as_durations=1 \
-    debug.sf.early.app.duration=13666666 \
-    debug.sf.early.sf.duration=15666666 \
-    debug.sf.earlyGl.app.duration=13666666 \
-    debug.sf.earlyGl.sf.duration=15666666 \
-    debug.sf.late.app.duration=13666666 \
-    debug.sf.late.sf.duration=15666666 \
     dev.pm.dyn_samplingrate=1 \
     persist.hwc.ptor.enable=true \
     ro.fb.mode=1 \
