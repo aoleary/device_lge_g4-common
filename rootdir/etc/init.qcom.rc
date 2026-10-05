@@ -93,17 +93,17 @@ on fs
     # These directories have different labeling in stock rom.
     # Jumping between stock and AOSP needs restorecon -F to apply our labeling.
     exec u:r:vendor_init:s0 root root -- /vendor/bin/toybox_vendor \
-      restorecon_recursive  /carrier
+      restorecon -RF  /carrier
     exec u:r:vendor_init:s0 root root -- /vendor/bin/toybox_vendor \
-      restorecon_recursive /firmware	
+      restorecon -RF /firmware	
     exec u:r:vendor_init:s0 root root -- /vendor/bin/toybox_vendor \
-      restorecon_recursive  /mpt
+      restorecon -RF  /mpt
     exec u:r:vendor_init:s0 root root -- /vendor/bin/toybox_vendor \
-      restorecon_recursive /persist
+      restorecon -RF /persist
     exec u:r:vendor_init:s0 root root -- /vendor/bin/toybox_vendor \
-      restorecon_recursive  /persist-lg
+      restorecon -RF  /persist-lg
     exec u:r:vendor_init:s0 root root -- /vendor/bin/toybox_vendor \
-      restorecon_recursive  /sns
+      restorecon -RF  /sns
 
     # do not block adb which is default since Android 10 and can cause adb issues / crashes
     setprop persist.adb.nonblocking_ffs 0
@@ -557,10 +557,10 @@ on post-fs
 
     # restorecon carrier partition
     exec u:r:vendor_init:s0 root root -- /vendor/bin/toybox_vendor \
-      restorecon_recursive  /carrier
+      restorecon -RF  /carrier
 
     # We restorecon /preload in case preload folder has been reset.
-    restorecon_recursive /preload
+    restorecon -RF /preload
 
     # required for Google wizard / first logon
     chmod 0222 /sys/kernel/debug/tracing/trace_marker
@@ -709,7 +709,7 @@ on post-fs-data
     chmod 0664 /persist/sensors/sensors_settings
     chown system root /persist/sensors/sensors_settings
     mkdir /data/misc/sensors 0775 system system
-    restorecon_recursive /data/misc/sensors
+    restorecon -RF /data/misc/sensors
 
     mkdir /data/tombstones 0771 system system
     mkdir /tombstones/modem 0771 system system
@@ -732,14 +732,14 @@ on post-fs-data
     chown system system /dev/mobicore-user
 
     # restorecon cota partition.
-    restorecon_recursive /cota
+    restorecon -RF /cota
 
     mkdir /data/usf 0700 system system
 
     # Z2G4-BSP-TS@lge.com make directory for sns.reg used by sensordaemon
     mkdir /sns/cal/ 0774 system system
     exec u:r:vendor_init:s0 root root -- /vendor/bin/toybox_vendor \
-      restorecon_recursive  /sns
+      restorecon -RF  /sns
 
 service imsqmidaemon /vendor/bin/imsqmidaemon
     class main
@@ -924,7 +924,7 @@ service qti /vendor/bin/qti
     disabled
 
 service vendor.sensors /vendor/bin/sensors.qcom
-    class late_start
+    class core
     user root
     group root system wakelock input
     task_profiles ServiceCapacityLow
@@ -1004,7 +1004,7 @@ on property:ro.data.large_tcp_window_size=true
 
 service msm_irqbalance /vendor/bin/msm_irqbalance -f /vendor/etc/msm_irqbalance.conf
     socket msm_irqbalance seqpacket 660 root system
-    class late_start
+    class core
     user root
     group root
     task_profiles ServiceCapacityLow
@@ -1081,7 +1081,7 @@ on property:sys.boot_completed=1
     write /dev/kmsg "Boot completed"
 
 service adsprpcd /vendor/bin/adsprpcd
-    class late_start
+    class main
     user media
     group media
     task_profiles ServiceCapacityLow
